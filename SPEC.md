@@ -127,6 +127,16 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 - **Ma galerie** : 12 dessins au plus par enfant. Les peintures libres sont gardées en petites images d'environ 10 Ko. On peut accrocher un dessin dans une pièce de sa maison (un tableau par pièce, encadré au mur ; toucher encore pour le décrocher), l'imprimer ou l'enlever (deux appuis).
 - **Imprimer** : le coloriage vide (pour le coloriage magique : avec les étiquettes et la légende des couleurs), la peinture en cours, ou un dessin de la galerie.
 
+**Atelier BD** (`js/jeux/bd.js`, île des créateurs) : inventer une petite bande dessinée de 3 cases (7 ans et moins) ou 4 cases (8 ans et plus), avec un titre.
+- **Dans chaque case** (on touche une case pour la modifier) :
+  - un décor parmi 8 : plage, forêt, espace, maison, école, ville, nuit, neige ;
+  - un personnage à gauche et un à droite : les enfants de la famille (leurs avatars), les personnages de l'île (maîtresse, docteure, marchande…) et 8 créatures (chien, chat, lapin, licorne, dragon, dinosaure, robot, extraterrestre) ;
+  - une bulle pour chacun : une phrase toute faite (16, lues à voix haute quand on les touche) ou un texte tapé (40 caractères au plus) ;
+  - un autocollant (étoile, cœur, arc-en-ciel…).
+- **« Lire ma BD »** : la voix raconte la BD (« Case 1. Zoé dit : Regarde ! »).
+- **« Mes BD »** : 8 BD au plus par enfant, à relire, imprimer (2 cases par ligne) ou enlever (deux appuis). Une BD vide n'est pas gardée.
+- C'est un jeu de création : pas d'étoiles.
+
 **Météo des émotions** (`js/jeux/emotions.js`, île du cœur) — **à faire relire par un parent** :
 - **Ma météo du jour** : « Quel temps fait-il dans ton cœur ? »
   - Cinq temps : soleil (joie), nuages (calme), pluie (tristesse), orage (colère), brouillard (peur ou inquiétude).

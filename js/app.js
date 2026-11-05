@@ -21,6 +21,7 @@ import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
 import * as peinture from './jeux/peinture.js';
 import * as emotions from './jeux/emotions.js';
+import * as bd from './jeux/bd.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -195,6 +196,7 @@ function entrerLieu(cible) {
   if (id === 'croyance') return ouvrirCroyance();
   if (id === 'peinture') return ouvrirAtelier();
   if (id === 'emotions') return ouvrirEmotions();
+  if (id === 'bd') return ouvrirBD();
   const l = LIEUX.find((x) => x.id === id);
   if (!l.ouvert) return parler(`${l.nom.replace('\n', ' ')} ouvre bientôt !`, { ton: 1.1 });
   if (l.type === 'magasin') return ouvrirLieu(id);
@@ -1143,6 +1145,122 @@ function respirer(v) {
   parler('Viens respirer avec moi. Regarde la bulle.');
   respiration = setTimeout(suite, 2500);
 }
+
+// L'atelier BD : inventer une bande dessinée, la relire à voix haute, l'imprimer
+const NOMS_ILE = { calcul: 'la maîtresse', heure: "l'horloger", corps: 'la docteure', syllabes: 'la bibliothécaire', espace: "l'astronome", cuisine: 'le cuisinier', marche: 'la marchande' };
+// Tous les personnages qu'on peut mettre dans une case : la famille, les personnages de l'île, les créatures
+function personnagesBD() {
+  return [
+    ...etat.profils.map((p) => [`profil:${p.id}`, p.prenom]),
+    ...Object.entries(NOMS_ILE).map(([k, nom]) => [`ile:${k}`, nom]),
+    ...bd.CREATURES.map(([k, , nom]) => [`creature:${k}`, nom]),
+  ];
+}
+const nomBD = (id) => personnagesBD().find(([k]) => k === id)?.[1] ?? 'Quelqu’un';
+function dessinPersoBD(id, x, y, l, h) {
+  const [type, cle] = id.split(/:(.*)/);
+  if (type === 'creature') return bd.dessinCreature(cle, x, y, l, h);
+  const svg = type === 'profil' ? (() => { const p = etat.profils.find((q) => String(q.id) === cle); return p && dessinerAvatar(p.avatar, 'entier', p.age); })()
+    : PERSONNAGES[cle] && (cle === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[cle], 'entier', 14));
+  return svg ? svg.replace('<svg ', `<svg x="${x}" y="${y}" width="${l}" height="${h}" `) : '';
+}
+
+let bdVue = null;
+function ouvrirBD() {
+  etoilesJoueuse();
+  afficherBD({ mode: 'accueil' });
+  montrer('bd');
+  parler("Bienvenue à l'atelier BD ! Invente une petite histoire en cases : choisis un décor, des personnages et ce qu'ils disent.", { ton: 1.1 });
+}
+
+function afficherBD(vue) {
+  bdVue = vue;
+  const v = $('#bd-vue');
+  v.replaceChildren();
+  if (vue.mode !== 'accueil') v.append(gros('← L’atelier BD', () => afficherBD({ mode: 'accueil' }), 'gros secondaire retour-atelier'));
+  ({ accueil: vueAccueilBD, editer: vueEditerBD, mes: vueMesBD })[vue.mode](v, vue);
+}
+
+function vueAccueilBD(v) {
+  v.append(el('div', { className: 'atelier-menu' },
+    gros('✏️ Nouvelle BD', () => {
+      afficherBD({ mode: 'editer', bd: bd.nouvelleBD(joueuse.age), caseActive: 0, onglet: 'decor' });
+      parler(`Ta BD a ${bd.nombreDeCases(joueuse.age)} cases. Commence par choisir le décor de la première case.`);
+    }),
+    gros(`📚 Mes BD (${joueuse.bds.length} / ${bd.BD_MAX})`, () => { afficherBD({ mode: 'mes' }); parler(joueuse.bds.length ? 'Voici tes BD.' : "Tu n'as pas encore de BD. Invente-en une !"); })));
+}
+
+const bande = (b, { cliquable = false, active = -1 } = {}) => {
+  const d = el('div', { className: 'bande' });
+  d.innerHTML = b.cases.map((c, i) => bd.dessinerCase(c, dessinPersoBD, { cliquable, numero: i }).replace('class="case-bd', `data-case="${i}" class="case-bd${i === active ? ' active' : ''}`)).join('');
+  return d;
+};
+
+function vueEditerBD(v, vue) {
+  const b = vue.bd, c = b.cases[vue.caseActive];
+  const titre = el('input', { className: 'titre-bd', placeholder: 'Le titre de ma BD', maxLength: bd.TEXTE_MAX, value: b.titre });
+  titre.setAttribute('aria-label', 'Le titre de ma BD');
+  titre.addEventListener('input', () => { b.titre = titre.value; });
+  const zoneBande = bande(b, { cliquable: true, active: vue.caseActive });
+  zoneBande.addEventListener('click', (ev) => {
+    const i = ev.target.closest('[data-case]')?.dataset.case;
+    if (i === undefined) return;
+    afficherBD({ ...vue, caseActive: Number(i) });
+    parler(`Case ${Number(i) + 1}.`);
+  });
+  const onglets = el('div', { className: 'onglets', role: 'group', ariaLabel: 'Que veux-tu changer ?' },
+    ...[['decor', '🏞️ Décor'], ['0', '⬅️ À gauche'], ['1', '➡️ À droite'], ['auto', '⭐ Autocollant']].map(([k, nom]) =>
+      bouton(nom, k === vue.onglet, () => afficherBD({ ...vue, onglet: k }))));
+  const panneau = el('div', { className: 'panneau-bd' });
+  // un bouton de choix : un dessin (ou rien) et un nom
+  const choisir = (actif, dessin, nom, action) => { const x = el('button', { className: 'choix-bd' }); x.innerHTML = `${dessin}<span></span>`; x.lastChild.textContent = nom; x.setAttribute('aria-pressed', actif); x.addEventListener('click', action); return x; };
+  const maj = (dire) => { afficherBD(vue); if (dire) parler(dire); };
+  if (vue.onglet === 'decor') {
+    panneau.append(el('div', { className: 'grille-bd' }, ...Object.entries(bd.DECORS).map(([k, [nom, dessin]]) =>
+      choisir(c.decor === k, `<svg viewBox="0 0 300 240" aria-hidden="true">${dessin}</svg>`, nom, () => { c.decor = k; maj(nom); }))));
+  } else if (vue.onglet === 'auto') {
+    panneau.append(el('div', { className: 'grille-bd petite' }, choisir(!c.autocollant, '', 'Aucun', () => { c.autocollant = null; maj('Aucun autocollant.'); }),
+      ...bd.AUTOCOLLANTS.map((a) => choisir(c.autocollant === a, `<span class="autocollant" aria-hidden="true">${a}</span>`, '', () => { c.autocollant = a; maj(); }))));
+  } else {
+    const k = Number(vue.onglet);
+    panneau.append(el('h3', { textContent: 'Qui ?' }), el('div', { className: 'grille-bd' },
+      choisir(!c.perso[k], '', 'Personne', () => { c.perso[k] = null; maj('Personne.'); }),
+      ...personnagesBD().map(([id, nom]) => choisir(c.perso[k] === id, `<svg viewBox="0 0 104 168" aria-hidden="true">${dessinPersoBD(id, 0, 0, 104, 168)}</svg>`, nom, () => { c.perso[k] = id; maj(nom); }))));
+    const texte = el('input', { className: 'texte-bulle', placeholder: 'Ou écris ici…', maxLength: bd.TEXTE_MAX, value: c.bulles[k] });
+    texte.setAttribute('aria-label', 'Ce que dit le personnage');
+    texte.addEventListener('change', () => { c.bulles[k] = bd.nettoyer(texte.value); maj(c.bulles[k]); });
+    panneau.append(el('h3', { textContent: 'Que dit-il ? Que dit-elle ?' }), el('div', { className: 'phrases' },
+      gros('Rien', () => { c.bulles[k] = ''; maj('Pas de bulle.'); }, `petit${c.bulles[k] ? '' : ' choisi'}`),
+      ...bd.PHRASES.map((p) => gros(p, () => { c.bulles[k] = p; maj(p); }, `petit${c.bulles[k] === p ? ' choisi' : ''}`))), texte);
+  }
+  const actions = el('div', { className: 'actions-atelier' },
+    gros('🔊 Lire ma BD', () => parler(bd.texteALire(b, nomBD)), 'gros secondaire'),
+    gros('🖨️ Imprimer', () => imprimerBD(b), 'gros secondaire'),
+    gros('✅ Terminé', () => {
+      try { bd.ajouterBD(joueuse, b); } catch (e) { return parler(e.message); }
+      enregistrer();
+      afficherBD({ mode: 'mes' });
+      parler('Bravo ! Ta BD est rangée dans « Mes BD ». Veux-tu l’écouter ?', { ton: 1.15 });
+    }));
+  v.append(titre, zoneBande, el('h2', { textContent: `Case ${vue.caseActive + 1}` }), onglets, panneau, actions);
+}
+
+function vueMesBD(v, vue) {
+  if (!joueuse.bds.length) v.append(el('p', { className: 'carte presentation', textContent: "Tu n'as pas encore de BD. Invente-en une !" }));
+  for (const b of [...joueuse.bds].reverse()) {
+    v.append(el('div', { className: 'carte une-bd' }, el('h3', { textContent: b.titre || 'Ma BD' }), bande(b), el('div', { className: 'actions-atelier' },
+      gros('🔊 Lire', () => parler(bd.texteALire(b, nomBD)), 'petit'),
+      gros('🖨️ Imprimer', () => imprimerBD(b), 'petit'),
+      gros(vue.aEnlever === b.id ? 'Vraiment ?' : '🗑️ Enlever', () => {
+        if (vue.aEnlever !== b.id) { afficherBD({ mode: 'mes', aEnlever: b.id }); return parler('Enlever cette BD ? Touche encore pour confirmer.'); }
+        bd.enleverBD(joueuse, b.id);
+        enregistrer();
+        afficherBD({ mode: 'mes' });
+      }, 'petit'))));
+  }
+}
+
+const imprimerBD = (b) => imprimer(`<div class="bande">${b.cases.map((c, i) => bd.dessinerCase(c, dessinPersoBD, { numero: i })).join('')}</div>`, bd.nettoyer(b.titre) || `La BD de ${joueuse.prenom}`);
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)
 function ouvrirRestaurant(cle = null) {

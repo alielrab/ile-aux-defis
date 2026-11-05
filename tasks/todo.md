@@ -67,3 +67,4 @@
 - [x] Archipel : carte générale, 4 îles (village et savoir ouvertes, créateurs et cœur à débloquer avec des étoiles, prix dans PRIX_ILES), retour sur l'île où l'on était, place pour d'autres îles ; profils intacts (champ `iles` ajouté)
 - [x] Atelier de peinture : peinture libre, coloriage, coloriage magique (sons / calculs), 8 dessins (5 à débloquer), galerie de 12, tableaux dans la maison, impression
 - [x] Météo des émotions : météo du jour (rien d'enregistré), respiration guidée, « Devine l'émotion » (visages et situations, conseils) — à faire relire
+- [x] Atelier BD : 3 ou 4 cases selon l'âge, décors, personnages (famille, île, créatures), bulles (phrases lues ou texte), autocollants, lire à voix haute, Mes BD (8), impression

@@ -44,7 +44,7 @@ export function modifierProfil(profil, { prenom, age, poids = profil.poids ?? nu
   profil.poids = poids;
 }
 
-// Écran parent : on repart de zéro (étoiles, achats, maison, îles et dessins à colorier débloqués). La galerie de dessins est gardée. On garde le prénom, l'âge, la peau et les yeux.
+// Écran parent : on repart de zéro (étoiles, achats, maison, îles et dessins à colorier débloqués). La galerie de dessins et les BD sont gardées. On garde le prénom, l'âge, la peau et les yeux.
 export function remettreAZero(profil) {
   Object.assign(profil, { etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, iles: [], modeles: [] });
   const a = profil.avatar;
@@ -62,7 +62,7 @@ const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toStri
 export function ajouterProfil(etat, { prenom, age, avatar }) {
   prenom = verifierPrenomAge(prenom, age);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [] };
+  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [] };
   etat.profils.push(profil);
   return profil;
 }
@@ -83,6 +83,7 @@ export function charger(stockage = globalThis.localStorage) {
       p.iles ??= []; // îles de l'archipel débloquées avec des étoiles (rien d'autre ne change dans le profil)
       p.dessins ??= []; // atelier de peinture : la galerie
       p.modeles ??= []; // atelier de peinture : les dessins à colorier débloqués
+      p.bds ??= []; // atelier BD : les bandes dessinées
       p.maison ??= maisonVide();
       p.maison.piece ??= 'chambre';
       p.maison.tableaux ??= {}; // un dessin de la galerie accroché par pièce
