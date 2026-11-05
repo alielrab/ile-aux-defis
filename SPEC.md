@@ -116,6 +116,17 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
   - *Rendre la monnaie*, avec 4 choix qui reprennent les vraies erreurs : oublier la retenue (3.60 au lieu de 2.60), recopier les centimes du prix (3.40).
 - **Étoiles** : 1,5 par bonne réponse à 7 ans et moins, 1 au-delà.
 
+**Atelier de peinture** (`js/jeux/peinture.js`, île des créateurs) :
+- **Peinture libre** au doigt : 14 couleurs, 3 tailles de pinceau, une gomme, des boutons « Annuler » et « Tout effacer » (deux appuis).
+- **Coloriage** : on choisit une couleur, puis on touche une partie du dessin, avec un bouton « Annuler ».
+- **Coloriage magique** : chaque couleur de la palette porte une étiquette, et chaque zone du dessin aussi.
+  - 7 ans et moins : la palette montre un son (« o »), la zone une syllabe qui le contient (« mo »). Toucher une zone la fait lire à voix haute.
+  - 8 ans : additions et soustractions ; 9 ans et plus : aussi les tables de multiplication.
+  - Une mauvaise couleur fait trembler la zone, et la voix répète le calcul ou la syllabe. Le dessin fini rapporte 0,5 ⭐ par zone (réglable : `peinture` dans `reglages.js`). La peinture libre et le coloriage simple ne rapportent pas d'étoiles.
+- **8 dessins** : maison, poisson et fleur dès le départ ; papillon, fusée et bateau à 5 ⭐ ; glace et arc-en-ciel à 8 ⭐ (deux appuis pour débloquer).
+- **Ma galerie** : 12 dessins au plus par enfant. Les peintures libres sont gardées en petites images d'environ 10 Ko. On peut accrocher un dessin dans une pièce de sa maison (un tableau par pièce, encadré au mur ; toucher encore pour le décrocher), l'imprimer ou l'enlever (deux appuis).
+- **Imprimer** : le coloriage vide (pour le coloriage magique : avec les étiquettes et la légende des couleurs), la peinture en cours, ou un dessin de la galerie.
+
 **Restaurant (Cuisine)** : 5 recettes (crêpes, cookies, salade de fruits, gâteau au yaourt, pain perdu). En jeu : à chaque étape, choisir l'ingrédient suivant (la carte de la recette est affichée ; pour 6 ans, la voix dit lequel), puis peser sur une balance avec des boutons (6 ans : par 50 g ; 9 ans : par 10 g). À la fin, le plat réussi, un « Le savais-tu ? » et la vraie recette débloquée (ingrédients, étapes, consignes de sécurité). Quand on l'a faite pour de vrai, un parent tape son code : +10 étoiles (`BONUS_RECETTE_REELLE`) et un objet pour la cuisine de la maison (poêle à crêpes, four, corbeille de fruits, moule à gâteau, tablier de chef), une seule fois par recette.
 
 Étoiles par bonne réponse des autres jeux, dans `js/reglages.js` (`ETOILES_AUTRES_JEUX`) :

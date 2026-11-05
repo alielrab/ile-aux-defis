@@ -44,9 +44,9 @@ export function modifierProfil(profil, { prenom, age, poids = profil.poids ?? nu
   profil.poids = poids;
 }
 
-// Écran parent : on repart de zéro (étoiles, achats, maison, îles débloquées). On garde le prénom, l'âge, la peau et les yeux.
+// Écran parent : on repart de zéro (étoiles, achats, maison, îles et dessins à colorier débloqués). La galerie de dessins est gardée. On garde le prénom, l'âge, la peau et les yeux.
 export function remettreAZero(profil) {
-  Object.assign(profil, { etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, iles: [] });
+  Object.assign(profil, { etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, iles: [], modeles: [] });
   const a = profil.avatar;
   if (!TENUES_DE_DEPART.includes(a.tenue)) a.tenue = AVATAR_PAR_DEFAUT.tenue;
   if (!COIFFURES_DE_DEPART.includes(a.coiffure)) a.coiffure = AVATAR_PAR_DEFAUT.coiffure;
@@ -54,7 +54,7 @@ export function remettreAZero(profil) {
   a.accessoires = [];
 }
 
-export const maisonVide = () => ({ piece: 'chambre', papiers: {}, places: [] });
+export const maisonVide = () => ({ piece: 'chambre', papiers: {}, places: [], tableaux: {} });
 
 // Un identifiant unique, valable aussi entre plusieurs appareils une fois synchronisés.
 const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
@@ -62,7 +62,7 @@ const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toStri
 export function ajouterProfil(etat, { prenom, age, avatar }) {
   prenom = verifierPrenomAge(prenom, age);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [] };
+  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [] };
   etat.profils.push(profil);
   return profil;
 }
@@ -81,8 +81,11 @@ export function charger(stockage = globalThis.localStorage) {
       p.recettes ??= {}; // restaurant : 'debloquee' puis 'faite'
       p.vus ??= {}; // questions déjà posées, par jeu (pour ne pas les reposer trop tôt)
       p.iles ??= []; // îles de l'archipel débloquées avec des étoiles (rien d'autre ne change dans le profil)
+      p.dessins ??= []; // atelier de peinture : la galerie
+      p.modeles ??= []; // atelier de peinture : les dessins à colorier débloqués
       p.maison ??= maisonVide();
       p.maison.piece ??= 'chambre';
+      p.maison.tableaux ??= {}; // un dessin de la galerie accroché par pièce
       p.maison.papiers ??= { chambre: p.maison.papier ?? null }; // avant : un seul papier peint
       delete p.maison.papier;
     }

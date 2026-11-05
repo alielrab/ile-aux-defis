@@ -65,10 +65,10 @@ test('les profils des premiers essais (sans yeux ni maison) sont complétés', (
   s.setItem('ile-aux-defis', JSON.stringify({ version: 2, code: '1234', profils: [{ id: 0, prenom: 'A', avatar: { peau: 'claire' } }] }));
   const p = charger(s).profils[0];
   assert.equal(p.avatar.yeux, 'marron');
-  assert.deepEqual(p.maison, { piece: 'chambre', papiers: {}, places: [] });
+  assert.deepEqual(p.maison, { piece: 'chambre', papiers: {}, places: [], tableaux: {} });
   assert.deepEqual(p.avatar.accessoires, []);
   s.setItem('ile-aux-defis', JSON.stringify({ version: 2, code: '1234', profils: [{ id: 0, avatar: {}, maison: { papier: 'pois', places: ['meuble:lit'] } }] }));
-  assert.deepEqual(charger(s).profils[0].maison, { piece: 'chambre', papiers: { chambre: 'pois' }, places: ['meuble:lit'] });
+  assert.deepEqual(charger(s).profils[0].maison, { piece: 'chambre', papiers: { chambre: 'pois' }, places: ['meuble:lit'], tableaux: {} });
 });
 
 test('stockage vide, illisible ou bloqué', () => {

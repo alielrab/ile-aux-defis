@@ -1,6 +1,7 @@
 // Les pièces de la maison en SVG (vue de face, 800 × 520), et les aperçus des objets des magasins.
 import { dessinerAvatar, CHEVEUX, teinte } from './avatar.js';
 import { MEUBLES, JOUETS, USTENSILES } from './catalogue.js';
+import { dessinerOeuvre } from './jeux/peinture.js';
 
 const PIECE_DE = Object.fromEntries(Object.entries({ ...MEUBLES, ...JOUETS, ...USTENSILES }).map(([cle, o]) => [cle, o.piece]));
 
@@ -195,6 +196,15 @@ const DECOR = {
     <rect x="20" y="300" width="300" height="104" fill="#9fc9e8"/><rect x="14" y="290" width="312" height="14" rx="4" fill="#d9b48a"/>
     ${[30, 128, 226].map((x) => `<rect x="${x}" y="314" width="84" height="80" rx="6" fill="#b6d7ef"/><rect x="${x + 36}" y="326" width="12" height="4" rx="2" fill="#5a7ea0"/>`).join('')}` },
 };
+// La place du tableau (dessin de l'atelier de peinture) sur le mur de chaque pièce : [x, y, largeur]
+const CADRE = { chambre: [690, 62, 92], salon: [206, 60, 112], jeux: [200, 70, 112], cuisine: [698, 66, 88] };
+function tableau(profil, piece) {
+  const d = (profil.dessins ?? []).find((x) => x.id === profil.maison.tableaux?.[piece]);
+  if (!d || !CADRE[piece]) return '';
+  const [x, y, l] = CADRE[piece], h = l * 0.75;
+  return `<rect x="${x - 7}" y="${y - 7}" width="${l + 14}" height="${h + 14}" rx="3" fill="#b07440"/><rect x="${x - 3}" y="${y - 3}" width="${l + 6}" height="${h + 6}" fill="#e8c890"/>
+    ${dessinerOeuvre(d).replace('<svg ', `<svg x="${x}" y="${y}" width="${l}" height="${h}" `)}`;
+}
 const ORDRE = ['tablier', 'poele', 'corbeille', 'four', 'moule', 'tapis', 'etagere', 'lampe', 'lit', 'bureau', 'plante', 'ours', 'robot', 'bibliotheque', 'tele', 'lampadaire', 'canape', 'fauteuil', 'table-basse', 'cerf-volant', 'toboggan', 'manege'];
 const DEVANT = ['ballon', 'train']; // devant l'enfant
 
@@ -228,6 +238,7 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
     ${[0, 1, 2, 3, 4, 5].map((i) => `<line x1="${i * 160}" y1="390" x2="${i * 160 - 60}" y2="520" stroke="${deco.lattes}" stroke-width="3"/>`).join('')}
     <rect y="372" width="800" height="16" fill="${teinte(deco.mur, -0.05)}"/>
     ${deco.fond ?? ''}
+    ${tableau(profil, piece)}
     ${dessins(ORDRE)}
     ${avatar}
     ${dessins(DEVANT)}${dessins(animaux)}

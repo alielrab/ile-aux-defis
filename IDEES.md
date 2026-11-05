@@ -21,6 +21,7 @@
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).
+- **L'atelier de peinture** (île des créateurs, voir SPEC.md).
 - **Archipel** : îles du village, du savoir, des créateurs et du cœur, reliées par un bateau (voir SPEC.md). Les idées ci-dessous ont déjà leur place réservée (« Bientôt ») : chantier, peinture, BD, musique, maison de la confiance, météo des émotions.
 - Lieu de croyance du village, choisi par les parents (voir SPEC.md) : idée d'origine, « Ma foi » et « Autres cultures ».
 
@@ -36,16 +37,6 @@ Un lieu calme sur l'île, sur les droits de l'enfant et la sécurité. **Pas d'�
   3. Un miroir où l'enfant liste des faits positifs sur elle-même.
   - Message clé : un avis méchant ne dit rien de vrai sur toi. Si ça se répète ou que ça fait mal, c'est du harcèlement : on en parle toujours à un adulte de confiance.
 - Contenu à baser sur les approches de **Protection de l'enfance Suisse** et de **Pro Juventute**, et **à faire relire par un parent avant utilisation**.
-
-## L'atelier de peinture (à construire plus tard)
-Un atelier sur l'île pour dessiner et colorier au doigt.
-- **Coloriage libre** : une palette de couleurs, plusieurs tailles de pinceau, une gomme et un bouton pour annuler.
-- **Coloriage magique** : chaque zone du dessin porte un calcul ou un son, et chaque couleur de la palette porte une réponse. L'enfant colorie la zone avec la couleur de la bonne réponse. Le contenu suit l'âge :
-  - pour la petite : des sons ou des syllabes (comme à la bibliothèque) ;
-  - pour la grande : des calculs (comme à l'école).
-- **Ma galerie** : un dessin fini s'accroche comme un tableau au mur de la maison, dans la pièce choisie.
-- **Nouveaux dessins** : de nouveaux modèles à colorier se débloquent avec les étoiles, comme dans les magasins.
-- **Imprimer** : un bouton pour imprimer le modèle vide (à colorier sur papier) ou le dessin fini.
 
 ## Commercialisation (à long terme)
 Rien de tout ça n'est construit. Le code est seulement préparé :

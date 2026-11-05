@@ -8,7 +8,7 @@ import {
 } from './avatar.js';
 import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
-import { CATALOGUE, MAGASINS, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante } from './catalogue.js';
+import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE } from './reglages.js';
 import { nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
@@ -19,6 +19,7 @@ import * as syllabes from './jeux/syllabes.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
+import * as peinture from './jeux/peinture.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -191,6 +192,7 @@ function entrerLieu(cible) {
   if (id === 'archipel') { ileCourante = null; ouvrirIle(); return parler("Voici l'archipel ! Choisis une île.", { ton: 1.1 }); }
   if (id === 'maison') return ouvrirLieu('maison');
   if (id === 'croyance') return ouvrirCroyance();
+  if (id === 'peinture') return ouvrirAtelier();
   const l = LIEUX.find((x) => x.id === id);
   if (!l.ouvert) return parler(`${l.nom.replace('\n', ' ')} ouvre bientôt !`, { ton: 1.1 });
   if (l.type === 'magasin') return ouvrirLieu(id);
@@ -847,6 +849,239 @@ function afficherRapprochements(vue) {
   fin.textContent = `💛 ${rapprochements.CONCLUSION}`;
   vue.append(fin);
   return `Ce qui nous rapproche, ce qui nous différencie. ${intro.textContent} Touche le haut-parleur d'une carte pour l'écouter. ${rapprochements.CONCLUSION}`;
+}
+
+// L'atelier de peinture : peinture libre, coloriage, coloriage magique, galerie (accrocher dans la maison, imprimer).
+let atelier = null; // la vue en cours : { mode: 'accueil' | 'choisir' | 'colorier' | 'libre' | 'galerie' | 'fini', … }
+const el = (tag, props = {}, ...enfants) => { const e = Object.assign(document.createElement(tag), props); e.append(...enfants); return e; };
+const gros = (texte, action, classe = 'gros') => { const b = el('button', { className: classe, textContent: texte }); b.addEventListener('click', action); return b; };
+const ditCalcul = (t) => t.replace('×', 'fois').replace('−', 'moins').replace('+', 'plus');
+
+function ouvrirAtelier() {
+  etoilesJoueuse();
+  afficherAtelier({ mode: 'accueil' });
+  montrer('atelier');
+  parler("Bienvenue à l'atelier de peinture ! Tu peux peindre avec ton doigt, colorier un dessin, ou faire un coloriage magique. Tes dessins vont dans ta galerie, et tu peux les accrocher dans ta maison.", { ton: 1.1 });
+}
+
+function afficherAtelier(vue) {
+  atelier = vue;
+  etoilesJoueuse();
+  const v = $('#atelier-vue');
+  v.replaceChildren();
+  if (vue.mode !== 'accueil') v.append(gros('← L’atelier', () => { afficherAtelier({ mode: 'accueil' }); parler("Que veux-tu faire ?"); }, 'gros secondaire retour-atelier'));
+  ({ accueil: vueAccueilAtelier, choisir: vueChoisirModele, colorier: vueColorier, libre: vueLibre, galerie: vueGalerie, fini: vueFini })[vue.mode](v, vue);
+}
+
+function vueAccueilAtelier(v) {
+  const n = joueuse.dessins.length;
+  v.append(el('div', { className: 'atelier-menu' },
+    gros('🖌️ Peinture libre', () => { afficherAtelier({ mode: 'libre' }); parler('Choisis une couleur et peins avec ton doigt !'); }),
+    gros('🖍️ Coloriage', () => { afficherAtelier({ mode: 'choisir', magique: false }); parler('Quel dessin veux-tu colorier ?'); }),
+    gros('✨ Coloriage magique', () => { afficherAtelier({ mode: 'choisir', magique: true }); parler(`Coloriage magique ! Chaque couleur a ${joueuse.age <= 7 ? 'un son' : 'un nombre'}. Quel dessin veux-tu ?`); }),
+    gros(`🖼️ Ma galerie (${n} / ${peinture.GALERIE_MAX})`, () => { afficherAtelier({ mode: 'galerie' }); parler(n ? 'Voici ta galerie. Tu peux accrocher un dessin dans ta maison.' : "Ta galerie est vide. Fais un dessin, il viendra ici !"); })));
+}
+
+// Choisir un dessin à colorier ; un dessin fermé montre son prix (deux appuis pour le débloquer)
+function vueChoisirModele(v, vue) {
+  v.append(el('div', { className: 'modeles' }, ...Object.entries(peinture.MODELES).map(([cle, m]) => {
+    const ouvert = peinture.modeleOuvert(joueuse, cle);
+    const b = el('button', { className: `modele${ouvert ? '' : ' ferme'}` });
+    b.innerHTML = `${peinture.dessinerModele(cle)}<span></span>`;
+    b.lastChild.textContent = ouvert ? m.nom : vue.aConfirmer === cle ? 'Touche encore !' : `${m.nom} · ⭐ ${m.prix}`;
+    b.addEventListener('click', () => {
+      if (ouvert) return commencerColoriage(cle, vue.magique);
+      if (joueuse.etoiles < m.prix) return parler(`${m.nom} coûte ${m.prix} étoiles. Tu en as ${formatEtoiles(joueuse.etoiles)}. Continue à jouer !`);
+      if (vue.aConfirmer !== cle) { afficherAtelier({ ...vue, aConfirmer: cle }); return parler(`${m.nom} coûte ${m.prix} étoiles. Touche encore pour le débloquer.`); }
+      peinture.debloquerModele(joueuse, cle);
+      enregistrer();
+      parler(`Bravo ! ${m.nom} est à toi !`, { ton: 1.15 });
+      commencerColoriage(cle, vue.magique);
+    });
+    return b;
+  })));
+}
+
+function commencerColoriage(cle, magique) {
+  const vue = { mode: 'colorier', cle, magique, remplissage: {}, historique: [], couleur: null, justes: new Set(), etiq: magique ? peinture.magique(cle, joueuse.age) : null };
+  afficherAtelier(vue);
+  parler(magique
+    ? (joueuse.age <= 7 ? "Touche une couleur pour écouter son son. Puis colorie les parties où tu entends ce son. Touche une partie pour l'écouter."
+      : 'Colorie chaque partie avec la couleur du résultat de son calcul.')
+    : 'Choisis une couleur, puis touche une partie du dessin pour la colorier.');
+}
+
+function vueColorier(v, vue) {
+  const { cle, magique, etiq } = vue, m = peinture.MODELES[cle];
+  const etiquettes = magique ? Object.fromEntries(Object.entries(etiq.zones).filter(([z]) => !vue.justes.has(z))) : {};
+  const zoneDessin = el('div', { className: 'toile-cadre' });
+  zoneDessin.innerHTML = peinture.dessinerModele(cle, vue.remplissage, etiquettes, { cliquable: true });
+  zoneDessin.addEventListener('click', (ev) => {
+    const z = ev.target.closest('[data-zone]')?.dataset.zone;
+    if (!z) return;
+    const texte = magique ? etiq.zones[z] : null;
+    if (!vue.couleur) return parler(magique && !vue.justes.has(z) ? (joueuse.age <= 7 ? texte : `${ditCalcul(texte)} ?`) : "Choisis d'abord une couleur.");
+    if (magique) {
+      if (vue.justes.has(z)) return;
+      if (!peinture.bonneCouleur(cle, z, vue.couleur)) {
+        bip(false);
+        ev.target.classList.add('tremble');
+        return parler(joueuse.age <= 7 ? `Pas cette couleur ! Écoute bien : ${texte}.` : `Pas encore ! Combien font ${ditCalcul(texte)} ?`);
+      }
+      vue.justes.add(z);
+      bip(true);
+    } else vue.historique.push([z, vue.remplissage[z]]);
+    vue.remplissage[z] = peinture.couleur(vue.couleur)[2];
+    if (magique && vue.justes.size === m.zones.length) return finirMagique(vue);
+    afficherAtelier(vue);
+  });
+  const couleurs = magique ? Object.keys(etiq.palette) : peinture.COULEURS.map(([c]) => c);
+  const palette = el('div', { className: 'palette', role: 'group', ariaLabel: 'Couleurs' }, ...couleurs.map((c) => {
+    const [, nom, hex] = peinture.couleur(c);
+    const b = el('button', { className: 'pot', ariaLabel: magique ? `${nom} : ${etiq.palette[c]}` : nom });
+    b.style.background = hex;
+    b.setAttribute('aria-pressed', c === vue.couleur);
+    if (magique) b.append(el('span', { textContent: etiq.palette[c] }));
+    b.addEventListener('click', () => { vue.couleur = c; afficherAtelier(vue); parler(magique ? (joueuse.age <= 7 ? etiq.palette[c] : `${nom} : ${etiq.palette[c]}`) : nom); });
+    return b;
+  }));
+  const actions = el('div', { className: 'actions-atelier' });
+  if (!magique) actions.append(gros('↩️ Annuler', () => { const [z, avant] = vue.historique.pop() ?? []; if (z) { if (avant) vue.remplissage[z] = avant; else delete vue.remplissage[z]; afficherAtelier(vue); } }, 'gros secondaire'));
+  actions.append(gros('🖨️ Imprimer', () => imprimerColoriage(vue), 'gros secondaire'));
+  if (!magique) actions.append(gros('✅ Terminé', () => garderOeuvre({ type: 'modele', modele: cle, remplissage: { ...vue.remplissage } })));
+  v.append(el('h2', { textContent: m.nom }), zoneDessin, palette, actions);
+}
+
+function finirMagique(vue) {
+  const gain = peinture.etoilesMagique(vue.cle, joueuse.age);
+  joueuse.etoiles += gain;
+  let galerie = true;
+  try { peinture.ajouterOeuvre(joueuse, { type: 'modele', modele: vue.cle, remplissage: { ...vue.remplissage } }); } catch { galerie = false; }
+  enregistrer();
+  afficherAtelier({ mode: 'fini', cle: vue.cle, remplissage: vue.remplissage, gain, galerie });
+  parler(`Bravo ${joueuse.prenom} ! Ton coloriage magique est fini. Tu gagnes ${formatEtoiles(gain)} étoiles !${galerie ? ' Il est dans ta galerie.' : ' Ta galerie est pleine : enlève un dessin pour garder les prochains.'}`, { ton: 1.15 });
+}
+
+function vueFini(v, vue) {
+  const d = el('div', { className: 'toile-cadre' });
+  d.innerHTML = peinture.dessinerModele(vue.cle, vue.remplissage);
+  v.append(el('h2', { textContent: `Bravo, ${joueuse.prenom} !` }), el('p', { className: 'gain', textContent: `+${formatEtoiles(vue.gain)} ⭐` }), d,
+    el('div', { className: 'actions-atelier' }, gros('🖼️ Ma galerie', () => afficherAtelier({ mode: 'galerie' })),
+      gros('✨ Un autre', () => afficherAtelier({ mode: 'choisir', magique: true }), 'gros secondaire')));
+}
+
+// Peinture libre au doigt (ou à la souris)
+function vueLibre(v, vue) {
+  vue.traits ??= [];
+  vue.couleur ??= 'bleu';
+  vue.taille ??= 14;
+  const toile = el('canvas', { width: 800, height: 600, className: 'toile' });
+  const ctx = toile.getContext('2d');
+  const tracer = (t) => {
+    ctx.strokeStyle = t.c; ctx.fillStyle = t.c; ctx.lineWidth = t.l; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    if (t.p.length === 1) { ctx.beginPath(); ctx.arc(t.p[0][0], t.p[0][1], t.l / 2, 0, Math.PI * 2); ctx.fill(); return; }
+    ctx.beginPath(); ctx.moveTo(...t.p[0]); for (const p of t.p.slice(1)) ctx.lineTo(...p); ctx.stroke();
+  };
+  const redessiner = () => { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 800, 600); for (const t of vue.traits) tracer(t); };
+  redessiner();
+  const pos = (ev) => { const r = toile.getBoundingClientRect(); return [((ev.clientX - r.left) * 800) / r.width, ((ev.clientY - r.top) * 600) / r.height]; };
+  let trait = null;
+  toile.addEventListener('pointerdown', (ev) => {
+    toile.setPointerCapture(ev.pointerId);
+    trait = { c: vue.gomme ? '#ffffff' : peinture.couleur(vue.couleur)[2], l: vue.gomme ? vue.taille * 1.6 : vue.taille, p: [pos(ev)] };
+    vue.traits.push(trait);
+    tracer(trait);
+  });
+  toile.addEventListener('pointermove', (ev) => { if (!trait) return; trait.p.push(pos(ev)); tracer({ ...trait, p: trait.p.slice(-2) }); });
+  for (const fin of ['pointerup', 'pointercancel']) toile.addEventListener(fin, () => { trait = null; });
+  const majOutils = () => { for (const b of v.querySelectorAll('[data-outil]')) b.setAttribute('aria-pressed', b.dataset.outil === (vue.gomme ? 'gomme' : String(vue.taille))); for (const b of v.querySelectorAll('.pot')) b.setAttribute('aria-pressed', !vue.gomme && b.dataset.c === vue.couleur); };
+  const palette = el('div', { className: 'palette', role: 'group', ariaLabel: 'Couleurs' }, ...peinture.COULEURS.map(([c, nom, hex]) => {
+    const b = el('button', { className: 'pot', ariaLabel: nom });
+    b.dataset.c = c;
+    b.style.background = hex;
+    b.addEventListener('click', () => { vue.couleur = c; vue.gomme = false; majOutils(); parler(nom); });
+    return b;
+  }));
+  const outil = (texte, cle, nom, action) => { const b = gros(texte, () => { action(); majOutils(); parler(nom); }, 'outil'); b.dataset.outil = cle; b.setAttribute('aria-label', nom); return b; };
+  const outils = el('div', { className: 'outils', role: 'group', ariaLabel: 'Pinceaux' },
+    outil('•', '6', 'Pinceau fin', () => { vue.taille = 6; vue.gomme = false; }),
+    outil('●', '14', 'Pinceau moyen', () => { vue.taille = 14; vue.gomme = false; }),
+    outil('⬤', '28', 'Gros pinceau', () => { vue.taille = 28; vue.gomme = false; }),
+    outil('🧽', 'gomme', 'La gomme', () => { vue.gomme = true; }));
+  const actions = el('div', { className: 'actions-atelier' },
+    gros('↩️ Annuler', () => { vue.traits.pop(); redessiner(); }, 'gros secondaire'),
+    gros(vue.aEffacer ? 'Vraiment ? Toucher encore' : '🗑️ Tout effacer', () => {
+      if (!vue.aEffacer) { vue.aEffacer = true; afficherAtelier(vue); return parler('Tout effacer ? Touche encore pour confirmer.'); }
+      afficherAtelier({ mode: 'libre', couleur: vue.couleur, taille: vue.taille });
+    }, 'gros secondaire'),
+    gros('🖨️ Imprimer', () => imprimer(`<img src="${toile.toDataURL('image/png')}" alt="Ma peinture">`, 'Ma peinture'), 'gros secondaire'),
+    gros('✅ Terminé', () => {
+      if (!vue.traits.length) return parler("Ta feuille est encore blanche. Peins quelque chose d'abord !");
+      const petit = el('canvas', { width: 400, height: 300 }); // une petite image, pour garder de la place sur la tablette
+      petit.getContext('2d').drawImage(toile, 0, 0, 400, 300);
+      garderOeuvre({ type: 'libre', image: petit.toDataURL('image/jpeg', 0.75) });
+    }));
+  v.append(el('div', { className: 'toile-cadre' }, toile), palette, outils, actions);
+  majOutils();
+}
+
+function garderOeuvre(oeuvre) {
+  try {
+    peinture.ajouterOeuvre(joueuse, oeuvre);
+  } catch (e) {
+    return parler(e.message);
+  }
+  enregistrer();
+  afficherAtelier({ mode: 'galerie' });
+  parler('Bravo ! Ton dessin est dans ta galerie. Tu peux l’accrocher dans ta maison.', { ton: 1.15 });
+}
+
+// La galerie : accrocher dans une pièce de la maison (une par pièce), imprimer, enlever (deux appuis)
+function vueGalerie(v, vue) {
+  const pieces = Object.keys(PIECES).filter((k) => possede(joueuse, article(`piece:${k}`)));
+  if (!joueuse.dessins.length) v.append(el('p', { className: 'carte presentation', textContent: 'Ta galerie est vide. Fais un dessin : il viendra ici !' }));
+  v.append(el('div', { className: 'galerie' }, ...joueuse.dessins.map((d, i) => {
+    const carte = el('div', { className: 'carte oeuvre' });
+    carte.innerHTML = peinture.dessinerOeuvre(d);
+    const ou = pieces.filter((k) => joueuse.maison.tableaux[k] === d.id).map((k) => PIECES[k].nom.toLowerCase());
+    if (ou.length) carte.append(el('p', { className: 'accroche', textContent: `🖼️ Accroché : ${ou.join(', ')}` }));
+    const choix = el('div', { className: 'accrocher', role: 'group', ariaLabel: 'Accrocher dans' }, ...pieces.map((k) => {
+      const b = gros(PIECES[k].nom, () => {
+        peinture.accrocher(joueuse, d.id, k);
+        enregistrer();
+        afficherAtelier({ mode: 'galerie' });
+        parler(joueuse.maison.tableaux[k] === d.id ? `Ton dessin est accroché dans ${PIECES[k].nom.toLowerCase()} !` : 'Dessin décroché.');
+      }, 'petit');
+      b.setAttribute('aria-pressed', joueuse.maison.tableaux[k] === d.id);
+      return b;
+    }));
+    carte.append(el('p', { className: 'consigne-accrocher', textContent: 'Accrocher dans :' }), choix, el('div', { className: 'actions-atelier' },
+      gros('🖨️', () => imprimer(peinture.dessinerOeuvre(d), `Dessin de ${joueuse.prenom}`), 'petit'),
+      gros(vue.aEnlever === d.id ? 'Vraiment ?' : '🗑️', () => {
+        if (vue.aEnlever !== d.id) { afficherAtelier({ mode: 'galerie', aEnlever: d.id }); return parler('Enlever ce dessin ? Touche encore pour confirmer.'); }
+        peinture.enleverOeuvre(joueuse, d.id);
+        enregistrer();
+        afficherAtelier({ mode: 'galerie' });
+      }, 'petit')));
+    carte.querySelector('svg').setAttribute('aria-label', `Dessin ${i + 1}`);
+    return carte;
+  })));
+}
+
+// Imprimer : on montre seulement ce qui est dans #impression (voir @media print dans style.css)
+function imprimer(contenu, titre) {
+  $('#impression').innerHTML = `<h1></h1>${contenu}`;
+  $('#impression h1').textContent = titre;
+  window.print();
+}
+// Le coloriage à imprimer : le dessin vide (avec les étiquettes et la légende des couleurs pour le coloriage magique)
+function imprimerColoriage(vue) {
+  const m = peinture.MODELES[vue.cle];
+  const legende = vue.magique ? `<ul class="legende">${Object.entries(vue.etiq.palette).map(([c, t]) => {
+    const [, nom, hex] = peinture.couleur(c);
+    return `<li><span style="background:${hex}"></span><strong>${t}</strong> = ${nom}</li>`;
+  }).join('')}</ul>` : '';
+  imprimer(peinture.dessinerModele(vue.cle, {}, vue.magique ? vue.etiq.zones : {}) + legende, vue.magique ? `Coloriage magique : ${m.nom}` : `Coloriage : ${m.nom}`);
 }
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)

@@ -24,7 +24,7 @@ export const LIEUX = [
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
   // L'île des créateurs
   { id: 'cuisine', ile: 'createurs', type: 'jeu', nom: 'Le\nrestaurant', detail: 'la cuisine de l’île', ouvert: true, x: 230, y: 400 },
-  { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: false, x: 570, y: 400 },
+  { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
   { id: 'bd', ile: 'createurs', type: 'jeu', nom: "L'atelier BD", detail: 'inventer des bandes dessinées', ouvert: false, x: 230, y: 680 },
   { id: 'musique', ile: 'createurs', type: 'jeu', nom: 'La salle\nde musique', detail: 'composer des mélodies', ouvert: false, x: 570, y: 680 },
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)

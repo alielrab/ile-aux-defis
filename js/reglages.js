@@ -18,10 +18,11 @@ export const QUESTIONS_PAR_PARTIE = 10;
 
 // Étoiles par bonne réponse (ou par étape réussie en cuisine) dans les autres jeux, selon l'âge.
 // croyance = le lieu de croyance du village (petites questions),
-// heure = tour de l'horloge, corps = hôpital, syllabes = bibliothèque, espace = observatoire, cuisine = restaurant, marche = marché.
+// heure = tour de l'horloge, corps = hôpital, syllabes = bibliothèque, espace = observatoire, cuisine = restaurant, marche = marché,
+// peinture = atelier de peinture (par zone réussie du coloriage magique ; la peinture libre ne rapporte pas d'étoiles).
 export const ETOILES_AUTRES_JEUX = [
-  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, espace: 1, cuisine: 1, croyance: 1, marche: 1.5 }, // 7 ans et moins
-  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1 }, // 8 ans et plus
+  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, espace: 1, cuisine: 1, croyance: 1, marche: 1.5, peinture: 0.5 }, // 7 ans et moins
+  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1, peinture: 0.5 }, // 8 ans et plus
 ];
 
 // Prix (en étoiles) pour débloquer une île de l'archipel. Le village et le savoir sont ouverts dès le départ.
