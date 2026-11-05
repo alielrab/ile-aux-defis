@@ -46,6 +46,36 @@ Un atelier sur l'île pour dessiner et colorier au doigt.
 - **Nouveaux dessins** : de nouveaux modèles à colorier se débloquent avec les étoiles, comme dans les magasins.
 - **Imprimer** : un bouton pour imprimer le modèle vide (à colorier sur papier) ou le dessin fini.
 
+## Commercialisation (à long terme)
+Rien de tout ça n'est construit. Le code est seulement préparé :
+- toute la sauvegarde passe par `js/store.js` (`charger` / `sauver`) ;
+- chaque enfant a un identifiant unique ;
+- la croyance est rangée à part, sur l'appareil.
+
+- **Comptes parents** : un compte par famille (e-mail + mot de passe, ou connexion Google/Apple), créé par un adulte. Les enfants n'ont jamais de compte ni d'e-mail. Le code à 4 chiffres reste pour l'espace parents sur la tablette.
+- **Synchronisation en ligne** : retrouver les profils sur plusieurs appareils (tablette, téléphone).
+  - On remplacera `charger` / `sauver` dans `store.js` par un envoi au serveur, en gardant la sauvegarde locale pour jouer hors ligne.
+  - Si les deux appareils ont changé : garder la version la plus récente, profil par profil.
+- **Protection des données des enfants (Suisse et Europe)** :
+  - **Lois** : nLPD en Suisse, RGPD en Europe. Le consentement d'un parent est obligatoire (article 8 du RGPD : moins de 16 ans selon les pays, 13 ans au minimum).
+  - **Données** : en garder le moins possible (prénom ou surnom, âge, progrès). Pas de photo, pas de position, pas de publicité, pas de pistage.
+  - **Hébergement** : en Suisse ou dans l'UE.
+  - **Droits des parents** : voir, exporter et supprimer toutes les données en un geste.
+  - **Documents** : une politique de confidentialité simple et un registre des traitements.
+  - **Voix enregistrées** : elles restent sur l'appareil, sauf choix explicite du parent.
+- **Croyance religieuse gardée uniquement sur l'appareil** : c'est une donnée sensible (article 9 du RGPD, et donnée « sensible » selon la nLPD). Elle n'est jamais envoyée au serveur, ni dans les sauvegardes en ligne. C'est déjà le cas : elle est rangée à part, sous la clé `ile-aux-defis-appareil`.
+- **Règles Google Play et App Store pour les apps enfants** :
+  - **Google Play** : programme « Familles » (Designed for Families), questionnaire sur le public visé, uniquement des SDK de pub et de statistiques certifiés pour les familles (ou aucun).
+  - **App Store** : catégorie « Enfants » (Kids Category), pas de liens ni d'achats sans contrôle parental (« parental gate »), pas de pub comportementale ni de statistiques tierces.
+  - **Pour les deux** : une politique de confidentialité en ligne. Les achats éventuels passent par un parent.
+  - **L'app actuelle** est une PWA. Pour les magasins d'apps, il faudra l'emballer (TWA pour Google Play, Capacitor pour l'App Store).
+- **Relecture des contenus par des professionnels** :
+  - **Questions sur le corps** : un médecin ou une infirmière scolaire.
+  - **Pédagogie** : un ou une enseignante, pour le calcul, la lecture et l'heure, selon le Plan d'études romand.
+  - **Croyances** : un représentant de chaque religion présentée, et quelqu'un de neutre pour « Autres cultures ».
+  - **Maison de la confiance** : Protection de l'enfance Suisse / Pro Juventute.
+  - **Textes lus à voix haute** : relecture de l'orthographe et de la prononciation.
+
 ## Maison
 - Nouvelles pièces
 - Placement libre des meubles (glisser-déposer)

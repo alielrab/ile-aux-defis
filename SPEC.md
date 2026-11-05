@@ -5,7 +5,7 @@
 1. App web statique (HTML/CSS/JS, **aucun framework, aucune étape de build**), installable comme une vraie app (PWA) : icône sur l'écran d'accueil, plein écran, sans barre du navigateur. Compatible **Android (Chrome)** en priorité, et iPad (Safari).
 2. Hébergée sur **GitHub Pages**. Il faut internet **une seule fois** pour l'installer. Ensuite elle marche 100 % hors-ligne (service worker).
 3. Les données (profils, étoiles, objets) restent **sur la tablette** (localStorage). Pas de compte, pas de serveur, rien n'est envoyé.
-4. Une seule tablette partagée par les deux filles. Pas de synchronisation entre appareils.
+4. Une seule tablette partagée par les enfants de la famille. Pas de synchronisation entre appareils (préparée dans `js/store.js`, voir IDEES.md « Commercialisation »).
 5. Langue : français uniquement. La fille de 6 ans lit peu : **les consignes sont lues à voix haute** (synthèse vocale du système, qui marche hors-ligne) et les réponses passent par des images/boutons, pas du texte à taper.
 6. Graphismes : dessins SVG faits maison (île, bâtiments, personnages). Pas d'images sous licence, pas d'artiste.
 7. Appareils : tablette Android ou iPad en priorité (au doigt), mais l'affichage s'adapte aussi au **téléphone** (portrait et paysage) et à l'**ordinateur** (souris). Aucune orientation imposée.
@@ -20,7 +20,7 @@ Une app éducative pour deux filles (6 et 9 ans). Une carte d'île : chaque lieu
 
 | Module | Rôle | Dépend de |
 |---|---|---|
-| `profils` | 2 profils (prénom, âge, avatar humain), code parent, écran parent (dont voix enregistrées), sauvegarde locale | — |
+| `profils` | Autant de profils que d'enfants (« Ajouter un enfant » dans l'espace parents ; jusqu'à 4 maisons sur la carte), prénom, âge, avatar humain, code parent, écran parent (dont voix enregistrées), sauvegarde locale | — |
 | `ile` | Carte illustrée de l'île : un bâtiment par mini-jeu + le village des maisons | profils |
 | `jeu-calcul` | L'école : les 4 opérations, difficulté selon l'âge | profils |
 | `jeu-heure` | Lire l'heure sur une horloge à aiguilles | profils |
@@ -77,7 +77,7 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 
 **Tour de l'horloge (Heure)** : murs de pierre, un horloger, une grande horloge (petite aiguille rouge = heures, grande bleue = minutes). Deux sortes de questions, au hasard : lire l'heure (3 ou 4 choix « 3 h 30 ») et régler l'horloge en faisant tourner les aiguilles avec le doigt (ou avec les boutons ◀ ▶), puis « C'est l'heure ! ». Quand la grande aiguille passe le 12, l'heure avance, comme une vraie horloge. 7 ans et moins : heures pile et demies, 3 choix. 8 ans et plus : quarts d'heure et 5 minutes près, 4 choix.
 
-**Hôpital (Corps)** : cabinet médical (carrelage, croix, tableau des lettres), une docteure avec un stéthoscope, un patient. Surtout des questions de culture sur le corps (`js/jeux/corps-questions.js`, faciles à compléter), chacune suivie d'un « Le savais-tu ? ». 7 ans et moins : les 3 premières questions, on touche une partie sur le patient (« Touche le genou », « Avec quoi entends-tu la musique ? ») ; ensuite 43 questions faciles à 3 choix. 8 ans et plus : 50 questions à 4 choix (os, organes, sang, dents, records du corps…). Chiffres arrondis « environ », vérifiés pour des enfants.
+**Hôpital (Corps)** : cabinet médical (carrelage, croix, tableau des lettres), une docteure avec un stéthoscope, un patient. Surtout des questions de culture sur le corps (`js/jeux/corps-questions.js`, faciles à compléter), chacune suivie d'un « Le savais-tu ? ». 7 ans et moins : les 3 premières questions, on touche une partie sur le patient (« Touche le genou », « Avec quoi entends-tu la musique ? ») ; ensuite 43 questions faciles. 8 ans et plus : 57 questions plus poussées (os, organes, sang, nerfs, records du corps…). Toujours 4 choix, avec des mauvaises réponses plausibles et proches de la bonne (206 os : 186, 226, 260). Chiffres arrondis « environ », vérifiés pour des enfants.
 
 **Bibliothèque (Syllabes)** : l'image du mot apparaît en ombre ; on touche les syllabes dans l'ordre pour former le mot ; une mauvaise syllabe tremble (on peut réessayer, mais la question compte comme une erreur). Le mot trouvé est dit à voix haute, l'image se dévoile, avec un « Le savais-tu ? ». Mots dans `js/jeux/syllabes-mots.js`. 7 ans et moins : 111 mots de 2 syllabes, 1 syllabe intruse. 8 ans et plus : 103 mots de 3 à 5 syllabes, 2 syllabes pièges qui se ressemblent (pa/ba, on/an, gnon/gmon…). Les images sont des emojis.
 
@@ -160,7 +160,7 @@ export function question(niveau, aleatoire = Math.random) {
 
 ## Critères de réussite
 1. Installée sur la tablette, l'app se lance et fonctionne entièrement **en mode avion**.
-2. Les 2 profils existent ; les étoiles et objets de l'une ne bougent pas quand l'autre joue.
+2. Les profils existent ; les étoiles et objets de l'un ne bougent pas quand un autre joue.
 3. Chaque mini-jeu propose des questions différentes selon l'âge (vérifié par test).
 4. Une partie de 10 questions donne le bon nombre d'étoiles (vérifié par test).
 5. On peut acheter et placer un meuble, un papier peint, une tenue et l'animal ; ils sont toujours là après fermeture de l'app.

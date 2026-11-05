@@ -121,7 +121,7 @@ const maison = (x, y, toit, mur) => `<g transform="translate(${x} ${y})">
   <path d="M-48 -36 L0 -78 L48 -36Z" fill="${toit}"/>
   <rect x="-10" y="-10" width="20" height="28" rx="3" fill="#7a4a30"/>
   <rect x="-30" y="-28" width="16" height="16" rx="2" fill="#bfe6ff"/><rect x="14" y="-28" width="16" height="16" rx="2" fill="#bfe6ff"/></g>`;
-const COULEURS_MAISONS = [['#e86fa8', '#fff1f6'], ['#6a8fe0', '#eef3ff']];
+const COULEURS_MAISONS = [['#e86fa8', '#fff1f6'], ['#6a8fe0', '#eef3ff'], ['#3fb27f', '#ecfbf3'], ['#f0a030', '#fff6e6']];
 
 function lieu(l) {
   const [dessin, s] = l.dessin ?? BATIMENTS[l.id];
@@ -138,15 +138,21 @@ export function lieuCroyance(famille) {
   return { id: 'croyance', type: 'jeu', nom: CROYANCES[famille].lieu, detail: 'croyances et cultures', ouvert: true, x: 400, y: 440, dessin: [batiment(famille), 0.62] };
 }
 
-// profils : les 2 filles ; joueuse : celle qui joue (seule sa maison s'ouvre) ; famille : la croyance choisie par les parents
+// Place pour 4 maisons au village, entre la boutique et l'hôpital : [écart entre maisons, taille]
+const RANGEE = { 1: [0, 1], 2: [160, 1], 3: [108, 0.8], 4: [84, 0.68] };
+
+// profils : les enfants ; joueuse : celle qui joue (seule sa maison s'ouvre) ; famille : la croyance choisie par les parents
+// Plus de 4 enfants : on montre la maison de la joueuse et 3 autres.
 export function dessinerIle(profils, joueuse, famille = null) {
   const lieux = [...LIEUX, lieuCroyance(famille)].filter(Boolean);
-  const maisons = profils.map((p, i) => {
-    const x = i ? 480 : 320, y = 560, [toit, mur] = COULEURS_MAISONS[i % 2];
+  const visibles = profils.length <= 4 ? profils : [joueuse, ...profils.filter((p) => p.id !== joueuse.id).slice(0, 3)];
+  const [ecart, taille] = RANGEE[visibles.length] ?? [0, 1];
+  const maisons = visibles.map((p, i) => {
+    const x = 400 + (i - (visibles.length - 1) / 2) * ecart, y = 560, [toit, mur] = COULEURS_MAISONS[profils.indexOf(p) % COULEURS_MAISONS.length];
     const tete = dessinerAvatar(p.avatar, 'tete').replace('<svg ', `<svg x="${x - 24}" y="${y - 30}" width="48" height="48" `); // à sa porte
     const aElle = p.id === joueuse.id;
     return `<g class="lieu maison${aElle ? '' : ' autre'}" ${aElle ? `role="button" tabindex="0" data-lieu="maison" aria-label="${echapper(`Ma maison (${p.prenom})`)}"` : 'aria-hidden="true"'}>
-      ${maison(x, y, toit, mur)}${tete}${etiquette(x, y + 46, aElle ? 'Ma maison' : p.prenom, 26, 112)}</g>`;
+      <g transform="translate(${x} ${y}) scale(${taille}) translate(${-x} ${-y})">${maison(x, y, toit, mur)}${tete}</g>${etiquette(x, y + 46 * taille, aElle ? 'Ma maison' : p.prenom, 26, Math.min(112, ecart - 12 || 112))}</g>`;
   }).join('');
   const [fx, fy] = [400, 640]; // la fontaine, au bout de la place du village
   const chemins = lieux.map((l) => `<path d="M${fx} ${fy} Q${(fx + l.x) / 2} ${(fy + l.y) / 2 + 20} ${l.x} ${l.y}"/>`).join('');

@@ -1,8 +1,12 @@
-// Données de l'app : code parent + 2 profils, gardés dans le navigateur (localStorage).
+// Données de l'app : code parent + les profils des enfants, gardés dans le navigateur (localStorage).
+// C'est le SEUL fichier qui lit et écrit les données : pour des comptes parents et une synchronisation en ligne,
+// on remplacera charger/sauver ici (voir IDEES.md, « Commercialisation ») sans toucher au reste de l'app.
+// Deux parts : CLE = ce qui pourra être synchronisé ; CLE_APPAREIL = ce qui ne quitte jamais l'appareil (la croyance).
 import { CROYANCES, RELIGIONS } from './croyances.js';
 import { avatarValide, AGE_MIN, AGE_MAX, AVATAR_PAR_DEFAUT, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART } from './avatar.js';
 
 const CLE = 'ile-aux-defis';
+const CLE_APPAREIL = 'ile-aux-defis-appareil';
 const VERSION = 2; // v2 : avatars humains (la v1 avec des emojis n'a servi qu'aux essais, on la recommence)
 
 function verifierCode(code) {
@@ -51,11 +55,13 @@ export function remettreAZero(profil) {
 
 export const maisonVide = () => ({ piece: 'chambre', papiers: {}, places: [] });
 
+// Un identifiant unique, valable aussi entre plusieurs appareils une fois synchronisés.
+const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+
 export function ajouterProfil(etat, { prenom, age, avatar }) {
-  if (etat.profils.length >= 2) throw new Error('Il y a déjà deux profils.');
   prenom = verifierPrenomAge(prenom, age);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: etat.profils.length, prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {} };
+  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {} };
   etat.profils.push(profil);
   return profil;
 }
@@ -64,7 +70,8 @@ export function charger(stockage = globalThis.localStorage) {
   try {
     const etat = JSON.parse(stockage.getItem(CLE));
     if (etat?.version !== VERSION) return null;
-    etat.croyance ??= { famille: null, decouvrir: [] };
+    // la croyance est sur l'appareil ; avant, elle était avec le reste (on la reprend de là une dernière fois)
+    etat.croyance = JSON.parse(stockage.getItem(CLE_APPAREIL))?.croyance ?? etat.croyance ?? { famille: null, decouvrir: [] };
     for (const p of etat.profils) {
       // compléter les profils créés pendant les premiers essais
       p.avatar.yeux ??= 'marron';
@@ -85,7 +92,9 @@ export function charger(stockage = globalThis.localStorage) {
 // Renvoie false si le navigateur refuse d'enregistrer (navigation privée, stockage plein).
 export function sauver(etat, stockage = globalThis.localStorage) {
   try {
-    stockage.setItem(CLE, JSON.stringify(etat));
+    const { croyance, ...synchronisable } = etat;
+    stockage.setItem(CLE, JSON.stringify(synchronisable));
+    stockage.setItem(CLE_APPAREIL, JSON.stringify({ croyance }));
     return true;
   } catch {
     return false;

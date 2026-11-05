@@ -55,7 +55,9 @@
   - Vérif : `node --test tests/` (code juste/faux, remise à zéro d'un seul profil)
   - Fichiers : `js/app.js`, `js/store.js`, `js/enregistrements.js`, `tests/store.test.js`, `index.html`
 
-- [ ] 8. Installation (PWA) et mise en ligne — fichiers faits (manifest, sw.js, icônes, test) ; reste : mise en ligne sur GitHub Pages et essai sur la tablette
+- [x] 8. Installation (PWA) et mise en ligne — en ligne sur https://alielrab.github.io/ile-aux-defis/ ; reste : essai sur la tablette (mode avion)
+- [x] Hôpital : 4 choix pour tous, mauvaises réponses plausibles, questions plus poussées pour 8 ans et plus (43 / 57)
+- [x] Profils illimités (« Ajouter un enfant »), identifiants uniques, croyance gardée sur l'appareil (prêt pour une synchronisation future)
   - Acceptation : `manifest.json` (plein écran, orientation libre, icônes 192/512), `sw.js` met tous les fichiers en cache ; Chrome Android propose « Installer l'application » ; publiée sur GitHub Pages.
   - Vérif : sur la tablette Android (et un téléphone), installer, passer en mode avion, fermer et relancer, faire un tour complet avec chaque profil
   - Fichiers : `manifest.json`, `sw.js`, `icons/`, `index.html`

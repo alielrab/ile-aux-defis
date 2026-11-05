@@ -38,7 +38,7 @@ function enregistrer() {
 
 function demarrer() {
   if (!etat) return montrer('code');
-  if (etat.profils.length < 2) return ouvrirProfil();
+  if (etat.profils.length === 0) return ouvrirProfil(); // les autres enfants : « Ajouter un enfant » dans l'espace parents
   afficherAccueil();
 }
 
@@ -57,7 +57,7 @@ $('#form-code').addEventListener('submit', (ev) => {
   demarrer();
 });
 
-// Première ouverture : chaque fille crée son personnage
+// Création d'un personnage (première ouverture, ou « Ajouter un enfant » dans l'espace parents)
 const formProfil = $('#form-profil');
 formProfil.age.append(new Option('Choisis…', ''), ...Array.from({ length: AGE_MAX - AGE_MIN + 1 }, (_, i) => new Option(`${AGE_MIN + i} ans`, AGE_MIN + i)));
 
@@ -104,10 +104,10 @@ function ouvrirProfil(profil = null) {
   formProfil.reset();
   formProfil.querySelector('.erreur').textContent = '';
   for (const e of formProfil.querySelectorAll('.seulement-creation')) e.hidden = !!profil; // prénom et âge : écran parent
-  $('#annuler-profil').hidden = !profil;
+  $('#annuler-profil').hidden = !profil && etat.profils.length === 0;
   $('#valider-profil').textContent = profil ? "C'est bon !" : "C'est moi !";
   $('#titre-profil').textContent = profil ? `${profil.prenom}, modifie ton personnage`
-    : etat.profils.length === 0 ? 'Première joueuse : crée ton personnage' : 'Deuxième joueuse : crée ton personnage';
+    : 'Crée ton personnage';
   majApercus();
   montrer('profil');
 }
@@ -798,6 +798,8 @@ function afficherParents(message = null) {
   afficherVoix();
   montrer('parents');
 }
+
+$('#ajouter-enfant').addEventListener('click', () => ouvrirProfil());
 
 $('#form-nouveau-code').addEventListener('submit', (ev) => {
   ev.preventDefault();

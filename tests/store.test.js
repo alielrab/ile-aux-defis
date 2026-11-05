@@ -15,7 +15,7 @@ test('le code parent doit avoir 4 chiffres', () => {
   for (const mauvais of ['123', '12345', 'abcd', '']) assert.throws(() => nouvelEtat(mauvais));
 });
 
-test('deux profils séparés, pas de troisième', () => {
+test('profils séparés, autant qu’on veut, chacun avec un identifiant unique', () => {
   const etat = nouvelEtat('1234');
   const a = ajouterProfil(etat, lea);
   const b = ajouterProfil(etat, zoe);
@@ -23,7 +23,23 @@ test('deux profils séparés, pas de troisième', () => {
   assert.notEqual(a.id, b.id);
   a.etoiles = 5;
   assert.equal(b.etoiles, 0);
-  assert.throws(() => ajouterProfil(etat, zoe));
+  for (let i = 0; i < 5; i++) ajouterProfil(etat, zoe);
+  assert.equal(etat.profils.length, 7);
+  assert.equal(new Set(etat.profils.map((p) => p.id)).size, 7);
+});
+
+test('la croyance reste sur l’appareil : elle n’est pas dans la part qui sera synchronisée', () => {
+  const s = faux();
+  const etat = nouvelEtat('1234');
+  etat.croyance = { famille: 'islam', decouvrir: [] };
+  sauver(etat, s);
+  assert.ok(!s.getItem('ile-aux-defis').includes('islam'));
+  assert.deepEqual(charger(s).croyance, etat.croyance);
+  // un ancien enregistrement avec la croyance dedans se recharge
+  s.setItem('ile-aux-defis', JSON.stringify({ ...etat, croyance: { famille: 'bouddhisme', decouvrir: [] } }));
+  const t = faux();
+  t.setItem('ile-aux-defis', s.getItem('ile-aux-defis'));
+  assert.equal(charger(t).croyance.famille, 'bouddhisme');
 });
 
 test('profil invalide refusé', () => {

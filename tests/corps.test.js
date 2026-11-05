@@ -24,8 +24,8 @@ test('le nez est le nez (pas la tête), la tête accepte tout le visage, à côt
   assert.ok(!touche('pied', x, y, 8));
 });
 
-test('banque de questions : au moins 20 faciles et 40 difficiles, sans doublon, chacune avec « Le savais-tu ? »', () => {
-  for (const [banque, min, autres] of [[FACILES, 20, 2], [DIFFICILES, 40, 3]]) {
+test('banque de questions : au moins 40 faciles et 50 difficiles, 4 choix, sans doublon, chacune avec « Le savais-tu ? »', () => {
+  for (const [banque, min, autres] of [[FACILES, 40, 3], [DIFFICILES, 50, 3]]) {
     assert.ok(banque.length >= min);
     assert.equal(new Set(banque.map((q) => q[0])).size, banque.length);
     for (const [texte, bonne, faux, savais] of banque) {
@@ -36,12 +36,12 @@ test('banque de questions : au moins 20 faciles et 40 difficiles, sans doublon, 
   }
 });
 
-test('6 ans : on touche le patient au début, puis des questions faciles à 3 choix ; 9 ans : que des questions difficiles à 4 choix', () => {
+test('6 ans : on touche le patient au début, puis des questions faciles à 4 choix ; 9 ans : que des questions difficiles à 4 choix', () => {
   const partie = (age, graineN) => nouvellePartie(question, { age }, graine(graineN)).questions;
   for (let n = 1; n < 20; n++) {
     const petite = partie(6, n);
     assert.ok(petite.slice(0, TOUCHER_AU_DEBUT).every((q) => q.mode === 'toucher' && q.reponse in PARTIES));
-    assert.ok(petite.slice(TOUCHER_AU_DEBUT).every((q) => q.mode === 'choix' && q.choix.length === 3 && q.savaisTu));
+    assert.ok(petite.slice(TOUCHER_AU_DEBUT).every((q) => q.mode === 'choix' && q.choix.length === 4 && q.savaisTu));
     const grande = partie(9, n);
     assert.ok(grande.every((q) => q.mode === 'choix' && q.choix.length === 4 && q.choix.includes(q.reponse) && q.savaisTu));
     assert.equal(new Set(grande.map((q) => q.texte)).size, 10);

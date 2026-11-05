@@ -27,3 +27,12 @@ test('un prénom long rétrécit pour ne pas déborder sur la maison voisine', (
   assert.match(dessinerIle(longs, longs[1]), /font-size="18"[^>]*textLength="112"[^>]*>Marie-Charlotte-Anne</);
   assert.match(dessinerIle(profils, profils[1]), /font-size="26"[^>]*>Léa</); // un prénom court ne change pas
 });
+
+test('jusqu’à 4 maisons sur la carte ; au-delà, celle de la joueuse et 3 autres', () => {
+  const beaucoup = Array.from({ length: 6 }, (_, i) => ({ id: `e${i}`, prenom: `Enfant${i}`, age: 7, avatar: AVATAR_PAR_DEFAUT }));
+  const maisons = (svg) => svg.match(/class="lieu maison/g).length;
+  assert.equal(maisons(dessinerIle(beaucoup.slice(0, 3), beaucoup[0])), 3);
+  const svg = dessinerIle(beaucoup, beaucoup[5]);
+  assert.equal(maisons(svg), 4);
+  assert.match(svg, /aria-label="Ma maison \(Enfant5\)"/);
+});
