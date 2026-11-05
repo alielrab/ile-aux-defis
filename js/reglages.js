@@ -24,5 +24,9 @@ export const ETOILES_AUTRES_JEUX = [
   { jusqua: 99, heure: 1, corps: 1, syllabes: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1 }, // 8 ans et plus
 ];
 
+// Prix (en étoiles) pour débloquer une île de l'archipel. Le village et le savoir sont ouverts dès le départ.
+// Chaque enfant débloque les îles avec ses propres étoiles. Mettre 0 pour ouvrir une île à tout le monde.
+export const PRIX_ILES = { createurs: 20, coeur: 20 };
+
 // Recette faite pour de vrai avec un parent (validée avec le code) : étoiles en plus, et un objet pour la cuisine de la maison.
 export const BONUS_RECETTE_REELLE = 10;

@@ -6,7 +6,8 @@ import {
   PEAUX, CHEVEUX, YEUX, COIFFURES, TENUES, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART,
   AVATAR_PAR_DEFAUT, AGE_MIN, AGE_MAX, dessinerAvatar,
 } from './avatar.js';
-import { dessinerIle, LIEUX } from './carte.js';
+import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
+import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
 import { CATALOGUE, MAGASINS, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE } from './reglages.js';
@@ -137,28 +138,57 @@ function afficherAccueil() {
     carte.innerHTML = `<button class="tuile"><span class="avatar">${dessinerAvatar(p.avatar, 'entier', p.age)}</span><span class="prenom"></span></button>
       <button class="modifier">✏️ Modifier mon avatar</button>`;
     carte.querySelector('.prenom').textContent = p.prenom;
-    carte.querySelector('.tuile').addEventListener('click', () => ouvrirIle(p));
+    carte.querySelector('.tuile').addEventListener('click', () => { ileCourante = null; ouvrirIle(p); parler("Voici l'archipel ! Choisis une île.", { ton: 1.1 }); });
     carte.querySelector('.modifier').addEventListener('click', () => ouvrirProfil(p));
     return carte;
   }));
   montrer('accueil');
 }
 
+// L'archipel : ileCourante = l'île où se trouve la joueuse (null = la carte de l'archipel).
+// Les boutons « retour » des jeux et des magasins ramènent sur l'île où l'on était.
+let ileCourante = null, ileAConfirmer = null;
 function ouvrirIle(p = joueuse) {
   joueuse = p;
+  ileAConfirmer = null;
   $('#ile-joueuse').innerHTML = `<span class="mini-avatar">${dessinerAvatar(p.avatar, 'tete')}</span><span></span>`;
   $('#ile-joueuse').lastChild.textContent = p.prenom;
   $('#ile-etoiles').textContent = `⭐ ${formatEtoiles(p.etoiles)}`;
-  $('#carte').innerHTML = dessinerIle(etat.profils, p, etat.croyance.famille);
+  $('#carte').innerHTML = ileCourante ? dessinerIle(ileCourante, etat.profils, p, etat.croyance.famille) : dessinerArchipel(p);
+  $('[data-ecran="ile"] h1').textContent = ileCourante ? ile(ileCourante).nom : "L'archipel";
   montrer('ile');
 }
 
 $('#changer').addEventListener('click', afficherAccueil);
 
+function choisirIle(id) {
+  const i = ile(id), prix = prixIle(id);
+  if (ileOuverte(joueuse, id)) {
+    ileCourante = id;
+    ouvrirIle();
+    return parler(`Bienvenue sur ${i.nom.replace(/^L'île/, "l'île")} !`, { ton: 1.1 });
+  }
+  if (joueuse.etoiles < prix) {
+    return parler(`${i.nom} coûte ${prix} étoiles. Tu en as ${formatEtoiles(joueuse.etoiles)}. Continue à jouer pour en gagner !`);
+  }
+  if (ileAConfirmer !== id) {
+    $('#carte').innerHTML = dessinerArchipel(joueuse, id);
+    ileAConfirmer = id;
+    return parler(`${i.nom} coûte ${prix} étoiles. Touche encore pour la débloquer.`);
+  }
+  debloquerIle(joueuse, id);
+  enregistrer();
+  ileCourante = id;
+  ouvrirIle();
+  parler(`Bravo ! Tu as débloqué ${i.nom.replace(/^L'île/, "l'île")} !`, { ton: 1.15 });
+}
+
 // On touche un lieu pour y entrer (clavier : Entrée ou Espace)
 function entrerLieu(cible) {
-  const id = cible?.dataset.lieu;
+  const id = cible?.dataset.lieu, ileId = cible?.dataset.ile;
+  if (ileId) return choisirIle(ileId);
   if (!id) return;
+  if (id === 'archipel') { ileCourante = null; ouvrirIle(); return parler("Voici l'archipel ! Choisis une île.", { ton: 1.1 }); }
   if (id === 'maison') return ouvrirLieu('maison');
   if (id === 'croyance') return ouvrirCroyance();
   const l = LIEUX.find((x) => x.id === id);
@@ -169,11 +199,11 @@ function entrerLieu(cible) {
   if (id === 'cuisine') return ouvrirRestaurant();
   lancerJeu(id);
 }
-$('#carte').addEventListener('click', (ev) => entrerLieu(ev.target.closest('[data-lieu]')));
+$('#carte').addEventListener('click', (ev) => entrerLieu(ev.target.closest('[data-lieu], [data-ile]')));
 $('#carte').addEventListener('keydown', (ev) => {
   if (ev.key !== 'Enter' && ev.key !== ' ') return;
   ev.preventDefault();
-  entrerLieu(ev.target.closest('[data-lieu]'));
+  entrerLieu(ev.target.closest('[data-lieu], [data-ile]'));
 });
 
 // La maison (placer ses objets) et les magasins de l'île (acheter) : le même écran.

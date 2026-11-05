@@ -86,8 +86,7 @@ test('carte : les 3 nouveaux lieux sont sur l’île', () => {
   for (const id of ['syllabes', 'espace', 'cuisine']) assert.ok(LIEUX.some((l) => l.id === id && l.ouvert));
   const etat = nouvelEtat('1234');
   const p = ajouterProfil(etat, { prenom: 'Léa', age: 6, avatar: AVATAR_PAR_DEFAUT });
-  const svg = dessinerIle(etat.profils, p);
-  for (const id of ['syllabes', 'espace', 'cuisine']) assert.ok(svg.includes(`data-lieu="${id}"`));
+  for (const [id, ile] of [['syllabes', 'savoir'], ['espace', 'savoir'], ['cuisine', 'createurs']]) assert.ok(dessinerIle(ile, etat.profils, p).includes(`data-lieu="${id}"`));
 });
 
 test('variété : au moins 100 mots et 40 questions d’hôpital par âge, sans doublon', async () => {

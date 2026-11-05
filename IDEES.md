@@ -1,6 +1,6 @@
 # Idées pour plus tard
 
-À ne pas construire pour la V1 (voir `SPEC.md`). Chaque idée deviendra un lieu de l'île.
+À ne pas construire pour la V1 (voir `SPEC.md`). Chaque idée deviendra un lieu d'une île de l'archipel (voir `js/archipel.js` pour ajouter une île).
 
 ## Mini-jeux
 
@@ -21,6 +21,7 @@
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).
+- **Archipel** : îles du village, du savoir, des créateurs et du cœur, reliées par un bateau (voir SPEC.md). Les idées ci-dessous ont déjà leur place réservée (« Bientôt ») : chantier, peinture, BD, musique, maison de la confiance, météo des émotions.
 - Lieu de croyance du village, choisi par les parents (voir SPEC.md) : idée d'origine, « Ma foi » et « Autres cultures ».
 
 ## La maison de la confiance (à construire plus tard)

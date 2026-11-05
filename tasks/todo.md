@@ -64,3 +64,4 @@
   - Fichiers : `manifest.json`, `sw.js`, `icons/`, `index.html`
   - **Point de contrôle 3**
 - [x] Marché (francs suisses) : compter, payer juste en touchant les pièces, rendre la monnaie (pièges réalistes) ; prix réalistes
+- [x] Archipel : carte générale, 4 îles (village et savoir ouvertes, créateurs et cœur à débloquer avec des étoiles, prix dans PRIX_ILES), retour sur l'île où l'on était, place pour d'autres îles ; profils intacts (champ `iles` ajouté)

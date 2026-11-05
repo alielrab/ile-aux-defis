@@ -37,11 +37,20 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
 - **Avatar** (option A, choisie le 2026-11-04) : enfant dessiné en SVG fait maison, avec contours, ombres et reflets, en entier (corps visible). Il s'adapte à l'âge : plus jeune = plus petite, tête plus grosse, corps plus court. Quand l'âge est mis à jour dans l'écran parent, l'avatar grandit. Coiffures, couleurs, tenues et bijoux achetés s'appliquent à cet avatar ; plusieurs bijoux à la fois.
 - Écran d'accueil : 2 grosses tuiles (prénom + avatar). Un appui = on entre.
 
-### Île
-- Carte illustrée : la mer autour (vagues, bateau, poisson), une plage, des palmiers et des arbres, un village au centre avec la maison de chaque fille (sa tête à la porte, « Ma maison » ou le prénom de la sœur).
-- Un bâtiment par mini-jeu : l'école (Calcul), la tour de l'horloge (Heure), l'hôpital (Corps), la bibliothèque (Syllabes), l'observatoire (Système solaire), le restaurant (Cuisine). On touche un lieu pour y entrer. Un lieu pas encore prêt affiche « Bientôt » et le dit à voix haute.
-- Quatre magasins : **le coiffeur** (coiffures, couleurs), **la boutique** (vêtements, bijoux), **le magasin de meubles** (meubles, jouets, papiers peints, nouvelles pièces), **le refuge** (animaux à adopter).
-- Seule la maison de la joueuse en cours s'ouvre.
+### L'archipel
+- **Carte de l'archipel** (`js/archipel.js`, dessins dans `js/carte.js`) : des îles thématiques reliées par un bateau, et deux emplacements « Bientôt… » pour les prochaines îles.
+  - Après le choix du profil, on arrive sur cette carte. On touche une île pour y aller.
+  - Sur chaque île, le voilier « L'archipel » ramène à la carte. Les boutons « retour » des jeux et des magasins ramènent sur l'île où l'on était.
+- **Les îles** :
+  - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (bientôt).
+  - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge.
+  - **L'île des créateurs** : le restaurant ; l'atelier de peinture, l'atelier BD et la salle de musique (bientôt).
+  - **L'île du cœur** : la maison de la confiance et la météo des émotions (bientôt) ; le lieu de culte choisi par les parents (sinon, un grand arbre).
+- **Débloquer une île** : chaque enfant débloque les îles fermées avec ses propres étoiles. On touche une première fois (« Touche encore ! »), puis une deuxième pour payer.
+  - Le prix est réglable dans `PRIX_ILES` (`js/reglages.js`), 20 étoiles par défaut. À 0, l'île est ouverte pour tout le monde.
+  - Les îles débloquées sont gardées dans le profil (`iles`). Les anciens profils reçoivent une liste vide, et rien d'autre ne change. « Remettre à zéro » referme les îles.
+- **Lieux** : on touche un lieu pour y entrer. Un lieu pas encore prêt affiche « Bientôt » et le dit à voix haute. Seule la maison de la joueuse en cours s'ouvre.
+- **Ajouter une île** : une entrée dans `ILES` (`js/archipel.js`), ses lieux dans `LIEUX` (`js/carte.js`, avec `ile: '…'`), et son prix dans `PRIX_ILES`.
 - **Pas de niveau à régler** : la difficulté de chaque jeu dépend de l'âge du profil.
 - **Espace parents** (bouton « 👪 Espace parents » sous les profils), protégé par le code à 4 chiffres : changer prénom et âge, remettre un profil à zéro (étoiles, achats, maison ; on garde prénom, âge, peau et yeux ; deux appuis pour confirmer), changer le code. L'avatar se modifie avec « Modifier mon avatar ». Le code est un verrou anti-fausse-manip, pas une sécurité forte.
 - **Croyance de la famille** (espace parents) : christianisme catholique, protestant, orthodoxe, islam, judaïsme, bouddhisme, hindouisme, autre, ou non croyant / athée ; et les autres religions que les enfants peuvent découvrir (aucune possible). Un bâtiment apparaît alors au milieu du village : l'église, le temple, l'église orthodoxe, la mosquée, la synagogue, le temple bouddhiste, le temple hindou, ou la maison des sages (valeurs et grandes questions) pour « autre » et « non croyant ». Sans choix, pas de bâtiment.

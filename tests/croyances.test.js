@@ -44,12 +44,12 @@ test('espace parents : croyance de la famille et religions à découvrir ; le li
   const etat = nouvelEtat('1234');
   const p = ajouterProfil(etat, { prenom: 'Léa', age: 6, avatar: AVATAR_PAR_DEFAUT });
   assert.deepEqual(etat.croyance, { famille: null, decouvrir: [], illustrations: true });
-  assert.ok(!dessinerIle(etat.profils, p, etat.croyance.famille).includes('data-lieu="croyance"'));
+  assert.ok(!dessinerIle('coeur', etat.profils, p, etat.croyance.famille).includes('data-lieu="croyance"'));
   reglerCroyance(etat, 'protestant', ['protestant', 'islam', 'bouddhisme']);
   assert.deepEqual(etat.croyance, { famille: 'protestant', decouvrir: ['islam', 'bouddhisme'], illustrations: true }); // pas sa propre croyance
-  assert.match(dessinerIle(etat.profils, p, 'protestant'), /data-lieu="croyance"[\s\S]*Le temple/);
+  assert.match(dessinerIle('coeur', etat.profils, p, 'protestant'), /data-lieu="croyance"[\s\S]*Le temple/);
   reglerCroyance(etat, 'athee', []);
-  assert.match(dessinerIle(etat.profils, p, 'athee'), /La maison des sages/);
+  assert.match(dessinerIle('coeur', etat.profils, p, 'athee'), /La maison des sages/);
   assert.throws(() => reglerCroyance(etat, 'licorne', []));
   assert.throws(() => reglerCroyance(etat, 'islam', ['sagesse']));
   reglerCroyance(etat, null, ['islam']);

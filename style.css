@@ -289,7 +289,7 @@ select {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
-  .lieu:hover, .lieu:focus-visible, .lieu:active { transform: none; }
+  .lieu:hover, .lieu:focus-visible, .lieu:active, .archipel .ile:hover, .archipel .ile:focus-visible { transform: none; }
   .choix input:checked + span, .gros:active, .tuile:active { transform: none; }
 }
 
@@ -466,6 +466,12 @@ select {
 .vraie-recette .attention { margin: 0; background: #fff3cd; border-radius: 12px; padding: 0.5rem 0.8rem; font-weight: 500; }
 .valider-recette { display: grid; gap: 0.6rem; }
 .valider-recette p { margin: 0; }
+
+/* Archipel */
+.archipel .ile { cursor: pointer; transform-box: fill-box; transform-origin: center; transition: transform 0.15s; }
+.archipel .ile:hover, .archipel .ile:focus-visible { transform: scale(1.04); }
+.archipel .ile:focus-visible { outline: none; }
+.archipel .ile:focus-visible ellipse:first-of-type { stroke: var(--accent); stroke-width: 6; }
 
 /* Marché : payer en francs suisses */
 .salle[data-decor="marche"] {
