@@ -127,6 +127,18 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 - **Ma galerie** : 12 dessins au plus par enfant. Les peintures libres sont gardées en petites images d'environ 10 Ko. On peut accrocher un dessin dans une pièce de sa maison (un tableau par pièce, encadré au mur ; toucher encore pour le décrocher), l'imprimer ou l'enlever (deux appuis).
 - **Imprimer** : le coloriage vide (pour le coloriage magique : avec les étiquettes et la légende des couleurs), la peinture en cours, ou un dessin de la galerie.
 
+**Météo des émotions** (`js/jeux/emotions.js`, île du cœur) — **à faire relire par un parent** :
+- **Ma météo du jour** : « Quel temps fait-il dans ton cœur ? »
+  - Cinq temps : soleil (joie), nuages (calme), pluie (tristesse), orage (colère), brouillard (peur ou inquiétude).
+  - L'app répond avec douceur et propose d'en parler à un adulte de confiance.
+  - **Rien n'est enregistré** : c'est une donnée sensible.
+- **Respirer avec moi** : une bulle grandit (« Inspire par le nez… ») et rétrécit (« Souffle doucement… »), 3 fois 4 secondes, avec la voix. L'exercice s'arrête dès qu'on quitte l'écran.
+- **Devine l'émotion** : 10 questions, 1 ⭐ par bonne réponse.
+  - Des visages dessinés (10 émotions, couleurs de peau variées) et 32 situations de la vie (« Tom a perdu son doudou… Que ressent Tom ? »). Après chaque réponse, un conseil (« Quand on est triste, ça fait du bien de… »).
+  - 7 ans et moins : joie, tristesse, colère, peur, surprise, dégoût, avec 3 choix.
+  - 8 ans et plus : en plus, fierté, jalousie, ennui, timidité, inquiétude, déception, avec 4 choix.
+  - Deux émotions proches (peur et inquiétude, tristesse et déception…) ne sont jamais proposées ensemble.
+
 **Restaurant (Cuisine)** : 5 recettes (crêpes, cookies, salade de fruits, gâteau au yaourt, pain perdu). En jeu : à chaque étape, choisir l'ingrédient suivant (la carte de la recette est affichée ; pour 6 ans, la voix dit lequel), puis peser sur une balance avec des boutons (6 ans : par 50 g ; 9 ans : par 10 g). À la fin, le plat réussi, un « Le savais-tu ? » et la vraie recette débloquée (ingrédients, étapes, consignes de sécurité). Quand on l'a faite pour de vrai, un parent tape son code : +10 étoiles (`BONUS_RECETTE_REELLE`) et un objet pour la cuisine de la maison (poêle à crêpes, four, corbeille de fruits, moule à gâteau, tablier de chef), une seule fois par recette.
 
 Étoiles par bonne réponse des autres jeux, dans `js/reglages.js` (`ETOILES_AUTRES_JEUX`) :

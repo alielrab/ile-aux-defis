@@ -20,6 +20,7 @@ import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
 import * as peinture from './jeux/peinture.js';
+import * as emotions from './jeux/emotions.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -193,6 +194,7 @@ function entrerLieu(cible) {
   if (id === 'maison') return ouvrirLieu('maison');
   if (id === 'croyance') return ouvrirCroyance();
   if (id === 'peinture') return ouvrirAtelier();
+  if (id === 'emotions') return ouvrirEmotions();
   const l = LIEUX.find((x) => x.id === id);
   if (!l.ouvert) return parler(`${l.nom.replace('\n', ' ')} ouvre bientôt !`, { ton: 1.1 });
   if (l.type === 'magasin') return ouvrirLieu(id);
@@ -345,7 +347,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -356,6 +358,7 @@ const PERSONNAGES = {
   croyance: { peau: 'mate', yeux: 'noisette', coiffure: 'longs', cheveux: 'brun', tenue: 'pull-violet', accessoires: [] },
   cuisine: { peau: 'tres-claire', yeux: 'bleus', coiffure: 'courts', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
   marche: { peau: 'brune', yeux: 'marron', coiffure: 'chignon', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
+  emotions: { peau: 'doree', yeux: 'verts', coiffure: 'longs', cheveux: 'roux', tenue: 'pull-violet', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
 const majuscule = (t) => t[0].toUpperCase() + t.slice(1);
@@ -409,6 +412,9 @@ function afficherQuestion() {
     afficherSyllabes(q);
   } else if (jeu === 'marche') {
     afficherMarche(q);
+  } else if (jeu === 'emotions') {
+    $('#aide').innerHTML = q.mode === 'visage' ? emotions.visage(q.reponse, q.peau) : '';
+    boutonsReponses(q.choix, emotions.nom, true);
   } else if (jeu === 'espace' || jeu === 'croyance' || jeu === 'recit') {
     $('#aide').innerHTML = jeu === 'recit' ? recits.illustration(recitOuvert, etat.croyance.illustrations) : '';
     boutonsReponses(q.choix, String, true);
@@ -617,6 +623,10 @@ function finirPartie() {
     $('#fin-extra button').addEventListener('click', () => ouvrirRestaurant(recette));
     fin += ` Recette débloquée ! Le savais-tu ? ${r.savaisTu}`;
   }
+  if (jeu === 'emotions') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">☁️ Ma météo du jour</button>';
+    $('#fin-extra button').addEventListener('click', () => { afficherEmotions(); montrer('emotions'); });
+  }
   if (jeu === 'recit') { // retour aux histoires
     $('#fin-extra').innerHTML = '<button class="gros secondaire">📚 Les autres histoires</button>';
     $('#fin-extra button').addEventListener('click', () => { recitOuvert = null; afficherCroyance(); montrer('croyance'); });
@@ -633,6 +643,7 @@ for (const b of document.querySelectorAll('.reecouter')) b.addEventListener('cli
 function aDire(q) {
   if (jeu === 'marche') return marche.aDire(q);
   const ou = (l) => (l.length > 1 ? `${l.slice(0, -1).join(', ')}, ou ${l.at(-1)} ?` : l[0]);
+  if (jeu === 'emotions') return `${q.consigne} ${ou(q.choix.map(emotions.nom))}`;
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
   if (q.mode === 'ingredient') return `${q.consigne} ${ou(q.choix.map((id) => cuisine.INGREDIENTS[id][0]))}`;
@@ -640,7 +651,7 @@ function aDire(q) {
 }
 $('#rejouer').addEventListener('click', () => lancerJeu(jeu));
 $('#retour-ile').addEventListener('click', () => ouvrirIle());
-for (const b of document.querySelectorAll('.retour-ile')) b.addEventListener('click', () => { taire(); ouvrirIle(); });
+for (const b of document.querySelectorAll('.retour-ile')) b.addEventListener('click', () => { taire(); arreterRespiration(); ouvrirIle(); });
 const etoilesJoueuse = () => { for (const e of document.querySelectorAll('.etoiles-joueuse')) e.textContent = `⭐ ${formatEtoiles(joueuse.etoiles)}`; };
 
 // L'observatoire : voyage en fusée, tailles des planètes, quiz (les étoiles se gagnent au quiz)
@@ -1082,6 +1093,55 @@ function imprimerColoriage(vue) {
     return `<li><span style="background:${hex}"></span><strong>${t}</strong> = ${nom}</li>`;
   }).join('')}</ul>` : '';
   imprimer(peinture.dessinerModele(vue.cle, {}, vue.magique ? vue.etiq.zones : {}) + legende, vue.magique ? `Coloriage magique : ${m.nom}` : `Coloriage : ${m.nom}`);
+}
+
+// La météo des émotions : « Ma météo du jour » (rien n'est enregistré), respirer ensemble, et « Devine l'émotion » (jeu à étoiles)
+let respiration = null; // le minuteur de l'exercice de respiration en cours
+function arreterRespiration() { clearTimeout(respiration); respiration = null; }
+
+function ouvrirEmotions() {
+  etoilesJoueuse();
+  afficherEmotions();
+  montrer('emotions');
+  parler("Bienvenue à la météo des émotions ! Quel temps fait-il dans ton cœur aujourd'hui ? Tu peux aussi jouer à deviner les émotions.", { ton: 1.1 });
+}
+
+function afficherEmotions(choix = null) {
+  arreterRespiration();
+  const v = $('#emotions-vue');
+  v.replaceChildren(el('h2', { textContent: "☁️ Quel temps fait-il dans ton cœur aujourd'hui ?" }));
+  v.append(el('div', { className: 'meteo' }, ...emotions.METEO.map(([cle, image, nom, reponse]) => {
+    const b = el('button', { className: 'temps' }, el('span', { className: 'image-temps', textContent: image, ariaHidden: 'true' }), el('span', { textContent: nom }));
+    b.setAttribute('aria-pressed', cle === choix);
+    b.addEventListener('click', () => { afficherEmotions(cle); parler(`${nom}. ${reponse}`); });
+    return b;
+  })));
+  if (choix) {
+    const [, , , reponse] = emotions.METEO.find(([c]) => c === choix);
+    v.append(el('p', { className: 'carte presentation', textContent: reponse }));
+  }
+  v.append(gros('🫧 Respirer avec moi', () => respirer(v)), gros("⭐ Devine l'émotion", () => { arreterRespiration(); lancerJeu('emotions'); }));
+}
+
+// Respiration guidée : 3 fois « inspire » (4 secondes), « souffle » (4 secondes), avec une bulle qui grandit et rétrécit
+function respirer(v) {
+  arreterRespiration();
+  v.querySelector('.bulle-respiration')?.remove();
+  const bulle = el('div', { className: 'bulle-respiration', role: 'status' }, el('span', { textContent: 'On y va ?' }));
+  v.append(bulle);
+  bulle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const etapes = ['Inspire par le nez…', 'Souffle doucement…', 'Inspire par le nez…', 'Souffle doucement…', 'Inspire par le nez…', 'Souffle doucement…', 'Bravo ! Tu te sens plus calme ?'];
+  let i = 0;
+  const suite = () => {
+    if (!document.body.contains(bulle) || $('[data-ecran="emotions"]').hidden) return arreterRespiration(); // on a quitté l'écran
+    const t = etapes[i];
+    bulle.firstChild.textContent = t;
+    bulle.className = `bulle-respiration ${t.startsWith('Inspire') ? 'gonfle' : t.startsWith('Souffle') ? 'degonfle' : ''}`;
+    parler(t.replace('…', ''));
+    if (++i < etapes.length) respiration = setTimeout(suite, 4000);
+  };
+  parler('Viens respirer avec moi. Regarde la bulle.');
+  respiration = setTimeout(suite, 2500);
 }
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)

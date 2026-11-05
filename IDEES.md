@@ -14,7 +14,6 @@
 | Code avec un robot | Programmer un robot avec des flèches pour atteindre un but |
 | Atelier BD | Composer une petite bande dessinée (cases, personnages, bulles) |
 | Compositeur de musique | Créer une mélodie sur une grille de notes |
-| Météo des émotions | Nommer et reconnaître ses émotions |
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
@@ -22,6 +21,7 @@
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).
 - **L'atelier de peinture** (île des créateurs, voir SPEC.md).
+- **La météo des émotions** (île du cœur, voir SPEC.md) — à faire relire par un parent.
 - **Archipel** : îles du village, du savoir, des créateurs et du cœur, reliées par un bateau (voir SPEC.md). Les idées ci-dessous ont déjà leur place réservée (« Bientôt ») : chantier, peinture, BD, musique, maison de la confiance, météo des émotions.
 - Lieu de croyance du village, choisi par les parents (voir SPEC.md) : idée d'origine, « Ma foi » et « Autres cultures ».
 

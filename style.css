@@ -503,6 +503,20 @@ select {
   .legende span { display: inline-block; width: 1.2em; height: 1.2em; border: 1px solid #000; vertical-align: middle; margin-right: 0.3em; }
 }
 
+/* Météo des émotions */
+.meteo { width: 100%; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+.temps { display: grid; gap: 0.3rem; justify-items: center; padding: 0.8rem 0.4rem; border: 0; border-radius: 18px; background: #fff; box-shadow: 0 4px 0 rgb(0 0 0 / 0.12); font: inherit; font-weight: 700; color: inherit; cursor: pointer; }
+.temps[aria-pressed="true"] { outline: 5px solid var(--accent); }
+.image-temps { font-size: 3rem; line-height: 1; }
+.bulle-respiration { width: 220px; height: 220px; border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 1.5rem; font-weight: 800; font-size: 1.2rem;
+  background: radial-gradient(circle at 35% 30%, #fff, #bfe6ff 60%, #8fd3f4); box-shadow: 0 0 0 8px rgb(255 255 255 / 0.4); transform: scale(0.75); transition: transform 4s ease-in-out; }
+.bulle-respiration.gonfle { transform: scale(1.1); }
+.bulle-respiration.degonfle { transform: scale(0.7); }
+.salle[data-decor="emotions"] { background: linear-gradient(#ffe9f0 0 76%, #f4bfd0 76% 77.5%, #fbd6e2 77.5%); }
+.salle[data-decor="emotions"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
+.visage { width: min(52vw, 32dvh, 220px); height: auto; }
+@media (prefers-reduced-motion: reduce) { .bulle-respiration { transition: none; } }
+
 /* Archipel */
 .archipel .ile { cursor: pointer; transform-box: fill-box; transform-origin: center; transition: transform 0.15s; }
 .archipel .ile:hover, .archipel .ile:focus-visible { transform: scale(1.04); }
