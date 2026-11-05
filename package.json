@@ -1,0 +1,8 @@
+{
+  "name": "ile-aux-defis",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
