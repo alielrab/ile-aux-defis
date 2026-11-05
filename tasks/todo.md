@@ -58,6 +58,7 @@
 - [x] 8. Installation (PWA) et mise en ligne — en ligne sur https://alielrab.github.io/ile-aux-defis/ ; reste : essai sur la tablette (mode avion)
 - [x] Hôpital : 4 choix pour tous, mauvaises réponses plausibles, questions plus poussées pour 8 ans et plus (43 / 57)
 - [x] Profils illimités (« Ajouter un enfant »), identifiants uniques, croyance gardée sur l'appareil (prêt pour une synchronisation future)
+- [x] Croyances : 20 histoires bibliques + 5 par religion (judaïsme, islam, hindouisme, bouddhisme), illustrées, lues, avec 2–3 questions ; réglage « illustrations des personnages religieux » ; onglet « Ce qui nous rapproche » — à faire relire
   - Acceptation : `manifest.json` (plein écran, orientation libre, icônes 192/512), `sw.js` met tous les fichiers en cache ; Chrome Android propose « Installer l'application » ; publiée sur GitHub Pages.
   - Vérif : sur la tablette Android (et un téléphone), installer, passer en mode avion, fermer et relancer, faire un tour complet avec chaque profil
   - Fichiers : `manifest.json`, `sw.js`, `icons/`, `index.html`

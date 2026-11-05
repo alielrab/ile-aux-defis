@@ -45,8 +45,20 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
 - **Pas de niveau à régler** : la difficulté de chaque jeu dépend de l'âge du profil.
 - **Espace parents** (bouton « 👪 Espace parents » sous les profils), protégé par le code à 4 chiffres : changer prénom et âge, remettre un profil à zéro (étoiles, achats, maison ; on garde prénom, âge, peau et yeux ; deux appuis pour confirmer), changer le code. L'avatar se modifie avec « Modifier mon avatar ». Le code est un verrou anti-fausse-manip, pas une sécurité forte.
 - **Croyance de la famille** (espace parents) : christianisme catholique, protestant, orthodoxe, islam, judaïsme, bouddhisme, hindouisme, autre, ou non croyant / athée ; et les autres religions que les enfants peuvent découvrir (aucune possible). Un bâtiment apparaît alors au milieu du village : l'église, le temple, l'église orthodoxe, la mosquée, la synagogue, le temple bouddhiste, le temple hindou, ou la maison des sages (valeurs et grandes questions) pour « autre » et « non croyant ». Sans choix, pas de bâtiment.
-  - Deux onglets : « Ma foi » (ou « Les grandes questions ») avec présentation, fêtes, histoires, symboles et des petites questions (10 par partie, étoiles) ; « Autres cultures », seulement les religions cochées par les parents, ton neutre et descriptif, sans quiz.
-  - Aucune représentation de Dieu ni des prophètes : seulement des bâtiments, des symboles et des objets.
+  - Trois onglets :
+    - **« Ma foi »** (ou « Les grandes questions ») : présentation, fêtes, histoires, symboles et des petites questions (10 par partie, étoiles).
+    - **« Autres cultures »** : seulement les religions cochées par les parents, ton neutre et descriptif (« Les musulmans racontent que… »).
+    - **« Ce qui nous rapproche »** : visible dès que deux croyances différentes sont choisies (`js/rapprochements.js`).
+      - Points communs : Abraham, personnages partagés, prière, jeûne, partage, règle d'or.
+      - Pour les 8 ans et plus, les différences : qui est Jésus, un seul Dieu ou plusieurs formes du divin, jour de prière, livres saints.
+      - Chaque croyance est présentée du point de vue de ceux qui y croient. Seules les religions choisies apparaissent. Fin : « Chacun peut croire différemment et se respecter », avec une invitation à en parler avec ses parents.
+  - **Histoires illustrées** (`js/recits.js`, même structure pour toutes les religions) : chaque histoire est lue en entier à voix haute, avec un bouton 🔊 pour réécouter, puis suivie de 2 ou 3 questions qui donnent des étoiles.
+    - Christianisme : 20 histoires bibliques.
+    - Judaïsme, islam, hindouisme, bouddhisme : 5 histoires chacun.
+  - **Illustrations des personnages religieux** (réglage de l'espace parents, gardé sur l'appareil) :
+    - Réglé automatiquement selon la croyance : non pour l'islam, oui pour les autres. Le parent peut le modifier.
+    - S'applique partout, y compris dans « Autres cultures ». Sans illustration : seulement des décors, des symboles et des objets.
+    - **Jamais dessinés, quel que soit le réglage** : Dieu, les prophètes dans les histoires de l'islam, les divinités hindoues.
   - Adapté à l'âge (3 choix et questions plus simples pour 7 ans et moins), « Le savais-tu ? » partout, chaque carte peut être écoutée. Contenu dans `js/croyances-contenu.js`, **à faire relire par un parent**.
 - **Enregistrer ma voix** (dans l'écran parent) : chaque parent enregistre au micro ses propres phrases de félicitations et d'encouragement, les réécoute, les refait ou les supprime. S'il en existe, l'app les joue au hasard à la place de la voix de synthèse pour ces moments-là. Les enregistrements restent sur l'appareil (IndexedDB), 6 secondes au plus chacun. Les messages de série (« 3 de suite ! ») restent dits par la voix de synthèse. Il faut l'app en https (GitHub Pages) pour que le micro soit autorisé.
 

@@ -1,7 +1,8 @@
 // Contenu des lieux de croyance. À FAIRE RELIRE PAR UN PARENT avant de le montrer aux enfants.
 // Ton descriptif (« Les chrétiens fêtent… »), sans jugement. Aucune représentation de Dieu ni des prophètes :
 // seulement des symboles, des lieux et des objets (images = emojis de symboles).
-// fetes / symboles : [image, nom, texte, « Le savais-tu ? »] ; histoires : [titre, texte]
+// fetes / symboles : [image, nom, texte, « Le savais-tu ? »] ; histoires : [titre, texte] (maison des sages seulement :
+// les histoires des religions sont dans js/recits.js, illustrées et suivies de questions)
 // questions : [question, bonne réponse, [3 autres choix], « Le savais-tu ? », grand ?]
 // grand = seulement pour les 8 ans et plus. Les 7 ans et moins ont 3 choix au lieu de 4.
 
@@ -12,11 +13,6 @@ const CHRETIEN = {
     ['👑', "L'Épiphanie, le 6 janvier", "On se souvient des Rois mages venus voir Jésus. En Suisse, on partage le gâteau des Rois, avec une petite figurine cachée dedans.", 'Celui ou celle qui trouve la figurine devient roi ou reine pour la journée et porte la couronne !'],
     ['🥚', 'Pâques, au printemps', 'La plus grande fête des chrétiens : ils fêtent Jésus revenu à la vie, la résurrection. Les enfants cherchent des œufs.', 'La date de Pâques change chaque année : c’est un dimanche qui dépend de la pleine lune du printemps.'],
     ['🕊️', 'La Pentecôte', "Cinquante jours après Pâques, les chrétiens fêtent l'Esprit saint.", '« Pentecôte » vient d’un mot grec qui veut dire « cinquantième ».'],
-  ],
-  histoires: [
-    ['La naissance de Jésus', "La Bible raconte que Marie et Joseph ont dû voyager jusqu'à Bethléem. Il n'y avait plus de place à l'auberge : Jésus est né dans une étable et a été couché dans une mangeoire. Des bergers et des mages sont venus le voir."],
-    ['Le bon Samaritain', "Jésus raconte l'histoire d'un homme blessé au bord de la route. Plusieurs personnes passent sans s'arrêter. Puis un étranger, un Samaritain, s'arrête, le soigne et l'emmène dans une auberge. L'histoire enseigne qu'il faut aider les autres, même ceux qu'on ne connaît pas."],
-    ["L'arche de Noé", "La Bible raconte que Noé construit un immense bateau, l'arche, et y fait monter un couple de chaque animal avant un grand déluge. À la fin, un arc-en-ciel apparaît dans le ciel, signe de paix."],
   ],
   symboles: [
     ['✝️', 'La croix', 'Elle rappelle la mort et la résurrection de Jésus.', "On la voit en haut des clochers."],
@@ -48,7 +44,6 @@ export const CONTENUS = {
     fetes: [...CHRETIEN.fetes,
       ['✨', 'La Toussaint, le 1er novembre', 'On fête tous les saints, des personnes qui ont mené une vie très bonne.', 'Le lendemain, beaucoup de familles pensent à leurs proches qui sont morts.'],
       ['🍞', 'La première communion', "Vers 8 ou 9 ans, beaucoup d'enfants catholiques reçoivent pour la première fois l'hostie, un petit pain très fin, pendant la messe.", "C'est souvent une grande fête de famille."]],
-    histoires: CHRETIEN.histoires,
     symboles: [...CHRETIEN.symboles,
       ['📿', 'Le chapelet', 'Un collier de perles pour compter les prières.', 'Chaque perle correspond à une prière.']],
     questions: [...CHRETIEN.questions,
@@ -63,7 +58,6 @@ export const CONTENUS = {
     fetes: [...CHRETIEN.fetes,
       ['📜', 'La fête de la Réformation, en novembre', "On se souvient de la Réforme, il y a 500 ans, quand des chrétiens ont voulu changer l'Église.", 'Deux grands réformateurs ont vécu en Suisse : Zwingli à Zurich et Calvin à Genève.'],
       ['🍞', 'La sainte cène', "Un repas en souvenir du dernier repas de Jésus avec ses amis, avec du pain et du vin ou du jus de raisin.", 'On la partage pendant le culte.']],
-    histoires: CHRETIEN.histoires,
     symboles: [...CHRETIEN.symboles,
       ['🎵', 'Les cantiques', 'Les protestants chantent beaucoup ensemble pendant le culte.', 'Les chants sont dans la langue de tous les jours, pour que chacun comprenne.']],
     questions: [...CHRETIEN.questions,
@@ -78,7 +72,6 @@ export const CONTENUS = {
     fetes: [...CHRETIEN.fetes.filter((f) => !f[1].startsWith('Noël') && !f[1].startsWith('Pâques')),
       ['🎄', 'Noël', "Beaucoup d'orthodoxes fêtent Noël le 7 janvier, car ils suivent un ancien calendrier, le calendrier julien.", 'Les orthodoxes de Grèce, eux, fêtent Noël le 25 décembre.'],
       ['🥚', 'Pâques, la plus grande fête', "Elle tombe souvent à une autre date que la Pâques des catholiques et des protestants, car le calendrier n'est pas le même.", "On teint des œufs en rouge et on les cogne l'un contre l'autre : celui dont l'œuf ne se casse pas a gagné !"]],
-    histoires: CHRETIEN.histoires,
     symboles: [...CHRETIEN.symboles.filter((s) => s[1] !== 'La croix'),
       ['☦️', 'La croix orthodoxe', 'Elle a trois barres.', 'On la voit en haut des coupoles en forme d’oignon.'],
       ['🖼️', 'Les icônes', 'Des images peintes sur du bois, qu’on regarde pour prier.', 'Elles sont souvent décorées avec de l’or.']],
@@ -94,10 +87,6 @@ export const CONTENUS = {
       ['🌙', 'Le ramadan', "Un mois pendant lequel les adultes ne mangent pas et ne boivent pas du lever au coucher du soleil. Le soir, on partage le repas en famille : c'est l'iftar.", "Les enfants et les personnes malades n'ont pas à jeûner."],
       ['🎉', "L'Aïd el-Fitr", 'La grande fête de la fin du ramadan : on met de beaux habits, on rend visite à la famille et on offre des sucreries ou des cadeaux.', 'Ce jour-là, on donne aussi aux personnes pauvres : c’est un moment de partage.'],
       ['🐑', "L'Aïd el-Kébir", "La fête du sacrifice. On se souvient d'Abraham, appelé Ibrahim, qui avait une très grande confiance en Dieu. On partage un repas avec la famille et avec les pauvres.", 'Abraham est un personnage important pour les musulmans, les juifs et les chrétiens.'],
-    ],
-    histoires: [
-      ['La fourmi et le roi Salomon', "Le Coran raconte qu'une petite fourmi voit arriver l'armée du roi Salomon. Elle prévient les autres fourmis : « Rentrez vite dans vos maisons, pour ne pas être écrasées ! » Salomon, qui comprend le langage des animaux, l'entend et sourit. L'histoire montre qu'il faut faire attention même aux plus petits."],
-      ['« Lis ! »', "Les musulmans racontent que le premier mot du Coran reçu par le prophète Mohammed, dans une grotte près de La Mecque, était « Lis ! ». C'est pour cela que lire et apprendre sont très importants dans l'islam."],
     ],
     symboles: [
       ['🕌', 'La mosquée', "Le lieu de prière, souvent avec une coupole et une tour : le minaret.", "On enlève ses chaussures avant d'entrer."],
@@ -130,10 +119,6 @@ export const CONTENUS = {
       ['🎭', 'Pourim', 'Une fête joyeuse où les enfants se déguisent.', "On y raconte l'histoire de la reine Esther, qui a sauvé son peuple."],
       ['🍞', 'Pessah', "Au printemps, on se souvient de la sortie d'Égypte, quand le peuple hébreu a quitté l'esclavage. On mange du pain sans levain, la matsa.", 'Pendant le repas de fête, le Seder, les enfants posent quatre questions.'],
     ],
-    histoires: [
-      ["La sortie d'Égypte", "La Torah raconte qu'il y a très longtemps, le peuple hébreu était esclave en Égypte. Moïse l'a conduit hors d'Égypte, vers la liberté, et la mer s'est ouverte pour le laisser passer. On le raconte chaque année à Pessah."],
-      ["L'arche de Noé", "La Torah raconte que Noé construit un immense bateau, l'arche, et y fait monter un couple de chaque animal avant un grand déluge. À la fin, un arc-en-ciel apparaît dans le ciel."],
-    ],
     symboles: [
       ['✡️', "L'étoile de David", 'Une étoile à six branches.', "Elle est sur le drapeau d'Israël."],
       ['🕎', 'Le chandelier de Hanoucca', 'Il a 9 branches : 8 bougies, et une pour allumer les autres.', 'On le place souvent près d’une fenêtre, pour que sa lumière se voie dehors.'],
@@ -162,9 +147,6 @@ export const CONTENUS = {
       ['🏮', 'Vesak', 'La plus grande fête bouddhiste, au printemps : on fête la naissance, l’éveil et la mort de Bouddha. On allume des lanternes.', 'Ce jour-là, beaucoup de bouddhistes font de bonnes actions, comme partager de la nourriture.'],
       ['🎆', 'Le Nouvel An', 'Selon les pays, le Nouvel An est une grande fête bouddhiste, comme le Losar au Tibet.', 'On nettoie la maison pour bien commencer l’année.'],
     ],
-    histoires: [
-      ["Le prince qui découvrit le monde", "Le jeune prince Siddhartha vivait dans un palais où tout était beau. Un jour, il sortit et vit des personnes malades, âgées et pauvres. Il quitta le palais pour comprendre comment aider les gens à moins souffrir. Après une longue méditation sous un arbre, il devint Bouddha, « l'Éveillé »."],
-    ],
     symboles: [
       ['☸️', 'La roue du Dharma', 'Ses 8 rayons rappellent les 8 bons chemins à suivre dans la vie.', 'Elle représente l’enseignement de Bouddha.'],
       ['🪷', 'La fleur de lotus', 'Elle pousse dans la boue, mais sa fleur est très belle.', 'Elle rappelle que chacun peut devenir meilleur.'],
@@ -190,10 +172,8 @@ export const CONTENUS = {
     presentation: "L'hindouisme est une religion très ancienne, née en Inde. Les hindous honorent le divin sous beaucoup de formes, et prient au temple ou devant un petit autel à la maison.",
     fetes: [
       ['🪔', 'Diwali', 'La fête des lumières, en automne. On allume des petites lampes à huile, les diyas, et on fait des dessins colorés devant la maison, les rangolis.', "Pour beaucoup d'hindous, c'est aussi le début de la nouvelle année."],
+      ['🐘', 'Ganesh Chaturthi', 'La fête de Ganesh, à la fin de l’été : on accueille sa statue à la maison ou dans le quartier pendant plusieurs jours, avec des chants et des fleurs.', 'On lui offre des modaks, de petits gâteaux sucrés qu’il aime beaucoup.'],
       ['🎨', 'Holi', 'La fête des couleurs, au printemps : on se lance des poudres de toutes les couleurs !', 'Holi fête l’arrivée du printemps et la victoire du bien sur le mal.'],
-    ],
-    histoires: [
-      ['Le retour de Rama', "Une histoire de Diwali raconte que le prince Rama est revenu chez lui après de longues années loin de son royaume. Pour l'accueillir, les habitants ont allumé des milliers de petites lampes : c'est pour cela qu'on allume des lumières à Diwali."],
     ],
     symboles: [
       ['🕉️', 'Om', 'Un son sacré, qu’on prononce au début et à la fin des prières.', 'Il s’écrit avec un signe spécial.'],

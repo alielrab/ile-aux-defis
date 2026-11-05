@@ -2,7 +2,7 @@
 // C'est le SEUL fichier qui lit et écrit les données : pour des comptes parents et une synchronisation en ligne,
 // on remplacera charger/sauver ici (voir IDEES.md, « Commercialisation ») sans toucher au reste de l'app.
 // Deux parts : CLE = ce qui pourra être synchronisé ; CLE_APPAREIL = ce qui ne quitte jamais l'appareil (la croyance).
-import { CROYANCES, RELIGIONS } from './croyances.js';
+import { CROYANCES, RELIGIONS, illustrationsParDefaut } from './croyances.js';
 import { avatarValide, AGE_MIN, AGE_MAX, AVATAR_PAR_DEFAUT, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART } from './avatar.js';
 
 const CLE = 'ile-aux-defis';
@@ -14,13 +14,14 @@ function verifierCode(code) {
   return code;
 }
 
-export const nouvelEtat = (code) => ({ version: VERSION, code: verifierCode(code), profils: [], croyance: { famille: null, decouvrir: [] } });
+export const nouvelEtat = (code) => ({ version: VERSION, code: verifierCode(code), profils: [], croyance: { famille: null, decouvrir: [], illustrations: true } });
 
 // Espace parents : la croyance de la famille (le lieu du village) et les autres religions que les enfants peuvent découvrir.
-export function reglerCroyance(etat, famille, decouvrir) {
+// illustrations : afficher les personnages religieux dessinés (réglé selon la croyance, modifiable par le parent).
+export function reglerCroyance(etat, famille, decouvrir, illustrations = illustrationsParDefaut(famille)) {
   if (famille !== null && !(famille in CROYANCES)) throw new Error('Croyance inconnue.');
   if (!decouvrir.every((x) => RELIGIONS.includes(x))) throw new Error('Religion inconnue.');
-  etat.croyance = { famille, decouvrir: famille ? decouvrir.filter((x) => x !== famille) : [] };
+  etat.croyance = { famille, decouvrir: famille ? decouvrir.filter((x) => x !== famille) : [], illustrations: !!illustrations };
 }
 
 export function changerCode(etat, code) {
@@ -72,6 +73,7 @@ export function charger(stockage = globalThis.localStorage) {
     if (etat?.version !== VERSION) return null;
     // la croyance est sur l'appareil ; avant, elle était avec le reste (on la reprend de là une dernière fois)
     etat.croyance = JSON.parse(stockage.getItem(CLE_APPAREIL))?.croyance ?? etat.croyance ?? { famille: null, decouvrir: [] };
+    etat.croyance.illustrations ??= illustrationsParDefaut(etat.croyance.famille);
     for (const p of etat.profils) {
       // compléter les profils créés pendant les premiers essais
       p.avatar.yeux ??= 'marron';

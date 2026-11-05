@@ -365,6 +365,20 @@ select {
 .religions { display: grid; gap: 0.4rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); }
 .religions label { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
 .religions input { width: 24px; height: 24px; }
+.tuiles-recits { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); }
+.tuile-recit { display: grid; gap: 0.3rem; padding: 0.4rem; border: 0; border-radius: 16px; background: #fff; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12); font: inherit; font-weight: 700; color: inherit; cursor: pointer; text-align: center; }
+.tuile-recit svg { width: 100%; height: auto; border-radius: 12px; display: block; }
+.recit { text-align: left; gap: 0.6rem; }
+.recit h2 { flex: 1; margin: 0; color: inherit; text-shadow: none; }
+.recit svg { width: 100%; height: auto; border-radius: 14px; display: block; }
+.texte-recit p { margin: 0 0 0.5rem; font-size: 1.1em; line-height: 1.5; }
+.recit .source { margin: 0; font-size: 0.85em; opacity: 0.75; }
+.points-de-vue { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+.conclusion { font-weight: 700; }
+#aide .illustration-recit { width: min(100%, 360px); height: auto; border-radius: 14px; }
+.case { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.case input { width: 24px; height: 24px; }
+.aide-reglage { margin: 0; font-size: 0.9em; }
 .salle[data-decor="croyance"] { background: linear-gradient(#fdf3e3 0 76%, #d8c3a0 76% 77.5%, #e9dcc3 77.5%); }
 .salle[data-decor="croyance"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
 .reponse.texte { font-family: inherit; font-size: clamp(1rem, 0.9rem + 0.8vw, 1.4rem); padding: 0.4rem; }

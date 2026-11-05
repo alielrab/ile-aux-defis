@@ -7,9 +7,9 @@ import { nouvelEtat, ajouterProfil, reglerCroyance, charger, sauver } from '../j
 import { AVATAR_PAR_DEFAUT } from '../js/avatar.js';
 import { dessinerIle } from '../js/carte.js';
 
-test('chaque contenu : présentation, fêtes, histoires, symboles, et au moins 10 questions par âge', () => {
+test('chaque contenu : présentation, fêtes, symboles, et au moins 10 questions par âge', () => {
   for (const [cle, c] of Object.entries(CONTENUS)) {
-    assert.ok(c.presentation && c.fetes.length && c.histoires.length && c.symboles.length >= 3, cle);
+    assert.ok(c.presentation && c.fetes.length && c.symboles.length >= 3, cle);
     assert.ok(c.questions.filter((q) => !q[4]).length >= 10, `${cle} : 10 questions pour les 6 ans`);
     assert.equal(new Set(c.questions.map((q) => q[0])).size, c.questions.length, cle);
     for (const [q, bonne, autres, savais] of c.questions) {
@@ -43,21 +43,21 @@ test('dessins : un bâtiment par croyance, seulement des formes et des symboles 
 test('espace parents : croyance de la famille et religions à découvrir ; le lieu apparaît au village', () => {
   const etat = nouvelEtat('1234');
   const p = ajouterProfil(etat, { prenom: 'Léa', age: 6, avatar: AVATAR_PAR_DEFAUT });
-  assert.deepEqual(etat.croyance, { famille: null, decouvrir: [] });
+  assert.deepEqual(etat.croyance, { famille: null, decouvrir: [], illustrations: true });
   assert.ok(!dessinerIle(etat.profils, p, etat.croyance.famille).includes('data-lieu="croyance"'));
   reglerCroyance(etat, 'protestant', ['protestant', 'islam', 'bouddhisme']);
-  assert.deepEqual(etat.croyance, { famille: 'protestant', decouvrir: ['islam', 'bouddhisme'] }); // pas sa propre croyance
+  assert.deepEqual(etat.croyance, { famille: 'protestant', decouvrir: ['islam', 'bouddhisme'], illustrations: true }); // pas sa propre croyance
   assert.match(dessinerIle(etat.profils, p, 'protestant'), /data-lieu="croyance"[\s\S]*Le temple/);
   reglerCroyance(etat, 'athee', []);
   assert.match(dessinerIle(etat.profils, p, 'athee'), /La maison des sages/);
   assert.throws(() => reglerCroyance(etat, 'licorne', []));
   assert.throws(() => reglerCroyance(etat, 'islam', ['sagesse']));
   reglerCroyance(etat, null, ['islam']);
-  assert.deepEqual(etat.croyance, { famille: null, decouvrir: [] });
+  assert.deepEqual(etat.croyance, { famille: null, decouvrir: [], illustrations: true });
   assert.ok(RELIGIONS.every((r) => r in CROYANCES));
   // un ancien enregistrement sans croyance se recharge
   const m = new Map(), stockage = { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => m.set(k, v) };
   delete etat.croyance;
   sauver(etat, stockage);
-  assert.deepEqual(charger(stockage).croyance, { famille: null, decouvrir: [] });
+  assert.deepEqual(charger(stockage).croyance, { famille: null, decouvrir: [], illustrations: true });
 });

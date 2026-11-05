@@ -1,5 +1,5 @@
 // Le lieu de croyance du village, choisi par les parents (espace parents) : son bâtiment, ses onglets et ses petites questions.
-// Dessins : seulement des bâtiments et des symboles, jamais de représentation de Dieu ni des prophètes.
+// Dessins des bâtiments : seulement des formes et des symboles. Les histoires illustrées sont dans js/recits.js.
 import { CONTENUS } from './croyances-contenu.js';
 import { melanger, etoilesDuJeu, parmiLesNouveaux } from './partie.js';
 
@@ -16,6 +16,10 @@ export const CROYANCES = {
   athee: { nom: 'Non croyant / athée', contenu: 'sagesse', lieu: 'La maison des sages' },
 };
 // Ce que les enfants peuvent découvrir dans l'onglet « Autres cultures » (choisi par les parents)
+// Afficher les personnages religieux dessinés ? Par défaut non pour l'islam, où les prophètes (dont Noé, Abraham, Moïse, Jésus)
+// ne sont pas représentés. Le parent peut changer ce réglage. Dieu, lui, n'est jamais dessiné.
+export const illustrationsParDefaut = (famille) => famille !== 'islam';
+
 export const RELIGIONS = ['catholique', 'protestant', 'orthodoxe', 'islam', 'judaisme', 'bouddhisme', 'hindouisme'];
 
 export const etoilesParBonneReponse = (age) => etoilesDuJeu('croyance', age);

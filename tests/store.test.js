@@ -31,7 +31,7 @@ test('profils séparés, autant qu’on veut, chacun avec un identifiant unique'
 test('la croyance reste sur l’appareil : elle n’est pas dans la part qui sera synchronisée', () => {
   const s = faux();
   const etat = nouvelEtat('1234');
-  etat.croyance = { famille: 'islam', decouvrir: [] };
+  etat.croyance = { famille: 'islam', decouvrir: [], illustrations: false };
   sauver(etat, s);
   assert.ok(!s.getItem('ile-aux-defis').includes('islam'));
   assert.deepEqual(charger(s).croyance, etat.croyance);

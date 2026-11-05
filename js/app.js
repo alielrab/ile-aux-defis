@@ -1,5 +1,7 @@
 import { nouvelEtat, ajouterProfil, charger, sauver, modifierProfil, remettreAZero, changerCode, reglerCroyance } from './store.js';
 import * as croyance from './croyances.js';
+import * as recits from './recits.js';
+import * as rapprochements from './rapprochements.js';
 import {
   PEAUX, CHEVEUX, YEUX, COIFFURES, TENUES, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART,
   AVATAR_PAR_DEFAUT, AGE_MIN, AGE_MAX, dessinerAvatar,
@@ -310,7 +312,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, croyance };
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -330,11 +332,14 @@ function lancerJeu(nom) {
   const cle = `${nom}:${nom === 'calcul' ? operation : nom === 'croyance' ? etat.croyance.famille : ''}:${joueuse.age}`, vus = new Set(joueuse.vus[cle] ?? []);
   partie = nom === 'cuisine'
     ? { questions: cuisine.etapes(recette, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les étapes de la recette, dans l'ordre
+    : nom === 'recit'
+    ? { questions: recits.questions(recitOuvert, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les questions de l'histoire, dans l'ordre
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille }, Math.random, vus);
   joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  $('#salle').dataset.decor = nom;
-  $('#maitre-dessin').innerHTML = nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[nom], 'entier', 14);
+  const lieu = nom === 'recit' ? 'croyance' : nom;
+  $('#salle').dataset.decor = lieu;
+  $('#maitre-dessin').innerHTML = nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
   montrer('jeu');
   afficherQuestion();
 }
@@ -368,8 +373,8 @@ function afficherQuestion() {
     else afficherReglage(q);
   } else if (jeu === 'syllabes') {
     afficherSyllabes(q);
-  } else if (jeu === 'espace' || jeu === 'croyance') {
-    $('#aide').innerHTML = '';
+  } else if (jeu === 'espace' || jeu === 'croyance' || jeu === 'recit') {
+    $('#aide').innerHTML = jeu === 'recit' ? recits.illustration(recitOuvert, etat.croyance.illustrations) : '';
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'cuisine') {
     if (q.mode === 'ingredient') {
@@ -531,6 +536,10 @@ function finirPartie() {
     $('#fin-extra button').addEventListener('click', () => ouvrirRestaurant(recette));
     fin += ` Recette débloquée ! Le savais-tu ? ${r.savaisTu}`;
   }
+  if (jeu === 'recit') { // retour aux histoires
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">📚 Les autres histoires</button>';
+    $('#fin-extra button').addEventListener('click', () => { recitOuvert = null; afficherCroyance(); montrer('croyance'); });
+  }
   montrer('fin');
   parler(fin, { ton: 1.15 });
 }
@@ -608,10 +617,11 @@ function montrerAstre(dire) {
 for (const b of $('#obs-onglets').children) b.addEventListener('click', () => (b.dataset.vue === 'quiz' ? lancerJeu('espace') : afficherObservatoire(b.dataset.vue)));
 
 // Le lieu de croyance : « Ma foi » (ou « Les grandes questions ») et « Autres cultures » (choisies par les parents)
-let ongletCroyance = 'foi', culture = null;
+let ongletCroyance = 'foi', culture = null, recitOuvert = null; // recitOuvert : l'histoire en cours de lecture
 function ouvrirCroyance() {
   etoilesJoueuse();
   ongletCroyance = 'foi';
+  recitOuvert = null;
   culture = etat.croyance.decouvrir[0] ?? null;
   afficherCroyance(true);
   montrer('croyance');
@@ -620,16 +630,21 @@ function ouvrirCroyance() {
 function afficherCroyance(dire = false) {
   const { famille, decouvrir } = etat.croyance, c = croyance.CROYANCES[famille], sagesse = c.contenu === 'sagesse';
   $('#croyance-titre').textContent = c.lieu;
-  const onglets = [['foi', sagesse ? '💭 Les grandes questions' : '🙏 Ma foi'], ...(decouvrir.length ? [['autres', '🌍 Autres cultures']] : [])];
-  $('#croyance-onglets').replaceChildren(...onglets.map(([k, nom]) => bouton(nom, k === ongletCroyance, () => { ongletCroyance = k; afficherCroyance(true); })));
+  const onglets = [['foi', sagesse ? '💭 Les grandes questions' : '🙏 Ma foi'], ...(decouvrir.length ? [['autres', '🌍 Autres cultures']] : []),
+    ...(rapprochements.disponible(etat.croyance) ? [['ensemble', '🤝 Ce qui nous rapproche']] : [])];
+  $('#croyance-onglets').replaceChildren(...onglets.map(([k, nom]) => bouton(nom, k === ongletCroyance, () => { ongletCroyance = k; recitOuvert = null; afficherCroyance(true); })));
   const vue = $('#croyance-vue');
   vue.replaceChildren();
   let texte;
-  if (ongletCroyance === 'autres') {
+  if (recitOuvert) {
+    texte = afficherRecit(vue, recitOuvert);
+  } else if (ongletCroyance === 'ensemble') {
+    texte = afficherRapprochements(vue);
+  } else if (ongletCroyance === 'autres') {
     const choix = document.createElement('div');
     choix.className = 'onglets';
     choix.setAttribute('aria-label', 'Religions à découvrir');
-    choix.replaceChildren(...decouvrir.map((k) => bouton(croyance.CROYANCES[k].nom, k === culture, () => { culture = k; afficherCroyance(true); })));
+    choix.replaceChildren(...decouvrir.map((k) => bouton(croyance.CROYANCES[k].nom, k === culture, () => { culture = k; recitOuvert = null; afficherCroyance(true); })));
     vue.append(choix);
     texte = contenuCroyance(vue, croyance.CROYANCES[culture].contenu, false);
   } else {
@@ -670,9 +685,88 @@ function contenuCroyance(vue, cle, sagesse) {
     vue.append(h, grille);
   };
   rubrique(sagesse ? '🎉 Fêtes de chez nous' : '🎉 Fêtes', c.fetes, (f) => f);
-  rubrique(sagesse ? '💭 Grandes questions' : '📚 Histoires', c.histoires, ([titre, texte]) => [sagesse ? '💭' : '📚', titre, texte]);
+  const histoires = recits.recitsDe(cle);
+  if (histoires.length) vue.append(titreRubrique('📚 Histoires'), tuilesRecits(histoires));
+  else if (c.histoires) rubrique('💭 Grandes questions', c.histoires, ([titre, texte]) => ['💭', titre, texte]);
   rubrique('✨ Symboles', c.symboles, (s) => s);
   return c.presentation;
+}
+
+const titreRubrique = (texte) => Object.assign(document.createElement('h2'), { textContent: texte });
+
+// Les histoires : une tuile par histoire (son image et son titre). Les personnages ne sont dessinés que si la famille l'a choisi.
+function tuilesRecits(liste) {
+  const grille = document.createElement('div');
+  grille.className = 'tuiles-recits';
+  grille.replaceChildren(...liste.map((r) => {
+    const b = document.createElement('button');
+    b.className = 'tuile-recit';
+    b.innerHTML = `${recits.illustration(r, etat.croyance.illustrations)}<span></span>`;
+    b.lastChild.textContent = r.titre;
+    b.addEventListener('click', () => { recitOuvert = r; afficherCroyance(true); window.scrollTo(0, 0); });
+    return b;
+  }));
+  return grille;
+}
+
+// Une histoire : l'image, le texte (lu en entier à voix haute), puis les petites questions.
+function afficherRecit(vue, r) {
+  const retour = document.createElement('button');
+  retour.className = 'gros secondaire';
+  retour.textContent = '← Toutes les histoires';
+  retour.addEventListener('click', () => { recitOuvert = null; afficherCroyance(); });
+  const carte = document.createElement('article');
+  carte.className = 'carte recit';
+  carte.innerHTML = `<div class="tete-carte"><h2></h2><button class="rond" aria-label="Réécouter l'histoire">🔊</button></div>
+    ${recits.illustration(r, etat.croyance.illustrations)}<div class="texte-recit"></div><p class="source"></p>`;
+  carte.querySelector('h2').textContent = r.titre;
+  carte.querySelector('.texte-recit').replaceChildren(...r.texte.map((t) => Object.assign(document.createElement('p'), { textContent: t })));
+  carte.querySelector('.source').textContent = `D'après : ${r.source}`;
+  carte.querySelector('button').addEventListener('click', () => parler(recits.texteALire(r)));
+  const quiz = document.createElement('button');
+  quiz.className = 'gros';
+  quiz.textContent = `⭐ ${r.questions.length} petites questions`;
+  quiz.addEventListener('click', () => lancerJeu('recit'));
+  vue.append(retour, carte, quiz);
+  return recits.texteALire(r);
+}
+
+// Ce qui nous rapproche, ce qui nous différencie : seulement les croyances choisies par les parents.
+function afficherRapprochements(vue) {
+  const toutes = rapprochements.cartes(etat.croyance, joueuse.age);
+  const intro = document.createElement('p');
+  intro.className = 'carte presentation';
+  intro.textContent = "Les religions et les façons de penser ont des choses en commun, et d'autres qui sont différentes. Ici, chacune est racontée comme la voient ceux qui y croient.";
+  vue.append(intro);
+  for (const [type, titre] of [['commun', '🤝 Ce qui nous rapproche'], ['difference', '🧭 Ce qui nous différencie']]) {
+    const liste = toutes.filter((p) => p.type === type);
+    if (!liste.length) continue;
+    const grille = document.createElement('div');
+    grille.className = 'cartes-croyance';
+    grille.replaceChildren(...liste.map((p) => {
+      const carte = document.createElement('div');
+      carte.className = 'carte carte-croyance';
+      carte.innerHTML = `<div class="tete-carte"><span class="symbole" aria-hidden="true"></span><h3></h3><button class="rond" aria-label="Écouter">🔊</button></div>${p.intro ? '<p></p>' : ''}<ul class="points-de-vue"></ul>`;
+      carte.querySelector('.symbole').textContent = p.image;
+      carte.querySelector('h3').textContent = p.titre;
+      if (p.intro) carte.querySelector('p').textContent = p.intro;
+      carte.querySelector('ul').replaceChildren(...p.lignes.map(([qui, quoi]) => {
+        const li = document.createElement('li');
+        li.innerHTML = '<strong></strong> ';
+        li.firstChild.textContent = `${qui} :`;
+        li.append(quoi);
+        return li;
+      }));
+      carte.querySelector('button').addEventListener('click', () => parler([p.titre, p.intro, ...p.lignes.map(([qui, quoi]) => `${qui} : ${quoi}`)].filter(Boolean).join(' ')));
+      return carte;
+    }));
+    vue.append(titreRubrique(titre), grille);
+  }
+  const fin = document.createElement('p');
+  fin.className = 'carte presentation conclusion';
+  fin.textContent = `💛 ${rapprochements.CONCLUSION}`;
+  vue.append(fin);
+  return `Ce qui nous rapproche, ce qui nous différencie. ${intro.textContent} Touche le haut-parleur d'une carte pour l'écouter. ${rapprochements.CONCLUSION}`;
 }
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)
@@ -827,8 +921,9 @@ function afficherReglageCroyance() {
     l.lastChild.textContent = croyance.CROYANCES[k].nom;
     return l;
   }));
+  f.illustrations.checked = etat.croyance.illustrations;
   const majCases = () => { for (const c of f.querySelectorAll('[name=decouvrir]')) c.disabled = !f.famille.value || c.value === f.famille.value; };
-  f.famille.onchange = majCases;
+  f.famille.onchange = () => { majCases(); f.illustrations.checked = croyance.illustrationsParDefaut(f.famille.value || null); }; // réglé selon la croyance, modifiable
   majCases();
   noter(f.querySelector('.erreur'), '');
 }
@@ -836,7 +931,7 @@ $('#form-croyance').addEventListener('submit', (ev) => {
   ev.preventDefault();
   const f = ev.target;
   try {
-    reglerCroyance(etat, f.famille.value || null, [...f.querySelectorAll('[name=decouvrir]:checked:not(:disabled)')].map((c) => c.value));
+    reglerCroyance(etat, f.famille.value || null, [...f.querySelectorAll('[name=decouvrir]:checked:not(:disabled)')].map((c) => c.value), f.illustrations.checked);
   } catch (e) {
     return noter(f.querySelector('.erreur'), e.message);
   }
