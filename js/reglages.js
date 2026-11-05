@@ -18,10 +18,10 @@ export const QUESTIONS_PAR_PARTIE = 10;
 
 // Étoiles par bonne réponse (ou par étape réussie en cuisine) dans les autres jeux, selon l'âge.
 // croyance = le lieu de croyance du village (petites questions),
-// heure = tour de l'horloge, corps = hôpital, syllabes = bibliothèque, espace = observatoire, cuisine = restaurant.
+// heure = tour de l'horloge, corps = hôpital, syllabes = bibliothèque, espace = observatoire, cuisine = restaurant, marche = marché.
 export const ETOILES_AUTRES_JEUX = [
-  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, espace: 1, cuisine: 1, croyance: 1 }, // 7 ans et moins
-  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, espace: 1, cuisine: 0.5, croyance: 1 }, // 8 ans et plus
+  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, espace: 1, cuisine: 1, croyance: 1, marche: 1.5 }, // 7 ans et moins
+  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1 }, // 8 ans et plus
 ];
 
 // Recette faite pour de vrai avec un parent (validée avec le code) : étoiles en plus, et un objet pour la cuisine de la maison.

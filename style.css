@@ -376,8 +376,8 @@ select {
 .points-de-vue { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
 .conclusion { font-weight: 700; }
 #aide .illustration-recit { width: min(100%, 360px); height: auto; border-radius: 14px; }
-.case { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
-.case input { width: 24px; height: 24px; }
+.case-reglage { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.case-reglage input { width: 24px; height: 24px; }
 .aide-reglage { margin: 0; font-size: 0.9em; }
 .salle[data-decor="croyance"] { background: linear-gradient(#fdf3e3 0 76%, #d8c3a0 76% 77.5%, #e9dcc3 77.5%); }
 .salle[data-decor="croyance"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
@@ -466,3 +466,30 @@ select {
 .vraie-recette .attention { margin: 0; background: #fff3cd; border-radius: 12px; padding: 0.5rem 0.8rem; font-weight: 500; }
 .valider-recette { display: grid; gap: 0.6rem; }
 .valider-recette p { margin: 0; }
+
+/* Marché : payer en francs suisses */
+.salle[data-decor="marche"] {
+  background:
+    repeating-linear-gradient(90deg, #fff 0 34px, #2bb3a0 34px 68px) 0 0 / 100% 26px no-repeat,
+    linear-gradient(#fdf3e3 0 76%, #c98b4f 76% 77.5%, #e2c08f 77.5%);
+}
+.salle[data-decor="marche"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
+.marche-aide { color: var(--texte); display: grid; gap: 0.5rem; justify-items: center; width: 100%; }
+.etal { display: flex; align-items: center; gap: 0.75rem; }
+.etal .produit { font-size: clamp(3.5rem, 3rem + 4vw, 5.5rem); line-height: 1; }
+.etiquette-prix { padding: 0.2em 0.6em; background: #fff; border: 3px solid #2b2b3a; border-radius: 10px; font-weight: 800; font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.2rem); transform: rotate(-4deg); }
+.paie-avec { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.porte-monnaie, .comptoir { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; min-height: 64px; width: min(100%, 520px); padding: 8px; border-radius: 16px; }
+.porte-monnaie { background: #8a5a30; box-shadow: inset 0 0 0 4px #6a4020; }
+.comptoir { background: #fffdf5; border: 3px dashed #c98b4f; }
+.argent.piece { width: 56px; height: 56px; }
+.argent.billet { width: 104px; height: auto; }
+.porte-monnaie .argent.piece, .comptoir .argent.piece { width: 48px; height: 48px; }
+.total { margin: 0; font-weight: 800; font-size: 1.2em; }
+.argent-bouton { display: grid; place-items: center; min-height: var(--toucher); padding: 6px; border: 0; border-radius: 14px; background: #fffdf5; box-shadow: 0 4px 0 rgb(0 0 0 / 0.15); cursor: pointer; }
+.argent-bouton:active:not(:disabled) { translate: 0 2px; }
+.reponses:has(.argent-bouton) { gap: 10px; padding-bottom: 12px; }
+.reponses:has(.argent-bouton) .reponse { min-height: var(--toucher); font-size: clamp(1.1rem, 1rem + 1vw, 1.5rem); }
+.reponses:has(.argent-bouton) .reponse::before, .reponses:has(.argent-bouton) .reponse::after { display: none; }
+.reponse.large { grid-column: 1 / -1; }
+.reponse.argent-choix { font-size: clamp(1.3rem, 1rem + 1.5vw, 2rem); }

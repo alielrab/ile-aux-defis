@@ -1,5 +1,5 @@
 // Carte de l'île en SVG : la mer, la plage, les arbres, le village des filles au centre,
-// un bâtiment par mini-jeu et les magasins (coiffeur, boutique, meubles, refuge).
+// un bâtiment par mini-jeu (dont le marché) et les magasins (coiffeur, boutique, meubles, refuge).
 import { dessinerAvatar } from './avatar.js';
 import { CROYANCES, batiment } from './croyances.js';
 
@@ -12,6 +12,7 @@ export const LIEUX = [
   { id: 'heure', type: 'jeu', nom: "La tour\nde l'horloge", detail: "lire l'heure", ouvert: true, x: 610, y: 285 },
   { id: 'syllabes', type: 'jeu', nom: 'La bibliothèque', detail: 'la chasse aux syllabes', ouvert: true, x: 185, y: 465 },
   { id: 'espace', type: 'jeu', nom: "L'observatoire", detail: 'le système solaire', ouvert: true, x: 615, y: 465 },
+  { id: 'marche', type: 'jeu', nom: 'Le marché', detail: 'payer en francs suisses', ouvert: true, x: 500, y: 410 },
   { id: 'mode', type: 'magasin', nom: 'La boutique', detail: 'vêtements et bijoux', ouvert: true, x: 160, y: 630 },
   { id: 'corps', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 640, y: 630 },
   { id: 'meubles', type: 'magasin', nom: 'Le magasin\nde meubles', detail: 'meubles, jouets, murs et pièces', ouvert: true, x: 225, y: 800 },
@@ -106,6 +107,14 @@ const BATIMENTS = {
     <rect x="-64" y="-72" width="78" height="54" rx="4" fill="#bfe6ff" stroke="#fff" stroke-width="3"/>
     <text x="-25" y="-28" font-size="38" text-anchor="middle">🛋️</text>
     <rect x="28" y="-56" width="34" height="56" rx="4" fill="#7a4a30"/><text x="0" y="-100" font-size="20" text-anchor="middle">🧸</text>`, 1],
+  marche: [`<rect x="-62" y="-64" width="124" height="64" rx="4" fill="#c98b4f"/>
+    <rect x="-70" y="-30" width="140" height="12" rx="3" fill="#9a6334"/>
+    <rect x="-66" y="-112" width="6" height="84" fill="#7a4a28"/><rect x="60" y="-112" width="6" height="84" fill="#7a4a28"/>
+    <rect x="-72" y="-120" width="144" height="12" rx="4" fill="#1f8a7a"/>${auvent(-70, 70, -108, '#2bb3a0', '#fff')}
+    <circle cx="-44" cy="-38" r="9" fill="#e74c3c"/><circle cx="-28" cy="-40" r="9" fill="#f39c12"/><circle cx="-12" cy="-38" r="9" fill="#2ecc71"/>
+    <circle cx="10" cy="-39" r="9" fill="#e74c3c"/><circle cx="26" cy="-38" r="9" fill="#f1c40f"/>
+    <rect x="34" y="-68" width="30" height="20" rx="3" fill="#fff" stroke="#2b2b3a" stroke-width="2" transform="rotate(-8 49 -58)"/>
+    <text x="49" y="-53" font-size="11" font-weight="800" text-anchor="middle" fill="#2b2b3a" transform="rotate(-8 49 -58)">CHF</text>`, 0.55],
   refuge: [`<rect x="-66" y="-84" width="132" height="84" rx="6" fill="#c98b4f"/>
     ${[-70, -56, -42, -28, -14].map((y) => `<line x1="-66" y1="${y}" x2="66" y2="${y}" stroke="#a8703c" stroke-width="2"/>`).join('')}
     <path d="M-76 -80 L0 -122 L76 -80Z" fill="#5cb85c"/>
@@ -183,7 +192,7 @@ export function dessinerIle(profils, joueuse, famille = null) {
   <circle cx="${fx}" cy="${fy}" r="28" fill="#ecd59a"/><circle cx="${fx}" cy="${fy}" r="11" fill="#7fdcea" stroke="#b9b9c9" stroke-width="5"/>
 
   ${palmier(92, 420, 0.7)}${palmier(718, 400, 0.7)}${palmier(110, 740, 0.7)}${palmier(690, 745, 0.7)}${palmier(295, 215, 0.7)}${palmier(505, 210, 0.7)}
-  ${famille ? '' : arbre(400, 445, 0.75)}${arbre(300, 430, 0.5)}${arbre(500, 430, 0.5)}
+  ${famille ? '' : arbre(400, 445, 0.75)}${arbre(300, 430, 0.5)}
   ${fleurs([[330, 380, '#ff7aa8'], [470, 385, '#ffd84a'], [255, 640, '#b06ae0'], [545, 640, '#ff7aa8'], [320, 710, '#ffd84a'], [705, 480, '#b06ae0'], [95, 480, '#ffd84a']])}
 
   ${lieux.map(lieu).join('')}

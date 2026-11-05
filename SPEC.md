@@ -95,6 +95,18 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 
 **Observatoire (Système solaire)** : trois onglets. *Voyage* : une fusée vole de planète en planète (Soleil, 8 planètes et la Lune) ; pour chacune, 3 infos amusantes et « ton poids là-bas » (on tape son poids, gardé dans le profil ; aussi modifiable dans l'espace parents). *Les tailles* : toutes les planètes à la même échelle. *Quiz* : 10 questions (30 faciles à 3 choix, 32 difficiles à 4 choix) avec « Le savais-tu ? » ; c'est là qu'on gagne les étoiles.
 
+**Marché (francs suisses)** (`js/jeux/marche.js`) : un étal sur la place du village, avec une marchande.
+- **Pièces et billets suisses** : 5, 10, 20, 50 centimes, 1, 2, 5 francs, et billets de 10, 20, 50 francs. Ils sont dessinés simplement (valeur et couleur), sans copier les vrais billets.
+- **Prix** : réalistes pour chaque article, affichés comme en magasin (« Fr. 3.– », « Fr. 7.40 ») et lus à voix haute (« 7 francs 40 »).
+- **7 ans et moins** : pièces de 1, 2 et 5 francs, prix ronds jusqu'à 10 francs.
+  - *Compter* le porte-monnaie, avec 3 choix.
+  - *Payer juste* : on touche les pièces, la voix annonce le total, puis on touche « Payer » (et « Enlever » pour corriger).
+- **8 ans et plus** : avec les centimes et les billets.
+  - *Payer juste*.
+  - *Compter* le porte-monnaie.
+  - *Rendre la monnaie*, avec 4 choix qui reprennent les vraies erreurs : oublier la retenue (3.60 au lieu de 2.60), recopier les centimes du prix (3.40).
+- **Étoiles** : 1,5 par bonne réponse à 7 ans et moins, 1 au-delà.
+
 **Restaurant (Cuisine)** : 5 recettes (crêpes, cookies, salade de fruits, gâteau au yaourt, pain perdu). En jeu : à chaque étape, choisir l'ingrédient suivant (la carte de la recette est affichée ; pour 6 ans, la voix dit lequel), puis peser sur une balance avec des boutons (6 ans : par 50 g ; 9 ans : par 10 g). À la fin, le plat réussi, un « Le savais-tu ? » et la vraie recette débloquée (ingrédients, étapes, consignes de sécurité). Quand on l'a faite pour de vrai, un parent tape son code : +10 étoiles (`BONUS_RECETTE_REELLE`) et un objet pour la cuisine de la maison (poêle à crêpes, four, corbeille de fruits, moule à gâteau, tablier de chef), une seule fois par recette.
 
 Étoiles par bonne réponse des autres jeux, dans `js/reglages.js` (`ETOILES_AUTRES_JEUX`) :

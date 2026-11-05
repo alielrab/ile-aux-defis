@@ -63,3 +63,4 @@
   - Vérif : sur la tablette Android (et un téléphone), installer, passer en mode avion, fermer et relancer, faire un tour complet avec chaque profil
   - Fichiers : `manifest.json`, `sw.js`, `icons/`, `index.html`
   - **Point de contrôle 3**
+- [x] Marché (francs suisses) : compter, payer juste en touchant les pièces, rendre la monnaie (pièges réalistes) ; prix réalistes

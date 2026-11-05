@@ -9,7 +9,6 @@
 | Dictée magique | Un mot est lu à voix haute, l'enfant l'écrit |
 | Allemand | Vocabulaire de base, avec images et prononciation |
 | Syllabes | Assembler des syllabes pour apprendre à lire |
-| Boutique en francs suisses | Payer et rendre la monnaie avec des pièces et des billets en CHF |
 | Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
 | Code avec un robot | Programmer un robot avec des flèches pour atteindre un but |
@@ -21,6 +20,7 @@
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
 
 ## Fait (2026-11-05)
+- Boutique en francs suisses → **le marché** (voir SPEC.md).
 - Lieu de croyance du village, choisi par les parents (voir SPEC.md) : idée d'origine, « Ma foi » et « Autres cultures ».
 
 ## La maison de la confiance (à construire plus tard)

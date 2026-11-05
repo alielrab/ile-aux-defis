@@ -17,6 +17,7 @@ import * as corps from './jeux/corps.js';
 import * as syllabes from './jeux/syllabes.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
+import * as marche from './jeux/marche.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -312,7 +313,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -322,6 +323,7 @@ const PERSONNAGES = {
   espace: { peau: 'foncee', yeux: 'noirs', coiffure: 'afro', cheveux: 'noir', tenue: 'heroine', accessoires: [] },
   croyance: { peau: 'mate', yeux: 'noisette', coiffure: 'longs', cheveux: 'brun', tenue: 'pull-violet', accessoires: [] },
   cuisine: { peau: 'tres-claire', yeux: 'bleus', coiffure: 'courts', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
+  marche: { peau: 'brune', yeux: 'marron', coiffure: 'chignon', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
 const majuscule = (t) => t[0].toUpperCase() + t.slice(1);
@@ -373,6 +375,8 @@ function afficherQuestion() {
     else afficherReglage(q);
   } else if (jeu === 'syllabes') {
     afficherSyllabes(q);
+  } else if (jeu === 'marche') {
+    afficherMarche(q);
   } else if (jeu === 'espace' || jeu === 'croyance' || jeu === 'recit') {
     $('#aide').innerHTML = jeu === 'recit' ? recits.illustration(recitOuvert, etat.croyance.illustrations) : '';
     boutonsReponses(q.choix, String, true);
@@ -468,6 +472,51 @@ function afficherPesee(q) {
   $('#reponses').replaceChildren(...boutons, valider);
 }
 
+// Le marché : compter le porte-monnaie, payer le bon prix (on touche les pièces), rendre la monnaie.
+function afficherMarche(q) {
+  const etal = q.image ? `<div class="etal"><span class="produit" aria-hidden="true">${q.image}</span><span class="etiquette-prix">${marche.ecrire(q.prix)}</span></div>` : '';
+  const pieces = (l) => l.map(marche.dessinArgent).join('');
+  if (q.mode === 'compter') {
+    $('#aide').innerHTML = `<div class="marche-aide"><div class="porte-monnaie">${pieces(q.pieces)}</div></div>`;
+    return boutonsReponses(q.choix, marche.ecrire, true);
+  }
+  if (q.mode === 'rendre') {
+    $('#aide').innerHTML = `<div class="marche-aide">${etal}<p class="paie-avec">Tu paies avec : ${marche.dessinArgent(q.donne)}</p></div>`;
+    return boutonsReponses(q.choix, marche.ecrire, true);
+  }
+  // payer : on pose des pièces sur le comptoir, puis « Payer »
+  const donnees = [];
+  $('#aide').innerHTML = `<div class="marche-aide">${etal}<div class="comptoir" aria-live="polite"></div><p class="total"></p></div>`;
+  const maj = () => {
+    const total = donnees.reduce((a, b) => a + b, 0);
+    $('#aide .comptoir').innerHTML = pieces(donnees);
+    $('#aide .total').textContent = `Tu donnes : ${marche.ecrire(total)}`;
+    payer.disabled = !total;
+    return total;
+  };
+  const boutons = q.valeurs.map((v) => {
+    const b = document.createElement('button');
+    b.className = 'argent-bouton';
+    b.innerHTML = marche.dessinArgent(v);
+    b.setAttribute('aria-label', `Ajouter ${marche.dire(v)}`);
+    b.addEventListener('click', () => { donnees.push(v); parler(`Tu donnes ${marche.dire(maj())}`); });
+    return b;
+  });
+  const enlever = document.createElement('button');
+  enlever.className = 'reponse';
+  enlever.textContent = '↩️ Enlever';
+  enlever.addEventListener('click', () => { donnees.pop(); maj(); });
+  const payer = document.createElement('button');
+  payer.className = 'reponse valider';
+  payer.textContent = 'Payer ✓';
+  payer.addEventListener('click', () => choisir(donnees.reduce((a, b) => a + b, 0)));
+  $('#reponses').style.gridTemplateColumns = `repeat(${Math.min(boutons.length, 5)}, minmax(0, 1fr))`;
+  $('#reponses').replaceChildren(...boutons, enlever, payer);
+  enlever.classList.toggle('large', boutons.length <= 3);
+  payer.classList.toggle('large', boutons.length <= 3);
+  maj();
+}
+
 // L'hôpital : on touche une partie du corps du patient. À côté du patient, rien ne se passe.
 function toucherPatient(ev) {
   const q = questionEnCours(partie);
@@ -550,6 +599,7 @@ for (const b of document.querySelectorAll('.reecouter')) b.addEventListener('cli
 
 // La consigne, puis les réponses proposées à voix haute (pour celles qui ne lisent pas encore bien)
 function aDire(q) {
+  if (jeu === 'marche') return marche.aDire(q);
   const ou = (l) => (l.length > 1 ? `${l.slice(0, -1).join(', ')}, ou ${l.at(-1)} ?` : l[0]);
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
