@@ -37,6 +37,12 @@ export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
 
 export const taire = () => globalThis.speechSynthesis?.cancel();
 
+// Attendre que la voix ait vraiment fini : sur certaines tablettes, la fin de la phrase est annoncée trop tôt.
+export async function attendreSilence(max = 20000) {
+  const synth = globalThis.speechSynthesis, debut = Date.now();
+  while (synth?.speaking && Date.now() - debut < max) await new Promise((r) => setTimeout(r, 150));
+}
+
 let audio;
 export function bip(juste) {
   try {

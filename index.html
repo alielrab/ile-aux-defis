@@ -107,6 +107,14 @@
         <button class="gros">Enregistrer</button>
       </form>
 
+      <form id="form-suivante" class="carte parents-carte" novalidate>
+        <h2>Après une réponse</h2>
+        <p>Pour toute la famille, dans tous les jeux de questions.</p>
+        <label class="case-reglage"><input type="radio" name="suivante" value="auto"> La question suivante arrive toute seule, quand la voix a fini (puis 1 seconde)</label>
+        <label class="case-reglage"><input type="radio" name="suivante" value="bouton"> Un bouton « Question suivante » : l'enfant avance à son rythme</label>
+        <p class="erreur" role="status"></p>
+      </form>
+
       <form id="form-nouveau-code" class="carte parents-carte" novalidate>
         <h2>Changer le code</h2>
         <label>Nouveau code <input name="code" type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label>

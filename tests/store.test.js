@@ -105,3 +105,16 @@ test('écran parent : modifier prénom et âge, remettre à zéro, changer le co
   assert.equal(etat.code, '9876');
   assert.throws(() => changerCode(etat, '98'));
 });
+
+test('réglage des parents : passage automatique ou bouton « Question suivante », gardé après rechargement', async () => {
+  const { reglerSuivante } = await import('../js/store.js');
+  const s = faux();
+  const etat = nouvelEtat('1234');
+  assert.equal(etat.reglages.suivante, 'auto');
+  reglerSuivante(etat, 'bouton');
+  assert.throws(() => reglerSuivante(etat, 'vite'));
+  sauver(etat, s);
+  assert.equal(charger(s).reglages.suivante, 'bouton');
+  s.setItem('ile-aux-defis', JSON.stringify({ version: 2, code: '1234', profils: [] })); // ancien enregistrement
+  assert.equal(charger(s).reglages.suivante, 'auto');
+});

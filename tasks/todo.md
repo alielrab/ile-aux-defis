@@ -68,3 +68,4 @@
 - [x] Atelier de peinture : peinture libre, coloriage, coloriage magique (sons / calculs), 8 dessins (5 à débloquer), galerie de 12, tableaux dans la maison, impression
 - [x] Météo des émotions : météo du jour (rien d'enregistré), respiration guidée, « Devine l'émotion » (visages et situations, conseils) — à faire relire
 - [x] Atelier BD : 3 ou 4 cases selon l'âge, décors, personnages (famille, île, créatures), bulles (phrases lues ou texte), autocollants, lire à voix haute, Mes BD (8), impression
+- [x] Atlas du corps (8 pages, fiches, quiz par page), 17 meubles + cuisine complète, couleurs du lit, restaurant en mots à lire, bibliothèque en couleurs, refuge/mode/coiffeur enrichis (1 836 ⭐ au total), passage à la question suivante (auto après la voix + 1 s, ou bouton), liste des phrases à enregistrer (voix/phrases.csv)

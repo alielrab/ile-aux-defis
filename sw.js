@@ -1,5 +1,5 @@
 // Garde l'app en cache pour qu'elle marche hors ligne. Changer VERSION à chaque mise en ligne.
-const VERSION = 'ile-8';
+const VERSION = 'ile-9';
 const FICHIERS = [
   './', 'index.html', 'style.css', 'manifest.json', 'icons/icone-192.png', 'icons/icone-512.png',
   'js/app.js', 'js/archipel.js', 'js/avatar.js', 'js/carte.js', 'js/catalogue.js', 'js/croyances-contenu.js', 'js/croyances.js',

@@ -14,7 +14,7 @@ function verifierCode(code) {
   return code;
 }
 
-export const nouvelEtat = (code) => ({ version: VERSION, code: verifierCode(code), profils: [], croyance: { famille: null, decouvrir: [], illustrations: true } });
+export const nouvelEtat = (code) => ({ version: VERSION, code: verifierCode(code), profils: [], croyance: { famille: null, decouvrir: [], illustrations: true }, reglages: { suivante: 'auto' } });
 
 // Espace parents : la croyance de la famille (le lieu du village) et les autres religions que les enfants peuvent découvrir.
 // illustrations : afficher les personnages religieux dessinés (réglé selon la croyance, modifiable par le parent).
@@ -22,6 +22,11 @@ export function reglerCroyance(etat, famille, decouvrir, illustrations = illustr
   if (famille !== null && !(famille in CROYANCES)) throw new Error('Croyance inconnue.');
   if (!decouvrir.every((x) => RELIGIONS.includes(x))) throw new Error('Religion inconnue.');
   etat.croyance = { famille, decouvrir: famille ? decouvrir.filter((x) => x !== famille) : [], illustrations: !!illustrations };
+}
+
+export function reglerSuivante(etat, mode) {
+  if (!['auto', 'bouton'].includes(mode)) throw new Error('Réglage inconnu.');
+  etat.reglages = { ...etat.reglages, suivante: mode };
 }
 
 export function changerCode(etat, code) {
@@ -74,6 +79,7 @@ export function charger(stockage = globalThis.localStorage) {
     // la croyance est sur l'appareil ; avant, elle était avec le reste (on la reprend de là une dernière fois)
     etat.croyance = JSON.parse(stockage.getItem(CLE_APPAREIL))?.croyance ?? etat.croyance ?? { famille: null, decouvrir: [] };
     etat.croyance.illustrations ??= illustrationsParDefaut(etat.croyance.famille);
+    etat.reglages ??= { suivante: 'auto' }; // après une réponse : 'auto' (quand la voix a fini, + 1 s) ou 'bouton' (« Question suivante »)
     for (const p of etat.profils) {
       // compléter les profils créés pendant les premiers essais
       p.avatar.yeux ??= 'marron';

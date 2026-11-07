@@ -1,4 +1,4 @@
-import { nouvelEtat, ajouterProfil, charger, sauver, modifierProfil, remettreAZero, changerCode, reglerCroyance } from './store.js';
+import { nouvelEtat, ajouterProfil, charger, sauver, modifierProfil, remettreAZero, changerCode, reglerCroyance, reglerSuivante } from './store.js';
 import * as croyance from './croyances.js';
 import * as recits from './recits.js';
 import * as rapprochements from './rapprochements.js';
@@ -24,7 +24,7 @@ import * as emotions from './jeux/emotions.js';
 import * as bd from './jeux/bd.js';
 import * as atlas from './jeux/atlas.js';
 import * as voixParents from './enregistrements.js';
-import { parler, taire, bip, repeter } from './voix.js';
+import { parler, taire, bip, repeter, attendreSilence } from './voix.js';
 import { messageReponse } from './messages.js';
 
 let etat = charger();
@@ -634,10 +634,21 @@ async function choisir(choix) {
   const suite = [q.trouve, correction, q.savaisTu && `Le savais-tu ? ${q.savaisTu}`].filter(Boolean).join(' ');
   $('#retour').textContent = `${m.texte} ${suite}`.trim();
   $('#retour').classList.toggle('longue', suite.length > 60);
-  // on passe à la suite quand la phrase est finie, et pas avant un temps minimum pour voir la correction
+  const passer = () => {
+    if (p !== partie || $('[data-ecran="jeu"]').hidden) return; // partie quittée entre-temps
+    terminee(partie) ? finirPartie() : afficherQuestion();
+  };
+  if (etat.reglages?.suivante === 'bouton') { // réglage des parents : l'enfant passe à la suite quand elle veut
+    const suivante = el('button', { className: 'reponse valider large', textContent: terminee(partie) ? 'Voir mon résultat ➜' : 'Question suivante ➜' });
+    suivante.addEventListener('click', () => { taire(); voixParents.arreter(); passer(); });
+    $('#reponses').append(suivante);
+    return reagir(m, juste, suite);
+  }
+  // sinon : quand la voix a vraiment fini (et pas avant un temps minimum pour voir la correction), puis une seconde de pause
   await Promise.all([reagir(m, juste, suite), new Promise((r) => setTimeout(r, q.savaisTu ? 3000 : juste ? 1000 : 2000))]);
-  if (p !== partie || $('[data-ecran="jeu"]').hidden) return; // partie quittée entre-temps
-  terminee(partie) ? finirPartie() : afficherQuestion();
+  await attendreSilence();
+  await new Promise((r) => setTimeout(r, 1000));
+  passer();
 }
 
 // La voix d'un parent si elle a été enregistrée pour ce moment-là, sinon la voix de synthèse.
@@ -1319,6 +1330,7 @@ function ouvrirAtlas() {
 
 // systeme : null = la liste des pages
 function afficherAtlas(systeme, dire = false) {
+  etoilesJoueuse(); // les étoiles gagnées en découvrant une page s'affichent tout de suite
   const v = $('#atlas-vue');
   v.replaceChildren();
   if (!systeme) {
@@ -1476,6 +1488,8 @@ function afficherParents(message = null) {
   }));
   if (message) return; // on reste où on est sur la page
   afficherReglageCroyance();
+  for (const r of $('#form-suivante').elements.suivante) r.checked = r.value === (etat.reglages?.suivante ?? 'auto');
+  noter($('#form-suivante .erreur'), '');
   $('#form-nouveau-code').reset();
   $('#form-nouveau-code .erreur').textContent = '';
   voixMessage('');
@@ -1484,6 +1498,12 @@ function afficherParents(message = null) {
 }
 
 $('#ajouter-enfant').addEventListener('click', () => ouvrirProfil());
+
+$('#form-suivante').addEventListener('change', (ev) => {
+  reglerSuivante(etat, ev.target.value);
+  enregistrer();
+  noter($('#form-suivante .erreur'), 'Enregistré ✓', true);
+});
 
 $('#form-nouveau-code').addEventListener('submit', (ev) => {
   ev.preventDefault();
