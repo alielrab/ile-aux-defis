@@ -62,7 +62,7 @@ const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toStri
 export function ajouterProfil(etat, { prenom, age, avatar }) {
   prenom = verifierPrenomAge(prenom, age);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [] };
+  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {} };
   etat.profils.push(profil);
   return profil;
 }
@@ -84,6 +84,7 @@ export function charger(stockage = globalThis.localStorage) {
       p.dessins ??= []; // atelier de peinture : la galerie
       p.modeles ??= []; // atelier de peinture : les dessins à colorier débloqués
       p.bds ??= []; // atelier BD : les bandes dessinées
+      p.atlas ??= {}; // atlas du corps : les fiches déjà découvertes, par page
       p.maison ??= maisonVide();
       p.maison.piece ??= 'chambre';
       p.maison.tableaux ??= {}; // un dessin de la galerie accroché par pièce

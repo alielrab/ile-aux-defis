@@ -10,7 +10,7 @@ import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
 import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
-import { BONUS_RECETTE_REELLE } from './reglages.js';
+import { BONUS_RECETTE_REELLE, ETOILES_ATLAS } from './reglages.js';
 import { nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
 import * as calcul from './jeux/calcul.js';
 import * as heure from './jeux/heure.js';
@@ -22,6 +22,7 @@ import * as marche from './jeux/marche.js';
 import * as peinture from './jeux/peinture.js';
 import * as emotions from './jeux/emotions.js';
 import * as bd from './jeux/bd.js';
+import * as atlas from './jeux/atlas.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -202,6 +203,7 @@ function entrerLieu(cible) {
   if (l.type === 'magasin') return ouvrirLieu(id);
   if (id === 'calcul') return ouvrirOperations();
   if (id === 'espace') return ouvrirObservatoire();
+  if (id === 'corps') return ouvrirAtlas();
   if (id === 'cuisine') return ouvrirRestaurant();
   lancerJeu(id);
 }
@@ -349,7 +351,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -368,15 +370,15 @@ let jeu, partie, horloge = null;
 
 function lancerJeu(nom) {
   jeu = nom;
-  const cle = `${nom}:${nom === 'calcul' ? operation : nom === 'croyance' ? etat.croyance.famille : ''}:${joueuse.age}`, vus = new Set(joueuse.vus[cle] ?? []);
+  const cle = `${nom}:${nom === 'calcul' ? operation : nom === 'croyance' ? etat.croyance.famille : nom === 'atlas' ? systemeAtlas : ''}:${joueuse.age}`, vus = new Set(joueuse.vus[cle] ?? []);
   partie = nom === 'cuisine'
     ? { questions: cuisine.etapes(recette, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les étapes de la recette, dans l'ordre
     : nom === 'recit'
     ? { questions: recits.questions(recitOuvert, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les questions de l'histoire, dans l'ordre
-    : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille }, Math.random, vus);
+    : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas }, Math.random, vus);
   joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = nom === 'recit' ? 'croyance' : nom;
+  const lieu = { recit: 'croyance', atlas: 'corps' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   $('#maitre-dessin').innerHTML = nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
   montrer('jeu');
@@ -417,7 +419,7 @@ function afficherQuestion() {
   } else if (jeu === 'emotions') {
     $('#aide').innerHTML = q.mode === 'visage' ? emotions.visage(q.reponse, q.peau) : '';
     boutonsReponses(q.choix, emotions.nom, true);
-  } else if (jeu === 'espace' || jeu === 'croyance' || jeu === 'recit') {
+  } else if (jeu === 'espace' || jeu === 'croyance' || jeu === 'recit' || jeu === 'atlas') {
     $('#aide').innerHTML = jeu === 'recit' ? recits.illustration(recitOuvert, etat.croyance.illustrations) : '';
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'cuisine') {
@@ -624,6 +626,10 @@ function finirPartie() {
       <p class="savais">Le savais-tu ? ${r.savaisTu}</p><button class="gros secondaire">📖 Voir la vraie recette</button>`;
     $('#fin-extra button').addEventListener('click', () => ouvrirRestaurant(recette));
     fin += ` Recette débloquée ! Le savais-tu ? ${r.savaisTu}`;
+  }
+  if (jeu === 'atlas' || jeu === 'corps') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">📖 Retour à l’atlas</button>';
+    $('#fin-extra button').addEventListener('click', () => { afficherAtlas(jeu === 'atlas' ? systemeAtlas : null); montrer('atlas'); });
   }
   if (jeu === 'emotions') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">☁️ Ma météo du jour</button>';
@@ -1261,6 +1267,57 @@ function vueMesBD(v, vue) {
 }
 
 const imprimerBD = (b) => imprimer(`<div class="bande">${b.cases.map((c, i) => bd.dessinerCase(c, dessinPersoBD, { numero: i })).join('')}</div>`, bd.nettoyer(b.titre) || `La BD de ${joueuse.prenom}`);
+
+// L'hôpital : l'atlas du corps (une page par système, des fiches à découvrir, un quiz par page) et le grand quiz du corps
+let systemeAtlas = 'squelette', organeAtlas = null;
+function ouvrirAtlas() {
+  etoilesJoueuse();
+  afficherAtlas(null);
+  montrer('atlas');
+  parler("Bienvenue à l'hôpital ! Voici l'atlas du corps. Choisis une page pour découvrir ton corps.", { ton: 1.1 });
+}
+
+// systeme : null = la liste des pages
+function afficherAtlas(systeme, dire = false) {
+  const v = $('#atlas-vue');
+  v.replaceChildren();
+  if (!systeme) {
+    v.append(el('div', { className: 'atelier-menu' }, ...Object.entries(atlas.SYSTEMES).map(([k, s]) => {
+      const vus = joueuse.atlas?.[k]?.length ?? 0, fini = vus === s.organes.length;
+      return gros(`${s.image} ${s.nom}${fini ? ' ✓' : vus ? ` (${vus}/${s.organes.length})` : ''}`, () => { systemeAtlas = k; organeAtlas = null; afficherAtlas(k, true); }, `gros${fini ? ' secondaire' : ''}`);
+    })), gros('⭐ Le grand quiz du corps', () => lancerJeu('corps'), 'gros secondaire'));
+    return;
+  }
+  const s = atlas.SYSTEMES[systeme], vus = joueuse.atlas?.[systeme] ?? [];
+  const o = s.organes.find((x) => x.id === organeAtlas);
+  const corpsSvg = el('div', { className: 'atlas-dessin' });
+  corpsSvg.innerHTML = atlas.dessinerSysteme(systeme, vus, organeAtlas);
+  const ouvrir = (id) => {
+    organeAtlas = id;
+    const complet = atlas.decouvrir(joueuse, systeme, id);
+    if (complet) joueuse.etoiles += ETOILES_ATLAS;
+    enregistrer();
+    afficherAtlas(systeme);
+    const org = s.organes.find((x) => x.id === id);
+    parler(`${org.nom}. ${atlas.fiche(org, joueuse.age)} Le savais-tu ? ${org.savais}${complet ? ` Bravo, tu as découvert toute la page ! Tu gagnes ${ETOILES_ATLAS} étoiles.` : ''}`);
+  };
+  corpsSvg.addEventListener('click', (ev) => { const id = ev.target.closest('[data-organe]')?.dataset.organe; if (id) ouvrir(id); });
+  corpsSvg.addEventListener('keydown', (ev) => { const id = ev.target.closest('[data-organe]')?.dataset.organe; if (id && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); ouvrir(id); } });
+  const noms = el('div', { className: 'phrases' }, ...s.organes.map((x) => {
+    const b = gros(`${vus.includes(x.id) ? '✓ ' : ''}${x.nom}`, () => ouvrir(x.id), `petit${x.id === organeAtlas ? ' choisi' : ''}`);
+    return b;
+  }));
+  const carte = o
+    ? el('div', { className: 'carte carte-croyance' }, el('div', { className: 'tete-carte' }, el('h3', { textContent: o.nom }),
+        gros('🔊', () => parler(`${o.nom}. ${atlas.fiche(o, joueuse.age)} Le savais-tu ? ${o.savais}`), 'rond')),
+      el('p', { textContent: atlas.fiche(o, joueuse.age) }), el('p', { className: 'savais', textContent: `Le savais-tu ? ${o.savais}` }))
+    : el('p', { className: 'carte presentation', textContent: s.intro });
+  v.append(gros('← L’atlas', () => afficherAtlas(null), 'gros secondaire retour-atelier'), el('h2', { textContent: `${s.image} ${s.nom}` }),
+    el('p', { className: 'progres-atlas', textContent: `${vus.length} / ${s.organes.length} découvertes${vus.length === s.organes.length ? ' ✓' : ` · découvre tout pour gagner ${ETOILES_ATLAS} ⭐`}` }),
+    el('div', { className: 'atlas-page' }, corpsSvg, el('div', { className: 'atlas-fiche' }, carte, noms)),
+    gros('🧠 Je teste mes connaissances', () => lancerJeu('atlas')));
+  if (dire) parler(`${s.nom}. ${s.intro}`);
+}
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)
 function ouvrirRestaurant(cle = null) {

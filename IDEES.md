@@ -16,6 +16,33 @@
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
+| Musée des dinosaures | Les grandes espèces, leurs tailles, ce qu'elles mangeaient ; reconstituer un squelette |
+| Passeport du monde | Visiter des pays (drapeau, langue, plat, monument) et collectionner les tampons du passeport |
+| Fractions en pizza | Partager des pizzas en parts égales : moitié, tiers, quart… |
+| Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
+| Vétérinaire | Soigner les animaux : reconnaître les symptômes, choisir le bon soin |
+| Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
+| Centre de tri | Trier les déchets dans la bonne poubelle (verre, papier, PET, compost…) |
+| Jeux de réflexion | Memory, tangram, labyrinthes |
+
+## Nouvelles îles (à construire plus tard)
+- **L'île de la sécurité** : le code de la route du piéton et du cycliste (traverser, panneaux, casque, être vu la nuit) ; les numéros d'urgence suisses **144** (ambulance), **117** (police), **118** (pompiers), avec quoi dire au téléphone.
+- **L'île de la mer** : l'aquarium et les fonds marins (poissons, coraux, baleines, protéger la mer).
+
+## Île du cœur : « Grandir ensemble » (à construire plus tard)
+Un lieu sur le vivre-ensemble. Comme la maison de la confiance : pas de pénalité, des explications douces, une invitation à en parler avec un parent.
+- **Le volcan de la colère** : reconnaître la colère qui monte, et ce qui la fait redescendre (respirer, s'éloigner, dire avec des mots).
+- **Savoir perdre** : un jeu où l'on perd parfois. Les étoiles récompensent le bon comportement (féliciter l'autre, rester calme, rejouer), **pas la victoire**.
+- **Le bocal de patience** : attendre son tour, attendre une récompense ; le bocal se remplit quand on patiente.
+- **Le droit à l'erreur** : se tromper, c'est apprendre ; des histoires d'erreurs célèbres qui ont mené à des découvertes.
+- **« Et si j'avais tort ? »** : changer d'avis quand on apprend quelque chose de nouveau, écouter l'autre.
+- **La boîte à excuses** : comment s'excuser vraiment (dire ce qu'on a fait, réparer), et accepter des excuses.
+- **Mission politesse** : bonjour, merci, s'il te plaît, au revoir, dans des situations de tous les jours.
+- **Dans les chaussures de l'autre** : imaginer ce que ressent l'autre (lien avec la météo des émotions).
+- À garder en tête : le respect des adultes reste compatible avec « mon corps m'appartient ». On peut être poli **et** dire non à un adulte qui met mal à l'aise, puis en parler à un adulte de confiance (voir la maison de la confiance).
+
+## Voix de qualité (à construire plus tard)
+Remplacer la voix de la tablette par des fichiers audio pré-enregistrés pour les phrases fixes ; la voix de la tablette reste pour les phrases qui changent (prénoms, nombres). La liste de toutes les phrases fixes est dans `voix/phrases.csv` (générée par `node voix/lister-phrases.mjs`) : chaque phrase a un identifiant, qui servira de nom de fichier audio.
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).

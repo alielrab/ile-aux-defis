@@ -30,5 +30,8 @@ export const ETOILES_AUTRES_JEUX = [
 // Chaque enfant débloque les îles avec ses propres étoiles. Mettre 0 pour ouvrir une île à tout le monde.
 export const PRIX_ILES = { createurs: 20, coeur: 20 };
 
+// Atlas du corps (hôpital) : étoiles quand on a découvert toutes les fiches d'une page, la première fois.
+export const ETOILES_ATLAS = 3;
+
 // Recette faite pour de vrai avec un parent (validée avec le code) : étoiles en plus, et un objet pour la cuisine de la maison.
 export const BONUS_RECETTE_REELLE = 10;
