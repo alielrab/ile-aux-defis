@@ -455,6 +455,7 @@ select {
 .carte-recette .fait { color: #1e7a36; text-decoration: line-through; }
 .balance { width: min(70vw, 38dvh, 300px); height: auto; display: block; }
 .recettes .plat, .plat-reussi { font-size: 3.5rem; }
+.ingredient-a-trouver { font-size: clamp(4.5rem, 3.5rem + 6vw, 8rem); line-height: 1.1; }
 .recette small { font-weight: 500; font-size: 0.8em; }
 .plat-reussi { font-size: clamp(5rem, 4rem + 6vw, 8rem); animation: pop 0.6s ease-out; }
 .fin-extra { display: grid; gap: 0.75rem; justify-items: center; max-width: 640px; }

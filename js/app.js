@@ -423,9 +423,9 @@ function afficherQuestion() {
     $('#aide').innerHTML = jeu === 'recit' ? recits.illustration(recitOuvert, etat.croyance.illustrations) : '';
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'cuisine') {
-    if (q.mode === 'ingredient') {
-      $('#aide').innerHTML = cuisine.carte(q.recette, q.etape);
-      boutonsReponses(q.choix, (id) => `${cuisine.INGREDIENTS[id][1]} ${majuscule(cuisine.INGREDIENTS[id][0])}`, true);
+    if (q.mode === 'ingredient') { // on voit l'ingrédient, on l'entend ; on lit les mots (sans images) pour trouver le bon
+      $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
+      boutonsReponses(q.choix, majuscule, true);
     } else afficherPesee(q);
   } else {
     $('#aide').innerHTML = `<div class="patient${q.mode === 'choix' ? ' petit-patient' : ''}">${dessinerAvatar(corps.PATIENT, 'entier', corps.AGE_PATIENT)}</div>`;
@@ -654,7 +654,7 @@ function aDire(q) {
   if (jeu === 'emotions') return `${q.consigne} ${ou(q.choix.map(emotions.nom))}`;
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
-  if (q.mode === 'ingredient') return `${q.consigne} ${ou(q.choix.map((id) => cuisine.INGREDIENTS[id][0]))}`;
+  if (q.mode === 'ingredient') return q.consigne; // les mots des boutons ne sont pas lus : c'est à l'enfant de les lire
   return q.consigne;
 }
 $('#rejouer').addEventListener('click', () => lancerJeu(jeu));

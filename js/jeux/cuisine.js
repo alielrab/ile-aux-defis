@@ -117,15 +117,12 @@ export const boutonsBalance = (niv) => (niv === 1 ? [-50, 50, 100] : [-10, 10, 5
 export function etapes(cle, age, aleatoire = Math.random) {
   const niv = niveau(age), r = RECETTES[cle], questions = [];
   r.jeu.forEach(([id, nom, image, grammes], i) => {
-    // les autres choix : les ingrédients qui viennent après, complétés par des intrus d'autres recettes (pour la dernière étape)
-    const restants = melanger(r.jeu.slice(i + 1).map((x) => x[0]), aleatoire);
-    const intrus = melanger(Object.keys(INGREDIENTS).filter((x) => !r.jeu.some((y) => y[0] === x)), aleatoire);
-    const choix = melanger([id, ...[...restants, ...intrus].slice(0, niv === 1 ? 2 : 3)], aleatoire);
+    // on voit l'ingrédient et on entend son nom ; il faut lire le bon mot parmi des mots (pas lus à voix haute)
     questions.push({
-      mode: 'ingredient', texte: `${cle}-${id}`, recette: cle, etape: i, reponse: id, choix,
-      titre: `Étape ${i + 1} : qu'ajoute-t-on ?`,
-      consigne: niv === 1 ? `Mets ${nom} dans le saladier.` : 'Regarde la recette : quel ingrédient vient maintenant ?',
-      solution: `Il fallait ${nom}.`,
+      mode: 'ingredient', texte: `${cle}-${id}`, recette: cle, etape: i, reponse: nom, image, choix: motsAuChoix(nom, niv, aleatoire),
+      titre: `Étape ${i + 1} : trouve le bon mot !`,
+      consigne: `Ajoute ${nom}. Trouve le mot ${nom.replace(/^(la |le |les |l')/, '')} !`,
+      solution: `C'était écrit : ${nom}.`,
     });
     if (aPeser(grammes, niv)) {
       questions.push({
@@ -137,6 +134,35 @@ export function etapes(cle, age, aleatoire = Math.random) {
     }
   });
   return questions;
+}
+
+// Des noms d'aliments pour les choix à lire
+const MOTS = ['le sel', 'le riz', 'le thé', 'le miel', 'le pain', 'le jus', 'la noix', 'le kiwi', 'la pomme', 'la poire', 'le lait', 'le sucre',
+  'le beurre', 'la farine', 'la fraise', 'la framboise', 'la frite', 'le fromage', 'la crème', 'la crêpe', 'le sirop', 'le citron', 'la cerise',
+  'la banane', 'la vanille', 'la cannelle', 'la confiture', 'le chocolat', 'la compote', 'les céréales', 'la levure', 'les œufs', 'l’orange',
+  'les olives', 'la salade', 'le yaourt', 'la tomate', 'la carotte', 'le melon', 'le persil'];
+const sansArticle = (m) => m.replace(/^(la |le |les |l'|l’)/, '');
+// Le nombre de lettres à changer pour passer d'un mot à l'autre (distance d'édition)
+export function distance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+// 7 ans et moins : 2 mots courts et bien différents (autre première lettre). Grands : 3 mots proches, parmi les plus ressemblants.
+export function motsAuChoix(nom, niv, aleatoire = Math.random) {
+  const mot = sansArticle(nom);
+  // jamais un mot contenu dans l'autre (« le beurre » pour « le beurre fondu ») : il y aurait deux réponses presque justes
+  const autres = [...new Set([...MOTS, ...Object.values(INGREDIENTS).map(([n]) => n)])].filter((m) => !sansArticle(m).includes(mot) && !mot.includes(sansArticle(m)));
+  let pieges;
+  if (niv === 1) {
+    const courts = autres.filter((m) => sansArticle(m).length <= 5 && sansArticle(m)[0] !== mot[0] && distance(sansArticle(m), mot) >= 3);
+    pieges = melanger(courts, aleatoire).slice(0, 2);
+  } else {
+    const proches = [...autres].sort((a, b) => distance(sansArticle(a), mot) - distance(sansArticle(b), mot) || aleatoire() - 0.5);
+    pieges = melanger(proches.slice(0, 4), aleatoire).slice(0, 3);
+  }
+  return melanger([nom, ...pieges], aleatoire);
 }
 
 // Tous les ingrédients, par clé : [nom, image]

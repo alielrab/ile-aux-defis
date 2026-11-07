@@ -54,7 +54,7 @@ test('cuisine : 5 recettes, étapes dans l’ordre, pesées adaptées à l’âg
     for (const age of [6, 9]) {
       const qs = cuisine.etapes(cle, age, graine(age));
       const ingredients = qs.filter((q) => q.mode === 'ingredient');
-      assert.deepEqual(ingredients.map((q) => q.reponse), r.jeu.map((x) => x[0]));
+      assert.deepEqual(ingredients.map((q) => q.reponse), r.jeu.map((x) => x[1]));
       for (const q of ingredients) assert.ok(q.choix.includes(q.reponse) && new Set(q.choix).size === q.choix.length && q.choix.length === (age === 6 ? 3 : 4), cle);
       for (const q of qs.filter((x) => x.mode === 'peser')) {
         if (age === 6) assert.equal(q.reponse % 50, 0); // atteignable avec les boutons de 50 g
@@ -120,4 +120,22 @@ test('une question ne revient pas tant que les autres n’ont pas été posées'
   assert.equal(new Set(poses).size, poses.length);
   assert.equal(poses.length, 42);
   assert.ok(FACILES.length >= 42);
+});
+
+test('restaurant : on lit le mot de l’ingrédient ; courts et différents à 6 ans, proches à 9 ans', () => {
+  const nu = (m) => m.replace(/^(la |le |les |l'|l’)/, '');
+  for (const cle of Object.keys(cuisine.RECETTES)) {
+    for (const age of [6, 9]) {
+      for (const q of cuisine.etapes(cle, age, graine(age + 3)).filter((x) => x.mode === 'ingredient')) {
+        assert.ok(q.image && q.consigne.includes(q.reponse), q.texte);
+        assert.ok(!q.choix.some((c) => /\p{Extended_Pictographic}/u.test(c)), 'pas d’emoji dans les boutons');
+        for (const c of q.choix.filter((x) => x !== q.reponse)) {
+          assert.ok(!nu(q.reponse).includes(nu(c)) && !nu(c).includes(nu(q.reponse)), `${q.reponse} / ${c}`);
+          if (age === 6) assert.ok(nu(c).length <= 5 && nu(c)[0] !== nu(q.reponse)[0], `${q.reponse} / ${c}`);
+          else assert.ok(cuisine.distance(nu(c), nu(q.reponse)) <= Math.max(5, nu(q.reponse).length - 1), `${q.reponse} / ${c}`);
+        }
+      }
+    }
+  }
+  assert.equal(cuisine.distance('farine', 'fraise'), 3);
 });
