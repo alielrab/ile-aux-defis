@@ -7,10 +7,10 @@ import { accorder } from '../js/genre.js';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue, dinos, passeport, urgences] = await Promise.all([
+const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue, dinos, passeport, urgences, veto, fractions, memory] = await Promise.all([
   js('messages.js'), js('jeux/corps-questions.js'), js('jeux/atlas.js'), js('jeux/espace.js'), js('jeux/syllabes-mots.js'), js('croyances.js'),
   js('recits.js'), js('rapprochements.js'), js('jeux/emotions.js'), js('jeux/cuisine.js'), js('jeux/bd.js'), js('jeux/peinture.js'), js('catalogue.js'),
-  js('jeux/dinos.js'), js('jeux/passeport.js'), js('jeux/urgences.js'),
+  js('jeux/dinos.js'), js('jeux/passeport.js'), js('jeux/urgences.js'), js('jeux/veto.js'), js('jeux/fractions.js'), js('jeux/memory.js'),
 ]);
 
 const lignes = [], vus = new Set();
@@ -122,6 +122,31 @@ ajouter('urgences.rassurer', "Numéros d'urgence (à faire relire)", urgences.RA
 Object.entries(urgences.REPONSES).forEach(([k, t]) => ajouter(`urgences.reponse.${k}`, "Numéros d'urgence (à faire relire)", t.replace(/^\S+ /, '')));
 urgences.SITUATIONS.forEach(([t, , , s], i) => { ajouter(`urgences.situation${i + 1}`, "Numéros d'urgence (à faire relire)", t); ajouter(`urgences.situation${i + 1}.savais`, "Numéros d'urgence (à faire relire)", `Le savais-tu ? ${s}`); });
 banque('urgences.quiz', "Numéros d'urgence (à faire relire)", urgences.QUESTIONS);
+for (const [k, f] of Object.entries(veto.FICHES)) {
+  ajouter(`veto.${k}.nom`, 'Vétérinaire', f.nom);
+  ajouter(`veto.${k}.besoins`, 'Vétérinaire', f.besoins);
+  ajouter(`veto.${k}.repas`, 'Vétérinaire', f.repas);
+  ajouter(`veto.${k}.savais`, 'Vétérinaire', `Le savais-tu ? ${f.savais}`);
+}
+{ // toutes les questions possibles du vétérinaire et de la pizzeria (tirées au hasard, en grand nombre)
+  let x = 1; const hasard = () => ((x = (x * 1103515245 + 12345) % 2147483648) / 2147483648);
+  const vues = new Map();
+  for (let i = 0; i < 4000; i++) for (const age of [6, 9]) {
+    const q = veto.question({ age }, hasard);
+    vues.set(`veto|${q.consigne}`, ['Vétérinaire', q.consigne]);
+    for (const c of q.choix) vues.set(`veto|${veto.libelle(c)}`, ['Vétérinaire', veto.libelle(c)]);
+    vues.set(`veto|${q.solution}`, ['Vétérinaire', q.solution]);
+    vues.set(`veto|${q.savaisTu}`, ['Vétérinaire', `Le savais-tu ? ${q.savaisTu}`]);
+    const f = fractions.question({ age }, hasard);
+    for (const t of [f.mode === 'fraction' ? fractions.aDire(f) : f.consigne, f.solution, `Le savais-tu ? ${f.savaisTu}`]) vues.set(`fr|${t}`, ['Pizzeria (fractions)', t]);
+  }
+  let n = 0;
+  for (const [cle, [src, t]] of vues) ajouter(`${cle.startsWith('veto') ? 'veto' : 'pizzeria'}.phrase${++n}`, src, t);
+}
+for (const [k, t] of Object.entries(memory.THEMES)) {
+  ajouter(`memory.theme.${k}`, 'Memory', t.nom);
+  for (const c of t.cartes()) { ajouter(`memory.${k}.${c.cle}`, 'Memory', c.nom); ajouter(`memory.${k}.${c.cle}.savais`, 'Memory', `Le savais-tu ? ${c.savais}`); }
+}
 
 bd.PHRASES.forEach((t, i) => ajouter(`bd.phrase${i + 1}`, 'Atelier BD', t));
 bd.CREATURES.forEach(([k, , nom]) => ajouter(`bd.creature.${k}`, 'Atelier BD', nom));

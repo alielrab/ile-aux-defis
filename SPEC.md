@@ -188,6 +188,20 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 
 **Restaurant (Cuisine)** : 5 recettes (crêpes, cookies, salade de fruits, gâteau au yaourt, pain perdu). En jeu : à chaque étape, choisir l'ingrédient suivant (la carte de la recette est affichée ; pour 6 ans, la voix dit lequel), puis peser sur une balance avec des boutons (6 ans : par 50 g ; 9 ans : par 10 g). À la fin, le plat réussi, un « Le savais-tu ? » et la vraie recette débloquée (ingrédients, étapes, consignes de sécurité). Quand on l'a faite pour de vrai, un parent tape son code : +10 étoiles (`BONUS_RECETTE_REELLE`) et un objet pour la cuisine de la maison (poêle à crêpes, four, corbeille de fruits, moule à gâteau, tablier de chef), une seule fois par recette.
 
+**Le vétérinaire** (île du village) : soigner des animaux, 10 questions. Les patients sont les animaux adoptés au refuge, avec leur prénom (sinon ceux de la clinique : Filou, Mistigri…). Au refuge, le bouton 🩺 sous un animal l'emmène se faire soigner seul.
+  - Les soins : bander une patte, nettoyer une coupure et mettre un pansement, prendre la température, donner de l'eau fraîche (pas de lait), donner le bon repas (croquettes, foin, graines, paillettes…).
+  - 7 ans et moins : 3 choix. 8 ans et plus : 4 choix, et des questions sur les fiches (« Combien de temps un chat dort-il ? »).
+  - Les fiches des 7 animaux : besoins, repas, « Le savais-tu ? », avec la voix.
+
+**La pizzeria** (île du savoir) : les fractions avec des pizzas et des gâteaux, 10 questions.
+  - 7 ans et moins : garnir la moitié ou un quart (toucher les parts, puis « C'est prêt »), trouver le dessin en parts égales, compter les parts, partager entre 2 ou 4 enfants. Les fractions sont aussi écrites en mots (« 1/4 : un quart »).
+  - 8 ans et plus : tiers, sixièmes, huitièmes ; lire la fraction garnie, comparer deux fractions, trouver la fraction égale à la moitié.
+
+**Le Memory** (salle de jeux, île du village) : retrouver les paires. 4 thèmes : animaux du refuge, planètes, dinosaures, drapeaux. 6 paires à 7 ans et moins, 10 paires à 8 ans et plus.
+  - Seul, ou à deux sur la même tablette avec un autre enfant de la famille (ou quelqu'un d'autre, sans étoiles). Une paire trouvée fait rejouer ; sinon, c'est à l'autre. À deux, le nombre de cartes suit le plus jeune.
+  - Chaque carte retournée est lue à voix haute ; chaque paire donne un « Le savais-tu ? ».
+  - Étoiles par paire, selon l'âge de celui ou celle qui la trouve : 0,75 (7 ans et moins), 0,5 (8 ans et plus), arrondi à la demi-étoile.
+
 Étoiles par bonne réponse des autres jeux, dans `js/reglages.js` (`ETOILES_AUTRES_JEUX`) :
 
 | | Heure | Corps | Syllabes | Système solaire | Cuisine (par étape) |

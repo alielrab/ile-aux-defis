@@ -15,6 +15,8 @@ export const LIEUX = [
   { id: 'meubles', ile: 'village', type: 'magasin', nom: 'Le magasin\nde meubles', detail: 'meubles, jouets, murs et pièces', ouvert: true, x: 610, y: 300 },
   { id: 'marche', ile: 'village', type: 'jeu', nom: 'Le marché', detail: 'payer en francs suisses', ouvert: true, x: 190, y: 480 },
   { id: 'refuge', ile: 'village', type: 'magasin', nom: 'Le refuge', detail: 'animaux à adopter', ouvert: true, x: 610, y: 480 },
+  { id: 'veto', ile: 'village', type: 'jeu', nom: 'Le vétérinaire', detail: 'soigner les animaux', ouvert: true, x: 185, y: 740 },
+  { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory, seul ou à deux', ouvert: true, x: 615, y: 740 },
   { id: 'chantier', ile: 'village', type: 'jeu', nom: 'Le chantier', detail: 'construire', ouvert: false, x: 400, y: 800 },
   // L'île du savoir
   { id: 'calcul', ile: 'savoir', type: 'jeu', nom: "L'école", detail: 'Calcul', ouvert: true, x: 200, y: 330 },
@@ -23,6 +25,7 @@ export const LIEUX = [
   { id: 'espace', ile: 'savoir', type: 'jeu', nom: "L'observatoire", detail: 'le système solaire', ouvert: true, x: 600, y: 590 },
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
   { id: 'musee', ile: 'savoir', type: 'jeu', nom: 'Le musée\ndes dinosaures', detail: 'reconstituer des squelettes', ouvert: true, x: 400, y: 330 },
+  { id: 'fractions', ile: 'savoir', type: 'jeu', nom: 'La pizzeria', detail: 'les fractions', ouvert: true, x: 600, y: 790 },
   { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le passeport du monde', ouvert: true, x: 400, y: 655 },
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
@@ -182,6 +185,21 @@ const BATIMENTS = {
     <path d="M-60 -110 A60 50 0 0 1 60 -110" fill="none" stroke="#e74c3c" stroke-width="6"/><path d="M-50 -110 A50 40 0 0 1 50 -110" fill="none" stroke="#f1c40f" stroke-width="6"/><path d="M-40 -110 A40 30 0 0 1 40 -110" fill="none" stroke="#3498db" stroke-width="6"/>
     ${[[-36, '#ffd84a', 'M-42 -46 q6 6 12 0'], [0, '#7ad0f0', 'M-6 -42 q6 -6 12 0'], [36, '#ff9a7a', 'M30 -44 h12']].map(([x, c, b]) => `<circle cx="${x}" cy="-50" r="14" fill="${c}"/><circle cx="${x - 5}" cy="-54" r="2" fill="#2b2b3a"/><circle cx="${x + 5}" cy="-54" r="2" fill="#2b2b3a"/><path d="${b}" stroke="#2b2b3a" stroke-width="2" fill="none"/>`).join('')}
     <rect x="-12" y="-28" width="24" height="28" rx="4" fill="#7a4a30"/>`, 0.95],
+  veto: [`<rect x="-64" y="-86" width="128" height="86" rx="6" fill="#eef8f4" stroke="#bfe3d3" stroke-width="3"/>
+    <rect x="-70" y="-98" width="140" height="16" rx="5" fill="#3fb27f"/>
+    <rect x="-11" y="-130" width="22" height="30" rx="3" fill="#3fb27f"/><rect x="-15" y="-126" width="30" height="22" rx="3" fill="#3fb27f"/><rect x="-4" y="-124" width="8" height="18" fill="#fff"/><rect x="-9" y="-119" width="18" height="8" fill="#fff"/>
+    <rect x="-50" y="-66" width="40" height="32" rx="4" fill="#bfe6ff" stroke="#fff" stroke-width="3"/><text x="-30" y="-40" font-size="22" text-anchor="middle">🐾</text>
+    <rect x="12" y="-50" width="32" height="50" rx="4" fill="#7a4a30"/>`, 0.95],
+  memory: [`<rect x="-66" y="-82" width="132" height="82" rx="6" fill="#fff4d6"/>
+    <rect x="-72" y="-94" width="144" height="16" rx="5" fill="#8a6ad8"/>
+    ${[[-40, '#e86fa8', '🐱'], [-14, '#6a8fe0', '?'], [12, '#3fb27f', '?'], [38, '#f0a030', '🐱']].map(([x, c, t], i) => `<g transform="translate(${x} -126) rotate(${(i - 1.5) * 8})"><rect x="-11" y="-15" width="22" height="30" rx="4" fill="${c}" stroke="#fff" stroke-width="2"/><text y="6" font-size="14" text-anchor="middle" fill="#fff">${t}</text></g>`).join('')}
+    <rect x="-50" y="-64" width="40" height="30" rx="4" fill="#bfe6ff" stroke="#fff" stroke-width="3"/><text x="-30" y="-41" font-size="20" text-anchor="middle">🎲</text>
+    <rect x="14" y="-50" width="32" height="50" rx="4" fill="#7a4a30"/>`, 0.95],
+  fractions: [`<rect x="-66" y="-80" width="132" height="80" rx="6" fill="#fff1e0"/>
+    ${[-66, -44, -22, 0, 22, 44].map((x, i) => `<path d="M${x} -94 h22 v14 a11 8 0 0 1 -22 0z" fill="${i % 2 ? '#fff' : '#e05252'}"/>`).join('')}
+    <g transform="translate(0 -122)"><circle r="22" fill="#e0a050"/><circle r="18" fill="#f7d27a"/><path d="M0 0 L0 -18 M0 0 L18 0 M0 0 L0 18 M0 0 L-18 0" stroke="#a8702a" stroke-width="2.5"/><circle cx="8" cy="-8" r="4" fill="#e8708a"/><circle cx="-8" cy="8" r="4" fill="#e8708a"/></g>
+    <rect x="-50" y="-62" width="40" height="30" rx="4" fill="#bfe6ff" stroke="#fff" stroke-width="3"/>
+    <rect x="12" y="-50" width="32" height="50" rx="4" fill="#7a4a30"/>`, 0.95],
   refuge: [`<rect x="-66" y="-84" width="132" height="84" rx="6" fill="#c98b4f"/>
     ${[-70, -56, -42, -28, -14].map((y) => `<line x1="-66" y1="${y}" x2="66" y2="${y}" stroke="#a8703c" stroke-width="2"/>`).join('')}
     <path d="M-76 -80 L0 -122 L76 -80Z" fill="#5cb85c"/>

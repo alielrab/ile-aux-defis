@@ -16,12 +16,10 @@
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
-| Fractions en pizza | Partager des pizzas en parts égales : moitié, tiers, quart… |
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
-| Vétérinaire | Soigner les animaux : reconnaître les symptômes, choisir le bon soin |
 | Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
 | Centre de tri | Trier les déchets dans la bonne poubelle (verre, papier, PET, compost…) |
-| Jeux de réflexion | Memory, tangram, labyrinthes |
+| Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
 ## Nouvelles îles (à construire plus tard)
 - **L'île de la sécurité** (créée, avec les numéros d'urgence) : il reste le code de la route du piéton et du cycliste (traverser, panneaux, casque, être vu la nuit).

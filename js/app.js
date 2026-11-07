@@ -27,6 +27,9 @@ import * as atlas from './jeux/atlas.js';
 import * as dinos from './jeux/dinos.js';
 import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
+import * as veto from './jeux/veto.js';
+import * as fractions from './jeux/fractions.js';
+import * as memory from './jeux/memory.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter, attendreSilence, choisirGenre } from './voix.js';
 import { accorder } from './genre.js';
@@ -225,6 +228,8 @@ function entrerLieu(cible) {
   if (id === 'musee') return ouvrirMusee();
   if (id === 'aeroport') return ouvrirPasseport();
   if (id === 'urgences') return ouvrirUrgences();
+  if (id === 'veto') return ouvrirVeto();
+  if (id === 'memory') return ouvrirMemory();
   if (id === 'cuisine') return ouvrirRestaurant();
   lancerJeu(id);
 }
@@ -336,6 +341,9 @@ function carteArticle(a) {
     const outils = document.createElement('div');
     outils.className = 'outils-animal';
     outils.append(gros('✏️ Prénom', () => demanderPrenom(a), 'petit'));
+    const soigner = gros('🩺', () => ouvrirVeto(a.id), 'petit');
+    soigner.setAttribute('aria-label', `Soigner ${joueuse.noms?.[a.id] ?? a.nom.toLowerCase()} chez le vétérinaire`);
+    outils.append(soigner);
     const habits = Object.keys(HABITS_ANIMAUX).some((k) => joueuse.objets.includes(`habit-animal:${k}`));
     if (habits && a.cle !== 'poisson') {
       const habiller = gros('👕', () => {
@@ -412,7 +420,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -424,6 +432,8 @@ const PERSONNAGES = {
   cuisine: { peau: 'tres-claire', yeux: 'bleus', coiffure: 'courts', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
   marche: { peau: 'brune', yeux: 'marron', coiffure: 'chignon', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
   emotions: { peau: 'doree', yeux: 'verts', coiffure: 'longs', cheveux: 'roux', tenue: 'pull-violet', accessoires: [] },
+  veto: { peau: 'claire', yeux: 'marron', coiffure: 'queue', cheveux: 'chatain', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
+  fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
 const majuscule = (t) => t[0].toUpperCase() + t.slice(1);
@@ -438,7 +448,7 @@ function lancerJeu(nom) {
     ? { questions: recits.questions(recitOuvert, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les questions de l'histoire, dans l'ordre
     : nom === 'passeport'
     ? { questions: passeport.questions(paysCourant, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les 3 questions du pays
-    : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas }, Math.random, vus);
+    : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
   const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee' }[nom] ?? nom;
@@ -488,6 +498,12 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
+  } else if (jeu === 'veto') {
+    const dessin = apercu(article(q.patient ?? `animal:${q.espece}`));
+    $('#aide').innerHTML = `<div class="patient-veto" aria-hidden="true">${dessin}${q.symptome ? `<span class="symptome">${q.symptome}</span>` : ''}</div>`;
+    boutonsReponses(q.choix, String, true);
+  } else if (jeu === 'fractions') {
+    afficherFractions(q);
   } else if (jeu === 'emotions') {
     $('#aide').innerHTML = q.mode === 'visage' ? emotions.visage(q.reponse, q.peau) : '';
     boutonsReponses(q.choix, emotions.nom, true);
@@ -631,6 +647,41 @@ function afficherMarche(q) {
   maj();
 }
 
+// La pizzeria : garnir des parts (on les touche, puis « C'est prêt »), choisir un dessin, ou une fraction
+function afficherFractions(q) {
+  $('#aide').setAttribute('aria-hidden', 'false');
+  if (q.mode === 'garnir') {
+    const garnies = new Set();
+    const pret = el('button', { className: 'reponse valider large', textContent: 'C’est prêt ✓' });
+    const dessiner = () => {
+      $('#aide').innerHTML = `<div class="pizza-cadre">${fractions.pizza(q.d, [...garnies], { cliquable: true, gateau: q.gateau })}</div><p class="total">${garnies.size} part${garnies.size > 1 ? 's' : ''} sur ${q.d}</p>`;
+      for (const g of $('#aide').querySelectorAll('.part')) {
+        const toucher = () => { if (pret.disabled) return; const k = Number(g.dataset.part); garnies.has(k) ? garnies.delete(k) : garnies.add(k); dessiner(); };
+        g.addEventListener('click', toucher);
+        g.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toucher(); } });
+      }
+    };
+    dessiner();
+    pret.addEventListener('click', () => choisir(garnies.size));
+    $('#reponses').style.gridTemplateColumns = '1fr';
+    return $('#reponses').replaceChildren(pret);
+  }
+  if (q.mode === 'dessins') {
+    $('#aide').innerHTML = '';
+    $('#reponses').style.gridTemplateColumns = `repeat(${q.choix.length}, minmax(0, 1fr))`;
+    return $('#reponses').replaceChildren(...q.choix.map((v, i) => {
+      const b = el('button', { className: 'reponse dessin-pizza' });
+      b.innerHTML = q.dessins[v];
+      b.dataset.v = v;
+      b.setAttribute('aria-label', `Dessin ${i + 1}`);
+      b.addEventListener('click', () => choisir(v));
+      return b;
+    }));
+  }
+  $('#aide').innerHTML = q.dessin ? `<div class="pizza-cadre">${q.dessin}</div>` : '';
+  boutonsReponses(q.choix, q.mode === 'fraction' ? (f) => fractions.libelle(f, joueuse.age) : String, q.mode === 'fraction');
+}
+
 // L'hôpital : on touche une partie du corps du patient. À côté du patient, rien ne se passe.
 function toucherPatient(ev) {
   const q = questionEnCours(partie);
@@ -717,6 +768,10 @@ function finirPartie() {
     $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon !` : ''}</p><button class="gros secondaire">📘 Mon passeport</button>`;
     $('#fin-extra button').addEventListener('click', () => { afficherPasseport('livret'); montrer('passeport'); });
   }
+  if (jeu === 'veto') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">🩺 Retour à la clinique</button>';
+    $('#fin-extra button').addEventListener('click', () => ouvrirVeto());
+  }
   if (jeu === 'dinos' || jeu === 'urgences') {
     $('#fin-extra').innerHTML = `<button class="gros secondaire">${jeu === 'dinos' ? '🦴 Retour au musée' : '📞 Les numéros d’urgence'}</button>`;
     $('#fin-extra button').addEventListener('click', () => { if (jeu === 'dinos') { afficherMusee(); montrer('musee'); } else ouvrirUrgences(); });
@@ -747,6 +802,8 @@ function aDire(q) {
   const ou = (l) => (l.length > 1 ? `${l.slice(0, -1).join(', ')}, ou ${l.at(-1)} ?` : l[0]);
   if (jeu === 'emotions') return `${q.consigne} ${ou(q.choix.map(emotions.nom))}`;
   if (jeu === 'urgences') return `${q.consigne} ${ou(q.choix.map(urgences.libelle))}`;
+  if (jeu === 'veto') return veto.aDire(q);
+  if (jeu === 'fractions') return fractions.aDire(q);
   if (jeu === 'passeport' && q.type === 'drapeau') return q.consigne; // les drapeaux ne se lisent pas : ce serait donner la réponse
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
@@ -1470,6 +1527,131 @@ function afficherFicheDino(d) {
       el('p', { textContent: texte }), el('p', { className: 'savais', textContent: `Le savais-tu ? ${d.savais}` })),
     el('div', { className: 'actions-atelier' }, gros('🦴 Un autre dinosaure', afficherMusee, 'gros secondaire'), gros('⭐ Le quiz des dinosaures', () => lancerJeu('dinos'))));
   parler(`Bravo, le squelette est complet !${nouveau ? ` Tu gagnes ${dinos.ETOILES_SQUELETTE} étoiles.` : ''} ${texte} Le savais-tu ? ${d.savais}`, { ton: 1.1 });
+}
+
+// Le vétérinaire : soigner ses animaux (ou ceux de la clinique) et lire les fiches des animaux
+let animalVeto = null; // un seul animal à soigner (depuis le refuge ou la clinique), sinon tous
+function ouvrirVeto(seul = null) {
+  animalVeto = seul;
+  taire();
+  etoilesJoueuse();
+  if (seul) return lancerJeu('veto');
+  afficherVeto();
+  montrer('veto');
+  const miens = veto.patients(joueuse).filter(([id]) => joueuse.objets.includes(id));
+  parler(miens.length ? 'Bienvenue chez le vétérinaire ! Tes animaux ont besoin de toi. Choisis qui soigner, ou lis les fiches des animaux.'
+    : 'Bienvenue chez le vétérinaire ! Les animaux de la clinique ont besoin de toi. Tu peux aussi lire les fiches des animaux.', { ton: 1.1 });
+}
+function afficherVeto() {
+  const v = $('#veto-vue');
+  const miens = veto.patients(joueuse).filter(([id]) => joueuse.objets.includes(id));
+  const vignette = (id, texte, action) => {
+    const b = el('button', { className: 'carte-animal-veto' });
+    b.innerHTML = `${apercu(article(id))}<span>${echapperHtml(texte)}</span>`;
+    b.addEventListener('click', action);
+    return b;
+  };
+  v.replaceChildren(
+    el('p', { className: 'carte presentation', textContent: miens.length ? 'Tes animaux du refuge viennent se faire soigner ici. Touche un animal pour le soigner.' : 'Pas encore d’animal ? Les animaux de la clinique t’attendent. Tu peux en adopter un au refuge, sur l’île du village.' }),
+    miens.length ? el('div', { className: 'animaux-veto' }, ...miens.map(([id, nom]) => vignette(id, `🩺 ${nom === 'ton animal' ? article(id).nom : nom}`, () => ouvrirVeto(id)))) : '',
+    gros(miens.length ? '🩺 Soigner tous mes animaux' : '🩺 Soigner les animaux de la clinique', () => lancerJeu('veto')),
+    el('h2', { textContent: '📋 Les fiches des animaux' }),
+    el('div', { className: 'animaux-veto' }, ...Object.keys(veto.FICHES).map((k) => vignette(`animal:${k}`, veto.FICHES[k].nom, () => afficherFicheVeto(k)))));
+}
+function afficherFicheVeto(k) {
+  const f = veto.FICHES[k], dessin = el('div', { className: 'patient-veto' });
+  dessin.innerHTML = apercu(article(`animal:${k}`));
+  const texte = `${f.nom}. ${f.besoins} Son repas : ${f.repas.toLowerCase()}. Le savais-tu ? ${f.savais}`;
+  $('#veto-vue').replaceChildren(gros('← La clinique', afficherVeto, 'gros secondaire retour-atelier'), el('h2', { textContent: f.nom }), dessin,
+    el('div', { className: 'carte carte-croyance' }, el('div', { className: 'tete-carte' }, el('h3', { textContent: 'Ses besoins' }), gros('🔊', () => parler(texte), 'rond')),
+      el('p', { textContent: f.besoins }), el('p', { textContent: `🍽️ Son repas : ${f.repas.toLowerCase()}.` }), el('p', { className: 'savais', textContent: `Le savais-tu ? ${f.savais}` })));
+  parler(texte);
+}
+const echapperHtml = (t) => String(t).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+// Le Memory : choisir un thème, seul ou à deux (avec un autre enfant de la famille, ou un invité), puis retrouver les paires
+let memo = null, joueursMemory = null;
+function ouvrirMemory() {
+  taire();
+  etoilesJoueuse();
+  joueursMemory = [joueuse];
+  afficherChoixMemory();
+  montrer('memory');
+  parler('Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.', { ton: 1.1 });
+}
+function afficherChoixMemory() {
+  const autres = etat.profils.filter((p) => p.id !== joueuse.id);
+  const invite = { id: null, prenom: 'Joueur 2', age: joueuse.age } // pas d'étoiles pour un invité;
+  const avec = joueursMemory[1];
+  $('#memory-vue').replaceChildren(
+    el('h2', { textContent: 'Qui joue ?' }),
+    el('div', { className: 'phrases' },
+      gros(acc('🙂 {Seul|Seule}'), () => { joueursMemory = [joueuse]; afficherChoixMemory(); }, `petit${avec ? '' : ' choisi'}`),
+      ...[...autres, invite].map((p) => gros(`👫 À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'}`, () => { joueursMemory = [joueuse, p]; afficherChoixMemory(); parler(`À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'} !`); }, `petit${avec && avec.id === p.id ? ' choisi' : ''}`))),
+    el('h2', { textContent: 'Quelles cartes ?' }),
+    el('div', { className: 'themes-memory' }, ...Object.entries(memory.THEMES).map(([k, t]) => gros(`${t.image} ${t.nom}`, () => commencerMemory(k)))),
+    el('p', { className: 'carte presentation', textContent: `${memory.nbPaires(Math.min(...joueursMemory.map((j) => j.age)))} paires à trouver. Chaque paire rapporte des étoiles${avec ? ' à celui ou celle qui la trouve' : ''} !` }));
+}
+function commencerMemory(theme) {
+  clearTimeout(attenteMemory);
+  attenteMemory = null;
+  memo = memory.nouvellePartie(theme, joueursMemory.map((j) => ({ id: j.id, prenom: j.prenom, age: j.age })));
+  afficherMemory();
+  parler(memo.joueurs.length > 1 ? `C'est parti ! ${memo.joueurs[0].prenom} commence. Retourne deux cartes pour trouver une paire.` : 'C’est parti ! Retourne deux cartes pour trouver une paire.', { ton: 1.1 });
+}
+function afficherMemory(message = '') {
+  const p = memo, cartes = memory.THEMES[p.theme].cartes(), infos = Object.fromEntries(cartes.map((c) => [c.cle, c]));
+  const colonnes = p.cartes.length <= 12 ? 4 : 5;
+  const grille = el('div', { className: 'grille-memory' });
+  grille.style.gridTemplateColumns = `repeat(${colonnes}, minmax(0, 1fr))`;
+  p.cartes.forEach((c, i) => {
+    const visible = c.trouvee !== null || p.ouvertes.includes(i);
+    const b = el('button', { className: `carte-memory${visible ? ' retournee' : ''}${c.trouvee !== null ? ` trouvee joueur${c.trouvee}` : ''}` });
+    b.innerHTML = visible ? `<span class="face">${infos[c.cle].dessin}<small>${echapperHtml(infos[c.cle].nom)}</small></span>` : '<span class="dos" aria-hidden="true">🏝️</span>';
+    b.setAttribute('aria-label', visible ? infos[c.cle].nom : `Carte ${i + 1}, cachée`);
+    b.disabled = c.trouvee !== null;
+    b.addEventListener('click', () => retournerMemory(i));
+    grille.append(b);
+  });
+  const scores = p.joueurs.length > 1
+    ? el('div', { className: 'scores-memory' }, ...p.joueurs.map((j, k) => el('span', { className: `score joueur${k}${p.tour === k ? ' a-toi' : ''}`, textContent: `${p.tour === k ? '👉 ' : ''}${j.prenom} : ${p.paires[k]}` })))
+    : el('p', { className: 'scores-memory', textContent: `Paires : ${p.paires[0]} / ${p.cartes.length / 2} · Essais : ${p.coups}` });
+  $('#memory-vue').replaceChildren(gros('← Changer de jeu', afficherChoixMemory, 'gros secondaire retour-atelier'), scores, grille, el('p', { className: 'savais message-memory', textContent: message }));
+}
+let attenteMemory = null;
+function retournerMemory(i) {
+  if (attenteMemory) return; // deux cartes ratées encore visibles
+  const p = memo, r = memory.retourner(p, i);
+  if (r === 'non') return;
+  const c = memory.carte(p.theme, p.cartes[i].cle);
+  if (r === 'premiere') { afficherMemory(); return parler(c.nom); }
+  if (r === 'ratee') {
+    afficherMemory();
+    bip(false);
+    const suivant = p.joueurs[(p.tour + 1) % p.joueurs.length];
+    parler(p.joueurs.length > 1 ? `${c.nom}. Pas pareil ! À toi, ${suivant.prenom}.` : `${c.nom}. Pas pareil ! Essaie encore.`);
+    attenteMemory = setTimeout(() => { attenteMemory = null; if (memo !== p) return; memory.cacher(p); afficherMemory(); }, 1600);
+    return;
+  }
+  bip(true);
+  const qui = p.joueurs.length > 1 ? ` pour ${p.joueurs[p.tour].prenom}` : '';
+  if (r === 'paire') {
+    afficherMemory(`Le savais-tu ? ${c.savais}`);
+    return parler(`Une paire${qui} : ${c.nom} ! Le savais-tu ? ${c.savais}${p.joueurs.length > 1 ? ' Tu rejoues !' : ''}`, { ton: 1.1 });
+  }
+  finirMemory(c);
+}
+function finirMemory(derniere) {
+  const p = memo, gains = memory.etoiles(p), g = memory.gagnant(p);
+  p.joueurs.forEach((j, k) => { const profil = etat.profils.find((x) => x.id === j.id); if (profil) profil.etoiles += gains[k]; });
+  enregistrer();
+  etoilesJoueuse();
+  const titre = p.joueurs.length === 1 ? `Bravo ${joueuse.prenom} : toutes les paires en ${p.coups} essais !` : g === null ? 'Égalité ! Bravo à vous deux !' : `${p.joueurs[g].prenom} gagne ! Bravo à vous deux !`;
+  const detail = p.joueurs.map((j, k) => `${j.prenom} : ${p.paires[k]} paire${p.paires[k] > 1 ? 's' : ''}${j.id ? `, +${formatEtoiles(gains[k])} ⭐` : ''}`).join(' · ');
+  $('#memory-vue').replaceChildren(el('h2', { textContent: titre }), el('p', { className: 'carte presentation', textContent: detail }),
+    el('p', { className: 'savais', textContent: `Dernière paire : ${derniere.nom}. Le savais-tu ? ${derniere.savais}` }),
+    el('div', { className: 'actions-atelier' }, gros('🔁 Rejouer', () => commencerMemory(p.theme)), gros('🃏 Autres cartes', afficherChoixMemory, 'gros secondaire')));
+  parler(`${titre} ${detail.replaceAll('⭐', 'étoiles').replaceAll('·', '.')}. Dernière paire : ${derniere.nom}. Le savais-tu ? ${derniere.savais}`, { ton: 1.15 });
 }
 
 // Le passeport du monde : la carte et l'avion, la fiche d'un pays, le livret des tampons

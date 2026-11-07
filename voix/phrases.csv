@@ -3989,6 +3989,577 @@ urgences.quiz.13.reponse2;Numéros d'urgence (à faire relire);Je raccroche et j
 urgences.quiz.13.reponse3;Numéros d'urgence (à faire relire);Je fais une blague
 urgences.quiz.13.reponse4;Numéros d'urgence (à faire relire);Je ne dis rien
 urgences.quiz.13.savais;Numéros d'urgence (à faire relire);Le savais-tu ? Si tu raccroches, les secours vont rappeler pour vérifier que tout va bien.
+veto.chien.nom;Vétérinaire;Le chien
+veto.chien.besoins;Vétérinaire;Le chien a besoin de croquettes pour chien, d’eau fraîche tous les jours, et surtout de promenades : il aime courir et jouer.
+veto.chien.repas;Vétérinaire;Des croquettes pour chien
+veto.chien.savais;Vétérinaire;Le savais-tu ? Le chocolat est dangereux pour les chiens : il ne faut jamais leur en donner.
+veto.chat.nom;Vétérinaire;Le chat
+veto.chat.besoins;Vétérinaire;Le chat a besoin de croquettes pour chat, d’eau fraîche, d’un coin calme pour dormir et d’un griffoir pour ses griffes.
+veto.chat.repas;Vétérinaire;Des croquettes pour chat
+veto.chat.savais;Vétérinaire;Le savais-tu ? Un chat dort environ 15 heures par jour !
+veto.lapin.nom;Vétérinaire;Le lapin
+veto.lapin.besoins;Vétérinaire;Le lapin mange surtout du foin, et aussi des légumes. Il a besoin de place pour sauter et de compagnie.
+veto.lapin.repas;Vétérinaire;Du foin et des légumes
+veto.lapin.savais;Vétérinaire;Le savais-tu ? Les dents du lapin poussent toute sa vie : ronger du foin les use.
+veto.hamster.nom;Vétérinaire;Le hamster
+veto.hamster.besoins;Vétérinaire;Le hamster mange des graines et un peu de légumes. Il dort le jour et court la nuit : il aime sa roue !
+veto.hamster.repas;Vétérinaire;Des graines
+veto.hamster.savais;Vétérinaire;Le savais-tu ? Le hamster transporte sa nourriture dans ses joues, comme dans des poches.
+veto.tortue.nom;Vétérinaire;La tortue
+veto.tortue.besoins;Vétérinaire;La tortue de terre mange des feuilles, de la salade et des légumes. Elle a besoin de soleil pour se réchauffer.
+veto.tortue.repas;Vétérinaire;De la salade et des légumes
+veto.tortue.savais;Vétérinaire;Le savais-tu ? En hiver, la tortue de terre hiberne : elle dort pendant tout l’hiver.
+veto.perroquet.besoins;Vétérinaire;Le perroquet mange des graines et des fruits. Il a besoin de voler un peu, de jouets et qu’on lui parle.
+veto.perroquet.repas;Vétérinaire;Des graines et des fruits
+veto.perroquet.savais;Vétérinaire;Le savais-tu ? Le perroquet apprend des mots en imitant ce qu’il entend.
+veto.poisson.nom;Vétérinaire;Le poisson rouge
+veto.poisson.besoins;Vétérinaire;Le poisson rouge mange des paillettes, un tout petit peu à la fois. Son eau doit être changée régulièrement.
+veto.poisson.repas;Vétérinaire;Des paillettes pour poisson
+veto.poisson.savais;Vétérinaire;Le savais-tu ? Un poisson rouge peut vivre plus de 10 ans s’il est bien soigné !
+veto.phrase1;Vétérinaire;Pompon a une petite coupure sur le dos. Que fais-tu ?
+veto.phrase2;Vétérinaire;Mettre un nœud dessus
+veto.phrase3;Vétérinaire;Lui donner un bonbon
+veto.phrase4;Vétérinaire;Nettoyer et mettre un pansement
+veto.phrase5;Vétérinaire;La bonne réponse : nettoyer et mettre un pansement.
+veto.phrase6;Vétérinaire;Le savais-tu ? On nettoie d’abord la coupure, pour enlever les microbes.
+pizzeria.phrase7;Pizzeria (fractions);Mets du jambon sur trois quarts de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase8;Pizzeria (fractions);Il fallait garnir 3 parts sur 4.
+pizzeria.phrase9;Pizzeria (fractions);Le savais-tu ? Trois quarts : on coupe en 4 parts égales, et on en prend 3.
+veto.phrase10;Vétérinaire;Pourquoi le lapin doit-il ronger du foin ?
+veto.phrase11;Vétérinaire;Pour avoir plus chaud
+veto.phrase12;Vétérinaire;Pour user ses dents, qui poussent tout le temps
+veto.phrase13;Vétérinaire;Pour construire un nid
+veto.phrase14;Vétérinaire;Pour se faire les griffes
+veto.phrase15;Vétérinaire;La bonne réponse : Pour user ses dents, qui poussent tout le temps.
+pizzeria.phrase17;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un quart, ou un sixième, ou un huitième ?
+pizzeria.phrase18;Pizzeria (fractions);Chaque enfant a un quart.
+pizzeria.phrase19;Pizzeria (fractions);Le savais-tu ? Plus on partage entre beaucoup d’enfants, plus les parts sont petites.
+veto.phrase20;Vétérinaire;Coco a faim. Que lui donnes-tu ?
+veto.phrase23;Vétérinaire;Des bonbons
+veto.phrase24;Vétérinaire;La bonne réponse : des graines et des fruits.
+pizzeria.phrase26;Pizzeria (fractions);La pizza est coupée en parts égales. Combien de parts y a-t-il ?
+pizzeria.phrase27;Pizzeria (fractions);Il y a 8 parts.
+pizzeria.phrase28;Pizzeria (fractions);Le savais-tu ? Si on la partage entre 8 enfants, chacun a une part.
+veto.phrase29;Vétérinaire;Pourquoi faut-il promener son chien tous les jours ?
+veto.phrase30;Vétérinaire;Pour qu’il apprenne à lire
+veto.phrase31;Vétérinaire;Pour qu’il se dépense et fasse ses besoins
+veto.phrase32;Vétérinaire;Pour qu’il dorme moins
+veto.phrase34;Vétérinaire;La bonne réponse : Pour qu’il se dépense et fasse ses besoins.
+pizzeria.phrase36;Pizzeria (fractions);Mets de la crème sur cinq huitièmes du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase37;Pizzeria (fractions);Il fallait garnir 5 parts sur 8.
+pizzeria.phrase38;Pizzeria (fractions);Le savais-tu ? Cinq huitièmes : on coupe en 8 parts égales, et on en prend 5.
+veto.phrase39;Vétérinaire;Mistigri a une petite coupure sur le dos. Que fais-tu ?
+veto.phrase40;Vétérinaire;Le laisser au soleil
+pizzeria.phrase41;Pizzeria (fractions);Mets de la crème sur la moitié du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase42;Pizzeria (fractions);Il fallait garnir 2 parts sur 4.
+pizzeria.phrase43;Pizzeria (fractions);Le savais-tu ? La moitié, c’est 2 parts sur 4 : autant de parts garnies que de parts sans rien.
+veto.phrase44;Vétérinaire;Filou a très soif. Que lui donnes-tu ?
+veto.phrase46;Vétérinaire;De l’eau fraîche
+veto.phrase49;Vétérinaire;La bonne réponse : de l’eau fraîche.
+veto.phrase50;Vétérinaire;Le savais-tu ? Les chats et les chiens adultes digèrent mal le lait : l’eau fraîche est la meilleure boisson.
+pizzeria.phrase51;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six huitièmes, ou deux huitièmes, ou huit sixièmes, ou six demis ?
+pizzeria.phrase52;Pizzeria (fractions);6 parts garnies sur 8 : six huitièmes.
+pizzeria.phrase53;Pizzeria (fractions);"Le savais-tu ? Le nombre du bas dit en combien de parts on a coupé ; le nombre du haut, combien on en prend."
+veto.phrase54;Vétérinaire;Filou a faim. Que lui donnes-tu ?
+veto.phrase57;Vétérinaire;La bonne réponse : des croquettes pour chien.
+pizzeria.phrase58;Pizzeria (fractions);Le gâteau est coupé en parts égales. Combien de parts y a-t-il ?
+pizzeria.phrase59;Pizzeria (fractions);Il y a 2 parts.
+pizzeria.phrase60;Pizzeria (fractions);Le savais-tu ? Si on la partage entre 2 enfants, chacun a une part.
+veto.phrase61;Vétérinaire;Noisette boite : sa patte est blessée. Que fais-tu ?
+veto.phrase62;Vétérinaire;Lui donner un bain
+veto.phrase63;Vétérinaire;Le faire courir
+veto.phrase64;Vétérinaire;Bander la patte
+veto.phrase65;Vétérinaire;Lui donner du chocolat
+veto.phrase66;Vétérinaire;La bonne réponse : bander la patte.
+veto.phrase67;Vétérinaire;Le savais-tu ? Un bandage tient la patte au chaud et la protège pendant qu’elle guérit.
+pizzeria.phrase68;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un quart, ou quatre tiers, ou trois sur un, ou trois quarts ?
+pizzeria.phrase69;Pizzeria (fractions);3 parts garnies sur 4 : trois quarts.
+veto.phrase70;Vétérinaire;Filou est tout chaud et très fatigué. Que fais-tu ?
+veto.phrase71;Vétérinaire;Jouer à la balle
+veto.phrase72;Vétérinaire;Lui donner une glace
+veto.phrase73;Vétérinaire;Prendre sa température
+veto.phrase74;Vétérinaire;La bonne réponse : prendre sa température.
+veto.phrase75;Vétérinaire;Le savais-tu ? Chez le chien et le chat, la température normale est d’environ 38,5 °C : un peu plus que chez nous.
+pizzeria.phrase76;Pizzeria (fractions);Il fallait garnir 1 part sur 2.
+pizzeria.phrase77;Pizzeria (fractions);Le savais-tu ? La moitié, c’est 1 part sur 2 : autant de parts garnies que de parts sans rien.
+veto.phrase78;Vétérinaire;Que faut-il faire pour l’eau du poisson rouge ?
+veto.phrase79;Vétérinaire;La changer régulièrement
+veto.phrase80;Vétérinaire;Ne jamais la changer
+veto.phrase81;Vétérinaire;La faire bouillir
+veto.phrase82;Vétérinaire;Y mettre du sirop
+veto.phrase83;Vétérinaire;La bonne réponse : La changer régulièrement.
+pizzeria.phrase85;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou trois sur un, ou un quart, ou quatre tiers ?
+veto.phrase86;Vétérinaire;Mistigri est tout chaud et très fatigué. Que fais-tu ?
+veto.phrase87;Vétérinaire;Lui chanter une chanson très fort
+pizzeria.phrase88;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un demi, ou un quart ?
+pizzeria.phrase89;Pizzeria (fractions);Chaque enfant a un demi.
+pizzeria.phrase90;Pizzeria (fractions);Le savais-tu ? Un demi, c’est la moitié.
+veto.phrase91;Vétérinaire;Caramel a faim. Que lui donnes-tu ?
+veto.phrase93;Vétérinaire;La bonne réponse : de la salade et des légumes.
+pizzeria.phrase95;Pizzeria (fractions);Mets de la crème sur cinq sixièmes du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase96;Pizzeria (fractions);Il fallait garnir 5 parts sur 6.
+pizzeria.phrase97;Pizzeria (fractions);Le savais-tu ? Cinq sixièmes : on coupe en 6 parts égales, et on en prend 5.
+veto.phrase98;Vétérinaire;Noisette a très soif. Que lui donnes-tu ?
+pizzeria.phrase99;Pizzeria (fractions);Quel dessin montre la pizza coupée en deux parts égales ?
+pizzeria.phrase100;Pizzeria (fractions);Des parts égales ont toutes la même taille.
+pizzeria.phrase101;Pizzeria (fractions);Le savais-tu ? Pour partager équitablement, toutes les parts doivent avoir la même taille.
+pizzeria.phrase102;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? cinq huitièmes, ou trois huitièmes, ou cinq tiers, ou huit cinquièmes ?
+pizzeria.phrase103;Pizzeria (fractions);5 parts garnies sur 8 : cinq huitièmes.
+pizzeria.phrase104;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un quart ?
+veto.phrase105;Vétérinaire;Quand le hamster est-il le plus actif ?
+veto.phrase106;Vétérinaire;Le matin
+veto.phrase110;Vétérinaire;La bonne réponse : La nuit.
+pizzeria.phrase112;Pizzeria (fractions);Mets de la crème sur un tiers du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase113;Pizzeria (fractions);Il fallait garnir 1 part sur 3.
+pizzeria.phrase114;Pizzeria (fractions);Le savais-tu ? Un tiers : on coupe en 3 parts égales, et on en prend 1.
+pizzeria.phrase115;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un tiers ou un quart ? un tiers, ou un quart ?
+pizzeria.phrase116;Pizzeria (fractions);Un tiers est plus grand.
+pizzeria.phrase117;Pizzeria (fractions);Le savais-tu ? Avec un même nombre de parts prises, plus on coupe en beaucoup de parts, plus chaque part est petite : un quart est plus petit qu’un demi.
+veto.phrase118;Vétérinaire;Pompon boite : sa patte est blessée. Que fais-tu ?
+pizzeria.phrase119;Pizzeria (fractions);Quel dessin montre le gâteau coupé en quatre parts égales ?
+veto.phrase120;Vétérinaire;Quel aliment est dangereux pour un chien ?
+veto.phrase122;Vétérinaire;Les croquettes pour chien
+veto.phrase123;Vétérinaire;Un os à mâcher
+veto.phrase124;Vétérinaire;L’eau fraîche
+veto.phrase125;Vétérinaire;La bonne réponse : Le chocolat.
+pizzeria.phrase126;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un demi, ou un tiers ?
+pizzeria.phrase127;Pizzeria (fractions);Chaque enfant a un tiers.
+pizzeria.phrase128;Pizzeria (fractions);Mets du jambon sur la moitié de la pizza. Touche les parts, puis touche « C’est prêt ».
+veto.phrase129;Vétérinaire;Pompon a très soif. Que lui donnes-tu ?
+pizzeria.phrase130;Pizzeria (fractions);Qu’est-ce qui est le plus grand : trois huitièmes ou un demi ? trois huitièmes, ou un demi ?
+pizzeria.phrase131;Pizzeria (fractions);Un demi est plus grand.
+veto.phrase132;Vétérinaire;Pompon a faim. Que lui donnes-tu ?
+veto.phrase134;Vétérinaire;La bonne réponse : du foin et des légumes.
+pizzeria.phrase135;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un huitième, ou deux sur un ?
+pizzeria.phrase136;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou deux tiers, ou trois demis, ou deux sur un ?
+pizzeria.phrase137;Pizzeria (fractions);2 parts garnies sur 3 : deux tiers.
+pizzeria.phrase138;Pizzeria (fractions);Mets du jambon sur un quart de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase139;Pizzeria (fractions);Il fallait garnir 1 part sur 4.
+pizzeria.phrase140;Pizzeria (fractions);Le savais-tu ? Un quart : on coupe en 4 parts égales, et on en prend 1.
+pizzeria.phrase141;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un tiers, ou un demi, ou un quart ?
+pizzeria.phrase142;Pizzeria (fractions);Il y a 4 parts.
+pizzeria.phrase143;Pizzeria (fractions);Le savais-tu ? Si on la partage entre 4 enfants, chacun a une part.
+veto.phrase144;Vétérinaire;Noisette a une petite coupure sur le dos. Que fais-tu ?
+pizzeria.phrase145;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou trois quarts, ou deux quarts, ou deux tiers ?
+pizzeria.phrase146;Pizzeria (fractions);Deux quarts, c’est la moitié.
+pizzeria.phrase147;Pizzeria (fractions);Le savais-tu ? Deux quarts, trois sixièmes, quatre huitièmes : c’est toujours la moitié !
+veto.phrase148;Vétérinaire;Filou boite : sa patte est blessée. Que fais-tu ?
+pizzeria.phrase149;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un demi, ou un quart ?
+veto.phrase150;Vétérinaire;Noisette a faim. Que lui donnes-tu ?
+veto.phrase151;Vétérinaire;La bonne réponse : des graines.
+pizzeria.phrase152;Pizzeria (fractions);Il y a 3 parts.
+pizzeria.phrase153;Pizzeria (fractions);Le savais-tu ? Si on la partage entre 3 enfants, chacun a une part.
+pizzeria.phrase154;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un huitième, ou sept sur un, ou sept huitièmes, ou huit septièmes ?
+pizzeria.phrase155;Pizzeria (fractions);7 parts garnies sur 8 : sept huitièmes.
+veto.phrase156;Vétérinaire;Mistigri a très soif. Que lui donnes-tu ?
+veto.phrase157;Vétérinaire;Du chocolat
+pizzeria.phrase159;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux tiers, ou trois quarts, ou deux quarts, ou un tiers ?
+veto.phrase160;Vétérinaire;Filou a une petite coupure sur le dos. Que fais-tu ?
+pizzeria.phrase161;Pizzeria (fractions);Mets de la crème sur deux tiers du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase162;Pizzeria (fractions);Il fallait garnir 2 parts sur 3.
+pizzeria.phrase163;Pizzeria (fractions);Le savais-tu ? Deux tiers : on coupe en 3 parts égales, et on en prend 2.
+veto.phrase164;Vétérinaire;Mistigri a faim. Que lui donnes-tu ?
+veto.phrase165;Vétérinaire;La bonne réponse : des croquettes pour chat.
+pizzeria.phrase167;Pizzeria (fractions);Mets de la crème sur trois quarts du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase168;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un quart ou un demi ? un quart, ou un demi ?
+veto.phrase169;Vétérinaire;Caramel boite : sa patte est blessée. Que fais-tu ?
+pizzeria.phrase170;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un demi, ou un tiers, ou trois sur un, ou deux tiers ?
+pizzeria.phrase171;Pizzeria (fractions);1 parts garnies sur 3 : un tiers.
+pizzeria.phrase172;Pizzeria (fractions);Mets de la crème sur deux sixièmes du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase173;Pizzeria (fractions);Il fallait garnir 2 parts sur 6.
+pizzeria.phrase174;Pizzeria (fractions);Le savais-tu ? Deux sixièmes : on coupe en 6 parts égales, et on en prend 2.
+pizzeria.phrase175;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? sept huitièmes, ou un huitième, ou huit sur un, ou un septième ?
+pizzeria.phrase176;Pizzeria (fractions);1 parts garnies sur 8 : un huitième.
+veto.phrase177;Vétérinaire;Coco boite : sa patte est blessée. Que fais-tu ?
+veto.phrase178;Vétérinaire;Mistigri boite : sa patte est blessée. Que fais-tu ?
+pizzeria.phrase179;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un quart, ou un demi ?
+pizzeria.phrase180;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un quart, ou trois quarts, ou un tiers, ou quatre sur un ?
+pizzeria.phrase181;Pizzeria (fractions);1 parts garnies sur 4 : un quart.
+pizzeria.phrase182;Pizzeria (fractions);Il y a 6 parts.
+pizzeria.phrase183;Pizzeria (fractions);Le savais-tu ? Si on la partage entre 6 enfants, chacun a une part.
+veto.phrase184;Vétérinaire;Combien de temps un chat dort-il par jour ?
+veto.phrase186;Vétérinaire;Environ 15 heures
+veto.phrase187;Vétérinaire;Environ 6 heures
+veto.phrase188;Vétérinaire;Toute la journée sans se réveiller
+veto.phrase189;Vétérinaire;La bonne réponse : Environ 15 heures.
+pizzeria.phrase190;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un quart ?
+pizzeria.phrase191;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit tiers, ou trois huitièmes, ou cinq huitièmes, ou trois cinquièmes ?
+pizzeria.phrase192;Pizzeria (fractions);3 parts garnies sur 8 : trois huitièmes.
+pizzeria.phrase193;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un demi ou un quart ? un demi, ou un quart ?
+pizzeria.phrase194;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six huitièmes, ou deux sixièmes, ou deux huitièmes, ou huit demis ?
+pizzeria.phrase195;Pizzeria (fractions);2 parts garnies sur 8 : deux huitièmes.
+pizzeria.phrase196;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un quart ou un tiers ? un quart, ou un tiers ?
+pizzeria.phrase197;Pizzeria (fractions);Mets du jambon sur trois huitièmes de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase198;Pizzeria (fractions);Il fallait garnir 3 parts sur 8.
+pizzeria.phrase199;Pizzeria (fractions);Le savais-tu ? Trois huitièmes : on coupe en 8 parts égales, et on en prend 3.
+pizzeria.phrase200;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un tiers ou un demi ? un tiers, ou un demi ?
+pizzeria.phrase201;Pizzeria (fractions);Quel dessin montre la pizza coupée en quatre parts égales ?
+veto.phrase202;Vétérinaire;Pompon est tout chaud et très fatigué. Que fais-tu ?
+pizzeria.phrase203;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou un huitième ?
+pizzeria.phrase204;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six demis, ou quatre sixièmes, ou deux sixièmes, ou deux quarts ?
+pizzeria.phrase205;Pizzeria (fractions);2 parts garnies sur 6 : deux sixièmes.
+pizzeria.phrase206;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou un tiers, ou trois quarts, ou deux tiers ?
+pizzeria.phrase207;Pizzeria (fractions);Mets de la crème sur un quart du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase208;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un demi ou trois huitièmes ? un demi, ou trois huitièmes ?
+veto.phrase209;Vétérinaire;Comment un perroquet apprend-il des mots ?
+veto.phrase210;Vétérinaire;Il les sait en naissant
+veto.phrase211;Vétérinaire;En imitant ce qu’il entend
+veto.phrase212;Vétérinaire;En regardant des images
+veto.phrase213;Vétérinaire;En lisant
+veto.phrase214;Vétérinaire;La bonne réponse : En imitant ce qu’il entend.
+pizzeria.phrase215;Pizzeria (fractions);Qu’est-ce qui est le plus grand : trois quarts ou un quart ? trois quarts, ou un quart ?
+pizzeria.phrase216;Pizzeria (fractions);Trois quarts est plus grand.
+pizzeria.phrase217;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou quatre sur un, ou un quart ?
+pizzeria.phrase218;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou deux sur un, ou deux tiers, ou trois demis ?
+pizzeria.phrase219;Pizzeria (fractions);Qu’est-ce qui est le plus grand : deux tiers ou un tiers ? deux tiers, ou un tiers ?
+pizzeria.phrase220;Pizzeria (fractions);Deux tiers est plus grand.
+pizzeria.phrase221;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? sept huitièmes, ou un huitième, ou un septième, ou huit sur un ?
+pizzeria.phrase222;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un quart, ou un tiers, ou trois quarts, ou quatre sur un ?
+pizzeria.phrase223;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou deux sur un, ou un tiers ?
+pizzeria.phrase224;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq sixièmes, ou un cinquième, ou un sixième, ou six sur un ?
+pizzeria.phrase225;Pizzeria (fractions);1 parts garnies sur 6 : un sixième.
+pizzeria.phrase226;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un demi, ou deux tiers, ou trois sur un, ou un tiers ?
+pizzeria.phrase227;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sixièmes, ou quatre sixièmes, ou deux quarts, ou six demis ?
+pizzeria.phrase228;Pizzeria (fractions);Mets du jambon sur deux tiers de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase229;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un quart ?
+pizzeria.phrase230;Pizzeria (fractions);Mets du jambon sur cinq huitièmes de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase231;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou deux quarts, ou un tiers, ou deux tiers ?
+pizzeria.phrase232;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart ?
+pizzeria.phrase233;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un quart, ou un tiers ?
+pizzeria.phrase234;Pizzeria (fractions);Mets du jambon sur deux sixièmes de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase235;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit quarts, ou quatre quarts, ou quatre huitièmes, ou cinq huitièmes ?
+pizzeria.phrase236;Pizzeria (fractions);4 parts garnies sur 8 : quatre huitièmes.
+pizzeria.phrase237;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou quatre sur un, ou un quart ?
+pizzeria.phrase238;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un huitième ou un quart ? un huitième, ou un quart ?
+pizzeria.phrase239;Pizzeria (fractions);Un quart est plus grand.
+pizzeria.phrase240;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux demis, ou trois quarts, ou deux quarts, ou quatre demis ?
+pizzeria.phrase241;Pizzeria (fractions);2 parts garnies sur 4 : deux quarts.
+pizzeria.phrase242;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou deux tiers, ou trois quarts, ou deux quarts ?
+pizzeria.phrase243;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou trois sur un, ou un huitième ?
+pizzeria.phrase244;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un tiers, ou un demi, ou un huitième ?
+pizzeria.phrase245;Pizzeria (fractions);Chaque enfant a un huitième.
+pizzeria.phrase246;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou deux tiers, ou un tiers, ou trois quarts ?
+pizzeria.phrase247;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un demi ?
+pizzeria.phrase248;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six quarts, ou deux sixièmes, ou quatre demis, ou quatre sixièmes ?
+pizzeria.phrase249;Pizzeria (fractions);4 parts garnies sur 6 : quatre sixièmes.
+pizzeria.phrase250;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un quart, ou un huitième ?
+pizzeria.phrase251;Pizzeria (fractions);Mets du jambon sur cinq sixièmes de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase252;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux tiers, ou deux quarts, ou un tiers, ou trois quarts ?
+pizzeria.phrase253;Pizzeria (fractions);Quel dessin montre le gâteau coupé en deux parts égales ?
+pizzeria.phrase254;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou deux tiers, ou deux quarts, ou un tiers ?
+pizzeria.phrase255;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou un tiers, ou un huitième ?
+veto.phrase256;Vétérinaire;Que fait la tortue de terre en hiver ?
+veto.phrase257;Vétérinaire;Elle change de carapace
+veto.phrase258;Vétérinaire;Elle mange deux fois plus
+veto.phrase259;Vétérinaire;Elle hiberne : elle dort tout l’hiver
+veto.phrase260;Vétérinaire;Elle part en voyage
+veto.phrase261;Vétérinaire;La bonne réponse : Elle hiberne : elle dort tout l’hiver.
+pizzeria.phrase262;Pizzeria (fractions);Mets de la crème sur trois huitièmes du gâteau. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase263;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou deux sur un ?
+pizzeria.phrase264;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six demis, ou huit sixièmes, ou deux huitièmes, ou six huitièmes ?
+pizzeria.phrase265;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un quart, ou quatre sur un ?
+pizzeria.phrase266;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un quart, ou un demi, ou un tiers ?
+pizzeria.phrase267;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un quart, ou un demi ?
+pizzeria.phrase268;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un tiers ou deux tiers ? un tiers, ou deux tiers ?
+pizzeria.phrase269;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six quarts, ou quatre sixièmes, ou quatre demis, ou deux sixièmes ?
+pizzeria.phrase270;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six cinquièmes, ou cinq sixièmes, ou cinq sur un, ou un sixième ?
+pizzeria.phrase271;Pizzeria (fractions);5 parts garnies sur 6 : cinq sixièmes.
+pizzeria.phrase272;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? deux sur un, ou un demi, ou un huitième ?
+pizzeria.phrase273;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou trois sur un, ou un quart ?
+pizzeria.phrase274;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un cinquième, ou six sur un, ou cinq sixièmes, ou un sixième ?
+pizzeria.phrase275;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq sixièmes, ou cinq sur un, ou six cinquièmes, ou un sixième ?
+pizzeria.phrase276;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou deux sur un, ou un demi ?
+pizzeria.phrase277;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un quart ou un huitième ? un quart, ou un huitième ?
+pizzeria.phrase278;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois tiers, ou six tiers, ou trois sixièmes, ou quatre sixièmes ?
+pizzeria.phrase279;Pizzeria (fractions);3 parts garnies sur 6 : trois sixièmes.
+pizzeria.phrase280;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre sur un, ou trois quarts, ou un tiers, ou un quart ?
+pizzeria.phrase281;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un tiers, ou un demi ?
+pizzeria.phrase282;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? cinq sixièmes, ou un cinquième, ou un sixième, ou six sur un ?
+pizzeria.phrase283;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou un demi, ou deux tiers, ou trois sur un ?
+pizzeria.phrase284;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un huitième ?
+pizzeria.phrase285;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un sixième, ou un tiers, ou un demi ?
+pizzeria.phrase286;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou deux sur un ?
+pizzeria.phrase287;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq sur un, ou six cinquièmes, ou un sixième, ou cinq sixièmes ?
+pizzeria.phrase288;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou trois sur un, ou un tiers, ou un demi ?
+pizzeria.phrase289;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six huitièmes, ou deux huitièmes, ou huit sixièmes, ou six demis ?
+pizzeria.phrase290;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un huitième, ou un tiers ?
+pizzeria.phrase291;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou deux sur un, ou un demi ?
+pizzeria.phrase292;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit sixièmes, ou six huitièmes, ou six demis, ou deux huitièmes ?
+pizzeria.phrase293;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un demi, ou un quart, ou un tiers ?
+pizzeria.phrase294;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou deux sur un ?
+pizzeria.phrase295;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? deux sur un, ou un demi, ou un quart ?
+pizzeria.phrase296;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? trois sur un, ou un huitième, ou un sixième, ou un tiers ?
+pizzeria.phrase297;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou un tiers, ou deux sur un, ou trois demis ?
+pizzeria.phrase298;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un quart, ou trois quarts, ou trois sur un, ou quatre tiers ?
+pizzeria.phrase299;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou trois quarts, ou deux tiers, ou deux quarts ?
+pizzeria.phrase300;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit sur un, ou un huitième, ou un septième, ou sept huitièmes ?
+pizzeria.phrase301;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux tiers, ou trois quarts, ou un tiers, ou deux quarts ?
+pizzeria.phrase302;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois sur un, ou un demi, ou deux tiers, ou un tiers ?
+pizzeria.phrase303;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un demi, ou un quart ?
+pizzeria.phrase304;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou un demi, ou un tiers, ou trois sur un ?
+pizzeria.phrase305;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart ?
+pizzeria.phrase306;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou trois quarts, ou un tiers, ou deux tiers ?
+pizzeria.phrase307;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux huitièmes, ou huit demis, ou deux sixièmes, ou six huitièmes ?
+pizzeria.phrase308;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou quatre sur un, ou un tiers ?
+pizzeria.phrase309;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sixièmes, ou deux quarts, ou six demis, ou quatre sixièmes ?
+pizzeria.phrase310;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un quart ou trois quarts ? un quart, ou trois quarts ?
+pizzeria.phrase311;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou un tiers, ou deux quarts, ou deux tiers ?
+pizzeria.phrase312;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou deux sur un, ou trois demis, ou un tiers ?
+pizzeria.phrase313;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou deux tiers, ou deux quarts, ou trois quarts ?
+pizzeria.phrase314;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un tiers, ou un huitième, ou un sixième ?
+pizzeria.phrase315;Pizzeria (fractions);Chaque enfant a un sixième.
+pizzeria.phrase316;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux quarts, ou trois quarts, ou deux demis, ou quatre demis ?
+pizzeria.phrase317;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux tiers, ou deux quarts, ou trois quarts, ou un tiers ?
+pizzeria.phrase318;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois quarts, ou un quart, ou trois sur un, ou quatre tiers ?
+pizzeria.phrase319;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou huit sur un, ou un demi, ou un huitième ?
+pizzeria.phrase320;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou quatre sur un, ou un quart ?
+pizzeria.phrase321;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou un huitième ?
+pizzeria.phrase322;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou un demi ?
+pizzeria.phrase323;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un quart, ou un sixième ?
+pizzeria.phrase324;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un tiers, ou un huitième, ou un quart ?
+pizzeria.phrase325;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou deux tiers, ou trois sur un, ou un demi ?
+pizzeria.phrase326;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux quarts, ou deux sixièmes, ou quatre sixièmes, ou six demis ?
+pizzeria.phrase327;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un cinquième, ou un sixième, ou cinq sixièmes, ou six sur un ?
+pizzeria.phrase328;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un tiers ?
+pizzeria.phrase329;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit demis, ou six huitièmes, ou deux sixièmes, ou deux huitièmes ?
+pizzeria.phrase330;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un sixième, ou un demi ?
+pizzeria.phrase331;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un quart, ou un sixième, ou un tiers ?
+pizzeria.phrase332;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un sixième, ou un demi, ou un tiers ?
+pizzeria.phrase333;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un tiers, ou un demi ?
+pizzeria.phrase334;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six sur un, ou un sixième, ou un cinquième, ou cinq sixièmes ?
+pizzeria.phrase335;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois demis, ou un tiers, ou deux tiers, ou deux sur un ?
+pizzeria.phrase336;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? huit septièmes, ou sept sur un, ou un huitième, ou sept huitièmes ?
+pizzeria.phrase337;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un huitième, ou un sixième, ou un tiers ?
+pizzeria.phrase338;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un tiers, ou un quart ?
+pizzeria.phrase339;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un huitième, ou un sixième ?
+pizzeria.phrase340;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un demi ?
+pizzeria.phrase341;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou quatre sur un, ou un quart ?
+pizzeria.phrase342;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un huitième, ou un quart ?
+pizzeria.phrase343;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six demis, ou six huitièmes, ou huit sixièmes, ou deux huitièmes ?
+pizzeria.phrase344;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou trois sur un, ou un demi, ou un tiers ?
+pizzeria.phrase345;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou deux quarts, ou trois quarts, ou deux tiers ?
+pizzeria.phrase346;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois sur un, ou un tiers, ou un demi, ou deux tiers ?
+pizzeria.phrase347;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou deux sur un, ou un demi ?
+pizzeria.phrase348;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou un quart, ou un sixième ?
+pizzeria.phrase349;Pizzeria (fractions);Quelle fraction est égale à la moitié ? un tiers, ou deux quarts, ou deux tiers, ou trois quarts ?
+pizzeria.phrase350;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un tiers, ou un sixième ?
+pizzeria.phrase351;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? huit sur un, ou un tiers, ou un sixième, ou un huitième ?
+pizzeria.phrase352;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? sept sur un, ou sept huitièmes, ou huit septièmes, ou un huitième ?
+pizzeria.phrase353;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois sur un, ou quatre tiers, ou un quart, ou trois quarts ?
+pizzeria.phrase354;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? trois sur un, ou un sixième, ou un tiers, ou un demi ?
+pizzeria.phrase355;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou huit sur un, ou un tiers, ou un huitième ?
+pizzeria.phrase356;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou quatre demis, ou deux quarts, ou deux demis ?
+pizzeria.phrase357;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois demis, ou deux sur un, ou deux tiers, ou un tiers ?
+pizzeria.phrase358;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre sur un, ou un quart, ou trois quarts, ou un tiers ?
+pizzeria.phrase359;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un quart, ou un huitième ?
+pizzeria.phrase360;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux demis, ou trois quarts, ou quatre demis, ou deux quarts ?
+pizzeria.phrase361;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre demis, ou deux sixièmes, ou quatre sixièmes, ou six quarts ?
+pizzeria.phrase362;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un quart, ou trois quarts, ou un tiers, ou quatre sur un ?
+pizzeria.phrase363;Pizzeria (fractions);On partage le gâteau entre six enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou six sur un, ou un tiers ?
+pizzeria.phrase364;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un huitième, ou un quart ?
+pizzeria.phrase365;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? deux sur un, ou un sixième, ou un demi ?
+pizzeria.phrase366;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? quatre sur un, ou un demi, ou un quart ?
+pizzeria.phrase367;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou deux quarts, ou quatre demis, ou deux demis ?
+pizzeria.phrase368;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou quatre sur un ?
+pizzeria.phrase369;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux tiers, ou un tiers, ou deux quarts, ou trois quarts ?
+pizzeria.phrase370;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois sur un, ou un demi, ou deux tiers, ou un tiers ?
+pizzeria.phrase371;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un tiers ?
+pizzeria.phrase372;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un tiers, ou un huitième, ou trois sur un ?
+pizzeria.phrase373;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un quart, ou quatre tiers, ou trois sur un, ou trois quarts ?
+pizzeria.phrase374;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un tiers, ou un quart ?
+pizzeria.phrase375;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou huit sur un, ou un demi, ou un quart ?
+pizzeria.phrase376;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six cinquièmes, ou cinq sur un, ou un sixième, ou cinq sixièmes ?
+pizzeria.phrase377;Pizzeria (fractions);On partage le gâteau entre six enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un quart, ou un tiers, ou un huitième ?
+pizzeria.phrase378;Pizzeria (fractions);Mets du jambon sur un tiers de la pizza. Touche les parts, puis touche « C’est prêt ».
+pizzeria.phrase379;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou deux tiers, ou un tiers, ou deux quarts ?
+pizzeria.phrase380;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un huitième ?
+pizzeria.phrase381;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois demis, ou deux tiers, ou deux sur un, ou un tiers ?
+pizzeria.phrase382;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? sept huitièmes, ou un septième, ou un huitième, ou huit sur un ?
+pizzeria.phrase383;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux quarts, ou deux demis, ou quatre demis, ou trois quarts ?
+pizzeria.phrase384;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un quart, ou quatre sur un, ou trois quarts, ou un tiers ?
+pizzeria.phrase385;Pizzeria (fractions);Qu’est-ce qui est le plus grand : un demi ou un tiers ? un demi, ou un tiers ?
+pizzeria.phrase386;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un tiers, ou trois sur un, ou deux tiers, ou un demi ?
+pizzeria.phrase387;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux tiers, ou un demi, ou trois sur un, ou un tiers ?
+pizzeria.phrase388;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un tiers, ou un demi, ou deux tiers, ou trois sur un ?
+pizzeria.phrase389;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un huitième ?
+pizzeria.phrase390;Pizzeria (fractions);On partage le gâteau entre six enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou un huitième, ou un sixième ?
+pizzeria.phrase391;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un huitième, ou un quart, ou un demi ?
+pizzeria.phrase392;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un quart, ou six sur un ?
+pizzeria.phrase393;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq huitièmes, ou cinq tiers, ou trois huitièmes, ou huit cinquièmes ?
+pizzeria.phrase394;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux sur un, ou trois demis, ou deux tiers, ou un tiers ?
+pizzeria.phrase395;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou deux tiers, ou trois quarts, ou un tiers ?
+pizzeria.phrase396;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou trois demis, ou deux tiers, ou deux sur un ?
+pizzeria.phrase397;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre huitièmes, ou huit quarts, ou quatre quarts, ou cinq huitièmes ?
+pizzeria.phrase398;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sur un, ou deux tiers, ou un tiers, ou trois demis ?
+pizzeria.phrase399;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre sur un, ou trois quarts, ou un quart, ou un tiers ?
+pizzeria.phrase400;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois tiers, ou quatre sixièmes, ou six tiers, ou trois sixièmes ?
+pizzeria.phrase401;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un demi, ou deux tiers, ou un tiers, ou trois sur un ?
+pizzeria.phrase402;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq sixièmes, ou un sixième, ou six cinquièmes, ou cinq sur un ?
+pizzeria.phrase403;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un quart, ou un tiers ?
+pizzeria.phrase404;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? quatre tiers, ou un quart, ou trois sur un, ou trois quarts ?
+pizzeria.phrase405;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un huitième, ou un quart ?
+pizzeria.phrase406;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six tiers, ou quatre sixièmes, ou trois tiers, ou trois sixièmes ?
+pizzeria.phrase407;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un tiers, ou un demi ?
+pizzeria.phrase408;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou quatre sur un, ou un quart ?
+pizzeria.phrase409;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six quarts, ou quatre demis, ou quatre sixièmes, ou deux sixièmes ?
+pizzeria.phrase410;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit septièmes, ou un huitième, ou sept sur un, ou sept huitièmes ?
+pizzeria.phrase411;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? trois sur un, ou un demi, ou un tiers, ou un huitième ?
+pizzeria.phrase412;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un sixième, ou six cinquièmes, ou cinq sur un, ou cinq sixièmes ?
+pizzeria.phrase413;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un tiers, ou deux tiers, ou deux sur un, ou trois demis ?
+pizzeria.phrase414;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou deux quarts, ou deux demis, ou quatre demis ?
+pizzeria.phrase415;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou deux sur un ?
+pizzeria.phrase416;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou un huitième, ou huit sur un ?
+pizzeria.phrase417;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six sur un, ou un sixième, ou cinq sixièmes, ou un cinquième ?
+pizzeria.phrase418;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un sixième, ou cinq sixièmes, ou six sur un, ou un cinquième ?
+pizzeria.phrase419;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? cinq sixièmes, ou six sur un, ou un cinquième, ou un sixième ?
+pizzeria.phrase420;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou trois quarts, ou deux tiers, ou un tiers ?
+pizzeria.phrase421;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux huitièmes, ou six huitièmes, ou huit demis, ou deux sixièmes ?
+pizzeria.phrase422;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou deux sur un, ou un tiers ?
+pizzeria.phrase423;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un demi, ou un tiers, ou deux tiers, ou trois sur un ?
+pizzeria.phrase424;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux quarts, ou deux sixièmes, ou six demis, ou quatre sixièmes ?
+pizzeria.phrase425;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six demis, ou six huitièmes, ou deux huitièmes, ou huit sixièmes ?
+pizzeria.phrase426;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un huitième, ou un demi, ou un tiers ?
+pizzeria.phrase427;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou trois sur un, ou un sixième ?
+pizzeria.phrase428;Pizzeria (fractions);On partage la pizza entre trois enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou trois sur un, ou un tiers ?
+pizzeria.phrase429;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un huitième, ou un quart, ou un tiers ?
+pizzeria.phrase430;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un huitième, ou un demi ?
+pizzeria.phrase431;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six sur un, ou cinq sixièmes, ou un sixième, ou un cinquième ?
+pizzeria.phrase432;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou deux sur un ?
+pizzeria.phrase433;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou quatre sur un, ou un sixième, ou un quart ?
+pizzeria.phrase434;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un septième, ou un huitième, ou sept huitièmes, ou huit sur un ?
+pizzeria.phrase435;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? deux sur un, ou un demi, ou un quart ?
+pizzeria.phrase436;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un demi ?
+pizzeria.phrase437;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un tiers, ou trois sur un ?
+pizzeria.phrase438;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit quarts, ou cinq huitièmes, ou quatre quarts, ou quatre huitièmes ?
+pizzeria.phrase439;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois demis, ou deux sur un, ou un tiers, ou deux tiers ?
+pizzeria.phrase440;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? six sur un, ou un quart, ou un demi, ou un sixième ?
+pizzeria.phrase441;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart, ou un sixième ?
+pizzeria.phrase442;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois huitièmes, ou huit tiers, ou trois cinquièmes, ou cinq huitièmes ?
+pizzeria.phrase443;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un demi, ou un sixième ?
+pizzeria.phrase444;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? sept huitièmes, ou huit sur un, ou un septième, ou un huitième ?
+pizzeria.phrase445;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou un sixième ?
+pizzeria.phrase446;Pizzeria (fractions);On partage le gâteau entre six enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un sixième, ou un demi, ou un tiers ?
+pizzeria.phrase447;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un huitième, ou un sixième ?
+pizzeria.phrase448;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? huit sur un, ou un quart, ou un tiers, ou un huitième ?
+pizzeria.phrase449;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou un sixième, ou six sur un ?
+pizzeria.phrase450;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sur un, ou un tiers, ou deux tiers, ou trois demis ?
+pizzeria.phrase451;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou six sur un, ou un huitième, ou un sixième ?
+pizzeria.phrase452;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois demis, ou deux tiers, ou deux sur un, ou un tiers ?
+pizzeria.phrase453;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart ?
+pizzeria.phrase454;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou six sur un, ou un demi, ou un sixième ?
+pizzeria.phrase455;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois sur un, ou deux tiers, ou un tiers, ou un demi ?
+pizzeria.phrase456;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un quart, ou quatre sur un, ou un tiers, ou trois quarts ?
+pizzeria.phrase457;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un tiers, ou un huitième, ou un sixième ?
+pizzeria.phrase458;Pizzeria (fractions);On partage le gâteau entre trois enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un tiers, ou un sixième, ou un huitième ?
+pizzeria.phrase459;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un sixième, ou un quart, ou quatre sur un ?
+pizzeria.phrase460;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sixièmes, ou huit demis, ou six huitièmes, ou deux huitièmes ?
+pizzeria.phrase461;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux tiers, ou trois demis, ou deux sur un, ou un tiers ?
+pizzeria.phrase462;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre demis, ou trois quarts, ou deux demis, ou deux quarts ?
+pizzeria.phrase463;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six huitièmes, ou huit sixièmes, ou six demis, ou deux huitièmes ?
+pizzeria.phrase464;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou un quart, ou un tiers, ou quatre sur un ?
+pizzeria.phrase465;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? six demis, ou six huitièmes, ou deux huitièmes, ou huit sixièmes ?
+pizzeria.phrase466;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux sixièmes, ou quatre sixièmes, ou quatre demis, ou six quarts ?
+pizzeria.phrase467;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un quart, ou un demi ?
+pizzeria.phrase468;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un huitième, ou un quart ?
+pizzeria.phrase469;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six tiers, ou trois sixièmes, ou quatre sixièmes, ou trois tiers ?
+pizzeria.phrase470;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? huit sur un, ou un sixième, ou un quart, ou un huitième ?
+pizzeria.phrase471;Pizzeria (fractions);On partage le gâteau entre six enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou six sur un, ou un sixième ?
+pizzeria.phrase472;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux quarts, ou six demis, ou deux sixièmes, ou quatre sixièmes ?
+pizzeria.phrase473;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? deux sur un, ou un huitième, ou un demi ?
+pizzeria.phrase474;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre sur un, ou un tiers, ou trois quarts, ou un quart ?
+pizzeria.phrase475;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou un tiers, ou deux tiers, ou deux quarts ?
+pizzeria.phrase476;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un demi, ou deux tiers, ou trois sur un, ou un tiers ?
+pizzeria.phrase477;Pizzeria (fractions);On partage le gâteau entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou deux sur un, ou un demi ?
+pizzeria.phrase478;Pizzeria (fractions);Quelle fraction est égale à la moitié ? deux quarts, ou un tiers, ou deux tiers, ou trois quarts ?
+pizzeria.phrase479;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou un quart ?
+pizzeria.phrase480;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois quarts, ou trois sur un, ou quatre tiers, ou un quart ?
+pizzeria.phrase481;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? sept huitièmes, ou sept sur un, ou huit septièmes, ou un huitième ?
+pizzeria.phrase482;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un huitième, ou un sixième ?
+pizzeria.phrase483;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? quatre tiers, ou trois sur un, ou un quart, ou trois quarts ?
+pizzeria.phrase484;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois huitièmes, ou cinq tiers, ou cinq huitièmes, ou huit cinquièmes ?
+pizzeria.phrase485;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois demis, ou un tiers, ou deux sur un, ou deux tiers ?
+pizzeria.phrase486;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou quatre sur un, ou un demi, ou un huitième ?
+pizzeria.phrase487;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six tiers, ou trois tiers, ou trois sixièmes, ou quatre sixièmes ?
+pizzeria.phrase488;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou un demi ?
+pizzeria.phrase489;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? quatre demis, ou deux quarts, ou trois quarts, ou deux demis ?
+pizzeria.phrase490;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou huit sur un, ou un huitième ?
+pizzeria.phrase491;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou quatre sur un, ou un huitième ?
+pizzeria.phrase492;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un tiers, ou quatre sur un, ou un quart, ou trois quarts ?
+pizzeria.phrase493;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un huitième, ou un demi, ou un quart ?
+pizzeria.phrase494;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux tiers, ou trois sur un, ou un demi, ou un tiers ?
+pizzeria.phrase495;Pizzeria (fractions);Quelle fraction est égale à la moitié ? trois quarts, ou deux quarts, ou deux tiers, ou un tiers ?
+pizzeria.phrase496;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart, ou un sixième ?
+pizzeria.phrase497;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? huit sixièmes, ou six demis, ou deux huitièmes, ou six huitièmes ?
+pizzeria.phrase498;Pizzeria (fractions);On partage le gâteau entre huit enfants, en parts égales. Quelle part a chaque enfant ? un huitième, ou un demi, ou huit sur un, ou un sixième ?
+pizzeria.phrase499;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? cinq sur un, ou un sixième, ou six cinquièmes, ou cinq sixièmes ?
+pizzeria.phrase500;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou un demi, ou un huitième ?
+pizzeria.phrase501;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un demi, ou trois sur un, ou un tiers, ou deux tiers ?
+pizzeria.phrase502;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? un tiers, ou un quart, ou trois quarts, ou quatre sur un ?
+pizzeria.phrase503;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? un tiers, ou trois quarts, ou un quart, ou quatre sur un ?
+pizzeria.phrase504;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un quart ?
+pizzeria.phrase505;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un demi, ou un quart, ou quatre sur un ?
+pizzeria.phrase506;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? six demis, ou deux huitièmes, ou huit sixièmes, ou six huitièmes ?
+pizzeria.phrase507;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un quart, ou quatre sur un ?
+pizzeria.phrase508;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un quart, ou quatre sur un, ou un tiers, ou un demi ?
+pizzeria.phrase509;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? trois sur un, ou un quart, ou quatre tiers, ou trois quarts ?
+pizzeria.phrase510;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un tiers, ou un huitième, ou un demi ?
+pizzeria.phrase511;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? quatre sur un, ou trois quarts, ou un quart, ou un tiers ?
+pizzeria.phrase512;Pizzeria (fractions);On partage la pizza entre deux enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un quart ?
+pizzeria.phrase513;Pizzeria (fractions);On partage la pizza entre huit enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou un demi, ou un tiers, ou un huitième ?
+pizzeria.phrase514;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? cinq sixièmes, ou cinq sur un, ou un sixième, ou six cinquièmes ?
+pizzeria.phrase515;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux sur un, ou trois demis, ou un tiers, ou deux tiers ?
+pizzeria.phrase516;Pizzeria (fractions);Quelle fraction du gâteau est garnie ? deux sixièmes, ou quatre demis, ou quatre sixièmes, ou six quarts ?
+pizzeria.phrase517;Pizzeria (fractions);On partage le gâteau entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un sixième, ou quatre sur un, ou un quart, ou un huitième ?
+pizzeria.phrase518;Pizzeria (fractions);On partage la pizza entre six enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un quart, ou un sixième, ou six sur un ?
+pizzeria.phrase519;Pizzeria (fractions);On partage la pizza entre quatre enfants, en parts égales. Quelle part a chaque enfant ? un demi, ou un sixième, ou un quart, ou un tiers ?
+pizzeria.phrase520;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? sept huitièmes, ou huit sur un, ou un septième, ou un huitième ?
+pizzeria.phrase521;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? deux sixièmes, ou six demis, ou quatre sixièmes, ou deux quarts ?
+pizzeria.phrase522;Pizzeria (fractions);Quelle fraction de la pizza est garnie ? trois demis, ou un tiers, ou deux sur un, ou deux tiers ?
+memory.animaux.poisson;Memory;Poisson rouge
+memory.animaux.hamster;Memory;Hamster
+memory.animaux.lapin;Memory;Lapin blanc
+memory.animaux.lapin-brun;Memory;Lapin brun
+memory.animaux.tortue;Memory;Tortue
+memory.animaux.chat;Memory;Chaton roux
+memory.animaux.chat-gris;Memory;Chaton gris
+memory.animaux.chat-blanc;Memory;Chaton blanc
+memory.animaux.chat-noir;Memory;Chaton noir
+memory.animaux.chien;Memory;Chiot
+memory.animaux.chien-gris;Memory;Chiot gris
+memory.animaux.dalmatien;Memory;Dalmatien
+memory.animaux.perroquet;Memory;Perroquet
+memory.planetes.soleil.savais;Memory;Le savais-tu ? Ce n'est pas une planète : c'est une étoile, une énorme boule de gaz brûlant.
+memory.planetes.mercure.savais;Memory;Le savais-tu ? La planète la plus proche du Soleil, et la plus petite.
+memory.planetes.venus.savais;Memory;Le savais-tu ? La planète la plus chaude : environ 460 °C, à cause de ses nuages épais.
+memory.planetes.terre.savais;Memory;Le savais-tu ? Notre planète ! La seule où l’on connaît la vie.
+memory.planetes.lune.savais;Memory;Le savais-tu ? Ce n'est pas une planète : c'est le satellite de la Terre, elle tourne autour de nous.
+memory.planetes.mars.savais;Memory;Le savais-tu ? La planète rouge : son sol est plein de rouille.
+memory.planetes.jupiter.savais;Memory;Le savais-tu ? La plus grosse planète : plus de 1 000 Terres tiendraient dedans.
+memory.planetes.saturne.savais;Memory;Le savais-tu ? Ses anneaux sont faits de morceaux de glace et de roche.
+memory.planetes.uranus.savais;Memory;Le savais-tu ? Elle tourne couchée sur le côté, comme une boule qui roule.
+memory.planetes.neptune.savais;Memory;Le savais-tu ? La planète la plus loin du Soleil.
+memory.theme.dinos;Memory;Les dinosaures
+memory.theme.drapeaux;Memory;Les drapeaux
+memory.drapeaux.suisse;Memory;La Suisse
+memory.drapeaux.france;Memory;La France
+memory.drapeaux.allemagne;Memory;L’Allemagne
+memory.drapeaux.italie;Memory;L’Italie
+memory.drapeaux.autriche;Memory;L’Autriche
+memory.drapeaux.liechtenstein;Memory;Le Liechtenstein
+memory.drapeaux.espagne;Memory;L’Espagne
+memory.drapeaux.portugal;Memory;Le Portugal
+memory.drapeaux.royaume-uni;Memory;Le Royaume-Uni
+memory.drapeaux.grece;Memory;La Grèce
+memory.drapeaux.maroc;Memory;Le Maroc
+memory.drapeaux.egypte;Memory;L’Égypte
+memory.drapeaux.kenya;Memory;Le Kenya
+memory.drapeaux.inde;Memory;L’Inde
+memory.drapeaux.chine;Memory;La Chine
+memory.drapeaux.japon;Memory;Le Japon
+memory.drapeaux.australie;Memory;L’Australie
+memory.drapeaux.bresil;Memory;Le Brésil
+memory.drapeaux.canada;Memory;Le Canada
+memory.drapeaux.mexique;Memory;Le Mexique
 bd.phrase1;Atelier BD;Bonjour !
 bd.phrase2;Atelier BD;Oh non !
 bd.phrase3;Atelier BD;Hourra !
@@ -4088,19 +4659,6 @@ objet.lit.jaune;Magasins (noms des objets);Lit jaune
 objet.lit.turquoise;Magasins (noms des objets);Lit turquoise
 objet.lit.violet;Magasins (noms des objets);Lit violet
 objet.lit.rouge;Magasins (noms des objets);Lit rouge
-objet.animal.poisson;Magasins (noms des objets);Poisson rouge
-objet.animal.hamster;Magasins (noms des objets);Hamster
-objet.animal.lapin;Magasins (noms des objets);Lapin blanc
-objet.animal.lapin-brun;Magasins (noms des objets);Lapin brun
-objet.animal.tortue;Magasins (noms des objets);Tortue
-objet.animal.chat;Magasins (noms des objets);Chaton roux
-objet.animal.chat-gris;Magasins (noms des objets);Chaton gris
-objet.animal.chat-blanc;Magasins (noms des objets);Chaton blanc
-objet.animal.chat-noir;Magasins (noms des objets);Chaton noir
-objet.animal.chien;Magasins (noms des objets);Chiot
-objet.animal.chien-gris;Magasins (noms des objets);Chiot gris
-objet.animal.dalmatien;Magasins (noms des objets);Dalmatien
-objet.animal.perroquet;Magasins (noms des objets);Perroquet
 objet.habit-animal.collier-bleu;Magasins (noms des objets);Collier bleu
 objet.habit-animal.noeud-rose;Magasins (noms des objets);Nœud rose
 objet.habit-animal.collier-dore;Magasins (noms des objets);Collier doré
@@ -4224,4 +4782,5 @@ app.17;Phrases de l'app;Enlever cette BD ? Touche encore pour confirmer.
 app.18;Phrases de l'app;Bienvenue à l'hôpital ! Voici l'atlas du corps. Choisis une page pour découvrir ton corps.
 app.19;Phrases de l'app;Bienvenue au musée des dinosaures ! Choisis un dinosaure pour reconstituer son squelette.
 app.20;Phrases de l'app;Ce n’est pas la bonne pièce. Regarde bien la forme qui brille !
-app.21;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
+app.21;Phrases de l'app;Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.
+app.22;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
