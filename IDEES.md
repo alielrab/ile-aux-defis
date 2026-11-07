@@ -16,8 +16,6 @@
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
-| Musée des dinosaures | Les grandes espèces, leurs tailles, ce qu'elles mangeaient ; reconstituer un squelette |
-| Passeport du monde | Visiter des pays (drapeau, langue, plat, monument) et collectionner les tampons du passeport |
 | Fractions en pizza | Partager des pizzas en parts égales : moitié, tiers, quart… |
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
 | Vétérinaire | Soigner les animaux : reconnaître les symptômes, choisir le bon soin |
@@ -26,7 +24,7 @@
 | Jeux de réflexion | Memory, tangram, labyrinthes |
 
 ## Nouvelles îles (à construire plus tard)
-- **L'île de la sécurité** : le code de la route du piéton et du cycliste (traverser, panneaux, casque, être vu la nuit) ; les numéros d'urgence suisses **144** (ambulance), **117** (police), **118** (pompiers), avec quoi dire au téléphone.
+- **L'île de la sécurité** (créée, avec les numéros d'urgence) : il reste le code de la route du piéton et du cycliste (traverser, panneaux, casque, être vu la nuit).
 - **L'île de la mer** : l'aquarium et les fonds marins (poissons, coraux, baleines, protéger la mer).
 
 ## Île du cœur : « Grandir ensemble » (à construire plus tard)
@@ -48,6 +46,7 @@ Remplacer la voix de la tablette par des fichiers audio pré-enregistrés pour l
 - Boutique en francs suisses → **le marché** (voir SPEC.md).
 - **L'atelier de peinture** (île des créateurs, voir SPEC.md).
 - **L'atelier BD** (île des créateurs, voir SPEC.md).
+- **Le musée des dinosaures** et **le passeport du monde** (île du savoir), **les numéros d'urgence** (île de la sécurité) : voir SPEC.md.
 - **La météo des émotions** (île du cœur, voir SPEC.md) — à faire relire par un parent.
 - **Archipel** : îles du village, du savoir, des créateurs et du cœur, reliées par un bateau (voir SPEC.md). Les idées ci-dessous ont déjà leur place réservée (« Bientôt ») : chantier, peinture, BD, musique, maison de la confiance, météo des émotions.
 - Lieu de croyance du village, choisi par les parents (voir SPEC.md) : idée d'origine, « Ma foi » et « Autres cultures ».

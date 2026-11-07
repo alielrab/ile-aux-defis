@@ -11,7 +11,7 @@ import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
 import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, HABITS_ANIMAUX } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE, ETOILES_ATLAS } from './reglages.js';
-import { nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
+import { melanger, nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
 import * as calcul from './jeux/calcul.js';
 import * as heure from './jeux/heure.js';
 import * as corps from './jeux/corps.js';
@@ -23,6 +23,9 @@ import * as peinture from './jeux/peinture.js';
 import * as emotions from './jeux/emotions.js';
 import * as bd from './jeux/bd.js';
 import * as atlas from './jeux/atlas.js';
+import * as dinos from './jeux/dinos.js';
+import * as passeport from './jeux/passeport.js';
+import * as urgences from './jeux/urgences.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, repeter, attendreSilence } from './voix.js';
 import { messageReponse } from './messages.js';
@@ -204,6 +207,9 @@ function entrerLieu(cible) {
   if (id === 'calcul') return ouvrirOperations();
   if (id === 'espace') return ouvrirObservatoire();
   if (id === 'corps') return ouvrirAtlas();
+  if (id === 'musee') return ouvrirMusee();
+  if (id === 'aeroport') return ouvrirPasseport();
+  if (id === 'urgences') return ouvrirUrgences();
   if (id === 'cuisine') return ouvrirRestaurant();
   lancerJeu(id);
 }
@@ -391,7 +397,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -415,10 +421,12 @@ function lancerJeu(nom) {
     ? { questions: cuisine.etapes(recette, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les étapes de la recette, dans l'ordre
     : nom === 'recit'
     ? { questions: recits.questions(recitOuvert, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les questions de l'histoire, dans l'ordre
+    : nom === 'passeport'
+    ? { questions: passeport.questions(paysCourant, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les 3 questions du pays
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas }, Math.random, vus);
   joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   $('#maitre-dessin').innerHTML = nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
   montrer('jeu');
@@ -456,6 +464,15 @@ function afficherQuestion() {
     afficherSyllabes(q);
   } else if (jeu === 'marche') {
     afficherMarche(q);
+  } else if (jeu === 'dinos') {
+    $('#aide').innerHTML = dinos.dessinerSquelette(dinos.dino(q.dino));
+    boutonsReponses(q.choix, String, true);
+  } else if (jeu === 'passeport') {
+    $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.type === 'drapeau' ? '🏳️' : passeport.pays(paysCourant).drapeau}</div>`;
+    boutonsReponses(q.choix, String, true);
+  } else if (jeu === 'urgences') {
+    $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
+    boutonsReponses(q.choix, urgences.libelle, true);
   } else if (jeu === 'emotions') {
     $('#aide').innerHTML = q.mode === 'visage' ? emotions.visage(q.reponse, q.peau) : '';
     boutonsReponses(q.choix, emotions.nom, true);
@@ -678,6 +695,17 @@ function finirPartie() {
     $('#fin-extra button').addEventListener('click', () => ouvrirRestaurant(recette));
     fin += ` Recette débloquée ! Le savais-tu ? ${r.savaisTu}`;
   }
+  if (jeu === 'passeport') { // le tampon du pays, avec au moins 2 bonnes réponses
+    const p = passeport.pays(paysCourant), tampon = passeport.tamponner(joueuse, paysCourant, partie.bonnes);
+    enregistrer();
+    fin += tampon ? ` Nouveau tampon pour ${p.nom.toLowerCase().replace(/^l’/, 'l’')} dans ton passeport !` : partie.bonnes < passeport.BONNES_POUR_TAMPON ? ' Il faut 2 bonnes réponses pour le tampon : réessaie !' : '';
+    $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon !` : ''}</p><button class="gros secondaire">📘 Mon passeport</button>`;
+    $('#fin-extra button').addEventListener('click', () => { afficherPasseport('livret'); montrer('passeport'); });
+  }
+  if (jeu === 'dinos' || jeu === 'urgences') {
+    $('#fin-extra').innerHTML = `<button class="gros secondaire">${jeu === 'dinos' ? '🦴 Retour au musée' : '📞 Les numéros d’urgence'}</button>`;
+    $('#fin-extra button').addEventListener('click', () => { if (jeu === 'dinos') { afficherMusee(); montrer('musee'); } else ouvrirUrgences(); });
+  }
   if (jeu === 'atlas' || jeu === 'corps') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">📖 Retour à l’atlas</button>';
     $('#fin-extra button').addEventListener('click', () => { afficherAtlas(jeu === 'atlas' ? systemeAtlas : null); montrer('atlas'); });
@@ -703,6 +731,8 @@ function aDire(q) {
   if (jeu === 'marche') return marche.aDire(q);
   const ou = (l) => (l.length > 1 ? `${l.slice(0, -1).join(', ')}, ou ${l.at(-1)} ?` : l[0]);
   if (jeu === 'emotions') return `${q.consigne} ${ou(q.choix.map(emotions.nom))}`;
+  if (jeu === 'urgences') return `${q.consigne} ${ou(q.choix.map(urgences.libelle))}`;
+  if (jeu === 'passeport' && q.type === 'drapeau') return q.consigne; // les drapeaux ne se lisent pas : ce serait donner la réponse
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
   if (q.mode === 'ingredient') return q.consigne; // les mots des boutons ne sont pas lus : c'est à l'enfant de les lire
@@ -1369,6 +1399,126 @@ function afficherAtlas(systeme, dire = false) {
     el('div', { className: 'atlas-page' }, corpsSvg, el('div', { className: 'atlas-fiche' }, carte, noms)),
     gros('🧠 Je teste mes connaissances', () => lancerJeu('atlas')));
   if (dire) parler(`${s.nom}. ${s.intro}`);
+}
+
+// Le musée des dinosaures : reconstituer un squelette (puzzle), lire sa fiche, puis le quiz
+let puzzle = null; // { cle, posees: [], ordre: [] }
+function ouvrirMusee() {
+  etoilesJoueuse();
+  afficherMusee();
+  montrer('musee');
+  parler('Bienvenue au musée des dinosaures ! Choisis un dinosaure pour reconstituer son squelette.', { ton: 1.1 });
+}
+function afficherMusee() {
+  puzzle = null;
+  etoilesJoueuse();
+  const v = $('#musee-vue');
+  v.replaceChildren(el('p', { className: 'carte presentation', textContent: `Tu as reconstitué ${joueuse.dinos.length} squelettes sur ${dinos.DINOS.length}. Le premier squelette de chaque dinosaure rapporte ${dinos.ETOILES_SQUELETTE} ⭐.` }),
+    el('div', { className: 'phrases' }, ...dinos.DINOS.map((d) => gros(`${joueuse.dinos.includes(d.cle) ? '✓ ' : '🦴 '}${d.nom}`, () => commencerPuzzle(d.cle), `petit${joueuse.dinos.includes(d.cle) ? ' choisi' : ''}`))),
+    gros('⭐ Le quiz des dinosaures', () => lancerJeu('dinos')));
+}
+function commencerPuzzle(cle) {
+  puzzle = { cle, posees: [], ordre: melanger(dinos.PIECES) };
+  afficherPuzzle();
+  parler(`${dinos.dino(cle).nom}. Reconstitue son squelette ! Regarde la place qui brille, et choisis la bonne pièce.`);
+}
+function afficherPuzzle() {
+  const d = dinos.dino(puzzle.cle), aRemplir = puzzle.ordre.find((k) => !puzzle.posees.includes(k));
+  if (!aRemplir) return afficherFicheDino(d);
+  const v = $('#musee-vue');
+  const dessin = el('div', { className: 'toile-cadre' });
+  dessin.innerHTML = dinos.dessinerSquelette(d, puzzle.posees, aRemplir);
+  const reserve = el('div', { className: 'reserve-pieces' }, ...melanger(dinos.PIECES.filter((k) => !puzzle.posees.includes(k))).map((k) => {
+    const b = el('button', { className: 'piece-dino', ariaLabel: dinos.NOMS_PIECES[k] });
+    b.innerHTML = dinos.dessinerPiece(d, k);
+    b.addEventListener('click', () => {
+      if (k !== aRemplir) { bip(false); b.classList.add('tremble'); return parler('Ce n’est pas la bonne pièce. Regarde bien la forme qui brille !'); }
+      puzzle.posees.push(k);
+      bip(true);
+      afficherPuzzle();
+      if (puzzle.ordre.some((x) => !puzzle.posees.includes(x))) parler(`Bravo, ${dinos.NOMS_PIECES[k]} !`);
+    });
+    return b;
+  }));
+  v.replaceChildren(gros('← Le musée', afficherMusee, 'gros secondaire retour-atelier'), el('h2', { textContent: d.nom }), dessin,
+    el('p', { className: 'consigne-puzzle', textContent: 'Quelle pièce va à la place qui brille ?' }), reserve);
+}
+function afficherFicheDino(d) {
+  const nouveau = !joueuse.dinos.includes(d.cle);
+  if (nouveau) { joueuse.dinos.push(d.cle); joueuse.etoiles += dinos.ETOILES_SQUELETTE; enregistrer(); }
+  etoilesJoueuse();
+  const texte = dinos.fiche(d, joueuse.age);
+  const dessin = el('div', { className: 'toile-cadre' });
+  dessin.innerHTML = dinos.dessinerSquelette(d);
+  $('#musee-vue').replaceChildren(gros('← Le musée', afficherMusee, 'gros secondaire retour-atelier'), el('h2', { textContent: d.nom }), dessin,
+    el('div', { className: 'carte carte-croyance' }, el('div', { className: 'tete-carte' }, el('h3', { textContent: 'Sa fiche' }), gros('🔊', () => parler(`${texte} Le savais-tu ? ${d.savais}`), 'rond')),
+      el('p', { textContent: texte }), el('p', { className: 'savais', textContent: `Le savais-tu ? ${d.savais}` })),
+    el('div', { className: 'actions-atelier' }, gros('🦴 Un autre dinosaure', afficherMusee, 'gros secondaire'), gros('⭐ Le quiz des dinosaures', () => lancerJeu('dinos'))));
+  parler(`Bravo, le squelette est complet !${nouveau ? ` Tu gagnes ${dinos.ETOILES_SQUELETTE} étoiles.` : ''} ${texte} Le savais-tu ? ${d.savais}`, { ton: 1.1 });
+}
+
+// Le passeport du monde : la carte et l'avion, la fiche d'un pays, le livret des tampons
+let paysCourant = 'suisse';
+function ouvrirPasseport() {
+  etoilesJoueuse();
+  afficherPasseport('carte');
+  montrer('passeport');
+  parler('Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.', { ton: 1.1 });
+}
+function afficherPasseport(vue) {
+  etoilesJoueuse();
+  const v = $('#passeport-vue'), tampons = joueuse.passeport;
+  const carte = el('div', { className: 'toile-cadre' });
+  carte.innerHTML = passeport.dessinerCarte(tampons, paysCourant);
+  if (vue === 'livret') {
+    v.replaceChildren(gros('← La carte', () => afficherPasseport('carte'), 'gros secondaire retour-atelier'), el('h2', { textContent: `📘 Mon passeport : ${tampons.length} / ${passeport.PAYS.length}` }),
+      el('div', { className: 'livret' }, ...passeport.PAYS.map((p) => {
+        const a = tampons.includes(p.cle);
+        return el('div', { className: `tampon${a ? '' : ' vide'}` }, el('span', { className: 'drapeau', textContent: a ? p.drapeau : '?' }), el('span', { textContent: a ? p.nom : '…' }));
+      })));
+    return parler(`Ton passeport a ${tampons.length} tampon${tampons.length > 1 ? 's' : ''}.`);
+  }
+  if (vue === 'pays') {
+    const p = passeport.pays(paysCourant);
+    v.replaceChildren(gros('← La carte', () => afficherPasseport('carte'), 'gros secondaire retour-atelier'), carte,
+      el('div', { className: 'carte fiche-pays' }, el('div', { className: 'tete-carte' }, el('span', { className: 'drapeau-grand', textContent: p.drapeau }), el('h2', { textContent: p.nom }),
+        gros('🔊', () => parler(passeport.presentation(p, joueuse.age)), 'rond')),
+      el('ul', {}, el('li', { textContent: `🏛️ Capitale : ${p.capitale}` }), el('li', { textContent: `${p.animal[0]} Un animal : ${p.animal[1]}` }),
+        el('li', { textContent: `${p.plat[0]} Un plat : ${p.plat[1]}` }), el('li', { textContent: `🗣️ On y parle ${p.langue}` })),
+      el('p', { className: 'savais', textContent: `Le savais-tu ? ${p.savais}` })),
+      gros(tampons.includes(p.cle) ? '✈️ Petit quiz (déjà tamponné ✓)' : '✈️ Petit quiz pour gagner le tampon', () => lancerJeu('passeport')));
+    return parler(passeport.presentation(p, joueuse.age));
+  }
+  v.replaceChildren(carte, gros(`📘 Mon passeport (${tampons.length} / ${passeport.PAYS.length})`, () => afficherPasseport('livret'), 'gros secondaire'),
+    el('div', { className: 'phrases' }, ...passeport.PAYS.map((p) => gros(`${p.drapeau} ${p.nom}${tampons.includes(p.cle) ? ' ✓' : ''}`, () => voyager(p.cle), `petit${tampons.includes(p.cle) ? ' choisi' : ''}`))));
+}
+// L'avion vole jusqu'au pays, puis on découvre sa fiche
+function voyager(cle) {
+  const avion = $('#passeport-vue .avion');
+  const [x, y] = passeport.position(cle);
+  paysCourant = cle;
+  if (avion) avion.style.transform = `translate(${x}px, ${y}px)`;
+  parler(`En route pour ${passeport.pays(cle).nom.replace(/^La |^Le |^L’/, (m) => m.toLowerCase())} !`);
+  setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
+}
+
+// Les numéros d'urgence : découvrir, puis « Qui appeler ? »
+function ouvrirUrgences() {
+  etoilesJoueuse();
+  const v = $('#urgences-vue');
+  v.replaceChildren(el('p', { className: 'carte presentation', textContent: urgences.RASSURER }),
+    el('div', { className: 'numeros' }, ...urgences.NUMEROS.map((n) => {
+      const c = el('button', { className: 'numero-urgence' }, el('span', { className: 'image-numero', textContent: n.image }), el('strong', { textContent: n.numero }), el('span', { className: 'nom-numero', textContent: n.nom }), el('small', { textContent: n.quand }));
+      c.style.borderColor = n.couleur;
+      c.addEventListener('click', () => parler(`${n.numero}. ${n.nom}. ${n.quand}`));
+      return c;
+    })),
+    el('h2', { textContent: '📞 Au téléphone, je dis :' }),
+    el('ol', { className: 'quoi-dire carte' }, ...urgences.QUOI_DIRE.map(([image, titre, texte]) => el('li', {}, el('span', { textContent: `${image} ` }), el('strong', { textContent: `${titre} ` }), texte))),
+    gros('🔊 Écouter', () => parler(`${urgences.RASSURER} Au téléphone, je dis : ${urgences.QUOI_DIRE.map(([, t, x]) => `${t} ${x}`).join(' ')}`), 'gros secondaire'),
+    gros('⭐ Qui appeler ?', () => lancerJeu('urgences')));
+  montrer('urgences');
+  parler(`Les numéros d'urgence. 144 : l'ambulance. 117 : la police. 118 : les pompiers. ${urgences.RASSURER}`, { ton: 1.05 });
 }
 
 // Le restaurant : les 5 recettes, et la vraie recette à faire avec un parent (validée avec le code parent)

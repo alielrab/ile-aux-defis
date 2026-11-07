@@ -43,8 +43,9 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
   - Sur chaque île, le voilier « L'archipel » ramène à la carte. Les boutons « retour » des jeux et des magasins ramènent sur l'île où l'on était.
 - **Les îles** :
   - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (bientôt).
-  - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge.
+  - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge, le musée des dinosaures, l'aéroport (le passeport du monde).
   - **L'île des créateurs** : le restaurant ; l'atelier de peinture, l'atelier BD et la salle de musique (bientôt).
+  - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence ; le code de la route (bientôt).
   - **L'île du cœur** : la maison de la confiance et la météo des émotions (bientôt) ; le lieu de culte choisi par les parents (sinon, un grand arbre).
 - **Débloquer une île** : chaque enfant débloque les îles fermées avec ses propres étoiles. On touche une première fois (« Touche encore ! »), puis une deuxième pour payer.
   - Le prix est réglable dans `PRIX_ILES` (`js/reglages.js`), 20 étoiles par défaut. À 0, l'île est ouverte pour tout le monde.
@@ -97,6 +98,26 @@ Bonus sans-faute (+2) et nombre de questions (10) aussi dans `js/reglages.js`. L
 Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la craie sur un tableau vert, une maîtresse qui parle dans une bulle, les réponses sur des pupitres.
 
 **Tour de l'horloge (Heure)** : murs de pierre, un horloger, une grande horloge (petite aiguille rouge = heures, grande bleue = minutes). Deux sortes de questions, au hasard : lire l'heure (3 ou 4 choix « 3 h 30 ») et régler l'horloge en faisant tourner les aiguilles avec le doigt (ou avec les boutons ◀ ▶), puis « C'est l'heure ! ». Quand la grande aiguille passe le 12, l'heure avance, comme une vraie horloge. 7 ans et moins : heures pile et demies, 3 choix. 8 ans et plus : quarts d'heure et 5 minutes près, 4 choix.
+
+**Musée des dinosaures** (`js/jeux/dinos.js`, île du savoir) : 16 dinosaures, dont le Plateosaurus, trouvé en Suisse à Frick.
+- **Le puzzle** : on choisit un dinosaure et on reconstitue son squelette en 4 pièces (tête, corps, queue, pattes). La place à remplir brille, et on touche la bonne pièce dans la réserve. Une mauvaise pièce tremble, sans pénalité.
+- **La fiche** : longueur, ce qu'il mangeait, et en plus pour les grands le poids et l'époque. Elle est lue à voix haute, avec un « Le savais-tu ? ».
+- **Étoiles** : le premier squelette de chaque dinosaure rapporte 2 ⭐ (`ETOILES_SQUELETTE`).
+- **Le quiz** : 10 questions faites à partir des fiches. 7 ans et moins : ce qu'il mangeait, et « Quel dinosaure… ? », avec 3 choix. Grands : aussi la taille et l'époque, avec 4 choix.
+
+**Passeport du monde** (`js/jeux/passeport.js`, île du savoir, « L'aéroport ») : 20 pays (la Suisse et ses voisins, puis l'Europe et le monde).
+- **Le voyage** : sur la carte du monde, l'avion vole jusqu'au pays choisi. On choisit le pays dans une liste de boutons, car les pays d'Europe sont trop serrés sur la carte pour un doigt.
+- **La fiche** : drapeau, capitale, un animal, un plat typique, la langue, et un « Le savais-tu ? ».
+- **Le petit quiz** : 3 questions. 7 ans et moins : drapeau, animal, plat, avec 3 choix. Grands : 3 questions au hasard parmi drapeau, capitale, animal, plat et langue, avec 4 choix. Les drapeaux proposés ne sont pas lus à voix haute.
+- **Le passeport** : au moins 2 bonnes réponses ajoutent le tampon du pays dans « Mon passeport ».
+- Les drapeaux sont des emojis : ils s'affichent sur la tablette Android, mais en lettres sur un ordinateur Windows.
+
+**Numéros d'urgence** (`js/jeux/urgences.js`, île de la sécurité) — **à faire relire par un parent** :
+- **Découvrir** : les 3 numéros, 144 (l'ambulance), 117 (la police) et 118 (les pompiers), avec quand les appeler ; puis « Au téléphone, je dis » : Qui ? Où ? Quoi ? et rester au téléphone. Ton rassurant : les secours sont des personnes gentilles dont le métier est d'aider.
+- **« Qui appeler ? »** : 10 questions, 4 choix (144, 117, 118, ou « Pas une urgence : je demande à un adulte »).
+  - 15 situations illustrées, dont 4 qui ne sont pas des urgences (dont « appeler pour rire, c'est interdit »).
+  - Des questions sur quoi dire et quoi faire : sortir de la maison avant d'appeler en cas de feu, rester en ligne.
+  - Pour les grands : le 112 et la gratuité des appels.
 
 **Hôpital : l'atlas du corps** (`js/jeux/atlas.js`) — c'est ce qui s'ouvre en entrant à l'hôpital.
 - **8 pages** : le squelette, les muscles, le cœur et le sang, la respiration, la digestion, le cerveau et les nerfs, les 5 sens, les dents et la peau.

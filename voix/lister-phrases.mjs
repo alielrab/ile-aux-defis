@@ -6,9 +6,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue] = await Promise.all([
+const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue, dinos, passeport, urgences] = await Promise.all([
   js('messages.js'), js('jeux/corps-questions.js'), js('jeux/atlas.js'), js('jeux/espace.js'), js('jeux/syllabes-mots.js'), js('croyances.js'),
   js('recits.js'), js('rapprochements.js'), js('jeux/emotions.js'), js('jeux/cuisine.js'), js('jeux/bd.js'), js('jeux/peinture.js'), js('catalogue.js'),
+  js('jeux/dinos.js'), js('jeux/passeport.js'), js('jeux/urgences.js'),
 ]);
 
 const lignes = [], vus = new Set();
@@ -101,6 +102,24 @@ for (const [k, r] of Object.entries(cuisine.RECETTES)) {
   r.vraie.etapes.forEach((t, i) => ajouter(`restaurant.${k}.etape${i + 1}`, 'Restaurant', t));
   ajouter(`restaurant.${k}.savais`, 'Restaurant', `Le savais-tu ? ${r.savaisTu}`);
 }
+
+for (const d of dinos.DINOS) {
+  ajouter(`musee.${d.cle}.nom`, 'Musée des dinosaures', d.nom);
+  ajouter(`musee.${d.cle}.fiche.petit`, 'Musée des dinosaures', dinos.fiche(d, 6));
+  ajouter(`musee.${d.cle}.fiche.grand`, 'Musée des dinosaures', dinos.fiche(d, 9));
+  ajouter(`musee.${d.cle}.savais`, 'Musée des dinosaures', `Le savais-tu ? ${d.savais}`);
+}
+for (const p of passeport.PAYS) {
+  ajouter(`passeport.${p.cle}.presentation.petit`, 'Passeport du monde', passeport.presentation(p, 6));
+  ajouter(`passeport.${p.cle}.presentation.grand`, 'Passeport du monde', passeport.presentation(p, 9));
+  ajouter(`passeport.${p.cle}.savais`, 'Passeport du monde', `Le savais-tu ? ${p.savais}`);
+}
+for (const n of urgences.NUMEROS) ajouter(`urgences.${n.numero}`, "Numéros d'urgence (à faire relire)", `${n.numero}. ${n.nom}. ${n.quand}`);
+urgences.QUOI_DIRE.forEach(([, t, x], i) => ajouter(`urgences.quoidire${i + 1}`, "Numéros d'urgence (à faire relire)", `${t} ${x}`));
+ajouter('urgences.rassurer', "Numéros d'urgence (à faire relire)", urgences.RASSURER);
+Object.entries(urgences.REPONSES).forEach(([k, t]) => ajouter(`urgences.reponse.${k}`, "Numéros d'urgence (à faire relire)", t.replace(/^\S+ /, '')));
+urgences.SITUATIONS.forEach(([t, , , s], i) => { ajouter(`urgences.situation${i + 1}`, "Numéros d'urgence (à faire relire)", t); ajouter(`urgences.situation${i + 1}.savais`, "Numéros d'urgence (à faire relire)", `Le savais-tu ? ${s}`); });
+banque('urgences.quiz', "Numéros d'urgence (à faire relire)", urgences.QUESTIONS);
 
 bd.PHRASES.forEach((t, i) => ajouter(`bd.phrase${i + 1}`, 'Atelier BD', t));
 bd.CREATURES.forEach(([k, , nom]) => ajouter(`bd.creature.${k}`, 'Atelier BD', nom));

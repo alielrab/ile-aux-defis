@@ -67,7 +67,7 @@ const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toStri
 export function ajouterProfil(etat, { prenom, age, avatar }) {
   prenom = verifierPrenomAge(prenom, age);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {} };
+  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [] };
   etat.profils.push(profil);
   return profil;
 }
@@ -93,6 +93,8 @@ export function charger(stockage = globalThis.localStorage) {
       p.atlas ??= {}; // atlas du corps : les fiches déjà découvertes, par page
       p.noms ??= {}; // les prénoms des animaux
       p.habits ??= {}; // le vêtement de chaque animal
+      p.dinos ??= []; // musée : les squelettes reconstitués
+      p.passeport ??= []; // passeport du monde : les pays tamponnés
       p.maison ??= maisonVide();
       p.maison.piece ??= 'chambre';
       p.maison.tableaux ??= {}; // un dessin de la galerie accroché par pièce

@@ -22,6 +22,11 @@ export const LIEUX = [
   { id: 'syllabes', ile: 'savoir', type: 'jeu', nom: 'La bibliothèque', detail: 'la chasse aux syllabes', ouvert: true, x: 200, y: 590 },
   { id: 'espace', ile: 'savoir', type: 'jeu', nom: "L'observatoire", detail: 'le système solaire', ouvert: true, x: 600, y: 590 },
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
+  { id: 'musee', ile: 'savoir', type: 'jeu', nom: 'Le musée\ndes dinosaures', detail: 'reconstituer des squelettes', ouvert: true, x: 400, y: 330 },
+  { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le passeport du monde', ouvert: true, x: 400, y: 655 },
+  // L'île de la sécurité
+  { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
+  { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: false, x: 540, y: 440 },
   // L'île des créateurs
   { id: 'cuisine', ile: 'createurs', type: 'jeu', nom: 'Le\nrestaurant', detail: 'la cuisine de l’île', ouvert: true, x: 230, y: 400 },
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
@@ -127,6 +132,21 @@ const BATIMENTS = {
     <circle cx="10" cy="-39" r="9" fill="#e74c3c"/><circle cx="26" cy="-38" r="9" fill="#f1c40f"/>
     <rect x="34" y="-68" width="30" height="20" rx="3" fill="#fff" stroke="#2b2b3a" stroke-width="2" transform="rotate(-8 49 -58)"/>
     <text x="49" y="-53" font-size="11" font-weight="800" text-anchor="middle" fill="#2b2b3a" transform="rotate(-8 49 -58)">CHF</text>`, 0.8],
+  musee: [`<rect x="-70" y="-70" width="140" height="70" fill="#efe2c4"/><path d="M-80 -68 L0 -110 L80 -68Z" fill="#8a6a4a"/>
+    ${[-50, -25, 25, 50].map((x) => `<rect x="${x - 5}" y="-66" width="10" height="66" fill="#f8efd8"/>`).join('')}<rect x="-14" y="-40" width="28" height="40" fill="#7a5a3a"/>
+    <g transform="translate(-6 -96) scale(.38)" fill="none" stroke="#f3ead2" stroke-width="7" stroke-linecap="round"><path d="M-60 0 Q-40 -30 -10 -10 Q20 -30 50 -5 Q70 5 90 20 M-10 -10 L-14 20 M30 -8 L34 20"/><circle cx="-66" cy="-4" r="10" fill="#f3ead2"/></g>`, 0.85],
+  aeroport: [`<rect x="-80" y="-50" width="160" height="50" fill="#e8f0f8"/><path d="M-84 -50 Q0 -78 84 -50Z" fill="#5b84c4"/>
+    ${[-60, -36, -12, 12, 36].map((x) => `<rect x="${x}" y="-40" width="18" height="22" fill="#bfe6ff" stroke="#fff" stroke-width="2"/>`).join('')}
+    <rect x="62" y="-120" width="14" height="70" fill="#d8d8e0"/><rect x="54" y="-136" width="30" height="18" rx="4" fill="#5b84c4"/>
+    <text x="-30" y="-86" font-size="34">✈️</text>`, 0.8],
+  urgences: [`<rect x="-80" y="-80" width="160" height="80" rx="4" fill="#f4f4f6"/><rect x="-86" y="-90" width="172" height="14" rx="4" fill="#e05252"/>
+    ${[['#e05252', -58], ['#2f6fd0', -18], ['#e8873a', 22]].map(([c, x]) => `<rect x="${x}" y="-52" width="36" height="52" fill="${c}"/><path d="M${x} -40 H${x + 36} M${x} -28 H${x + 36} M${x} -16 H${x + 36}" stroke="#fff" stroke-width="2" opacity=".6"/>`).join('')}
+    <rect x="-20" y="-112" width="40" height="22" rx="8" fill="#2f6fd0"/><circle cx="0" cy="-101" r="7" fill="#7ad0f0"/>
+    <text x="-58" y="-60" font-size="13" font-weight="800" fill="#2b2b3a" font-family="sans-serif">144 117 118</text>`, 0.9],
+  route: [`<rect x="-80" y="-16" width="160" height="16" fill="#555"/>${[-66, -40, -14, 12, 38, 64].map((x) => `<rect x="${x}" y="-14" width="14" height="12" fill="#fff"/>`).join('')}
+    <rect x="50" y="-120" width="8" height="104" fill="#555"/><rect x="40" y="-150" width="28" height="64" rx="6" fill="#2b2b3a"/>
+    <circle cx="54" cy="-138" r="7" fill="#e05252"/><circle cx="54" cy="-118" r="7" fill="#f2c230"/><circle cx="54" cy="-98" r="7" fill="#5cb85c"/>
+    <circle cx="-40" cy="-60" r="26" fill="#2f6fd0" stroke="#fff" stroke-width="4"/><path d="M-50 -48 l8 -16 l6 10 l6 -12" stroke="#fff" stroke-width="4" fill="none"/>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}
@@ -275,8 +295,8 @@ export function dessinerArchipel(joueuse, aConfirmer = null) {
   }).join('');
   const futures = EMPLACEMENTS_LIBRES.map(([x, y]) => `<g aria-hidden="true" opacity=".7"><ellipse cx="${x}" cy="${y}" rx="90" ry="50" fill="#fff" opacity=".5" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/>
     ${etiquette(x, y + 8, 'Bientôt…', 22)}</g>`).join('');
-  return `<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" class="carte-ile archipel" role="group" aria-label="L'archipel">
-  ${MER}${vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
+  return `<svg viewBox="0 0 800 1150" xmlns="http://www.w3.org/2000/svg" class="carte-ile archipel" role="group" aria-label="L'archipel">
+  ${MER.replace('height="900"', 'height="1150"')}${vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
   ${etiquette(400, 70, "L'archipel", 40)}
   <g stroke="#fff" stroke-width="5" fill="none" stroke-dasharray="4 14" stroke-linecap="round" opacity=".85">${routes}</g>
   ${futures}${iles}

@@ -9,9 +9,10 @@ export const ILES = [
   { id: 'savoir', nom: "L'île du savoir", ouverte: true, x: 575, y: 285, herbe: '#9fd8a0', vitrine: ['calcul', 'heure', 'espace'] },
   { id: 'createurs', nom: "L'île des créateurs", x: 225, y: 640, herbe: '#cfe27a', vitrine: ['cuisine', 'peinture'] },
   { id: 'coeur', nom: "L'île du cœur", x: 575, y: 625, herbe: '#f4bfd0', vitrine: ['confiance', 'emotions'] },
+  { id: 'securite', nom: "L'île de la sécurité", x: 225, y: 975, herbe: '#b8e0c8', vitrine: ['urgences', 'route'] },
 ];
 // De la place pour les prochaines îles (dessinées dans la brume, « Bientôt »)
-export const EMPLACEMENTS_LIBRES = [[400, 465], [400, 830]];
+export const EMPLACEMENTS_LIBRES = [[400, 465], [575, 975]];
 
 export const ile = (id) => ILES.find((i) => i.id === id);
 export const prixIle = (id) => (ile(id).ouverte ? 0 : PRIX_ILES[id]);

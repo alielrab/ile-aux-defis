@@ -507,6 +507,43 @@ select {
 .outils-animal { display: flex; gap: 4px; justify-content: center; }
 #lieu-message .texte-bulle { max-width: 14rem; margin: 0.3rem; }
 
+/* Musée des dinosaures */
+.squelette { width: 100%; height: auto; display: block; border-radius: 12px; }
+.squelette .a-remplir { animation: briller 1s ease-in-out infinite alternate; }
+@keyframes briller { from { opacity: 0.25; } to { opacity: 0.75; } }
+@media (prefers-reduced-motion: reduce) { .squelette .a-remplir { animation: none; } }
+.reserve-pieces { width: 100%; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); }
+.piece-dino { padding: 4px; border: 0; border-radius: 14px; background: #4a3a5a; box-shadow: 0 4px 0 rgb(0 0 0 / 0.2); cursor: pointer; }
+.piece-dino svg { width: 100%; height: auto; display: block; }
+.consigne-puzzle { margin: 0; color: #fff; font-weight: 800; text-shadow: 0 1px 0 var(--mer-fonce); }
+.salle[data-decor="musee"] { background: linear-gradient(#e9dcc3 0 76%, #8a6a4a 76% 77.5%, #b98a58 77.5%); }
+.salle[data-decor="musee"] .tableau, .salle[data-decor="passeport"] .tableau, .salle[data-decor="urgences"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
+#aide .squelette { width: min(100%, 420px); }
+
+/* Passeport du monde */
+.carte-monde { width: 100%; height: auto; display: block; border-radius: 12px; }
+.carte-monde .avion { transition: transform 1.4s ease-in-out; }
+@media (prefers-reduced-motion: reduce) { .carte-monde .avion { transition: none; } }
+.fiche-pays { text-align: left; gap: 0.5rem; width: 100%; }
+.fiche-pays ul { margin: 0; padding-left: 0.4rem; list-style: none; display: grid; gap: 0.3rem; font-weight: 600; }
+.fiche-pays h2 { flex: 1; margin: 0; color: inherit; text-shadow: none; }
+.drapeau-grand { font-size: 3rem; line-height: 1; }
+.livret { width: 100%; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); }
+.tampon { display: grid; justify-items: center; gap: 2px; padding: 0.6rem 0.3rem; border-radius: 50%; aspect-ratio: 1; align-content: center; border: 4px dashed #c0392b; background: #fffdf5; color: #c0392b; font-weight: 800; font-size: 0.85rem; text-align: center; transform: rotate(-6deg); }
+.tampon.vide { border-color: #d8cfc0; color: #b0a898; transform: none; }
+.tampon .drapeau { font-size: 2rem; }
+.salle[data-decor="passeport"] { background: linear-gradient(#cfeaf7 0 76%, #9aa3ad 76% 77.5%, #c8ced6 77.5%); }
+
+/* Numéros d'urgence */
+.numeros { width: 100%; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+.numero-urgence { display: grid; justify-items: center; gap: 0.2rem; padding: 0.8rem; border: 5px solid; border-radius: 18px; background: #fff; font: inherit; color: inherit; cursor: pointer; }
+.numero-urgence strong { font-size: 2.6rem; line-height: 1; }
+.image-numero { font-size: 2.6rem; line-height: 1; }
+.nom-numero { font-weight: 800; }
+.numero-urgence small { font-size: 0.9rem; }
+.quoi-dire { width: 100%; text-align: left; margin: 0; padding: 1rem 1rem 1rem 2.4rem; display: grid; gap: 0.4rem; font-weight: 500; }
+.salle[data-decor="urgences"] { background: linear-gradient(#eef6fb 0 76%, #e05252 76% 77.5%, #f4d0d0 77.5%); }
+
 /* Atlas du corps (hôpital) */
 .atlas-page { width: 100%; display: grid; gap: 0.75rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: start; }
 @media (max-width: 600px) { .atlas-page { grid-template-columns: 1fr; } }
