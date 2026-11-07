@@ -16,6 +16,7 @@ export const COIFFURES = {
   courts: 'Courts', carre: 'Carré', longs: 'Longs', boucles: 'Bouclés', queue: 'Queue de cheval',
   tresses: 'Tresses', chignon: 'Chignon', afro: 'Afro', couettes: 'Couettes', macarons: 'Deux macarons', ondules: 'Longs ondulés',
   'mi-longs': 'Mi-longs', frange: 'Frange droite', 'tresse-cote': 'Tresse sur le côté', chignons: 'Deux chignons hauts',
+  'tres-courts': 'Très courts', meche: 'Mèche sur le côté', herisses: 'Hérissés',
 };
 // Ce qui se gagne chez le coiffeur (prix en étoiles). Le reste est au choix dès le départ.
 export const PRIX_LOOK = {
@@ -32,6 +33,10 @@ export const TENUES = {
   'tshirt-rouge': { nom: 'T-shirt rouge et jupe', forme: 'jupe', haut: '#e05252', bas: '#5b7fd6' },
   'pull-violet': { nom: 'Pull violet', forme: 'pantalon', haut: '#9b7ae0', bas: '#3b5b8c' },
   'tshirt-turquoise': { nom: 'T-shirt turquoise', forme: 'short', haut: '#2bb3a0', bas: '#f2f2f2' },
+  'polo-vert': { nom: 'Polo vert et bermuda', forme: 'short', haut: '#3fae6a', bas: '#c8a070' },
+  'chemise-carreaux': { nom: 'Chemise à carreaux', forme: 'pantalon', haut: '#d9534f', bas: '#3b5b8c', motif: 'carreaux' },
+  'sweat-gris': { nom: 'Sweat gris', forme: 'pantalon', haut: '#9aa3ad', bas: '#2e3f66' },
+  'tshirt-rayures': { nom: 'T-shirt à rayures', forme: 'short', haut: '#f39c12', bas: '#3b5b8c', motif: 'rayures' },
   princesse: { nom: 'Robe de princesse', forme: 'robe', haut: '#a066d8', motif: 'etoiles', col: true, prix: 25 },
   heroine: { nom: 'Super-héroïne', forme: 'pantalon', haut: '#3a6fd8', bas: '#3a6fd8', cape: '#e03a3a', motif: 'eclair', prix: 25 },
   sport: { nom: 'Maillot de foot', forme: 'short', haut: '#e03a3a', bas: '#ffffff', motif: 'numero', prix: 15 },
@@ -90,6 +95,8 @@ export const COIFFURES_DE_DEPART = gratuits(COIFFURES, PRIX_LOOK.coiffure);
 export const CHEVEUX_DE_DEPART = gratuits(CHEVEUX, PRIX_LOOK.cheveux);
 
 export const AVATAR_PAR_DEFAUT = { peau: 'claire', yeux: 'marron', coiffure: 'longs', cheveux: 'chatain', tenue: 'tshirt-bleu', accessoires: [] };
+// Le personnage proposé au départ, selon le genre choisi (tout reste modifiable, et tout est accessible à tous)
+export const AVATAR_DE_DEPART = { fille: AVATAR_PAR_DEFAUT, garcon: { peau: 'claire', yeux: 'marron', coiffure: 'courts', cheveux: 'chatain', tenue: 'polo-vert', accessoires: [] } };
 export const AGE_MIN = 3, AGE_MAX = 14;
 
 export function avatarValide(a) {
@@ -143,6 +150,18 @@ function coiffure(style, c) {
   }).join('') + `<path d="M${x - 6} 262 Q${x} 280 ${x + 6} 262" ${trait}/>` + elastique(x, 258);
 
   switch (style) {
+    case 'tres-courts': return {
+      derriere: `<path d="M56 118 C52 60 90 42 120 42 C150 42 188 60 184 118 C182 138 178 148 172 152 L68 152 C62 148 58 138 56 118Z" ${trait}/>`,
+      devant: `<path d="M60 112 C60 70 90 50 120 50 C150 50 180 70 180 112 C172 94 150 84 120 84 C90 84 68 94 60 112Z" ${trait}/>` + reflet('M88 60 Q110 52 140 56'),
+    };
+    case 'meche': return {
+      derriere: `<path d="M54 120 C50 58 90 38 120 38 C152 38 192 58 186 120 C188 150 182 172 170 178 L70 178 C58 172 52 150 54 120Z" ${trait}/>`,
+      devant: `<path d="M57 122 C50 62 92 38 128 38 C168 40 192 66 183 118 C178 98 166 88 150 84 C130 106 96 112 60 116Z" ${trait}/>` + reflet('M150 50 Q120 46 96 60') + `<path d="M150 86 Q124 104 90 108" fill="none" stroke="${o}" stroke-width="2.5" opacity=".6" ${L}/>`,
+    };
+    case 'herisses': return {
+      derriere: `<path d="M54 120 C50 58 90 38 120 38 C152 38 192 58 186 120 C188 150 182 172 170 178 L70 178 C58 172 52 150 54 120Z" ${trait}/>`,
+      devant: `<path d="M58 114 L60 74 L74 84 L80 50 L94 70 L104 36 L116 62 L126 30 L136 60 L148 38 L156 68 L168 50 L172 82 L182 72 L182 114 C170 94 150 84 120 84 C90 84 70 94 58 114Z" ${trait}/>`,
+    };
     case 'mi-longs': return {
       derriere: `<path d="M54 116 C50 58 90 38 120 38 C152 38 192 58 186 116 L190 214 Q174 224 160 216 L80 216 Q66 224 50 214Z" ${trait}/>`,
       devant: frangeCote,
@@ -224,6 +243,7 @@ const MOTIFS = {
   paillettes: () => [[96, 224], [118, 214], [142, 226], [106, 280], [134, 286], [120, 300], [90, 300], [150, 298]].map(([x, y]) =>
     `<path d="M${x} ${y - 5} L${x + 1.5} ${y - 1.5} L${x + 5} ${y} L${x + 1.5} ${y + 1.5} L${x} ${y + 5} L${x - 1.5} ${y + 1.5} L${x - 5} ${y} L${x - 1.5} ${y - 1.5}Z" fill="#fff"/>`).join(''),
   rayures: () => [216, 230, 244, 258].map((y) => `<path d="M84 ${y} H156" stroke="#2e4f9a" stroke-width="6"/>`).join(''),
+  carreaux: () => [100, 120, 140].map((x) => `<path d="M${x} 202 V266" stroke="#fff" stroke-width="3" opacity=".6"/>`).join('') + [218, 238, 258].map((y) => `<path d="M80 ${y} H160" stroke="#fff" stroke-width="3" opacity=".6"/>`).join(''),
   boutons: () => '<path d="M120 204 V266" stroke="#2e3f66" stroke-width="2.5"/>' + [222, 240, 258].map((y) => `<circle cx="126" cy="${y}" r="3" fill="#f2c230"/>`).join(''),
 };
 

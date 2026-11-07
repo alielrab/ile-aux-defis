@@ -4,6 +4,12 @@
 // Deux parts : CLE = ce qui pourra être synchronisé ; CLE_APPAREIL = ce qui ne quitte jamais l'appareil (la croyance).
 import { CROYANCES, RELIGIONS, illustrationsParDefaut } from './croyances.js';
 import { avatarValide, AGE_MIN, AGE_MAX, AVATAR_PAR_DEFAUT, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART } from './avatar.js';
+import { GENRES } from './genre.js';
+
+function verifierGenre(genre) {
+  if (!(genre in GENRES)) throw new Error('Choisis : fille ou garçon.');
+  return genre;
+}
 
 const CLE = 'ile-aux-defis';
 const CLE_APPAREIL = 'ile-aux-defis-appareil';
@@ -42,9 +48,10 @@ function verifierPrenomAge(prenom, age) {
 
 // Écran parent : changer le prénom et l'âge (l'avatar grandit avec l'âge).
 // poids (kg, facultatif) : pour l'observatoire. null = pas de poids.
-export function modifierProfil(profil, { prenom, age, poids = profil.poids ?? null }) {
+export function modifierProfil(profil, { prenom, age, poids = profil.poids ?? null, genre = profil.genre ?? 'fille' }) {
   if (poids !== null && !(Number.isInteger(poids) && poids >= 8 && poids <= 150)) throw new Error('Le poids doit être un nombre entier de kilos, entre 8 et 150.');
   profil.prenom = verifierPrenomAge(prenom, age);
+  profil.genre = verifierGenre(genre);
   profil.age = age;
   profil.poids = poids;
 }
@@ -64,10 +71,11 @@ export const maisonVide = () => ({ piece: 'chambre', papiers: {}, places: [], ta
 // Un identifiant unique, valable aussi entre plusieurs appareils une fois synchronisés.
 const nouvelId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
-export function ajouterProfil(etat, { prenom, age, avatar }) {
+export function ajouterProfil(etat, { prenom, age, avatar, genre = 'fille' }) {
   prenom = verifierPrenomAge(prenom, age);
+  verifierGenre(genre);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [] };
+  const profil = { id: nouvelId(), prenom, genre, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [] };
   etat.profils.push(profil);
   return profil;
 }
@@ -82,6 +90,7 @@ export function charger(stockage = globalThis.localStorage) {
     etat.reglages ??= { suivante: 'auto' }; // après une réponse : 'auto' (quand la voix a fini, + 1 s) ou 'bouton' (« Question suivante »)
     for (const p of etat.profils) {
       // compléter les profils créés pendant les premiers essais
+      p.genre ??= 'fille'; // les premiers profils ont été créés pour deux filles
       p.avatar.yeux ??= 'marron';
       p.avatar.accessoires ??= [];
       p.recettes ??= {}; // restaurant : 'debloquee' puis 'faite'

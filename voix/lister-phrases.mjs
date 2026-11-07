@@ -3,6 +3,7 @@
 // Les phrases qui changent (prénoms, nombres, scores) ne sont pas dans la liste : la voix de la tablette les dira toujours.
 // L'identifiant servira de nom de fichier audio (ex. atlas.squelette.crane.petit.mp3).
 import { readFileSync, writeFileSync } from 'node:fs';
+import { accorder } from '../js/genre.js';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
@@ -13,11 +14,12 @@ const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emoti
 ]);
 
 const lignes = [], vus = new Set();
+// Une phrase qui s'accorde au genre ({fort|forte}) donne deux lignes : id.garcon et id.fille
 const ajouter = (id, source, texte) => {
   const t = String(texte ?? '').trim();
-  if (!t || vus.has(t) || t.includes('${')) return;
-  vus.add(t);
-  lignes.push([id, source, t]);
+  if (!t || t.includes('${')) return;
+  const versions = /\{[^{}|]*\|[^{}|]*\}/.test(t) ? [[`${id}.garcon`, accorder(t, 'garcon')], [`${id}.fille`, accorder(t, 'fille')]] : [[id, t]];
+  for (const [i, v] of versions) if (!vus.has(v)) { vus.add(v); lignes.push([i, source, v]); }
 };
 // Une banque de questions [question, bonne, [autres], « Le savais-tu ? »] : la question, chaque réponse, le savais-tu
 const banque = (id, source, liste) => liste.forEach(([q, bonne, autres, savais], i) => {

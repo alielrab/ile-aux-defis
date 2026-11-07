@@ -40,6 +40,9 @@
           <label class="seulement-creation">Ton âge
             <select name="age" required></select>
           </label>
+          <fieldset class="seulement-creation"><legend>Tu es…</legend>
+            <div class="choix-genre"><label><input type="radio" name="genre" value="fille"> <span>👧 une fille</span></label><label><input type="radio" name="genre" value="garcon"> <span>👦 un garçon</span></label></div>
+          </fieldset>
           <fieldset><legend>Ta peau</legend><div class="choix choix-couleurs" data-options="peau"></div></fieldset>
           <fieldset><legend>Tes yeux</legend><div class="choix choix-couleurs" data-options="yeux"></div></fieldset>
           <fieldset><legend>Ta coiffure</legend><div class="choix choix-dessins" data-options="coiffure"></div></fieldset>
@@ -126,7 +129,7 @@
 
     <section data-ecran="ile" hidden>
       <header class="barre">
-        <button id="changer" class="rond" aria-label="Changer de joueuse">⇄</button>
+        <button id="changer" class="rond" aria-label="Changer de profil">⇄</button>
         <span id="ile-joueuse" class="joueuse"></span>
         <span id="ile-etoiles" class="etoiles"></span>
       </header>

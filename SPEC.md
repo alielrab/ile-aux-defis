@@ -37,6 +37,15 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
 - **Avatar** (option A, choisie le 2026-11-04) : enfant dessiné en SVG fait maison, avec contours, ombres et reflets, en entier (corps visible). Il s'adapte à l'âge : plus jeune = plus petite, tête plus grosse, corps plus court. Quand l'âge est mis à jour dans l'écran parent, l'avatar grandit. Coiffures, couleurs, tenues et bijoux achetés s'appliquent à cet avatar ; plusieurs bijoux à la fois.
 - Écran d'accueil : 2 grosses tuiles (prénom + avatar). Un appui = on entre.
 
+### Fille ou garçon
+- **À la création d'un profil**, on choisit « une fille » ou « un garçon ». Le choix est obligatoire et reste modifiable dans l'espace parents. Les profils créés avant sont des filles.
+- **Le personnage de départ** est proposé selon ce choix (garçon : coupe courte et polo vert) et reste entièrement modifiable.
+- **Nouvelles coiffures et tenues de départ**, gratuites et proposées à tous : très courts, mèche sur le côté, hérissés ; polo vert, chemise à carreaux, sweat gris, t-shirt à rayures.
+- **Boutiques** : tous les objets restent accessibles à tous, sans rien classer « pour filles » ou « pour garçons ».
+- **Accord des textes** (`js/genre.js`) : les textes s'écrivent avec des marques « {masculin|féminin} », par exemple « Tu es trop {fort|forte} ! ». Les phrases dites à voix haute s'accordent toutes au genre du profil, dans `parler` ; les textes affichés aussi (question, bulle de réponse, météo du jour).
+- **« Bienvenue ! »** (formule d'accueil) reste invariable : c'est la bonne orthographe pour une fille comme pour un garçon.
+- **La liste des phrases à enregistrer** (`voix/phrases.csv`) donne les deux versions des phrases qui s'accordent (`….garcon` et `….fille`).
+
 ### L'archipel
 - **Carte de l'archipel** (`js/archipel.js`, dessins dans `js/carte.js`) : des îles thématiques reliées par un bateau, et deux emplacements « Bientôt… » pour les prochaines îles.
   - Après le choix du profil, on arrive sur cette carte. On touche une île pour y aller.

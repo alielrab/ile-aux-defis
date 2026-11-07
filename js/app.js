@@ -3,6 +3,7 @@ import * as croyance from './croyances.js';
 import * as recits from './recits.js';
 import * as rapprochements from './rapprochements.js';
 import {
+  AVATAR_DE_DEPART,
   PEAUX, CHEVEUX, YEUX, COIFFURES, TENUES, TENUES_DE_DEPART, COIFFURES_DE_DEPART, CHEVEUX_DE_DEPART,
   AVATAR_PAR_DEFAUT, AGE_MIN, AGE_MAX, dessinerAvatar,
 } from './avatar.js';
@@ -27,7 +28,8 @@ import * as dinos from './jeux/dinos.js';
 import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
 import * as voixParents from './enregistrements.js';
-import { parler, taire, bip, repeter, attendreSilence } from './voix.js';
+import { parler, taire, bip, repeter, attendreSilence, choisirGenre } from './voix.js';
+import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
 
 let etat = charger();
@@ -88,8 +90,8 @@ function remplirOptions(nom, valeurs, nomLisible, dessin, choisi = AVATAR_PAR_DE
 const pastille = (couleur) => `<i class="pastille" style="background:${couleur}"></i>`;
 
 // Création : les choix de départ. Modification : tout ce que la joueuse possède (dont ses achats).
-function preparerOptions(profil) {
-  const choisi = profil?.avatar ?? AVATAR_PAR_DEFAUT;
+function preparerOptions(profil, depart = AVATAR_PAR_DEFAUT) {
+  const choisi = profil?.avatar ?? depart;
   const aElle = (type, depart) => (profil ? CATALOGUE.filter((a) => a.type === type && possede(profil, a)).map((a) => a.cle) : depart);
   remplirOptions('peau', Object.keys(PEAUX), (v) => `Peau ${v.replace('-', ' ')}`, (v) => pastille(PEAUX[v]), choisi.peau);
   remplirOptions('yeux', Object.keys(YEUX), (v) => `Yeux ${v}`, (v) => pastille(YEUX[v]), choisi.yeux);
@@ -107,7 +109,13 @@ function majApercus() {
   $('#apercu').innerHTML = dessinerAvatar(a, 'entier', profilModifie?.age ?? Number(formProfil.age.value));
 }
 
-formProfil.addEventListener('change', majApercus);
+formProfil.addEventListener('change', (ev) => {
+  if (ev.target.name === 'genre' && !profilModifie) { // un personnage de départ selon le genre ; tout reste modifiable
+    preparerOptions(null, AVATAR_DE_DEPART[ev.target.value]);
+    for (const i of formProfil.querySelectorAll('.options input[type=radio]:not([name=genre])')) i.checked = i.defaultChecked;
+  }
+  majApercus();
+});
 
 function ouvrirProfil(profil = null) {
   profilModifie = profil;
@@ -129,7 +137,10 @@ formProfil.addEventListener('submit', (ev) => {
   const f = ev.target;
   try {
     if (profilModifie) modifierAvatar(profilModifie, avatarDuFormulaire());
-    else ajouterProfil(etat, { prenom: f.prenom.value, age: Number(f.age.value) || undefined, avatar: avatarDuFormulaire() });
+    else {
+      if (!f.genre.value) throw new Error('Choisis : fille ou garçon.');
+      ajouterProfil(etat, { prenom: f.prenom.value, age: Number(f.age.value) || undefined, avatar: avatarDuFormulaire(), genre: f.genre.value });
+    }
   } catch (e) {
     return (f.querySelector('.erreur').textContent = e.message);
   }
@@ -155,8 +166,12 @@ function afficherAccueil() {
 // L'archipel : ileCourante = l'île où se trouve la joueuse (null = la carte de l'archipel).
 // Les boutons « retour » des jeux et des magasins ramènent sur l'île où l'on était.
 let ileCourante = null, ileAConfirmer = null;
+// Accorder un texte affiché au genre de l'enfant qui joue (les phrases dites le sont dans parler)
+const acc = (t) => accorder(t, joueuse?.genre);
+
 function ouvrirIle(p = joueuse) {
   joueuse = p;
+  choisirGenre(p.genre ?? 'fille');
   ileAConfirmer = null;
   $('#ile-joueuse').innerHTML = `<span class="mini-avatar">${dessinerAvatar(p.avatar, 'tete')}</span><span></span>`;
   $('#ile-joueuse').lastChild.textContent = p.prenom;
@@ -448,7 +463,7 @@ function boutonsReponses(valeurs, libelle = String, texte = false) {
 function afficherQuestion() {
   const q = questionEnCours(partie);
   $('#progression').textContent = `Question ${partie.index + 1} / ${partie.questions.length}`;
-  $('#question').textContent = jeu === 'calcul' ? `${q.texte} = ?` : q.titre;
+  $('#question').textContent = jeu === 'calcul' ? `${q.texte} = ?` : acc(q.titre);
   $('#retour').textContent = partie.index === 0 ? `À toi, ${joueuse.prenom} !` : '';
   $('#retour').classList.remove('longue');
   $('#aide').setAttribute('aria-hidden', jeu === 'calcul'); // les images du calcul : décoratives
@@ -649,7 +664,7 @@ async function choisir(choix) {
   const ici = jeu === 'corps' && q.mode === 'toucher' ? `Ça, c'est ${corps.PARTIES[choix].nom}. ` : '';
   const correction = juste ? '' : ici + (q.solution ?? `La bonne réponse est ${q.reponse}.`);
   const suite = [q.trouve, correction, q.savaisTu && `Le savais-tu ? ${q.savaisTu}`].filter(Boolean).join(' ');
-  $('#retour').textContent = `${m.texte} ${suite}`.trim();
+  $('#retour').textContent = acc(`${m.texte} ${suite}`.trim());
   $('#retour').classList.toggle('longue', suite.length > 60);
   const passer = () => {
     if (p !== partie || $('[data-ecran="jeu"]').hidden) return; // partie quittée entre-temps
@@ -1207,7 +1222,7 @@ function afficherEmotions(choix = null) {
   })));
   if (choix) {
     const [, , , reponse] = emotions.METEO.find(([c]) => c === choix);
-    v.append(el('p', { className: 'carte presentation', textContent: reponse }));
+    v.append(el('p', { className: 'carte presentation', textContent: acc(reponse) }));
   }
   v.append(gros('🫧 Respirer avec moi', () => respirer(v)), gros("⭐ Devine l'émotion", () => { arreterRespiration(); lancerJeu('emotions'); }));
 }
@@ -1602,6 +1617,7 @@ function afficherParents(message = null) {
     f.innerHTML = `<div class="parents-tete"><span class="mini-avatar">${dessinerAvatar(p.avatar, 'tete')}</span><h2></h2></div>
       <label>Prénom <input name="prenom" maxlength="20" autocomplete="off"></label>
       <label>Âge <select name="age"></select></label>
+      <label>Fille ou garçon <select name="genre"><option value="fille">Fille</option><option value="garcon">Garçon</option></select></label>
       <label>Poids en kilos <small>(facultatif, pour l'observatoire)</small> <input name="poids" type="number" inputmode="numeric" min="8" max="150"></label>
       <p class="info-profil"></p>
       <p class="erreur" role="status"></p>
@@ -1609,6 +1625,7 @@ function afficherParents(message = null) {
     f.querySelector('h2').textContent = p.prenom;
     f.prenom.value = p.prenom;
     f.poids.value = p.poids ?? '';
+    f.genre.value = p.genre ?? 'fille';
     f.age.append(...Array.from({ length: AGE_MAX - AGE_MIN + 1 }, (_, i) => new Option(`${AGE_MIN + i} ans`, AGE_MIN + i, false, AGE_MIN + i === p.age)));
     f.querySelector('.info-profil').textContent = `⭐ ${formatEtoiles(p.etoiles)} étoiles, ${p.objets.length} achat${p.objets.length > 1 ? 's' : ''}`;
     const info = f.querySelector('.erreur');
@@ -1616,7 +1633,7 @@ function afficherParents(message = null) {
     f.addEventListener('submit', (ev) => {
       ev.preventDefault();
       try {
-        modifierProfil(p, { prenom: f.prenom.value, age: Number(f.age.value), poids: f.poids.value === '' ? null : Number(f.poids.value) });
+        modifierProfil(p, { prenom: f.prenom.value, age: Number(f.age.value), poids: f.poids.value === '' ? null : Number(f.poids.value), genre: f.genre.value });
       } catch (e) {
         return noter(info, e.message);
       }

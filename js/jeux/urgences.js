@@ -24,7 +24,7 @@ export const RASSURER = 'Les secours sont des personnes gentilles, dont le méti
 // [situation, image, bonne réponse (numéro ou « pas »), le savais-tu]
 export const SITUATIONS = [
   ['Grand-papa est tombé dans le jardin, et il n’arrive plus à se relever.', '👴', '144', 'Les ambulanciers savent soigner, et ils emmènent à l’hôpital si c’est nécessaire.'],
-  ['Papa s’est allongé par terre et ne répond plus quand tu lui parles.', '🛋️', '144', 'Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant. Tu n’es pas seul, tu n’es pas seule.'],
+  ['Papa s’est allongé par terre et ne répond plus quand tu lui parles.', '🛋️', '144', 'Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant. Tu n’es pas {seul|seule}.'],
   ['La voisine est tombée dans l’escalier et s’est fait très mal.', '🩹', '144', 'Reste près d’elle si tu peux, et ouvre la porte quand l’ambulance arrive.'],
   ['Quelqu’un a beaucoup de mal à respirer et devient tout pâle.', '😮‍💨', '144', 'Quand quelqu’un respire mal, il faut vite appeler : les secours arrivent rapidement.'],
   ['Tu vois de la fumée qui sort de la fenêtre d’une maison.', '🏠', '118', 'Les pompiers arrivent avec leur grand camion rouge et de l’eau pour éteindre le feu.'],

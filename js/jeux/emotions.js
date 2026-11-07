@@ -22,11 +22,11 @@ export const proches = (a, b) => PROCHES.some(([x, y]) => (x === a && y === b) |
 export const CONSEILS = {
   joie: 'La joie, ça donne envie de sourire, de rire et de la partager avec les autres !',
   tristesse: "Quand on est triste, ça fait du bien de pleurer, de faire un câlin, ou d'en parler à quelqu'un.",
-  colere: 'La colère, c’est normal. On peut dire « Je suis fâché », respirer lentement, sans taper ni casser.',
+  colere: 'La colère, c’est normal. On peut dire « Je suis {fâché|fâchée} », respirer lentement, sans taper ni casser.',
   peur: 'Quand on a peur, on peut appeler un adulte, allumer la lumière ou serrer son doudou.',
   surprise: 'La surprise arrive d’un coup, et elle passe très vite !',
   degout: 'Le dégoût nous protège : il nous dit de ne pas toucher ou manger ce qui pourrait nous rendre malades.',
-  fierte: "Être fier de soi, c'est reconnaître ses efforts. Tu as le droit d'être fier ou fière de toi !",
+  fierte: "Être fier de soi, c'est reconnaître ses efforts. Tu as le droit d'être {fier|fière} de toi !",
   jalousie: 'La jalousie arrive à tout le monde. Ça aide d’en parler, au lieu de la garder pour soi.',
   ennui: "L'ennui aide parfois à inventer de nouveaux jeux : laisse venir les idées !",
   timidite: 'Être timide, ce n’est pas grave. On peut commencer par un sourire, ou dire bonjour tout doucement.',
@@ -79,7 +79,7 @@ export const METEO = [
   ['calme', '⛅', 'Quelques nuages : le calme', 'Un jour calme, c’est bien aussi. Tu peux te reposer, lire ou dessiner tranquillement.'],
   ['tristesse', '🌧️', 'La pluie : la tristesse', "C'est normal d'être triste parfois. Un câlin, un dessin ou en parler à un adulte de confiance peut aider. Après la pluie, le soleil revient."],
   ['colere', '⛈️', "L'orage : la colère", 'La colère, c’est comme un orage : ça passe. Viens respirer avec moi pour la calmer doucement.'],
-  ['peur', '🌫️', 'Le brouillard : la peur ou l’inquiétude', 'Quand tout est flou et qu’on a peur, on peut en parler à un adulte de confiance. Tu n’es pas seul, tu n’es pas seule.'],
+  ['peur', '🌫️', 'Le brouillard : la peur ou l’inquiétude', 'Quand tout est flou et qu’on a peur, on peut en parler à un adulte de confiance. Tu n’es pas {seul|seule}.'],
 ];
 
 const nomsSet = (age) => Object.keys(EMOTIONS).filter((e) => age > 7 || !EMOTIONS[e].grand);

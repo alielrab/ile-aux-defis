@@ -86,7 +86,7 @@ export const FACILES = [
     "Le bâillement est contagieux : quand quelqu'un bâille, on a souvent envie de bâiller aussi !"],
   ['Quel est le doigt le plus gros de la main ?', 'Le pouce', ['Le petit doigt', 'Le majeur', "L'index"],
     'Grâce au pouce, tu peux attraper les objets et tenir un crayon.'],
-  ['Que fait ton nez quand tu es enrhumé ?', 'Il coule', ['Il chante', 'Il grandit', 'Il devient bleu'],
+  ['Que fait ton nez quand tu es {enrhumé|enrhumée} ?', 'Il coule', ['Il chante', 'Il grandit', 'Il devient bleu'],
     'Ce liquide attrape les microbes : mouche-toi et jette le mouchoir !'],
   ['À quoi servent les larmes ?', 'À protéger et nettoyer les yeux', ['À arroser les plantes', 'À faire grandir', 'À faire pousser les cils'],
     'Tes yeux fabriquent un peu de larmes tout le temps, même quand tu ne pleures pas.'],

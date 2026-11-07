@@ -590,6 +590,12 @@ select {
 .visage { width: min(52vw, 32dvh, 220px); height: auto; }
 @media (prefers-reduced-motion: reduce) { .bulle-respiration { transition: none; } }
 
+/* Fille ou garçon (création du profil) */
+.choix-genre { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.choix-genre label { display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.9rem; border-radius: 999px; background: #fffdf5; font-weight: 700; cursor: pointer; min-height: var(--toucher); }
+.choix-genre input { width: 24px; height: 24px; }
+.choix-genre label:has(input:checked) { outline: 4px solid var(--accent); }
+
 /* Archipel */
 .archipel .ile { cursor: pointer; transform-box: fill-box; transform-origin: center; transition: transform 0.15s; }
 .archipel .ile:hover, .archipel .ile:focus-visible { transform: scale(1.04); }

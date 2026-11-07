@@ -3,7 +3,8 @@ message.felicitation.1;Messages;Bravo !
 message.felicitation.2;Messages;Super !
 message.felicitation.3;Messages;Excellent !
 message.felicitation.4;Messages;Continue comme ça !
-message.felicitation.5;Messages;Tu es trop forte !
+message.felicitation.5.garcon;Messages;Tu es trop fort !
+message.felicitation.5.fille;Messages;Tu es trop forte !
 message.felicitation.6;Messages;Génial !
 message.felicitation.7;Messages;Bien joué !
 message.felicitation.8;Messages;Waouh, bravo !
@@ -16,7 +17,8 @@ message.encouragement.4;Messages;Tu vas y arriver !
 message.encouragement.5;Messages;Ce n'est pas grave !
 message.serie.3;Messages;3 de suite !
 message.serie.5;Messages;5 d'affilée, incroyable !
-message.serie.7;Messages;7 de suite, quelle championne !
+message.serie.7.garcon;Messages;7 de suite, quel champion !
+message.serie.7.fille;Messages;7 de suite, quelle championne !
 message.serie.10;Messages;Dix sur dix, un sans-faute !
 hopital.facile.1.question;Hôpital : le grand quiz;Combien as-tu de doigts en tout, aux deux mains ?
 hopital.facile.1.reponse1;Hôpital : le grand quiz;10
@@ -230,7 +232,8 @@ hopital.facile.41.reponse2;Hôpital : le grand quiz;Le petit doigt
 hopital.facile.41.reponse3;Hôpital : le grand quiz;Le majeur
 hopital.facile.41.reponse4;Hôpital : le grand quiz;L'index
 hopital.facile.41.savais;Hôpital : le grand quiz;Le savais-tu ? Grâce au pouce, tu peux attraper les objets et tenir un crayon.
-hopital.facile.42.question;Hôpital : le grand quiz;Que fait ton nez quand tu es enrhumé ?
+hopital.facile.42.question.garcon;Hôpital : le grand quiz;Que fait ton nez quand tu es enrhumé ?
+hopital.facile.42.question.fille;Hôpital : le grand quiz;Que fait ton nez quand tu es enrhumée ?
 hopital.facile.42.reponse1;Hôpital : le grand quiz;Il coule
 hopital.facile.42.reponse2;Hôpital : le grand quiz;Il chante
 hopital.facile.42.reponse3;Hôpital : le grand quiz;Il grandit
@@ -3608,11 +3611,13 @@ emotion.inquietude.nom;Météo des émotions;L'inquiétude
 emotion.deception.nom;Météo des émotions;La déception
 emotion.joie.conseil;Météo des émotions;Le savais-tu ? La joie, ça donne envie de sourire, de rire et de la partager avec les autres !
 emotion.tristesse.conseil;Météo des émotions;Le savais-tu ? Quand on est triste, ça fait du bien de pleurer, de faire un câlin, ou d'en parler à quelqu'un.
-emotion.colere.conseil;Météo des émotions;Le savais-tu ? La colère, c’est normal. On peut dire « Je suis fâché », respirer lentement, sans taper ni casser.
+emotion.colere.conseil.garcon;Météo des émotions;Le savais-tu ? La colère, c’est normal. On peut dire « Je suis fâché », respirer lentement, sans taper ni casser.
+emotion.colere.conseil.fille;Météo des émotions;Le savais-tu ? La colère, c’est normal. On peut dire « Je suis fâchée », respirer lentement, sans taper ni casser.
 emotion.peur.conseil;Météo des émotions;Le savais-tu ? Quand on a peur, on peut appeler un adulte, allumer la lumière ou serrer son doudou.
 emotion.surprise.conseil;Météo des émotions;Le savais-tu ? La surprise arrive d’un coup, et elle passe très vite !
 emotion.degout.conseil;Météo des émotions;Le savais-tu ? Le dégoût nous protège : il nous dit de ne pas toucher ou manger ce qui pourrait nous rendre malades.
-emotion.fierte.conseil;Météo des émotions;Le savais-tu ? Être fier de soi, c'est reconnaître ses efforts. Tu as le droit d'être fier ou fière de toi !
+emotion.fierte.conseil.garcon;Météo des émotions;Le savais-tu ? Être fier de soi, c'est reconnaître ses efforts. Tu as le droit d'être fier de toi !
+emotion.fierte.conseil.fille;Météo des émotions;Le savais-tu ? Être fier de soi, c'est reconnaître ses efforts. Tu as le droit d'être fière de toi !
 emotion.jalousie.conseil;Météo des émotions;Le savais-tu ? La jalousie arrive à tout le monde. Ça aide d’en parler, au lieu de la garder pour soi.
 emotion.ennui.conseil;Météo des émotions;Le savais-tu ? L'ennui aide parfois à inventer de nouveaux jeux : laisse venir les idées !
 emotion.timidite.conseil;Météo des émotions;Le savais-tu ? Être timide, ce n’est pas grave. On peut commencer par un sourire, ou dire bonjour tout doucement.
@@ -3659,7 +3664,8 @@ meteo.tristesse.reponse;Météo des émotions;C'est normal d'être triste parfoi
 meteo.colere.nom;Météo des émotions;L'orage : la colère
 meteo.colere.reponse;Météo des émotions;La colère, c’est comme un orage : ça passe. Viens respirer avec moi pour la calmer doucement.
 meteo.peur.nom;Météo des émotions;Le brouillard : la peur ou l’inquiétude
-meteo.peur.reponse;Météo des émotions;Quand tout est flou et qu’on a peur, on peut en parler à un adulte de confiance. Tu n’es pas seul, tu n’es pas seule.
+meteo.peur.reponse.garcon;Météo des émotions;Quand tout est flou et qu’on a peur, on peut en parler à un adulte de confiance. Tu n’es pas seul.
+meteo.peur.reponse.fille;Météo des émotions;Quand tout est flou et qu’on a peur, on peut en parler à un adulte de confiance. Tu n’es pas seule.
 restaurant.crepes.nom;Restaurant;Crêpes
 restaurant.ingredient.la-farine;Restaurant;la farine
 restaurant.ingredient.le-sucre;Restaurant;le sucre
@@ -3887,7 +3893,8 @@ urgences.reponse.pas;Numéros d'urgence (à faire relire);Pas une urgence : je d
 urgences.situation1;Numéros d'urgence (à faire relire);Grand-papa est tombé dans le jardin, et il n’arrive plus à se relever.
 urgences.situation1.savais;Numéros d'urgence (à faire relire);Le savais-tu ? Les ambulanciers savent soigner, et ils emmènent à l’hôpital si c’est nécessaire.
 urgences.situation2;Numéros d'urgence (à faire relire);Papa s’est allongé par terre et ne répond plus quand tu lui parles.
-urgences.situation2.savais;Numéros d'urgence (à faire relire);Le savais-tu ? Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant. Tu n’es pas seul, tu n’es pas seule.
+urgences.situation2.savais.garcon;Numéros d'urgence (à faire relire);Le savais-tu ? Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant. Tu n’es pas seul.
+urgences.situation2.savais.fille;Numéros d'urgence (à faire relire);Le savais-tu ? Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant. Tu n’es pas seule.
 urgences.situation3;Numéros d'urgence (à faire relire);La voisine est tombée dans l’escalier et s’est fait très mal.
 urgences.situation3.savais;Numéros d'urgence (à faire relire);Le savais-tu ? Reste près d’elle si tu peux, et ouvre la porte quand l’ambulance arrive.
 urgences.situation4;Numéros d'urgence (à faire relire);Quelqu’un a beaucoup de mal à respirer et devient tout pâle.
@@ -4123,6 +4130,10 @@ objet.tenue.robe-jaune;Magasins (noms des objets);Robe jaune
 objet.tenue.tshirt-rouge;Magasins (noms des objets);T-shirt rouge et jupe
 objet.tenue.pull-violet;Magasins (noms des objets);Pull violet
 objet.tenue.tshirt-turquoise;Magasins (noms des objets);T-shirt turquoise
+objet.tenue.polo-vert;Magasins (noms des objets);Polo vert et bermuda
+objet.tenue.chemise-carreaux;Magasins (noms des objets);Chemise à carreaux
+objet.tenue.sweat-gris;Magasins (noms des objets);Sweat gris
+objet.tenue.tshirt-rayures;Magasins (noms des objets);T-shirt à rayures
 objet.tenue.princesse;Magasins (noms des objets);Robe de princesse
 objet.tenue.heroine;Magasins (noms des objets);Super-héroïne
 objet.tenue.sport;Magasins (noms des objets);Maillot de foot
@@ -4179,6 +4190,9 @@ objet.coiffure.mi-longs;Magasins (noms des objets);Mi-longs
 objet.coiffure.frange;Magasins (noms des objets);Frange droite
 objet.coiffure.tresse-cote;Magasins (noms des objets);Tresse sur le côté
 objet.coiffure.chignons;Magasins (noms des objets);Deux chignons hauts
+objet.coiffure.tres-courts;Magasins (noms des objets);Très courts
+objet.coiffure.meche;Magasins (noms des objets);Mèche sur le côté
+objet.coiffure.herisses;Magasins (noms des objets);Hérissés
 objet.cheveux.noir;Magasins (noms des objets);Cheveux noir
 objet.cheveux.brun;Magasins (noms des objets);Cheveux brun
 objet.cheveux.chatain;Magasins (noms des objets);Cheveux châtain

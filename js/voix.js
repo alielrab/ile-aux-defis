@@ -1,4 +1,9 @@
 // Voix (synthèse vocale du système) et petits sons. Marche sans internet si une voix française est installée.
+import { accorder } from './genre.js';
+
+// Le genre de l'enfant qui joue : toutes les phrases dites s'accordent (« Tu es trop {fort|forte} ! »)
+let genre = 'fille';
+export const choisirGenre = (g) => { genre = g; };
 
 // La voix française la plus naturelle disponible. Hors-ligne, seulement les voix installées sur l'appareil.
 export function choisirVoix(voix, enLigne = true) {
@@ -19,6 +24,7 @@ let derniere = { texte: '', ton: 1 };
 export const repeter = () => parler(derniere.texte, { ton: derniere.ton });
 
 export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
+  texte = accorder(texte, genre);
   derniere = { texte, ton };
   return new Promise((fini) => {
     const synth = globalThis.speechSynthesis;
