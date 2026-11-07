@@ -29,3 +29,23 @@ test('chaque pièce montre ses objets posés, et les animaux suivent l’enfant'
   assert.ok(!dessinerPiece(p, 'chambre').includes('#f2a654'));
   for (const piece of ['chambre', 'salon', 'jeux']) assert.ok(!dessinerPiece(p, piece).includes('undefined'));
 });
+
+test('chaque meuble et jouet vendu a un dessin qui apparaît dans sa pièce ; la couleur du lit change le dessin', async () => {
+  const { MEUBLES, JOUETS, COULEURS_LIT, CATALOGUE, acheter, estUtilise } = await import('../js/catalogue.js');
+  const { dessinerPiece, apercu } = await import('../js/maison.js');
+  const { AVATAR_PAR_DEFAUT } = await import('../js/avatar.js');
+  for (const [type, liste] of [['meuble', MEUBLES], ['jouet', JOUETS]]) {
+    for (const [cle, o] of Object.entries(liste)) {
+      const vide = { avatar: AVATAR_PAR_DEFAUT, age: 8, maison: { piece: o.piece, papiers: {}, places: [], tableaux: {} } };
+      const avec = { ...vide, maison: { ...vide.maison, places: [`${type}:${cle}`] } };
+      assert.ok(dessinerPiece(avec).length > dessinerPiece(vide).length, `${cle} n'est pas dessiné`);
+    }
+  }
+  for (const a of CATALOGUE) assert.ok(apercu(a, { avatar: AVATAR_PAR_DEFAUT, age: 8 }).includes('<svg'), a.id);
+  const p = { etoiles: 100, objets: [], avatar: AVATAR_PAR_DEFAUT, age: 8, maison: { piece: 'chambre', papiers: {}, places: ['meuble:lit'], tableaux: {} } };
+  assert.ok(estUtilise(p, CATALOGUE.find((a) => a.id === 'lit:rose')));
+  acheter(p, 'lit:bleu');
+  assert.equal(p.maison.lit, 'bleu');
+  assert.ok(dessinerPiece(p).includes(COULEURS_LIT.bleu.couleur));
+  assert.equal(p.etoiles, 100 - COULEURS_LIT.bleu.prix);
+});

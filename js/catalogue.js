@@ -21,6 +21,29 @@ export const MEUBLES = {
   bibliotheque: { nom: 'Bibliothèque', prix: 12, piece: 'salon' },
   tele: { nom: 'Télévision', prix: 15, piece: 'salon' },
   canape: { nom: 'Canapé', prix: 18, piece: 'salon' },
+  horloge: { nom: 'Horloge', prix: 8, piece: 'chambre' },
+  pouf: { nom: 'Pouf', prix: 9, piece: 'chambre' },
+  guirlande: { nom: 'Guirlande lumineuse', prix: 10, piece: 'chambre' },
+  coffre: { nom: 'Coffre à jouets', prix: 12, piece: 'chambre' },
+  miroir: { nom: 'Miroir', prix: 9, piece: 'salon' },
+  'plante-salon': { nom: 'Grande plante', prix: 8, piece: 'salon' },
+  'tapis-salon': { nom: 'Tapis du salon', prix: 10, piece: 'salon' },
+  'tableau-noir': { nom: 'Tableau noir', prix: 12, piece: 'jeux' },
+  // la cuisine complète (le four, la poêle… se gagnent au restaurant)
+  'etagere-cuisine': { nom: 'Étagère à bocaux', prix: 8, piece: 'cuisine' },
+  chaises: { nom: 'Chaises', prix: 10, piece: 'cuisine' },
+  placard: { nom: 'Placard', prix: 12, piece: 'cuisine' },
+  evier: { nom: 'Évier', prix: 14, piece: 'cuisine' },
+  'table-cuisine': { nom: 'Table de cuisine', prix: 14, piece: 'cuisine' },
+  'lave-vaisselle': { nom: 'Lave-vaisselle', prix: 15, piece: 'cuisine' },
+  frigo: { nom: 'Frigo', prix: 20, piece: 'cuisine' },
+};
+// La couleur de la couverture du lit (rose au départ)
+export const COULEURS_LIT = {
+  rose: { nom: 'Lit rose', prix: 0, couleur: '#f080b0' }, bleu: { nom: 'Lit bleu', prix: 6, couleur: '#5b9ae0' },
+  vert: { nom: 'Lit vert', prix: 6, couleur: '#5cb85c' }, jaune: { nom: 'Lit jaune', prix: 6, couleur: '#f2c230' },
+  turquoise: { nom: 'Lit turquoise', prix: 6, couleur: '#2bb3a0' }, violet: { nom: 'Lit violet', prix: 8, couleur: '#8e6ad8' },
+  rouge: { nom: 'Lit rouge', prix: 8, couleur: '#e05252' },
 };
 export const JOUETS = {
   ballon: { nom: 'Ballon', prix: 4, piece: 'chambre' },
@@ -30,6 +53,8 @@ export const JOUETS = {
   train: { nom: 'Petit train', prix: 10, piece: 'jeux' },
   manege: { nom: 'Manège', prix: 15, piece: 'jeux' },
   toboggan: { nom: 'Toboggan', prix: 18, piece: 'jeux' },
+  cubes: { nom: 'Cubes à lettres', prix: 6, piece: 'jeux' },
+  'piscine-balles': { nom: 'Piscine à balles', prix: 20, piece: 'jeux' },
 };
 export const PAPIERS = {
   menthe: { nom: 'Vert menthe', prix: 8 },
@@ -61,6 +86,7 @@ export const CATALOGUE = [
   ...articles('meuble', MEUBLES, (k) => MEUBLES[k].nom),
   ...articles('jouet', JOUETS, (k) => JOUETS[k].nom),
   ...articles('papier', PAPIERS, (k) => PAPIERS[k].nom),
+  ...articles('lit', COULEURS_LIT, (k) => COULEURS_LIT[k].nom),
   ...articles('animal', ANIMAUX, (k) => ANIMAUX[k].nom),
   ...articles('ustensile', USTENSILES, (k) => USTENSILES[k].nom, () => null), // pas de prix : pas à vendre
   ...articles('tenue', TENUES, (k) => TENUES[k].nom),
@@ -73,7 +99,7 @@ export const CATALOGUE = [
 export const MAGASINS = {
   coiffeur: { nom: 'Le coiffeur', apercu: 'avatar', rayons: [['✂️ Coiffures', ['coiffure']], ['🎨 Couleurs', ['cheveux']]] },
   mode: { nom: 'La boutique', apercu: 'avatar', rayons: [['👗 Vêtements', ['tenue']], ['💍 Bijoux', ['accessoire']]] },
-  meubles: { nom: 'Le magasin de meubles', apercu: 'piece', rayons: [['🛋️ Meubles', ['meuble']], ['🧸 Jouets', ['jouet']], ['🖌️ Murs', ['papier']], ['🏠 Pièces', ['piece']]] },
+  meubles: { nom: 'Le magasin de meubles', apercu: 'piece', rayons: [['🛋️ Meubles', ['meuble']], ['🛏️ Couleurs du lit', ['lit']], ['🧸 Jouets', ['jouet']], ['🖌️ Murs', ['papier']], ['🏠 Pièces', ['piece']]] },
   refuge: { nom: 'Le refuge', apercu: 'piece', rayons: [['🐾 Animaux', ['animal']]] },
 };
 
@@ -90,6 +116,7 @@ export function estUtilise(profil, a) {
   if (DANS_LA_PIECE.includes(a.type)) return m.places.includes(a.id);
   if (a.type === 'papier') return m.papiers[m.piece] === a.cle;
   if (a.type === 'piece') return m.piece === a.cle;
+  if (a.type === 'lit') return (m.lit ?? 'rose') === a.cle;
   if (a.type === 'accessoire') return (profil.avatar.accessoires ?? []).includes(a.cle);
   return profil.avatar[a.type] === a.cle; // tenue, coiffure, cheveux
 }
@@ -103,6 +130,7 @@ export function utiliser(profil, id) {
   if (DANS_LA_PIECE.includes(a.type)) m.places = bascule(m.places, id);
   else if (a.type === 'papier') m.papiers[m.piece] = estUtilise(profil, a) ? null : a.cle;
   else if (a.type === 'piece') m.piece = a.cle;
+  else if (a.type === 'lit') m.lit = a.cle;
   else if (a.type === 'accessoire') avatar.accessoires = bascule(avatar.accessoires ?? [], a.cle);
   else avatar[a.type] = a.cle;
 }

@@ -282,12 +282,12 @@ function carteArticle(a) {
   carte.querySelector('.nom').textContent = a.nom;
   const b = carte.querySelector('.action');
   const aMoi = possede(joueuse, a), enPlace = aMoi && estUtilise(joueuse, a);
-  const porte = ['tenue', 'coiffure', 'cheveux'].includes(a.type);
+  const porte = ['tenue', 'coiffure', 'cheveux', 'lit'].includes(a.type);
   const manque = !aMoi && pieceManquante(joueuse, a);
   if (aMoi) {
     b.textContent = a.type === 'piece' ? (enPlace ? 'Tu y es ✓' : 'Y aller')
-      : enPlace ? (porte ? 'Porté ✓' : a.type === 'accessoire' || a.type === 'papier' ? 'Enlever' : 'Ranger')
-        : porte || a.type === 'accessoire' || a.type === 'papier' ? 'Mettre' : 'Placer';
+      : enPlace ? (porte ? (a.type === 'lit' ? 'Choisi ✓' : 'Porté ✓') : a.type === 'accessoire' || a.type === 'papier' ? 'Enlever' : 'Ranger')
+        : a.type === 'lit' ? 'Choisir' : porte || a.type === 'accessoire' || a.type === 'papier' ? 'Mettre' : 'Placer';
     b.disabled = enPlace && (porte || a.type === 'piece');
     b.classList.toggle('en-place', enPlace);
   } else if (manque) {

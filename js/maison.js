@@ -1,6 +1,6 @@
 // Les pièces de la maison en SVG (vue de face, 800 × 520), et les aperçus des objets des magasins.
 import { dessinerAvatar, CHEVEUX, teinte } from './avatar.js';
-import { MEUBLES, JOUETS, USTENSILES } from './catalogue.js';
+import { MEUBLES, JOUETS, USTENSILES, COULEURS_LIT } from './catalogue.js';
 import { dessinerOeuvre } from './jeux/peinture.js';
 
 const PIECE_DE = Object.fromEntries(Object.entries({ ...MEUBLES, ...JOUETS, ...USTENSILES }).map(([cle, o]) => [cle, o.piece]));
@@ -123,6 +123,50 @@ const OBJETS = {
     <rect x="583" y="450" width="16" height="12" rx="2" fill="#bfe6ff"/>
     <rect x="516" y="482" width="92" height="6" rx="2" fill="${N}"/>
     ${[532, 558, 592].map((x) => `<circle cx="${x}" cy="492" r="8" fill="${N}"/><circle cx="${x}" cy="492" r="3" fill="#aaa"/>`).join('')}` },
+  // Nouveaux meubles de la chambre
+  horloge: { boite: '30 60 72 72', dessin: `<circle cx="66" cy="96" r="30" fill="#fff" stroke="#c98b4f" stroke-width="6"/>
+    ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => `<circle cx="${(66 + 22 * Math.cos((i * Math.PI) / 6)).toFixed(1)}" cy="${(96 + 22 * Math.sin((i * Math.PI) / 6)).toFixed(1)}" r="2" fill="${N}"/>`).join('')}
+    <path d="M66 96 V78 M66 96 L80 102" stroke="${N}" stroke-width="3" stroke-linecap="round"/>` },
+  coffre: { boite: '40 420 164 90', dessin: `${ombre(122, 504, 76)}
+    <rect x="52" y="452" width="140" height="50" rx="6" fill="#c98b4f"/><rect x="48" y="440" width="148" height="16" rx="6" fill="#9a6334"/>
+    <rect x="112" y="458" width="20" height="10" rx="3" fill="#f2c230"/>
+    <circle cx="80" cy="436" r="10" fill="#e05252"/><rect x="150" y="424" width="22" height="18" rx="3" fill="#4a90d9"/>` },
+  pouf: { boite: '644 452 112 58', dessin: `${ombre(700, 506, 46)}
+    <path d="M654 474 Q654 504 700 504 Q746 504 746 474Z" fill="#8e6ad8"/><ellipse cx="700" cy="474" rx="46" ry="14" fill="#b08ae8"/>` },
+  guirlande: { boite: '0 0 800 60', dessin: `<path d="M0 16 Q100 46 200 16 T400 16 T600 16 T800 16" stroke="#555" stroke-width="2" fill="none"/>
+    ${[50, 150, 250, 350, 450, 550, 650, 750].map((x, i) => `<circle cx="${x}" cy="${i % 2 ? 34 : 30}" r="7" fill="${['#ffd84a', '#ff7aa8', '#7ad0f0', '#7ac943'][i % 4]}"/>`).join('')}` },
+  // Nouveaux meubles du salon
+  'tapis-salon': { boite: '180 432 400 76', dessin: `<ellipse cx="380" cy="472" rx="190" ry="32" fill="#e0805a"/><ellipse cx="380" cy="472" rx="150" ry="22" fill="#f2c27a"/>
+    <ellipse cx="380" cy="472" rx="104" ry="13" fill="#e0805a"/>` },
+  miroir: { boite: '494 52 82 108', dessin: `<ellipse cx="535" cy="106" rx="36" ry="50" fill="#d9b44a"/><ellipse cx="535" cy="106" rx="28" ry="42" fill="#cfeaf7"/>
+    <path d="M520 80 L536 70 M516 96 L544 76" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>` },
+  'plante-salon': { boite: '728 286 72 158', dessin: `<path d="M742 400 H790 L784 440 H748Z" fill="#c96a46"/>
+    <path d="M766 400 Q730 350 744 300 Q762 350 766 400Z M766 400 Q800 352 790 296 Q772 350 766 400Z M766 400 Q760 340 768 288 Q778 340 766 400Z" fill="#3e9a48"/>` },
+  // Nouveaux meubles et jouets de la salle de jeux
+  'tableau-noir': { boite: '682 72 114 126', dessin: `<rect x="688" y="78" width="104" height="112" rx="4" fill="#9a6334"/><rect x="696" y="86" width="88" height="96" fill="#2f5a3a"/>
+    <path d="M708 110 l10 -10 10 10 M738 100 h20 M712 150 q14 -18 28 0 t28 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>` },
+  cubes: { boite: '294 394 54 60', dessin: `${[[300, 426, '#e05252', 'A'], [322, 426, '#4a90d9', 'B'], [311, 404, '#f2c230', 'C']].map(([x, y, c, l]) => `<rect x="${x}" y="${y}" width="22" height="22" rx="3" fill="${c}"/><text x="${x + 11}" y="${y + 17}" font-size="15" font-weight="800" text-anchor="middle" fill="#fff" font-family="sans-serif">${l}</text>`).join('')}` },
+  'piscine-balles': { boite: '624 440 172 76', dessin: `<rect x="632" y="456" width="158" height="52" rx="22" fill="#4a90d9"/>
+    ${[650, 672, 694, 716, 738, 760, 662, 684, 706, 728, 750].map((x, i) => `<circle cx="${x}" cy="${i > 5 ? 452 : 462}" r="10" fill="${['#e05252', '#f2c230', '#5cb85c', '#f080b0', '#8e6ad8'][i % 5]}"/>`).join('')}
+    <rect x="632" y="468" width="158" height="40" rx="18" fill="#6ac0d0"/>` },
+  // Cuisine complète
+  frigo: { boite: '722 144 78 294', dessin: `${ombre(761, 432, 34)}<rect x="728" y="150" width="66" height="282" rx="8" fill="#f4f6f8" stroke="#b9c0c9" stroke-width="3"/>
+    <path d="M728 250 H794" stroke="#b9c0c9" stroke-width="3"/><rect x="736" y="200" width="6" height="36" rx="3" fill="#9aa3ad"/><rect x="736" y="262" width="6" height="60" rx="3" fill="#9aa3ad"/>
+    <circle cx="772" cy="180" r="6" fill="#e05252"/><rect x="760" y="270" width="18" height="14" rx="2" fill="#ffd84a"/>` },
+  evier: { boite: '228 252 92 56', dessin: `<rect x="238" y="290" width="72" height="9" rx="3" fill="#9aa3ad"/><rect x="244" y="292" width="60" height="5" rx="2" fill="#6a7684"/>
+    <path d="M292 291 V266 Q292 258 282 258 H272 V266" stroke="#9aa3ad" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="300" cy="284" r="4" fill="#4a90d9"/>` },
+  placard: { boite: '18 34 206 94', dessin: `<rect x="24" y="40" width="194" height="80" rx="6" fill="#f3d9a4" stroke="#c98b4f" stroke-width="3"/>
+    <path d="M121 40 V120" stroke="#c98b4f" stroke-width="3"/><circle cx="110" cy="86" r="4" fill="#9a6334"/><circle cx="132" cy="86" r="4" fill="#9a6334"/>` },
+  'etagere-cuisine': { boite: '486 100 86 118', dessin: `<rect x="490" y="150" width="78" height="7" rx="2" fill="#9a6334"/><rect x="490" y="206" width="78" height="7" rx="2" fill="#9a6334"/>
+    ${[[498, 118, '#f2c230'], [522, 122, '#e05252'], [546, 116, '#7ac943'], [500, 176, '#c96a46'], [526, 172, '#f080b0'], [550, 178, '#4a90d9']].map(([x, y, c]) => `<rect x="${x}" y="${y}" width="16" height="${(y > 160 ? 206 : 150) - y}" rx="3" fill="${c}" opacity=".85"/><rect x="${x - 1}" y="${y - 4}" width="18" height="5" rx="2" fill="#9a6334"/>`).join('')}` },
+  'lave-vaisselle': { boite: '220 306 96 96', dessin: `<rect x="226" y="312" width="84" height="84" rx="5" fill="#eef1f4" stroke="#b9c0c9" stroke-width="3"/>
+    <rect x="232" y="318" width="72" height="12" rx="3" fill="#cfd5dc"/><circle cx="244" cy="324" r="3" fill="#5cb85c"/><circle cx="256" cy="324" r="3" fill="#9aa3ad"/>
+    <rect x="250" y="338" width="36" height="5" rx="2.5" fill="#9aa3ad"/>` },
+  chaises: { boite: '14 392 312 116', dessin: `${[[22, 1], [318, -1]].map(([x, s]) => `<rect x="${s > 0 ? x : x - 36}" y="452" width="36" height="8" rx="3" fill="#c98b4f"/>
+    <rect x="${s > 0 ? x : x - 6}" y="400" width="6" height="104" rx="3" fill="#9a6334"/><rect x="${s > 0 ? x + 30 : x - 36}" y="456" width="6" height="48" rx="3" fill="#9a6334"/>`).join('')}` },
+  'table-cuisine': { boite: '50 404 242 104', dessin: `${ombre(170, 504, 100)}<rect x="62" y="420" width="216" height="12" rx="4" fill="#c98b4f"/>
+    <rect x="74" y="432" width="9" height="70" fill="#9a6334"/><rect x="257" y="432" width="9" height="70" fill="#9a6334"/>
+    <rect x="62" y="412" width="216" height="10" rx="3" fill="#f6efe0"/><path d="M62 417 H278" stroke="#e05252" stroke-width="3" stroke-dasharray="10 10"/>` },
   // Cuisine (objets gagnés en faisant les recettes pour de vrai)
   poele: { boite: '50 236 140 60', dessin: `
     <rect x="56" y="282" width="120" height="10" rx="3" fill="#3a3f4a"/><circle cx="85" cy="287" r="3" fill="#e05252"/><circle cx="150" cy="287" r="3" fill="#e05252"/>
@@ -135,10 +179,10 @@ const OBJETS = {
     <rect x="585" y="300" width="120" height="100" rx="8" fill="#3a3f4a"/><rect x="595" y="312" width="100" height="74" rx="6" fill="#ffb347" opacity=".85"/>
     <rect x="600" y="346" width="90" height="4" fill="#555"/>${[615, 645, 675].map((x) => `<circle cx="${x}" cy="340" r="7" fill="#b07440"/><circle cx="${x - 2}" cy="338" r="1.6" fill="#4a2a10"/>`).join('')}
     <rect x="600" y="292" width="90" height="6" rx="3" fill="#9aa3ad"/>` },
-  corbeille: { boite: '186 226 112 70', dessin: `
+  corbeille: { boite: '345 130 112 70', dessin: `<g transform="translate(159 -96)">
     <circle cx="214" cy="260" r="13" fill="#e05252"/><circle cx="240" cy="254" r="13" fill="#ff9a3c"/><circle cx="266" cy="260" r="13" fill="#7ac943"/>
     <path d="M222 246 q20 -22 48 -10 q-14 6 -48 10Z" fill="#f2d24a"/>
-    <path d="M196 264 H284 L272 292 H208Z" fill="#c98b4f"/><path d="M200 274 H280 M204 284 H276" stroke="#a8703c" stroke-width="3"/>` },
+    <path d="M196 264 H284 L272 292 H208Z" fill="#c98b4f"/><path d="M200 274 H280 M204 284 H276" stroke="#a8703c" stroke-width="3"/></g>` },
   moule: { boite: '590 214 110 40', dessin: `
     <path d="M604 250 L612 228 H678 L686 250Z" fill="#e05252"/><path d="M604 250 H686" stroke="#a83a3a" stroke-width="3"/>
     ${[620, 634, 648, 662, 676].map((x) => `<line x1="${x}" y1="230" x2="${x - 3}" y2="248" stroke="#c94444" stroke-width="2"/>`).join('')}
@@ -205,7 +249,10 @@ function tableau(profil, piece) {
   return `<rect x="${x - 7}" y="${y - 7}" width="${l + 14}" height="${h + 14}" rx="3" fill="#b07440"/><rect x="${x - 3}" y="${y - 3}" width="${l + 6}" height="${h + 6}" fill="#e8c890"/>
     ${dessinerOeuvre(d).replace('<svg ', `<svg x="${x}" y="${y}" width="${l}" height="${h}" `)}`;
 }
-const ORDRE = ['tablier', 'poele', 'corbeille', 'four', 'moule', 'tapis', 'etagere', 'lampe', 'lit', 'bureau', 'plante', 'ours', 'robot', 'bibliotheque', 'tele', 'lampadaire', 'canape', 'fauteuil', 'table-basse', 'cerf-volant', 'toboggan', 'manege'];
+const ORDRE = ['placard', 'etagere-cuisine', 'frigo', 'lave-vaisselle', 'evier', 'tablier', 'poele', 'corbeille', 'four', 'moule', 'chaises', 'table-cuisine',
+  'guirlande', 'horloge', 'tapis', 'etagere', 'lampe', 'lit', 'bureau', 'plante', 'ours', 'robot', 'coffre', 'pouf',
+  'bibliotheque', 'miroir', 'tele', 'lampadaire', 'plante-salon', 'canape', 'fauteuil', 'tapis-salon', 'table-basse',
+  'tableau-noir', 'cerf-volant', 'toboggan', 'manege', 'cubes', 'piscine-balles'];
 const DEVANT = ['ballon', 'train']; // devant l'enfant
 
 // Papier peint : un motif SVG (id unique par dessin, car plusieurs aperçus sont sur la même page).
@@ -225,7 +272,8 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
   const deco = DECOR[piece] ?? DECOR.chambre;
   const { defs, fond } = papier(profil.maison.papiers[piece], 'papier-piece', deco.mur);
   const poses = new Set(profil.maison.places.map((id) => id.split(':')).filter(([type, cle]) => type === 'animal' || PIECE_DE[cle] === piece).map(([, cle]) => cle));
-  const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => OBJETS[c].dessin).join('');
+  const lit = COULEURS_LIT[profil.maison.lit]?.couleur ?? COULEURS_LIT.rose.couleur;
+  const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => (c === 'lit' ? OBJETS.lit.dessin.replace('#f080b0', lit) : OBJETS[c].dessin)).join('');
   const animaux = ['poisson', 'hamster', 'chien', 'chat', 'lapin'];
   const avatar = dessinerAvatar(profil.avatar, 'entier', profil.age).replace('<svg ', '<svg x="345" y="196" width="150" height="244" ');
   return `<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="piece-svg" role="img" aria-label="${poses.size ? 'La pièce et tes objets' : 'La pièce, encore vide'}">
@@ -249,6 +297,7 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
 export function apercu(a, profil) {
   const mini = (boite, dessin) => `<svg viewBox="${boite}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${dessin}</svg>`;
   if (OBJETS[a.cle] && ['meuble', 'jouet', 'animal', 'ustensile'].includes(a.type)) return mini(OBJETS[a.cle].boite, OBJETS[a.cle].dessin);
+  if (a.type === 'lit') return mini(OBJETS.lit.boite, OBJETS.lit.dessin.replace('#f080b0', COULEURS_LIT[a.cle].couleur));
   if (a.type === 'papier') {
     const { defs, fond } = papier(a.cle, `papier-${a.cle}`, '#fbeedd');
     return mini('0 0 100 100', `<defs>${defs}</defs><rect width="100" height="100" rx="12" fill="${fond}"/>`);
