@@ -1,5 +1,5 @@
 // La bibliothèque : la chasse aux syllabes. On touche les syllabes dans l'ordre pour former le mot ;
-// son image (en ombre au début) se dévoile, et le mot est lu à voix haute.
+// son image (floue mais en couleurs au début) devient nette, et le mot est lu à voix haute.
 import { melanger, etoilesDuJeu, parmiLesNouveaux } from '../partie.js';
 import { MOTS_FACILES, MOTS_DIFFICILES } from './syllabes-mots.js';
 
