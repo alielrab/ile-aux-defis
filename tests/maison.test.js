@@ -49,3 +49,35 @@ test('chaque meuble et jouet vendu a un dessin qui apparaît dans sa pièce ; la
   assert.ok(dessinerPiece(p).includes(COULEURS_LIT.bleu.couleur));
   assert.equal(p.etoiles, 100 - COULEURS_LIT.bleu.prix);
 });
+
+test('animaux : prénom, vêtement, accessoires à côté de l’animal ; chaque animal et objet a un dessin', async () => {
+  const { ANIMAUX, ACCESSOIRES_ANIMAUX, nommer, changerHabit, acheter } = await import('../js/catalogue.js');
+  const p = profil();
+  for (const k of Object.keys(ANIMAUX)) {
+    const seul = { ...p, maison: { ...p.maison, places: [`animal:${k}`] } };
+    assert.ok(dessinerPiece(seul).length > dessinerPiece(p).length, k);
+  }
+  assert.equal(nommer(p, 'animal:chien', '  Rex   le chien  '), 'Rex le chien');
+  assert.equal(nommer(p, 'animal:chat', 'x'.repeat(40)).length, 15);
+  nommer(p, 'animal:chat', '');
+  assert.equal(p.noms['animal:chat'], undefined);
+  acheter(p, 'animal:chien');
+  acheter(p, 'habit-animal:pull-rouge');
+  acheter(p, 'habit-animal:noeud-rose');
+  assert.equal(changerHabit(p, 'animal:chien'), 'noeud-rose'); // dans l'ordre du catalogue
+  assert.equal(changerHabit(p, 'animal:chien'), 'pull-rouge');
+  assert.equal(changerHabit(p, 'animal:chien'), null); // puis aucun
+  changerHabit(p, 'animal:chien');
+  changerHabit(p, 'animal:chien');
+  const svg = dessinerPiece(p);
+  assert.match(svg, /Rex le chien/);
+  assert.ok(svg.includes('#e05252')); // le pull rouge
+  // un prénom tapé est échappé dans le dessin
+  nommer(p, 'animal:chien', '<b>Max</b>');
+  assert.ok(!dessinerPiece(p).includes('<b>'));
+  for (const k of Object.keys(ACCESSOIRES_ANIMAUX)) {
+    acheter(p, `acc-animal:${k}`);
+    assert.ok(p.maison.places.includes(`acc-animal:${k}`), k);
+  }
+  assert.ok(dessinerPiece(p).length > 0);
+});

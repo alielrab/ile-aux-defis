@@ -8,7 +8,7 @@ import {
 } from './avatar.js';
 import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
-import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante } from './catalogue.js';
+import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, HABITS_ANIMAUX } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE, ETOILES_ATLAS } from './reglages.js';
 import { nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
@@ -215,7 +215,7 @@ $('#carte').addEventListener('keydown', (ev) => {
 });
 
 // La maison (placer ses objets) et les magasins de l'île (acheter) : le même écran.
-const DANS_LA_MAISON = ['meuble', 'jouet', 'animal', 'papier', 'ustensile'];
+const DANS_LA_MAISON = ['meuble', 'jouet', 'animal', 'papier', 'ustensile', 'acc-animal'];
 let vue = null; // 'maison' ou l'id d'un magasin
 let onglet = 0; // magasin : n° du rayon ; maison : la pièce affichée est profil.maison.piece
 let aConfirmer = null; // achat : 1er appui = « Acheter ? », 2e appui = on achète (évite les achats par erreur)
@@ -279,15 +279,16 @@ function carteArticle(a) {
   const carte = document.createElement('div');
   carte.className = 'article';
   carte.innerHTML = `<div class="apercu-article">${apercu(a, joueuse)}</div><span class="nom"></span><button class="action"></button>`;
-  carte.querySelector('.nom').textContent = a.nom;
+  const prenom = a.type === 'animal' && joueuse.noms?.[a.id];
+  carte.querySelector('.nom').textContent = prenom ? `${a.nom} « ${prenom} »` : a.nom;
   const b = carte.querySelector('.action');
   const aMoi = possede(joueuse, a), enPlace = aMoi && estUtilise(joueuse, a);
-  const porte = ['tenue', 'coiffure', 'cheveux', 'lit'].includes(a.type);
+  const porte = ['tenue', 'coiffure', 'cheveux', 'lit', 'chaussures'].includes(a.type);
   const manque = !aMoi && pieceManquante(joueuse, a);
   if (aMoi) {
     b.textContent = a.type === 'piece' ? (enPlace ? 'Tu y es ✓' : 'Y aller')
-      : enPlace ? (porte ? (a.type === 'lit' ? 'Choisi ✓' : 'Porté ✓') : a.type === 'accessoire' || a.type === 'papier' ? 'Enlever' : 'Ranger')
-        : a.type === 'lit' ? 'Choisir' : porte || a.type === 'accessoire' || a.type === 'papier' ? 'Mettre' : 'Placer';
+      : enPlace ? (porte ? (a.type === 'lit' ? 'Choisi ✓' : 'Porté ✓') : ['accessoire', 'papier', 'chapeau'].includes(a.type) ? 'Enlever' : 'Ranger')
+        : a.type === 'lit' ? 'Choisir' : porte || ['accessoire', 'papier', 'chapeau'].includes(a.type) ? 'Mettre' : 'Placer';
     b.disabled = enPlace && (porte || a.type === 'piece');
     b.classList.toggle('en-place', enPlace);
   } else if (manque) {
@@ -304,8 +305,29 @@ function carteArticle(a) {
     b.classList.add(confirmer ? 'confirmer' : 'acheter');
     b.setAttribute('aria-label', confirmer ? `Oui, acheter ${a.nom} pour ${a.prix} étoiles` : `Acheter ${a.nom} pour ${a.prix} étoiles`);
   }
+  if (aMoi && a.type === 'habit-animal') { // il se met sur un animal, dans la maison
+    b.textContent = 'À toi ✓';
+    b.disabled = true;
+  }
   carte.classList.toggle('a-moi', aMoi);
   b.addEventListener('click', () => toucherArticle(a));
+  if (aMoi && a.type === 'animal') { // son prénom, et ses vêtements
+    const outils = document.createElement('div');
+    outils.className = 'outils-animal';
+    outils.append(gros('✏️ Prénom', () => demanderPrenom(a), 'petit'));
+    const habits = Object.keys(HABITS_ANIMAUX).some((k) => joueuse.objets.includes(`habit-animal:${k}`));
+    if (habits && a.cle !== 'poisson') {
+      const habiller = gros('👕', () => {
+        const h = changerHabit(joueuse, a.id);
+        enregistrer();
+        afficherLieu();
+        parler(h ? HABITS_ANIMAUX[h].nom : 'Sans vêtement.');
+      }, 'petit');
+      habiller.setAttribute('aria-label', 'Changer son vêtement');
+      outils.append(habiller);
+    }
+    carte.append(outils);
+  }
   return carte;
 }
 
@@ -329,6 +351,24 @@ function toucherArticle(a) {
   if (a.piece) joueuse.maison.piece = a.piece; // montrer la pièce où l'objet est posé
   enregistrer();
   afficherLieu();
+  if (a.type === 'animal' && !joueuse.noms?.[a.id] && possede(joueuse, a)) demanderPrenom(a); // tout juste adopté : lui donner un prénom
+}
+
+// Donner (ou changer) le prénom d'un animal : un champ sous le magasin ou la maison
+function demanderPrenom(a) {
+  const champ = el('input', { className: 'texte-bulle', maxLength: 15, value: joueuse.noms?.[a.id] ?? '', placeholder: 'Son prénom' });
+  champ.setAttribute('aria-label', `Le prénom de ${a.nom.toLowerCase()}`);
+  const valider = () => {
+    const nom = nommer(joueuse, a.id, champ.value);
+    enregistrer();
+    afficherLieu();
+    $('#lieu-message').textContent = nom ? `${a.nom} s'appelle ${nom} !` : '';
+    if (nom) parler(`Bienvenue, ${nom} !`, { ton: 1.15 });
+  };
+  champ.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') valider(); });
+  $('#lieu-message').replaceChildren(el('span', { textContent: `Quel prénom veux-tu donner à ${a.nom.toLowerCase()} ? ` }), champ, gros("C'est son prénom !", valider, 'petit'));
+  champ.focus();
+  parler(`Quel prénom veux-tu donner à ${a.nom.toLowerCase()} ?`);
 }
 
 $('#lieu-retour').addEventListener('click', () => ouvrirIle());

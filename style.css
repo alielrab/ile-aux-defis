@@ -504,6 +504,9 @@ select {
   .legende span { display: inline-block; width: 1.2em; height: 1.2em; border: 1px solid #000; vertical-align: middle; margin-right: 0.3em; }
 }
 
+.outils-animal { display: flex; gap: 4px; justify-content: center; }
+#lieu-message .texte-bulle { max-width: 14rem; margin: 0.3rem; }
+
 /* Atlas du corps (hôpital) */
 .atlas-page { width: 100%; display: grid; gap: 0.75rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: start; }
 @media (max-width: 600px) { .atlas-page { grid-template-columns: 1fr; } }

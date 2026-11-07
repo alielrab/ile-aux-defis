@@ -1,6 +1,6 @@
 // Les pièces de la maison en SVG (vue de face, 800 × 520), et les aperçus des objets des magasins.
 import { dessinerAvatar, CHEVEUX, teinte } from './avatar.js';
-import { MEUBLES, JOUETS, USTENSILES, COULEURS_LIT } from './catalogue.js';
+import { MEUBLES, JOUETS, USTENSILES, COULEURS_LIT, ANIMAUX, HABITS_ANIMAUX, ACCESSOIRES_ANIMAUX } from './catalogue.js';
 import { dessinerOeuvre } from './jeux/peinture.js';
 
 const PIECE_DE = Object.fromEntries(Object.entries({ ...MEUBLES, ...JOUETS, ...USTENSILES }).map(([cle, o]) => [cle, o.piece]));
@@ -267,14 +267,98 @@ function papier(cle, id, defaut) {
   return { defs: motifs[cle], fond: `url(#${id})` };
 }
 
-// Objets posés (meuble:lit, jouet:ours, animal:chat…) : on dessine ceux de cette pièce, et les animaux partout.
+
+// ---------- Les animaux de la maison ----------
+// Les animaux posés se rangent sur ces emplacements, le long du sol (milieu du bas), dans l'ordre où on les a posés.
+// shortcut: 5 animaux visibles au plus à la fois ; les suivants attendent d'être placés à la place d'un autre.
+const PLACES_ANIMAUX = [[150, 512], [285, 512], [560, 512], [690, 512], [420, 516]];
+const echapper = (t) => String(t).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+// Où poser un vêtement, sur le dessin d'origine de chaque espèce : tête, cou, corps [x, y, rx, ry]
+const ANCRES = {
+  chat: { tete: [330, 414], cou: [344, 462], corps: [372, 462, 40, 18] },
+  chien: { tete: [232, 436], cou: [248, 474], corps: [264, 482, 24, 16] },
+  lapin: { tete: [486, 462], cou: [478, 488], corps: [464, 490, 18, 13] },
+  hamster: { tete: [120, 476], cou: [120, 486], corps: [120, 496, 16, 10] },
+  perroquet: { tete: [34, 18], cou: [32, 44], corps: [30, 64, 11, 18] },
+  tortue: { tete: [84, 25], cou: [76, 38], corps: [44, 28, 24, 12] },
+};
+const ANIMAUX_EN_PLUS = {
+  perroquet: { boite: '8 8 54 100', dessin: `${ombre(34, 104, 18)}
+    <path d="M24 84 L16 106 L34 100Z" fill="#3498db"/><ellipse cx="30" cy="62" rx="15" ry="26" fill="#2ecc71"/>
+    <path d="M18 56 Q14 80 28 88 Q24 70 30 52Z" fill="#27ae60"/><ellipse cx="34" cy="70" rx="7" ry="10" fill="#e74c3c"/>
+    <circle cx="34" cy="30" r="13" fill="#2ecc71"/><circle cx="38" cy="29" r="6" fill="#fff"/><circle cx="39" cy="29" r="2.4" fill="${N}"/>
+    <path d="M45 28 Q58 30 50 42 Q47 36 45 36Z" fill="#f39c12"/><path d="M26 88 V96 M34 88 V96" stroke="#e67e22" stroke-width="3" stroke-linecap="round"/>` },
+  tortue: { boite: '4 2 96 56', dessin: `${ombre(48, 52, 40)}
+    <ellipse cx="22" cy="46" rx="8" ry="5" fill="#9ccc65"/><ellipse cx="64" cy="46" rx="8" ry="5" fill="#9ccc65"/><path d="M10 32 L2 36 L10 38Z" fill="#9ccc65"/>
+    <circle cx="84" cy="34" r="10" fill="#9ccc65"/><circle cx="88" cy="31" r="2" fill="${N}"/><path d="M86 38 q4 2 7 -1" stroke="#5a7a3a" stroke-width="1.5" fill="none"/>
+    <ellipse cx="44" cy="30" rx="34" ry="20" fill="#4caf50"/><path d="M44 12 L56 22 L52 36 L36 36 L32 22Z M20 26 L32 22 M68 26 L56 22 M24 40 L36 36 M64 40 L52 36" stroke="#2e7d32" stroke-width="2.5" fill="none"/>` },
+  // le poisson sans son bocal (quand il a un aquarium)
+  'poisson-seul': { boite: '690 400 100 110', dessin: `<path d="M726 446 Q740 430 754 446 Q740 462 726 446Z M752 446 L764 437 V455Z" fill="#f28c28"/>
+    <circle cx="733" cy="443" r="2" fill="${N}"/><path d="M742 440 q4 6 0 12" stroke="#ffd0a0" stroke-width="2" fill="none"/>
+    <circle cx="722" cy="428" r="2.5" fill="#fff" opacity=".9"/><circle cx="727" cy="418" r="1.8" fill="#fff" opacity=".9"/>` },
+};
+const boiteDe = (o) => o.boite.split(' ').map(Number);
+
+// Les vêtements d'un animal, dessinés sur ses ancres (dans les coordonnées de son dessin d'origine)
+function habitAnimal(espece, cle) {
+  const h = HABITS_ANIMAUX[cle], a = ANCRES[espece];
+  if (!h || !a) return '';
+  const c = h.couleur;
+  if (h.forme === 'pull') { const [x, y, rx, ry] = a.corps; return `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${c}" opacity=".95"/><path d="M${x - rx * 0.7} ${y - 3} H${x + rx * 0.7} M${x - rx * 0.7} ${y + 4} H${x + rx * 0.7}" stroke="#fff" stroke-width="2.5" opacity=".7"/>`; }
+  if (h.forme === 'collier') { const [x, y] = a.cou; return `<ellipse cx="${x}" cy="${y}" rx="10" ry="4" fill="none" stroke="${c}" stroke-width="4"/><circle cx="${x}" cy="${y + 5}" r="3.2" fill="#f2c230" stroke="#b8860b"/>`; }
+  if (h.forme === 'noeud') { const [x, y] = a.tete; return `<g transform="translate(${x + 8} ${y + 2})"><path d="M0 0 L-10 -6 L-10 6Z M0 0 L10 -6 L10 6Z" fill="${c}"/><circle r="3" fill="${c}" stroke="#fff"/></g>`; }
+  const [x, y] = a.tete; // chapeau de fête
+  return `<path d="M${x - 9} ${y + 2} L${x} ${y - 22} L${x + 9} ${y + 2}Z" fill="${c}"/><circle cx="${x}" cy="${y - 23}" r="3.5" fill="#ffd84a"/><circle cx="${x - 3}" cy="${y - 6}" r="1.6" fill="#fff"/><circle cx="${x + 3}" cy="${y - 13}" r="1.6" fill="#fff"/>`;
+}
+
+// Les accessoires des animaux, à côté de l'animal qui s'en sert (cx, by : le milieu du bas de sa place)
+const DESSINS_ACC = {
+  panier: (cx, by) => `<ellipse cx="${cx}" cy="${by - 6}" rx="62" ry="14" fill="#9a6334"/><ellipse cx="${cx}" cy="${by - 12}" rx="55" ry="9" fill="#f6c8d8"/><path d="M${cx - 60} ${by - 4} Q${cx} ${by + 10} ${cx + 60} ${by - 4}" stroke="#7a4a28" stroke-width="2" fill="none"/>`,
+  coussin: (cx, by) => `<ellipse cx="${cx}" cy="${by - 5}" rx="54" ry="11" fill="#8e6ad8"/><ellipse cx="${cx}" cy="${by - 8}" rx="40" ry="6" fill="#b08ae8"/>`,
+  gamelle: (cx, by) => `<path d="M${cx + 46} ${by - 16} H${cx + 78} L${cx + 74} ${by - 2} H${cx + 50}Z" fill="#e05252"/><ellipse cx="${cx + 62}" cy="${by - 16}" rx="16" ry="4" fill="#c98b4f"/>`,
+  os: (cx, by) => `<g transform="translate(${cx - 62} ${by - 8})"><rect x="-12" y="-3" width="24" height="6" fill="#fffaf0"/>${[[-12, -3], [-12, 3], [12, -3], [12, 3]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#fffaf0" stroke="#e0d8c8"/>`).join('')}</g>`,
+  pelote: (cx, by) => `<circle cx="${cx - 60}" cy="${by - 12}" r="12" fill="#e86fa8"/><path d="M${cx - 70} ${by - 16} Q${cx - 60} ${by - 6} ${cx - 50} ${by - 16} M${cx - 68} ${by - 6} Q${cx - 60} ${by - 18} ${cx - 52} ${by - 6} M${cx - 48} ${by - 10} Q${cx - 30} ${by} ${cx - 20} ${by - 2}" stroke="#c94a88" stroke-width="2" fill="none"/>`,
+  roue: (cx, by) => `<path d="M${cx - 76} ${by} L${cx - 62} ${by - 30} L${cx - 48} ${by}" stroke="#9aa3ad" stroke-width="4" fill="none"/><circle cx="${cx - 62}" cy="${by - 32}" r="27" fill="none" stroke="#5b9ae0" stroke-width="5"/>${[0, 45, 90, 135].map((a) => `<path d="M${cx - 62} ${by - 32} l${(25 * Math.cos((a * Math.PI) / 180)).toFixed(1)} ${(25 * Math.sin((a * Math.PI) / 180)).toFixed(1)} M${cx - 62} ${by - 32} l${(-25 * Math.cos((a * Math.PI) / 180)).toFixed(1)} ${(-25 * Math.sin((a * Math.PI) / 180)).toFixed(1)}" stroke="#5b9ae0" stroke-width="2"/>`).join('')}`,
+  griffoir: () => `<rect x="744" y="498" width="52" height="10" rx="3" fill="#c98b4f"/><rect x="760" y="364" width="20" height="136" fill="#e8d4a8"/>${[380, 400, 420, 440, 460, 480].map((y) => `<path d="M760 ${y} H780" stroke="#c09050" stroke-width="3"/>`).join('')}<rect x="748" y="354" width="44" height="12" rx="3" fill="#c98b4f"/><circle cx="790" cy="380" r="6" fill="#e86fa8"/><path d="M790 366 V374" stroke="#555"/>`,
+  laisse: () => `<circle cx="30" cy="300" r="5" fill="#9aa3ad"/><path d="M30 300 Q20 340 36 372 Q46 392 30 404" stroke="#e05252" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="30" cy="410" rx="9" ry="7" fill="none" stroke="#e05252" stroke-width="4"/>`,
+  perchoir: (cx, by) => `<rect x="${cx - 4}" y="${by - 64}" width="8" height="64" fill="#9a6334"/><rect x="${cx - 30}" y="${by - 66}" width="60" height="7" rx="3" fill="#c98b4f"/><ellipse cx="${cx}" cy="${by - 2}" rx="26" ry="6" fill="#7a4a28"/>`,
+  aquarium: (cx, by) => `<rect x="${cx - 74}" y="${by - 22}" width="148" height="22" fill="#7a4a28"/><rect x="${cx - 70}" y="${by - 122}" width="140" height="100" rx="6" fill="#9fdcf5" stroke="#e8f6ff" stroke-width="5"/>
+    <rect x="${cx - 67}" y="${by - 38}" width="134" height="14" fill="#e8c27a"/><path d="M${cx - 50} ${by - 26} Q${cx - 58} ${by - 60} ${cx - 46} ${by - 80} M${cx + 52} ${by - 26} Q${cx + 44} ${by - 54} ${cx + 56} ${by - 70}" stroke="#3a9a4a" stroke-width="5" fill="none"/>`,
+};
+// pour une place d'animal : où l'accessoire se met par rapport à lui
+const ACC_FIXES = ['griffoir', 'laisse']; // accrochés au mur ou dans le coin, pas sous un animal
+
+function animauxDeLaPiece(profil) {
+  const places = profil.maison.places;
+  const poses = places.filter((id) => id.startsWith('animal:') && ANIMAUX[id.slice(7)]).slice(0, PLACES_ANIMAUX.length);
+  const accs = places.filter((id) => id.startsWith('acc-animal:')).map((id) => id.slice(11)).filter((k) => ACCESSOIRES_ANIMAUX[k]);
+  const especeDe = (id) => ANIMAUX[id.slice(7)].espece;
+  const placeDe = (k) => { const i = poses.findIndex((id) => ACCESSOIRES_ANIMAUX[k].pour.includes(especeDe(id))); return PLACES_ANIMAUX[Math.max(0, i)]; };
+  const avecAccessoire = (k, id) => accs.includes(k) && poses.find((x) => ACCESSOIRES_ANIMAUX[k].pour.includes(especeDe(x))) === id;
+  const dessous = accs.map((k) => (ACC_FIXES.includes(k) ? DESSINS_ACC[k]() : DESSINS_ACC[k](...placeDe(k)))).join('');
+  const animaux = poses.map((id, i) => {
+    const a = ANIMAUX[id.slice(7)], [sx, sy] = PLACES_ANIMAUX[i];
+    const base = a.espece === 'poisson' && avecAccessoire('aquarium', id) ? 'poisson-seul' : a.espece;
+    const o = OBJETS[base] ?? ANIMAUX_EN_PLUS[base];
+    const [bx, by, bw, bh] = boiteDe(o);
+    const monte = a.espece === 'perroquet' && avecAccessoire('perchoir', id) ? 62 : 0; // le perroquet se pose sur son perchoir
+    const dy = a.espece === 'poisson' && base === 'poisson-seul' ? -24 : 0; // le poisson nage au milieu de l'aquarium
+    let dessin = o.dessin;
+    for (const [de, vers] of Object.entries(a.couleurs ?? {})) dessin = dessin.replaceAll(de, vers);
+    const nom = profil.noms?.[id];
+    return `<g transform="translate(${sx - (bx + bw / 2)} ${sy - (by + bh) - monte + dy})">${dessin}${a.taches ?? ''}${habitAnimal(a.espece, profil.habits?.[id])}</g>`
+      + (nom ? `<text x="${sx}" y="${sy - bh - monte - 8}" class="nom-animal" font-size="20" font-weight="800" text-anchor="middle" fill="#2b2b3a" stroke="#fff" stroke-width="5" paint-order="stroke" font-family="sans-serif">${echapper(nom)}</text>` : '');
+  }).join('');
+  return dessous + animaux;
+}
+
+// Objets posés (meuble:lit, jouet:ours…) : on dessine ceux de cette pièce ; les animaux et leurs accessoires suivent l'enfant partout.
 export function dessinerPiece(profil, piece = profil.maison.piece) {
   const deco = DECOR[piece] ?? DECOR.chambre;
   const { defs, fond } = papier(profil.maison.papiers[piece], 'papier-piece', deco.mur);
   const poses = new Set(profil.maison.places.map((id) => id.split(':')).filter(([type, cle]) => type === 'animal' || PIECE_DE[cle] === piece).map(([, cle]) => cle));
   const lit = COULEURS_LIT[profil.maison.lit]?.couleur ?? COULEURS_LIT.rose.couleur;
   const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => (c === 'lit' ? OBJETS.lit.dessin.replace('#f080b0', lit) : OBJETS[c].dessin)).join('');
-  const animaux = ['poisson', 'hamster', 'chien', 'chat', 'lapin'];
   const avatar = dessinerAvatar(profil.avatar, 'entier', profil.age).replace('<svg ', '<svg x="345" y="196" width="150" height="244" ');
   return `<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="piece-svg" role="img" aria-label="${poses.size ? 'La pièce et tes objets' : 'La pièce, encore vide'}">
     <defs>${defs}</defs>
@@ -289,14 +373,28 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
     ${tableau(profil, piece)}
     ${dessins(ORDRE)}
     ${avatar}
-    ${dessins(DEVANT)}${dessins(animaux)}
+    ${dessins(DEVANT)}${animauxDeLaPiece(profil)}
   </svg>`;
 }
 
 // Aperçu d'un objet en magasin. profil : pour montrer vêtements, coiffures et bijoux sur son propre avatar.
 export function apercu(a, profil) {
   const mini = (boite, dessin) => `<svg viewBox="${boite}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${dessin}</svg>`;
-  if (OBJETS[a.cle] && ['meuble', 'jouet', 'animal', 'ustensile'].includes(a.type)) return mini(OBJETS[a.cle].boite, OBJETS[a.cle].dessin);
+  if (OBJETS[a.cle] && ['meuble', 'jouet', 'ustensile'].includes(a.type)) return mini(OBJETS[a.cle].boite, OBJETS[a.cle].dessin);
+  if (a.type === 'animal') {
+    const an = ANIMAUX[a.cle], o = OBJETS[an.espece] ?? ANIMAUX_EN_PLUS[an.espece];
+    let d = o.dessin;
+    for (const [de, vers] of Object.entries(an.couleurs ?? {})) d = d.replaceAll(de, vers);
+    return mini(o.boite, d + (an.taches ?? ''));
+  }
+  if (a.type === 'habit-animal') return mini(OBJETS.chien.boite, OBJETS.chien.dessin + habitAnimal('chien', a.cle));
+  if (a.type === 'acc-animal') {
+    if (a.cle === 'griffoir') return mini('740 350 60 162', DESSINS_ACC.griffoir());
+    if (a.cle === 'laisse') return mini('14 292 40 128', DESSINS_ACC.laisse());
+    // cadrage serré de chaque accessoire, dessiné au milieu (100) du bas (100) d'une place d'animal
+    const cadre = { panier: '34 78 132 32', coussin: '42 82 116 26', gamelle: '140 76 48 28', os: '24 82 52 28', pelote: '26 76 60 30', roue: '6 38 66 64', perchoir: '64 30 72 74', aquarium: '20 -28 160 130' }[a.cle];
+    return mini(cadre, DESSINS_ACC[a.cle](100, 100));
+  }
   if (a.type === 'lit') return mini(OBJETS.lit.boite, OBJETS.lit.dessin.replace('#f080b0', COULEURS_LIT[a.cle].couleur));
   if (a.type === 'papier') {
     const { defs, fond } = papier(a.cle, `papier-${a.cle}`, '#fbeedd');
@@ -311,7 +409,7 @@ export function apercu(a, profil) {
   if (a.type === 'cheveux') return mini('0 0 100 100', `<circle cx="50" cy="50" r="34" fill="${CHEVEUX[a.cle]}"/>`);
   if (a.type === 'accessoire') {
     const acc = [...new Set([...(profil.avatar.accessoires ?? []), a.cle])];
-    return dessinerAvatar({ ...profil.avatar, accessoires: acc }, ['collier', 'bracelet'].includes(a.cle) ? 'corps' : 'tete');
+    return dessinerAvatar({ ...profil.avatar, accessoires: acc }, ['collier', 'bracelet', 'echarpe', 'sac', 'montre'].includes(a.cle) ? 'corps' : 'tete');
   }
-  return dessinerAvatar({ ...profil.avatar, [a.type]: a.cle }, a.type === 'tenue' ? 'corps' : 'tete');
+  return dessinerAvatar({ ...profil.avatar, [a.type]: a.cle }, a.type === 'tenue' || a.type === 'chaussures' ? 'corps' : 'tete');
 }

@@ -47,7 +47,7 @@ test('profil invalide refusé', () => {
   assert.throws(() => ajouterProfil(etat, { ...lea, prenom: '   ' }));
   assert.throws(() => ajouterProfil(etat, { ...lea, prenom: 'x'.repeat(21) }));
   assert.throws(() => ajouterProfil(etat, { ...lea, avatar: '🦊' }));
-  assert.throws(() => ajouterProfil(etat, { ...lea, avatar: { ...AVATAR_PAR_DEFAUT, cheveux: 'vert' } }));
+  assert.throws(() => ajouterProfil(etat, { ...lea, avatar: { ...AVATAR_PAR_DEFAUT, cheveux: 'arc-en-ciel' } }));
   for (const age of [undefined, 2, 15, 6.5, '6']) assert.throws(() => ajouterProfil(etat, { ...lea, age }));
   assert.equal(etat.profils.length, 0);
 });
