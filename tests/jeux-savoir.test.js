@@ -134,7 +134,33 @@ test('maison de la confiance, fait ou avis : 6 phrases amusantes puis 2 blessant
   assert.deepEqual(r.map((s) => s.seRepete), [false, false, true]); // la situation qui se répète vient en dernier
   assert.match(confiance.quandCaSeRepete(9), /harcèlement/);
   assert.doesNotMatch(confiance.quandCaSeRepete(6), /harcèlement/);
+  assert.ok(confiance.SITUATIONS.every(([t]) => /^Imagine : /.test(t) && / (te|ton|tes|tu) /.test(t) && !/Léo|Sami|Inès|Noé|Lina|Malik|Aya/.test(t)), 'on s’adresse à l’enfant, sans aucun prénom');
+  assert.ok(confiance.SITUATIONS.length >= 15 && confiance.SITUATIONS.filter((s) => s[1]).length >= 3);
+  assert.equal(new Set(confiance.SITUATIONS.map((s) => s[0])).size, confiance.SITUATIONS.length);
   assert.equal(confiance.REACTIONS.length, 4);
   assert.match(confiance.FIN, /147/);
-  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis']); // un thème à la fois, relu avant d'ouvrir
+  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis', 'emotions']); // un thème à la fois, relu avant d'ouvrir
+});
+
+test('maison de la confiance, mes émotions : le message de chaque émotion, le oui et le non, les quatre gestes ; jamais « faux »', async () => {
+  const { EMOTIONS } = await import('../js/jeux/emotions.js');
+  for (const [age, n, choix] of [[6, 5, 3], [9, 6, 4]]) {
+    const m = confiance.messages(age, graine(age));
+    assert.equal(m.length, n); // la gêne : 8 ans et plus
+    for (const q of m) {
+      assert.ok(EMOTIONS[q.emotion], q.emotion); // un visage existe
+      assert.equal(new Set(q.choix).size, choix);
+      assert.ok(q.choix.includes(q.reponse));
+      assert.match(confiance.retourMessage(q, q.reponse), /^Oui !/);
+      assert.match(confiance.retourMessage(q, q.choix.find((c) => c !== q.reponse)), /^Son message, c’est plutôt/);
+    }
+  }
+  const o = confiance.ouiNon(graine(2));
+  assert.equal(new Set(o.map((q) => q.texte)).size, 8);
+  assert.ok(confiance.OUI_NON.filter((q) => q[1] === 'oui').length >= 4 && confiance.OUI_NON.filter((q) => q[1] === 'non').length >= 4);
+  assert.match(confiance.retourOuiNon(o[0], o[0].reponse === 'oui' ? 'non' : 'oui'), /^Chacun ressent les choses à sa façon/);
+  assert.equal(confiance.GESTES.length, 4);
+  assert.equal(confiance.quandNon(graine(1)).length, 3);
+  const tout = [confiance.DOUCEUR_ATTENDRE, confiance.FIN_EMOTIONS, ...confiance.OUI_NON.map((q) => q[2]), ...confiance.MESSAGES.map((m) => m[3])].join(' ');
+  assert.doesNotMatch(tout, /faux|mauvaise réponse|perdu|bisou/i); // le bisou obligé et le corps : gardés pour le thème 5
 });

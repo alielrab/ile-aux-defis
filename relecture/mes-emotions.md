@@ -1,7 +1,6 @@
 # Maison de la confiance — thème 2 : « Mes émotions me parlent »
 
-**À relire par un parent. Rien de ce texte n'est dans l'app.**
-Corrige directement ce fichier (ou dis-moi quoi changer) : j'ouvrirai le thème seulement après ton accord.
+**Relu et validé par un parent le 15 novembre 2026.** Le thème est ouvert dans l'app (`js/jeux/confiance.js`). Le bisou obligé, « être pris dans les bras » et l'adulte connu qui demande un secret sont retirés d'ici et gardés pour le thème 5.
 
 Règles du lieu : aucune étoile perdue, aucune pénalité. Une réponse à revoir donne seulement une explication douce. Le thème finit par une invitation à en parler avec un parent.
 

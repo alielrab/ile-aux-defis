@@ -1,12 +1,12 @@
 // La maison de la confiance (île du cœur). Thème 1 : « Fait ou avis ? » (texte relu dans relecture/fait-ou-avis.md).
 // Règle du lieu : aucune pénalité. Une réponse à revoir donne une explication douce ; les étoiles récompensent
-// le fait d'aller au bout d'une étape, jamais les bonnes réponses. À FAIRE RELIRE PAR UN PARENT.
+// le fait d'aller au bout d'une étape, jamais les bonnes réponses. Thèmes 1 et 2 relus et validés par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert.
 import { melanger } from '../partie.js';
 
 // Les thèmes du lieu, dans l'ordre choisi par les parents. ouvert : false = « Bientôt ».
 export const THEMES = [
   { cle: 'fait-avis', nom: 'Fait ou avis ?', image: '🔎', ouvert: true },
-  { cle: 'emotions', nom: 'Mes émotions me parlent', image: '💛', ouvert: false },
+  { cle: 'emotions', nom: 'Mes émotions me parlent', image: '💛', ouvert: true },
   { cle: 'droits', nom: 'Mes droits', image: '📜', ouvert: false },
   { cle: 'inconnus', nom: 'Les inconnus', image: '🚶', ouvert: false },
   { cle: 'corps', nom: 'Mon corps m’appartient', image: '🛡️', ouvert: false },
@@ -65,22 +65,33 @@ export const REACTIONS = [
 ];
 export const A_REVOIR = 'Je lui dis quelque chose de méchant aussi.';
 export const DOUCEUR = 'On comprend que tu aies envie de répondre. Mais une méchanceté de plus ne répare rien, et tu te sentirais moins bien après. Regarde ce que tu peux faire à la place.';
-// [situation, ça se répète ?]
+// [situation, ça se répète ?]. On s'adresse à l'enfant (« te dit »), comme les réactions qui sont à la première personne.
+// « Imagine » garde de la distance ; aucun prénom, ni celui de l'enfant ni celui d'un camarade.
 export const SITUATIONS = [
-  ['À la récré, Léo dit à Sami : « Tu cours trop lentement, tu es nul. »'],
-  ['Dans le vestiaire, quelqu’un dit à Inès : « Ton pull est moche. »'],
-  ['En classe, un enfant regarde le dessin de Noé et dit : « C’est n’importe quoi, ton dessin. »'],
-  ['À la cantine, une fille dit à Lina : « Tu manges bizarrement. »'],
-  ['Pendant un jeu, on dit à Malik : « On ne veut pas de toi, tu joues mal. »'],
-  ['Tous les jours, le même enfant se moque du prénom d’Aya.', true],
+  ['Imagine : à la récré, un enfant te dit : « Tu cours trop lentement, tu es {nul|nulle}. »'],
+  ['Imagine : dans le vestiaire, quelqu’un te dit : « Ton pull est moche. »'],
+  ['Imagine : en classe, un enfant regarde ton dessin et dit : « C’est n’importe quoi, ton dessin. »'],
+  ['Imagine : à la cantine, une fille te dit : « Tu manges bizarrement. »'],
+  ['Imagine : pendant un jeu, on te dit : « On ne veut pas de toi, tu joues mal. »'],
+  ['Imagine : à la piscine, quelqu’un te dit : « Tu nages comme un caillou. »'],
+  ['Imagine : un enfant regarde tes chaussures et dit : « Elles sont trop moches. »'],
+  ['Imagine : à la récré, on te dit : « Tu es trop {petit|petite} pour jouer avec nous. »'],
+  ['Imagine : en classe, tu te trompes en lisant, et un enfant rit : « Tu ne sais même pas lire ! »'],
+  ['Imagine : à un anniversaire, quelqu’un te dit : « Ton cadeau est nul. »'],
+  ['Imagine : au parc, un enfant te dit : « Ton vélo, c’est un vélo de bébé. »'],
+  ['Imagine : quelqu’un te dit : « Tu as une drôle de voix. »'],
+  ['Imagine : tu as pleuré, et on te dit : « Tu pleures tout le temps, tu es un bébé. »'],
+  ['Imagine : tous les jours, le même enfant se moque de ton prénom.', true],
+  ['Imagine : chaque matin dans le bus, les mêmes enfants rient quand tu montes.', true],
+  ['Imagine : à chaque récré, le même groupe te dit : « Va-t’en, on ne joue pas avec toi. »', true],
 ];
 // 7 ans et moins : on ne nomme pas le harcèlement, on dit seulement d'en parler
 export const quandCaSeRepete = (age) => (age > 7
   ? 'Quand ça se répète, ou quand ça fait mal, ça s’appelle du harcèlement. Ce n’est jamais ta faute. Il faut toujours en parler à un adulte de confiance.'
   : 'Quand ça se répète, ce n’est jamais ta faute. Il faut toujours en parler à un adulte de confiance.');
-// 3 situations par partie ; celle qui se répète vient en dernier
+// 3 situations par partie ; une de celles qui se répètent vient en dernier
 export function recre(aleatoire = Math.random) {
-  const [repete] = SITUATIONS.filter((s) => s[1]);
+  const [repete] = melanger(SITUATIONS.filter((s) => s[1]), aleatoire);
   return [...melanger(SITUATIONS.filter((s) => !s[1]), aleatoire).slice(0, 2), repete].map(([texte, seRepete]) => ({ texte, seRepete: !!seRepete }));
 }
 
@@ -94,3 +105,65 @@ export const MIROIR = [
 export const APRES_LE_MIROIR = 'Tout ça, ce sont des faits sur toi. Un avis méchant ne peut pas les effacer.';
 
 export const FIN = 'Un avis méchant ne dit rien de vrai sur toi. Si ça se répète ou si ça te fait mal, parles-en à un adulte de confiance. Tu peux aussi appeler le 147 : c’est gratuit, jour et nuit, et des adultes sont là pour écouter les enfants. Et maintenant, si tu en parlais avec un adulte de ta famille ?';
+
+// ---------- Thème 2 : « Mes émotions me parlent » (texte d'origine : relecture/mes-emotions.md) ----------
+// L'angle n'est pas celui de la météo des émotions (reconnaître une émotion) : ici, une émotion est un message qui protège.
+// Les situations sur le corps (bisou obligé, bras) et sur l'adulte qui demande un secret sont gardées pour le thème 5.
+export const INTRO_EMOTIONS = 'Tes émotions sont comme des petits messagers. Chacune vient te dire quelque chose d’important. Aucune émotion n’est interdite : même la colère et la peur ont le droit d’être là. Ce qui compte, c’est de les écouter, et de savoir quoi faire ensuite.';
+
+// [émotion (le visage de la météo des émotions), nom, son message, explication, grand ?]
+export const MESSAGES = [
+  ['peur', 'La peur', '« Attention, il y a peut-être un danger. »', 'La peur te protège. Elle te dit de t’arrêter et d’aller vers un adulte de confiance.'],
+  ['colere', 'La colère', '« Quelque chose n’est pas juste pour moi. »', 'La colère te dit que quelqu’un a dépassé une limite. On peut le dire avec des mots, sans taper.'],
+  ['tristesse', 'La tristesse', '« J’ai besoin de réconfort. »', 'La tristesse te dit que tu as besoin d’un câlin ou de parler à quelqu’un.'],
+  ['joie', 'La joie', '« C’est bon pour moi, j’en veux encore. »', 'La joie te montre ce qui te fait du bien, et les personnes avec qui tu te sens bien.'],
+  ['degout', 'Le dégoût', '« Ça, je n’en veux pas. »', 'Le dégoût te protège de ce qui pourrait te rendre malade.'],
+  ['timidite', 'La gêne', '« Ça me met mal à l’aise, je veux que ça s’arrête. »', 'La gêne est un vrai signal. Tu n’as pas besoin de savoir pourquoi pour avoir le droit de dire stop.', true],
+];
+// Étape 1 : pour chaque émotion, retrouver son message parmi ceux des autres (3 choix à 7 ans et moins, 4 ensuite)
+export function messages(age, aleatoire = Math.random) {
+  const liste = MESSAGES.filter((m) => age > 7 || !m[4]);
+  return melanger(liste, aleatoire).map(([emotion, nom, reponse, explication]) => ({
+    emotion, texte: `${nom} : que vient-elle te dire ?`.replace('Le dégoût : que vient-elle', 'Le dégoût : que vient-il'), reponse, explication,
+    choix: melanger([reponse, ...melanger(liste.filter((m) => m[2] !== reponse), aleatoire).slice(0, age > 7 ? 3 : 2).map((m) => m[2])], aleatoire),
+  }));
+}
+export const retourMessage = (q, choix) => `${choix === q.reponse ? 'Oui !' : `Son message, c’est plutôt : ${q.reponse}`} ${q.explication}`;
+
+export const OUI_NON_INTRO = 'Ton corps te parle aussi. Quand quelque chose te fait du bien, c’est tout doux et tout chaud : c’est un oui. Quand quelque chose ne va pas, ça serre dans le ventre, le cœur bat vite, on a envie de partir : c’est un non. Ton non a toujours raison de se faire entendre.';
+// [situation, « oui » ou « non », explication]
+export const OUI_NON = [
+  ['Mamie te fait un câlin et tu en as très envie.', 'oui', 'Un câlin que tu veux, ça fait du bien.'],
+  ['Ton ami te chatouille et vous riez tous les deux.', 'oui', 'Tant que tout le monde s’amuse, c’est un jeu.'],
+  ['Ton ami continue de te chatouiller alors que tu as dit « arrête ».', 'non', 'Quand on dit stop, le jeu s’arrête. Sinon, ce n’est plus un jeu.'],
+  ['Papa prépare une surprise pour l’anniversaire de maman et te demande de ne rien dire.', 'oui', 'C’est une surprise : elle fait plaisir, et elle sera bientôt dite.'],
+  ['Quelqu’un te dit : « Ne le dis à personne, sinon tu auras des ennuis. »', 'non', 'Un secret qui fait peur ou qui serre le ventre, on a toujours le droit de le raconter.'],
+  ['Tu joues à ton jeu préféré avec ta cousine.', 'oui', 'Jouer avec quelqu’un qu’on aime, ça fait du bien.'],
+  ['Un grand de l’école te demande de lui donner ton goûter, sinon il se fâche.', 'non', 'Ce n’est pas juste. Tu peux en parler à la maîtresse ou à un parent.'],
+  ['Ta maîtresse te félicite devant toute la classe.', 'oui', 'Ça fait chaud au cœur, même si on rougit un peu.'],
+  ['Quelqu’un regarde par-dessus ton épaule ce que tu écris et se moque.', 'non', 'Tu as le droit de dire : « Arrête, je n’aime pas ça. »'],
+  ['Tu te blottis dans ton lit avec ton doudou.', 'oui', 'C’est un moment tout doux, rien que pour toi.'],
+];
+// Étape 2 : 8 situations à trier
+export const ouiNon = (aleatoire = Math.random) => melanger(OUI_NON, aleatoire).slice(0, 8).map(([texte, reponse, explication]) => ({ texte, reponse, explication }));
+// Jamais « faux » : chacun ressent les choses à sa façon
+export const retourOuiNon = (q, choix) => `${choix === q.reponse ? 'Oui !' : `Chacun ressent les choses à sa façon. Pour beaucoup d’enfants, ça ferait plutôt « ${q.reponse} ». Écoute pourquoi.`} ${q.explication}`;
+
+// Étape 3 : quand ça fait « non ». Quatre gestes, toujours les mêmes ; un seul choix est à revoir, avec douceur.
+export const GESTES = [
+  'Je m’arrête et j’écoute ce que je ressens.',
+  'Je dis « non » ou « stop », bien fort.',
+  'Je m’éloigne.',
+  'J’en parle à un adulte de confiance.',
+];
+export const ATTENDRE = 'Je ne dis rien et j’attends que ça passe.';
+export const DOUCEUR_ATTENDRE = 'On comprend : parfois on n’ose pas. Mais garder ça pour soi, c’est lourd. Regarde ce que tu peux faire à la place.';
+export const QUAND_NON = [
+  'Imagine : un copain te pousse pour que tu sautes de très haut, et tu as peur.',
+  'Imagine : une grande te demande de lui prêter ton vélo, et tu n’en as pas envie.',
+  'Imagine : on te demande de garder un secret qui te serre le ventre.',
+  'Imagine : dans un jeu, tout le monde rit sauf toi, et ça te fait mal.',
+];
+export const quandNon = (aleatoire = Math.random) => melanger(QUAND_NON, aleatoire).slice(0, 3).map((texte) => ({ texte }));
+
+export const FIN_EMOTIONS = 'Tes émotions sont tes alliées. Quand ça fait « non », écoute-les. Tu n’as pas besoin d’expliquer pourquoi : ressentir « non », ça suffit. Et tu n’es jamais {seul|seule} : il y a toujours un adulte de confiance à qui parler. Et maintenant, si tu en parlais avec un adulte de ta famille ?';

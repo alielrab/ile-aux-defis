@@ -1,7 +1,6 @@
 # Maison de la confiance — thème 1 : « Fait ou avis ? »
 
-**À relire par un parent. Rien de ce texte n'est encore dans l'app.**
-Corrige directement ce fichier (ou dis-moi quoi changer) : j'ouvrirai le thème seulement après ton accord.
+**Relu et validé par un parent le 15 novembre 2026.** Le thème est ouvert dans l'app (`js/jeux/confiance.js`).
 
 Règles du lieu : aucune étoile perdue, aucune pénalité. Une réponse à revoir donne seulement une explication douce. Le thème finit par une invitation à en parler avec un parent.
 
@@ -68,12 +67,24 @@ Une situation, puis « Que peux-tu faire ? ». Plusieurs réponses sont bonnes :
 
 | Situation |
 |---|
-| À la récré, Léo dit à Sami : « Tu cours trop lentement, tu es nul. » |
-| Dans le vestiaire, quelqu'un dit à Inès : « Ton pull est moche. » |
-| En classe, un enfant regarde le dessin de Noé et dit : « C'est n'importe quoi, ton dessin. » |
-| À la cantine, une fille dit à Lina : « Tu manges bizarrement. » |
-| Pendant un jeu, on dit à Malik : « On ne veut pas de toi, tu joues mal. » |
-| Tous les jours, le même enfant se moque du prénom d'Aya. |
+| Imagine : à la récré, un enfant te dit : « Tu cours trop lentement, tu es {nul\|nulle}. » |
+| Imagine : dans le vestiaire, quelqu'un te dit : « Ton pull est moche. » |
+| Imagine : en classe, un enfant regarde ton dessin et dit : « C'est n'importe quoi, ton dessin. » |
+| Imagine : à la cantine, une fille te dit : « Tu manges bizarrement. » |
+| Imagine : pendant un jeu, on te dit : « On ne veut pas de toi, tu joues mal. » |
+| Imagine : à la piscine, quelqu'un te dit : « Tu nages comme un caillou. » |
+| Imagine : un enfant regarde tes chaussures et dit : « Elles sont trop moches. » |
+| Imagine : à la récré, on te dit : « Tu es trop {petit\|petite} pour jouer avec nous. » |
+| Imagine : en classe, tu te trompes en lisant, et un enfant rit : « Tu ne sais même pas lire ! » |
+| Imagine : à un anniversaire, quelqu'un te dit : « Ton cadeau est nul. » |
+| Imagine : au parc, un enfant te dit : « Ton vélo, c'est un vélo de bébé. » |
+| Imagine : quelqu'un te dit : « Tu as une drôle de voix. » |
+| Imagine : tu as pleuré, et on te dit : « Tu pleures tout le temps, tu es un bébé. » |
+| Imagine : tous les jours, le même enfant se moque de ton prénom. *(se répète)* |
+| Imagine : chaque matin dans le bus, les mêmes enfants rient quand tu montes. *(se répète)* |
+| Imagine : à chaque récré, le même groupe te dit : « Va-t'en, on ne joue pas avec toi. » *(se répète)* |
+
+Les situations s'adressent à l'enfant (« te dit »), sans aucun prénom : c'est cohérent avec les réactions à la première personne, et aucune moquerie ne vise un prénom réel.
 
 Pour la dernière situation (tous les jours), la voix ajoute :
 > Quand ça se répète, ou quand ça fait mal, ça s'appelle du harcèlement. Ce n'est jamais ta faute. Il faut toujours en parler à un adulte de confiance.

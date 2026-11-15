@@ -304,14 +304,20 @@ export function question(niveau, aleatoire = Math.random) {
 - 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
 - 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
 
-**La maison de la confiance** (`js/jeux/confiance.js`, île du cœur) — **à faire relire par un parent** :
+**La maison de la confiance** (`js/jeux/confiance.js`, île du cœur) — thèmes 1 et 2 relus par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert :
 - Un thème à la fois ; les autres affichent « bientôt ». Aucune pénalité, jamais « faux » : une réponse à revoir donne une explication douce.
 - Étoiles (`ETOILES_CONFIANCE`, 3) quand on finit une étape, la première fois seulement, jamais pour une bonne réponse.
 - **Thème 1, « Fait ou avis ? »** (texte d'origine : `relecture/fait-ou-avis.md`) :
   - *Je trie* : 8 phrases, 6 amusantes puis 2 blessantes (« Tu es moche » = un avis). Les deux faits dits pour se moquer (lunettes, taille) : 8 ans et plus.
-  - *Dans la cour de récré* : 3 situations, 4 bonnes réactions montrées à chaque fois. La situation qui se répète vient en dernier ; le mot « harcèlement » n'est dit qu'à 8 ans et plus.
+  - *Dans la cour de récré* : 3 situations par partie, parmi 16, adressées à l'enfant (« Imagine : … te dit … »), sans aucun prénom, 4 bonnes réactions montrées à chaque fois. La situation qui se répète vient en dernier ; le mot « harcèlement » n'est dit qu'à 8 ans et plus.
   - *Mon miroir* : l'enfant choisit des phrases vraies sur soi. Rien n'est enregistré.
   - Message de fin avec le 147.
+- **Thème 2, « Mes émotions me parlent »** (texte d'origine : `relecture/mes-emotions.md`) :
+  - L'angle : une émotion est un message qui protège (la météo des émotions, elle, apprend à les reconnaître).
+  - *Le message de chaque émotion* : un visage, et son message à retrouver parmi ceux des autres (3 choix à 7 ans et moins, 4 ensuite ; la gêne : 8 ans et plus).
+  - *Le oui et le non dans mon corps* : 8 situations à trier parmi 10. Une réponse différente donne « Chacun ressent les choses à sa façon… ».
+  - *Quand ça fait non* : 3 situations, les quatre gestes montrés à chaque fois (je m'arrête, je dis stop, je m'éloigne, j'en parle).
+  - Gardé pour le thème 5 : le bisou obligé, être pris dans les bras, et l'adulte connu qui demande un secret.
 
 **Le chantier : « La grue folle »** (`js/jeux/chantier.js`, île du village) :
 - Une grue balance un bloc ; on touche l'écran (ou Espace) pour le lâcher. Le bloc tient s'il tombe assez bien sur celui du dessous ; sinon la partie s'arrête. La grue accélère à chaque étage (jusqu'au double).

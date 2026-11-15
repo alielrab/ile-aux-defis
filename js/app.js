@@ -1720,84 +1720,98 @@ function voyager(cle) {
 function ouvrirConfiance() {
   etoilesJoueuse();
   const accueil = 'Ici, on apprend à se sentir bien et en sécurité. Il n’y a pas de mauvaise réponse : on apprend ensemble.';
+  const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance };
   $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', textContent: accueil }),
     ...confiance.THEMES.map((t) => {
-      const b = gros(`${t.image} ${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrirFaitAvis, t.ouvert ? 'gros' : 'gros secondaire');
+      const b = gros(`${t.image} ${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrir[t.cle], t.ouvert ? 'gros' : 'gros secondaire');
       b.disabled = !t.ouvert;
       return b;
     }));
   montrer('confiance');
   parler(`La maison de la confiance. ${accueil}`);
 }
-
-// Thème 1 : « Fait ou avis ? », en trois étapes
-function ouvrirFaitAvis() {
-  const faite = (e) => (joueuse.confiance?.[`fait-avis:${e}`] ? ' ✓' : '');
-  $('#confiance-vue').replaceChildren(el('h2', { textContent: '🔎 Fait ou avis ?' }), el('p', { className: 'carte presentation', textContent: confiance.INTRO }),
-    gros(`1. Je trie : fait ou avis ?${faite('tri')}`, trierFaitAvis), gros(`2. Dans la cour de récré${faite('recre')}`, recreFaitAvis), gros(`3. Mon miroir${faite('miroir')}`, miroirFaitAvis),
-    el('p', { className: 'carte presentation', textContent: confiance.FIN }), gros('← Les autres thèmes', ouvrirConfiance, 'gros secondaire'));
-  parler(confiance.INTRO);
+// Le menu d'un thème : son explication, ses étapes (avec une coche quand elles sont finies), son message à retenir
+function menuTheme(theme, titre, intro, etapes, fin) {
+  $('#confiance-vue').replaceChildren(el('h2', { textContent: titre }), el('p', { className: 'carte presentation', textContent: intro }),
+    ...etapes.map(([cle, nom, jouer], i) => gros(`${i + 1}. ${nom}${joueuse.confiance?.[`${theme}:${cle}`] ? ' ✓' : ''}`, jouer)),
+    el('p', { className: 'carte presentation', textContent: acc(fin) }), gros('← Les autres thèmes', ouvrirConfiance, 'gros secondaire'));
+  parler(intro);
 }
 // La fin d'une étape : ses étoiles la première fois, puis retour au thème
-function finEtapeConfiance(etape, texte) {
+function finEtapeConfiance(theme, etape, texte, retour) {
   joueuse.confiance ??= {};
-  const premiere = !joueuse.confiance[`fait-avis:${etape}`];
-  joueuse.confiance[`fait-avis:${etape}`] = true;
+  const premiere = !joueuse.confiance[`${theme}:${etape}`];
+  joueuse.confiance[`${theme}:${etape}`] = true;
   if (premiere) joueuse.etoiles += ETOILES_CONFIANCE;
   enregistrer();
   etoilesJoueuse();
   const dit = `${texte}${premiere ? ` Tu gagnes ${ETOILES_CONFIANCE} étoiles pour être {allé|allée} au bout.` : ''}`;
-  $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', role: 'status', textContent: acc(dit) }), gros('Continuer', ouvrirFaitAvis));
+  $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', role: 'status', textContent: acc(dit) }), gros('Continuer', retour));
   fanfare();
   parler(dit, { ton: 1.1 });
 }
-function trierFaitAvis() {
-  const questions = confiance.tri(joueuse.age);
+// Une suite de questions à choix : après chaque réponse, une explication (jamais « faux »), puis « Suivant ».
+// q : { texte, choix: [[valeur, libellé]], aide (dessin), avant (dit avant la question) }
+function jouerChoix({ questions, mot, retour, question = '', fin }) {
   let i = 0;
   const poser = () => {
-    if (i === questions.length) return finEtapeConfiance('tri', 'Bravo ! Tu sais reconnaître un fait et un avis.');
-    const q = questions[i], avant = q.blessante && !questions[i - 1].blessante ? `${confiance.AVANT_LES_BLESSANTES} ` : '';
+    if (i === questions.length) return fin();
+    const q = questions[i];
     const explication = el('p', { className: 'carte presentation', role: 'status' });
-    const boutons = el('div', { className: 'actions' }, ...['fait', 'avis'].map((c) => gros(`C’est ${confiance.NOMS[c]}`, () => {
-      const t = confiance.retour(q, c);
+    const boutons = el('div', { className: q.choix.length > 2 ? 'choix-confiance' : 'actions' }, ...q.choix.map(([valeur, libelle]) => gros(acc(libelle), () => {
+      const t = retour(q, valeur);
       explication.textContent = acc(t);
       boutons.replaceChildren(gros('Suivant ➜', () => { i++; poser(); }));
       parler(t);
-    })));
-    $('#confiance-vue').replaceChildren(el('p', { className: 'etape-confiance', textContent: `${avant}Phrase ${i + 1} sur ${questions.length}` }),
-      el('p', { className: 'carte phrase-confiance', textContent: acc(q.texte) }), boutons, explication);
-    parler(`${avant}${q.texte} Est-ce un fait, ou un avis ?`);
+    }, q.choix.length > 2 ? 'gros secondaire' : 'gros')));
+    const aide = el('div', { className: 'aide-confiance', ariaHidden: 'true' });
+    aide.innerHTML = q.aide ?? ''; // un dessin fabriqué par l'app, jamais du texte saisi
+    $('#confiance-vue').replaceChildren(el('p', { className: 'etape-confiance', textContent: `${mot} ${i + 1} sur ${questions.length}` }),
+      ...(q.avant ? [el('p', { className: 'carte presentation', textContent: q.avant })] : []), ...(q.aide ? [aide] : []), el('p', { className: 'carte phrase-confiance', textContent: acc(q.texte) }), boutons, explication);
+    parler(`${q.avant ?? ''}${q.texte} ${question}`);
   };
   poser();
 }
-function recreFaitAvis() {
-  const situations = confiance.recre();
+// Une suite de situations : plusieurs réactions sont bonnes et on les montre toutes ; une seule est à revoir, avec douceur.
+function jouerReactions({ situations, bonnes, aRevoir, douceur, apres = () => '', fin }) {
   let i = 0;
   const poser = () => {
-    if (i === situations.length) return finEtapeConfiance('recre', `Tu connais quatre bonnes façons de réagir. ${confiance.REACTIONS.join(' ')}`);
+    if (i === situations.length) return fin();
     const s = situations[i];
     const explication = el('p', { className: 'carte presentation', role: 'status' });
-    const choix = el('div', { className: 'choix-confiance' }, ...melanger([...confiance.REACTIONS, confiance.A_REVOIR]).map((r) => {
-      const b = gros(r, () => {
-        const t = `${r === confiance.A_REVOIR ? confiance.DOUCEUR : 'Oui, c’est une bonne idée ! Les trois autres marchent aussi.'}${s.seRepete ? ` ${confiance.quandCaSeRepete(joueuse.age)}` : ''}`;
-        explication.textContent = t;
-        for (const x of choix.children) { x.disabled = true; x.classList.toggle('bonne-idee', x.textContent !== confiance.A_REVOIR); } // on montre toutes les bonnes idées
-        choix.after(gros('Suivant ➜', () => { i++; poser(); }));
-        parler(t);
-      }, 'gros secondaire');
-      return b;
-    }));
+    const choix = el('div', { className: 'choix-confiance' }, ...melanger([...bonnes, aRevoir]).map((r) => gros(r, () => {
+      const t = `${r === aRevoir ? douceur : 'Oui, c’est une bonne idée ! Les trois autres marchent aussi.'}${apres(s)}`;
+      explication.textContent = t;
+      for (const x of choix.children) { x.disabled = true; x.classList.toggle('bonne-idee', x.textContent !== aRevoir); } // on montre toutes les bonnes idées
+      choix.after(gros('Suivant ➜', () => { i++; poser(); }));
+      parler(t);
+    }, 'gros secondaire')));
     $('#confiance-vue').replaceChildren(el('p', { className: 'etape-confiance', textContent: `Situation ${i + 1} sur ${situations.length}` }),
-      el('p', { className: 'carte phrase-confiance', textContent: s.texte }), el('h2', { textContent: 'Que peux-tu faire ?' }), choix, explication);
+      el('p', { className: 'carte phrase-confiance', textContent: acc(s.texte) }), el('h2', { textContent: 'Que peux-tu faire ?' }), choix, explication);
     parler(`${s.texte} Que peux-tu faire ?`);
   };
   poser();
 }
-function miroirFaitAvis() {
+
+// Thème 1 : « Fait ou avis ? »
+function ouvrirFaitAvis() {
+  const finir = (etape, texte) => finEtapeConfiance('fait-avis', etape, texte, ouvrirFaitAvis);
+  menuTheme('fait-avis', '🔎 Fait ou avis ?', confiance.INTRO, [
+    ['tri', 'Je trie : fait ou avis ?', () => jouerChoix({
+      questions: confiance.tri(joueuse.age).map((q, i, l) => ({ ...q, choix: [['fait', 'C’est un fait'], ['avis', 'C’est un avis']], avant: q.blessante && !l[i - 1].blessante ? `${confiance.AVANT_LES_BLESSANTES} ` : '' })),
+      mot: 'Phrase', retour: confiance.retour, question: 'Est-ce un fait, ou un avis ?', fin: () => finir('tri', 'Bravo ! Tu sais reconnaître un fait et un avis.') })],
+    ['recre', 'Dans la cour de récré', () => jouerReactions({
+      situations: confiance.recre(), bonnes: confiance.REACTIONS, aRevoir: confiance.A_REVOIR, douceur: confiance.DOUCEUR,
+      apres: (s) => (s.seRepete ? ` ${confiance.quandCaSeRepete(joueuse.age)}` : ''),
+      fin: () => finir('recre', `Tu connais quatre bonnes façons de réagir. ${confiance.REACTIONS.join(' ')}`) })],
+    ['miroir', 'Mon miroir', () => miroirFaitAvis(finir)],
+  ], confiance.FIN);
+}
+function miroirFaitAvis(finir) {
   const choisies = new Set(); // rien n'est enregistré
   const miroir = el('div', { className: 'miroir-confiance' });
   miroir.innerHTML = dessinerAvatar(joueuse.avatar, 'tete');
-  const fini = gros('J’ai fini', () => finEtapeConfiance('miroir', `${confiance.APRES_LE_MIROIR} ${confiance.FIN}`));
+  const fini = gros('J’ai fini', () => finir('miroir', `${confiance.APRES_LE_MIROIR} ${confiance.FIN}`));
   fini.disabled = true;
   $('#confiance-vue').replaceChildren(el('h2', { textContent: 'Qu’est-ce qui est vrai pour toi ?' }), miroir,
     el('div', { className: 'choix-confiance' }, ...confiance.MIROIR.map((phrase) => {
@@ -1811,6 +1825,22 @@ function miroirFaitAvis() {
       return b;
     })), fini);
   parler('Regarde-toi dans le miroir. Touche tout ce qui est vrai pour toi.');
+}
+
+// Thème 2 : « Mes émotions me parlent ». Une émotion est un message qui protège.
+function ouvrirEmotionsConfiance() {
+  const finir = (etape, texte) => finEtapeConfiance('emotions', etape, texte, ouvrirEmotionsConfiance);
+  menuTheme('emotions', '💛 Mes émotions me parlent', confiance.INTRO_EMOTIONS, [
+    ['messages', 'Le message de chaque émotion', () => jouerChoix({
+      questions: confiance.messages(joueuse.age).map((q) => ({ ...q, choix: q.choix.map((c) => [c, c]), aide: emotions.visage(q.emotion, PEAUX[joueuse.avatar.peau]) })),
+      mot: 'Émotion', retour: confiance.retourMessage, fin: () => finir('messages', 'Bravo ! Tu sais écouter le message de tes émotions.') })],
+    ['oui-non', 'Le oui et le non dans mon corps', () => jouerChoix({
+      questions: confiance.ouiNon().map((q, i) => ({ ...q, choix: [['oui', 'Ça fait oui'], ['non', 'Ça fait non']], avant: i ? '' : `${confiance.OUI_NON_INTRO} ` })),
+      mot: 'Situation', retour: confiance.retourOuiNon, question: 'Ça fait oui, ou ça fait non ?', fin: () => finir('oui-non', 'Tu sais écouter le oui et le non dans ton corps.') })],
+    ['gestes', 'Quand ça fait non', () => jouerReactions({
+      situations: confiance.quandNon(), bonnes: confiance.GESTES, aRevoir: confiance.ATTENDRE, douceur: confiance.DOUCEUR_ATTENDRE,
+      fin: () => finir('gestes', `Tu connais les quatre gestes. ${confiance.GESTES.join(' ')} ${confiance.FIN_EMOTIONS}`) })],
+  ], confiance.FIN_EMOTIONS);
 }
 
 // Le chantier : « La grue folle ». On empile des blocs ; une tour assez haute construit les pièces achetées.
