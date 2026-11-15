@@ -53,6 +53,14 @@ export const TENUES = {
   'ensemble-rose': { nom: 'Ensemble à paillettes', forme: 'pantalon', haut: '#ff8fb8', bas: '#ff8fb8', motif: 'paillettes', prix: 22 },
   'robe-nuit': { nom: 'Robe nuit étoilée', forme: 'robe', haut: '#2e3f78', motif: 'etoiles', col: true, prix: 25 },
   'robe-soiree': { nom: 'Robe de soirée', forme: 'robe', haut: '#c0392b', motif: 'paillettes', prix: 30 },
+  'tshirt-etoiles': { nom: 'T-shirt étoilé', forme: 'short', haut: '#2e3f78', bas: '#f2c230', motif: 'etoiles', prix: 14 },
+  'salopette-jean': { nom: 'Salopette en jean', forme: 'pantalon', haut: '#ffd257', bas: '#5b84c4', bretelles: true, prix: 16 },
+  'jupe-ecossaise': { nom: 'Jupe écossaise', forme: 'jupe', haut: '#2e7d4f', bas: '#c0392b', motif: 'carreaux', prix: 16 },
+  'robe-turquoise': { nom: 'Robe turquoise à pois', forme: 'robe', haut: '#2bb3a0', motif: 'pois', col: true, prix: 18 },
+  pompier: { nom: 'Tenue de pompier', forme: 'pantalon', haut: '#d9412b', bas: '#2e3f66', motif: 'boutons', prix: 22 },
+  docteur: { nom: 'Blouse de docteur', forme: 'pantalon', haut: '#ffffff', bas: '#7ad0f0', motif: 'boutons', prix: 22 },
+  'heros-vert': { nom: 'Costume à cape verte', forme: 'pantalon', haut: '#2e9e5b', bas: '#2e9e5b', cape: '#f2c230', motif: 'eclair', prix: 25 },
+  astronaute: { nom: 'Combinaison d’astronaute', forme: 'pantalon', haut: '#eef1f4', bas: '#eef1f4', motif: 'etoiles', prix: 28 },
 };
 // Bijoux et accessoires : on peut en porter plusieurs à la fois. Tous à gagner à la boutique.
 export const ACCESSOIRES = {
@@ -78,6 +86,11 @@ export const CHAUSSURES = {
   'bottes-pluie': { nom: 'Bottes de pluie', forme: 'botte', couleur: '#f2c230', prix: 12 },
   'bottes-cuir': { nom: 'Bottes en cuir', forme: 'botte', couleur: '#7a4a28', prix: 16 },
   'baskets-or': { nom: 'Baskets dorées', forme: 'basket', couleur: '#e6b422', prix: 20 },
+  'baskets-vertes': { nom: 'Baskets vertes', forme: 'basket', couleur: '#3fae6a', prix: 10 },
+  'baskets-violettes': { nom: 'Baskets violettes', forme: 'basket', couleur: '#8e6ad8', prix: 10 },
+  'sandales-bleues': { nom: 'Sandales bleues', forme: 'sandale', couleur: '#4a90d9', prix: 10 },
+  'ballerines-noires': { nom: 'Ballerines noires', forme: 'ballerine', couleur: '#3a3a44', prix: 12 },
+  'bottes-roses': { nom: 'Bottes roses', forme: 'botte', couleur: '#ff8fb8', prix: 12 },
 };
 // Chapeaux (un à la fois, ou aucun)
 export const CHAPEAUX = {
@@ -87,6 +100,10 @@ export const CHAPEAUX = {
   'chapeau-paille': { nom: 'Chapeau de paille', couleur: '#e8c27a', prix: 14 },
   'couronne-fleurs': { nom: 'Couronne de fleurs', couleur: '#ff8fb8', prix: 16 },
   sorciere: { nom: 'Chapeau de sorcière', couleur: '#6a4ab0', prix: 18 },
+  // forme : le dessin d'un autre chapeau, dans une autre couleur
+  'casquette-bleue': { nom: 'Casquette bleue', forme: 'casquette', couleur: '#4a90d9', prix: 10 },
+  'bonnet-rose': { nom: 'Bonnet rose', forme: 'bonnet', couleur: '#ff8fb8', prix: 10 },
+  'chapeau-soleil': { nom: 'Chapeau de soleil', forme: 'chapeau-paille', couleur: '#fff4d6', prix: 14 },
 };
 
 const gratuits = (liste, prix = {}) => Object.keys(liste).filter((k) => !prix[k]);
@@ -271,7 +288,7 @@ function chapeau(cle) {
     'chapeau-paille': `<ellipse cx="120" cy="62" rx="90" ry="16" fill="${c}" stroke="${o}" stroke-width="3"/><path d="M78 62 C78 20 162 20 162 62Z" fill="${c}" stroke="${o}" stroke-width="3"/><path d="M80 54 Q120 62 160 54" stroke="#e05252" stroke-width="7" fill="none"/>`,
     'couronne-fleurs': [[64, 92], [76, 70], [94, 56], [120, 50], [146, 56], [164, 70], [176, 92]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="9" fill="${['#ff8fb8', '#ffd84a', '#ffffff', '#b08ae8'][i % 4]}" stroke="#d07090" stroke-width="1.5"/><circle cx="${x}" cy="${y}" r="3" fill="#f2a654"/>`).join(''),
     sorciere: `<ellipse cx="120" cy="66" rx="82" ry="14" fill="${c}" stroke="${o}" stroke-width="3"/><path d="M84 64 L136 0 L156 64Z" fill="${c}" stroke="${o}" stroke-width="3" ${L}/><path d="M88 56 Q120 62 152 56" stroke="#ffd84a" stroke-width="6" fill="none"/>`,
-  }[cle];
+  }[h.forme ?? cle];
 }
 
 function corps(t, p, acc, aux = 'baskets-rouges') {

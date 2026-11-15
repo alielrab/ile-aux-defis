@@ -10,7 +10,7 @@ const aVendre = (type) => CATALOGUE.filter((a) => a.type === type && a.prix > 0)
 test('le catalogue : beaucoup d’objets à gagner, ids uniques', () => {
   assert.ok(aVendre('meuble') >= 12 && aVendre('jouet') >= 6 && aVendre('animal') >= 5);
   assert.ok(aVendre('tenue') >= 8 && aVendre('accessoire') >= 6 && aVendre('coiffure') >= 3 && aVendre('cheveux') >= 3);
-  assert.equal(aVendre('piece'), 2);
+  assert.equal(aVendre('piece'), 3);
   assert.equal(new Set(CATALOGUE.map((a) => a.id)).size, CATALOGUE.length);
 });
 

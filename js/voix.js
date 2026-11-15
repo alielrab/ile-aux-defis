@@ -18,6 +18,12 @@ export function choisirVoix(voix, enLigne = true) {
     .sort((a, b) => score(b) - score(a))[0] ?? null;
 }
 
+// Réglages des parents : une voix choisie parmi celles de l'appareil (sinon la meilleure trouvée), et la vitesse
+export const VITESSES = { lente: 0.85, normale: 1, rapide: 1.15 };
+let preferee = null, allure = 1;
+export const appliquerVoix = ({ voix = null, vitesse = 'normale' } = {}) => { preferee = voix; allure = VITESSES[vitesse] ?? 1; };
+export const voixFrancaises = (voix = globalThis.speechSynthesis?.getVoices() ?? []) => voix.filter((v) => v.lang?.toLowerCase().startsWith('fr'));
+
 // Ton : 1 = normal, plus haut = plus enjoué. Se termine quand la phrase est dite (ou après un délai de secours).
 let derniere = { texte: '', ton: 1 };
 // Redire la dernière phrase (bouton 🔊 « réécouter »)
@@ -32,9 +38,10 @@ export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
     synth.cancel();
     const u = new SpeechSynthesisUtterance(texte);
     u.lang = 'fr-FR';
-    u.voice = choisirVoix(synth.getVoices(), navigator.onLine);
+    const voix = synth.getVoices();
+    u.voice = voix.find((x) => x.name === preferee) ?? choisirVoix(voix, navigator.onLine);
     u.pitch = ton;
-    u.rate = vitesse;
+    u.rate = vitesse * allure;
     const secours = setTimeout(fini, 1500 + texte.length * 80); // certains navigateurs oublient l'événement de fin
     u.onend = u.onerror = () => { clearTimeout(secours); fini(); };
     synth.speak(u);
@@ -50,16 +57,25 @@ export async function attendreSilence(max = 20000) {
 }
 
 let audio;
-export function bip(juste) {
+// Des notes douces, comme un xylophone : [fréquence, début (s), durée (s)]
+function notes(liste, type = 'triangle') {
   try {
     audio ??= new AudioContext();
-    const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime;
-    o.frequency.setValueAtTime(juste ? 660 : 330, t);
-    if (juste) o.frequency.setValueAtTime(880, t + 0.12);
-    g.gain.setValueAtTime(0.15, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-    o.connect(g).connect(audio.destination);
-    o.start(t);
-    o.stop(t + 0.35);
+    const t0 = audio.currentTime;
+    for (const [frequence, debut, duree] of liste) {
+      const o = audio.createOscillator(), g = audio.createGain(), t = t0 + debut;
+      o.type = type;
+      o.frequency.value = frequence;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.18, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + duree);
+      o.connect(g).connect(audio.destination);
+      o.start(t);
+      o.stop(t + duree);
+    }
   } catch { /* pas de son, pas grave */ }
 }
+// Juste : deux notes qui montent. À revoir : deux notes graves qui descendent, sans agresser.
+export const bip = (juste) => (juste ? notes([[784, 0, 0.18], [1047, 0.1, 0.4]]) : notes([[330, 0, 0.22], [262, 0.14, 0.32]], 'sine'));
+// La fin d'une partie : do, mi, sol, do
+export const fanfare = () => notes([[523, 0, 0.2], [659, 0.12, 0.2], [784, 0.24, 0.2], [1047, 0.36, 0.6]]);

@@ -110,6 +110,15 @@
         <button class="gros">Enregistrer</button>
       </form>
 
+      <form id="form-lecture" class="carte parents-carte" novalidate>
+        <h2>La voix qui lit</h2>
+        <p>Les voix proposées sont celles de cet appareil. Pour une voix plus naturelle, installez une voix française de haute qualité dans les réglages de la tablette (Synthèse vocale).</p>
+        <label>Voix <select name="voix"></select></label>
+        <label>Vitesse <select name="vitesse"><option value="lente">Lente</option><option value="normale">Normale</option><option value="rapide">Rapide</option></select></label>
+        <div class="actions"><button type="button" class="gros secondaire" id="essayer-voix">🔊 Essayer</button></div>
+        <p class="erreur" role="status"></p>
+      </form>
+
       <form id="form-suivante" class="carte parents-carte" novalidate>
         <h2>Après une réponse</h2>
         <p>Pour toute la famille, dans tous les jeux de questions.</p>
@@ -319,6 +328,7 @@
     </section>
 
     <section data-ecran="fin" hidden>
+      <div class="confettis" aria-hidden="true"></div>
       <h1 tabindex="-1" id="fin-titre"></h1>
       <p id="fin-score"></p>
       <p id="fin-etoiles" class="gain"></p>

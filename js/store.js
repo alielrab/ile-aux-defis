@@ -35,6 +35,12 @@ export function reglerSuivante(etat, mode) {
   etat.reglages = { ...etat.reglages, suivante: mode };
 }
 
+// La voix qui lit : son nom parmi les voix de l'appareil (null = la meilleure trouvée) et sa vitesse
+export function reglerLecture(etat, { voix = null, vitesse = 'normale' } = {}) {
+  if (!['lente', 'normale', 'rapide'].includes(vitesse)) throw new Error('Réglage inconnu.');
+  etat.reglages = { ...etat.reglages, voix: voix ? String(voix).slice(0, 100) : null, vitesse };
+}
+
 export function changerCode(etat, code) {
   etat.code = verifierCode(code);
 }

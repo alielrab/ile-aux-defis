@@ -29,7 +29,7 @@ export const LIEUX = [
   { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le passeport du monde', ouvert: true, x: 400, y: 655 },
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
-  { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: false, x: 540, y: 440 },
+  { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: true, x: 540, y: 440 },
   // L'île des créateurs
   { id: 'cuisine', ile: 'createurs', type: 'jeu', nom: 'Le\nrestaurant', detail: 'la cuisine de l’île', ouvert: true, x: 230, y: 400 },
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },

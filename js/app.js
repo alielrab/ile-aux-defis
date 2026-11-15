@@ -1,4 +1,4 @@
-import { nouvelEtat, ajouterProfil, charger, sauver, modifierProfil, remettreAZero, changerCode, reglerCroyance, reglerSuivante } from './store.js';
+import { nouvelEtat, ajouterProfil, charger, sauver, modifierProfil, remettreAZero, changerCode, reglerCroyance, reglerSuivante, reglerLecture } from './store.js';
 import * as croyance from './croyances.js';
 import * as recits from './recits.js';
 import * as rapprochements from './rapprochements.js';
@@ -27,15 +27,17 @@ import * as atlas from './jeux/atlas.js';
 import * as dinos from './jeux/dinos.js';
 import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
+import * as route from './jeux/route.js';
 import * as veto from './jeux/veto.js';
 import * as fractions from './jeux/fractions.js';
 import * as memory from './jeux/memory.js';
 import * as voixParents from './enregistrements.js';
-import { parler, taire, bip, repeter, attendreSilence, choisirGenre } from './voix.js';
+import { parler, taire, bip, fanfare, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises } from './voix.js';
 import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
 
 let etat = charger();
+appliquerVoix(etat?.reglages);
 let joueuse = null;
 navigator.storage?.persist?.(); // demande au navigateur de ne pas effacer les données tout seul
 
@@ -420,7 +422,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -498,6 +500,9 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
+  } else if (jeu === 'route') {
+    $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
+    boutonsReponses(q.choix, String, true);
   } else if (jeu === 'veto') {
     const dessin = apercu(article(q.patient ?? `animal:${q.espece}`));
     $('#aide').innerHTML = `<div class="patient-veto" aria-hidden="true">${dessin}${q.symptome ? `<span class="symptome">${q.symptome}</span>` : ''}</div>`;
@@ -788,7 +793,9 @@ function finirPartie() {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">📚 Les autres histoires</button>';
     $('#fin-extra button').addEventListener('click', () => { recitOuvert = null; afficherCroyance(); montrer('croyance'); });
   }
+  $('[data-ecran="fin"]').classList.toggle('parfait', parfait); // des confettis pour un sans-faute
   montrer('fin');
+  fanfare();
   parler(fin, { ton: 1.15 });
 }
 
@@ -1210,7 +1217,7 @@ function garderOeuvre(oeuvre) {
 
 // La galerie : accrocher dans une pièce de la maison (une par pièce), imprimer, enlever (deux appuis)
 function vueGalerie(v, vue) {
-  const pieces = Object.keys(PIECES).filter((k) => possede(joueuse, article(`piece:${k}`)));
+  const pieces = Object.keys(PIECES).filter((k) => k !== 'jardin' && possede(joueuse, article(`piece:${k}`))); // pas de tableau au jardin
   if (!joueuse.dessins.length) v.append(el('p', { className: 'carte presentation', textContent: 'Ta galerie est vide. Fais un dessin : il viendra ici !' }));
   v.append(el('div', { className: 'galerie' }, ...joueuse.dessins.map((d, i) => {
     const carte = el('div', { className: 'carte oeuvre' });
@@ -1839,6 +1846,7 @@ function afficherParents(message = null) {
   afficherReglageCroyance();
   for (const r of $('#form-suivante').elements.suivante) r.checked = r.value === (etat.reglages?.suivante ?? 'auto');
   noter($('#form-suivante .erreur'), '');
+  afficherLecture();
   $('#form-nouveau-code').reset();
   $('#form-nouveau-code .erreur').textContent = '';
   voixMessage('');
@@ -1847,6 +1855,31 @@ function afficherParents(message = null) {
 }
 
 $('#ajouter-enfant').addEventListener('click', () => ouvrirProfil());
+
+// La voix qui lit : choisie parmi les voix françaises de l'appareil, et sa vitesse
+function afficherLecture() {
+  const f = $('#form-lecture').elements, r = etat.reglages ?? {};
+  f.voix.replaceChildren(new Option('Automatique (la meilleure trouvée)', ''), ...voixFrancaises().map((x) => new Option(`${x.name}${x.localService ? '' : ' (avec internet)'}`, x.name)));
+  f.voix.value = r.voix ?? '';
+  if (f.voix.selectedIndex < 0) f.voix.value = ''; // la voix choisie n'est pas sur cet appareil
+  f.vitesse.value = r.vitesse ?? 'normale';
+  noter($('#form-lecture .erreur'), '');
+}
+$('#form-lecture').addEventListener('change', () => {
+  const f = $('#form-lecture').elements;
+  reglerLecture(etat, { voix: f.voix.value || null, vitesse: f.vitesse.value });
+  enregistrer();
+  appliquerVoix(etat.reglages);
+  noter($('#form-lecture .erreur'), 'Enregistré ✓', true);
+});
+// les voix de l'appareil arrivent parfois après l'ouverture de la page
+globalThis.speechSynthesis?.addEventListener?.('voiceschanged', () => { if (!$('[data-ecran="parents"]').hidden) afficherLecture(); });
+$('#essayer-voix').addEventListener('click', () => parler('Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?'));
+$('.confettis').replaceChildren(...['🎉', '⭐', '🎊', '✨', '🌟', '🎈', '⭐', '🎉', '✨', '🎊', '🌟', '🎈', '⭐'].map((c, i) => {
+  const s = el('span', { textContent: c });
+  s.style.cssText = `left:${i * 7.7}%;animation-delay:${((i * 5) % 13) * 0.12}s`;
+  return s;
+}));
 
 $('#form-suivante').addEventListener('change', (ev) => {
   reglerSuivante(etat, ev.target.value);

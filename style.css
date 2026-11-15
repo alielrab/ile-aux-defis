@@ -287,7 +287,16 @@ select {
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 @keyframes pop { 0% { transform: scale(0.2); opacity: 0; } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
+/* Un écran qui s'ouvre arrive en douceur ; des confettis tombent pour un sans-faute */
+[data-ecran]:not([hidden]) { animation: apparaitre 0.25s ease-out; }
+@keyframes apparaitre { from { opacity: 0; translate: 0 10px; } }
+.confettis { display: none; position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.parfait .confettis { display: block; }
+.confettis span { position: absolute; top: -3rem; font-size: 2rem; animation: tomber 2.8s ease-in 2 both; }
+@keyframes tomber { to { transform: translateY(115vh) rotate(360deg); } }
+
 @media (prefers-reduced-motion: reduce) {
+  .parfait .confettis { display: none; }
   * { transition: none !important; animation: none !important; }
   .lieu:hover, .lieu:focus-visible, .lieu:active, .archipel .ile:hover, .archipel .ile:focus-visible { transform: none; }
   .choix input:checked + span, .gros:active, .tuile:active { transform: none; }
@@ -517,7 +526,7 @@ select {
 .piece-dino svg { width: 100%; height: auto; display: block; }
 .consigne-puzzle { margin: 0; color: #fff; font-weight: 800; text-shadow: 0 1px 0 var(--mer-fonce); }
 .salle[data-decor="musee"] { background: linear-gradient(#e9dcc3 0 76%, #8a6a4a 76% 77.5%, #b98a58 77.5%); }
-.salle[data-decor="musee"] .tableau, .salle[data-decor="passeport"] .tableau, .salle[data-decor="urgences"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
+.salle[data-decor="musee"] .tableau, .salle[data-decor="passeport"] .tableau, .salle[data-decor="urgences"] .tableau, .salle[data-decor="route"] .tableau { background: none; border: 0; box-shadow: none; padding: 0; justify-items: center; }
 #aide .squelette { width: min(100%, 420px); }
 
 /* Passeport du monde */
@@ -542,6 +551,7 @@ select {
 .nom-numero { font-weight: 800; }
 .numero-urgence small { font-size: 0.9rem; }
 .quoi-dire { width: 100%; text-align: left; margin: 0; padding: 1rem 1rem 1rem 2.4rem; display: grid; gap: 0.4rem; font-weight: 500; }
+.salle[data-decor="route"] { background: linear-gradient(#dff1fb 0 76%, #f2c230 76% 77.5%, #9aa0a8 77.5%); }
 .salle[data-decor="urgences"] { background: linear-gradient(#eef6fb 0 76%, #e05252 76% 77.5%, #f4d0d0 77.5%); }
 
 /* Atlas du corps (hôpital) */

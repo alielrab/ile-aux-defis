@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as dinos from '../js/jeux/dinos.js';
 import * as passeport from '../js/jeux/passeport.js';
 import * as urgences from '../js/jeux/urgences.js';
+import * as route from '../js/jeux/route.js';
 import { nouvellePartie } from '../js/partie.js';
 import { graine } from './hasard.js';
 
@@ -65,4 +66,21 @@ test('urgences : 144, 117, 118 ; des situations pour chaque numéro et des cas q
     }
   }
   assert.ok(!urgences.SITUATIONS.some(([t]) => /mort|sang|tué|cadavre/i.test(t)), 'jamais effrayant');
+});
+
+test('code de la route : 10 questions différentes, 4 choix, une image ; les questions des grands seulement dès 8 ans', () => {
+  assert.equal(new Set(route.QUESTIONS.map((q) => q[0])).size, route.QUESTIONS.length);
+  assert.ok(route.QUESTIONS.filter((q) => !q[5]).length >= 15);
+  const grandes = new Set(route.QUESTIONS.filter((q) => q[5]).map((q) => q[0]));
+  for (const age of [6, 9]) {
+    for (let g = 1; g < 10; g++) {
+      const { questions } = nouvellePartie(route.question, { age }, graine(g));
+      assert.equal(new Set(questions.map((q) => q.texte)).size, 10);
+      for (const q of questions) {
+        assert.equal(new Set(q.choix).size, 4);
+        assert.ok(q.choix.includes(q.reponse) && q.savaisTu && q.image, q.titre);
+        if (age === 6) assert.ok(!grandes.has(q.texte), q.titre);
+      }
+    }
+  }
 });

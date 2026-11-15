@@ -22,7 +22,6 @@
 | Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
 ## Nouvelles îles (à construire plus tard)
-- **L'île de la sécurité** (créée, avec les numéros d'urgence) : il reste le code de la route du piéton et du cycliste (traverser, panneaux, casque, être vu la nuit).
 - **L'île de la mer** : l'aquarium et les fonds marins (poissons, coraux, baleines, protéger la mer).
 
 ## Île du cœur : « Grandir ensemble » (à construire plus tard)

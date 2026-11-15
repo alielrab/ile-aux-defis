@@ -70,3 +70,5 @@
 - [x] Atelier BD : 3 ou 4 cases selon l'âge, décors, personnages (famille, île, créatures), bulles (phrases lues ou texte), autocollants, lire à voix haute, Mes BD (8), impression
 - [x] Atlas du corps (8 pages, fiches, quiz par page), 17 meubles + cuisine complète, couleurs du lit, restaurant en mots à lire, bibliothèque en couleurs, refuge/mode/coiffeur enrichis (1 836 ⭐ au total), passage à la question suivante (auto après la voix + 1 s, ou bouton), liste des phrases à enregistrer (voix/phrases.csv)
 - [x] Musée des dinosaures (16, puzzle + fiche + quiz), passeport du monde (20 pays, avion, tampons), île de la sécurité avec les numéros d’urgence (144, 117, 118)
+- [x] Code de la route (île de la sécurité) : 24 questions à pied, à vélo, panneaux, en voiture — à faire relire
+- [x] Jardin (nouvelle pièce, 7 objets), 4 papiers peints, 5 animaux, 5 vêtements d'animaux, 8 tenues, 5 chaussures, 3 chapeaux ; voix au choix et vitesse (espace parents), sons plus doux, fanfare, confettis, écrans en fondu

@@ -7,10 +7,10 @@ import { accorder } from '../js/genre.js';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue, dinos, passeport, urgences, veto, fractions, memory] = await Promise.all([
+const [messages, corps, atlas, espace, syllabes, croyances, recits, rappr, emotions, cuisine, bd, peinture, catalogue, dinos, passeport, urgences, veto, fractions, memory, route] = await Promise.all([
   js('messages.js'), js('jeux/corps-questions.js'), js('jeux/atlas.js'), js('jeux/espace.js'), js('jeux/syllabes-mots.js'), js('croyances.js'),
   js('recits.js'), js('rapprochements.js'), js('jeux/emotions.js'), js('jeux/cuisine.js'), js('jeux/bd.js'), js('jeux/peinture.js'), js('catalogue.js'),
-  js('jeux/dinos.js'), js('jeux/passeport.js'), js('jeux/urgences.js'), js('jeux/veto.js'), js('jeux/fractions.js'), js('jeux/memory.js'),
+  js('jeux/dinos.js'), js('jeux/passeport.js'), js('jeux/urgences.js'), js('jeux/veto.js'), js('jeux/fractions.js'), js('jeux/memory.js'), js('jeux/route.js'),
 ]);
 
 const lignes = [], vus = new Set();
@@ -122,6 +122,7 @@ ajouter('urgences.rassurer', "Numéros d'urgence (à faire relire)", urgences.RA
 Object.entries(urgences.REPONSES).forEach(([k, t]) => ajouter(`urgences.reponse.${k}`, "Numéros d'urgence (à faire relire)", t.replace(/^\S+ /, '')));
 urgences.SITUATIONS.forEach(([t, , , s], i) => { ajouter(`urgences.situation${i + 1}`, "Numéros d'urgence (à faire relire)", t); ajouter(`urgences.situation${i + 1}.savais`, "Numéros d'urgence (à faire relire)", `Le savais-tu ? ${s}`); });
 banque('urgences.quiz', "Numéros d'urgence (à faire relire)", urgences.QUESTIONS);
+banque('route.quiz', 'Code de la route (à faire relire)', route.QUESTIONS);
 for (const [k, f] of Object.entries(veto.FICHES)) {
   ajouter(`veto.${k}.nom`, 'Vétérinaire', f.nom);
   ajouter(`veto.${k}.besoins`, 'Vétérinaire', f.besoins);

@@ -3989,6 +3989,147 @@ urgences.quiz.13.reponse2;Numéros d'urgence (à faire relire);Je raccroche et j
 urgences.quiz.13.reponse3;Numéros d'urgence (à faire relire);Je fais une blague
 urgences.quiz.13.reponse4;Numéros d'urgence (à faire relire);Je ne dis rien
 urgences.quiz.13.savais;Numéros d'urgence (à faire relire);Le savais-tu ? Si tu raccroches, les secours vont rappeler pour vérifier que tout va bien.
+route.quiz.1.question;Code de la route (à faire relire);Avant de traverser la route, que fais-tu ?
+route.quiz.1.reponse1;Code de la route (à faire relire);Je m’arrête, je regarde, j’écoute, puis je traverse
+route.quiz.1.reponse2;Code de la route (à faire relire);Je cours très vite
+route.quiz.1.reponse3;Code de la route (à faire relire);Je ferme les yeux
+route.quiz.1.reponse4;Code de la route (à faire relire);Je traverse en regardant mes pieds
+route.quiz.1.savais;Code de la route (à faire relire);Le savais-tu ? S’arrêter, regarder, écouter, traverser : quatre gestes, toujours dans cet ordre.
+route.quiz.2.question;Code de la route (à faire relire);Où traverses-tu la route ?
+route.quiz.2.reponse1;Code de la route (à faire relire);Sur le passage pour piétons
+route.quiz.2.reponse2;Code de la route (à faire relire);Entre deux voitures garées
+route.quiz.2.reponse3;Code de la route (à faire relire);Au milieu du virage
+route.quiz.2.reponse4;Code de la route (à faire relire);N’importe où
+route.quiz.2.savais;Code de la route (à faire relire);Le savais-tu ? En Suisse, les passages pour piétons sont des bandes jaunes.
+route.quiz.3.question;Code de la route (à faire relire);Le petit bonhomme du feu est rouge. Que fais-tu ?
+route.quiz.3.reponse1;Code de la route (à faire relire);J’attends sur le trottoir
+route.quiz.3.reponse2;Code de la route (à faire relire);Je traverse vite
+route.quiz.3.reponse3;Code de la route (à faire relire);Je traverse si aucune voiture ne vient
+route.quiz.3.reponse4;Code de la route (à faire relire);Je traverse en courant
+route.quiz.3.savais;Code de la route (à faire relire);Le savais-tu ? Même s’il n’y a pas de voiture, on attend le bonhomme vert : les plus petits te regardent et font comme toi.
+route.quiz.4.question;Code de la route (à faire relire);Le petit bonhomme du feu est vert. Que fais-tu ?
+route.quiz.4.reponse1;Code de la route (à faire relire);Je regarde quand même, puis je traverse
+route.quiz.4.reponse2;Code de la route (à faire relire);Je traverse sans regarder
+route.quiz.4.reponse3;Code de la route (à faire relire);J’attends qu’il redevienne rouge
+route.quiz.4.reponse4;Code de la route (à faire relire);Je traverse en reculant
+route.quiz.4.savais;Code de la route (à faire relire);Le savais-tu ? Un conducteur peut ne pas avoir vu le feu : on regarde toujours avant d’avancer.
+route.quiz.5.question;Code de la route (à faire relire);Une voiture ralentit devant le passage pour piétons. Quand traverses-tu ?
+route.quiz.5.reponse1;Code de la route (à faire relire);Quand ses roues sont complètement arrêtées
+route.quiz.5.reponse2;Code de la route (à faire relire);Dès qu’elle ralentit
+route.quiz.5.reponse3;Code de la route (à faire relire);Quand elle klaxonne
+route.quiz.5.reponse4;Code de la route (à faire relire);Avant qu’elle arrive
+route.quiz.5.savais;Code de la route (à faire relire);Le savais-tu ? Roues arrêtées, je peux y aller : tant que les roues tournent, on attend.
+route.quiz.6.question;Code de la route (à faire relire);Comment traverses-tu la route ?
+route.quiz.6.reponse1;Code de la route (à faire relire);En marchant, sans courir
+route.quiz.6.reponse2;Code de la route (à faire relire);En courant le plus vite possible
+route.quiz.6.reponse3;Code de la route (à faire relire);En sautant à cloche-pied
+route.quiz.6.reponse4;Code de la route (à faire relire);En jouant avec mon téléphone
+route.quiz.6.savais;Code de la route (à faire relire);Le savais-tu ? En courant, on peut tomber, et les conducteurs ont moins de temps pour te voir.
+route.quiz.7.question;Code de la route (à faire relire);Ton ballon roule sur la route. Que fais-tu ?
+route.quiz.7.reponse1;Code de la route (à faire relire);Je m’arrête et je demande à un adulte
+route.quiz.7.reponse2;Code de la route (à faire relire);Je cours le chercher
+route.quiz.7.reponse3;Code de la route (à faire relire);Je crie pour arrêter les voitures
+route.quiz.7.reponse4;Code de la route (à faire relire);Je le suis sans regarder
+route.quiz.7.savais;Code de la route (à faire relire);Le savais-tu ? Un ballon se remplace. Toi, non !
+route.quiz.8.question;Code de la route (à faire relire);Sur le trottoir, où marches-tu ?
+route.quiz.8.reponse1;Code de la route (à faire relire);Du côté des maisons, loin de la route
+route.quiz.8.reponse2;Code de la route (à faire relire);Tout au bord de la route
+route.quiz.8.reponse3;Code de la route (à faire relire);Un pied sur la route
+route.quiz.8.reponse4;Code de la route (à faire relire);En équilibre sur la bordure
+route.quiz.8.savais;Code de la route (à faire relire);Le savais-tu ? Les voitures passent tout près du bord : côté maisons, on est plus tranquille.
+route.quiz.9.question;Code de la route (à faire relire);Pourquoi ne traverse-t-on pas entre deux voitures garées ?
+route.quiz.9.reponse1;Code de la route (à faire relire);Parce que les conducteurs ne me voient pas
+route.quiz.9.reponse2;Code de la route (à faire relire);Parce que c’est sale
+route.quiz.9.reponse3;Code de la route (à faire relire);Parce que les voitures dorment
+route.quiz.9.reponse4;Code de la route (à faire relire);Parce que c’est trop loin
+route.quiz.9.savais;Code de la route (à faire relire);Le savais-tu ? Si tu ne vois pas la route, les conducteurs ne te voient pas non plus.
+route.quiz.10.question;Code de la route (à faire relire);Il fait nuit. Comment t’habilles-tu pour être bien vu des voitures ?
+route.quiz.10.reponse1;Code de la route (à faire relire);Avec des habits clairs et des bandes qui brillent
+route.quiz.10.reponse2;Code de la route (à faire relire);Tout en noir
+route.quiz.10.reponse3;Code de la route (à faire relire);Avec un grand chapeau
+route.quiz.10.reponse4;Code de la route (à faire relire);Avec des lunettes de soleil
+route.quiz.10.savais;Code de la route (à faire relire);Le savais-tu ? Les bandes réfléchissantes renvoient la lumière des phares : on te voit de très loin.
+route.quiz.11.question;Code de la route (à faire relire);Tu descends du bus et tu dois traverser. Que fais-tu ?
+route.quiz.11.reponse1;Code de la route (à faire relire);J’attends que le bus soit parti
+route.quiz.11.reponse2;Code de la route (à faire relire);Je passe juste devant le bus
+route.quiz.11.reponse3;Code de la route (à faire relire);Je passe juste derrière le bus
+route.quiz.11.savais;Code de la route (à faire relire);Le savais-tu ? Le bus est si grand qu’il te cache : quand il est parti, tu vois bien la route, et on te voit.
+route.quiz.12.question;Code de la route (à faire relire);Il n’y a pas de trottoir. Où marches-tu ?
+route.quiz.12.reponse1;Code de la route (à faire relire);Au bord gauche de la route, face aux voitures
+route.quiz.12.reponse2;Code de la route (à faire relire);Au milieu de la route
+route.quiz.12.reponse3;Code de la route (à faire relire);Au bord droit, dos aux voitures
+route.quiz.12.reponse4;Code de la route (à faire relire);En zigzag
+route.quiz.12.savais;Code de la route (à faire relire);Le savais-tu ? À gauche, tu vois les voitures arriver en face de toi.
+route.quiz.13.question;Code de la route (à faire relire);Que mets-tu sur la tête pour faire du vélo ?
+route.quiz.13.reponse1;Code de la route (à faire relire);Un casque bien attaché
+route.quiz.13.reponse2;Code de la route (à faire relire);Une casquette
+route.quiz.13.reponse4;Code de la route (à faire relire);Un bonnet de bain
+route.quiz.13.savais;Code de la route (à faire relire);Le savais-tu ? Le casque protège ta tête si tu tombes. Il doit être bien serré sous le menton.
+route.quiz.14.question;Code de la route (à faire relire);À vélo, comment montres-tu que tu vas tourner ?
+route.quiz.14.reponse1;Code de la route (à faire relire);Je tends le bras du côté où je tourne
+route.quiz.14.reponse2;Code de la route (à faire relire);Je crie très fort
+route.quiz.14.reponse4;Code de la route (à faire relire);Je ne montre rien
+route.quiz.14.savais;Code de la route (à faire relire);Le savais-tu ? Ton bras, c’est ton clignotant !
+route.quiz.15.question;Code de la route (à faire relire);À trottinette sur le trottoir, comment roules-tu ?
+route.quiz.15.reponse1;Code de la route (à faire relire);Doucement, en faisant attention aux piétons
+route.quiz.15.reponse2;Code de la route (à faire relire);Le plus vite possible
+route.quiz.15.reponse3;Code de la route (à faire relire);En slalomant entre les gens
+route.quiz.15.reponse4;Code de la route (à faire relire);En fermant les yeux
+route.quiz.15.savais;Code de la route (à faire relire);Le savais-tu ? Sur le trottoir, ce sont les piétons qui passent en premier.
+route.quiz.16.question;Code de la route (à faire relire);Qu’est-ce qui doit bien marcher sur ton vélo avant de partir ?
+route.quiz.16.reponse1;Code de la route (à faire relire);Les freins
+route.quiz.16.reponse2;Code de la route (à faire relire);Le porte-bagages
+route.quiz.16.reponse3;Code de la route (à faire relire);Les autocollants
+route.quiz.16.reponse4;Code de la route (à faire relire);La couleur
+route.quiz.16.savais;Code de la route (à faire relire);Le savais-tu ? Avant de rouler : freins, pneus gonflés, sonnette et lumières.
+route.quiz.17.question;Code de la route (à faire relire);La nuit, quelles lumières faut-il sur ton vélo ?
+route.quiz.17.reponse1;Code de la route (à faire relire);Une blanche devant et une rouge derrière
+route.quiz.17.reponse2;Code de la route (à faire relire);Une rouge devant et une blanche derrière
+route.quiz.17.reponse3;Code de la route (à faire relire);Aucune
+route.quiz.17.reponse4;Code de la route (à faire relire);Une verte de chaque côté
+route.quiz.17.savais;Code de la route (à faire relire);Le savais-tu ? Blanc devant, rouge derrière : comme les voitures.
+route.quiz.18.question;Code de la route (à faire relire);À vélo, de quel côté de la route roules-tu ?
+route.quiz.18.reponse1;Code de la route (à faire relire);À droite
+route.quiz.18.reponse2;Code de la route (à faire relire);À gauche
+route.quiz.18.reponse3;Code de la route (à faire relire);Au milieu
+route.quiz.18.reponse4;Code de la route (à faire relire);Ça dépend des jours
+route.quiz.18.savais;Code de la route (à faire relire);Le savais-tu ? En Suisse, on roule à droite, à vélo comme en voiture.
+route.quiz.19.question;Code de la route (à faire relire);Que veut dire ce panneau rouge à huit côtés ?
+route.quiz.19.reponse1;Code de la route (à faire relire);Stop : il faut s’arrêter complètement
+route.quiz.19.reponse2;Code de la route (à faire relire);On peut aller plus vite
+route.quiz.19.reponse3;Code de la route (à faire relire);La route est fermée
+route.quiz.19.reponse4;Code de la route (à faire relire);Il y a un magasin
+route.quiz.19.savais;Code de la route (à faire relire);Le savais-tu ? Le panneau stop est le seul panneau à huit côtés : on le reconnaît même de dos.
+route.quiz.20.question;Code de la route (à faire relire);Que veut dire un panneau rond et rouge avec une barre blanche ?
+route.quiz.20.reponse1;Code de la route (à faire relire);Sens interdit : on n’entre pas par là
+route.quiz.20.reponse2;Code de la route (à faire relire);Passage pour piétons
+route.quiz.20.reponse3;Code de la route (à faire relire);Parking
+route.quiz.20.reponse4;Code de la route (à faire relire);Fin de la route
+route.quiz.20.savais;Code de la route (à faire relire);Le savais-tu ? Ce panneau est pour les voitures et les vélos. À pied, sur le trottoir, tu peux passer.
+route.quiz.21.question;Code de la route (à faire relire);Que veut dire un panneau en triangle avec un bord rouge ?
+route.quiz.21.reponse1;Code de la route (à faire relire);Attention, danger
+route.quiz.21.reponse2;Code de la route (à faire relire);Il faut s’arrêter
+route.quiz.21.reponse3;Code de la route (à faire relire);Il y a une piste cyclable
+route.quiz.21.reponse4;Code de la route (à faire relire);On peut se garer
+route.quiz.21.savais;Code de la route (à faire relire);Le savais-tu ? Triangle au bord rouge : attention. Rond au bord rouge : interdit. Rond bleu : obligatoire.
+route.quiz.22.question;Code de la route (à faire relire);Que veut dire un panneau rond et bleu avec un vélo ?
+route.quiz.22.reponse1;Code de la route (à faire relire);Une piste pour les vélos
+route.quiz.22.reponse2;Code de la route (à faire relire);Vélos interdits
+route.quiz.22.reponse3;Code de la route (à faire relire);Un magasin de vélos
+route.quiz.22.reponse4;Code de la route (à faire relire);Une course de vélos
+route.quiz.22.savais;Code de la route (à faire relire);Le savais-tu ? Sur la piste cyclable, les vélos roulent à l’abri des voitures.
+route.quiz.23.question;Code de la route (à faire relire);En voiture, que fais-tu avant que la voiture démarre ?
+route.quiz.23.reponse1;Code de la route (à faire relire);J’attache ma ceinture
+route.quiz.23.reponse2;Code de la route (à faire relire);J’ouvre la fenêtre
+route.quiz.23.reponse3;Code de la route (à faire relire);Je me mets debout
+route.quiz.23.reponse4;Code de la route (à faire relire);Je détache mon siège
+route.quiz.23.savais;Code de la route (à faire relire);Le savais-tu ? La ceinture, c’est pour tout le monde, même pour un tout petit trajet.
+route.quiz.24.question;Code de la route (à faire relire);De quel côté descends-tu de la voiture ?
+route.quiz.24.reponse1;Code de la route (à faire relire);Du côté du trottoir
+route.quiz.24.reponse2;Code de la route (à faire relire);Du côté de la route
+route.quiz.24.reponse3;Code de la route (à faire relire);Par le coffre
+route.quiz.24.reponse4;Code de la route (à faire relire);Par la fenêtre
+route.quiz.24.savais;Code de la route (à faire relire);Le savais-tu ? Côté trottoir, aucune voiture ne peut passer près de toi.
 veto.chien.nom;Vétérinaire;Le chien
 veto.chien.besoins;Vétérinaire;Le chien a besoin de croquettes pour chien, d’eau fraîche tous les jours, et surtout de promenades : il aime courir et jouer.
 veto.chien.repas;Vétérinaire;Des croquettes pour chien
@@ -4519,6 +4660,9 @@ memory.animaux.poisson;Memory;Poisson rouge
 memory.animaux.hamster;Memory;Hamster
 memory.animaux.lapin;Memory;Lapin blanc
 memory.animaux.lapin-brun;Memory;Lapin brun
+memory.animaux.lapin-gris;Memory;Lapin gris
+memory.animaux.hamster-gris;Memory;Hamster gris
+memory.animaux.poisson-bleu;Memory;Poisson bleu
 memory.animaux.tortue;Memory;Tortue
 memory.animaux.chat;Memory;Chaton roux
 memory.animaux.chat-gris;Memory;Chaton gris
@@ -4528,6 +4672,8 @@ memory.animaux.chien;Memory;Chiot
 memory.animaux.chien-gris;Memory;Chiot gris
 memory.animaux.dalmatien;Memory;Dalmatien
 memory.animaux.perroquet;Memory;Perroquet
+memory.animaux.perroquet-rouge;Memory;Ara rouge
+memory.animaux.perroquet-bleu;Memory;Ara bleu
 memory.planetes.soleil.savais;Memory;Le savais-tu ? Ce n'est pas une planète : c'est une étoile, une énorme boule de gaz brûlant.
 memory.planetes.mercure.savais;Memory;Le savais-tu ? La planète la plus proche du Soleil, et la plus petite.
 memory.planetes.venus.savais;Memory;Le savais-tu ? La planète la plus chaude : environ 460 °C, à cause de ses nuages épais.
@@ -4611,6 +4757,7 @@ peinture.dessin.arcenciel;Atelier de peinture;L'arc-en-ciel
 objet.piece.chambre;Magasins (noms des objets);Chambre
 objet.piece.salon;Magasins (noms des objets);Salon
 objet.piece.jeux;Magasins (noms des objets);Salle de jeux
+objet.piece.jardin;Magasins (noms des objets);Jardin
 objet.piece.cuisine;Magasins (noms des objets);Cuisine
 objet.meuble.plante;Magasins (noms des objets);Plante
 objet.meuble.tapis;Magasins (noms des objets);Tapis
@@ -4632,6 +4779,10 @@ objet.meuble.miroir;Magasins (noms des objets);Miroir
 objet.meuble.plante-salon;Magasins (noms des objets);Grande plante
 objet.meuble.tapis-salon;Magasins (noms des objets);Tapis du salon
 objet.meuble.tableau-noir;Magasins (noms des objets);Tableau noir
+objet.meuble.fleurs;Magasins (noms des objets);Massif de fleurs
+objet.meuble.potager;Magasins (noms des objets);Potager
+objet.meuble.pommier;Magasins (noms des objets);Pommier
+objet.meuble.cabane;Magasins (noms des objets);Cabane
 objet.meuble.etagere-cuisine;Magasins (noms des objets);Étagère à bocaux
 objet.meuble.chaises;Magasins (noms des objets);Chaises
 objet.meuble.placard;Magasins (noms des objets);Placard
@@ -4648,10 +4799,17 @@ objet.jouet.manege;Magasins (noms des objets);Manège
 objet.jouet.toboggan;Magasins (noms des objets);Toboggan
 objet.jouet.cubes;Magasins (noms des objets);Cubes à lettres
 objet.jouet.piscine-balles;Magasins (noms des objets);Piscine à balles
+objet.jouet.piscine;Magasins (noms des objets);Petite piscine
+objet.jouet.balancoire;Magasins (noms des objets);Balançoire
+objet.jouet.trampoline;Magasins (noms des objets);Trampoline
 objet.papier.menthe;Magasins (noms des objets);Vert menthe
 objet.papier.rayures;Magasins (noms des objets);Rayures roses
 objet.papier.pois;Magasins (noms des objets);Pois bleus
 objet.papier.etoiles;Magasins (noms des objets);Ciel étoilé
+objet.papier.lavande;Magasins (noms des objets);Lavande
+objet.papier.coeurs;Magasins (noms des objets);Petits cœurs
+objet.papier.nuages;Magasins (noms des objets);Nuages
+objet.papier.arc-en-ciel;Magasins (noms des objets);Arc-en-ciel
 objet.lit.rose;Magasins (noms des objets);Lit rose
 objet.lit.bleu;Magasins (noms des objets);Lit bleu
 objet.lit.vert;Magasins (noms des objets);Lit vert
@@ -4665,6 +4823,11 @@ objet.habit-animal.collier-dore;Magasins (noms des objets);Collier doré
 objet.habit-animal.chapeau-fete;Magasins (noms des objets);Chapeau de fête
 objet.habit-animal.pull-rouge;Magasins (noms des objets);Pull rouge
 objet.habit-animal.pull-bleu;Magasins (noms des objets);Pull bleu
+objet.habit-animal.collier-rouge;Magasins (noms des objets);Collier rouge
+objet.habit-animal.noeud-violet;Magasins (noms des objets);Nœud violet
+objet.habit-animal.chapeau-rose;Magasins (noms des objets);Chapeau de fête rose
+objet.habit-animal.pull-vert;Magasins (noms des objets);Pull vert
+objet.habit-animal.pull-jaune;Magasins (noms des objets);Pull jaune
 objet.acc-animal.gamelle;Magasins (noms des objets);Gamelle
 objet.acc-animal.os;Magasins (noms des objets);Os à mâchouiller
 objet.acc-animal.pelote;Magasins (noms des objets);Pelote de laine
@@ -4708,6 +4871,14 @@ objet.tenue.tenue-ski;Magasins (noms des objets);Tenue de ski
 objet.tenue.ensemble-rose;Magasins (noms des objets);Ensemble à paillettes
 objet.tenue.robe-nuit;Magasins (noms des objets);Robe nuit étoilée
 objet.tenue.robe-soiree;Magasins (noms des objets);Robe de soirée
+objet.tenue.tshirt-etoiles;Magasins (noms des objets);T-shirt étoilé
+objet.tenue.salopette-jean;Magasins (noms des objets);Salopette en jean
+objet.tenue.jupe-ecossaise;Magasins (noms des objets);Jupe écossaise
+objet.tenue.robe-turquoise;Magasins (noms des objets);Robe turquoise à pois
+objet.tenue.pompier;Magasins (noms des objets);Tenue de pompier
+objet.tenue.docteur;Magasins (noms des objets);Blouse de docteur
+objet.tenue.heros-vert;Magasins (noms des objets);Costume à cape verte
+objet.tenue.astronaute;Magasins (noms des objets);Combinaison d’astronaute
 objet.accessoire.boucles-oreilles;Magasins (noms des objets);Boucles d'oreilles
 objet.accessoire.bracelet;Magasins (noms des objets);Bracelets
 objet.accessoire.serre-tete;Magasins (noms des objets);Serre-tête
@@ -4727,12 +4898,20 @@ objet.chaussures.ballerines;Magasins (noms des objets);Ballerines
 objet.chaussures.bottes-pluie;Magasins (noms des objets);Bottes de pluie
 objet.chaussures.bottes-cuir;Magasins (noms des objets);Bottes en cuir
 objet.chaussures.baskets-or;Magasins (noms des objets);Baskets dorées
+objet.chaussures.baskets-vertes;Magasins (noms des objets);Baskets vertes
+objet.chaussures.baskets-violettes;Magasins (noms des objets);Baskets violettes
+objet.chaussures.sandales-bleues;Magasins (noms des objets);Sandales bleues
+objet.chaussures.ballerines-noires;Magasins (noms des objets);Ballerines noires
+objet.chaussures.bottes-roses;Magasins (noms des objets);Bottes roses
 objet.chapeau.casquette;Magasins (noms des objets);Casquette
 objet.chapeau.bonnet;Magasins (noms des objets);Bonnet à pompon
 objet.chapeau.beret;Magasins (noms des objets);Béret
 objet.chapeau.chapeau-paille;Magasins (noms des objets);Chapeau de paille
 objet.chapeau.couronne-fleurs;Magasins (noms des objets);Couronne de fleurs
 objet.chapeau.sorciere;Magasins (noms des objets);Chapeau de sorcière
+objet.chapeau.casquette-bleue;Magasins (noms des objets);Casquette bleue
+objet.chapeau.bonnet-rose;Magasins (noms des objets);Bonnet rose
+objet.chapeau.chapeau-soleil;Magasins (noms des objets);Chapeau de soleil
 objet.coiffure.courts;Magasins (noms des objets);Courts
 objet.coiffure.carre;Magasins (noms des objets);Carré
 objet.coiffure.longs;Magasins (noms des objets);Longs
@@ -4784,3 +4963,4 @@ app.19;Phrases de l'app;Bienvenue au musée des dinosaures ! Choisis un dinosaur
 app.20;Phrases de l'app;Ce n’est pas la bonne pièce. Regarde bien la forme qui brille !
 app.21;Phrases de l'app;Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.
 app.22;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
+app.23;Phrases de l'app;Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?

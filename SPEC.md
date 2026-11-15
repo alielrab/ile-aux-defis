@@ -54,7 +54,7 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
   - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (bientôt).
   - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge, le musée des dinosaures, l'aéroport (le passeport du monde).
   - **L'île des créateurs** : le restaurant ; l'atelier de peinture, l'atelier BD et la salle de musique (bientôt).
-  - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence ; le code de la route (bientôt).
+  - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence et le code de la route.
   - **L'île du cœur** : la maison de la confiance et la météo des émotions (bientôt) ; le lieu de culte choisi par les parents (sinon, un grand arbre).
 - **Débloquer une île** : chaque enfant débloque les îles fermées avec ses propres étoiles. On touche une première fois (« Touche encore ! »), puis une deuxième pour payer.
   - Le prix est réglable dans `PRIX_ILES` (`js/reglages.js`), 20 étoiles par défaut. À 0, l'île est ouverte pour tout le monde.
@@ -212,12 +212,12 @@ Chaque jeu a le décor de son lieu. Calcul = salle de classe : la question à la
 ### Maison et magasins
 - La maison : la chambre et la cuisine au départ (la cuisine se remplit avec les objets gagnés au restaurant) ; le salon et la salle de jeux s'achètent (30 ⭐ chacun) au magasin de meubles. On passe d'une pièce à l'autre, on place ou range ses objets, papier peint au choix par pièce. Vue de face.
 - On achète dans les magasins de l'île (pas dans la maison). Catalogue dans `js/catalogue.js` et `js/avatar.js` (prix modifiables), 131 objets payants :
-  - **Magasin de meubles** : 27 meubles, dont une cuisine complète (frigo, évier, table, chaises, étagère à bocaux, placard, lave-vaisselle) ; 9 jouets ; 4 papiers peints ; 2 pièces ; 6 couleurs de lit (rayon « Couleurs du lit », le rose est celui du départ).
-  - **Boutique** : 16 tenues spéciales, 12 bijoux et accessoires (sac, montre, barrettes, lunettes de soleil, écharpe…), 6 paires de chaussures (rayon « Chaussures », les baskets rouges sont celles du départ) et 6 chapeaux (rayon « Chapeaux », on le met ou on l'enlève).
+  - **Magasin de meubles** : 31 meubles, dont une cuisine complète et ceux du jardin (pommier, cabane, potager, massif de fleurs) (frigo, évier, table, chaises, étagère à bocaux, placard, lave-vaisselle) ; 12 jouets (dont la balançoire, le trampoline et la petite piscine du jardin) ; 8 papiers peints ; 3 pièces (salon, salle de jeux, jardin : dehors, sans fenêtre ni papier peint ni tableau) ; 6 couleurs de lit (rayon « Couleurs du lit », le rose est celui du départ).
+  - **Boutique** : 24 tenues spéciales, 12 bijoux et accessoires (sac, montre, barrettes, lunettes de soleil, écharpe…), 11 paires de chaussures (rayon « Chaussures », les baskets rouges sont celles du départ) et 9 chapeaux (rayon « Chapeaux », on le met ou on l'enlève).
   - **Coiffeur** : 7 coiffures et 7 couleurs à gagner, en plus de celles du départ.
-  - **Refuge** : 13 animaux (chiots, chatons, lapins de plusieurs couleurs, dalmatien, hamster, tortue, perroquet, poisson rouge), 6 vêtements pour animaux (pulls, nœud, colliers, chapeau de fête) et 10 accessoires (gamelle, os, pelote, laisse, coussin, roue, perchoir, panier, griffoir, aquarium).
+  - **Refuge** : 18 animaux (chiots, chatons, lapins et hamsters de plusieurs couleurs, dalmatien, tortue, perroquet, aras rouge et bleu, poissons rouge et bleu), 11 vêtements pour animaux (pulls, nœud, colliers, chapeau de fête) et 10 accessoires (gamelle, os, pelote, laisse, coussin, roue, perchoir, panier, griffoir, aquarium).
 - **Animaux** : à l'adoption, l'enfant leur donne un prénom (15 lettres au plus), affiché au-dessus de l'animal et modifiable (« ✏️ Prénom »). Le bouton « 👕 » change le vêtement de l'animal parmi ceux qu'on a. Les animaux posés se rangent sur 5 places le long du sol ; leurs accessoires se mettent à côté du premier animal qui s'en sert (la laisse et le griffoir au mur ; le perroquet se pose sur son perchoir ; le poisson nage dans l'aquarium).
-- **Tout débloquer** coûte 1 836 ⭐ (1 765 dans les magasins, 31 pour les dessins à colorier, 40 pour les îles), soit environ 150 parties : un objectif à long terme.
+- **Tout débloquer** coûte 2 433 ⭐ (2 362 dans les magasins, 31 pour les dessins à colorier, 40 pour les îles), soit environ 200 parties : un objectif à long terme.
 - Un meuble ou jouet du salon ou de la salle de jeux ne s'achète qu'après la pièce (bouton « 🔒 Salon »).
 - Meubles, jouets et animaux sont tous dessinés en SVG dans le même style (pas d'emojis).
 - Les animaux suivent l'enfant : ils apparaissent dans la pièce affichée. Les animaux n'existent que comme animaux de compagnie.
@@ -299,3 +299,9 @@ export function question(niveau, aleatoire = Math.random) {
 ## Points d'attention
 - Android : la voix française hors-ligne dépend des données vocales de « Synthèse vocale Google » installées sur la tablette (à vérifier une fois en mode avion).
 - iPad : les données ne sont pas effacées seulement si l'app est lancée depuis l'icône de l'écran d'accueil.
+
+**Code de la route** (`js/jeux/route.js`, île de la sécurité) — **à faire relire par un parent** :
+- 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
+- 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
+
+**La voix qui lit** (espace parents, `js/voix.js`) : choix de la voix parmi les voix françaises de l'appareil (sinon la meilleure trouvée) et de la vitesse (lente, normale, rapide), avec un bouton « Essayer ». Sons : deux notes douces pour juste ou à revoir, une petite fanfare à la fin d'une partie, des confettis pour un sans-faute.

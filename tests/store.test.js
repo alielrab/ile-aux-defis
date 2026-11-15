@@ -106,6 +106,21 @@ test('écran parent : modifier prénom et âge, remettre à zéro, changer le co
   assert.throws(() => changerCode(etat, '98'));
 });
 
+test('réglage des parents : la voix qui lit et sa vitesse, gardées après rechargement', async () => {
+  const { reglerLecture } = await import('../js/store.js');
+  const { appliquerVoix, voixFrancaises } = await import('../js/voix.js');
+  const s = faux();
+  const etat = nouvelEtat('1234');
+  reglerLecture(etat, { voix: 'Amélie', vitesse: 'lente' });
+  assert.throws(() => reglerLecture(etat, { vitesse: 'éclair' }));
+  sauver(etat, s);
+  assert.deepEqual([charger(s).reglages.voix, charger(s).reglages.vitesse, charger(s).reglages.suivante], ['Amélie', 'lente', 'auto']);
+  reglerLecture(etat, { voix: '', vitesse: 'normale' });
+  assert.equal(etat.reglages.voix, null);
+  appliquerVoix(undefined); // ancien enregistrement, sans réglages : rien ne casse
+  assert.deepEqual(voixFrancaises([{ name: 'A', lang: 'fr-FR' }, { name: 'B', lang: 'en-US' }, { name: 'C', lang: 'fr_CA' }]).map((x) => x.name), ['A', 'C']);
+});
+
 test('réglage des parents : passage automatique ou bouton « Question suivante », gardé après rechargement', async () => {
   const { reglerSuivante } = await import('../js/store.js');
   const s = faux();

@@ -6,6 +6,7 @@ export const PIECES = {
   chambre: { nom: 'Chambre', prix: 0 },
   salon: { nom: 'Salon', prix: 30 },
   jeux: { nom: 'Salle de jeux', prix: 30 },
+  jardin: { nom: 'Jardin', prix: 40 },
   cuisine: { nom: 'Cuisine', prix: 0 }, // ses objets se gagnent en faisant les recettes du restaurant pour de vrai
 };
 export const MEUBLES = {
@@ -29,6 +30,11 @@ export const MEUBLES = {
   'plante-salon': { nom: 'Grande plante', prix: 8, piece: 'salon' },
   'tapis-salon': { nom: 'Tapis du salon', prix: 10, piece: 'salon' },
   'tableau-noir': { nom: 'Tableau noir', prix: 12, piece: 'jeux' },
+  // le jardin
+  fleurs: { nom: 'Massif de fleurs', prix: 8, piece: 'jardin' },
+  potager: { nom: 'Potager', prix: 10, piece: 'jardin' },
+  pommier: { nom: 'Pommier', prix: 12, piece: 'jardin' },
+  cabane: { nom: 'Cabane', prix: 20, piece: 'jardin' },
   // la cuisine complète (le four, la poêle… se gagnent au restaurant)
   'etagere-cuisine': { nom: 'Étagère à bocaux', prix: 8, piece: 'cuisine' },
   chaises: { nom: 'Chaises', prix: 10, piece: 'cuisine' },
@@ -55,12 +61,19 @@ export const JOUETS = {
   toboggan: { nom: 'Toboggan', prix: 18, piece: 'jeux' },
   cubes: { nom: 'Cubes à lettres', prix: 6, piece: 'jeux' },
   'piscine-balles': { nom: 'Piscine à balles', prix: 20, piece: 'jeux' },
+  piscine: { nom: 'Petite piscine', prix: 15, piece: 'jardin' },
+  balancoire: { nom: 'Balançoire', prix: 18, piece: 'jardin' },
+  trampoline: { nom: 'Trampoline', prix: 20, piece: 'jardin' },
 };
 export const PAPIERS = {
   menthe: { nom: 'Vert menthe', prix: 8 },
   rayures: { nom: 'Rayures roses', prix: 10 },
   pois: { nom: 'Pois bleus', prix: 10 },
   etoiles: { nom: 'Ciel étoilé', prix: 14 },
+  lavande: { nom: 'Lavande', prix: 8 },
+  coeurs: { nom: 'Petits cœurs', prix: 12 },
+  nuages: { nom: 'Nuages', prix: 12 },
+  'arc-en-ciel': { nom: 'Arc-en-ciel', prix: 16 },
 };
 // Objets de cuisine : pas à vendre, on les gagne en faisant une recette du restaurant pour de vrai, avec un parent.
 export const USTENSILES = {
@@ -76,6 +89,9 @@ export const ANIMAUX = {
   hamster: { nom: 'Hamster', prix: 15, espece: 'hamster' },
   lapin: { nom: 'Lapin blanc', prix: 20, espece: 'lapin' },
   'lapin-brun': { nom: 'Lapin brun', prix: 20, espece: 'lapin', couleurs: { '#f7f4ef': '#b9875a', '#ece6dc': '#9a6a40', '#d8cfc2': '#8a5a34', '#fff"': '#f7f4ef"' } },
+  'lapin-gris': { nom: 'Lapin gris', prix: 20, espece: 'lapin', couleurs: { '#f7f4ef': '#aab0b8', '#ece6dc': '#959ba4', '#d8cfc2': '#858b94', '#fff"': '#f7f4ef"' } },
+  'hamster-gris': { nom: 'Hamster gris', prix: 15, espece: 'hamster', couleurs: { '#e8a65a': '#a9afb8', '#d48a3e': '#8a909a', '#fbe3c0': '#f4f4f6' } },
+  'poisson-bleu': { nom: 'Poisson bleu', prix: 12, espece: 'poisson', couleurs: { '#f28c28': '#3f86d8', '#ffd0a0': '#bfe0ff' } },
   tortue: { nom: 'Tortue', prix: 25, espece: 'tortue' },
   chat: { nom: 'Chaton roux', prix: 30, espece: 'chat' },
   'chat-gris': { nom: 'Chaton gris', prix: 30, espece: 'chat', couleurs: { '#f2a654': '#9aa3ad' } },
@@ -86,6 +102,9 @@ export const ANIMAUX = {
   dalmatien: { nom: 'Dalmatien', prix: 35, espece: 'chien', couleurs: { '#c98b4f': '#f7f7f2', '#b8804a': '#e8e8e0', '#b07440': '#e0e0d8', '#7a4a28': '#2b2b3a', '#e7c08e': '#ffffff' },
     taches: '<g fill="#2b2b3a"><circle cx="256" cy="476" r="4"/><circle cx="270" cy="488" r="3.5"/><circle cx="280" cy="474" r="3"/><circle cx="226" cy="446" r="3"/><circle cx="246" cy="492" r="3"/></g>' },
   perroquet: { nom: 'Perroquet', prix: 35, espece: 'perroquet' },
+  // l'ordre compte : le ventre d'abord, puis le corps (les couleurs sont remplacées l'une après l'autre)
+  'perroquet-rouge': { nom: 'Ara rouge', prix: 35, espece: 'perroquet', couleurs: { '#e74c3c': '#f1c40f', '#2ecc71': '#e0503c', '#27ae60': '#b83a2a' } },
+  'perroquet-bleu': { nom: 'Ara bleu', prix: 35, espece: 'perroquet', couleurs: { '#e74c3c': '#f1c40f', '#3498db': '#1f5f99', '#2ecc71': '#3f9be0', '#27ae60': '#2573a7' } },
 };
 // Vêtements pour animaux : chaque animal en porte un (on le change dans la maison)
 export const HABITS_ANIMAUX = {
@@ -95,6 +114,11 @@ export const HABITS_ANIMAUX = {
   'chapeau-fete': { nom: 'Chapeau de fête', prix: 8, forme: 'chapeau', couleur: '#8e6ad8' },
   'pull-rouge': { nom: 'Pull rouge', prix: 10, forme: 'pull', couleur: '#e05252' },
   'pull-bleu': { nom: 'Pull bleu', prix: 10, forme: 'pull', couleur: '#5b9ae0' },
+  'collier-rouge': { nom: 'Collier rouge', prix: 6, forme: 'collier', couleur: '#e05252' },
+  'noeud-violet': { nom: 'Nœud violet', prix: 6, forme: 'noeud', couleur: '#8e6ad8' },
+  'chapeau-rose': { nom: 'Chapeau de fête rose', prix: 8, forme: 'chapeau', couleur: '#ff8fb8' },
+  'pull-vert': { nom: 'Pull vert', prix: 10, forme: 'pull', couleur: '#5cb85c' },
+  'pull-jaune': { nom: 'Pull jaune', prix: 10, forme: 'pull', couleur: '#f2c230' },
 };
 // Accessoires pour animaux : placés dans la maison, à côté du premier animal qui s'en sert (pour)
 export const ACCESSOIRES_ANIMAUX = {
