@@ -6,7 +6,7 @@ import { dessinerOeuvre } from './jeux/peinture.js';
 const PIECE_DE = Object.fromEntries(Object.entries({ ...MEUBLES, ...JOUETS, ...USTENSILES }).map(([cle, o]) => [cle, o.piece]));
 
 // Une image du nouveau style, si elle a été préparée (images/liste.js, voir images/PLAN.md) ; sinon null : on garde le dessin.
-const image = (chemin) => ((globalThis.IMAGES ?? []).includes(`images/${chemin}.webp`) ? `images/${chemin}.webp` : null);
+export const image = (chemin) => ((globalThis.IMAGES ?? []).includes(`images/${chemin}.webp`) ? `images/${chemin}.webp` : null);
 
 const N = '#2b2b3a'; // yeux, nez, roues
 const ombre = (x, y, rx) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="4" fill="#000" opacity=".12"/>`;

@@ -2,6 +2,7 @@
 // Les îles (noms, prix, positions) sont dans js/archipel.js.
 import { dessinerAvatar } from './avatar.js';
 import { CROYANCES, batiment } from './croyances.js';
+import { image } from './maison.js';
 import { ILES, EMPLACEMENTS_LIBRES, ile, ileOuverte, prixIle } from './archipel.js';
 
 const echapper = (t) => String(t).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -217,19 +218,36 @@ const maison = (x, y, toit, mur) => `<g transform="translate(${x} ${y})">
   <rect x="-30" y="-28" width="16" height="16" rx="2" fill="#bfe6ff"/><rect x="14" y="-28" width="16" height="16" rx="2" fill="#bfe6ff"/></g>`;
 const COULEURS_MAISONS = [['#e86fa8', '#fff1f6'], ['#6a8fe0', '#eef3ff'], ['#3fb27f', '#ecfbf3'], ['#f0a030', '#fff6e6']];
 
+// Un bâtiment en image (nouveau style, images/ile), posé sur son emplacement : x au milieu, y au sol. null s'il n'a pas d'image.
+const batimentImage = (fichier, x, y, cote) => {
+  const img = image(`ile/${fichier}`);
+  return img && `<image href="${img}" x="${x - cote / 2}" y="${y - cote * 0.9}" width="${cote}" height="${cote}" preserveAspectRatio="xMidYMax meet"/>`;
+};
+
+// Les îles en image (images/ile/fond-<île>.webp) : où poser les bâtiments, en parts de l'image [x, y], dans l'ordre des lieux de l'île.
+// cote : la taille d'un bâtiment sur cette île. Une île sans emplacements ici garde son dessin (le village : 8 lieux et les maisons).
+const EMPLACEMENTS = {
+  savoir: { cote: 122, places: [[0.5, 0.215], [0.32, 0.355], [0.685, 0.355], [0.24, 0.52], [0.75, 0.52], [0.215, 0.657], [0.493, 0.7], [0.78, 0.657]] },
+  createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657]] },
+  securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
+  coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
+};
+const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
+const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
+
 function lieu(l) {
   const [dessin, s] = l.dessin ?? BATIMENTS[l.id];
   const nom = l.nom.replace('\n', ' ');
   return `<g class="lieu${l.ouvert ? '' : ' ferme'}" role="button" tabindex="0" data-lieu="${l.id}"
     aria-label="${echapper(`${nom} : ${l.detail}${l.ouvert ? '' : ', bientôt'}`)}">
-    <title>${echapper(nom)}</title><g transform="translate(${l.x} ${l.y}) scale(${s})">${dessin}</g>
-    ${etiquette(l.x, l.y + 30, l.nom, 28, 230)}${l.ouvert ? '' : bientot(l.x, l.y - 40)}</g>`;
+    <title>${echapper(nom)}</title>${batimentImage(l.fichier ?? l.id, l.x, l.y, l.cote ?? 170) ?? `<g transform="translate(${l.x} ${l.y}) scale(${s})">${dessin}</g>`}
+    ${etiquette(l.x, l.y + (l.bas ?? 30), l.nom, l.police ?? 28, 230)}${l.ouvert ? '' : bientot(l.x, l.y - 40)}</g>`;
 }
 
 // Le lieu de culte choisi par les parents, sur l'île du cœur (rien si aucun choix)
 export function lieuCroyance(famille) {
   if (!famille) return null;
-  return { id: 'croyance', ile: 'coeur', type: 'jeu', nom: CROYANCES[famille].lieu, detail: 'croyances et cultures', ouvert: true, x: 400, y: 720, dessin: [batiment(famille), 0.75] };
+  return { id: 'croyance', ile: 'coeur', type: 'jeu', nom: CROYANCES[famille].lieu, detail: 'croyances et cultures', ouvert: true, x: 400, y: 720, dessin: [batiment(famille), 0.75], fichier: `croyance-${CROYANCES[famille].contenu}` };
 }
 
 // Les lieux d'une île
@@ -248,7 +266,7 @@ function maisons(profils, joueuse) {
     const tete = dessinerAvatar(p.avatar, 'tete').replace('<svg ', `<svg x="${x - 24}" y="${y - 30}" width="48" height="48" `); // à sa porte
     const aElle = p.id === joueuse.id;
     return `<g class="lieu maison${aElle ? '' : ' autre'}" ${aElle ? `role="button" tabindex="0" data-lieu="maison" aria-label="${echapper(`Ma maison (${p.prenom})`)}"` : 'aria-hidden="true"'}>
-      <g transform="translate(${x} ${y}) scale(${taille}) translate(${-x} ${-y})">${maison(x, y, toit, mur)}${tete}</g>${etiquette(x, y + 46 * taille, aElle ? 'Ma maison' : p.prenom, 26, Math.min(112, ecart - 12 || 112))}</g>`;
+      <g transform="translate(${x} ${y}) scale(${taille}) translate(${-x} ${-y})">${batimentImage('maison', x, y + 8, 124) ?? maison(x, y, toit, mur)}${tete}</g>${etiquette(x, y + 46 * taille, aElle ? 'Ma maison' : p.prenom, 26, Math.min(112, ecart - 12 || 112))}</g>`;
   }).join('');
 }
 
@@ -263,7 +281,14 @@ const voilier = (s = 1) => `<g transform="scale(${s})"><path d="M-40 0 L40 0 L28
 
 // La carte d'une île. ileId : 'village', 'savoir'… ; profils : les enfants ; joueuse : celle qui joue ; famille : la croyance des parents
 export function dessinerIle(ileId, profils, joueuse, famille = null) {
-  const info = ile(ileId), lieux = lieuxDe(ileId, famille);
+  const info = ile(ileId), e = EMPLACEMENTS[ileId], fond = e && image(`ile/fond-${ileId}`);
+  // sur une île en image, chaque lieu se pose sur un emplacement dessiné ; sinon il garde sa place sur l'île dessinée
+  const lieux = lieuxDe(ileId, famille).map((l, i) => {
+    if (!fond || !e.places[i]) return l;
+    const [x, y] = surLeFond(e.places[i]);
+    return { ...l, x, y, cote: e.cote, bas: 12, police: 22 };
+  });
+  const [ax, ay] = fond ? surLeFond(e.places[2]) : [400, 720]; // le grand arbre de l'île du cœur, quand il n'y a pas de lieu de culte
   const [fx, fy] = ileId === 'village' ? [400, 470] : [400, 520]; // la fontaine, au milieu des chemins
   const chemins = lieux.map((l) => `<path d="M${fx} ${fy} Q${(fx + l.x) / 2} ${(fy + l.y) / 2 + 20} ${l.x} ${l.y}"/>`).join('');
   return `<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" class="carte-ile" role="group" aria-label="${echapper(info.nom)}">
@@ -271,7 +296,7 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
   <g class="nuage" fill="#fff" opacity=".9"><ellipse cx="120" cy="60" rx="46" ry="18"/><ellipse cx="146" cy="48" rx="30" ry="18"/></g>
   <circle cx="735" cy="70" r="38" fill="#ffd84a"/><circle cx="735" cy="70" r="50" fill="#ffd84a" opacity=".3"/>
   <g transform="translate(745 760)"><ellipse cx="0" cy="0" rx="16" ry="9" fill="#ff9a3c"/><path d="M14 0 L28 -9 L28 9Z" fill="#ff9a3c"/><circle cx="-7" cy="-2" r="2" fill="#333"/></g>
-  <g transform="translate(400 450) scale(1.05 1.2) translate(-400 -420)">
+  ${fond ? `<image href="${fond}" x="${FOND[0]}" y="${FOND[1]}" width="${FOND[2]}" height="${FOND[2]}"/>${etiquette(400, 92, info.nom, 34)}` : `<g transform="translate(400 450) scale(1.05 1.2) translate(-400 -420)">
   <path d="${FORME}" fill="#fff" opacity=".6" transform="translate(400 420) scale(1.03) translate(-400 -420)"/>
   <path d="${FORME}" fill="#f6dc9a"/><path d="${HERBE}" fill="${info.herbe}"/>
   </g>
@@ -279,9 +304,9 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
   <g stroke="#ecd59a" stroke-width="18" fill="none" stroke-linecap="round">${chemins}</g>
   <circle cx="${fx}" cy="${fy}" r="28" fill="#ecd59a"/><circle cx="${fx}" cy="${fy}" r="11" fill="#7fdcea" stroke="#b9b9c9" stroke-width="5"/>
   ${palmier(92, 420, 0.7)}${palmier(718, 400, 0.7)}${palmier(110, 740, 0.7)}${palmier(690, 745, 0.7)}
-  ${fleurs([[330, 380, '#ff7aa8'], [470, 385, '#ffd84a'], [255, 640, '#b06ae0'], [545, 640, '#ff7aa8'], [705, 480, '#b06ae0'], [95, 480, '#ffd84a']])}
-  ${lieux.map(lieu).join('')}
-  ${ileId === 'village' ? maisons(profils, joueuse) : ''}${ileId === 'coeur' && !famille ? arbre(400, 720, 1.2) : ''}
+  ${fleurs([[330, 380, '#ff7aa8'], [470, 385, '#ffd84a'], [255, 640, '#b06ae0'], [545, 640, '#ff7aa8'], [705, 480, '#b06ae0'], [95, 480, '#ffd84a']])}`}
+  ${(fond ? [...lieux].reverse() : lieux).map(lieu).join('')/* sur une île en image, du bas vers le haut : le nom d'un lieu passe devant le toit du lieu d'en dessous */}
+  ${ileId === 'village' ? maisons(profils, joueuse) : ''}${ileId === 'coeur' && !famille ? arbre(ax, ay, fond ? 0.8 : 1.2) : ''}
   <g class="lieu port" role="button" tabindex="0" data-lieu="archipel" aria-label="Le bateau : aller vers une autre île">
     <title>Le bateau</title><g transform="translate(95 850)">${voilier(1.3)}</g>${etiquette(95, 890, "L'archipel", 24)}</g>
 </svg>`;
@@ -299,7 +324,7 @@ export function dessinerArchipel(joueuse, aConfirmer = null) {
     const vitrine = i.vitrine.map((b, k) => {
       const x = (k - (i.vitrine.length - 1) / 2) * 70;
       const dessin = b === 'maison' ? maison(0, 0, '#e86fa8', '#fff1f6') : BATIMENTS[b][0];
-      return `<g transform="translate(${x} 20) scale(${b === 'maison' ? 0.5 : 0.36})">${dessin}</g>`;
+      return batimentImage(b, x, 24, 78) ?? `<g transform="translate(${x} 20) scale(${b === 'maison' ? 0.5 : 0.36})">${dessin}</g>`;
     }).join('');
     const ferme = ouverte ? '' : `<ellipse rx="150" ry="110" fill="#fff" opacity=".55"/>
       <g transform="translate(0 -14)"><rect x="-22" y="-6" width="44" height="34" rx="6" fill="#c9a227"/><path d="M-13 -6 V-18 A13 13 0 0 1 13 -18 V-6" fill="none" stroke="#c9a227" stroke-width="7"/></g>
@@ -308,8 +333,8 @@ export function dessinerArchipel(joueuse, aConfirmer = null) {
     const quoi = ouverte ? 'ouverte' : `fermée, ${prix} étoiles pour la débloquer`;
     return `<g class="ile${ouverte ? '' : ' fermee'}" role="button" tabindex="0" data-ile="${i.id}" aria-label="${echapper(`${i.nom} : ${quoi}`)}">
       <title>${echapper(i.nom)}</title><g transform="translate(${i.x} ${i.y})">
-      <ellipse rx="158" ry="118" fill="#fff" opacity=".5"/><ellipse rx="150" ry="110" fill="#f6dc9a"/><ellipse rx="122" ry="86" fill="${i.herbe}"/>
-      ${vitrine}${ferme}</g>${etiquette(i.x, i.y + 150, i.nom, 28)}</g>`;
+      ${image(`ile/fond-${i.id}`) ? `<image href="${image(`ile/fond-${i.id}`)}" x="-165" y="-162" width="330" height="330"/>` : `<ellipse rx="158" ry="118" fill="#fff" opacity=".5"/><ellipse rx="150" ry="110" fill="#f6dc9a"/><ellipse rx="122" ry="86" fill="${i.herbe}"/>
+      ${vitrine}`}${ferme}</g>${etiquette(i.x, i.y + 150, i.nom, 28)}</g>`;
   }).join('');
   const futures = EMPLACEMENTS_LIBRES.map(([x, y]) => `<g aria-hidden="true" opacity=".7"><ellipse cx="${x}" cy="${y}" rx="90" ry="50" fill="#fff" opacity=".5" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/>
     ${etiquette(x, y + 8, 'Bientôt…', 22)}</g>`).join('');

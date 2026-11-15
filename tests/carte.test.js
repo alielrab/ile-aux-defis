@@ -93,3 +93,37 @@ test('profils : les anciens profils gardent leurs données et reçoivent une lis
   remettreAZero(n);
   assert.deepEqual(n.iles, []);
 });
+
+test('nouveau style : un bâtiment dont l’image est prête est montré en image, sur l’île et sur l’archipel ; les autres gardent leur dessin', async () => {
+  const { dessinerIle, dessinerArchipel, lieuCroyance } = await import('../js/carte.js');
+  const j = { id: 'a', prenom: 'Lina', age: 8, avatar: (await import('../js/avatar.js')).AVATAR_PAR_DEFAUT, iles: [] };
+  assert.ok(!dessinerIle('village', [j], j).includes('<image'));
+  globalThis.IMAGES = ['images/ile/refuge.webp', 'images/ile/maison.webp', 'images/ile/croyance-islam.webp'];
+  try {
+    const village = dessinerIle('village', [j], j);
+    assert.equal(village.match(/<image href="images\/ile\/(refuge|maison)\.webp"/g).length, 2); // le coiffeur garde son dessin
+    assert.match(village, /data-lieu="refuge"[\s\S]*?<image/);
+    assert.equal(lieuCroyance('islam').fichier, 'croyance-islam');
+    assert.equal(lieuCroyance('athee').fichier, 'croyance-sagesse');
+    assert.ok(dessinerArchipel(j).includes('images/ile/'));
+  } finally { delete globalThis.IMAGES; }
+});
+
+test('nouveau style : sur une île en image, les lieux se posent sur ses emplacements ; le village garde son dessin', async () => {
+  const { dessinerIle, dessinerArchipel } = await import('../js/carte.js');
+  const j = { id: 'a', prenom: 'Lina', age: 8, avatar: (await import('../js/avatar.js')).AVATAR_PAR_DEFAUT, iles: ['coeur'] };
+  const avant = dessinerIle('savoir', [j], j);
+  globalThis.IMAGES = ['images/ile/fond-savoir.webp', 'images/ile/fond-coeur.webp', 'images/ile/fond-village.webp', 'images/ile/calcul.webp'];
+  try {
+    const savoir = dessinerIle('savoir', [j], j);
+    assert.ok(savoir.includes('images/ile/fond-savoir.webp') && !savoir.includes('stroke="#ecd59a"'), 'le fond en image remplace l’île et ses chemins dessinés');
+    assert.equal(savoir.match(/data-lieu="/g).length, avant.match(/data-lieu="/g).length); // les 8 lieux et le bateau sont toujours là
+    assert.match(savoir, /<image href="images\/ile\/calcul\.webp" x="339" /); // l'école, sur le premier emplacement (au milieu, en haut)
+    assert.ok(!savoir.includes('NaN') && !savoir.includes('undefined'));
+    const coeur = dessinerIle('coeur', [j], j); // 2 lieux et le grand arbre, pour 4 emplacements
+    assert.ok(coeur.includes('fond-coeur.webp') && !coeur.includes('NaN'));
+    assert.ok(!dessinerIle('village', [j], j).includes('fond-village'), 'le village n’a pas assez d’emplacements : il garde son dessin');
+    const archipel = dessinerArchipel(j);
+    assert.equal(archipel.match(/images\/ile\/fond-/g).length, 3); // savoir, cœur et village en image sur la carte de l'archipel
+  } finally { delete globalThis.IMAGES; }
+});
