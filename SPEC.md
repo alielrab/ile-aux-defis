@@ -304,7 +304,7 @@ export function question(niveau, aleatoire = Math.random) {
 - 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
 - 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
 
-**La maison de la confiance** (`js/jeux/confiance.js`, île du cœur) — thèmes 1 et 2 relus par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert :
+**La maison de la confiance** (`js/jeux/confiance.js`, île du cœur) — thèmes 1, 2 et 3 relus par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert :
 - Un thème à la fois ; les autres affichent « bientôt ». Aucune pénalité, jamais « faux » : une réponse à revoir donne une explication douce.
 - Étoiles (`ETOILES_CONFIANCE`, 3) quand on finit une étape, la première fois seulement, jamais pour une bonne réponse.
 - **Thème 1, « Fait ou avis ? »** (texte d'origine : `relecture/fait-ou-avis.md`) :
@@ -318,6 +318,12 @@ export function question(niveau, aleatoire = Math.random) {
   - *Le oui et le non dans mon corps* : 8 situations à trier parmi 10. Une réponse différente donne « Chacun ressent les choses à sa façon… ».
   - *Quand ça fait non* : 3 situations, les quatre gestes montrés à chaque fois (je m'arrête, je dis stop, je m'éloigne, j'en parle).
   - Gardé pour le thème 5 : le bisou obligé, être pris dans les bras, et l'adulte connu qui demande un secret.
+- **Thème 3, « Mes droits »** (texte d'origine : `relecture/mes-droits.md`), d'après la Convention relative aux droits de l'enfant :
+  - Neuf droits dits avec des mots d'enfant. « Être respecté comme je suis » (couleur de peau, langue, religion, handicap) vaut pour tous les âges ; « avoir mon jardin secret » : 8 ans et plus.
+  - *Un droit, ou une envie ?* : 8 phrases à trier parmi 14.
+  - *Quel droit est respecté ?* : 6 situations, le droit à retrouver parmi 3 (7 ans et moins) ou 4.
+  - *Et si un droit n'est pas respecté ?* : 3 situations, quatre bonnes idées montrées à chaque fois.
+  - Une carte « Mes droits, et ceux des autres » (donner son avis n'est pas tout décider), puis le message de fin avec le 147.
 
 **Le chantier : « La grue folle »** (`js/jeux/chantier.js`, île du village) :
 - Une grue balance un bloc ; on touche l'écran (ou Espace) pour le lâcher. Le bloc tient s'il tombe assez bien sur celui du dessous ; sinon la partie s'arrête. La grue accélère à chaque étage (jusqu'au double).

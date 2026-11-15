@@ -1,13 +1,13 @@
 // La maison de la confiance (île du cœur). Thème 1 : « Fait ou avis ? » (texte relu dans relecture/fait-ou-avis.md).
 // Règle du lieu : aucune pénalité. Une réponse à revoir donne une explication douce ; les étoiles récompensent
-// le fait d'aller au bout d'une étape, jamais les bonnes réponses. Thèmes 1 et 2 relus et validés par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert.
+// le fait d'aller au bout d'une étape, jamais les bonnes réponses. Thèmes 1, 2 et 3 relus et validés par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert.
 import { melanger } from '../partie.js';
 
 // Les thèmes du lieu, dans l'ordre choisi par les parents. ouvert : false = « Bientôt ».
 export const THEMES = [
   { cle: 'fait-avis', nom: 'Fait ou avis ?', image: '🔎', ouvert: true },
   { cle: 'emotions', nom: 'Mes émotions me parlent', image: '💛', ouvert: true },
-  { cle: 'droits', nom: 'Mes droits', image: '📜', ouvert: false },
+  { cle: 'droits', nom: 'Mes droits', image: '📜', ouvert: true },
   { cle: 'inconnus', nom: 'Les inconnus', image: '🚶', ouvert: false },
   { cle: 'corps', nom: 'Mon corps m’appartient', image: '🛡️', ouvert: false },
 ];
@@ -167,3 +167,87 @@ export const QUAND_NON = [
 export const quandNon = (aleatoire = Math.random) => melanger(QUAND_NON, aleatoire).slice(0, 3).map((texte) => ({ texte }));
 
 export const FIN_EMOTIONS = 'Tes émotions sont tes alliées. Quand ça fait « non », écoute-les. Tu n’as pas besoin d’expliquer pourquoi : ressentir « non », ça suffit. Et tu n’es jamais {seul|seule} : il y a toujours un adulte de confiance à qui parler. Et maintenant, si tu en parlais avec un adulte de ta famille ?';
+
+// ---------- Thème 3 : « Mes droits » (texte d'origine : relecture/mes-droits.md, relu par un parent) ----------
+// Source : la Convention relative aux droits de l'enfant (ONU, 1989), dite avec des mots d'enfant.
+export const INTRO_DROITS = 'Tous les enfants du monde ont des droits. Un droit, c’est quelque chose dont tu as besoin pour grandir, et que personne ne peut t’enlever. Tu n’as pas besoin de les mériter : tu les as parce que tu es un enfant. Et tous les autres enfants ont exactement les mêmes.';
+
+// clé : [nom, dit avec des mots d'enfant, grand ?]
+export const DROITS = {
+  protection: ['Être {protégé|protégée}', 'J’ai le droit d’être en sécurité. Personne n’a le droit de me faire du mal.'],
+  soins: ['Être {soigné|soignée}', 'J’ai le droit d’être {soigné|soignée} quand je suis malade ou {blessé|blessée}.'],
+  ecole: ['Aller à l’école', 'J’ai le droit d’apprendre.'],
+  jeu: ['Jouer et me reposer', 'J’ai le droit de jouer, de rêver et de dormir.'],
+  toit: ['Manger et avoir un toit', 'J’ai le droit de manger à ma faim et d’avoir une maison.'],
+  famille: ['Avoir un nom et une famille', 'J’ai le droit d’avoir un prénom, et des personnes qui prennent soin de moi.'],
+  avis: ['Donner mon avis', 'J’ai le droit de dire ce que je pense, et qu’on m’écoute.'],
+  respect: ['Être {respecté|respectée} comme je suis', 'J’ai les mêmes droits que tous les enfants, quelles que soient ma couleur de peau, ma langue, ma religion, que je sois une fille ou un garçon, ou que j’aie un handicap.'],
+  secret: ['Avoir mon jardin secret', 'J’ai le droit d’avoir des choses à moi : mon journal, mes pensées.', true],
+};
+const droitsPour = (age) => Object.keys(DROITS).filter((k) => age > 7 || !DROITS[k][2]);
+
+export const DROIT_ENVIE_INTRO = 'Un droit, c’est ce dont tous les enfants ont besoin. Une envie, c’est ce qui fait plaisir, mais dont on peut se passer.';
+export const NOMS_DROITS = { droit: 'un droit', envie: 'une envie' };
+// [phrase, « droit » ou « envie », explication]
+export const DROIT_ENVIE = [
+  ['Aller à l’école.', 'droit', 'Tous les enfants ont le droit d’apprendre.'],
+  ['Avoir une tablette rien qu’à moi.', 'envie', 'C’est agréable, mais on peut grandir sans.'],
+  ['Être {soigné|soignée} quand je suis malade.', 'droit', 'Tous les enfants ont le droit d’être soignés.'],
+  ['Manger des bonbons tous les jours.', 'envie', 'Tu as le droit de manger à ta faim. Les bonbons, c’est en plus !'],
+  ['Avoir un endroit où dormir.', 'droit', 'Tous les enfants ont le droit d’avoir un toit.'],
+  ['Me coucher à minuit.', 'envie', 'Tu as le droit de te reposer. L’heure du coucher, ce sont tes parents qui la choisissent.'],
+  ['Jouer.', 'droit', 'Oui, jouer est un vrai droit !'],
+  ['Avoir le jouet que j’ai vu à la télé.', 'envie', 'Tu as le droit de jouer, pas d’avoir tous les jouets.'],
+  ['Dire ce que je pense.', 'droit', 'Tu as le droit de donner ton avis, et qu’on t’écoute.'],
+  ['Décider de tout à la maison.', 'envie', 'Donner son avis ne veut pas dire décider de tout : les adultes écoutent, puis choisissent ce qui est bon pour toi.'],
+  ['Être en sécurité.', 'droit', 'Personne n’a le droit de te faire du mal.'],
+  ['Ne jamais ranger ma chambre.', 'envie', 'Bien essayé ! Ranger, ça fait partie de la vie ensemble.'],
+  ['Avoir un prénom.', 'droit', 'Dès ta naissance, tu as le droit d’avoir un prénom rien qu’à toi.'],
+  ['Avoir des personnes qui prennent soin de moi.', 'droit', 'Tous les enfants ont le droit d’avoir une famille ou des adultes qui veillent sur eux.'],
+];
+// Étape 1 : 8 phrases à trier
+export const droitOuEnvie = (aleatoire = Math.random) => melanger(DROIT_ENVIE, aleatoire).slice(0, 8).map(([texte, reponse, explication]) => ({ texte, reponse, explication }));
+export const retourDroitEnvie = (q, choix) => `${choix === q.reponse ? 'Oui !' : `C’est plutôt ${NOMS_DROITS[q.reponse]}.`} ${q.explication}`;
+
+// [situation, le droit respecté]
+export const RESPECTES = [
+  ['Tu as de la fièvre, et on t’emmène chez le médecin.', 'soins'],
+  ['Chaque matin, tu vas à l’école.', 'ecole'],
+  ['Après les devoirs, tu vas jouer dehors.', 'jeu'],
+  ['À la maison, on te demande ce que tu préfères pour les vacances, et on t’écoute.', 'avis'],
+  ['Le soir, il y a un repas chaud et un lit pour toi.', 'toit'],
+  ['Quand tu traverses, un adulte te donne la main.', 'protection'],
+  ['On t’appelle par ton prénom, et quelqu’un vient te chercher à l’école.', 'famille'],
+  ['Dans ta classe, une élève en fauteuil roulant fait la sortie avec tout le monde.', 'respect'],
+  ['Personne ne lit ton journal sans te le demander.', 'secret'],
+];
+// Étape 2 : 6 situations ; retrouver le droit parmi 3 (7 ans et moins) ou 4
+export function respectes(age, aleatoire = Math.random) {
+  const cles = droitsPour(age);
+  return melanger(RESPECTES.filter(([, d]) => cles.includes(d)), aleatoire).slice(0, 6).map(([texte, reponse]) => ({
+    texte, reponse, choix: melanger([reponse, ...melanger(cles.filter((k) => k !== reponse), aleatoire).slice(0, age > 7 ? 3 : 2)], aleatoire),
+  }));
+}
+export const retourRespecte = (q, choix) => `${choix === q.reponse ? 'Oui !' : `C’est plutôt le droit : ${DROITS[q.reponse][0].toLowerCase()}.`} ${DROITS[q.reponse][1]}`;
+
+// Étape 3 : quand un droit n'est pas respecté. Quatre bonnes idées, toujours les mêmes ; un seul choix est à revoir.
+export const IDEES_DROITS = [
+  'Je dis avec des mots : « Ce n’est pas juste. »',
+  'Je reste près de l’enfant à qui ça arrive.',
+  'J’en parle à un adulte de confiance.',
+  'Je me rappelle que ce n’est pas ma faute.',
+];
+export const NORMAL = 'Je me dis que c’est normal, et je ne fais rien.';
+export const DOUCEUR_NORMAL = 'Parfois, on ne sait pas quoi faire, et c’est normal d’hésiter. Mais un droit qui n’est pas respecté, ce n’est jamais « normal ». Regarde ce que tu peux faire à la place.';
+// [situation, grand ?]
+export const PAS_RESPECTES = [
+  ['Imagine : à la récré, un enfant est toujours mis de côté parce qu’il ne parle pas encore bien français.'],
+  ['Imagine : dans un jeu, on dit à une fille : « Toi, tu ne peux pas jouer, c’est un jeu de garçons. »'],
+  ['Imagine : en classe, on rit dès qu’un enfant prend la parole, et il n’ose plus rien dire.'],
+  ['Imagine : un enfant te raconte qu’il a souvent faim à l’école parce qu’il n’a pas de goûter.'],
+  ['Imagine : quelqu’un lit ton journal devant tout le monde pour se moquer.', true],
+];
+export const pasRespectes = (age, aleatoire = Math.random) => melanger(PAS_RESPECTES.filter((s) => age > 7 || !s[1]), aleatoire).slice(0, 3).map(([texte]) => ({ texte }));
+
+export const DROITS_DES_AUTRES = 'Tous les enfants ont les mêmes droits que toi. Alors, quand tu respectes les autres, tu respectes leurs droits : tu les laisses jouer, tu les écoutes, tu ne leur fais pas de mal. Avoir des droits, ça ne veut pas dire tout décider. Les adultes qui t’aiment t’écoutent, puis choisissent ce qui est bon pour toi.';
+export const FIN_DROITS = 'Tes droits sont à toi, pour toujours. Personne ne peut te les enlever. Si un jour quelque chose ne te semble pas juste, ou si quelqu’un te fait du mal, parles-en à un adulte de confiance. Tu peux aussi appeler le 147 : c’est gratuit, jour et nuit, et des adultes sont là pour écouter les enfants. Et maintenant, si tu en parlais avec un adulte de ta famille ?';

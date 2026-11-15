@@ -76,3 +76,4 @@
 - [x] Chantier : la grue folle (étoiles par étage, record, pièces achetées à construire avec une tour assez haute)
 - [x] Maison de la confiance : thème 1 « Fait ou avis ? » (tri, cour de récré, miroir), sans pénalité — à faire relire
 - [x] Maison de la confiance : thème 2 « Mes émotions me parlent » (messages, oui/non, quatre gestes) — à faire relire
+- [x] Maison de la confiance : thème 3 « Mes droits » (droit ou envie, le droit respecté, les quatre idées)

@@ -139,7 +139,7 @@ test('maison de la confiance, fait ou avis : 6 phrases amusantes puis 2 blessant
   assert.equal(new Set(confiance.SITUATIONS.map((s) => s[0])).size, confiance.SITUATIONS.length);
   assert.equal(confiance.REACTIONS.length, 4);
   assert.match(confiance.FIN, /147/);
-  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis', 'emotions']); // un thème à la fois, relu avant d'ouvrir
+  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis', 'emotions', 'droits']); // un thème à la fois, relu avant d'ouvrir
 });
 
 test('maison de la confiance, mes émotions : le message de chaque émotion, le oui et le non, les quatre gestes ; jamais « faux »', async () => {
@@ -163,4 +163,31 @@ test('maison de la confiance, mes émotions : le message de chaque émotion, le 
   assert.equal(confiance.quandNon(graine(1)).length, 3);
   const tout = [confiance.DOUCEUR_ATTENDRE, confiance.FIN_EMOTIONS, ...confiance.OUI_NON.map((q) => q[2]), ...confiance.MESSAGES.map((m) => m[3])].join(' ');
   assert.doesNotMatch(tout, /faux|mauvaise réponse|perdu|bisou/i); // le bisou obligé et le corps : gardés pour le thème 5
+});
+
+test('maison de la confiance, mes droits : droit ou envie, le droit respecté, les quatre idées ; le respect pour tous les âges', () => {
+  const t = confiance.droitOuEnvie(graine(1));
+  assert.equal(new Set(t.map((q) => q.texte)).size, 8);
+  assert.match(confiance.retourDroitEnvie(t[0], t[0].reponse), /^Oui !/);
+  assert.match(confiance.retourDroitEnvie(t[0], t[0].reponse === 'droit' ? 'envie' : 'droit'), /^C’est plutôt une? (droit|envie)\./);
+  assert.ok(confiance.RESPECTES.every(([, d]) => confiance.DROITS[d]) && new Set(confiance.RESPECTES.map((r) => r[1])).size === Object.keys(confiance.DROITS).length);
+  let respectA6 = false;
+  for (const [age, choix] of [[6, 3], [9, 4]]) {
+    for (let g = 1; g < 12; g++) {
+      const qs = confiance.respectes(age, graine(g));
+      assert.equal(qs.length, 6);
+      for (const q of qs) {
+        assert.equal(new Set(q.choix).size, choix);
+        assert.ok(q.choix.includes(q.reponse));
+        if (age === 6) { assert.ok(!q.choix.includes('secret'), 'le jardin secret : 8 ans et plus'); respectA6 ||= q.choix.includes('respect'); }
+        assert.match(confiance.retourRespecte(q, q.reponse), /^Oui ! J’/);
+      }
+    }
+  }
+  assert.ok(respectA6, 'être respecté comme je suis : pour tous les âges');
+  assert.equal(confiance.IDEES_DROITS.length, 4);
+  assert.equal(confiance.pasRespectes(6, graine(2)).length, 3);
+  assert.ok(confiance.pasRespectes(6, graine(2)).every((s) => !/journal/.test(s.texte)));
+  assert.match(confiance.FIN_DROITS, /147/);
+  assert.doesNotMatch([confiance.DOUCEUR_NORMAL, ...confiance.DROIT_ENVIE.map((q) => q[2])].join(' '), /faux|mauvaise réponse|perdu/i);
 });

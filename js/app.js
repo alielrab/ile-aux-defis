@@ -1720,7 +1720,7 @@ function voyager(cle) {
 function ouvrirConfiance() {
   etoilesJoueuse();
   const accueil = 'Ici, on apprend à se sentir bien et en sécurité. Il n’y a pas de mauvaise réponse : on apprend ensemble.';
-  const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance };
+  const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance, droits: ouvrirDroits };
   $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', textContent: accueil }),
     ...confiance.THEMES.map((t) => {
       const b = gros(`${t.image} ${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrir[t.cle], t.ouvert ? 'gros' : 'gros secondaire');
@@ -1841,6 +1841,22 @@ function ouvrirEmotionsConfiance() {
       situations: confiance.quandNon(), bonnes: confiance.GESTES, aRevoir: confiance.ATTENDRE, douceur: confiance.DOUCEUR_ATTENDRE,
       fin: () => finir('gestes', `Tu connais les quatre gestes. ${confiance.GESTES.join(' ')} ${confiance.FIN_EMOTIONS}`) })],
   ], confiance.FIN_EMOTIONS);
+}
+
+// Thème 3 : « Mes droits »
+function ouvrirDroits() {
+  const finir = (etape, texte) => finEtapeConfiance('droits', etape, texte, ouvrirDroits);
+  menuTheme('droits', '📜 Mes droits', confiance.INTRO_DROITS, [
+    ['tri', 'Un droit, ou une envie ?', () => jouerChoix({
+      questions: confiance.droitOuEnvie().map((q, i) => ({ ...q, choix: [['droit', 'C’est un droit'], ['envie', 'C’est une envie']], avant: i ? '' : `${confiance.DROIT_ENVIE_INTRO} ` })),
+      mot: 'Phrase', retour: confiance.retourDroitEnvie, question: 'Est-ce un droit, ou une envie ?', fin: () => finir('tri', 'Bravo ! Tu sais reconnaître un droit.') })],
+    ['respectes', 'Quel droit est respecté ?', () => jouerChoix({
+      questions: confiance.respectes(joueuse.age).map((q) => ({ ...q, choix: q.choix.map((k) => [k, confiance.DROITS[k][0]]) })),
+      mot: 'Situation', retour: confiance.retourRespecte, question: 'Quel droit est respecté ?', fin: () => finir('respectes', 'Bravo ! Tu connais tes droits.') })],
+    ['idees', 'Et si un droit n’est pas respecté ?', () => jouerReactions({
+      situations: confiance.pasRespectes(joueuse.age), bonnes: confiance.IDEES_DROITS, aRevoir: confiance.NORMAL, douceur: confiance.DOUCEUR_NORMAL,
+      fin: () => finir('idees', `${confiance.DROITS_DES_AUTRES} ${confiance.FIN_DROITS}`) })],
+  ], `${confiance.DROITS_DES_AUTRES} ${confiance.FIN_DROITS}`);
 }
 
 // Le chantier : « La grue folle ». On empile des blocs ; une tour assez haute construit les pièces achetées.
