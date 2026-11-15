@@ -168,6 +168,9 @@ export const possede = (profil, a) => a.prix === 0 || profil.objets.includes(a.i
 // Un meuble ou un jouet du salon ne s'achète qu'une fois le salon acheté.
 export const pieceManquante = (profil, a) => (a.piece && !possede(profil, article(`piece:${a.piece}`)) ? PIECES[a.piece].nom : null);
 
+// Une pièce achetée se construit d'abord au chantier (profil.chantier.aConstruire) : ensuite seulement, on peut y aller.
+export const aConstruire = (profil, cle) => (profil.chantier?.aConstruire ?? []).includes(cle);
+
 const DANS_LA_PIECE = ['meuble', 'jouet', 'animal', 'ustensile', 'acc-animal'];
 
 // Est-ce que l'objet est en place dans la maison, ou porté par l'avatar ?
@@ -192,7 +195,10 @@ export function utiliser(profil, id) {
   const bascule = (liste, x) => (liste.includes(x) ? liste.filter((y) => y !== x) : [...liste, x]);
   if (DANS_LA_PIECE.includes(a.type)) m.places = bascule(m.places, id);
   else if (a.type === 'papier') m.papiers[m.piece] = estUtilise(profil, a) ? null : a.cle;
-  else if (a.type === 'piece') m.piece = a.cle;
+  else if (a.type === 'piece') {
+    if (aConstruire(profil, a.cle)) throw new Error('Construis d’abord cette pièce au chantier.');
+    m.piece = a.cle;
+  }
   else if (a.type === 'lit') m.lit = a.cle;
   else if (a.type === 'habit-animal') return; // un vêtement d'animal se met dans la maison, sur un animal (habiller)
   else if (a.type === 'accessoire') avatar.accessoires = bascule(avatar.accessoires ?? [], a.cle);
@@ -228,6 +234,7 @@ export function acheter(profil, id) {
   if (manque > 0) throw new Error(`Il te manque ${manque.toLocaleString('fr-FR')} étoile${manque > 1 ? 's' : ''}.`);
   profil.etoiles -= a.prix;
   profil.objets.push(id);
+  if (a.type === 'piece') { (profil.chantier ??= { record: 0, aConstruire: [] }).aConstruire.push(a.cle); return; } // à construire au chantier
   utiliser(profil, id); // un objet acheté est tout de suite installé (ou porté)
 }
 

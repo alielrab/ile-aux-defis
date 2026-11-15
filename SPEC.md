@@ -51,7 +51,7 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
   - Après le choix du profil, on arrive sur cette carte. On touche une île pour y aller.
   - Sur chaque île, le voilier « L'archipel » ramène à la carte. Les boutons « retour » des jeux et des magasins ramènent sur l'île où l'on était.
 - **Les îles** :
-  - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (bientôt).
+  - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (la grue folle).
   - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge, le musée des dinosaures, l'aéroport (le passeport du monde).
   - **L'île des créateurs** : le restaurant, l'atelier de peinture, l'atelier BD et la salle de musique.
   - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence et le code de la route.
@@ -303,6 +303,12 @@ export function question(niveau, aleatoire = Math.random) {
 **Code de la route** (`js/jeux/route.js`, île de la sécurité) — **à faire relire par un parent** :
 - 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
 - 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
+
+**Le chantier : « La grue folle »** (`js/jeux/chantier.js`, île du village) :
+- Une grue balance un bloc ; on touche l'écran (ou Espace) pour le lâcher. Le bloc tient s'il tombe assez bien sur celui du dessous ; sinon la partie s'arrête. La grue accélère à chaque étage (jusqu'au double).
+- 7 ans et moins : plus lent, et le bloc tient même posé de travers.
+- Étoiles par étage (réglable dans `js/reglages.js` : 1 à 7 ans et moins, 0,5 ensuite), et un record à battre.
+- **Construire une pièce** : une pièce achetée au magasin de meubles (« 🏗️ À construire ») ne s'ouvre dans la maison qu'après une tour assez haute : 5 étages pour le salon, 6 pour la salle de jeux, 8 pour le jardin. Les pièces achetées avant le chantier restent ouvertes.
 
 **Salle de musique** (`js/jeux/musique.js`, île des créateurs) : une grille de 8 notes (do à do aigu) sur 8 temps, une note par temps. Toucher une case pose la note et la joue ; « Écouter ma mélodie » la joue en allumant chaque colonne ; « Tout effacer ». La mélodie est gardée dans le profil (`melodie`). Création libre : pas d'étoiles.
 

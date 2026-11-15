@@ -47,7 +47,11 @@ test('pièces : les meubles du salon demandent d’abord le salon', () => {
   assert.throws(() => acheter(p, 'meuble:canape'), /pièce : Salon/);
   assert.equal(p.etoiles, 100);
   acheter(p, 'piece:salon');
-  assert.equal(p.maison.piece, 'salon'); // on y va tout de suite
+  assert.equal(p.maison.piece, 'chambre'); // le salon est acheté, mais pas encore construit
+  assert.throws(() => utiliser(p, 'piece:salon'), /chantier/);
+  p.chantier.aConstruire = []; // construit au chantier (voir la grue folle)
+  utiliser(p, 'piece:salon');
+  assert.equal(p.maison.piece, 'salon');
   acheter(p, 'meuble:canape');
   assert.equal(pieceManquante(p, article('meuble:canape')), null);
   assert.equal(pieceManquante(p, article('jouet:ours')), null); // l'ours va dans la chambre
@@ -58,6 +62,8 @@ test('papier peint : un par pièce', () => {
   acheter(p, 'papier:pois');
   assert.deepEqual(p.maison.papiers, { chambre: 'pois' });
   acheter(p, 'piece:jeux');
+  p.chantier.aConstruire = []; // construite au chantier
+  utiliser(p, 'piece:jeux');
   utiliser(p, 'papier:pois');
   assert.deepEqual(p.maison.papiers, { chambre: 'pois', jeux: 'pois' });
   utiliser(p, 'papier:pois');

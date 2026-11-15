@@ -18,6 +18,7 @@
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
 | Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
 | Centre de tri | Trier les déchets dans la bonne poubelle (verre, papier, PET, compost…) |
+| Le glacier de la plage | Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
 | Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
 ## Nouvelles îles (à construire plus tard)

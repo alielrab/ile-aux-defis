@@ -5,6 +5,9 @@ import { dessinerOeuvre } from './jeux/peinture.js';
 
 const PIECE_DE = Object.fromEntries(Object.entries({ ...MEUBLES, ...JOUETS, ...USTENSILES }).map(([cle, o]) => [cle, o.piece]));
 
+// Une image du nouveau style, si elle a été préparée (images/liste.js, voir images/PLAN.md) ; sinon null : on garde le dessin.
+const image = (chemin) => ((globalThis.IMAGES ?? []).includes(`images/${chemin}.webp`) ? `images/${chemin}.webp` : null);
+
 const N = '#2b2b3a'; // yeux, nez, roues
 const ombre = (x, y, rx) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="4" fill="#000" opacity=".12"/>`;
 // Un cheval du manège, tourné vers la droite (s = 1) ou la gauche (s = -1)
@@ -384,10 +387,12 @@ function animauxDeLaPiece(profil) {
     const [bx, by, bw, bh] = boiteDe(o);
     const monte = a.espece === 'perroquet' && avecAccessoire('perchoir', id) ? 62 : 0; // le perroquet se pose sur son perchoir
     const dy = a.espece === 'poisson' && base === 'poisson-seul' ? -24 : 0; // le poisson nage au milieu de l'aquarium
-    let dessin = o.dessin;
-    for (const [de, vers] of Object.entries(a.couleurs ?? {})) dessin = dessin.replaceAll(de, vers);
+    const img = image(`animaux/${id.slice(7)}`);
+    // shortcut: un animal en image ne porte pas encore son vêtement (les repères sont ceux du dessin), à régler après l'essai.
+    let dessin = img ? `<image href="${img}" x="${bx}" y="${by}" width="${bw}" height="${bh}" preserveAspectRatio="xMidYMax meet"/>` : o.dessin + (a.taches ?? '') + habitAnimal(a.espece, profil.habits?.[id]);
+    if (!img) for (const [de, vers] of Object.entries(a.couleurs ?? {})) dessin = dessin.replaceAll(de, vers);
     const nom = profil.noms?.[id];
-    return `<g transform="translate(${sx - (bx + bw / 2)} ${sy - (by + bh) - monte + dy})">${dessin}${a.taches ?? ''}${habitAnimal(a.espece, profil.habits?.[id])}</g>`
+    return `<g transform="translate(${sx - (bx + bw / 2)} ${sy - (by + bh) - monte + dy})">${dessin}</g>`
       + (nom ? `<text x="${sx}" y="${sy - bh - monte - 8}" class="nom-animal" font-size="20" font-weight="800" text-anchor="middle" fill="#2b2b3a" stroke="#fff" stroke-width="5" paint-order="stroke" font-family="sans-serif">${echapper(nom)}</text>` : '');
   }).join('');
   return dessous + animaux;
@@ -421,6 +426,8 @@ export function apercu(a, profil) {
   const mini = (boite, dessin) => `<svg viewBox="${boite}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${dessin}</svg>`;
   if (OBJETS[a.cle] && ['meuble', 'jouet', 'ustensile'].includes(a.type)) return mini(OBJETS[a.cle].boite, OBJETS[a.cle].dessin);
   if (a.type === 'animal') {
+    const img = image(`animaux/${a.cle}`);
+    if (img) return mini('0 0 100 100', `<image href="${img}" width="100" height="100"/>`);
     const an = ANIMAUX[a.cle], o = OBJETS[an.espece] ?? ANIMAUX_EN_PLUS[an.espece];
     let d = o.dessin;
     for (const [de, vers] of Object.entries(an.couleurs ?? {})) d = d.replaceAll(de, vers);

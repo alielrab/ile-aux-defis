@@ -17,7 +17,7 @@ export const LIEUX = [
   { id: 'refuge', ile: 'village', type: 'magasin', nom: 'Le refuge', detail: 'animaux à adopter', ouvert: true, x: 610, y: 480 },
   { id: 'veto', ile: 'village', type: 'jeu', nom: 'Le vétérinaire', detail: 'soigner les animaux', ouvert: true, x: 185, y: 740 },
   { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory, seul ou à deux', ouvert: true, x: 615, y: 740 },
-  { id: 'chantier', ile: 'village', type: 'jeu', nom: 'Le chantier', detail: 'construire', ouvert: false, x: 400, y: 800 },
+  { id: 'chantier', ile: 'village', type: 'jeu', nom: 'Le chantier', detail: 'la grue folle', ouvert: true, x: 400, y: 800 },
   // L'île du savoir
   { id: 'calcul', ile: 'savoir', type: 'jeu', nom: "L'école", detail: 'Calcul', ouvert: true, x: 200, y: 330 },
   { id: 'heure', ile: 'savoir', type: 'jeu', nom: "La tour\nde l'horloge", detail: "lire l'heure", ouvert: true, x: 600, y: 330 },

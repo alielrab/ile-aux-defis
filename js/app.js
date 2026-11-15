@@ -9,7 +9,7 @@ import {
 } from './avatar.js';
 import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
-import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, HABITS_ANIMAUX } from './catalogue.js';
+import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, HABITS_ANIMAUX, aConstruire } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE, ETOILES_ATLAS } from './reglages.js';
 import { melanger, nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
@@ -29,6 +29,7 @@ import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
 import * as route from './jeux/route.js';
 import * as musique from './jeux/musique.js';
+import * as chantier from './jeux/chantier.js';
 import * as veto from './jeux/veto.js';
 import * as fractions from './jeux/fractions.js';
 import * as memory from './jeux/memory.js';
@@ -232,6 +233,7 @@ function entrerLieu(cible) {
   if (id === 'aeroport') return ouvrirPasseport();
   if (id === 'urgences') return ouvrirUrgences();
   if (id === 'musique') return ouvrirMusique();
+  if (id === 'chantier') return ouvrirChantier();
   if (id === 'veto') return ouvrirVeto();
   if (id === 'memory') return ouvrirMemory();
   if (id === 'cuisine') return ouvrirRestaurant();
@@ -288,7 +290,7 @@ function afficherLieu() {
     // la maison : une pièce à la fois, avec les objets qu'elle possède pour cette pièce
     const piece = joueuse.maison.piece;
     $('#onglets').setAttribute('aria-label', 'Pièces de la maison');
-    $('#onglets').replaceChildren(...CATALOGUE.filter((a) => a.type === 'piece' && possede(joueuse, a)).map((a) =>
+    $('#onglets').replaceChildren(...CATALOGUE.filter((a) => a.type === 'piece' && possede(joueuse, a) && !aConstruire(joueuse, a.cle)).map((a) =>
       bouton(a.nom, a.cle === piece, () => { utiliser(joueuse, a.id); enregistrer(); afficherLieu(); })));
     articles = CATALOGUE.filter((a) => DANS_LA_MAISON.includes(a.type) && a.prix !== 0 && possede(joueuse, a)
       && (!a.piece || a.piece === piece));
@@ -315,7 +317,11 @@ function carteArticle(a) {
   const aMoi = possede(joueuse, a), enPlace = aMoi && estUtilise(joueuse, a);
   const porte = ['tenue', 'coiffure', 'cheveux', 'lit', 'chaussures'].includes(a.type);
   const manque = !aMoi && pieceManquante(joueuse, a);
-  if (aMoi) {
+  if (aMoi && a.type === 'piece' && aConstruire(joueuse, a.cle)) {
+    b.textContent = '🏗️ À construire';
+    b.disabled = true;
+    b.setAttribute('aria-label', `${a.nom} : va la construire au chantier, avec une tour de ${chantier.HAUTEURS[a.cle]} étages`);
+  } else if (aMoi) {
     b.textContent = a.type === 'piece' ? (enPlace ? 'Tu y es ✓' : 'Y aller')
       : enPlace ? (porte ? (a.type === 'lit' ? 'Choisi ✓' : 'Porté ✓') : ['accessoire', 'papier', 'chapeau'].includes(a.type) ? 'Enlever' : 'Ranger')
         : a.type === 'lit' ? 'Choisir' : porte || ['accessoire', 'papier', 'chapeau'].includes(a.type) ? 'Mettre' : 'Placer';
@@ -1706,6 +1712,81 @@ function voyager(cle) {
   if (avion) avion.style.transform = `translate(${x}px, ${y}px)`;
   parler(`En route pour ${passeport.pays(cle).nom.replace(/^La |^Le |^L’/, (m) => m.toLowerCase())} !`);
   setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
+}
+
+// Le chantier : « La grue folle ». On empile des blocs ; une tour assez haute construit les pièces achetées.
+function ouvrirChantier() {
+  etoilesJoueuse();
+  const c = joueuse.chantier ??= chantier.chantierVide();
+  const objectifs = c.aConstruire.map((k) => `${chantier.NOMS[k]} (${chantier.HAUTEURS[k]} étages)`);
+  const regle = 'La grue balance un bloc. Touche l’écran au bon moment pour le lâcher, et monte la tour la plus haute possible !';
+  const suite = `${c.record ? ` Ton record : ${c.record} étage${c.record > 1 ? 's' : ''}.` : ''}${objectifs.length ? ` À construire : ${objectifs.join(', ')}.` : ''}`;
+  $('#chantier-vue').replaceChildren(el('p', { className: 'carte presentation', textContent: regle + suite }), gros('🏗️ Jouer', jouerGrue));
+  montrer('chantier');
+  parler(`La grue folle. ${regle}${suite}`, { ton: 1.1 });
+}
+
+function jouerGrue() {
+  taire();
+  const H = 44, L = chantier.LARGEUR, SOL = 470, HAUT = 70; // hauteur d'un bloc, sol et bloc suspendu (dans un dessin de 400 × 520)
+  const COULEURS = ['#f2a654', '#6ac0d0', '#f080b0', '#8fd36a', '#b08ae8', '#f2c230'];
+  const tour = []; // le milieu de chaque bloc posé, par rapport au milieu de l'écran
+  let phase = 0, x = 0, chute = null, rate = null, avant = performance.now();
+  const score = el('p', { className: 'carte score-grue', role: 'status', textContent: 'Touche pour lâcher le bloc !' });
+  const scene = el('button', { className: 'scene-grue', ariaLabel: 'Lâcher le bloc' });
+  $('#chantier-vue').replaceChildren(score, scene);
+  const bloc = (cx, y, i, tourne = 0) => `<g transform="translate(${200 + cx} ${y}) rotate(${tourne})"><rect x="${-L / 2}" width="${L}" height="${H}" rx="5" fill="${COULEURS[i % COULEURS.length]}" stroke="#2b2b3a" stroke-opacity=".25" stroke-width="3"/>
+    ${[-26, 0, 26].map((f) => `<rect x="${f - 8}" y="12" width="16" height="20" rx="3" fill="#fff" opacity=".85"/>`).join('')}</g>`;
+  const dessiner = () => {
+    const cam = Math.max(0, tour.length - 5) * H; // la tour descend quand elle devient haute
+    scene.innerHTML = `<svg viewBox="0 0 400 520" aria-hidden="true"><rect y="${SOL + cam}" width="400" height="520" fill="#c9a36a"/>
+      ${tour.map((cx, i) => [cx, SOL - (i + 1) * H + cam, i]).filter(([, y]) => y < 520).map(([cx, y, i]) => bloc(cx, y, i)).join('')}
+      <rect x="26" y="20" width="12" height="520" fill="#f2c230"/><rect x="20" y="20" width="368" height="12" rx="4" fill="#f2c230"/>
+      ${rate === null ? `<rect x="${190 + x}" y="26" width="20" height="12" rx="3" fill="#555"/><line x1="${200 + x}" y1="38" x2="${200 + x}" y2="${HAUT + (chute ?? 0)}" stroke="#555" stroke-width="3"/>${bloc(x, HAUT + (chute ?? 0), tour.length)}`
+    : bloc(rate, SOL - (tour.length + 1) * H + cam + 14, tour.length, rate > tour.at(-1) ? 24 : -24)}</svg>`;
+  };
+  const finir = () => {
+    const n = tour.length, r = chantier.finir(joueuse, n);
+    enregistrer();
+    etoilesJoueuse();
+    const pieces = r.construites.map((k) => chantier.NOMS[k]).join(', ');
+    const texte = `Ta tour fait ${n} étage${n > 1 ? 's' : ''} ! Tu gagnes ${formatEtoiles(r.gain)} étoile${r.gain > 1 ? 's' : ''}.${r.record ? ' Nouveau record !' : ''}${pieces ? ` Tu as construit : ${pieces} ! Va voir dans ta maison.` : ''}`;
+    score.textContent = texte;
+    $('#chantier-vue').append(gros('🏗️ Rejouer', jouerGrue), gros('Retour au chantier', ouvrirChantier, 'gros secondaire'));
+    if (pieces || r.record) fanfare(); else bip(false);
+    parler(texte, { ton: 1.1 });
+  };
+  const image = (t) => {
+    if (!scene.isConnected || $('[data-ecran="chantier"]').hidden) return; // on a quitté le chantier
+    const dt = Math.min(0.05, (t - avant) / 1000);
+    avant = t;
+    if (chute === null) {
+      phase += dt * chantier.vitesse(tour.length, joueuse.age);
+      x = Math.sin(phase) * chantier.AMPLITUDE;
+    } else {
+      chute += dt * 900;
+      const cam = Math.max(0, tour.length - 5) * H;
+      if (chute >= SOL - (tour.length + 1) * H + cam - HAUT) { // le bloc arrive sur la tour (le premier tient toujours : il se pose par terre)
+        if (!tour.length || chantier.tient(tour.at(-1), x, joueuse.age)) {
+          tour.push(x);
+          chute = null;
+          notes([[262 * 2 ** (Math.min(tour.length, 24) / 12), 0, 0.25]]); // chaque étage sonne un peu plus aigu
+          score.textContent = `${tour.length} étage${tour.length > 1 ? 's' : ''}`;
+        } else {
+          rate = x;
+          dessiner();
+          return finir();
+        }
+      }
+    }
+    dessiner();
+    requestAnimationFrame(image);
+  };
+  const lacher = (ev) => { ev.preventDefault(); if (chute === null && rate === null) chute = 0; };
+  scene.addEventListener('pointerdown', lacher); // au toucher, pas au relâcher : c'est un jeu de rythme
+  scene.addEventListener('keydown', (ev) => { if (ev.key === ' ' || ev.key === 'Enter') lacher(ev); });
+  requestAnimationFrame(image);
+  scene.focus();
 }
 
 // La salle de musique : une grille (une ligne par note, une colonne par temps). La mélodie est gardée dans le profil.

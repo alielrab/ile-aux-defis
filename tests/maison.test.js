@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { dessinerPiece, apercu } from '../js/maison.js';
-import { CATALOGUE, acheter, utiliser } from '../js/catalogue.js';
+import { CATALOGUE, article, acheter, utiliser } from '../js/catalogue.js';
 import { AVATAR_PAR_DEFAUT } from '../js/avatar.js';
 import { maisonVide } from '../js/store.js';
 
@@ -80,4 +80,15 @@ test('animaux : prénom, vêtement, accessoires à côté de l’animal ; chaque
     assert.ok(p.maison.places.includes(`acc-animal:${k}`), k);
   }
   assert.ok(dessinerPiece(p).length > 0);
+});
+
+test('nouveau style : un animal dont l’image est prête est montré en image, les autres gardent leur dessin', () => {
+  const p = { avatar: AVATAR_PAR_DEFAUT, age: 8, objets: [], maison: { piece: 'chambre', papiers: {}, places: ['animal:chat', 'animal:chien'], tableaux: {} } };
+  assert.ok(!dessinerPiece(p).includes('<image'));
+  globalThis.IMAGES = ['images/animaux/chat.webp'];
+  try {
+    assert.equal(dessinerPiece(p).match(/<image href="images\/animaux\/chat\.webp"/g).length, 1);
+    assert.ok(apercu(article('animal:chat'), p).includes('images/animaux/chat.webp'));
+    assert.ok(!apercu(article('animal:chien'), p).includes('<image'));
+  } finally { delete globalThis.IMAGES; }
 });

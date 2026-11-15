@@ -1,0 +1,318 @@
+﻿etape;fichier;taille;transparent;sujet
+1;images/animaux/poisson.webp;512x512;oui;Poisson rouge
+1;images/animaux/hamster.webp;512x512;oui;Hamster
+1;images/animaux/lapin.webp;512x512;oui;Lapin blanc
+1;images/animaux/lapin-brun.webp;512x512;oui;Lapin brun
+1;images/animaux/lapin-gris.webp;512x512;oui;Lapin gris
+1;images/animaux/hamster-gris.webp;512x512;oui;Hamster gris
+1;images/animaux/poisson-bleu.webp;512x512;oui;Poisson bleu
+1;images/animaux/tortue.webp;512x512;oui;Tortue
+1;images/animaux/chat.webp;512x512;oui;Chaton roux
+1;images/animaux/chat-gris.webp;512x512;oui;Chaton gris
+1;images/animaux/chat-blanc.webp;512x512;oui;Chaton blanc
+1;images/animaux/chat-noir.webp;512x512;oui;Chaton noir
+1;images/animaux/chien.webp;512x512;oui;Chiot
+1;images/animaux/chien-gris.webp;512x512;oui;Chiot gris
+1;images/animaux/dalmatien.webp;512x512;oui;Dalmatien
+1;images/animaux/perroquet.webp;512x512;oui;Perroquet
+1;images/animaux/perroquet-rouge.webp;512x512;oui;Ara rouge
+1;images/animaux/perroquet-bleu.webp;512x512;oui;Ara bleu
+1;images/animaux/habit-collier-bleu.webp;256x256;oui;Collier bleu
+1;images/animaux/habit-noeud-rose.webp;256x256;oui;Nœud rose
+1;images/animaux/habit-collier-dore.webp;256x256;oui;Collier doré
+1;images/animaux/habit-chapeau-fete.webp;256x256;oui;Chapeau de fête
+1;images/animaux/habit-pull-rouge.webp;256x256;oui;Pull rouge
+1;images/animaux/habit-pull-bleu.webp;256x256;oui;Pull bleu
+1;images/animaux/habit-collier-rouge.webp;256x256;oui;Collier rouge
+1;images/animaux/habit-noeud-violet.webp;256x256;oui;Nœud violet
+1;images/animaux/habit-chapeau-rose.webp;256x256;oui;Chapeau de fête rose
+1;images/animaux/habit-pull-vert.webp;256x256;oui;Pull vert
+1;images/animaux/habit-pull-jaune.webp;256x256;oui;Pull jaune
+1;images/animaux/acc-gamelle.webp;384x384;oui;Gamelle
+1;images/animaux/acc-os.webp;384x384;oui;Os à mâchouiller
+1;images/animaux/acc-pelote.webp;384x384;oui;Pelote de laine
+1;images/animaux/acc-laisse.webp;384x384;oui;Laisse
+1;images/animaux/acc-coussin.webp;384x384;oui;Coussin
+1;images/animaux/acc-roue.webp;384x384;oui;Roue
+1;images/animaux/acc-perchoir.webp;384x384;oui;Perchoir
+1;images/animaux/acc-panier.webp;384x384;oui;Panier
+1;images/animaux/acc-griffoir.webp;384x384;oui;Griffoir
+1;images/animaux/acc-aquarium.webp;384x384;oui;Aquarium
+1;images/interface/feuillage-haut.webp;1280x256;oui;Bordure de feuilles tropicales et fleurs, haut de l’écran
+1;images/interface/feuillage-bas.webp;1280x256;oui;Bordure de feuilles tropicales et fleurs, bas de l’écran
+1;images/interface/etoile.webp;128x128;oui;Étoile dorée brillante
+2;images/maison/plante.webp;512x512;oui;Plante
+2;images/maison/tapis.webp;512x512;oui;Tapis
+2;images/maison/lampe.webp;512x512;oui;Lampe
+2;images/maison/etagere.webp;512x512;oui;Étagère à livres
+2;images/maison/bureau.webp;512x512;oui;Bureau
+2;images/maison/lit.webp;512x512;oui;Lit
+2;images/maison/table-basse.webp;512x512;oui;Table basse
+2;images/maison/lampadaire.webp;512x512;oui;Lampadaire
+2;images/maison/fauteuil.webp;512x512;oui;Fauteuil
+2;images/maison/bibliotheque.webp;512x512;oui;Bibliothèque
+2;images/maison/tele.webp;512x512;oui;Télévision
+2;images/maison/canape.webp;512x512;oui;Canapé
+2;images/maison/horloge.webp;512x512;oui;Horloge
+2;images/maison/pouf.webp;512x512;oui;Pouf
+2;images/maison/guirlande.webp;512x512;oui;Guirlande lumineuse
+2;images/maison/coffre.webp;512x512;oui;Coffre à jouets
+2;images/maison/miroir.webp;512x512;oui;Miroir
+2;images/maison/plante-salon.webp;512x512;oui;Grande plante
+2;images/maison/tapis-salon.webp;512x512;oui;Tapis du salon
+2;images/maison/tableau-noir.webp;512x512;oui;Tableau noir
+2;images/maison/fleurs.webp;512x512;oui;Massif de fleurs
+2;images/maison/potager.webp;512x512;oui;Potager
+2;images/maison/pommier.webp;512x512;oui;Pommier
+2;images/maison/cabane.webp;512x512;oui;Cabane
+2;images/maison/etagere-cuisine.webp;512x512;oui;Étagère à bocaux
+2;images/maison/chaises.webp;512x512;oui;Chaises
+2;images/maison/placard.webp;512x512;oui;Placard
+2;images/maison/evier.webp;512x512;oui;Évier
+2;images/maison/table-cuisine.webp;512x512;oui;Table de cuisine
+2;images/maison/lave-vaisselle.webp;512x512;oui;Lave-vaisselle
+2;images/maison/frigo.webp;512x512;oui;Frigo
+2;images/maison/ballon.webp;512x512;oui;Ballon
+2;images/maison/ours.webp;512x512;oui;Ours en peluche
+2;images/maison/robot.webp;512x512;oui;Robot
+2;images/maison/cerf-volant.webp;512x512;oui;Cerf-volant
+2;images/maison/train.webp;512x512;oui;Petit train
+2;images/maison/manege.webp;512x512;oui;Manège
+2;images/maison/toboggan.webp;512x512;oui;Toboggan
+2;images/maison/cubes.webp;512x512;oui;Cubes à lettres
+2;images/maison/piscine-balles.webp;512x512;oui;Piscine à balles
+2;images/maison/piscine.webp;512x512;oui;Petite piscine
+2;images/maison/balancoire.webp;512x512;oui;Balançoire
+2;images/maison/trampoline.webp;512x512;oui;Trampoline
+2;images/maison/lit-bleu.webp;512x512;oui;Lit bleu
+2;images/maison/lit-vert.webp;512x512;oui;Lit vert
+2;images/maison/lit-jaune.webp;512x512;oui;Lit jaune
+2;images/maison/lit-turquoise.webp;512x512;oui;Lit turquoise
+2;images/maison/lit-violet.webp;512x512;oui;Lit violet
+2;images/maison/lit-rouge.webp;512x512;oui;Lit rouge
+2;images/maison/poele.webp;512x512;oui;Poêle à crêpes
+2;images/maison/four.webp;512x512;oui;Four
+2;images/maison/corbeille.webp;512x512;oui;Corbeille de fruits
+2;images/maison/moule.webp;512x512;oui;Moule à gâteau
+2;images/maison/tablier.webp;512x512;oui;Tablier de chef
+2;images/maison/piece-chambre.webp;1280x832;oui;Chambre vide : sol et fenêtre, mur transparent (le papier peint est derrière)
+2;images/maison/piece-salon.webp;1280x832;oui;Salon vide : sol et fenêtre, mur transparent (le papier peint est derrière)
+2;images/maison/piece-jeux.webp;1280x832;oui;Salle de jeux vide : sol et fenêtre, mur transparent (le papier peint est derrière)
+2;images/maison/piece-jardin.webp;1280x832;non;Jardin vide : sol, ciel et haie
+2;images/maison/piece-cuisine.webp;1280x832;oui;Cuisine vide : sol et fenêtre, mur transparent (le papier peint est derrière)
+3;images/ile/archipel.webp;1024x1280;non;La mer vue du ciel, vide (les îles sont posées dessus)
+3;images/ile/fond-village.webp;1024x1024;oui;L'île du village vue du ciel, vide : plage, herbe, chemins
+3;images/ile/fond-savoir.webp;1024x1024;oui;L'île du savoir vue du ciel, vide : plage, herbe, chemins
+3;images/ile/fond-createurs.webp;1024x1024;oui;L'île des créateurs vue du ciel, vide : plage, herbe, chemins
+3;images/ile/fond-coeur.webp;1024x1024;oui;L'île du cœur vue du ciel, vide : plage, herbe, chemins
+3;images/ile/fond-securite.webp;1024x1024;oui;L'île de la sécurité vue du ciel, vide : plage, herbe, chemins
+3;images/ile/coiffeur.webp;512x512;oui;Bâtiment : Le coiffeur (coiffures et couleurs)
+3;images/ile/mode.webp;512x512;oui;Bâtiment : La boutique (vêtements et bijoux)
+3;images/ile/meubles.webp;512x512;oui;Bâtiment : Le magasin de meubles (meubles, jouets, murs et pièces)
+3;images/ile/marche.webp;512x512;oui;Bâtiment : Le marché (payer en francs suisses)
+3;images/ile/refuge.webp;512x512;oui;Bâtiment : Le refuge (animaux à adopter)
+3;images/ile/veto.webp;512x512;oui;Bâtiment : Le vétérinaire (soigner les animaux)
+3;images/ile/memory.webp;512x512;oui;Bâtiment : La salle de jeux (le Memory, seul ou à deux)
+3;images/ile/chantier.webp;512x512;oui;Bâtiment : Le chantier (la grue folle)
+3;images/ile/calcul.webp;512x512;oui;Bâtiment : L'école (Calcul)
+3;images/ile/heure.webp;512x512;oui;Bâtiment : La tour de l'horloge (lire l'heure)
+3;images/ile/syllabes.webp;512x512;oui;Bâtiment : La bibliothèque (la chasse aux syllabes)
+3;images/ile/espace.webp;512x512;oui;Bâtiment : L'observatoire (le système solaire)
+3;images/ile/corps.webp;512x512;oui;Bâtiment : L'hôpital (le corps humain)
+3;images/ile/musee.webp;512x512;oui;Bâtiment : Le musée des dinosaures (reconstituer des squelettes)
+3;images/ile/fractions.webp;512x512;oui;Bâtiment : La pizzeria (les fractions)
+3;images/ile/aeroport.webp;512x512;oui;Bâtiment : L'aéroport (le passeport du monde)
+3;images/ile/urgences.webp;512x512;oui;Bâtiment : Les numéros d’urgence (144, 117, 118)
+3;images/ile/route.webp;512x512;oui;Bâtiment : Le code de la route (piétons et vélos)
+3;images/ile/cuisine.webp;512x512;oui;Bâtiment : Le restaurant (la cuisine de l’île)
+3;images/ile/peinture.webp;512x512;oui;Bâtiment : L'atelier de peinture (colorier et peindre)
+3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
+3;images/ile/musique.webp;512x512;oui;Bâtiment : La salle de musique (composer des mélodies)
+3;images/ile/confiance.webp;512x512;oui;Bâtiment : La maison de la confiance (mes droits et ma sécurité)
+3;images/ile/emotions.webp;512x512;oui;Bâtiment : La météo des émotions (reconnaître ses émotions)
+3;images/ile/maison.webp;512x512;oui;Bâtiment : la maison d’un enfant
+3;images/ile/croyance-catholique.webp;512x512;oui;Bâtiment : lieu de culte (catholique)
+3;images/ile/croyance-protestant.webp;512x512;oui;Bâtiment : lieu de culte (protestant)
+3;images/ile/croyance-orthodoxe.webp;512x512;oui;Bâtiment : lieu de culte (orthodoxe)
+3;images/ile/croyance-islam.webp;512x512;oui;Bâtiment : lieu de culte (islam)
+3;images/ile/croyance-judaisme.webp;512x512;oui;Bâtiment : lieu de culte (judaisme)
+3;images/ile/croyance-bouddhisme.webp;512x512;oui;Bâtiment : lieu de culte (bouddhisme)
+3;images/ile/croyance-hindouisme.webp;512x512;oui;Bâtiment : lieu de culte (hindouisme)
+3;images/ile/croyance-sagesse.webp;512x512;oui;Bâtiment : lieu de culte (sagesse)
+3;images/ile/bateau.webp;256x256;oui;Décoration : bateau
+3;images/ile/palmier.webp;256x256;oui;Décoration : palmier
+4;images/decors/coiffeur.webp;1280x832;non;Intérieur : Le coiffeur, vide au milieu
+4;images/decors/mode.webp;1280x832;non;Intérieur : La boutique, vide au milieu
+4;images/decors/meubles.webp;1280x832;non;Intérieur : Le magasin de meubles, vide au milieu
+4;images/decors/refuge.webp;1280x832;non;Intérieur : Le refuge, vide au milieu
+4;images/decors/calcul.webp;1280x832;non;Intérieur : L'école, vide au milieu
+4;images/decors/heure.webp;1280x832;non;Intérieur : La tour de l'horloge, vide au milieu
+4;images/decors/corps.webp;1280x832;non;Intérieur : L'hôpital, vide au milieu
+4;images/decors/syllabes.webp;1280x832;non;Intérieur : La bibliothèque, vide au milieu
+4;images/decors/espace.webp;1280x832;non;Intérieur : L'observatoire, vide au milieu
+4;images/decors/cuisine.webp;1280x832;non;Intérieur : Le restaurant, vide au milieu
+4;images/decors/marche.webp;1280x832;non;Intérieur : Le marché, vide au milieu
+4;images/decors/musee.webp;1280x832;non;Intérieur : Le musée des dinosaures, vide au milieu
+4;images/decors/aeroport.webp;1280x832;non;Intérieur : L'aéroport, vide au milieu
+4;images/decors/urgences.webp;1280x832;non;Intérieur : Les numéros d’urgence, vide au milieu
+4;images/decors/route.webp;1280x832;non;Intérieur : Le code de la route, vide au milieu
+4;images/decors/emotions.webp;1280x832;non;Intérieur : La météo des émotions, vide au milieu
+4;images/decors/veto.webp;1280x832;non;Intérieur : Le vétérinaire, vide au milieu
+4;images/decors/fractions.webp;1280x832;non;Intérieur : La pizzeria, vide au milieu
+4;images/decors/memory.webp;1280x832;non;Intérieur : La salle de jeux, vide au milieu
+4;images/decors/chantier.webp;1280x832;non;Intérieur : Le chantier, vide au milieu
+4;images/decors/peinture.webp;1280x832;non;Intérieur : L'atelier de peinture, vide au milieu
+4;images/decors/bd.webp;1280x832;non;Intérieur : L'atelier BD, vide au milieu
+4;images/decors/musique.webp;1280x832;non;Intérieur : La salle de musique, vide au milieu
+4;images/personnages/calcul.webp;512x768;oui;Personnage du lieu : calcul
+4;images/personnages/heure.webp;512x768;oui;Personnage du lieu : heure
+4;images/personnages/corps.webp;512x768;oui;Personnage du lieu : corps
+4;images/personnages/syllabes.webp;512x768;oui;Personnage du lieu : syllabes
+4;images/personnages/espace.webp;512x768;oui;Personnage du lieu : espace
+4;images/personnages/croyance.webp;512x768;oui;Personnage du lieu : croyance
+4;images/personnages/cuisine.webp;512x768;oui;Personnage du lieu : cuisine
+4;images/personnages/marche.webp;512x768;oui;Personnage du lieu : marche
+4;images/personnages/emotions.webp;512x768;oui;Personnage du lieu : emotions
+4;images/personnages/veto.webp;512x768;oui;Personnage du lieu : veto
+4;images/personnages/fractions.webp;512x768;oui;Personnage du lieu : fractions
+5;images/avatar/tenue-tshirt-bleu.webp;768x1024;oui;T-shirt bleu
+5;images/avatar/tenue-robe-rose.webp;768x1024;oui;Robe rose
+5;images/avatar/tenue-sweat-vert.webp;768x1024;oui;Sweat vert
+5;images/avatar/tenue-salopette-jaune.webp;768x1024;oui;Salopette jaune
+5;images/avatar/tenue-robe-jaune.webp;768x1024;oui;Robe jaune
+5;images/avatar/tenue-tshirt-rouge.webp;768x1024;oui;T-shirt rouge et jupe
+5;images/avatar/tenue-pull-violet.webp;768x1024;oui;Pull violet
+5;images/avatar/tenue-tshirt-turquoise.webp;768x1024;oui;T-shirt turquoise
+5;images/avatar/tenue-polo-vert.webp;768x1024;oui;Polo vert et bermuda
+5;images/avatar/tenue-chemise-carreaux.webp;768x1024;oui;Chemise à carreaux
+5;images/avatar/tenue-sweat-gris.webp;768x1024;oui;Sweat gris
+5;images/avatar/tenue-tshirt-rayures.webp;768x1024;oui;T-shirt à rayures
+5;images/avatar/tenue-princesse.webp;768x1024;oui;Robe de princesse
+5;images/avatar/tenue-heroine.webp;768x1024;oui;Super-héroïne
+5;images/avatar/tenue-sport.webp;768x1024;oui;Maillot de foot
+5;images/avatar/tenue-pyjama.webp;768x1024;oui;Pyjama à pois
+5;images/avatar/tenue-fleurs.webp;768x1024;oui;Robe à fleurs
+5;images/avatar/tenue-danseuse.webp;768x1024;oui;Tenue de danseuse
+5;images/avatar/tenue-mariniere.webp;768x1024;oui;Marinière
+5;images/avatar/tenue-jean.webp;768x1024;oui;Veste en jean
+5;images/avatar/tenue-sweat-orange.webp;768x1024;oui;Sweat orange
+5;images/avatar/tenue-short-fleuri.webp;768x1024;oui;Short fleuri
+5;images/avatar/tenue-jupe-pois.webp;768x1024;oui;Jupe à pois
+5;images/avatar/tenue-robe-rayee.webp;768x1024;oui;Robe à rayures
+5;images/avatar/tenue-tenue-ski.webp;768x1024;oui;Tenue de ski
+5;images/avatar/tenue-ensemble-rose.webp;768x1024;oui;Ensemble à paillettes
+5;images/avatar/tenue-robe-nuit.webp;768x1024;oui;Robe nuit étoilée
+5;images/avatar/tenue-robe-soiree.webp;768x1024;oui;Robe de soirée
+5;images/avatar/tenue-tshirt-etoiles.webp;768x1024;oui;T-shirt étoilé
+5;images/avatar/tenue-salopette-jean.webp;768x1024;oui;Salopette en jean
+5;images/avatar/tenue-jupe-ecossaise.webp;768x1024;oui;Jupe écossaise
+5;images/avatar/tenue-robe-turquoise.webp;768x1024;oui;Robe turquoise à pois
+5;images/avatar/tenue-pompier.webp;768x1024;oui;Tenue de pompier
+5;images/avatar/tenue-docteur.webp;768x1024;oui;Blouse de docteur
+5;images/avatar/tenue-heros-vert.webp;768x1024;oui;Costume à cape verte
+5;images/avatar/tenue-astronaute.webp;768x1024;oui;Combinaison d’astronaute
+5;images/avatar/accessoire-boucles-oreilles.webp;768x1024;oui;Boucles d'oreilles
+5;images/avatar/accessoire-bracelet.webp;768x1024;oui;Bracelets
+5;images/avatar/accessoire-serre-tete.webp;768x1024;oui;Serre-tête
+5;images/avatar/accessoire-noeud.webp;768x1024;oui;Gros nœud
+5;images/avatar/accessoire-collier.webp;768x1024;oui;Collier de perles
+5;images/avatar/accessoire-lunettes.webp;768x1024;oui;Lunettes
+5;images/avatar/accessoire-couronne.webp;768x1024;oui;Couronne
+5;images/avatar/accessoire-barrettes.webp;768x1024;oui;Barrettes
+5;images/avatar/accessoire-echarpe.webp;768x1024;oui;Écharpe
+5;images/avatar/accessoire-montre.webp;768x1024;oui;Montre
+5;images/avatar/accessoire-lunettes-soleil.webp;768x1024;oui;Lunettes de soleil
+5;images/avatar/accessoire-sac.webp;768x1024;oui;Sac à main
+5;images/avatar/chaussures-baskets-rouges.webp;768x1024;oui;Baskets rouges
+5;images/avatar/chaussures-baskets-bleues.webp;768x1024;oui;Baskets bleues
+5;images/avatar/chaussures-sandales.webp;768x1024;oui;Sandales
+5;images/avatar/chaussures-ballerines.webp;768x1024;oui;Ballerines
+5;images/avatar/chaussures-bottes-pluie.webp;768x1024;oui;Bottes de pluie
+5;images/avatar/chaussures-bottes-cuir.webp;768x1024;oui;Bottes en cuir
+5;images/avatar/chaussures-baskets-or.webp;768x1024;oui;Baskets dorées
+5;images/avatar/chaussures-baskets-vertes.webp;768x1024;oui;Baskets vertes
+5;images/avatar/chaussures-baskets-violettes.webp;768x1024;oui;Baskets violettes
+5;images/avatar/chaussures-sandales-bleues.webp;768x1024;oui;Sandales bleues
+5;images/avatar/chaussures-ballerines-noires.webp;768x1024;oui;Ballerines noires
+5;images/avatar/chaussures-bottes-roses.webp;768x1024;oui;Bottes roses
+5;images/avatar/chapeau-casquette.webp;768x1024;oui;Casquette
+5;images/avatar/chapeau-bonnet.webp;768x1024;oui;Bonnet à pompon
+5;images/avatar/chapeau-beret.webp;768x1024;oui;Béret
+5;images/avatar/chapeau-chapeau-paille.webp;768x1024;oui;Chapeau de paille
+5;images/avatar/chapeau-couronne-fleurs.webp;768x1024;oui;Couronne de fleurs
+5;images/avatar/chapeau-sorciere.webp;768x1024;oui;Chapeau de sorcière
+5;images/avatar/chapeau-casquette-bleue.webp;768x1024;oui;Casquette bleue
+5;images/avatar/chapeau-bonnet-rose.webp;768x1024;oui;Bonnet rose
+5;images/avatar/chapeau-chapeau-soleil.webp;768x1024;oui;Chapeau de soleil
+5;images/avatar/base-tres-claire-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux marron
+5;images/avatar/base-tres-claire-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux noisette
+5;images/avatar/base-tres-claire-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux bleus
+5;images/avatar/base-tres-claire-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux verts
+5;images/avatar/base-tres-claire-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux gris
+5;images/avatar/base-tres-claire-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau tres-claire, yeux noirs
+5;images/avatar/base-claire-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux marron
+5;images/avatar/base-claire-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux noisette
+5;images/avatar/base-claire-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux bleus
+5;images/avatar/base-claire-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux verts
+5;images/avatar/base-claire-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux gris
+5;images/avatar/base-claire-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau claire, yeux noirs
+5;images/avatar/base-doree-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux marron
+5;images/avatar/base-doree-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux noisette
+5;images/avatar/base-doree-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux bleus
+5;images/avatar/base-doree-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux verts
+5;images/avatar/base-doree-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux gris
+5;images/avatar/base-doree-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau doree, yeux noirs
+5;images/avatar/base-mate-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux marron
+5;images/avatar/base-mate-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux noisette
+5;images/avatar/base-mate-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux bleus
+5;images/avatar/base-mate-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux verts
+5;images/avatar/base-mate-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux gris
+5;images/avatar/base-mate-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau mate, yeux noirs
+5;images/avatar/base-brune-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux marron
+5;images/avatar/base-brune-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux noisette
+5;images/avatar/base-brune-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux bleus
+5;images/avatar/base-brune-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux verts
+5;images/avatar/base-brune-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux gris
+5;images/avatar/base-brune-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau brune, yeux noirs
+5;images/avatar/base-foncee-marron.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux marron
+5;images/avatar/base-foncee-noisette.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux noisette
+5;images/avatar/base-foncee-bleus.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux bleus
+5;images/avatar/base-foncee-verts.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux verts
+5;images/avatar/base-foncee-gris.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux gris
+5;images/avatar/base-foncee-noirs.webp;768x1024;oui;Enfant en sous-vêtements unis, chauve, peau foncee, yeux noirs
+5;images/avatar/coiffure-courts-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Courts, partie devant
+5;images/avatar/coiffure-courts-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Courts, partie derriere
+5;images/avatar/coiffure-carre-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Carré, partie devant
+5;images/avatar/coiffure-carre-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Carré, partie derriere
+5;images/avatar/coiffure-longs-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs, partie devant
+5;images/avatar/coiffure-longs-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs, partie derriere
+5;images/avatar/coiffure-boucles-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Bouclés, partie devant
+5;images/avatar/coiffure-boucles-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Bouclés, partie derriere
+5;images/avatar/coiffure-queue-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Queue de cheval, partie devant
+5;images/avatar/coiffure-queue-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Queue de cheval, partie derriere
+5;images/avatar/coiffure-tresses-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Tresses, partie devant
+5;images/avatar/coiffure-tresses-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Tresses, partie derriere
+5;images/avatar/coiffure-chignon-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Chignon, partie devant
+5;images/avatar/coiffure-chignon-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Chignon, partie derriere
+5;images/avatar/coiffure-afro-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Afro, partie devant
+5;images/avatar/coiffure-afro-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Afro, partie derriere
+5;images/avatar/coiffure-couettes-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Couettes, partie devant
+5;images/avatar/coiffure-couettes-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Couettes, partie derriere
+5;images/avatar/coiffure-macarons-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Deux macarons, partie devant
+5;images/avatar/coiffure-macarons-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Deux macarons, partie derriere
+5;images/avatar/coiffure-ondules-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs ondulés, partie devant
+5;images/avatar/coiffure-ondules-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs ondulés, partie derriere
+5;images/avatar/coiffure-mi-longs-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Mi-longs, partie devant
+5;images/avatar/coiffure-mi-longs-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Mi-longs, partie derriere
+5;images/avatar/coiffure-frange-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Frange droite, partie devant
+5;images/avatar/coiffure-frange-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Frange droite, partie derriere
+5;images/avatar/coiffure-tresse-cote-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Tresse sur le côté, partie devant
+5;images/avatar/coiffure-tresse-cote-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Tresse sur le côté, partie derriere
+5;images/avatar/coiffure-chignons-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Deux chignons hauts, partie devant
+5;images/avatar/coiffure-chignons-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Deux chignons hauts, partie derriere
+5;images/avatar/coiffure-tres-courts-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Très courts, partie devant
+5;images/avatar/coiffure-tres-courts-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Très courts, partie derriere
+5;images/avatar/coiffure-meche-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Mèche sur le côté, partie devant
+5;images/avatar/coiffure-meche-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Mèche sur le côté, partie derriere
+5;images/avatar/coiffure-herisses-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Hérissés, partie devant
+5;images/avatar/coiffure-herisses-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Hérissés, partie derriere

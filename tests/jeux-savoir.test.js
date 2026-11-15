@@ -5,6 +5,7 @@ import * as passeport from '../js/jeux/passeport.js';
 import * as urgences from '../js/jeux/urgences.js';
 import * as route from '../js/jeux/route.js';
 import * as musique from '../js/jeux/musique.js';
+import * as chantier from '../js/jeux/chantier.js';
 import { nouvellePartie } from '../js/partie.js';
 import { graine } from './hasard.js';
 
@@ -97,4 +98,18 @@ test('musique : 8 notes du grave à l’aigu ; une note par temps, toucher encor
   assert.deepEqual(musique.aJouer(m).map(([f, debut]) => [f, debut]), [[262, 0], [523, 2 * musique.DUREE]]);
   assert.deepEqual(musique.basculer(m, 0, 0)[0], null);
   assert.deepEqual(musique.aJouer([99, 'x', null]), []); // un enregistrement abîmé ne casse rien
+});
+
+test('grue folle : plus lent et plus tolérant à 6 ans ; étoiles par étage, record, pièces construites à la bonne hauteur', () => {
+  assert.ok(chantier.vitesse(0, 6) < chantier.vitesse(0, 9) && chantier.vitesse(5, 9) > chantier.vitesse(0, 9));
+  assert.equal(chantier.vitesse(100, 9), chantier.vitesse(1000, 9)); // la vitesse ne monte pas sans fin
+  const ecart = chantier.LARGEUR * 0.7;
+  assert.ok(chantier.tient(0, ecart, 6) && !chantier.tient(0, ecart, 9) && chantier.tient(10, -20, 9));
+  const p = { age: 6, etoiles: 0, chantier: { record: 4, aConstruire: ['salon', 'jardin'] } };
+  assert.deepEqual(chantier.finir(p, 6), { gain: 6, record: true, construites: ['salon'] }); // 5 étages pour le salon, 8 pour le jardin
+  assert.deepEqual([p.etoiles, p.chantier], [6, { record: 6, aConstruire: ['jardin'] }]);
+  const ancien = { age: 9, etoiles: 1 }; // un profil d'avant le chantier
+  assert.deepEqual(chantier.finir(ancien, 3), { gain: 1.5, record: true, construites: [] });
+  assert.deepEqual(chantier.finir(ancien, 2).record, false);
+  assert.deepEqual(Object.keys(chantier.HAUTEURS).sort(), ['jardin', 'jeux', 'salon']); // toutes les pièces à vendre
 });

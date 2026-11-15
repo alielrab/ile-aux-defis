@@ -679,3 +679,8 @@ select {
 .nom-note { font-weight: 800; text-align: right; padding-right: 0.3rem; }
 .case-note { aspect-ratio: 1; min-height: 0; padding: 0; border: 0; border-radius: 10px; background: #e9eef2; cursor: pointer; }
 .case-note.joue { outline: 4px solid var(--accent); }
+
+/* Le chantier : la grue folle */
+.scene-grue { width: min(100%, 46dvh); aspect-ratio: 400 / 520; padding: 0; border: 0; border-radius: 18px; overflow: hidden; background: linear-gradient(#bfe6ff, #eef9ff); touch-action: none; user-select: none; cursor: pointer; }
+.scene-grue svg { display: block; width: 100%; height: 100%; }
+.score-grue { margin: 0; font-weight: 800; text-align: center; }
