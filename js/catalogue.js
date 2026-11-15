@@ -106,7 +106,8 @@ export const ANIMAUX = {
   'perroquet-rouge': { nom: 'Ara rouge', prix: 35, espece: 'perroquet', couleurs: { '#e74c3c': '#f1c40f', '#2ecc71': '#e0503c', '#27ae60': '#b83a2a' } },
   'perroquet-bleu': { nom: 'Ara bleu', prix: 35, espece: 'perroquet', couleurs: { '#e74c3c': '#f1c40f', '#3498db': '#1f5f99', '#2ecc71': '#3f9be0', '#27ae60': '#2573a7' } },
 };
-// Vêtements pour animaux : chaque animal en porte un (on le change dans la maison)
+// Vêtements pour animaux : chaque animal en porte un (on le change dans la maison).
+// Les pulls sont des objets de collection : on les achète et on les garde, mais aucun animal ne les porte.
 export const HABITS_ANIMAUX = {
   'collier-bleu': { nom: 'Collier bleu', prix: 6, forme: 'collier', couleur: '#4a90d9' },
   'noeud-rose': { nom: 'Nœud rose', prix: 6, forme: 'noeud', couleur: '#ff5d8f' },
@@ -215,8 +216,9 @@ export function nommer(profil, id, nom) {
 }
 
 // Habiller un animal : le vêtement suivant parmi ceux qu'on a (puis aucun). Renvoie la clé du vêtement, ou null.
+export const sePorte = (cle) => HABITS_ANIMAUX[cle].forme !== 'pull';
 export function changerHabit(profil, id) {
-  const miens = Object.keys(HABITS_ANIMAUX).filter((k) => profil.objets.includes(`habit-animal:${k}`));
+  const miens = Object.keys(HABITS_ANIMAUX).filter((k) => sePorte(k) && profil.objets.includes(`habit-animal:${k}`));
   const ordre = [null, ...miens], actuel = profil.habits?.[id] ?? null;
   const suivant = ordre[(ordre.indexOf(actuel) + 1) % ordre.length];
   profil.habits ??= {};

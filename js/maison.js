@@ -289,7 +289,7 @@ function tableau(profil, piece) {
     ${dessinerOeuvre(d).replace('<svg ', `<svg x="${x}" y="${y}" width="${l}" height="${h}" `)}`;
 }
 const ORDRE = ['placard', 'etagere-cuisine', 'frigo', 'lave-vaisselle', 'evier', 'tablier', 'poele', 'corbeille', 'four', 'moule', 'chaises', 'table-cuisine',
-  'guirlande', 'horloge', 'tapis', 'etagere', 'lampe', 'lit', 'bureau', 'plante', 'ours', 'robot', 'coffre', 'pouf',
+  'guirlande', 'horloge', 'tapis', 'etagere', 'lit', 'bureau', 'lampe', 'plante', 'ours', 'robot', 'coffre', 'pouf',
   'bibliotheque', 'miroir', 'tele', 'lampadaire', 'plante-salon', 'canape', 'fauteuil', 'tapis-salon', 'table-basse',
   'tableau-noir', 'cerf-volant', 'toboggan', 'manege', 'cubes', 'piscine-balles',
   'pommier', 'cabane', 'balancoire', 'fleurs', 'potager', 'piscine', 'trampoline'];
@@ -370,6 +370,39 @@ const DESSINS_ACC = {
     <rect x="${cx - 67}" y="${by - 38}" width="134" height="14" fill="#e8c27a"/><path d="M${cx - 50} ${by - 26} Q${cx - 58} ${by - 60} ${cx - 46} ${by - 80} M${cx + 52} ${by - 26} Q${cx + 44} ${by - 54} ${cx + 56} ${by - 70}" stroke="#3a9a4a" stroke-width="5" fill="none"/>`,
 };
 // pour une place d'animal : où l'accessoire se met par rapport à lui
+// Un meuble en image, à la place de son dessin (null s'il n'a pas d'image). Il garde son emplacement : posé au sol, ou centré s'il est au mur.
+const COTES = { 'table-basse': [150], lit: [250], frigo: [190, -22], 'table-cuisine': [180], lampe: [84, 12, 186],
+  tele: [200, 0, 40], horloge: [96], guirlande: [440, 0, 40], 'plante-salon': [158, -6], chaises: [150, 150], 'etagere-cuisine': [130],
+  fleurs: [110], miroir: [120], potager: [160], ballon: [70], train: [130], poele: [100], corbeille: [84, 0, 6], cubes: [80], manege: [170], 'tableau-noir': [170, -39, 180] }; // le tableau noir est sur un chevalet : par terre, derrière le manège // la télé est sur un meuble : posée par terre, derrière le fauteuil // [côté du carré de l'image, décalage vers la droite, vers le bas], quand l'ancien emplacement ne convient pas
+function meubleImage(cle, fichier = cle) {
+  const img = image(`maison/${fichier}`);
+  if (!img) return null;
+  const [bx, by, bw, bh] = boiteDe(OBJETS[cle]);
+  if (cle.startsWith('tapis')) return `<image href="${img}" x="${bx}" y="${by}" width="${bw}" height="${bh}" preserveAspectRatio="none"/>`; // vu d'en haut, aplati sur le sol
+  const [cote, dx = 0, dy = 0] = COTES[cle] ?? [Math.max(bw, bh)], auMur = by + bh < 380;
+  return `<image href="${img}" x="${bx + bw / 2 - cote / 2 + dx}" y="${(auMur ? by + bh / 2 - cote / 2 : by + bh - cote) + dy}" width="${cote}" height="${cote}" preserveAspectRatio="${auMur ? 'xMidYMid' : 'xMidYMax'} meet"/>`;
+}
+// Le lit : une image par couleur de couverture (maison/lit pour le rose du départ)
+const fichierLit = (couleur) => (couleur && couleur !== 'rose' ? `lit-${couleur}` : 'lit');
+
+// Un chapeau ou un nœud sur la tête d'un animal en image. [x, y, taille] en parts du carré de l'image : le bas du chapeau (le nœud est centré au même endroit).
+const TETES = { chat: [0.36, 0.13, 0.30], chien: [0.62, 0.08, 0.30], lapin: [0.68, 0.27, 0.24], 'lapin-brun': [0.60, 0.30, 0.22], 'lapin-gris': [0.60, 0.30, 0.22],
+  hamster: [0.48, 0.16, 0.28], tortue: [0.80, 0.27, 0.20], perroquet: [0.54, 0.07, 0.26] };
+function habitImage(cle, espece, habit, x0, y0, cote) {
+  const h = HABITS_ANIMAUX[habit], t = TETES[cle] ?? TETES[espece], img = h && image(`animaux/habit-${habit}`);
+  // shortcut: colliers et pulls ne se portent pas encore sur un animal en image (collier à refaire sans fond blanc, pull vu de face).
+  if (!img || !t || !['chapeau', 'noeud'].includes(h.forme)) return '';
+  const l = t[2] * cote * (h.forme === 'noeud' ? 0.8 : 1), x = x0 + t[0] * cote - l / 2;
+  return h.forme === 'chapeau' ? `<image href="${img}" x="${x}" y="${y0 + t[1] * cote - l}" width="${l}" height="${l}" preserveAspectRatio="xMidYMax meet"/>`
+    : `<image href="${img}" x="${x}" y="${y0 + (t[1] - 0.02) * cote - l / 2}" width="${l}" height="${l}"/>`;
+}
+// Un accessoire en image : [écart depuis le milieu de l'animal, largeur, hauteur, enfoncement dans le sol]. Sans image : son dessin.
+const PLACES_ACC = { gamelle: [40, 52, 40], pelote: [-84, 38, 38], coussin: [-62, 124, 72, 8], aquarium: [-76, 152, 122], griffoir: [-42, 70, 150], laisse: [-756, 52, 110, -104],
+  panier: [-66, 132, 80, 10], os: [-92, 46, 30], roue: [-98, 62, 62], perchoir: [-36, 72, 70] }; // la laisse est accrochée au mur de gauche
+const accessoire = (k, cx, by) => {
+  const img = image(`animaux/acc-${k}`), p = PLACES_ACC[k];
+  return img && p ? `<image href="${img}" x="${cx + p[0]}" y="${by - p[2] + (p[3] ?? 0)}" width="${p[1]}" height="${p[2]}" preserveAspectRatio="xMidYMax meet"/>` : DESSINS_ACC[k](cx, by);
+};
 const ACC_FIXES = ['griffoir', 'laisse']; // accrochés au mur ou dans le coin, pas sous un animal
 
 function animauxDeLaPiece(profil) {
@@ -379,21 +412,24 @@ function animauxDeLaPiece(profil) {
   const especeDe = (id) => ANIMAUX[id.slice(7)].espece;
   const placeDe = (k) => { const i = poses.findIndex((id) => ACCESSOIRES_ANIMAUX[k].pour.includes(especeDe(id))); return PLACES_ANIMAUX[Math.max(0, i)]; };
   const avecAccessoire = (k, id) => accs.includes(k) && poses.find((x) => ACCESSOIRES_ANIMAUX[k].pour.includes(especeDe(x))) === id;
-  const dessous = accs.map((k) => (ACC_FIXES.includes(k) ? DESSINS_ACC[k]() : DESSINS_ACC[k](...placeDe(k)))).join('');
+  // un perroquet en image est déjà sur une branche : son perchoir se met à côté de lui
+  const aCote = (k) => (k === 'perchoir' && poses.some((id) => especeDe(id) === 'perroquet' && image(`animaux/${id.slice(7)}`)) ? -86 : 0);
+  const dessous = accs.map((k) => { const [x, y] = ACC_FIXES.includes(k) ? [768, 508] : placeDe(k); return accessoire(k, x + aCote(k), y); }).join(''); // les fixes : dans le coin droit
   const animaux = poses.map((id, i) => {
     const a = ANIMAUX[id.slice(7)], [sx, sy] = PLACES_ANIMAUX[i];
     const base = a.espece === 'poisson' && avecAccessoire('aquarium', id) ? 'poisson-seul' : a.espece;
     const o = OBJETS[base] ?? ANIMAUX_EN_PLUS[base];
     const [bx, by, bw, bh] = boiteDe(o);
-    const monte = a.espece === 'perroquet' && avecAccessoire('perchoir', id) ? 62 : 0; // le perroquet se pose sur son perchoir
-    const dy = a.espece === 'poisson' && base === 'poisson-seul' ? -24 : 0; // le poisson nage au milieu de l'aquarium
-    const img = image(`animaux/${id.slice(7)}`);
-    // shortcut: un animal en image ne porte pas encore son vêtement (les repères sont ceux du dessin), à régler après l'essai.
-    let dessin = img ? `<image href="${img}" x="${bx}" y="${by}" width="${bw}" height="${bh}" preserveAspectRatio="xMidYMax meet"/>` : o.dessin + (a.taches ?? '') + habitAnimal(a.espece, profil.habits?.[id]);
+    const dy = a.espece === 'poisson' && base === 'poisson-seul' ? (image('animaux/acc-aquarium') ? 14 : -24) : 0; // le poisson nage au milieu de l'aquarium
+    // un poisson qui a un aquarium y nage (petit dessin) : son image le montre déjà dans un bocal
+    const img = base === 'poisson-seul' ? null : image(`animaux/${id.slice(7)}`);
+    const monte = a.espece === 'perroquet' && !img && avecAccessoire('perchoir', id) ? 62 : 0; // le perroquet dessiné se pose sur son perchoir (en image, il a déjà sa branche)
+    const cote = Math.min(130, Math.max(80, Math.max(bw, bh) * (a.espece === 'poisson' ? 1 : 1.2))); // une image est carrée (le bocal, déjà gros, n'est pas agrandi) : un peu plus grande que le dessin, pour qu'on voie l'animal
+    let dessin = img ? `${ombre(bx + bw / 2, by + bh - 3, cote * 0.36)}<image href="${img}" x="${bx + bw / 2 - cote / 2}" y="${by + bh - cote}" width="${cote}" height="${cote}" preserveAspectRatio="xMidYMax meet"/>${habitImage(id.slice(7), a.espece, profil.habits?.[id], bx + bw / 2 - cote / 2, by + bh - cote, cote)}` : o.dessin + (a.taches ?? '') + habitAnimal(a.espece, profil.habits?.[id]);
     if (!img) for (const [de, vers] of Object.entries(a.couleurs ?? {})) dessin = dessin.replaceAll(de, vers);
     const nom = profil.noms?.[id];
     return `<g transform="translate(${sx - (bx + bw / 2)} ${sy - (by + bh) - monte + dy})">${dessin}</g>`
-      + (nom ? `<text x="${sx}" y="${sy - bh - monte - 8}" class="nom-animal" font-size="20" font-weight="800" text-anchor="middle" fill="#2b2b3a" stroke="#fff" stroke-width="5" paint-order="stroke" font-family="sans-serif">${echapper(nom)}</text>` : '');
+      + (nom ? `<text x="${sx}" y="${sy - (img ? cote + (HABITS_ANIMAUX[profil.habits?.[id]]?.forme === 'chapeau' ? 26 : 0) : bh) - monte - 8}" class="nom-animal" font-size="20" font-weight="800" text-anchor="middle" fill="#2b2b3a" stroke="#fff" stroke-width="5" paint-order="stroke" font-family="sans-serif">${echapper(nom)}</text>` : '');
   }).join('');
   return dessous + animaux;
 }
@@ -404,7 +440,7 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
   const { defs, fond } = papier(profil.maison.papiers[piece], 'papier-piece', deco.mur);
   const poses = new Set(profil.maison.places.map((id) => id.split(':')).filter(([type, cle]) => type === 'animal' || PIECE_DE[cle] === piece).map(([, cle]) => cle));
   const lit = COULEURS_LIT[profil.maison.lit]?.couleur ?? COULEURS_LIT.rose.couleur;
-  const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => (c === 'lit' ? OBJETS.lit.dessin.replace('#f080b0', lit) : OBJETS[c].dessin)).join('');
+  const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => (c === 'lit' ? meubleImage('lit', fichierLit(profil.maison.lit)) ?? OBJETS.lit.dessin.replace('#f080b0', lit) : (c === 'lampe' && !poses.has('bureau') ? null : meubleImage(c)) ?? OBJETS[c].dessin)).join(''); // la lampe en image se pose sur le bureau ; sans bureau, la suspension dessinée
   const avatar = dessinerAvatar(profil.avatar, 'entier', profil.age).replace('<svg ', '<svg x="345" y="196" width="150" height="244" ');
   return `<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="piece-svg" role="img" aria-label="${poses.size ? 'La pièce et tes objets' : 'La pièce, encore vide'}">
     <defs>${defs}</defs>
@@ -424,6 +460,9 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
 // Aperçu d'un objet en magasin. profil : pour montrer vêtements, coiffures et bijoux sur son propre avatar.
 export function apercu(a, profil) {
   const mini = (boite, dessin) => `<svg viewBox="${boite}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${dessin}</svg>`;
+  const enImage = (chemin) => image(chemin) && mini('0 0 100 100', `<image href="${image(chemin)}" width="100" height="100"/>`);
+  if (['meuble', 'jouet', 'ustensile'].includes(a.type) && enImage(`maison/${a.cle}`)) return enImage(`maison/${a.cle}`);
+  if (a.type === 'lit' && enImage(`maison/${fichierLit(a.cle)}`)) return enImage(`maison/${fichierLit(a.cle)}`);
   if (OBJETS[a.cle] && ['meuble', 'jouet', 'ustensile'].includes(a.type)) return mini(OBJETS[a.cle].boite, OBJETS[a.cle].dessin);
   if (a.type === 'animal') {
     const img = image(`animaux/${a.cle}`);
@@ -433,8 +472,11 @@ export function apercu(a, profil) {
     for (const [de, vers] of Object.entries(an.couleurs ?? {})) d = d.replaceAll(de, vers);
     return mini(o.boite, d + (an.taches ?? ''));
   }
+  if (a.type === 'habit-animal' && image(`animaux/habit-${a.cle}`)) return mini('0 0 100 100', `<image href="${image(`animaux/habit-${a.cle}`)}" width="100" height="100"/>`);
   if (a.type === 'habit-animal') return mini(OBJETS.chien.boite, OBJETS.chien.dessin + habitAnimal('chien', a.cle));
   if (a.type === 'acc-animal') {
+    const img = image(`animaux/acc-${a.cle}`);
+    if (img) return mini('0 0 100 100', `<image href="${img}" width="100" height="100"/>`);
     if (a.cle === 'griffoir') return mini('740 350 60 162', DESSINS_ACC.griffoir());
     if (a.cle === 'laisse') return mini('14 292 40 128', DESSINS_ACC.laisse());
     // cadrage serré de chaque accessoire, dessiné au milieu (100) du bas (100) d'une place d'animal

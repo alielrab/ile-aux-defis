@@ -3,9 +3,9 @@
 // 2. Lance : node images/preparer.mjs
 // Chaque image est réduite à la taille de images/liste.csv et convertie en WebP (avec ffmpeg), puis images/liste.js
 // est réécrit : c'est la liste des images que l'app utilise à la place de ses dessins, et qu'elle garde hors ligne.
-// shortcut: les marges vides autour du sujet ne sont pas rognées, à faire si les sujets paraissent trop petits.
+// Un voile presque transparent autour du sujet est effacé, les marges vides sont rognées, et une image n'est jamais agrandie.
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync, existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -17,11 +17,15 @@ for (const f of fichiers('images/originaux', /\.(png|jpe?g|webp)$/i)) {
   const cible = `images/${f.replace(/\.\w+$/, '')}.webp`, taille = tailles[cible];
   if (!taille) { console.log(`✖ ${f} : ce nom n'est pas dans images/liste.csv, image ignorée`); continue; }
   mkdirSync(dirname(cible), { recursive: true });
+  // le cadre du sujet, d'après la transparence (rien si l'image n'a pas de fond transparent)
+  const detecte = spawnSync('ffmpeg', ['-hide_banner', '-i', `images/originaux/${f}`, '-vf', 'alphaextract,bbox=min_val=56', '-frames:v', '1', '-f', 'null', '-'], { encoding: 'utf8' });
+  const rogner = /crop=[\d:]+/.exec(detecte.stderr ?? '')?.[0];
+  const [l, h] = taille.split('x');
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `images/originaux/${f}`,
-    '-vf', `scale=${taille.replace('x', ':')}:force_original_aspect_ratio=decrease`, '-c:v', 'libwebp', '-quality', '80', cible]);
-  console.log(`✔ ${cible} (${taille}, ${Math.round(statSync(cible).size / 1024)} Ko)`);
+    '-vf', `${rogner ? `format=rgba,lut=a='if(lt(val,56),0,val)',${rogner},` : ''}scale='min(${l},iw)':'min(${h},ih)':force_original_aspect_ratio=decrease`, '-c:v', 'libwebp', '-quality', '80', cible]);
+  console.log(`✔ ${cible} (au plus ${taille}, ${Math.round(statSync(cible).size / 1024)} Ko)`);
 }
 
-const pretes = fichiers('images', /\.webp$/).filter((f) => !f.startsWith('originaux/')).map((f) => `images/${f}`).sort();
+const pretes = fichiers('images', /\.webp$/).map((f) => `images/${f}`).filter((f) => tailles[f]).sort(); // seulement les noms de la liste : un dossier déposé à côté ne compte pas
 writeFileSync('images/liste.js', `// Fabriqué par images/preparer.mjs : ne pas modifier à la main.\nself.IMAGES = ${JSON.stringify(pretes, null, 1)};\n`);
 console.log(`${pretes.length} image(s) dans l'app, ${Math.round(pretes.reduce((s, f) => s + statSync(f).size, 0) / 1024)} Ko en tout. Pense à changer VERSION dans sw.js avant la mise en ligne.`);

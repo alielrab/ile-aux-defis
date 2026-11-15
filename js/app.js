@@ -9,7 +9,7 @@ import {
 } from './avatar.js';
 import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
-import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, HABITS_ANIMAUX, aConstruire } from './catalogue.js';
+import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, sePorte, HABITS_ANIMAUX, aConstruire } from './catalogue.js';
 import { dessinerPiece, apercu } from './maison.js';
 import { BONUS_RECETTE_REELLE, ETOILES_ATLAS } from './reglages.js';
 import { melanger, nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
@@ -342,7 +342,7 @@ function carteArticle(a) {
     b.setAttribute('aria-label', confirmer ? `Oui, acheter ${a.nom} pour ${a.prix} étoiles` : `Acheter ${a.nom} pour ${a.prix} étoiles`);
   }
   if (aMoi && a.type === 'habit-animal') { // il se met sur un animal, dans la maison
-    b.textContent = 'À toi ✓';
+    b.textContent = sePorte(a.cle) ? 'À toi ✓' : 'Dans ta collection ✓';
     b.disabled = true;
   }
   carte.classList.toggle('a-moi', aMoi);
@@ -354,7 +354,7 @@ function carteArticle(a) {
     const soigner = gros('🩺', () => ouvrirVeto(a.id), 'petit');
     soigner.setAttribute('aria-label', `Soigner ${joueuse.noms?.[a.id] ?? a.nom.toLowerCase()} chez le vétérinaire`);
     outils.append(soigner);
-    const habits = Object.keys(HABITS_ANIMAUX).some((k) => joueuse.objets.includes(`habit-animal:${k}`));
+    const habits = Object.keys(HABITS_ANIMAUX).some((k) => sePorte(k) && joueuse.objets.includes(`habit-animal:${k}`));
     if (habits && a.cle !== 'poisson') {
       const habiller = gros('👕', () => {
         const h = changerHabit(joueuse, a.id);

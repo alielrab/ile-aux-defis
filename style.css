@@ -267,12 +267,12 @@ select {
 .piece-svg { display: block; width: 100%; max-width: calc(45dvh * 800 / 520); height: auto; /* la boutique reste visible sous la pièce */
   border-radius: var(--rayon); box-shadow: 0 6px 0 rgb(0 0 0 / 0.12); background: #fbeedd; }
 .onglets { width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: 0.5rem; }
-.onglets button { min-height: var(--toucher); border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.6); }
+.onglets button { min-height: var(--toucher); border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.9); }
 .onglets button[aria-pressed="true"] { background: var(--sable); box-shadow: inset 0 0 0 3px var(--accent); }
 .info { min-height: 1.4em; color: #fff; text-shadow: 0 2px 0 var(--mer-fonce); }
 .rayon { width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); gap: 0.75rem; }
 .rayon h2 { grid-column: 1 / -1; margin: 0.75rem 0 0; color: #fff; text-shadow: 0 2px 0 var(--mer-fonce); font-size: 1.2em; }
-.article { display: grid; grid-template-rows: auto 1fr auto; gap: 0.4rem; justify-items: center; padding: 0.6rem; border-radius: var(--rayon); background: var(--sable); box-shadow: 0 4px 0 rgb(0 0 0 / 0.12); }
+.article { min-width: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 0.4rem; justify-items: center; padding: 0.6rem; border-radius: var(--rayon); background: var(--sable); box-shadow: 0 4px 0 rgb(0 0 0 / 0.12); }
 .apercu-article { width: 100%; aspect-ratio: 1; display: grid; place-items: center; background: #fff; border-radius: 14px; }
 .apercu-article svg { width: 85%; height: 85%; }
 .article .nom { font-size: 0.85em; text-align: center; }
@@ -513,7 +513,7 @@ select {
   .legende span { display: inline-block; width: 1.2em; height: 1.2em; border: 1px solid #000; vertical-align: middle; margin-right: 0.3em; }
 }
 
-.outils-animal { display: flex; gap: 4px; justify-content: center; }
+.outils-animal { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
 #lieu-message .texte-bulle { max-width: 14rem; margin: 0.3rem; }
 
 /* Musée des dinosaures */
@@ -684,3 +684,8 @@ select {
 .scene-grue { width: min(100%, 46dvh); aspect-ratio: 400 / 520; padding: 0; border: 0; border-radius: 18px; overflow: hidden; background: linear-gradient(#bfe6ff, #eef9ff); touch-action: none; user-select: none; cursor: pointer; }
 .scene-grue svg { display: block; width: 100%; height: 100%; }
 .score-grue { margin: 0; font-weight: 800; text-align: center; }
+
+/* Nouveau style : un cadre de feuilles derrière les magasins et la maison (images/interface) */
+[data-ecran="lieu"]::before, [data-ecran="lieu"]::after { content: ""; position: fixed; left: 0; right: 0; z-index: -1; pointer-events: none; background-repeat: no-repeat; background-size: 100% 100%; }
+[data-ecran="lieu"]::before { top: 0; height: clamp(40px, 10vw, 120px); background-image: url(images/interface/feuillage-haut.webp); }
+[data-ecran="lieu"]::after { bottom: 0; height: clamp(36px, 8vw, 96px); background-image: url(images/interface/feuillage-bas.webp); }
