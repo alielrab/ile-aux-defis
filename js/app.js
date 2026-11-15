@@ -28,11 +28,12 @@ import * as dinos from './jeux/dinos.js';
 import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
 import * as route from './jeux/route.js';
+import * as musique from './jeux/musique.js';
 import * as veto from './jeux/veto.js';
 import * as fractions from './jeux/fractions.js';
 import * as memory from './jeux/memory.js';
 import * as voixParents from './enregistrements.js';
-import { parler, taire, bip, fanfare, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises } from './voix.js';
+import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises } from './voix.js';
 import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
 
@@ -230,6 +231,7 @@ function entrerLieu(cible) {
   if (id === 'musee') return ouvrirMusee();
   if (id === 'aeroport') return ouvrirPasseport();
   if (id === 'urgences') return ouvrirUrgences();
+  if (id === 'musique') return ouvrirMusique();
   if (id === 'veto') return ouvrirVeto();
   if (id === 'memory') return ouvrirMemory();
   if (id === 'cuisine') return ouvrirRestaurant();
@@ -1704,6 +1706,39 @@ function voyager(cle) {
   if (avion) avion.style.transform = `translate(${x}px, ${y}px)`;
   parler(`En route pour ${passeport.pays(cle).nom.replace(/^La |^Le |^L’/, (m) => m.toLowerCase())} !`);
   setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
+}
+
+// La salle de musique : une grille (une ligne par note, une colonne par temps). La mélodie est gardée dans le profil.
+function ouvrirMusique() {
+  etoilesJoueuse();
+  const v = $('#musique-vue');
+  const melodie = () => joueuse.melodie ?? musique.melodieVide();
+  const dessiner = () => v.replaceChildren(
+    el('div', { className: 'grille-musique carte', role: 'group', ariaLabel: 'La grille des notes' },
+      ...musique.NOTES.map((n, note) => [el('span', { className: 'nom-note', textContent: n.nom }), ...melodie().map((choisie, temps) => {
+        const b = el('button', { className: 'case-note', ariaLabel: `${n.nom}, temps ${temps + 1}`, ariaPressed: String(choisie === note) });
+        b.dataset.temps = temps;
+        if (choisie === note) b.style.background = n.couleur;
+        b.addEventListener('click', () => {
+          joueuse.melodie = musique.basculer(melodie(), temps, note);
+          enregistrer();
+          taire();
+          if (joueuse.melodie[temps] === note) notes([[n.frequence, 0, 0.5]]);
+          dessiner();
+        });
+        return b;
+      })]).reverse().flat()), // la note la plus aiguë en haut
+    gros('▶️ Écouter ma mélodie', () => {
+      taire();
+      notes(musique.aJouer(melodie()));
+      for (let t = 0; t <= musique.TEMPS; t++) { // la colonne jouée s'allume
+        setTimeout(() => { for (const c of v.querySelectorAll('.case-note')) c.classList.toggle('joue', Number(c.dataset.temps) === t); }, t * musique.DUREE * 1000);
+      }
+    }),
+    gros('🗑️ Tout effacer', () => { joueuse.melodie = musique.melodieVide(); enregistrer(); dessiner(); }, 'gros secondaire'));
+  dessiner();
+  montrer('musique');
+  parler('La salle de musique. Touche les cases pour poser des notes, puis écoute ta mélodie !', { ton: 1.1 });
 }
 
 // Les numéros d'urgence : découvrir, puis « Qui appeler ? »

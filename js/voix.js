@@ -58,7 +58,7 @@ export async function attendreSilence(max = 20000) {
 
 let audio;
 // Des notes douces, comme un xylophone : [fréquence, début (s), durée (s)]
-function notes(liste, type = 'triangle') {
+export function notes(liste, type = 'triangle') {
   try {
     audio ??= new AudioContext();
     const t0 = audio.currentTime;

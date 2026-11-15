@@ -4,6 +4,7 @@ import * as dinos from '../js/jeux/dinos.js';
 import * as passeport from '../js/jeux/passeport.js';
 import * as urgences from '../js/jeux/urgences.js';
 import * as route from '../js/jeux/route.js';
+import * as musique from '../js/jeux/musique.js';
 import { nouvellePartie } from '../js/partie.js';
 import { graine } from './hasard.js';
 
@@ -83,4 +84,17 @@ test('code de la route : 10 questions différentes, 4 choix, une image ; les que
       }
     }
   }
+});
+
+test('musique : 8 notes du grave à l’aigu ; une note par temps, toucher encore l’enlève ; les silences ne sont pas joués', () => {
+  assert.equal(musique.NOTES.length, 8);
+  assert.ok(musique.NOTES.every((n, i) => i === 0 || n.frequence > musique.NOTES[i - 1].frequence));
+  let m = musique.melodieVide();
+  m = musique.basculer(m, 0, 0);
+  m = musique.basculer(m, 2, 4);
+  m = musique.basculer(m, 2, 7); // remplace le sol
+  assert.deepEqual(m, [0, null, 7, null, null, null, null, null]);
+  assert.deepEqual(musique.aJouer(m).map(([f, debut]) => [f, debut]), [[262, 0], [523, 2 * musique.DUREE]]);
+  assert.deepEqual(musique.basculer(m, 0, 0)[0], null);
+  assert.deepEqual(musique.aJouer([99, 'x', null]), []); // un enregistrement abîmé ne casse rien
 });

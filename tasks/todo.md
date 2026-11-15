@@ -72,3 +72,4 @@
 - [x] Musée des dinosaures (16, puzzle + fiche + quiz), passeport du monde (20 pays, avion, tampons), île de la sécurité avec les numéros d’urgence (144, 117, 118)
 - [x] Code de la route (île de la sécurité) : 24 questions à pied, à vélo, panneaux, en voiture — à faire relire
 - [x] Jardin (nouvelle pièce, 7 objets), 4 papiers peints, 5 animaux, 5 vêtements d'animaux, 8 tenues, 5 chaussures, 3 chapeaux ; voix au choix et vitesse (espace parents), sons plus doux, fanfare, confettis, écrans en fondu
+- [x] Salle de musique : grille de 8 notes sur 8 temps, mélodie gardée dans le profil

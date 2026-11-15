@@ -53,7 +53,7 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
 - **Les îles** :
   - **L'île du village** (ouverte dès le départ) : les maisons des enfants (sa tête à la porte, « Ma maison » ou le prénom), le coiffeur, la boutique, le magasin de meubles, le refuge, le marché, et le chantier (bientôt).
   - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge, le musée des dinosaures, l'aéroport (le passeport du monde).
-  - **L'île des créateurs** : le restaurant ; l'atelier de peinture, l'atelier BD et la salle de musique (bientôt).
+  - **L'île des créateurs** : le restaurant, l'atelier de peinture, l'atelier BD et la salle de musique.
   - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence et le code de la route.
   - **L'île du cœur** : la maison de la confiance et la météo des émotions (bientôt) ; le lieu de culte choisi par les parents (sinon, un grand arbre).
 - **Débloquer une île** : chaque enfant débloque les îles fermées avec ses propres étoiles. On touche une première fois (« Touche encore ! »), puis une deuxième pour payer.
@@ -303,5 +303,7 @@ export function question(niveau, aleatoire = Math.random) {
 **Code de la route** (`js/jeux/route.js`, île de la sécurité) — **à faire relire par un parent** :
 - 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
 - 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
+
+**Salle de musique** (`js/jeux/musique.js`, île des créateurs) : une grille de 8 notes (do à do aigu) sur 8 temps, une note par temps. Toucher une case pose la note et la joue ; « Écouter ma mélodie » la joue en allumant chaque colonne ; « Tout effacer ». La mélodie est gardée dans le profil (`melodie`). Création libre : pas d'étoiles.
 
 **La voix qui lit** (espace parents, `js/voix.js`) : choix de la voix parmi les voix françaises de l'appareil (sinon la meilleure trouvée) et de la vitesse (lente, normale, rapide), avec un bouton « Essayer ». Sons : deux notes douces pour juste ou à revoir, une petite fanfare à la fin d'une partie, des confettis pour un sans-faute.

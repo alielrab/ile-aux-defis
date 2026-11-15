@@ -673,3 +673,9 @@ select {
 .scores-memory .joueur1 { background: #ffe0ee; }
 .scores-memory .a-toi { border-color: #2b2b3a; }
 .message-memory:empty { display: none; }
+
+/* La salle de musique : une ligne par note, une colonne par temps */
+.grille-musique { width: min(100%, 66dvh); display: grid; grid-template-columns: auto repeat(8, minmax(0, 1fr)); gap: 5px; align-items: center; }
+.nom-note { font-weight: 800; text-align: right; padding-right: 0.3rem; }
+.case-note { aspect-ratio: 1; min-height: 0; padding: 0; border: 0; border-radius: 10px; background: #e9eef2; cursor: pointer; }
+.case-note.joue { outline: 4px solid var(--accent); }

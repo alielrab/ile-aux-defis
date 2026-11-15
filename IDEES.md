@@ -12,7 +12,6 @@
 | Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
 | Code avec un robot | Programmer un robot avec des flèches pour atteindre un but |
-| Compositeur de musique | Créer une mélodie sur une grille de notes |
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
