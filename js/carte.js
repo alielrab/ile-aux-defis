@@ -36,7 +36,7 @@ export const LIEUX = [
   { id: 'bd', ile: 'createurs', type: 'jeu', nom: "L'atelier BD", detail: 'inventer des bandes dessinées', ouvert: true, x: 230, y: 680 },
   { id: 'musique', ile: 'createurs', type: 'jeu', nom: 'La salle\nde musique', detail: 'composer des mélodies', ouvert: true, x: 570, y: 680 },
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)
-  { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: false, x: 230, y: 420 },
+  { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: true, x: 230, y: 420 },
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
 ];
 

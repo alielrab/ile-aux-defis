@@ -6,6 +6,7 @@ import * as urgences from '../js/jeux/urgences.js';
 import * as route from '../js/jeux/route.js';
 import * as musique from '../js/jeux/musique.js';
 import * as chantier from '../js/jeux/chantier.js';
+import * as confiance from '../js/jeux/confiance.js';
 import { nouvellePartie } from '../js/partie.js';
 import { graine } from './hasard.js';
 
@@ -112,4 +113,28 @@ test('grue folle : plus lent et plus tolérant à 6 ans ; étoiles par étage, r
   assert.deepEqual(chantier.finir(ancien, 3), { gain: 1.5, record: true, construites: [] });
   assert.deepEqual(chantier.finir(ancien, 2).record, false);
   assert.deepEqual(Object.keys(chantier.HAUTEURS).sort(), ['jardin', 'jeux', 'salon']); // toutes les pièces à vendre
+});
+
+test('maison de la confiance, fait ou avis : 6 phrases amusantes puis 2 blessantes ; jamais « faux » ; rien de trop dur à 6 ans', () => {
+  assert.equal(confiance.PHRASES.filter((p) => p[1] === 'fait').length, confiance.PHRASES.filter((p) => p[1] === 'avis').length);
+  for (const age of [6, 9]) {
+    for (let g = 1; g < 10; g++) {
+      const q = confiance.tri(age, graine(g));
+      assert.equal(q.length, 8);
+      assert.deepEqual(q.map((x) => x.blessante), [false, false, false, false, false, false, true, true]);
+      assert.equal(new Set(q.map((x) => x.texte)).size, 8);
+      if (age === 6) assert.ok(q.every((x) => !/lunettes|de la classe/.test(x.texte)), 'les faits dits pour se moquer : 8 ans et plus');
+    }
+  }
+  const q = confiance.tri(9, graine(1))[0], autre = q.reponse === 'fait' ? 'avis' : 'fait';
+  assert.match(confiance.retour(q, q.reponse), /^Oui !/);
+  assert.match(confiance.retour(q, autre), /^C’est plutôt un (fait|avis)\./);
+  assert.ok(![confiance.DOUCEUR, ...confiance.BLESSANTES.map((b) => b[2])].some((t) => /faux|mauvaise réponse|perdu/i.test(t)));
+  const r = confiance.recre(graine(3));
+  assert.deepEqual(r.map((s) => s.seRepete), [false, false, true]); // la situation qui se répète vient en dernier
+  assert.match(confiance.quandCaSeRepete(9), /harcèlement/);
+  assert.doesNotMatch(confiance.quandCaSeRepete(6), /harcèlement/);
+  assert.equal(confiance.REACTIONS.length, 4);
+  assert.match(confiance.FIN, /147/);
+  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis']); // un thème à la fois, relu avant d'ouvrir
 });

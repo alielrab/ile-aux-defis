@@ -74,3 +74,4 @@
 - [x] Jardin (nouvelle pièce, 7 objets), 4 papiers peints, 5 animaux, 5 vêtements d'animaux, 8 tenues, 5 chaussures, 3 chapeaux ; voix au choix et vitesse (espace parents), sons plus doux, fanfare, confettis, écrans en fondu
 - [x] Salle de musique : grille de 8 notes sur 8 temps, mélodie gardée dans le profil
 - [x] Chantier : la grue folle (étoiles par étage, record, pièces achetées à construire avec une tour assez haute)
+- [x] Maison de la confiance : thème 1 « Fait ou avis ? » (tri, cour de récré, miroir), sans pénalité — à faire relire

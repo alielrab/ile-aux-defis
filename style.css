@@ -689,3 +689,12 @@ select {
 [data-ecran="lieu"]::before, [data-ecran="lieu"]::after { content: ""; position: fixed; left: 0; right: 0; z-index: -1; pointer-events: none; background-repeat: no-repeat; background-size: 100% 100%; }
 [data-ecran="lieu"]::before { top: 0; height: clamp(40px, 10vw, 120px); background-image: url(images/interface/feuillage-haut.webp); }
 [data-ecran="lieu"]::after { bottom: 0; height: clamp(36px, 8vw, 96px); background-image: url(images/interface/feuillage-bas.webp); }
+
+/* La maison de la confiance */
+.etape-confiance { margin: 0; color: #fff; font-weight: 800; text-shadow: 0 2px 0 var(--mer-fonce); }
+.phrase-confiance { margin: 0; font-size: clamp(1.3rem, 1rem + 2vw, 2rem); font-weight: 800; text-align: center; }
+.choix-confiance { width: 100%; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.choix-confiance .gros { text-align: left; font-size: 1rem; }
+.choix-confiance .bonne-idee { background: #c9efc4; box-shadow: inset 0 0 0 3px #1e8e3e; opacity: 1; }
+.miroir-confiance { width: min(44vw, 180px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #e8f6ff; box-shadow: 0 0 0 8px #d9b44a, 0 6px 0 8px rgb(0 0 0 / 0.12); }
+.miroir-confiance svg { width: 100%; height: 100%; }

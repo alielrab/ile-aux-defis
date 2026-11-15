@@ -55,7 +55,7 @@ Ordre de construction : profils → ile → un mini-jeu de bout en bout (étoile
   - **L'île du savoir** (ouverte dès le départ) : l'école, la bibliothèque, l'observatoire, l'hôpital, la tour de l'horloge, le musée des dinosaures, l'aéroport (le passeport du monde).
   - **L'île des créateurs** : le restaurant, l'atelier de peinture, l'atelier BD et la salle de musique.
   - **L'île de la sécurité** (ouverte à tous, prix 0) : les numéros d'urgence et le code de la route.
-  - **L'île du cœur** : la maison de la confiance et la météo des émotions (bientôt) ; le lieu de culte choisi par les parents (sinon, un grand arbre).
+  - **L'île du cœur** : la maison de la confiance et la météo des émotions ; le lieu de culte choisi par les parents (sinon, un grand arbre).
 - **Débloquer une île** : chaque enfant débloque les îles fermées avec ses propres étoiles. On touche une première fois (« Touche encore ! »), puis une deuxième pour payer.
   - Le prix est réglable dans `PRIX_ILES` (`js/reglages.js`), 20 étoiles par défaut. À 0, l'île est ouverte pour tout le monde.
   - Les îles débloquées sont gardées dans le profil (`iles`). Les anciens profils reçoivent une liste vide, et rien d'autre ne change. « Remettre à zéro » referme les îles.
@@ -303,6 +303,15 @@ export function question(niveau, aleatoire = Math.random) {
 **Code de la route** (`js/jeux/route.js`, île de la sécurité) — **à faire relire par un parent** :
 - 10 questions, 4 choix, une image et un « Le savais-tu ? » : à pied (s'arrêter, regarder, écouter, traverser ; passage jaune ; roues arrêtées ; bus ; nuit), à vélo et à trottinette (casque, bras tendu, freins), les panneaux, en voiture (ceinture, descendre côté trottoir).
 - 24 questions, dont 6 pour les 8 ans et plus (lumières du vélo, rouler à droite, marcher à gauche sans trottoir, panneaux).
+
+**La maison de la confiance** (`js/jeux/confiance.js`, île du cœur) — **à faire relire par un parent** :
+- Un thème à la fois ; les autres affichent « bientôt ». Aucune pénalité, jamais « faux » : une réponse à revoir donne une explication douce.
+- Étoiles (`ETOILES_CONFIANCE`, 3) quand on finit une étape, la première fois seulement, jamais pour une bonne réponse.
+- **Thème 1, « Fait ou avis ? »** (texte d'origine : `relecture/fait-ou-avis.md`) :
+  - *Je trie* : 8 phrases, 6 amusantes puis 2 blessantes (« Tu es moche » = un avis). Les deux faits dits pour se moquer (lunettes, taille) : 8 ans et plus.
+  - *Dans la cour de récré* : 3 situations, 4 bonnes réactions montrées à chaque fois. La situation qui se répète vient en dernier ; le mot « harcèlement » n'est dit qu'à 8 ans et plus.
+  - *Mon miroir* : l'enfant choisit des phrases vraies sur soi. Rien n'est enregistré.
+  - Message de fin avec le 147.
 
 **Le chantier : « La grue folle »** (`js/jeux/chantier.js`, île du village) :
 - Une grue balance un bloc ; on touche l'écran (ou Espace) pour le lâcher. Le bloc tient s'il tombe assez bien sur celui du dessous ; sinon la partie s'arrête. La grue accélère à chaque étage (jusqu'au double).

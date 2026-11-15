@@ -34,6 +34,9 @@ export const ETOILES_AUTRES_JEUX = [
 // L'île de la sécurité est ouverte à tous (0) : savoir appeler les secours ne doit pas dépendre des étoiles.
 export const PRIX_ILES = { createurs: 20, coeur: 20, securite: 0 };
 
+// Maison de la confiance : étoiles quand on finit une étape d'un thème, la première fois (jamais pour une bonne réponse).
+export const ETOILES_CONFIANCE = 3;
+
 // Atlas du corps (hôpital) : étoiles quand on a découvert toutes les fiches d'une page, la première fois.
 export const ETOILES_ATLAS = 3;
 
