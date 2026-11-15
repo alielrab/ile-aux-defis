@@ -225,8 +225,10 @@ const batimentImage = (fichier, x, y, cote) => {
 };
 
 // Les îles en image (images/ile/fond-<île>.webp) : où poser les bâtiments, en parts de l'image [x, y], dans l'ordre des lieux de l'île.
-// cote : la taille d'un bâtiment sur cette île. Une île sans emplacements ici garde son dessin (le village : 8 lieux et les maisons).
+// cote : la taille d'un bâtiment sur cette île. maisons : au village, les deux emplacements du milieu, pour les maisons des enfants.
 const EMPLACEMENTS = {
+  village: { cote: 122, places: [[0.5, 0.2], [0.294, 0.322], [0.706, 0.322], [0.244, 0.456], [0.75, 0.456], [0.206, 0.6], [0.775, 0.606], [0.494, 0.756]],
+    maisons: [[0.494, 0.487], [0.494, 0.625]] },
   savoir: { cote: 122, places: [[0.5, 0.215], [0.32, 0.355], [0.685, 0.355], [0.24, 0.52], [0.75, 0.52], [0.215, 0.657], [0.493, 0.7], [0.78, 0.657]] },
   createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657]] },
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
@@ -258,11 +260,18 @@ const RANGEE = { 1: [0, 1], 2: [160, 1], 3: [108, 0.8], 4: [84, 0.68] };
 const Y_MAISONS = 590;
 
 // Les maisons des enfants (île du village). Plus de 4 enfants : la maison de la joueuse et 3 autres.
-function maisons(profils, joueuse) {
+// centres : sur l'île en image, les deux emplacements du milieu [x, y] ; une ou deux maisons sur chacun
+function maisons(profils, joueuse, centres = null) {
   const visibles = profils.length <= 4 ? profils : [joueuse, ...profils.filter((p) => p.id !== joueuse.id).slice(0, 3)];
-  const [ecart, taille] = RANGEE[visibles.length] ?? [0, 1];
+  const n = visibles.length, rangee = RANGEE[n] ?? [0, 1];
+  const place = (i) => { // [x, y, écart entre maisons, taille]
+    if (!centres) return [400 + (i - (n - 1) / 2) * rangee[0], Y_MAISONS, ...rangee];
+    if (n <= 2) return [...centres[i], 0, 0.85]; // une maison par emplacement
+    const rang = Math.floor(i / 2), dansLeRang = rang ? n - 2 : 2;
+    return [centres[rang][0] + (i % 2 - (dansLeRang - 1) / 2) * 80, centres[rang][1], 80, 0.62];
+  };
   return visibles.map((p, i) => {
-    const x = 400 + (i - (visibles.length - 1) / 2) * ecart, y = Y_MAISONS, [toit, mur] = COULEURS_MAISONS[profils.indexOf(p) % COULEURS_MAISONS.length];
+    const [x, y, ecart, taille] = place(i), [toit, mur] = COULEURS_MAISONS[profils.indexOf(p) % COULEURS_MAISONS.length];
     const tete = dessinerAvatar(p.avatar, 'tete').replace('<svg ', `<svg x="${x - 24}" y="${y - 30}" width="48" height="48" `); // à sa porte
     const aElle = p.id === joueuse.id;
     return `<g class="lieu maison${aElle ? '' : ' autre'}" ${aElle ? `role="button" tabindex="0" data-lieu="maison" aria-label="${echapper(`Ma maison (${p.prenom})`)}"` : 'aria-hidden="true"'}>
@@ -306,7 +315,7 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
   ${palmier(92, 420, 0.7)}${palmier(718, 400, 0.7)}${palmier(110, 740, 0.7)}${palmier(690, 745, 0.7)}
   ${fleurs([[330, 380, '#ff7aa8'], [470, 385, '#ffd84a'], [255, 640, '#b06ae0'], [545, 640, '#ff7aa8'], [705, 480, '#b06ae0'], [95, 480, '#ffd84a']])}`}
   ${(fond ? [...lieux].reverse() : lieux).map(lieu).join('')/* sur une île en image, du bas vers le haut : le nom d'un lieu passe devant le toit du lieu d'en dessous */}
-  ${ileId === 'village' ? maisons(profils, joueuse) : ''}${ileId === 'coeur' && !famille ? arbre(ax, ay, fond ? 0.8 : 1.2) : ''}
+  ${ileId === 'village' ? maisons(profils, joueuse, fond ? e.maisons.map(surLeFond) : null) : ''}${ileId === 'coeur' && !famille ? arbre(ax, ay, fond ? 0.8 : 1.2) : ''}
   <g class="lieu port" role="button" tabindex="0" data-lieu="archipel" aria-label="Le bateau : aller vers une autre île">
     <title>Le bateau</title><g transform="translate(95 850)">${voilier(1.3)}</g>${etiquette(95, 890, "L'archipel", 24)}</g>
 </svg>`;

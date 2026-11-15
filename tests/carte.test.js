@@ -109,7 +109,7 @@ test('nouveau style : un bâtiment dont l’image est prête est montré en imag
   } finally { delete globalThis.IMAGES; }
 });
 
-test('nouveau style : sur une île en image, les lieux se posent sur ses emplacements ; le village garde son dessin', async () => {
+test('nouveau style : sur une île en image, les lieux et les maisons se posent sur ses emplacements', async () => {
   const { dessinerIle, dessinerArchipel } = await import('../js/carte.js');
   const j = { id: 'a', prenom: 'Lina', age: 8, avatar: (await import('../js/avatar.js')).AVATAR_PAR_DEFAUT, iles: ['coeur'] };
   const avant = dessinerIle('savoir', [j], j);
@@ -122,7 +122,13 @@ test('nouveau style : sur une île en image, les lieux se posent sur ses emplace
     assert.ok(!savoir.includes('NaN') && !savoir.includes('undefined'));
     const coeur = dessinerIle('coeur', [j], j); // 2 lieux et le grand arbre, pour 4 emplacements
     assert.ok(coeur.includes('fond-coeur.webp') && !coeur.includes('NaN'));
-    assert.ok(!dessinerIle('village', [j], j).includes('fond-village'), 'le village n’a pas assez d’emplacements : il garde son dessin');
+    for (const n of [1, 2, 3, 4, 6]) { // le village : 8 lieux sur le tour, les maisons sur les deux emplacements du milieu
+      const enfants = [j, ...[...Array(n - 1)].map((_, i) => ({ ...j, id: `b${i}`, prenom: `E${i}` }))];
+      const village = dessinerIle('village', enfants, j);
+      assert.ok(village.includes('fond-village.webp') && !village.includes('NaN') && !village.includes('undefined'), `${n} enfants`);
+      assert.equal(village.match(/class="lieu maison/g).length, Math.min(n, 4));
+      assert.equal(village.match(/data-lieu="/g).length, 10); // 8 lieux, ma maison, le bateau
+    }
     const archipel = dessinerArchipel(j);
     assert.equal(archipel.match(/images\/ile\/fond-/g).length, 3); // savoir, cœur et village en image sur la carte de l'archipel
   } finally { delete globalThis.IMAGES; }

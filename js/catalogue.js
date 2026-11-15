@@ -74,6 +74,7 @@ export const PAPIERS = {
   coeurs: { nom: 'Petits cœurs', prix: 12 },
   nuages: { nom: 'Nuages', prix: 12 },
   'arc-en-ciel': { nom: 'Arc-en-ciel', prix: 16 },
+  jungle: { nom: 'Jungle', prix: 14 },
 };
 // Objets de cuisine : pas à vendre, on les gagne en faisant une recette du restaurant pour de vrai, avec un parent.
 export const USTENSILES = {
