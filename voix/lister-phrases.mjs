@@ -123,6 +123,9 @@ Object.entries(urgences.REPONSES).forEach(([k, t]) => ajouter(`urgences.reponse.
 urgences.SITUATIONS.forEach(([t, , , s], i) => { ajouter(`urgences.situation${i + 1}`, "Numéros d'urgence (à faire relire)", t); ajouter(`urgences.situation${i + 1}.savais`, "Numéros d'urgence (à faire relire)", `Le savais-tu ? ${s}`); });
 banque('urgences.quiz', "Numéros d'urgence (à faire relire)", urgences.QUESTIONS);
 banque('route.quiz', 'Code de la route (à faire relire)', route.QUESTIONS);
+const tri = await js('jeux/tri.js');
+tri.DECHETS.forEach(([d, , s], i) => { ajouter(`tri.${i + 1}.question`, 'Centre de tri (à faire relire)', `Où va ${d} ?`); ajouter(`tri.${i + 1}.savais`, 'Centre de tri (à faire relire)', `Le savais-tu ? ${s}`); });
+tri.POUBELLES.forEach((p, i) => ajouter(`tri.poubelle${i + 1}`, 'Centre de tri (à faire relire)', p));
 for (const [k, f] of Object.entries(veto.FICHES)) {
   ajouter(`veto.${k}.nom`, 'Vétérinaire', f.nom);
   ajouter(`veto.${k}.besoins`, 'Vétérinaire', f.besoins);

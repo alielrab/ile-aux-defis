@@ -4130,6 +4130,58 @@ route.quiz.24.reponse2;Code de la route (à faire relire);Du côté de la route
 route.quiz.24.reponse3;Code de la route (à faire relire);Par le coffre
 route.quiz.24.reponse4;Code de la route (à faire relire);Par la fenêtre
 route.quiz.24.savais;Code de la route (à faire relire);Le savais-tu ? Côté trottoir, aucune voiture ne peut passer près de toi.
+tri.1.question;Centre de tri (à faire relire);Où va la bouteille de vin vide ?
+tri.1.savais;Centre de tri (à faire relire);Le savais-tu ? Le verre se refond sans fin : une vieille bouteille peut redevenir une bouteille neuve.
+tri.2.question;Centre de tri (à faire relire);Où va le pot de confiture vide ?
+tri.2.savais;Centre de tri (à faire relire);Le savais-tu ? On enlève d’abord le couvercle en métal : lui va avec l’alu et le fer-blanc.
+tri.3.question;Centre de tri (à faire relire);Où va la bouteille d’eau en plastique PET ?
+tri.3.savais;Centre de tri (à faire relire);Le savais-tu ? On rapporte les bouteilles PET au magasin. Avec, on fabrique de nouvelles bouteilles… et même des pulls polaires !
+tri.4.question;Centre de tri (à faire relire);Où va le journal ?
+tri.4.savais;Centre de tri (à faire relire);Le savais-tu ? Avec le vieux papier, on fabrique du papier neuf, et on coupe moins d’arbres.
+tri.5.question;Centre de tri (à faire relire);Où va la boîte en carton ?
+tri.5.savais;Centre de tri (à faire relire);Le savais-tu ? On l’aplatit avant de la jeter : elle prend beaucoup moins de place.
+tri.6.question;Centre de tri (à faire relire);Où va le vieux cahier ?
+tri.6.savais;Centre de tri (à faire relire);Le savais-tu ? Le papier peut être recyclé plusieurs fois avant que ses fibres deviennent trop courtes.
+tri.7.question;Centre de tri (à faire relire);Où va la boîte de conserve vide ?
+tri.7.savais;Centre de tri (à faire relire);Le savais-tu ? Le fer-blanc est attiré par un aimant : c’est comme ça qu’on le sépare de l’alu au centre de tri.
+tri.8.question;Centre de tri (à faire relire);Où va la canette de boisson ?
+tri.8.savais;Centre de tri (à faire relire);Le savais-tu ? Une canette recyclée peut redevenir une canette en quelques semaines.
+tri.9.question;Centre de tri (à faire relire);Où va le trognon de pomme ?
+tri.9.savais;Centre de tri (à faire relire);Le savais-tu ? Dans le compost, les petites bêtes et les vers transforment les restes en terre pour le jardin.
+tri.10.question;Centre de tri (à faire relire);Où va la peau de banane ?
+tri.10.savais;Centre de tri (à faire relire);Le savais-tu ? Les épluchures deviennent du compost, un très bon engrais pour les plantes.
+tri.11.question;Centre de tri (à faire relire);Où va les feuilles mortes ?
+tri.11.savais;Centre de tri (à faire relire);Le savais-tu ? Les feuilles mortes nourrissent la terre : dans la forêt, personne ne les ramasse !
+tri.12.question;Centre de tri (à faire relire);Où va le papier de bonbon ?
+tri.12.savais;Centre de tri (à faire relire);Le savais-tu ? Les emballages sales ou mélangés ne se recyclent pas : ils vont dans le sac poubelle.
+tri.13.question;Centre de tri (à faire relire);Où va le mouchoir usagé ?
+tri.13.savais;Centre de tri (à faire relire);Le savais-tu ? Un mouchoir sale ne va pas au papier : il va dans le sac poubelle.
+tri.14.question;Centre de tri (à faire relire);Où va la pile usagée ?
+tri.14.savais;Centre de tri (à faire relire);Le savais-tu ? Les piles contiennent des produits dangereux pour la nature : on les rapporte dans la boîte à piles du magasin.
+tri.15.question;Centre de tri (à faire relire);Où va le t-shirt devenu trop petit ?
+tri.15.savais;Centre de tri (à faire relire);Le savais-tu ? Les habits en bon état servent encore à d’autres personnes. Les autres deviennent des chiffons.
+tri.16.question;Centre de tri (à faire relire);Où va les baskets trop petites ?
+tri.16.savais;Centre de tri (à faire relire);Le savais-tu ? Les chaussures vont aussi au conteneur à habits, attachées par paires.
+tri.17.question;Centre de tri (à faire relire);Où va l’ampoule qui ne marche plus ?
+tri.17.savais;Centre de tri (à faire relire);Le savais-tu ? Les ampoules basse consommation et LED contiennent des matières à récupérer : on les rapporte au magasin.
+tri.18.question;Centre de tri (à faire relire);Où va le vieux téléphone ?
+tri.18.savais;Centre de tri (à faire relire);Le savais-tu ? Un téléphone contient un peu d’or et d’argent ! Tout magasin qui en vend doit reprendre les vieux appareils.
+tri.19.question;Centre de tri (à faire relire);Où va le pot de yaourt vide ?
+tri.19.savais;Centre de tri (à faire relire);Le savais-tu ? Dans beaucoup de communes, les pots de yaourt vont au sac poubelle. Certaines ont une collecte des plastiques : renseigne-toi !
+tri.20.question;Centre de tri (à faire relire);Où va la boîte à pizza grasse ?
+tri.20.savais;Centre de tri (à faire relire);Le savais-tu ? Le carton plein de gras abîme le papier recyclé : une boîte à pizza sale va dans le sac poubelle.
+tri.21.question;Centre de tri (à faire relire);Où va la bouteille d’huile en verre ?
+tri.21.savais;Centre de tri (à faire relire);Le savais-tu ? Au conteneur, on trie le verre par couleur : blanc, brun et vert.
+tri.22.question;Centre de tri (à faire relire);Où va les coquilles d’œufs ?
+tri.22.savais;Centre de tri (à faire relire);Le savais-tu ? Les coquilles d’œufs apportent du calcium à la terre du jardin.
+tri.poubelle1;Centre de tri (à faire relire);Le verre
+tri.poubelle2;Centre de tri (à faire relire);Le PET
+tri.poubelle3;Centre de tri (à faire relire);Le papier et le carton
+tri.poubelle4;Centre de tri (à faire relire);L’alu et le fer-blanc
+tri.poubelle5;Centre de tri (à faire relire);Le compost
+tri.poubelle6;Centre de tri (à faire relire);Le sac poubelle
+tri.poubelle7;Centre de tri (à faire relire);Le retour au magasin
+tri.poubelle8;Centre de tri (à faire relire);Le conteneur à habits
 veto.chien.nom;Vétérinaire;Le chien
 veto.chien.besoins;Vétérinaire;Le chien a besoin de croquettes pour chien, d’eau fraîche tous les jours, et surtout de promenades : il aime courir et jouer.
 veto.chien.repas;Vétérinaire;Des croquettes pour chien

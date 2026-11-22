@@ -28,6 +28,7 @@ import * as dinos from './jeux/dinos.js';
 import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
 import * as route from './jeux/route.js';
+import * as tri from './jeux/tri.js';
 import * as musique from './jeux/musique.js';
 import * as chantier from './jeux/chantier.js';
 import * as confiance from './jeux/confiance.js';
@@ -477,7 +478,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -490,6 +491,7 @@ const PERSONNAGES = {
   marche: { peau: 'brune', yeux: 'marron', coiffure: 'chignon', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
   emotions: { peau: 'doree', yeux: 'verts', coiffure: 'longs', cheveux: 'roux', tenue: 'pull-violet', accessoires: [] },
   veto: { peau: 'claire', yeux: 'marron', coiffure: 'queue', cheveux: 'chatain', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
+  tri: { peau: 'brune', yeux: 'noisette', coiffure: 'tresses', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
   fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
@@ -557,7 +559,7 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
-  } else if (jeu === 'route') {
+  } else if (jeu === 'route' || jeu === 'tri') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'veto') {

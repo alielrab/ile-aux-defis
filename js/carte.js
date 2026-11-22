@@ -31,6 +31,7 @@ export const LIEUX = [
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
   { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: true, x: 540, y: 440 },
+  { id: 'tri', ile: 'securite', type: 'jeu', nom: 'Le centre\nde tri', detail: 'la bonne poubelle', ouvert: true, x: 400, y: 720 },
   // L'île des créateurs
   { id: 'cuisine', ile: 'createurs', type: 'jeu', nom: 'Le\nrestaurant', detail: 'la cuisine de l’île', ouvert: true, x: 230, y: 400 },
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
@@ -151,6 +152,9 @@ const BATIMENTS = {
     <rect x="50" y="-120" width="8" height="104" fill="#555"/><rect x="40" y="-150" width="28" height="64" rx="6" fill="#2b2b3a"/>
     <circle cx="54" cy="-138" r="7" fill="#e05252"/><circle cx="54" cy="-118" r="7" fill="#f2c230"/><circle cx="54" cy="-98" r="7" fill="#5cb85c"/>
     <circle cx="-40" cy="-60" r="26" fill="#2f6fd0" stroke="#fff" stroke-width="4"/><path d="M-50 -48 l8 -16 l6 10 l6 -12" stroke="#fff" stroke-width="4" fill="none"/>`, 0.85],
+  tri: [`<rect x="-80" y="-60" width="160" height="60" fill="#e8f0e0"/><path d="M-86 -60 H86 L70 -84 H-70Z" fill="#3f9a5a"/>
+    ${[['#3a8f4a', -62], ['#3a6fd0', -22], ['#f2c230', 18], ['#8a5a3a', 52]].map(([c, x]) => `<rect x="${x}" y="-40" width="30" height="40" rx="4" fill="${c}"/><rect x="${x - 2}" y="-46" width="34" height="8" rx="3" fill="${c}"/>`).join('')}
+    <text x="-16" y="-92" font-size="30">♻️</text>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}

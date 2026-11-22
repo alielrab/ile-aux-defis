@@ -5,6 +5,7 @@ import * as passeport from '../js/jeux/passeport.js';
 import * as urgences from '../js/jeux/urgences.js';
 import * as route from '../js/jeux/route.js';
 import * as musique from '../js/jeux/musique.js';
+import * as tri from '../js/jeux/tri.js';
 import * as chantier from '../js/jeux/chantier.js';
 import * as confiance from '../js/jeux/confiance.js';
 import { nouvellePartie } from '../js/partie.js';
@@ -69,6 +70,22 @@ test('urgences : 144, 117, 118 ; des situations pour chaque numéro et des cas q
     }
   }
   assert.ok(!urgences.SITUATIONS.some(([t]) => /mort|sang|tué|cadavre/i.test(t)), 'jamais effrayant');
+});
+
+test('centre de tri : 10 déchets différents, 4 poubelles dont la bonne ; les déchets des grands seulement dès 8 ans', () => {
+  for (const d of tri.DECHETS) assert.ok(tri.POUBELLES.includes(d[1]) && d[2] && d[3], d[0]);
+  const grands = new Set(tri.DECHETS.filter((d) => d[4]).map((d) => `Où va ${d[0]} ?`));
+  for (const age of [6, 9]) {
+    for (let g = 1; g < 10; g++) {
+      const { questions } = nouvellePartie(tri.question, { age }, graine(g));
+      assert.equal(new Set(questions.map((q) => q.texte)).size, 10);
+      for (const q of questions) {
+        assert.equal(new Set(q.choix).size, 4);
+        assert.ok(q.choix.includes(q.reponse) && q.savaisTu && q.image, q.titre);
+        if (age === 6) assert.ok(!grands.has(q.texte), q.titre);
+      }
+    }
+  }
 });
 
 test('code de la route : 10 questions différentes, 4 choix, une image ; les questions des grands seulement dès 8 ans', () => {

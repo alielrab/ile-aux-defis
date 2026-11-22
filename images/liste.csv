@@ -124,6 +124,7 @@
 3;images/ile/aeroport.webp;512x512;oui;Bâtiment : L'aéroport (le passeport du monde)
 3;images/ile/urgences.webp;512x512;oui;Bâtiment : Les numéros d’urgence (144, 117, 118)
 3;images/ile/route.webp;512x512;oui;Bâtiment : Le code de la route (piétons et vélos)
+3;images/ile/tri.webp;512x512;oui;Bâtiment : Le centre de tri (la bonne poubelle)
 3;images/ile/cuisine.webp;512x512;oui;Bâtiment : Le restaurant (la cuisine de l’île)
 3;images/ile/peinture.webp;512x512;oui;Bâtiment : L'atelier de peinture (colorier et peindre)
 3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
@@ -156,6 +157,7 @@
 4;images/decors/aeroport.webp;1280x832;non;Intérieur : L'aéroport, vide au milieu
 4;images/decors/urgences.webp;1280x832;non;Intérieur : Les numéros d’urgence, vide au milieu
 4;images/decors/route.webp;1280x832;non;Intérieur : Le code de la route, vide au milieu
+4;images/decors/tri.webp;1280x832;non;Intérieur : Le centre de tri, vide au milieu
 4;images/decors/emotions.webp;1280x832;non;Intérieur : La météo des émotions, vide au milieu
 4;images/decors/veto.webp;1280x832;non;Intérieur : Le vétérinaire, vide au milieu
 4;images/decors/fractions.webp;1280x832;non;Intérieur : La pizzeria, vide au milieu

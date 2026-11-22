@@ -16,7 +16,6 @@
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
 | Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
-| Centre de tri | Trier les déchets dans la bonne poubelle (verre, papier, PET, compost…) |
 | Le glacier de la plage | Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
 | Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
@@ -56,6 +55,7 @@ Remplacer la voix de la tablette par des fichiers audio pré-enregistrés pour l
 ## Fait (2026-11-22)
 - **Le calendrier de l'Avent** : bouton 🎄 en haut de l'île, en décembre seulement ; 24 cases (« Le savais-tu ? » sur l'hiver ou petit défi à faire en vrai), 2 étoiles par case et 5 le 24, rattrapage possible des jours oubliés (`js/jeux/avent.js`).
 - **Les mots de voyage** : chaque tampon du passeport débloque 6 mots dans la langue du pays (bonjour, merci, au revoir, oui, non, s'il te plaît), avec la prononciation « à la française » et un 🔊 (voix de la langue si la tablette l'a, sinon la prononciation lue en français). Le livret compte les mots appris (`MOTS` dans `js/jeux/passeport.js`).
+- **Le centre de tri** (île de la sécurité) : 22 déchets à mettre dans la bonne poubelle parmi 8 (verre, PET, papier et carton, alu et fer-blanc, compost, sac poubelle, retour au magasin, habits), 6 réservés aux 8 ans et plus (`js/jeux/tri.js`, à faire relire : les règles varient selon les communes).
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).

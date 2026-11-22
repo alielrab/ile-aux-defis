@@ -35,7 +35,7 @@ for (const k of new Set(Object.values(CROYANCES).map((c) => c.contenu ?? c.lieu)
 for (const k of ['bateau', 'palmier']) ajouter(3, `ile/${k}`, '256x256', `Décoration : ${k}`);
 
 // Étape 4 : l'intérieur des lieux (derrière les questions et dans les magasins) et leur personnage
-const DECORS = ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'cuisine', 'marche', 'musee', 'aeroport', 'urgences', 'route', 'emotions', 'veto', 'fractions', 'memory', 'chantier', 'peinture', 'bd', 'musique'];
+const DECORS = ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'cuisine', 'marche', 'musee', 'aeroport', 'urgences', 'route', 'tri', 'emotions', 'veto', 'fractions', 'memory', 'chantier', 'peinture', 'bd', 'musique'];
 for (const id of [...Object.keys(MAGASINS), ...DECORS]) ajouter(4, `decors/${id}`, '1280x832', `Intérieur : ${plat(MAGASINS[id]?.nom ?? LIEUX.find((l) => l.id === id).nom)}, vide au milieu`, false);
 for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions', 'musee', 'passeport', 'urgences', 'route']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
 
