@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }] = await Promise.all(
-  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js')]);
+const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }] = await Promise.all(
+  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js')]);
 
 const lignes = [];
 const ajouter = (etape, fichier, taille, sujet, transparent = true) => lignes.push([etape, `images/${fichier}.webp`, taille, transparent ? 'oui' : 'non', sujet]);
@@ -39,6 +39,9 @@ const DECORS = ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'cuisine', 'ma
 for (const id of [...Object.keys(MAGASINS), ...DECORS]) ajouter(4, `decors/${id}`, '1280x832', `Intérieur : ${plat(MAGASINS[id]?.nom ?? LIEUX.find((l) => l.id === id).nom)}, vide au milieu`, false);
 for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions', 'musee', 'passeport', 'urgences', 'route']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
 
+// Étape 6 : les scènes des histoires du lieu de croyance, en paysages sans personne (Dieu et les prophètes ne sont jamais représentés)
+for (const l of Object.values(RECITS)) for (const r of l) ajouter(6, `recits/${r.cle}`, '768x480', `Histoire : ${r.titre}, sans personne`, false);
+
 // Étape 5 : le personnage en calques, tous dans la même pose et le même cadre
 for (const p of Object.keys(PEAUX)) for (const y of Object.keys(YEUX)) ajouter(5, `avatar/base-${p}-${y}`, '768x1024', `Enfant chauve en t-shirt et short beiges, peau ${p}, yeux ${y}`);
 for (const [k, nom] of Object.entries(COIFFURES)) for (const c of ['devant', 'derriere']) ajouter(5, `avatar/coiffure-${k}-${c}`, '768x1024', `Cheveux gris clair (teintés par le code), ${nom}, partie ${c}`);
@@ -46,8 +49,8 @@ for (const [k, nom] of Object.entries(COIFFURES)) for (const c of ['devant', 'de
 lignes.sort((a, b) => a[0] - b[0]);
 writeFileSync(new URL('images/liste.csv', racine), `﻿etape;fichier;taille;transparent;sujet\n${lignes.map((l) => l.join(';')).join('\n')}\n`); // BOM : les accents s'ouvrent bien dans Excel
 // Poids estimé en WebP (Ko par image, selon la taille), pour garder l'app légère
-const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110 };
-for (const e of [1, 2, 3, 4, 5]) {
+const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110, '768x480': 60 };
+for (const e of [1, 2, 3, 4, 5, 6]) {
   const l = lignes.filter((x) => x[0] === e);
   console.log(`étape ${e} : ${l.length} images, environ ${(l.reduce((s, x) => s + KO[x[2]], 0) / 1024).toFixed(1)} Mo`);
 }

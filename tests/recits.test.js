@@ -84,3 +84,14 @@ test('ce qui nous rapproche : seulement les religions choisies, différences pou
   assert.match(CONCLUSION, /respecter/);
   assert.match(CONCLUSION, /parents/);
 });
+
+test("les histoires en image : un paysage sans personne, les personnages dessinés par-dessus seulement si la famille l'a choisi", () => {
+  const r = RECITS.chretien.find((x) => x.cle === 'arche');
+  globalThis.IMAGES = ['images/recits/arche.webp'];
+  try {
+    const sans = illustration(r, false), avec = illustration(r, true);
+    assert.ok(sans.includes('images/recits/arche.webp') && avec.includes('images/recits/arche.webp'));
+    assert.ok(avec.length > sans.length); // les personnages s'ajoutent par-dessus l'image
+    assert.ok(!illustration(RECITS.chretien.find((x) => x.cle === 'creation'), false).includes('<image')); // pas d'image : le dessin
+  } finally { delete globalThis.IMAGES; }
+});
