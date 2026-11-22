@@ -40,7 +40,7 @@ for (const id of [...Object.keys(MAGASINS), ...DECORS]) ajouter(4, `decors/${id}
 for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
 
 // Étape 5 : le personnage en calques, tous dans la même pose et le même cadre
-for (const p of Object.keys(PEAUX)) for (const y of Object.keys(YEUX)) ajouter(5, `avatar/base-${p}-${y}`, '768x1024', `Enfant en sous-vêtements unis, chauve, peau ${p}, yeux ${y}`);
+for (const p of Object.keys(PEAUX)) for (const y of Object.keys(YEUX)) ajouter(5, `avatar/base-${p}-${y}`, '768x1024', `Enfant chauve en t-shirt et short beiges, peau ${p}, yeux ${y}`);
 for (const [k, nom] of Object.entries(COIFFURES)) for (const c of ['devant', 'derriere']) ajouter(5, `avatar/coiffure-${k}-${c}`, '768x1024', `Cheveux gris clair (teintés par le code), ${nom}, partie ${c}`);
 
 lignes.sort((a, b) => a[0] - b[0]);

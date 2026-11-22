@@ -19,7 +19,7 @@ for (const f of fichiers('images/originaux', /\.(png|jpe?g|webp)$/i)) {
   mkdirSync(dirname(cible), { recursive: true });
   // le cadre du sujet, d'après la transparence (rien si l'image n'a pas de fond transparent)
   const detecte = spawnSync('ffmpeg', ['-hide_banner', '-i', `images/originaux/${f}`, '-vf', 'alphaextract,bbox=min_val=56', '-frames:v', '1', '-f', 'null', '-'], { encoding: 'utf8' });
-  const rogner = /\/fond-/.test(f) ? null : /crop=[\d:]+/.exec(detecte.stderr ?? '')?.[0]; // un fond d'île n'est pas rogné : les bâtiments y sont placés en parts de l'image
+  const rogner = /\/(fond-|piece-)/.test(f) ? null : /crop=[\d:]+/.exec(detecte.stderr ?? '')?.[0]; // un fond d'île ou une pièce n'est pas rogné : on y place des choses en parts de l'image
   const [l, h] = taille.split('x');
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `images/originaux/${f}`,
     '-vf', `${rogner ? `format=rgba,lut=a='if(lt(val,56),0,val)',${rogner},` : ''}scale='min(${l},iw)':'min(${h},ih)':force_original_aspect_ratio=decrease`, '-c:v', 'libwebp', '-quality', '80', cible]);

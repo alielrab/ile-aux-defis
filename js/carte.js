@@ -317,7 +317,7 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
   ${(fond ? [...lieux].reverse() : lieux).map(lieu).join('')/* sur une île en image, du bas vers le haut : le nom d'un lieu passe devant le toit du lieu d'en dessous */}
   ${ileId === 'village' ? maisons(profils, joueuse, fond ? e.maisons.map(surLeFond) : null) : ''}${ileId === 'coeur' && !famille ? arbre(ax, ay, fond ? 0.8 : 1.2) : ''}
   <g class="lieu port" role="button" tabindex="0" data-lieu="archipel" aria-label="Le bateau : aller vers une autre île">
-    <title>Le bateau</title><g transform="translate(95 850)">${voilier(1.3)}</g>${etiquette(95, 890, "L'archipel", 24)}</g>
+    <title>Le bateau</title>${batimentImage('bateau', 95, 872, 130) ?? `<g transform="translate(95 850)">${voilier(1.3)}</g>`}${etiquette(95, 890, "L'archipel", 24)}</g>
 </svg>`;
 }
 
@@ -348,10 +348,11 @@ export function dessinerArchipel(joueuse, aConfirmer = null) {
   const futures = EMPLACEMENTS_LIBRES.map(([x, y]) => `<g aria-hidden="true" opacity=".7"><ellipse cx="${x}" cy="${y}" rx="90" ry="50" fill="#fff" opacity=".5" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/>
     ${etiquette(x, y + 8, 'Bientôt…', 22)}</g>`).join('');
   return `<svg viewBox="0 0 800 1150" xmlns="http://www.w3.org/2000/svg" class="carte-ile archipel" role="group" aria-label="L'archipel">
-  ${MER.replace('height="900"', 'height="1150"')}${vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
+  ${image('ile/archipel') ? `<image href="${image('ile/archipel')}" width="800" height="1150" preserveAspectRatio="xMidYMid slice"/>`
+    : MER.replace('height="900"', 'height="1150"') + vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
   ${etiquette(400, 70, "L'archipel", 40)}
   <g stroke="#fff" stroke-width="5" fill="none" stroke-dasharray="4 14" stroke-linecap="round" opacity=".85">${routes}</g>
   ${futures}${iles}
-  <g transform="translate(400 300)" aria-hidden="true">${voilier(0.9)}</g>
+  <g aria-hidden="true">${batimentImage('bateau', 400, 318, 110) ?? `<g transform="translate(400 300)">${voilier(0.9)}</g>`}</g>
 </svg>`;
 }

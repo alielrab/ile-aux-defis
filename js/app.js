@@ -52,7 +52,8 @@ function poserDecor(el, nom) {
   el.style.background = img ? `url("${img}") center / cover` : '';
   el.classList.toggle('decor-image', Boolean(img));
 }
-const DECORS_ECRANS = { memory: 'memory', musique: 'musique', chantier: 'chantier', bd: 'bd', atelier: 'peinture' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
+const DECORS_ECRANS = { memory: 'memory', musique: 'musique', chantier: 'chantier', bd: 'bd', atelier: 'peinture', musee: 'musee', veto: 'veto',
+  urgences: 'urgences', emotions: 'emotions', observatoire: 'espace', restaurant: 'cuisine', passeport: 'aeroport', atlas: 'corps' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
 
 function montrer(nom) {
   for (const e of document.querySelectorAll('[data-ecran]')) e.hidden = e.dataset.ecran !== nom;

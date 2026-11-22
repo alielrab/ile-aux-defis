@@ -443,14 +443,15 @@ export function dessinerPiece(profil, piece = profil.maison.piece) {
   const lit = COULEURS_LIT[profil.maison.lit]?.couleur ?? COULEURS_LIT.rose.couleur;
   const dessins = (cles) => cles.filter((c) => poses.has(c)).map((c) => (c === 'lit' ? meubleImage('lit', fichierLit(profil.maison.lit)) ?? OBJETS.lit.dessin.replace('#f080b0', lit) : (c === 'lampe' && !poses.has('bureau') ? null : meubleImage(c)) ?? OBJETS[c].dessin)).join(''); // la lampe en image se pose sur le bureau ; sans bureau, la suspension dessinée
   const avatar = dessinerAvatar(profil.avatar, 'entier', profil.age).replace('<svg ', '<svg x="345" y="196" width="150" height="244" ');
+  const img = image(`maison/piece-${piece}`); // la pièce en image : sol et fenêtre, mur transparent (le papier peint reste derrière) ; le jardin en entier
   return `<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="piece-svg" role="img" aria-label="${poses.size ? 'La pièce et tes objets' : 'La pièce, encore vide'}">
     <defs>${defs}</defs>
     <rect width="800" height="390" fill="${deco.dehors ? deco.mur : fond}"/>
-    <rect y="380" width="800" height="140" fill="${deco.sol}"/>
+    ${img ? `<image href="${img}" width="800" height="520" preserveAspectRatio="none"/>` : `<rect y="380" width="800" height="140" fill="${deco.sol}"/>
     ${deco.dehors ? '' : `${FENETRE}
     ${[0, 1, 2, 3, 4, 5].map((i) => `<line x1="${i * 160}" y1="390" x2="${i * 160 - 60}" y2="520" stroke="${deco.lattes}" stroke-width="3"/>`).join('')}
-    <rect y="372" width="800" height="16" fill="${teinte(deco.mur, -0.05)}"/>`}
-    ${deco.fond ?? ''}
+    <rect y="372" width="800" height="16" fill="${teinte(deco.mur, -0.05)}"/>`}`}
+    ${img && deco.dehors ? '' : deco.fond ?? ''}
     ${tableau(profil, piece)}
     ${dessins(ORDRE)}
     ${avatar}
