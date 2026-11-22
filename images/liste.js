@@ -349,6 +349,10 @@ self.IMAGES = [
  "images/personnages/fractions.webp",
  "images/personnages/heure.webp",
  "images/personnages/marche.webp",
+ "images/personnages/musee.webp",
+ "images/personnages/passeport.webp",
+ "images/personnages/route.webp",
  "images/personnages/syllabes.webp",
+ "images/personnages/urgences.webp",
  "images/personnages/veto.webp"
 ];

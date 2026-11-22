@@ -37,7 +37,7 @@ for (const k of ['bateau', 'palmier']) ajouter(3, `ile/${k}`, '256x256', `Décor
 // Étape 4 : l'intérieur des lieux (derrière les questions et dans les magasins) et leur personnage
 const DECORS = ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'cuisine', 'marche', 'musee', 'aeroport', 'urgences', 'route', 'emotions', 'veto', 'fractions', 'memory', 'chantier', 'peinture', 'bd', 'musique'];
 for (const id of [...Object.keys(MAGASINS), ...DECORS]) ajouter(4, `decors/${id}`, '1280x832', `Intérieur : ${plat(MAGASINS[id]?.nom ?? LIEUX.find((l) => l.id === id).nom)}, vide au milieu`, false);
-for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
+for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions', 'musee', 'passeport', 'urgences', 'route']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
 
 // Étape 5 : le personnage en calques, tous dans la même pose et le même cadre
 for (const p of Object.keys(PEAUX)) for (const y of Object.keys(YEUX)) ajouter(5, `avatar/base-${p}-${y}`, '768x1024', `Enfant chauve en t-shirt et short beiges, peau ${p}, yeux ${y}`);
