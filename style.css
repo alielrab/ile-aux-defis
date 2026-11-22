@@ -204,6 +204,7 @@ select {
 
 .maitre { grid-area: maitre; display: flex; align-items: center; gap: 0.75rem; }
 .maitre-dessin { width: clamp(70px, 14vw, 150px); aspect-ratio: 160 / 260; flex: none; }
+.maitre-dessin img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
 @media (min-width: 760px) {
   .maitre { flex-direction: column-reverse; justify-content: flex-end; width: 190px; }
 }
@@ -700,3 +701,8 @@ select {
 .miroir-confiance svg { width: 100%; height: 100%; }
 .aide-confiance { width: min(40vw, 170px); }
 .aide-confiance svg { width: 100%; height: auto; display: block; }
+
+/* Nouveau style : un intérieur en image (images/decors) en fond d'un lieu, posé par poserDecor() dans js/app.js */
+#decor { position: fixed; inset: 0; z-index: -2; pointer-events: none; } /* derrière tout l'écran, et derrière le cadre de feuilles */
+#decor.decor-image ~ section :is(h1, h2) { text-shadow: 0 2px 0 var(--mer-fonce), 0 0 10px rgb(0 0 0 / 0.75); } /* les titres blancs restent lisibles sur l'image */
+.salle.decor-image::before, .salle.decor-image::after { display: none; } /* la croix et le tableau des lettres de l'ancien cabinet */

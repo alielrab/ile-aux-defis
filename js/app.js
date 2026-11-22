@@ -10,7 +10,7 @@ import {
 import { dessinerIle, dessinerArchipel, LIEUX } from './carte.js';
 import { ile, ileOuverte, prixIle, debloquerIle } from './archipel.js';
 import { CATALOGUE, MAGASINS, PIECES, article, possede, estUtilise, acheter, utiliser, modifierAvatar, pieceManquante, nommer, changerHabit, sePorte, HABITS_ANIMAUX, aConstruire } from './catalogue.js';
-import { dessinerPiece, apercu } from './maison.js';
+import { dessinerPiece, apercu, image } from './maison.js';
 import { BONUS_RECETTE_REELLE, ETOILES_ATLAS, ETOILES_CONFIANCE } from './reglages.js';
 import { melanger, nouvellePartie, questionEnCours, repondre, terminee, etoilesGagnees, formatEtoiles } from './partie.js';
 import * as calcul from './jeux/calcul.js';
@@ -46,8 +46,17 @@ navigator.storage?.persist?.(); // demande au navigateur de ne pas effacer les d
 
 const $ = (s) => document.querySelector(s);
 
+// Un intérieur en image (images/decors) en fond d'un lieu ; sans image, l'ancien décor reste.
+function poserDecor(el, nom) {
+  const img = image(`decors/${nom}`);
+  el.style.background = img ? `url("${img}") center / cover` : '';
+  el.classList.toggle('decor-image', Boolean(img));
+}
+const DECORS_ECRANS = { memory: 'memory', musique: 'musique', chantier: 'chantier', bd: 'bd', atelier: 'peinture' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
+
 function montrer(nom) {
   for (const e of document.querySelectorAll('[data-ecran]')) e.hidden = e.dataset.ecran !== nom;
+  poserDecor($('#decor'), DECORS_ECRANS[nom] ?? (nom === 'lieu' ? vue : null)); // un magasin porte le nom de son image ; la maison n'en a pas
   $(`[data-ecran="${nom}"] h1`).focus();
 }
 
@@ -465,7 +474,9 @@ function lancerJeu(nom) {
   enregistrer();
   const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
-  $('#maitre-dessin').innerHTML = nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
+  poserDecor($('#salle'), nom === 'passeport' ? 'aeroport' : lieu);
+  const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
+  $('#maitre-dessin').innerHTML = perso ? `<img src="${perso}" alt="">` : nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
   montrer('jeu');
   afficherQuestion();
 }
