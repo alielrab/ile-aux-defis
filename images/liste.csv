@@ -211,6 +211,18 @@
 5;images/avatar/tenue-docteur.webp;768x1024;oui;Blouse de docteur
 5;images/avatar/tenue-heros-vert.webp;768x1024;oui;Costume à cape verte
 5;images/avatar/tenue-astronaute.webp;768x1024;oui;Combinaison d’astronaute
+5;images/avatar/tenue-robe-arc-en-ciel.webp;768x1024;oui;Robe arc-en-ciel
+5;images/avatar/tenue-robe-fraise.webp;768x1024;oui;Robe fraise
+5;images/avatar/tenue-pyjama-dino.webp;768x1024;oui;Pyjama dinosaures
+5;images/avatar/tenue-licorne.webp;768x1024;oui;Combinaison licorne
+5;images/avatar/tenue-pirate.webp;768x1024;oui;Tenue de pirate
+5;images/avatar/tenue-chevalier.webp;768x1024;oui;Tenue de chevalier
+5;images/avatar/tenue-explorateur.webp;768x1024;oui;Tenue d’explorateur
+5;images/avatar/tenue-judo.webp;768x1024;oui;Kimono de judo
+5;images/avatar/tenue-chef.webp;768x1024;oui;Tenue de chef
+5;images/avatar/tenue-artiste.webp;768x1024;oui;Blouse d’artiste
+5;images/avatar/tenue-basket.webp;768x1024;oui;Tenue de basket
+5;images/avatar/tenue-parka.webp;768x1024;oui;Parka d’hiver
 5;images/avatar/accessoire-boucles-oreilles.webp;768x1024;oui;Boucles d'oreilles
 5;images/avatar/accessoire-bracelet.webp;768x1024;oui;Bracelets
 5;images/avatar/accessoire-serre-tete.webp;768x1024;oui;Serre-tête
@@ -223,6 +235,12 @@
 5;images/avatar/accessoire-montre.webp;768x1024;oui;Montre
 5;images/avatar/accessoire-lunettes-soleil.webp;768x1024;oui;Lunettes de soleil
 5;images/avatar/accessoire-sac.webp;768x1024;oui;Sac à main
+5;images/avatar/accessoire-sac-a-dos.webp;768x1024;oui;Sac à dos
+5;images/avatar/accessoire-baguette.webp;768x1024;oui;Baguette magique
+5;images/avatar/accessoire-noeud-papillon.webp;768x1024;oui;Nœud papillon
+5;images/avatar/accessoire-medaille.webp;768x1024;oui;Médaille d’or
+5;images/avatar/accessoire-casque-audio.webp;768x1024;oui;Casque audio
+5;images/avatar/accessoire-collier-fleurs.webp;768x1024;oui;Collier de fleurs
 5;images/avatar/chaussures-baskets-rouges.webp;768x1024;oui;Baskets rouges
 5;images/avatar/chaussures-baskets-bleues.webp;768x1024;oui;Baskets bleues
 5;images/avatar/chaussures-sandales.webp;768x1024;oui;Sandales
@@ -235,6 +253,10 @@
 5;images/avatar/chaussures-sandales-bleues.webp;768x1024;oui;Sandales bleues
 5;images/avatar/chaussures-ballerines-noires.webp;768x1024;oui;Ballerines noires
 5;images/avatar/chaussures-bottes-roses.webp;768x1024;oui;Bottes roses
+5;images/avatar/chaussures-baskets-roses.webp;768x1024;oui;Baskets roses
+5;images/avatar/chaussures-chaussons-lapin.webp;768x1024;oui;Chaussons lapin
+5;images/avatar/chaussures-bottes-neige.webp;768x1024;oui;Bottes de neige
+5;images/avatar/chaussures-baskets-lumineuses.webp;768x1024;oui;Baskets lumineuses
 5;images/avatar/chapeau-casquette.webp;768x1024;oui;Casquette
 5;images/avatar/chapeau-bonnet.webp;768x1024;oui;Bonnet à pompon
 5;images/avatar/chapeau-beret.webp;768x1024;oui;Béret
@@ -244,6 +266,10 @@
 5;images/avatar/chapeau-casquette-bleue.webp;768x1024;oui;Casquette bleue
 5;images/avatar/chapeau-bonnet-rose.webp;768x1024;oui;Bonnet rose
 5;images/avatar/chapeau-chapeau-soleil.webp;768x1024;oui;Chapeau de soleil
+5;images/avatar/chapeau-pirate.webp;768x1024;oui;Chapeau de pirate
+5;images/avatar/chapeau-cowboy.webp;768x1024;oui;Chapeau de cow-boy
+5;images/avatar/chapeau-toque.webp;768x1024;oui;Toque de chef
+5;images/avatar/chapeau-anniversaire.webp;768x1024;oui;Chapeau d’anniversaire
 5;images/avatar/base-tres-claire-marron.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux marron
 5;images/avatar/base-tres-claire-noisette.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux noisette
 5;images/avatar/base-tres-claire-bleus.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux bleus
@@ -316,3 +342,11 @@
 5;images/avatar/coiffure-meche-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Mèche sur le côté, partie derriere
 5;images/avatar/coiffure-herisses-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Hérissés, partie devant
 5;images/avatar/coiffure-herisses-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Hérissés, partie derriere
+5;images/avatar/coiffure-locks-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Locks, partie devant
+5;images/avatar/coiffure-locks-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Locks, partie derriere
+5;images/avatar/coiffure-nattes-plaquees-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Nattes plaquées, partie devant
+5;images/avatar/coiffure-nattes-plaquees-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Nattes plaquées, partie derriere
+5;images/avatar/coiffure-queue-haute-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Queue haute, partie devant
+5;images/avatar/coiffure-queue-haute-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Queue haute, partie derriere
+5;images/avatar/coiffure-boucles-longues-devant.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs bouclés, partie devant
+5;images/avatar/coiffure-boucles-longues-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs bouclés, partie derriere

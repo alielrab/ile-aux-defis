@@ -8,6 +8,7 @@ export const CHEVEUX = {
   noir: '#2e2220', brun: '#5e3b26', chatain: '#94623a', blond: '#edc76a', roux: '#cc5a2c',
   rose: '#f07eb4', bleu: '#5b8ee6', violet: '#9b6ad8',
   platine: '#f3e2b0', auburn: '#8f3b1b', vert: '#4cc38a', turquoise: '#2bc4c4',
+  rouge: '#d6343c', orange: '#f28a26', jaune: '#f5d235', corail: '#ff7b6b', menthe: '#7fdcbc', 'bleu-nuit': '#2c4384',
 };
 export const YEUX = {
   marron: '#6b4226', noisette: '#9a7330', bleus: '#3f86d8', verts: '#3f9d5e', gris: '#7d8d99', noirs: '#2a2230',
@@ -17,11 +18,12 @@ export const COIFFURES = {
   tresses: 'Tresses', chignon: 'Chignon', afro: 'Afro', couettes: 'Couettes', macarons: 'Deux macarons', ondules: 'Longs ondulés',
   'mi-longs': 'Mi-longs', frange: 'Frange droite', 'tresse-cote': 'Tresse sur le côté', chignons: 'Deux chignons hauts',
   'tres-courts': 'Très courts', meche: 'Mèche sur le côté', herisses: 'Hérissés',
+  locks: 'Locks', 'nattes-plaquees': 'Nattes plaquées', 'queue-haute': 'Queue haute', 'boucles-longues': 'Longs bouclés',
 };
 // Ce qui se gagne chez le coiffeur (prix en étoiles). Le reste est au choix dès le départ.
 export const PRIX_LOOK = {
-  coiffure: { couettes: 12, macarons: 12, ondules: 15, 'mi-longs': 10, frange: 12, 'tresse-cote': 14, chignons: 15 },
-  cheveux: { rose: 10, bleu: 10, violet: 10, platine: 10, auburn: 10, vert: 12, turquoise: 12 },
+  coiffure: { couettes: 12, macarons: 12, ondules: 15, 'mi-longs': 10, frange: 12, 'tresse-cote': 14, chignons: 15, locks: 15, 'nattes-plaquees': 15, 'queue-haute': 12, 'boucles-longues': 15 },
+  cheveux: { rose: 10, bleu: 10, violet: 10, platine: 10, auburn: 10, vert: 12, turquoise: 12, rouge: 12, orange: 12, jaune: 12, corail: 12, menthe: 12, 'bleu-nuit': 12 },
 };
 // forme : robe, jupe, short ou pantalon. Avec un prix : à gagner à la boutique.
 export const TENUES = {
@@ -61,6 +63,18 @@ export const TENUES = {
   docteur: { nom: 'Blouse de docteur', forme: 'pantalon', haut: '#ffffff', bas: '#7ad0f0', motif: 'boutons', prix: 22 },
   'heros-vert': { nom: 'Costume à cape verte', forme: 'pantalon', haut: '#2e9e5b', bas: '#2e9e5b', cape: '#f2c230', motif: 'eclair', prix: 25 },
   astronaute: { nom: 'Combinaison d’astronaute', forme: 'pantalon', haut: '#eef1f4', bas: '#eef1f4', motif: 'etoiles', prix: 28 },
+  'robe-arc-en-ciel': { nom: 'Robe arc-en-ciel', forme: 'robe', haut: '#f2c230', motif: 'rayures', prix: 20 },
+  'robe-fraise': { nom: 'Robe fraise', forme: 'robe', haut: '#e04848', motif: 'pois', prix: 18 },
+  'pyjama-dino': { nom: 'Pyjama dinosaures', forme: 'pantalon', haut: '#4caf50', bas: '#4caf50', motif: 'pois', prix: 15 },
+  licorne: { nom: 'Combinaison licorne', forme: 'pantalon', haut: '#fbeefa', bas: '#fbeefa', motif: 'etoiles', prix: 25 },
+  pirate: { nom: 'Tenue de pirate', forme: 'short', haut: '#2e2a2a', bas: '#f2f2f2', motif: 'rayures', prix: 22 },
+  chevalier: { nom: 'Tenue de chevalier', forme: 'pantalon', haut: '#2e4fa8', bas: '#8a8f99', prix: 22 },
+  explorateur: { nom: 'Tenue d’explorateur', forme: 'short', haut: '#c8a46a', bas: '#b08c52', motif: 'boutons', prix: 18 },
+  judo: { nom: 'Kimono de judo', forme: 'pantalon', haut: '#ffffff', bas: '#ffffff', prix: 18 },
+  chef: { nom: 'Tenue de chef', forme: 'pantalon', haut: '#ffffff', bas: '#3a3a44', motif: 'boutons', prix: 20 },
+  artiste: { nom: 'Blouse d’artiste', forme: 'robe', haut: '#9fd3f5', motif: 'pois', prix: 16 },
+  basket: { nom: 'Tenue de basket', forme: 'short', haut: '#f28a26', bas: '#f28a26', motif: 'numero', prix: 15 },
+  parka: { nom: 'Parka d’hiver', forme: 'pantalon', haut: '#1f6f63', bas: '#4a4a52', motif: 'boutons', prix: 22 },
 };
 // Bijoux et accessoires : on peut en porter plusieurs à la fois. Tous à gagner à la boutique.
 export const ACCESSOIRES = {
@@ -76,6 +90,12 @@ export const ACCESSOIRES = {
   montre: { nom: 'Montre', prix: 12 },
   'lunettes-soleil': { nom: 'Lunettes de soleil', prix: 12 },
   sac: { nom: 'Sac à main', prix: 15 },
+  'sac-a-dos': { nom: 'Sac à dos', prix: 12 },
+  baguette: { nom: 'Baguette magique', prix: 15 },
+  'noeud-papillon': { nom: 'Nœud papillon', prix: 6 },
+  medaille: { nom: 'Médaille d’or', prix: 20 },
+  'casque-audio': { nom: 'Casque audio', prix: 14 },
+  'collier-fleurs': { nom: 'Collier de fleurs', prix: 10 },
 };
 // Chaussures (une paire à la fois) : les baskets rouges sont celles du départ
 export const CHAUSSURES = {
@@ -91,6 +111,10 @@ export const CHAUSSURES = {
   'sandales-bleues': { nom: 'Sandales bleues', forme: 'sandale', couleur: '#4a90d9', prix: 10 },
   'ballerines-noires': { nom: 'Ballerines noires', forme: 'ballerine', couleur: '#3a3a44', prix: 12 },
   'bottes-roses': { nom: 'Bottes roses', forme: 'botte', couleur: '#ff8fb8', prix: 12 },
+  'baskets-roses': { nom: 'Baskets roses', forme: 'basket', couleur: '#ff8fb8', prix: 10 },
+  'chaussons-lapin': { nom: 'Chaussons lapin', forme: 'ballerine', couleur: '#fdf3f7', prix: 14 },
+  'bottes-neige': { nom: 'Bottes de neige', forme: 'botte', couleur: '#3b5bb0', prix: 16 },
+  'baskets-lumineuses': { nom: 'Baskets lumineuses', forme: 'basket', couleur: '#f2f2f2', prix: 20 },
 };
 // Chapeaux (un à la fois, ou aucun)
 export const CHAPEAUX = {
@@ -104,6 +128,10 @@ export const CHAPEAUX = {
   'casquette-bleue': { nom: 'Casquette bleue', forme: 'casquette', couleur: '#4a90d9', prix: 10 },
   'bonnet-rose': { nom: 'Bonnet rose', forme: 'bonnet', couleur: '#ff8fb8', prix: 10 },
   'chapeau-soleil': { nom: 'Chapeau de soleil', forme: 'chapeau-paille', couleur: '#fff4d6', prix: 14 },
+  pirate: { nom: 'Chapeau de pirate', forme: 'beret', couleur: '#2a2a2a', prix: 14 },
+  cowboy: { nom: 'Chapeau de cow-boy', forme: 'chapeau-paille', couleur: '#a8693a', prix: 16 },
+  toque: { nom: 'Toque de chef', forme: 'bonnet', couleur: '#ffffff', prix: 12 },
+  anniversaire: { nom: 'Chapeau d’anniversaire', forme: 'sorciere', couleur: '#ff8fb8', prix: 10 },
 };
 
 const gratuits = (liste, prix = {}) => Object.keys(liste).filter((k) => !prix[k]);
@@ -379,7 +407,7 @@ export function proportions(age) {
 // Placés dans le même repère que le dessin (pieds à y = 378, milieu à x = 120) pour que les appels existants ne changent pas.
 const calque = (nom) => ((globalThis.IMAGES ?? []).includes(`images/avatar/${nom}.webp`) ? `images/avatar/${nom}.webp` : null);
 const CADRES_IMAGE = { entier: '0 0 240 390', tete: '54.7 4 130.6 136', corps: '-1.5 114 243 270' };
-const SUR_LA_TETE = ['serre-tete', 'noeud', 'barrettes', 'couronne']; // posés sur les cheveux ; les lunettes passent au-dessus de tout
+const SUR_LA_TETE = ['serre-tete', 'noeud', 'barrettes', 'couronne', 'casque-audio']; // posés sur les cheveux ; les lunettes passent au-dessus de tout
 let filtres = 0; // un id de filtre unique par avatar : plusieurs avatars sont sur la même page
 function avatarEnImages(a, cadre, age) {
   const acc = a.accessoires ?? [], lunettes = acc.filter((k) => k.startsWith('lunettes'));

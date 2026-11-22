@@ -154,7 +154,7 @@ export const CATALOGUE = [
   ...articles('chaussures', CHAUSSURES, (k) => CHAUSSURES[k].nom),
   ...articles('chapeau', CHAPEAUX, (k) => CHAPEAUX[k].nom),
   ...articles('coiffure', COIFFURES, (k) => COIFFURES[k], (k) => PRIX_LOOK.coiffure[k] ?? 0),
-  ...articles('cheveux', CHEVEUX, (k) => `Cheveux ${k.replace('chatain', 'châtain')}`, (k) => PRIX_LOOK.cheveux[k] ?? 0),
+  ...articles('cheveux', CHEVEUX, (k) => `Cheveux ${k.replace('chatain', 'châtain').replace('-', ' ')}`, (k) => PRIX_LOOK.cheveux[k] ?? 0),
 ];
 
 // Les magasins de l'île : chaque rayon liste des types d'objets. apercu : ce qu'on voit en haut du magasin.
