@@ -191,3 +191,16 @@ test('maison de la confiance, mes droits : droit ou envie, le droit respecté, l
   assert.match(confiance.FIN_DROITS, /147/);
   assert.doesNotMatch([confiance.DOUCEUR_NORMAL, ...confiance.DROIT_ENVIE.map((q) => q[2])].join(' '), /faux|mauvaise réponse|perdu/i);
 });
+
+test('mots de voyage : 6 mots par pays, dans l’ordre bonjour… s’il te plaît, débloqués par le tampon', () => {
+  for (const p of passeport.PAYS) {
+    const m = passeport.MOTS[p.cle];
+    assert.ok(m && m.langue && /^[a-z]{2}-[A-Z]{2}$/.test(m.lang), p.cle);
+    assert.deepEqual(m.mots.map((x) => x.fr), passeport.MOTS_FR, p.cle);
+    for (const x of m.mots) assert.ok(x.mot && x.dire, `${p.cle} ${x.fr}`);
+  }
+  const profil = { passeport: [] };
+  assert.equal(passeport.motsDebloques(profil), 0);
+  passeport.tamponner(profil, 'japon', 3);
+  assert.equal(passeport.motsDebloques(profil), 6);
+});

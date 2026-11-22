@@ -540,6 +540,8 @@ select {
 .drapeau-grand { font-size: 3rem; line-height: 1; }
 .livret { width: 100%; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); }
 .tampon { display: grid; justify-items: center; gap: 2px; padding: 0.6rem 0.3rem; border-radius: 50%; aspect-ratio: 1; align-content: center; border: 4px dashed #c0392b; background: #fffdf5; color: #c0392b; font-weight: 800; font-size: 0.85rem; text-align: center; transform: rotate(-6deg); }
+button.tampon { cursor: pointer; font-family: inherit; }
+.mots-voyage li { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; }
 .tampon.vide { border-color: #d8cfc0; color: #b0a898; transform: none; }
 .tampon .drapeau { font-size: 2rem; }
 .salle[data-decor="passeport"] { background: linear-gradient(#cfeaf7 0 76%, #9aa3ad 76% 77.5%, #c8ced6 77.5%); }

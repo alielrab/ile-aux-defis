@@ -102,3 +102,35 @@ export function dessinerCarte(tampons = [], avionSur = 'suisse') {
     <g class="avion" style="transform: translate(${ax}px, ${ay}px)"><text x="0" y="0" font-size="30" text-anchor="middle" dominant-baseline="central">✈️</text></g></svg>`;
 }
 export const position = (cle) => xy(pays(cle).lon, pays(cle).lat);
+
+// ---------- Les mots de voyage : chaque tampon débloque 6 mots de base dans la langue du pays ----------
+// Toujours dans cet ordre : bonjour, merci, au revoir, oui, non, s'il te plaît.
+export const MOTS_FR = ['Bonjour', 'Merci', 'Au revoir', 'Oui', 'Non', 'S’il te plaît'];
+// langue (pour dire « en … »), code de la voix, puis 6 × [mot écrit, transcription latine ou null, prononciation à la française]
+const M = (langue, lang, ...mots) => ({ langue, lang, mots: mots.map(([mot, latin, dire], i) => ({ fr: MOTS_FR[i], mot, latin, dire })) });
+const ALLEMAND = [['Danke', null, 'dan-ké'], ['Auf Wiedersehen', null, 'aouf vi-dèr-zé-èn'], ['Ja', null, 'ya'], ['Nein', null, 'naïn'], ['Bitte', null, 'bi-té']];
+const ANGLAIS = [['Thank you', null, 'sank you'], ['Goodbye', null, 'goud-baï'], ['Yes', null, 'yèss'], ['No', null, 'no'], ['Please', null, 'pliz']];
+export const MOTS = {
+  suisse: M('suisse allemand', 'de-CH', ['Grüezi', null, 'grû-é-tsi'], ['Merci vilmal', null, 'mèr-si fil-mal'], ['Uf Wiederluege', null, 'ouf vi-dèr-lou-é-gué'], ['Ja', null, 'ya'], ['Nei', null, 'naï'], ['Bitte', null, 'bi-té']),
+  france: M('français', 'fr-FR', ['Bonjour', null, 'bon-jour'], ['Merci', null, 'mèr-si'], ['Au revoir', null, 'o re-voir'], ['Oui', null, 'oui'], ['Non', null, 'non'], ['S’il te plaît', null, 'sil te plè']),
+  allemagne: M('allemand', 'de-DE', ['Guten Tag', null, 'gou-tèn tak'], ...ALLEMAND),
+  italie: M('italien', 'it-IT', ['Buongiorno', null, 'bouon-djor-no'], ['Grazie', null, 'gra-tsi-é'], ['Arrivederci', null, 'a-ri-vé-dèr-tchi'], ['Sì', null, 'si'], ['No', null, 'no'], ['Per favore', null, 'pèr fa-vo-ré']),
+  autriche: M('allemand d’Autriche', 'de-AT', ['Grüß Gott', null, 'grus got'], ...ALLEMAND),
+  liechtenstein: M('allemand', 'de-DE', ['Grüss Gott', null, 'grus got'], ...ALLEMAND),
+  espagne: M('espagnol', 'es-ES', ['Hola', null, 'o-la'], ['Gracias', null, 'gra-thi-as'], ['Adiós', null, 'a-di-oss'], ['Sí', null, 'si'], ['No', null, 'no'], ['Por favor', null, 'por fa-vor']),
+  portugal: M('portugais', 'pt-PT', ['Olá', null, 'o-la'], ['Obrigado / Obrigada', null, 'o-bri-ga-dou'], ['Adeus', null, 'a-dé-ouch'], ['Sim', null, 'sin'], ['Não', null, 'nan'], ['Por favor', null, 'pour fa-vor']),
+  'royaume-uni': M('anglais', 'en-GB', ['Hello', null, 'hè-lo'], ...ANGLAIS),
+  grece: M('grec', 'el-GR', ['Γεια σου', 'Yia sou', 'ya sou'], ['Ευχαριστώ', 'Efcharistó', 'èf-ha-ri-sto'], ['Αντίο', 'Antío', 'a-di-o'], ['Ναι', 'Né', 'nè'], ['Όχι', 'Óchi', 'o-hi'], ['Παρακαλώ', 'Parakaló', 'pa-ra-ka-lo']),
+  maroc: M('arabe du Maroc', 'ar-MA', ['سلام', 'Salam', 'sa-lam'], ['شكرا', 'Choukran', 'chou-kran'], ['بسلامة', 'Bslama', 'bsla-ma'], ['إيه', 'Iyeh', 'i-yé'], ['لا', 'La', 'la'], ['عافاك', 'Afak', 'a-fak']),
+  egypte: M('arabe d’Égypte', 'ar-EG', ['أهلاً', 'Ahlan', 'ah-lan'], ['شكراً', 'Choukran', 'chou-kran'], ['مع السلامة', 'Ma‘a salama', 'ma-a sa-la-ma'], ['أيوه', 'Aywa', 'aï-oua'], ['لأ', 'La’', 'la'], ['من فضلك', 'Min fadlak', 'min fad-lak']),
+  kenya: M('swahili', 'sw-KE', ['Jambo', null, 'djam-bo'], ['Asante', null, 'a-san-té'], ['Kwaheri', null, 'kwa-hé-ri'], ['Ndiyo', null, 'n-di-yo'], ['Hapana', null, 'ha-pa-na'], ['Tafadhali', null, 'ta-fa-dha-li']),
+  inde: M('hindi', 'hi-IN', ['नमस्ते', 'Namaste', 'na-mas-té'], ['धन्यवाद', 'Dhanyavaad', 'da-nia-vad'], ['फिर मिलेंगे', 'Phir milenge', 'pir mi-lèn-gué'], ['हाँ', 'Haan', 'han'], ['नहीं', 'Nahin', 'na-hin'], ['कृपया', 'Kripaya', 'kri-pa-ya']),
+  chine: M('chinois', 'zh-CN', ['你好', 'Nǐ hǎo', 'ni hao'], ['谢谢', 'Xièxie', 'siè-siè'], ['再见', 'Zàijiàn', 'dzaï-djièn'], ['是', 'Shì', 'che'], ['不', 'Bù', 'bou'], ['请', 'Qǐng', 'tching']),
+  japon: M('japonais', 'ja-JP', ['こんにちは', 'Konnichiwa', 'kon-ni-tchi-wa'], ['ありがとう', 'Arigatō', 'a-ri-ga-to'], ['さようなら', 'Sayōnara', 'sa-yo-na-ra'], ['はい', 'Hai', 'haï'], ['いいえ', 'Iie', 'i-i-é'], ['おねがいします', 'Onegaishimasu', 'o-né-gaï-chi-mass']),
+  australie: M('anglais d’Australie', 'en-AU', ['G’day', null, 'gué-daï'], ...ANGLAIS),
+  bresil: M('portugais du Brésil', 'pt-BR', ['Oi', null, 'oï'], ['Obrigado / Obrigada', null, 'o-bri-ga-dou'], ['Tchau', null, 'tchaou'], ['Sim', null, 'sin'], ['Não', null, 'nan'], ['Por favor', null, 'pour fa-vor']),
+  canada: M('anglais (et français au Québec)', 'en-CA', ['Hi', null, 'haï'], ['Thanks', null, 'sanks'], ['Bye', null, 'baï'], ['Yes', null, 'yèss'], ['No', null, 'no'], ['Please', null, 'pliz']),
+  mexique: M('espagnol du Mexique', 'es-MX', ['Hola', null, 'o-la'], ['Gracias', null, 'gra-si-as'], ['Adiós', null, 'a-di-oss'], ['Sí', null, 'si'], ['No', null, 'no'], ['Por favor', null, 'por fa-vor']),
+};
+// Les mots débloqués : 6 par pays tamponné
+export const motsDebloques = (profil) => (profil.passeport ?? []).reduce((n, cle) => n + (MOTS[cle]?.mots.length ?? 0), 0);

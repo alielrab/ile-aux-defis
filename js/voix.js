@@ -50,6 +50,19 @@ export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
 
 export const taire = () => globalThis.speechSynthesis?.cancel();
 
+// Dire un mot étranger (mots de voyage) avec une voix de sa langue ; sans cette voix sur l'appareil, lire la prononciation « à la française »
+export function parlerLangue(mot, lang, prononciation) {
+  const synth = globalThis.speechSynthesis;
+  const voix = synth?.getVoices() ?? [];
+  const norme = (l) => l?.toLowerCase().replace('_', '-');
+  const v = voix.find((x) => norme(x.lang) === lang.toLowerCase()) ?? voix.find((x) => norme(x.lang)?.startsWith(lang.slice(0, 2)));
+  if (!v) return parler(prononciation.replaceAll('-', ''));
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(mot);
+  u.lang = v.lang; u.voice = v; u.rate = 0.8 * allure;
+  synth.speak(u);
+}
+
 // Attendre que la voix ait vraiment fini : sur certaines tablettes, la fin de la phrase est annoncée trop tôt.
 export async function attendreSilence(max = 20000) {
   const synth = globalThis.speechSynthesis, debut = Date.now();

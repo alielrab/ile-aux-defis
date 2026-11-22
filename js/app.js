@@ -36,7 +36,7 @@ import * as fractions from './jeux/fractions.js';
 import * as memory from './jeux/memory.js';
 import * as avent from './jeux/avent.js';
 import * as voixParents from './enregistrements.js';
-import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises } from './voix.js';
+import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises, parlerLangue } from './voix.js';
 import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
 
@@ -826,9 +826,9 @@ function finirPartie() {
   if (jeu === 'passeport') { // le tampon du pays, avec au moins 2 bonnes réponses
     const p = passeport.pays(paysCourant), tampon = passeport.tamponner(joueuse, paysCourant, partie.bonnes);
     enregistrer();
-    fin += tampon ? ` Nouveau tampon pour ${p.nom.toLowerCase().replace(/^l’/, 'l’')} dans ton passeport !` : partie.bonnes < passeport.BONNES_POUR_TAMPON ? ' Il faut 2 bonnes réponses pour le tampon : réessaie !' : '';
-    $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon !` : ''}</p><button class="gros secondaire">📘 Mon passeport</button>`;
-    $('#fin-extra button').addEventListener('click', () => { afficherPasseport('livret'); montrer('passeport'); });
+    fin += tampon ? ` Nouveau tampon pour ${p.nom.toLowerCase().replace(/^l’/, 'l’')} dans ton passeport ! Et tu débloques 6 mots en ${passeport.MOTS[paysCourant].langue}.` : partie.bonnes < passeport.BONNES_POUR_TAMPON ? ' Il faut 2 bonnes réponses pour le tampon : réessaie !' : '';
+    $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon ! 🗣️ +6 mots` : ''}</p><button class="gros secondaire">${tampon ? '🗣️ Mes nouveaux mots' : '📘 Mon passeport'}</button>`;
+    $('#fin-extra button').addEventListener('click', () => { afficherPasseport(tampon ? 'pays' : 'livret'); montrer('passeport'); });
   }
   if (jeu === 'veto') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">🩺 Retour à la clinique</button>';
@@ -1732,12 +1732,16 @@ function afficherPasseport(vue) {
   const carte = el('div', { className: 'toile-cadre' });
   carte.innerHTML = passeport.dessinerCarte(tampons, paysCourant);
   if (vue === 'livret') {
+    const mots = passeport.motsDebloques(joueuse);
     v.replaceChildren(gros('← La carte', () => afficherPasseport('carte'), 'gros secondaire retour-atelier'), el('h2', { textContent: `📘 Mon passeport : ${tampons.length} / ${passeport.PAYS.length}` }),
+      el('p', { className: 'savais', textContent: `🗣️ ${mots} mot${mots > 1 ? 's' : ''} de voyage appris. Touche un tampon pour les réécouter.` }),
       el('div', { className: 'livret' }, ...passeport.PAYS.map((p) => {
         const a = tampons.includes(p.cle);
-        return el('div', { className: `tampon${a ? '' : ' vide'}` }, el('span', { className: 'drapeau', textContent: a ? p.drapeau : '?' }), el('span', { textContent: a ? p.nom : '…' }));
+        const t = el(a ? 'button' : 'div', { className: `tampon${a ? '' : ' vide'}` }, el('span', { className: 'drapeau', textContent: a ? p.drapeau : '?' }), el('span', { textContent: a ? p.nom : '…' }));
+        if (a) t.addEventListener('click', () => { paysCourant = p.cle; afficherPasseport('pays'); });
+        return t;
       })));
-    return parler(`Ton passeport a ${tampons.length} tampon${tampons.length > 1 ? 's' : ''}.`);
+    return parler(`Ton passeport a ${tampons.length} tampon${tampons.length > 1 ? 's' : ''} et ${mots} mot${mots > 1 ? 's' : ''} de voyage.`);
   }
   if (vue === 'pays') {
     const p = passeport.pays(paysCourant);
@@ -1747,11 +1751,20 @@ function afficherPasseport(vue) {
       el('ul', {}, el('li', { textContent: `🏛️ Capitale : ${p.capitale}` }), el('li', { textContent: `${p.animal[0]} Un animal : ${p.animal[1]}` }),
         el('li', { textContent: `${p.plat[0]} Un plat : ${p.plat[1]}` }), el('li', { textContent: `🗣️ On y parle ${p.langue}` })),
       el('p', { className: 'savais', textContent: `Le savais-tu ? ${p.savais}` })),
+      carteMots(p, tampons.includes(p.cle)),
       gros(tampons.includes(p.cle) ? '✈️ Petit quiz (déjà tamponné ✓)' : '✈️ Petit quiz pour gagner le tampon', () => lancerJeu('passeport')));
     return parler(passeport.presentation(p, joueuse.age));
   }
   v.replaceChildren(carte, gros(`📘 Mon passeport (${tampons.length} / ${passeport.PAYS.length})`, () => afficherPasseport('livret'), 'gros secondaire'),
     el('div', { className: 'phrases' }, ...passeport.PAYS.map((p) => gros(`${p.drapeau} ${p.nom}${tampons.includes(p.cle) ? ' ✓' : ''}`, () => voyager(p.cle), `petit${tampons.includes(p.cle) ? ' choisi' : ''}`))));
+}
+// Les 6 mots de voyage du pays : débloqués par le tampon, chacun avec sa prononciation et un 🔊
+function carteMots(p, ouvert) {
+  const m = passeport.MOTS[p.cle], titre = el('h3', { textContent: `🗣️ Mes mots en ${m.langue}` });
+  if (!ouvert) return el('div', { className: 'carte fiche-pays' }, titre, el('p', { textContent: `🔒 Gagne le tampon pour débloquer ${m.mots.length} mots en ${m.langue} : bonjour, merci, au revoir…` }));
+  return el('div', { className: 'carte fiche-pays' }, titre, el('ul', { className: 'mots-voyage' }, ...m.mots.map((x) =>
+    el('li', {}, gros('🔊', () => parlerLangue(x.mot, m.lang, x.dire), 'rond'),
+      el('span', {}, el('strong', { textContent: `${x.fr} : ${x.mot}` }), x.latin ? ` (${x.latin})` : '', el('br'), el('em', { textContent: `on dit « ${x.dire} »` }))))));
 }
 // L'avion vole jusqu'au pays, puis on découvre sa fiche
 function voyager(cle) {

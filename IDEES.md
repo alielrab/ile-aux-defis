@@ -7,7 +7,7 @@
 | Idée | Le principe |
 |---|---|
 | Dictée magique | Un mot est lu à voix haute, l'enfant l'écrit |
-| Allemand | Vocabulaire de base, avec images et prononciation |
+| Langues | Voir « Les langues » plus bas : l'école des langues et les mots de voyage |
 | Syllabes | Assembler des syllabes pour apprendre à lire |
 | Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
@@ -19,6 +19,21 @@
 | Centre de tri | Trier les déchets dans la bonne poubelle (verre, papier, PET, compost…) |
 | Le glacier de la plage | Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
 | Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
+
+## Les langues (à construire plus tard)
+Un mini-jeu de langues à deux niveaux.
+
+**1. L'école des langues** (île du savoir)
+- Un parcours complet pour l'**allemand** et l'**anglais**, plus une **langue de famille** au choix dans l'espace parents.
+- Thèmes : couleurs, animaux, famille, école, nourriture, nombres…
+- Mini-jeux :
+  - **Écoute et touche** : entendre le mot, choisir l'image ;
+  - **Paires** français-langue ;
+  - **Petites scènes du quotidien** : commander une glace, se présenter, demander son chemin ;
+  - **Révision intelligente** : les mots ratés reviennent plus souvent.
+- Niveaux adaptés à l'âge.
+
+**2. Les mots de voyage** : fait, voir plus bas.
 
 ## Nouvelles îles (à construire plus tard)
 - **L'île de la mer** : l'aquarium et les fonds marins (poissons, coraux, baleines, protéger la mer).
@@ -40,6 +55,7 @@ Remplacer la voix de la tablette par des fichiers audio pré-enregistrés pour l
 
 ## Fait (2026-11-22)
 - **Le calendrier de l'Avent** : bouton 🎄 en haut de l'île, en décembre seulement ; 24 cases (« Le savais-tu ? » sur l'hiver ou petit défi à faire en vrai), 2 étoiles par case et 5 le 24, rattrapage possible des jours oubliés (`js/jeux/avent.js`).
+- **Les mots de voyage** : chaque tampon du passeport débloque 6 mots dans la langue du pays (bonjour, merci, au revoir, oui, non, s'il te plaît), avec la prononciation « à la française » et un 🔊 (voix de la langue si la tablette l'a, sinon la prononciation lue en français). Le livret compte les mots appris (`MOTS` dans `js/jeux/passeport.js`).
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).
