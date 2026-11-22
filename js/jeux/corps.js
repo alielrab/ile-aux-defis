@@ -90,5 +90,5 @@ export function docteure(avatar, age) {
     <path d="M102 202 Q100 230 116 244 M138 202 Q140 230 124 244 M116 244 Q120 248 124 244" fill="none" stroke="#3a3f4a" stroke-width="3.5" stroke-linecap="round"/>
     <path d="M124 244 Q138 256 136 268" fill="none" stroke="#3a3f4a" stroke-width="3.5" stroke-linecap="round"/>
     <circle cx="136" cy="272" r="7" fill="#c9ced6" stroke="#3a3f4a" stroke-width="3"/></g>`;
-  return dessinerAvatar(avatar, 'entier', age).replace(/<\/svg>\s*$/, `${stetho}</svg>`);
+  return dessinerAvatar(avatar, 'entier', age, true).replace(/<\/svg>\s*$/, `${stetho}</svg>`);
 }

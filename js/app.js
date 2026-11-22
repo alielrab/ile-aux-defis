@@ -543,7 +543,7 @@ function afficherQuestion() {
       boutonsReponses(q.choix, majuscule, true);
     } else afficherPesee(q);
   } else {
-    $('#aide').innerHTML = `<div class="patient${q.mode === 'choix' ? ' petit-patient' : ''}">${dessinerAvatar(corps.PATIENT, 'entier', corps.AGE_PATIENT)}</div>`;
+    $('#aide').innerHTML = `<div class="patient${q.mode === 'choix' ? ' petit-patient' : ''}">${dessinerAvatar(corps.PATIENT, 'entier', corps.AGE_PATIENT, true)}</div>`;
     if (q.mode === 'choix') boutonsReponses(q.choix, String, true);
     else {
       $('#reponses').replaceChildren();

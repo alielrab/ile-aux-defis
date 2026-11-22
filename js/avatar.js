@@ -375,8 +375,36 @@ export function proportions(age) {
   return { k, taille: 0.82 + 0.18 * k, tete: 1.1 - 0.16 * k, corps: 0.78 + 0.26 * k };
 }
 
-export function dessinerAvatar(a, cadre = 'entier', age = 8) {
+// L'avatar en images (images/avatar, nouveau style) : des calques 768 x 1024 alignés, empilés comme une poupée à habiller.
+// Placés dans le même repère que le dessin (pieds à y = 378, milieu à x = 120) pour que les appels existants ne changent pas.
+const calque = (nom) => ((globalThis.IMAGES ?? []).includes(`images/avatar/${nom}.webp`) ? `images/avatar/${nom}.webp` : null);
+const CADRES_IMAGE = { entier: '0 0 240 390', tete: '54.7 4 130.6 136', corps: '-1.5 114 243 270' };
+const SUR_LA_TETE = ['serre-tete', 'noeud', 'barrettes', 'couronne']; // posés sur les cheveux ; les lunettes passent au-dessus de tout
+let filtres = 0; // un id de filtre unique par avatar : plusieurs avatars sont sur la même page
+function avatarEnImages(a, cadre, age) {
+  const acc = a.accessoires ?? [], lunettes = acc.filter((k) => k.startsWith('lunettes'));
+  const noms = { derriere: `coiffure-${a.coiffure}-derriere`, base: `base-${a.peau}-${a.yeux}`, chaussures: `chaussures-${a.chaussures ?? 'baskets-rouges'}`, // comme le dessin : des baskets rouges par défaut
+    tenue: `tenue-${a.tenue}`, corps: acc.filter((k) => !SUR_LA_TETE.includes(k) && !lunettes.includes(k)).map((k) => `accessoire-${k}`),
+    devant: `coiffure-${a.coiffure}-devant`, tete: acc.filter((k) => SUR_LA_TETE.includes(k)).map((k) => `accessoire-${k}`),
+    chapeau: a.chapeau && `chapeau-${a.chapeau}`, lunettes: lunettes.map((k) => `accessoire-${k}`) };
+  const ordre = [noms.derriere, noms.base, noms.chaussures, noms.tenue, ...noms.corps, noms.devant, ...noms.tete, noms.chapeau, ...noms.lunettes].filter(Boolean);
+  if (!ordre.every(calque)) return null; // une seule image manque : tout l'avatar reste dessiné
+  const id = `cheveux-${++filtres}`, c = CHEVEUX[a.cheveux], k = 255 / 145; // 145 : le gris moyen des cheveux en image
+  const rgb = [1, 3, 5].map((i) => ((parseInt(c.slice(i, i + 2), 16) / 255) * k).toFixed(3));
+  const img = (nom) => `<image href="${calque(nom)}" x="-16" y="14" width="275" height="367"${nom.startsWith('coiffure-') ? ` filter="url(#${id})"` : ''}/>`;
+  const taille = cadre === 'entier' ? proportions(age).taille : 1; // l'âge ne change que la taille : les images n'ont qu'une silhouette
+  return `<svg viewBox="${CADRES_IMAGE[cadre]}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="avatar-svg">
+    <defs><filter id="${id}" color-interpolation-filters="sRGB"><feColorMatrix values="${rgb[0]} 0 0 0 0  0 ${rgb[1]} 0 0 0  0 0 ${rgb[2]} 0 0  0 0 0 1 0"/></filter></defs>
+    ${cadre === 'entier' ? '<ellipse cx="120" cy="380" rx="56" ry="8" fill="#000" opacity=".12"/>' : ''}
+    <g transform="translate(120 378) scale(${taille}) translate(-120 -378)">${ordre.map(img).join('')}</g>
+  </svg>`;
+}
+
+// dessin = true : toujours le dessin (le jeu du corps humain place ses zones à toucher sur la géométrie du dessin)
+export function dessinerAvatar(a, cadre = 'entier', age = 8, dessin = false) {
   if (!avatarValide(a)) a = AVATAR_PAR_DEFAUT;
+  const enImages = !dessin && avatarEnImages(a, cadre, age);
+  if (enImages) return enImages;
   const acc = a.accessoires ?? [];
   const peau = PEAUX[a.peau];
   const { derriere, devant } = coiffure(a.coiffure, CHEVEUX[a.cheveux]);

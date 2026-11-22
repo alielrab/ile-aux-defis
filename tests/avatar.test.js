@@ -50,3 +50,18 @@ test('bijoux : plusieurs à la fois, connus, sans doublon', () => {
   const svg = dessinerAvatar({ ...AVATAR_PAR_DEFAUT, accessoires: tous });
   assert.ok(svg.length > dessinerAvatar(AVATAR_PAR_DEFAUT).length && !svg.includes('undefined'));
 });
+
+test("l'avatar en images : calques empilés dans l'ordre, cheveux teintés ; une image manque = le dessin", () => {
+  const a = { ...AVATAR_PAR_DEFAUT, coiffure: 'longs', cheveux: 'roux', chapeau: 'casquette', accessoires: ['collier', 'lunettes', 'noeud'] };
+  const noms = ['coiffure-longs-derriere', 'base-claire-marron', 'chaussures-baskets-rouges', 'tenue-tshirt-bleu', 'accessoire-collier',
+    'coiffure-longs-devant', 'accessoire-noeud', 'chapeau-casquette', 'accessoire-lunettes'];
+  globalThis.IMAGES = noms.map((n) => `images/avatar/${n}.webp`);
+  try {
+    const svg = dessinerAvatar(a);
+    assert.deepEqual([...svg.matchAll(/images\/avatar\/([\w-]+)\.webp/g)].map((m) => m[1]), noms);
+    assert.equal((svg.match(/filter="url\(#cheveux-\d+\)"/g) ?? []).length, 2); // les deux parties des cheveux, pas le reste
+    assert.ok(!dessinerAvatar(a, 'entier', 8, true).includes('<image')); // le jeu du corps garde le dessin
+    globalThis.IMAGES.pop();
+    assert.ok(!dessinerAvatar(a).includes('<image')); // lunettes sans image : tout reste dessiné
+  } finally { delete globalThis.IMAGES; }
+});
