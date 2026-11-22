@@ -13,7 +13,6 @@
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
 | Code avec un robot | Programmer un robot avec des flèches pour atteindre un but |
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
-| Calendrier de l'Avent | Une case par jour en décembre, avec une surprise ou un mini-défi |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
 | Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
@@ -38,6 +37,9 @@ Un lieu sur le vivre-ensemble. Comme la maison de la confiance : pas de pénalit
 
 ## Voix de qualité (à construire plus tard)
 Remplacer la voix de la tablette par des fichiers audio pré-enregistrés pour les phrases fixes ; la voix de la tablette reste pour les phrases qui changent (prénoms, nombres). La liste de toutes les phrases fixes est dans `voix/phrases.csv` (générée par `node voix/lister-phrases.mjs`) : chaque phrase a un identifiant, qui servira de nom de fichier audio.
+
+## Fait (2026-11-22)
+- **Le calendrier de l'Avent** : bouton 🎄 en haut de l'île, en décembre seulement ; 24 cases (« Le savais-tu ? » sur l'hiver ou petit défi à faire en vrai), 2 étoiles par case et 5 le 24, rattrapage possible des jours oubliés (`js/jeux/avent.js`).
 
 ## Fait (2026-11-05)
 - Boutique en francs suisses → **le marché** (voir SPEC.md).

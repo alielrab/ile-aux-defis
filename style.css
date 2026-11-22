@@ -706,3 +706,16 @@ select {
 #decor { position: fixed; inset: 0; z-index: -2; pointer-events: none; } /* derrière tout l'écran, et derrière le cadre de feuilles */
 #decor.decor-image ~ section :is(h1, h2) { text-shadow: 0 2px 0 var(--mer-fonce), 0 0 10px rgb(0 0 0 / 0.75); } /* les titres blancs restent lisibles sur l'image */
 .salle.decor-image::before, .salle.decor-image::after { display: none; } /* la croix et le tableau des lettres de l'ancien cabinet */
+
+/* Le calendrier de l'Avent : 24 portes ; une porte ouverte montre son image */
+.avent-grille { width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(22%, 110px), 1fr)); gap: 0.6rem; }
+.avent-case { aspect-ratio: 1; border: 0; border-radius: 16px; padding: 0; overflow: hidden; cursor: pointer;
+  background: linear-gradient(160deg, #e0455a, #b8283e); color: #fff; box-shadow: 0 5px 0 #7d1a2a; }
+.avent-case:nth-child(3n + 2) { background: linear-gradient(160deg, #2f9e6b, #1d7a4f); box-shadow: 0 5px 0 #145638; }
+.avent-case:nth-child(3n) { background: linear-gradient(160deg, #3a6fd8, #2a52a8); box-shadow: 0 5px 0 #1c3976; }
+.avent-case:disabled { opacity: 0.45; cursor: default; }
+.avent-case.faite { background: #fffdf5; box-shadow: 0 5px 0 rgb(0 0 0 / 0.15); }
+.avent-case img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avent-num { font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem); font-weight: 800; text-shadow: 0 2px 0 rgb(0 0 0 / 0.25); }
+.avent-emoji { font-size: clamp(2rem, 1.5rem + 3vw, 3.2rem); }
+.avent-image { width: min(80vw, 340px); aspect-ratio: 1; object-fit: cover; border-radius: 20px; display: grid; place-items: center; background: #fffdf5; box-shadow: 0 6px 0 rgb(0 0 0 / 0.15); }

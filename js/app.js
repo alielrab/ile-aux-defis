@@ -34,6 +34,7 @@ import * as confiance from './jeux/confiance.js';
 import * as veto from './jeux/veto.js';
 import * as fractions from './jeux/fractions.js';
 import * as memory from './jeux/memory.js';
+import * as avent from './jeux/avent.js';
 import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises } from './voix.js';
 import { accorder } from './genre.js';
@@ -196,10 +197,44 @@ function ouvrirIle(p = joueuse) {
   $('#ile-etoiles').textContent = `⭐ ${formatEtoiles(p.etoiles)}`;
   $('#carte').innerHTML = ileCourante ? dessinerIle(ileCourante, etat.profils, p, etat.croyance.famille) : dessinerArchipel(p);
   $('[data-ecran="ile"] h1').textContent = ileCourante ? ile(ileCourante).nom : "L'archipel";
+  $('#avent').hidden = !avent.enSaison(new Date()); // le calendrier de l'Avent, en décembre seulement
   montrer('ile');
 }
 
 $('#changer').addEventListener('click', afficherAccueil);
+$('#avent').addEventListener('click', ouvrirAvent);
+
+// Le calendrier de l'Avent : 24 cases ; on ouvre celles des jours passés, la case montre son image et son texte
+function ouvrirAvent() {
+  afficherAvent();
+  montrer('avent');
+  parler('Le calendrier de l’Avent ! Chaque jour de décembre, une nouvelle case s’ouvre.');
+}
+function afficherAvent() {
+  etoilesJoueuse();
+  const n = avent.ouvrables(new Date()), faites = joueuse.avent ?? [];
+  $('#avent-vue').replaceChildren(el('div', { className: 'avent-grille' }, ...avent.JOURS.map(([emoji], i) => {
+    const j = i + 1, faite = faites.includes(j), img = image(`avent/${j}`);
+    const b = el('button', { className: `avent-case${faite ? ' faite' : ''}`, disabled: j > n,
+      ariaLabel: `${j} décembre${faite ? ', déjà ouverte' : j > n ? ', pas encore' : ''}` });
+    b.innerHTML = faite ? (img ? `<img src="${img}" alt="">` : `<span class="avent-emoji">${emoji}</span>`) : `<span class="avent-num">${j}</span>`;
+    b.addEventListener('click', () => ouvrirCaseAvent(j));
+    return b;
+  })));
+}
+function ouvrirCaseAvent(j) {
+  const gain = avent.ouvrir(joueuse, j, new Date());
+  if (gain === null) return;
+  if (gain) enregistrer();
+  etoilesJoueuse();
+  const [emoji, titre, texte] = avent.JOURS[j - 1], img = image(`avent/${j}`);
+  $('#avent-vue').replaceChildren(el('h2', { textContent: `${j} décembre` }),
+    img ? el('img', { className: 'avent-image', src: img, alt: '' }) : el('div', { className: 'avent-image avent-emoji', textContent: emoji }),
+    el('p', { className: 'carte presentation' }, el('strong', { textContent: `${titre} ` }), texte),
+    ...(gain ? [el('p', { className: 'gain', textContent: `+${gain} ⭐` })] : []),
+    gros('← Le calendrier', afficherAvent, 'gros secondaire'));
+  parler(`${titre} ${texte}`);
+}
 
 function choisirIle(id) {
   const i = ile(id), prix = prixIle(id);

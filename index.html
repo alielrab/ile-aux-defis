@@ -142,6 +142,7 @@
       <header class="barre">
         <button id="changer" class="rond" aria-label="Changer de profil">⇄</button>
         <span id="ile-joueuse" class="joueuse"></span>
+        <button id="avent" class="rond" aria-label="Le calendrier de l'Avent" hidden>🎄</button>
         <span id="ile-etoiles" class="etoiles"></span>
       </header>
       <h1 tabindex="-1" class="visuellement-cache">L'île</h1>
@@ -284,6 +285,16 @@
       </header>
       <h1 tabindex="-1">Le chantier</h1>
       <div id="chantier-vue" class="atelier-vue"></div>
+    </section>
+    <section data-ecran="avent" hidden>
+      <header class="barre">
+        <button class="rond retour-ile" aria-label="Retour à l'île">←</button>
+        <span></span>
+        <span class="etoiles-joueuse"></span>
+        <button class="rond reecouter" aria-label="Réécouter">🔊</button>
+      </header>
+      <h1 tabindex="-1">Le calendrier de l'Avent</h1>
+      <div id="avent-vue" class="atelier-vue"></div>
     </section>
     <section data-ecran="confiance" hidden>
       <header class="barre">
