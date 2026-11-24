@@ -27,6 +27,7 @@ export const LIEUX = [
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
   { id: 'musee', ile: 'savoir', type: 'jeu', nom: 'Le musée\ndes dinosaures', detail: 'reconstituer des squelettes', ouvert: true, x: 400, y: 330 },
   { id: 'fractions', ile: 'savoir', type: 'jeu', nom: 'La pizzeria', detail: 'les fractions', ouvert: true, x: 600, y: 790 },
+  { id: 'langues', ile: 'savoir', type: 'jeu', nom: "L'école\ndes langues", detail: 'allemand et anglais', ouvert: true, x: 200, y: 790 },
   { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le passeport du monde', ouvert: true, x: 400, y: 655 },
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
@@ -155,6 +156,9 @@ const BATIMENTS = {
   tri: [`<rect x="-80" y="-60" width="160" height="60" fill="#e8f0e0"/><path d="M-86 -60 H86 L70 -84 H-70Z" fill="#3f9a5a"/>
     ${[['#3a8f4a', -62], ['#3a6fd0', -22], ['#f2c230', 18], ['#8a5a3a', 52]].map(([c, x]) => `<rect x="${x}" y="-40" width="30" height="40" rx="4" fill="${c}"/><rect x="${x - 2}" y="-46" width="34" height="8" rx="3" fill="${c}"/>`).join('')}
     <text x="-16" y="-92" font-size="30">♻️</text>`, 0.85],
+  langues: [`<rect x="-70" y="-64" width="140" height="64" fill="#fbe9d0"/><path d="M-80 -62 L0 -100 L80 -62Z" fill="#d0603a"/>
+    <rect x="-14" y="-38" width="28" height="38" fill="#7a5a3a"/><rect x="-58" y="-50" width="30" height="22" fill="#bfe6ff"/><rect x="28" y="-50" width="30" height="22" fill="#bfe6ff"/>
+    <text x="-34" y="-104" font-size="26">🇩🇪</text><text x="6" y="-104" font-size="26">🇬🇧</text>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}

@@ -1,11 +1,11 @@
-# Résumé pour la prochaine session (22 novembre 2026)
+# Résumé pour la prochaine session (24 novembre 2026)
 
 À coller au début de la prochaine conversation : « Lis RESUME-SESSION.md et continue. »
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-36`. Il faut la monter à chaque envoi.
-- 128 tests, tous verts (`npm test`).
+- Version du cache (`sw.js`) : `ile-38`. Il faut la monter à chaque envoi.
+- 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
   - les **mots de voyage** du passeport ;
@@ -32,7 +32,8 @@
   - En cas de vieux cache : désinscrire le service worker, vider les caches, puis recharger.
 
 ## En attente
-- **Le centre de tri** : la personne n'a pas encore dit oui au commit. S'il n'est pas commité, demander « Je commite et j'envoie sur main ? ».
+- **Dinosaures en images** (24 nov.) : 16 images Higgsfield (`images/dinos/`), à toucher dans la galerie du musée et dans les questions « Quel dinosaure… ? » du quiz. Les 6 thèmes de l’école des langues sont aussi en images (`images/langues/`).
+- **L'école des langues** (24 nov.) : allemand et anglais, 6 thèmes, révision des mots ratés (`js/jeux/langues.js`). À faire relire par un parent (mots et prononciations). Visuel attendu : `images/ile/langues.webp`. Suite possible : langue de famille (espace parents), paires, petites scènes.
 - Deux visuels manquent pour le centre de tri : `images/ile/tri.webp` (le bâtiment) et `images/decors/tri.webp` (l'intérieur). Ils sont dans `liste.csv` ; d'ici là, le dessin et la classe servent de secours.
 - À faire relire par un parent : les règles du tri, qui varient selon les communes, et les mots de voyage dans les 20 langues (surtout l'arabe du Maroc et d'Égypte et le suisse allemand).
 - Nettoyage proposé, pas encore validé : supprimer les anciens lots de `images/` (30, 44, 45, 45bis, 45ter, 46) et `images/ile_aux_defis_lot_47_avatar_higgsfield/travail/` (114 Mo).

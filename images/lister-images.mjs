@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }] = await Promise.all(
-  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js')]);
+const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }] = await Promise.all(
+  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js')]);
 
 const lignes = [];
 const ajouter = (etape, fichier, taille, sujet, transparent = true) => lignes.push([etape, `images/${fichier}.webp`, taille, transparent ? 'oui' : 'non', sujet]);
@@ -49,11 +49,16 @@ for (let j = 1; j <= 24; j++) ajouter(7, `avent/${j}`, '384x384', `Calendrier de
 for (const p of Object.keys(PEAUX)) for (const y of Object.keys(YEUX)) ajouter(5, `avatar/base-${p}-${y}`, '768x1024', `Enfant chauve en t-shirt et short beiges, peau ${p}, yeux ${y}`);
 for (const [k, nom] of Object.entries(COIFFURES)) for (const c of ['devant', 'derriere']) ajouter(5, `avatar/coiffure-${k}-${c}`, '768x1024', `Cheveux gris clair (teintés par le code), ${nom}, partie ${c}`);
 
+// Étape 8 : les dinosaures du musée (à toucher dans le musée et dans le quiz)
+for (const d of DINOS) ajouter(8, `dinos/${d.cle}`, '512x320', `Dinosaure : ${d.nom}, en entier, de profil`);
+// Étape 8 aussi : les thèmes de l'école des langues
+for (const t of THEMES) ajouter(8, `langues/${t.cle}`, '512x320', `Thème de langue : ${t.nom}`);
+
 lignes.sort((a, b) => a[0] - b[0]);
 writeFileSync(new URL('images/liste.csv', racine), `﻿etape;fichier;taille;transparent;sujet\n${lignes.map((l) => l.join(';')).join('\n')}\n`); // BOM : les accents s'ouvrent bien dans Excel
 // Poids estimé en WebP (Ko par image, selon la taille), pour garder l'app légère
-const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110, '768x480': 60 };
-for (const e of [1, 2, 3, 4, 5, 6, 7]) {
+const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110, '768x480': 60, '512x320': 25 };
+for (const e of [1, 2, 3, 4, 5, 6, 7, 8]) {
   const l = lignes.filter((x) => x[0] === e);
   console.log(`étape ${e} : ${l.length} images, environ ${(l.reduce((s, x) => s + KO[x[2]], 0) / 1024).toFixed(1)} Mo`);
 }

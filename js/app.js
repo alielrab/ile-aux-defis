@@ -29,6 +29,7 @@ import * as passeport from './jeux/passeport.js';
 import * as urgences from './jeux/urgences.js';
 import * as route from './jeux/route.js';
 import * as tri from './jeux/tri.js';
+import * as langues from './jeux/langues.js';
 import * as musique from './jeux/musique.js';
 import * as chantier from './jeux/chantier.js';
 import * as confiance from './jeux/confiance.js';
@@ -55,7 +56,7 @@ function poserDecor(el, nom) {
   el.classList.toggle('decor-image', Boolean(img));
 }
 const DECORS_ECRANS = { memory: 'memory', musique: 'musique', chantier: 'chantier', bd: 'bd', atelier: 'peinture', musee: 'musee', veto: 'veto',
-  urgences: 'urgences', emotions: 'emotions', observatoire: 'espace', restaurant: 'cuisine', passeport: 'aeroport', atlas: 'corps' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
+  urgences: 'urgences', langues: 'langues', emotions: 'emotions', observatoire: 'espace', restaurant: 'cuisine', passeport: 'aeroport', atlas: 'corps' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
 
 function montrer(nom) {
   for (const e of document.querySelectorAll('[data-ecran]')) e.hidden = e.dataset.ecran !== nom;
@@ -278,6 +279,7 @@ function entrerLieu(cible) {
   if (id === 'corps') return ouvrirAtlas();
   if (id === 'musee') return ouvrirMusee();
   if (id === 'aeroport') return ouvrirPasseport();
+  if (id === 'langues') return ouvrirLangues();
   if (id === 'urgences') return ouvrirUrgences();
   if (id === 'musique') return ouvrirMusique();
   if (id === 'chantier') return ouvrirChantier();
@@ -478,7 +480,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -492,6 +494,7 @@ const PERSONNAGES = {
   emotions: { peau: 'doree', yeux: 'verts', coiffure: 'longs', cheveux: 'roux', tenue: 'pull-violet', accessoires: [] },
   veto: { peau: 'claire', yeux: 'marron', coiffure: 'queue', cheveux: 'chatain', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   tri: { peau: 'brune', yeux: 'noisette', coiffure: 'tresses', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
+  langues: { peau: 'claire', yeux: 'bleus', coiffure: 'carre', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
   fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
@@ -505,6 +508,8 @@ function lancerJeu(nom) {
     ? { questions: cuisine.etapes(recette, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les étapes de la recette, dans l'ordre
     : nom === 'recit'
     ? { questions: recits.questions(recitOuvert, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les questions de l'histoire, dans l'ordre
+    : nom === 'langues'
+    ? { questions: langues.questions({ age: joueuse.age, langue: langueEcole, theme: themeEcole, rates: langues.aRevoir(joueuse, langueEcole, themeEcole) }), index: 0, bonnes: 0, serie: 0 } // les mots ratés d'abord
     : nom === 'passeport'
     ? { questions: passeport.questions(paysCourant, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les 3 questions du pays
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
@@ -551,8 +556,10 @@ function afficherQuestion() {
   } else if (jeu === 'marche') {
     afficherMarche(q);
   } else if (jeu === 'dinos') {
-    $('#aide').innerHTML = dinos.dessinerSquelette(dinos.dino(q.dino));
+    const parImage = q.texte.startsWith('trait:'); // « Quel dinosaure… ? » : on touche son image (sans montrer la réponse au-dessus)
+    $('#aide').innerHTML = parImage ? '' : dinos.dessinerSquelette(dinos.dino(q.dino));
     boutonsReponses(q.choix, String, true);
+    if (parImage) for (const b of $('#reponses').children) { b.classList.add('reponse-dino'); b.innerHTML = `${portraitDino(dinos.DINOS.find((d) => d.nom === b.dataset.v))}<span>${b.dataset.v}</span>`; }
   } else if (jeu === 'passeport') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.type === 'drapeau' ? '🏳️' : passeport.pays(paysCourant).drapeau}</div>`;
     boutonsReponses(q.choix, String, true);
@@ -562,6 +569,10 @@ function afficherQuestion() {
   } else if (jeu === 'route' || jeu === 'tri') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
+  } else if (jeu === 'langues') {
+    $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
+    boutonsReponses(q.choix, String, q.mode === 'lire');
+    if (q.mode === 'ecoute') for (const b of $('#reponses').children) b.classList.add('reponse-image');
   } else if (jeu === 'veto') {
     const dessin = apercu(article(q.patient ?? `animal:${q.espece}`));
     $('#aide').innerHTML = `<div class="patient-veto" aria-hidden="true">${dessin}${q.symptome ? `<span class="symptome">${q.symptome}</span>` : ''}</div>`;
@@ -589,8 +600,10 @@ function afficherQuestion() {
   }
   $('#ecouter').disabled = false;
   $('#question').focus();
-  parler(aDire(q));
+  direQuestion(q);
 }
+// L'école des langues : la consigne en français, puis le mot avec la voix de sa langue
+const direQuestion = (q) => (jeu === 'langues' && q.mode === 'ecoute' ? parler(q.consigne).then(() => parlerLangue(q.mot, q.lang, q.dire)) : parler(aDire(q)));
 
 // Régler l'horloge : avec le doigt sur les aiguilles, ou avec les boutons (plus précis, et au clavier).
 function afficherReglage(q) {
@@ -762,6 +775,7 @@ async function choisir(choix) {
   const q = questionEnCours(partie);
   const p = partie;
   const juste = repondre(partie, choix);
+  if (jeu === 'langues') { langues.noter(joueuse, langueEcole, q.fr, juste); enregistrer(); } // gardé même si on quitte la partie
   $('#ecouter').disabled = true; // la question suivante n'est pas encore affichée
   for (const b of $('#reponses').querySelectorAll('button')) {
     b.disabled = true;
@@ -832,6 +846,10 @@ function finirPartie() {
     $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon ! 🗣️ +6 mots` : ''}</p><button class="gros secondaire">${tampon ? '🗣️ Mes nouveaux mots' : '📘 Mon passeport'}</button>`;
     $('#fin-extra button').addEventListener('click', () => { afficherPasseport(tampon ? 'pays' : 'livret'); montrer('passeport'); });
   }
+  if (jeu === 'langues') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">🗣️ Retour à l’école des langues</button>';
+    $('#fin-extra button').addEventListener('click', () => ouvrirLangues());
+  }
   if (jeu === 'veto') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">🩺 Retour à la clinique</button>';
     $('#fin-extra button').addEventListener('click', () => ouvrirVeto());
@@ -859,7 +877,7 @@ function finirPartie() {
 }
 
 $('#quitter').addEventListener('click', () => { partie = null; taire(); voixParents.arreter(); ouvrirIle(); });
-$('#ecouter').addEventListener('click', () => parler(aDire(questionEnCours(partie))));
+$('#ecouter').addEventListener('click', () => direQuestion(questionEnCours(partie)));
 for (const b of document.querySelectorAll('.reecouter')) b.addEventListener('click', () => repeter());
 
 // La consigne, puis les réponses proposées à voix haute (pour celles qui ne lisent pas encore bien)
@@ -871,6 +889,7 @@ function aDire(q) {
   if (jeu === 'veto') return veto.aDire(q);
   if (jeu === 'fractions') return fractions.aDire(q);
   if (jeu === 'passeport' && q.type === 'drapeau') return q.consigne; // les drapeaux ne se lisent pas : ce serait donner la réponse
+  if (jeu === 'langues') return q.consigne; // les mots étrangers ne se lisent pas avec la voix française
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
   if (q.mode === 'ingredient') return q.consigne; // les mots des boutons ne sont pas lus : c'est à l'enfant de les lire
@@ -1541,6 +1560,8 @@ function afficherAtlas(systeme, dire = false) {
 
 // Le musée des dinosaures : reconstituer un squelette (puzzle), lire sa fiche, puis le quiz
 let puzzle = null; // { cle, posees: [], ordre: [] }
+// L'image du dinosaure (images/dinos/…) ; sans image, son squelette
+const portraitDino = (d) => { const src = image(`dinos/${d.cle}`); return src ? `<img src="${src}" alt="">` : dinos.dessinerSquelette(d).replace('role="img"', 'aria-hidden="true"'); };
 function ouvrirMusee() {
   etoilesJoueuse();
   afficherMusee();
@@ -1552,7 +1573,12 @@ function afficherMusee() {
   etoilesJoueuse();
   const v = $('#musee-vue');
   v.replaceChildren(el('p', { className: 'carte presentation', textContent: `Tu as reconstitué ${joueuse.dinos.length} squelettes sur ${dinos.DINOS.length}. Le premier squelette de chaque dinosaure rapporte ${dinos.ETOILES_SQUELETTE} ⭐.` }),
-    el('div', { className: 'phrases' }, ...dinos.DINOS.map((d) => gros(`${joueuse.dinos.includes(d.cle) ? '✓ ' : '🦴 '}${d.nom}`, () => commencerPuzzle(d.cle), `petit${joueuse.dinos.includes(d.cle) ? ' choisi' : ''}`))),
+    el('div', { className: 'galerie-cartes' }, ...dinos.DINOS.map((d) => {
+      const b = el('button', { className: `carte-image${joueuse.dinos.includes(d.cle) ? ' choisi' : ''}` });
+      b.innerHTML = `${portraitDino(d)}<span>${joueuse.dinos.includes(d.cle) ? '✓ ' : ''}${d.nom}</span>`;
+      b.addEventListener('click', () => commencerPuzzle(d.cle));
+      return b;
+    })),
     gros('⭐ Le quiz des dinosaures', () => lancerJeu('dinos')));
 }
 function commencerPuzzle(cle) {
@@ -1776,6 +1802,26 @@ function voyager(cle) {
   if (avion) avion.style.transform = `translate(${x}px, ${y}px)`;
   parler(`En route pour ${passeport.pays(cle).nom.replace(/^La |^Le |^L’/, (m) => m.toLowerCase())} !`);
   setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
+}
+
+// L'école des langues : on choisit la langue, puis le thème ; les mots ratés reviennent (« à revoir »)
+let langueEcole = 'allemand', themeEcole = 'couleurs';
+function ouvrirLangues() {
+  etoilesJoueuse();
+  const L = langues.LANGUES[langueEcole];
+  $('#langues-vue').replaceChildren(
+    el('div', { className: 'phrases' }, ...Object.entries(langues.LANGUES).map(([cle, l]) =>
+      gros(`${l.drapeau} ${l.nom}`, () => { langueEcole = cle; ouvrirLangues(); }, `gros${cle === langueEcole ? ' choisi' : ' secondaire'}`))),
+    el('h2', { textContent: `Choisis un thème pour apprendre ${L.nom.replace(/^L’/, 'l’')} :` }),
+    el('div', { className: 'galerie-cartes' }, ...langues.THEMES.map((t) => {
+      const n = langues.aRevoir(joueuse, langueEcole, t.cle).length, src = image(`langues/${t.cle}`);
+      const b = el('button', { className: 'carte-image' });
+      b.innerHTML = `${src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${t.image}</span>`}<span>${t.nom}${n ? `<br>🔁 ${n} à revoir` : ''}</span>`;
+      b.addEventListener('click', () => { themeEcole = t.cle; lancerJeu('langues'); });
+      return b;
+    })));
+  montrer('langues');
+  parler(`L'école des langues ! Tu apprends ${L.nom.replace(/^L’/, 'l’')}. Choisis un thème : ${langues.THEMES.map((t) => t.nom).join(', ')}.`, { ton: 1.1 });
 }
 
 // La maison de la confiance : un thème à la fois. Aucune pénalité, jamais de « faux » ; les étoiles récompensent une étape finie, la première fois.

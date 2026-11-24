@@ -121,6 +121,7 @@
 3;images/ile/corps.webp;512x512;oui;Bâtiment : L'hôpital (le corps humain)
 3;images/ile/musee.webp;512x512;oui;Bâtiment : Le musée des dinosaures (reconstituer des squelettes)
 3;images/ile/fractions.webp;512x512;oui;Bâtiment : La pizzeria (les fractions)
+3;images/ile/langues.webp;512x512;oui;Bâtiment : L'école des langues (allemand et anglais)
 3;images/ile/aeroport.webp;512x512;oui;Bâtiment : L'aéroport (le passeport du monde)
 3;images/ile/urgences.webp;512x512;oui;Bâtiment : Les numéros d’urgence (144, 117, 118)
 3;images/ile/route.webp;512x512;oui;Bâtiment : Le code de la route (piétons et vélos)
@@ -420,3 +421,25 @@
 7;images/avent/22.webp;384x384;non;Calendrier de l’Avent, case 22
 7;images/avent/23.webp;384x384;non;Calendrier de l’Avent, case 23
 7;images/avent/24.webp;384x384;non;Calendrier de l’Avent, case 24
+8;images/dinos/trex.webp;512x320;oui;Dinosaure : Le Tyrannosaure, en entier, de profil
+8;images/dinos/triceratops.webp;512x320;oui;Dinosaure : Le Tricératops, en entier, de profil
+8;images/dinos/stegosaure.webp;512x320;oui;Dinosaure : Le Stégosaure, en entier, de profil
+8;images/dinos/diplodocus.webp;512x320;oui;Dinosaure : Le Diplodocus, en entier, de profil
+8;images/dinos/brachiosaure.webp;512x320;oui;Dinosaure : Le Brachiosaure, en entier, de profil
+8;images/dinos/velociraptor.webp;512x320;oui;Dinosaure : Le Vélociraptor, en entier, de profil
+8;images/dinos/ankylosaure.webp;512x320;oui;Dinosaure : L’Ankylosaure, en entier, de profil
+8;images/dinos/spinosaure.webp;512x320;oui;Dinosaure : Le Spinosaure, en entier, de profil
+8;images/dinos/parasaurolophus.webp;512x320;oui;Dinosaure : Le Parasaurolophus, en entier, de profil
+8;images/dinos/iguanodon.webp;512x320;oui;Dinosaure : L’Iguanodon, en entier, de profil
+8;images/dinos/allosaure.webp;512x320;oui;Dinosaure : L’Allosaure, en entier, de profil
+8;images/dinos/pachycephalosaure.webp;512x320;oui;Dinosaure : Le Pachycéphalosaure, en entier, de profil
+8;images/dinos/compsognathus.webp;512x320;oui;Dinosaure : Le Compsognathus, en entier, de profil
+8;images/dinos/argentinosaure.webp;512x320;oui;Dinosaure : L’Argentinosaure, en entier, de profil
+8;images/dinos/plateosaure.webp;512x320;oui;Dinosaure : Le Plateosaurus, en entier, de profil
+8;images/dinos/gallimimus.webp;512x320;oui;Dinosaure : Le Gallimimus, en entier, de profil
+8;images/langues/couleurs.webp;512x320;oui;Thème de langue : Les couleurs
+8;images/langues/animaux.webp;512x320;oui;Thème de langue : Les animaux
+8;images/langues/nombres.webp;512x320;oui;Thème de langue : Les nombres
+8;images/langues/famille.webp;512x320;oui;Thème de langue : La famille
+8;images/langues/nourriture.webp;512x320;oui;Thème de langue : À table
+8;images/langues/ecole.webp;512x320;oui;Thème de langue : À l’école

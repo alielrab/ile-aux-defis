@@ -22,7 +22,7 @@
 ## Les langues (à construire plus tard)
 Un mini-jeu de langues à deux niveaux.
 
-**1. L'école des langues** (île du savoir)
+**1. L'école des langues** (île du savoir) — **commencée** (`js/jeux/langues.js`) : allemand et anglais, 6 thèmes, « Écoute et touche », « Comment dit-on… ? » dès 8 ans, révision des mots ratés. Reste : la langue de famille, les paires, les petites scènes.
 - Un parcours complet pour l'**allemand** et l'**anglais**, plus une **langue de famille** au choix dans l'espace parents.
 - Thèmes : couleurs, animaux, famille, école, nourriture, nombres…
 - Mini-jeux :
