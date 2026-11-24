@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-52`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-53`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
@@ -32,7 +32,7 @@
   - En cas de vieux cache : désinscrire le service worker, vider les caches, puis recharger.
 
 ## En attente
-- **Améliorations du 25 nov.** : pastille « 3 jeux » sur les bâtiments qui en cachent plusieurs ; médailles sur la carte (`profil.parties`, bronze 1, argent 5, or 15 parties) ; **premiers secours** sur l'île de la sécurité (quiz, à faire relire) ; île de la nature à 20 ⭐ ; archipel agrandi vers le bas (2 places « Bientôt ») ; atelier des robots déplacé ; **mon potager** (semer en saison, arroser une fois par jour, récolter : `js/jeux/jardinage.js`, saisons à faire relire) ; monnaie à rendre au glacier dès 8 ans.
+- **Améliorations du 25 nov.** : pastille « 3 jeux » sur les bâtiments qui en cachent plusieurs ; médailles sur la carte (`profil.parties`, bronze 1, argent 5, or 15 parties) ; **premiers secours** sur l'île de la sécurité (quiz, à faire relire) ; île de la nature à 20 ⭐ ; archipel agrandi vers le bas (2 places « Bientôt ») ; atelier des robots déplacé, puis nouvelle carte de l’île des créateurs à 6 emplacements (une place libre) et tour de l’horloge recentrée ; **mon potager** (semer en saison, arroser une fois par jour, récolter : `js/jeux/jardinage.js`, saisons à faire relire) ; monnaie à rendre au glacier dès 8 ans.
   - **Cabane nature** : 19 fiches d'animaux (famille, milieu, régime, avec images Higgsfield dans `images/nature/`) et 17 fiches de plantes (comestible, à cuire, ne se mange pas, dangereuse), plus des questions de quiz tirées des fiches (`js/jeux/nature-fiches.js`). Les plantes restent en emoji : une image inventée pourrait tromper, et une plante dangereuse n'est jamais montrée avec un fruit appétissant. À faire relire par un parent.
   - Pas faits : le tangram et les minuscules de l'atelier d'écriture.
   - **Demandé ensuite** : de meilleurs visuels pour l'hôpital : une image par catégorie (comme les dinosaures et les thèmes de langue), puis des images interactives à la place des dessins dans chaque catégorie.
