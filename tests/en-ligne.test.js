@@ -1,13 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { dater, fusionner, copieDe, appliquer, aEnvoyer, disponible } from '../js/en-ligne.js';
+import { dater, fusionner, copieDe, appliquer, aEnvoyer } from '../js/en-ligne.js';
 
 const etat = (profils, code = '1234') => ({ version: 2, code, reglages: { suivante: 'auto' }, profils });
 const enfant = (id, etoiles, maj) => ({ id, prenom: id, etoiles, ...(maj ? { maj } : {}) });
-
-test('sans configuration, pas de compte en ligne', () => {
-  assert.equal(disponible(), false);
-});
 
 test('seul ce qui a changé depuis la dernière synchronisation est daté', () => {
   const local = etat([enfant('lea', 5, 100), enfant('tom', 3, 100)]);

@@ -28,6 +28,9 @@ drop policy if exists "sa famille" on public.profils;
 create policy "sa famille" on public.profils for all to authenticated
   using (famille = (select auth.uid())) with check (famille = (select auth.uid()));
 
+-- Le droit d'utiliser ces tables pour un parent connecté (au cas où le projet ne le donne pas tout seul)
+grant select, insert, update, delete on public.parents, public.profils to authenticated;
+
 -- Envoyer des changements : une version plus ancienne n'écrase jamais une plus récente
 create or replace function public.envoyer(parent jsonb, enfants jsonb) returns void
   language plpgsql security invoker set search_path = '' as $$
