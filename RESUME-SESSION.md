@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-38`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-39`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;

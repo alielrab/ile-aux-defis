@@ -443,21 +443,31 @@ function toucherArticle(a) {
   if (a.type === 'animal' && !joueuse.noms?.[a.id] && possede(joueuse, a)) demanderPrenom(a); // tout juste adopté : lui donner un prénom
 }
 
-// Donner (ou changer) le prénom d'un animal : un champ sous le magasin ou la maison
+// Donner (ou changer) le prénom d'un animal : une fenêtre au milieu de l'écran, avec l'animal
 function demanderPrenom(a) {
-  const champ = el('input', { className: 'texte-bulle', maxLength: 15, value: joueuse.noms?.[a.id] ?? '', placeholder: 'Son prénom' });
-  champ.setAttribute('aria-label', `Le prénom de ${a.nom.toLowerCase()}`);
+  const champ = el('input', { className: 'champ-prenom', maxLength: 15, value: joueuse.noms?.[a.id] ?? '', placeholder: 'Son prénom', autocomplete: 'off' });
+  champ.setAttribute('aria-label', `Le prénom de l'animal : ${a.nom.toLowerCase()}`);
+  const dessin = el('div', { className: 'apercu-prenom' });
+  dessin.innerHTML = apercu(a, joueuse);
+  const fenetre = el('dialog', { className: 'fenetre-prenom' });
+  const fermer = () => { fenetre.close(); fenetre.remove(); };
   const valider = () => {
     const nom = nommer(joueuse, a.id, champ.value);
+    if (!nom) return champ.focus();
     enregistrer();
+    fermer();
     afficherLieu();
-    $('#lieu-message').textContent = nom ? `${a.nom} s'appelle ${nom} !` : '';
-    if (nom) parler(`Bienvenue, ${nom} !`, { ton: 1.15 });
+    $('#lieu-message').textContent = `${a.nom} s'appelle ${nom} !`;
+    parler(`Bienvenue, ${nom} !`, { ton: 1.15 });
   };
   champ.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') valider(); });
-  $('#lieu-message').replaceChildren(el('span', { textContent: `Quel prénom veux-tu donner à ${a.nom.toLowerCase()} ? ` }), champ, gros("C'est son prénom !", valider, 'petit'));
+  fenetre.addEventListener('close', () => fenetre.remove());
+  fenetre.append(dessin, el('h2', { textContent: a.nom }), el('p', { textContent: 'Quel prénom veux-tu lui donner ?' }), champ,
+    el('div', { className: 'actions-prenom' }, gros('✔️ C’est son prénom !', valider), gros('Plus tard', fermer, 'gros secondaire')));
+  document.body.append(fenetre);
+  fenetre.showModal();
   champ.focus();
-  parler(`Quel prénom veux-tu donner à ${a.nom.toLowerCase()} ?`);
+  parler('Quel prénom veux-tu lui donner ?');
 }
 
 $('#lieu-retour').addEventListener('click', () => ouvrirIle());

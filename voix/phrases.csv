@@ -5033,26 +5033,27 @@ objet.cheveux.menthe;Magasins (noms des objets);Cheveux menthe
 objet.cheveux.bleu-nuit;Magasins (noms des objets);Cheveux bleu nuit
 app.1;Phrases de l'app;Voici l'archipel ! Choisis une île.
 app.2;Phrases de l'app;Le calendrier de l’Avent ! Chaque jour de décembre, une nouvelle case s’ouvre.
-app.4;Phrases de l'app;Que veux-tu faire ? Additions, soustractions, multiplications ou divisions ?
-app.5;Phrases de l'app;Voici les planètes à la même échelle. Jupiter est la plus grosse. Le Soleil est si gros qu'on n'en voit qu'un bout !
-app.6;Phrases de l'app;Bienvenue à l'atelier de peinture ! Tu peux peindre avec ton doigt, colorier un dessin, ou faire un coloriage magique. Tes dessins vont dans ta galerie, et tu peux les accrocher dans ta maison.
-app.7;Phrases de l'app;Que veux-tu faire ?
-app.8;Phrases de l'app;Choisis une couleur et peins avec ton doigt !
-app.9;Phrases de l'app;Quel dessin veux-tu colorier ?
-app.10;Phrases de l'app;Tout effacer ? Touche encore pour confirmer.
-app.11;Phrases de l'app;Ta feuille est encore blanche. Peins quelque chose d'abord !
-app.12;Phrases de l'app;Bravo ! Ton dessin est dans ta galerie. Tu peux l’accrocher dans ta maison.
-app.13;Phrases de l'app;Enlever ce dessin ? Touche encore pour confirmer.
-app.14;Phrases de l'app;Bienvenue à la météo des émotions ! Quel temps fait-il dans ton cœur aujourd'hui ? Tu peux aussi jouer à deviner les émotions.
-app.15;Phrases de l'app;Viens respirer avec moi. Regarde la bulle.
-app.16;Phrases de l'app;Bienvenue à l'atelier BD ! Invente une petite histoire en cases : choisis un décor, des personnages et ce qu'ils disent.
-app.17;Phrases de l'app;Bravo ! Ta BD est rangée dans « Mes BD ». Veux-tu l’écouter ?
-app.18;Phrases de l'app;Enlever cette BD ? Touche encore pour confirmer.
-app.19;Phrases de l'app;Bienvenue à l'hôpital ! Voici l'atlas du corps. Choisis une page pour découvrir ton corps.
-app.20;Phrases de l'app;Bienvenue au musée des dinosaures ! Choisis un dinosaure pour reconstituer son squelette.
-app.21;Phrases de l'app;Ce n’est pas la bonne pièce. Regarde bien la forme qui brille !
-app.22;Phrases de l'app;Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.
-app.23;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
-app.24;Phrases de l'app;Regarde-toi dans le miroir. Touche tout ce qui est vrai pour toi.
-app.25;Phrases de l'app;La salle de musique. Touche les cases pour poser des notes, puis écoute ta mélodie !
-app.26;Phrases de l'app;Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?
+app.4;Phrases de l'app;Quel prénom veux-tu lui donner ?
+app.5;Phrases de l'app;Que veux-tu faire ? Additions, soustractions, multiplications ou divisions ?
+app.6;Phrases de l'app;Voici les planètes à la même échelle. Jupiter est la plus grosse. Le Soleil est si gros qu'on n'en voit qu'un bout !
+app.7;Phrases de l'app;Bienvenue à l'atelier de peinture ! Tu peux peindre avec ton doigt, colorier un dessin, ou faire un coloriage magique. Tes dessins vont dans ta galerie, et tu peux les accrocher dans ta maison.
+app.8;Phrases de l'app;Que veux-tu faire ?
+app.9;Phrases de l'app;Choisis une couleur et peins avec ton doigt !
+app.10;Phrases de l'app;Quel dessin veux-tu colorier ?
+app.11;Phrases de l'app;Tout effacer ? Touche encore pour confirmer.
+app.12;Phrases de l'app;Ta feuille est encore blanche. Peins quelque chose d'abord !
+app.13;Phrases de l'app;Bravo ! Ton dessin est dans ta galerie. Tu peux l’accrocher dans ta maison.
+app.14;Phrases de l'app;Enlever ce dessin ? Touche encore pour confirmer.
+app.15;Phrases de l'app;Bienvenue à la météo des émotions ! Quel temps fait-il dans ton cœur aujourd'hui ? Tu peux aussi jouer à deviner les émotions.
+app.16;Phrases de l'app;Viens respirer avec moi. Regarde la bulle.
+app.17;Phrases de l'app;Bienvenue à l'atelier BD ! Invente une petite histoire en cases : choisis un décor, des personnages et ce qu'ils disent.
+app.18;Phrases de l'app;Bravo ! Ta BD est rangée dans « Mes BD ». Veux-tu l’écouter ?
+app.19;Phrases de l'app;Enlever cette BD ? Touche encore pour confirmer.
+app.20;Phrases de l'app;Bienvenue à l'hôpital ! Voici l'atlas du corps. Choisis une page pour découvrir ton corps.
+app.21;Phrases de l'app;Bienvenue au musée des dinosaures ! Choisis un dinosaure pour reconstituer son squelette.
+app.22;Phrases de l'app;Ce n’est pas la bonne pièce. Regarde bien la forme qui brille !
+app.23;Phrases de l'app;Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.
+app.24;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
+app.25;Phrases de l'app;Regarde-toi dans le miroir. Touche tout ce qui est vrai pour toi.
+app.26;Phrases de l'app;La salle de musique. Touche les cases pour poser des notes, puis écoute ta mélodie !
+app.27;Phrases de l'app;Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?
