@@ -6,7 +6,7 @@
 
 | Idée | Le principe |
 |---|---|
-| Dictée magique | Un mot est lu à voix haute, l'enfant l'écrit |
+| Dictée magique | **Fait** (dans la bibliothèque) : un mot est lu à voix haute, l'enfant l'écrit en touchant les lettres |
 | Langues | Voir « Les langues » plus bas : l'école des langues et les mots de voyage |
 | Syllabes | Assembler des syllabes pour apprendre à lire |
 | Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |

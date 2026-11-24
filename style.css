@@ -432,6 +432,8 @@ select {
   background: #fffdf5; color: var(--texte); border: 3px dashed #9a6334; font-family: "Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive; font-size: clamp(1.3rem, 1rem + 2vw, 2.2rem);
 }
 .case:not(:empty) { border-style: solid; border-color: #1e8e3e; background: #e3f7e8; }
+.cases.lettres { gap: 5px; }
+.cases.lettres .case { min-width: 1.5em; padding: 0 0.1em; } /* la dictée : une case par lettre */
 .reponse.syllabe { font-size: clamp(1.4rem, 1.1rem + 2vw, 2.4rem); }
 .reponse.utilisee { opacity: 0.35; }
 .tremble { animation: tremble 0.4s; border-color: var(--erreur); }
@@ -544,6 +546,8 @@ select {
 #aide .squelette { width: min(100%, 420px); }
 .galerie-cartes { width: 100%; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr)); }
 .carte-image { min-width: 0; hyphens: auto; overflow-wrap: break-word; display: grid; gap: 4px; padding: 6px; border: 3px solid transparent; border-radius: 14px; background: #fffdf5; font: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 0 rgb(0 0 0 / 0.2); }
+.galerie-cartes.grandes { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 34rem; margin: 0 auto; }
+.galerie-cartes.grandes .carte-image { font-size: 1.25rem; padding: 1rem 0.6rem; }
 .carte-image .emoji-theme { font-size: 3.5rem; line-height: 1; aspect-ratio: 8 / 5; display: grid; place-items: center; }
 .carte-image.choisi { border-color: #1e8e3e; background: #c8f0d0; }
 .carte-image img, .carte-image svg, .reponse-dino img, .reponse-dino svg { width: 100%; aspect-ratio: 8 / 5; object-fit: contain; border-radius: 10px; display: block; }

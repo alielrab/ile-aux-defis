@@ -17,6 +17,7 @@ import * as calcul from './jeux/calcul.js';
 import * as heure from './jeux/heure.js';
 import * as corps from './jeux/corps.js';
 import * as syllabes from './jeux/syllabes.js';
+import * as dictee from './jeux/dictee.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -57,7 +58,7 @@ function poserDecor(el, nom) {
   el.classList.toggle('decor-image', Boolean(img));
 }
 const DECORS_ECRANS = { memory: 'memory', musique: 'musique', chantier: 'chantier', bd: 'bd', atelier: 'peinture', musee: 'musee', veto: 'veto',
-  urgences: 'urgences', langues: 'langues', emotions: 'emotions', observatoire: 'espace', restaurant: 'cuisine', passeport: 'aeroport', atlas: 'corps' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
+  urgences: 'urgences', langues: 'langues', bibliotheque: 'syllabes', emotions: 'emotions', observatoire: 'espace', restaurant: 'cuisine', passeport: 'aeroport', atlas: 'corps' }; // les lieux qui ont leur propre écran : l'image remplit la fenêtre (#decor)
 
 function montrer(nom) {
   for (const e of document.querySelectorAll('[data-ecran]')) e.hidden = e.dataset.ecran !== nom;
@@ -303,6 +304,7 @@ function entrerLieu(cible) {
   if (id === 'musee') return ouvrirMusee();
   if (id === 'aeroport') return ouvrirPasseport();
   if (id === 'langues') return ouvrirLangues();
+  if (id === 'syllabes') return ouvrirBibliotheque();
   if (id === 'urgences') return ouvrirUrgences();
   if (id === 'musique') return ouvrirMusique();
   if (id === 'chantier') return ouvrirChantier();
@@ -513,7 +515,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -548,7 +550,7 @@ function lancerJeu(nom) {
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   poserDecor($('#salle'), nom === 'passeport' ? 'aeroport' : lieu);
   const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
@@ -584,7 +586,7 @@ function afficherQuestion() {
     $('#aide').innerHTML = heure.dessinerHorloge(q.mode === 'lire' ? q.reponse : q.depart, q.mode === 'regler');
     if (q.mode === 'lire') boutonsReponses(q.choix, heure.ecrire);
     else afficherReglage(q);
-  } else if (jeu === 'syllabes') {
+  } else if (jeu === 'syllabes' || jeu === 'dictee') {
     afficherSyllabes(q);
   } else if (jeu === 'marche') {
     afficherMarche(q);
@@ -663,9 +665,9 @@ function afficherReglage(q) {
 // La bibliothèque : on touche les syllabes dans l'ordre ; une erreur fait trembler la syllabe (on peut réessayer).
 function afficherSyllabes(q) {
   let place = 0, erreur = false;
-  $('#aide').innerHTML = `<div class="mot-image ombre" aria-hidden="true">${q.image}</div>
-    <div class="cases">${q.syllabes.map(() => '<span class="case"></span>').join('')}</div>`;
-  $('#reponses').style.gridTemplateColumns = `repeat(${Math.min(q.tuiles.length, 3)}, minmax(0, 1fr))`;
+  $('#aide').innerHTML = `<div class="mot-image${q.cache ? '' : ' ombre'}" aria-hidden="true">${q.cache ?? q.image}</div>
+    <div class="cases${q.cache ? ' lettres' : ''}">${q.syllabes.map(() => '<span class="case"></span>').join('')}</div>`;
+  $('#reponses').style.gridTemplateColumns = `repeat(${Math.min(q.tuiles.length, q.colonnes ?? 3)}, minmax(0, 1fr))`;
   $('#reponses').replaceChildren(...q.tuiles.map((t) => {
     const b = document.createElement('button');
     b.className = 'reponse syllabe';
@@ -684,6 +686,7 @@ function afficherSyllabes(q) {
       b.classList.add('utilisee');
       if (++place === q.syllabes.length) {
         $('#aide .mot-image').classList.remove('ombre');
+        $('#aide .mot-image').textContent = q.image; // la dictée : l'image du mot apparaît à la fin
         choisir(erreur ? '' : q.reponse);
       }
     });
@@ -878,6 +881,10 @@ function finirPartie() {
     fin += tampon ? ` Nouveau tampon pour ${p.nom.toLowerCase().replace(/^l’/, 'l’')} dans ton passeport ! Et tu débloques 6 mots en ${passeport.MOTS[paysCourant].langue}.` : partie.bonnes < passeport.BONNES_POUR_TAMPON ? ' Il faut 2 bonnes réponses pour le tampon : réessaie !' : '';
     $('#fin-extra').innerHTML = `<p class="gain">${tampon ? `${p.drapeau} Nouveau tampon ! 🗣️ +6 mots` : ''}</p><button class="gros secondaire">${tampon ? '🗣️ Mes nouveaux mots' : '📘 Mon passeport'}</button>`;
     $('#fin-extra button').addEventListener('click', () => { afficherPasseport(tampon ? 'pays' : 'livret'); montrer('passeport'); });
+  }
+  if (jeu === 'syllabes' || jeu === 'dictee') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">📚 Retour à la bibliothèque</button>';
+    $('#fin-extra button').addEventListener('click', () => ouvrirBibliotheque());
   }
   if (jeu === 'langues') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">🗣️ Retour à l’école des langues</button>';
@@ -1835,6 +1842,22 @@ function voyager(cle) {
   if (avion) avion.style.transform = `translate(${x}px, ${y}px)`;
   parler(`En route pour ${passeport.pays(cle).nom.replace(/^La |^Le |^L’/, (m) => m.toLowerCase())} !`);
   setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
+}
+
+// La bibliothèque : deux jeux de mots
+function ouvrirBibliotheque() {
+  etoilesJoueuse();
+  const carte = (emoji, nom, detail, nomJeu) => {
+    const b = el('button', { className: 'carte-image' });
+    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.addEventListener('click', () => lancerJeu(nomJeu));
+    return b;
+  };
+  $('#bibliotheque-vue').replaceChildren(el('div', { className: 'galerie-cartes grandes' },
+    carte('🧩', 'La chasse aux syllabes', 'Forme le mot de l’image', 'syllabes'),
+    carte('✏️', 'La dictée magique', 'Écris le mot que tu entends', 'dictee')));
+  montrer('bibliotheque');
+  parler('Bienvenue à la bibliothèque ! Choisis : la chasse aux syllabes, ou la dictée magique.', { ton: 1.1 });
 }
 
 // L'école des langues : on choisit la langue, puis le thème ; les mots ratés reviennent (« à revoir »)

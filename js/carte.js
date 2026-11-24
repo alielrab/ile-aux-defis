@@ -22,7 +22,7 @@ export const LIEUX = [
   // L'île du savoir
   { id: 'calcul', ile: 'savoir', type: 'jeu', nom: "L'école", detail: 'Calcul', ouvert: true, x: 200, y: 330 },
   { id: 'heure', ile: 'savoir', type: 'jeu', nom: "La tour\nde l'horloge", detail: "lire l'heure", ouvert: true, x: 600, y: 330 },
-  { id: 'syllabes', ile: 'savoir', type: 'jeu', nom: 'La bibliothèque', detail: 'la chasse aux syllabes', ouvert: true, x: 200, y: 590 },
+  { id: 'syllabes', ile: 'savoir', type: 'jeu', nom: 'La bibliothèque', detail: 'les syllabes et la dictée', ouvert: true, x: 200, y: 590 },
   { id: 'espace', ile: 'savoir', type: 'jeu', nom: "L'observatoire", detail: 'le système solaire', ouvert: true, x: 600, y: 590 },
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
   { id: 'musee', ile: 'savoir', type: 'jeu', nom: 'Le musée\ndes dinosaures', detail: 'reconstituer des squelettes', ouvert: true, x: 400, y: 330 },
