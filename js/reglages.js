@@ -25,8 +25,8 @@ export const QUESTIONS_PAR_PARTIE = 10;
 // memory = Memory (par paire trouvée ; à 8 ans et plus, il y a 10 paires au lieu de 6),
 // peinture = atelier de peinture (par zone réussie du coloriage magique ; la peinture libre ne rapporte pas d'étoiles).
 export const ETOILES_AUTRES_JEUX = [
-  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, dictee: 1.5, robot: 1.5, espace: 1, cuisine: 1, croyance: 1, marche: 1.5, peinture: 0.5, emotions: 1, dinos: 1.5, passeport: 1.5, urgences: 1.5, route: 1.5, tri: 1.5, chantier: 1, veto: 1.5, fractions: 1.5, memory: 0.75, langues: 1.5 }, // 7 ans et moins
-  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, dictee: 1, robot: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1, peinture: 0.5, emotions: 1, dinos: 1, passeport: 1, urgences: 1, route: 1, tri: 1, chantier: 0.5, veto: 1, fractions: 1, memory: 0.5, langues: 1 }, // 8 ans et plus
+  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, dictee: 1.5, robot: 1.5, suisse: 1.5, espace: 1, cuisine: 1, croyance: 1, marche: 1.5, peinture: 0.5, emotions: 1, dinos: 1.5, passeport: 1.5, urgences: 1.5, route: 1.5, tri: 1.5, chantier: 1, veto: 1.5, fractions: 1.5, memory: 0.75, langues: 1.5 }, // 7 ans et moins
+  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, dictee: 1, robot: 1, suisse: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1, peinture: 0.5, emotions: 1, dinos: 1, passeport: 1, urgences: 1, route: 1, tri: 1, chantier: 0.5, veto: 1, fractions: 1, memory: 0.5, langues: 1 }, // 8 ans et plus
 ];
 
 // Prix (en étoiles) pour débloquer une île de l'archipel. Le village et le savoir sont ouverts dès le départ.

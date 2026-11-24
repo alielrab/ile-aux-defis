@@ -9,7 +9,7 @@
 | Dictée magique | **Fait** (dans la bibliothèque) : un mot est lu à voix haute, l'enfant l'écrit en touchant les lettres |
 | Langues | Voir « Les langues » plus bas : l'école des langues et les mots de voyage |
 | Syllabes | Assembler des syllabes pour apprendre à lire |
-| Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |
+| Explorateur de la Suisse | **Commencé** (quiz à l'aéroport : cantons, chefs-lieux, langues, lacs, montagnes). Reste : la carte des cantons à toucher |
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
 | Code avec un robot | **Fait** (atelier des robots, île des créateurs) : programmer un robot avec des flèches pour atteindre l'étoile |
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |

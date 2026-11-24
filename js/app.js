@@ -19,6 +19,7 @@ import * as corps from './jeux/corps.js';
 import * as syllabes from './jeux/syllabes.js';
 import * as dictee from './jeux/dictee.js';
 import * as robot from './jeux/robot.js';
+import * as suisse from './jeux/suisse.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -516,7 +517,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, dictee, robot, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -552,9 +553,9 @@ function lancerJeu(nom) {
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   if (nom !== 'robot') joueuse.vus[cle] = [...vus]; // (les niveaux du robot sont tirés au hasard : rien à retenir) // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
-  poserDecor($('#salle'), nom === 'passeport' ? 'aeroport' : lieu);
+  poserDecor($('#salle'), lieu === 'passeport' ? 'aeroport' : lieu);
   const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
   $('#maitre-dessin').innerHTML = perso ? `<img src="${perso}" alt="">` : nom === 'corps' ? corps.docteure(PERSONNAGES.corps, 14) : dessinerAvatar(PERSONNAGES[lieu], 'entier', 14);
   montrer('jeu');
@@ -605,7 +606,7 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
-  } else if (jeu === 'route' || jeu === 'tri') {
+  } else if (jeu === 'route' || jeu === 'tri' || jeu === 'suisse') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'langues') {
@@ -936,6 +937,10 @@ function finirPartie() {
   if (jeu === 'syllabes' || jeu === 'dictee') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">📚 Retour à la bibliothèque</button>';
     $('#fin-extra button').addEventListener('click', () => ouvrirBibliotheque());
+  }
+  if (jeu === 'suisse') {
+    $('#fin-extra').innerHTML = '<button class="gros secondaire">🛫 Retour à l’aéroport</button>';
+    $('#fin-extra button').addEventListener('click', () => ouvrirPasseport());
   }
   if (jeu === 'langues') {
     $('#fin-extra').innerHTML = '<button class="gros secondaire">🗣️ Retour à l’école des langues</button>';
@@ -1874,7 +1879,8 @@ function afficherPasseport(vue) {
       gros(tampons.includes(p.cle) ? '✈️ Petit quiz (déjà tamponné ✓)' : '✈️ Petit quiz pour gagner le tampon', () => lancerJeu('passeport')));
     return parler(passeport.presentation(p, joueuse.age));
   }
-  v.replaceChildren(carte, gros(`📘 Mon passeport (${tampons.length} / ${passeport.PAYS.length})`, () => afficherPasseport('livret'), 'gros secondaire'),
+  v.replaceChildren(carte, el('div', { className: 'actions-atelier' }, gros(`📘 Mon passeport (${tampons.length} / ${passeport.PAYS.length})`, () => afficherPasseport('livret'), 'gros secondaire'),
+    gros('🏔️ L’explorateur de la Suisse', () => lancerJeu('suisse'))),
     el('div', { className: 'phrases' }, ...passeport.PAYS.map((p) => gros(`${p.drapeau} ${p.nom}${tampons.includes(p.cle) ? ' ✓' : ''}`, () => voyager(p.cle), `petit${tampons.includes(p.cle) ? ' choisi' : ''}`))));
 }
 // Les 6 mots de voyage du pays : débloqués par le tampon, chacun avec sa prononciation et un 🔊
