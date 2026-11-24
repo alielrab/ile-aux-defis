@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }] = await Promise.all(
-  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js')]);
+const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }, { ANIMAUX }] = await Promise.all(
+  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js'), js('jeux/nature-fiches.js')]);
 
 const lignes = [];
 const ajouter = (etape, fichier, taille, sujet, transparent = true) => lignes.push([etape, `images/${fichier}.webp`, taille, transparent ? 'oui' : 'non', sujet]);
@@ -53,6 +53,8 @@ for (const [k, nom] of Object.entries(COIFFURES)) for (const c of ['devant', 'de
 for (const d of DINOS) ajouter(8, `dinos/${d.cle}`, '512x320', `Dinosaure : ${d.nom}, en entier, de profil`);
 // Étape 8 aussi : les thèmes de l'école des langues
 for (const t of THEMES) ajouter(8, `langues/${t.cle}`, '512x320', `Thème de langue : ${t.nom}`);
+// Les animaux de la cabane nature
+for (const a of ANIMAUX) ajouter(8, `nature/${a[0]}`, '512x320', `Animal : ${a[1]}, en entier`);
 
 lignes.sort((a, b) => a[0] - b[0]);
 writeFileSync(new URL('images/liste.csv', racine), `﻿etape;fichier;taille;transparent;sujet\n${lignes.map((l) => l.join(';')).join('\n')}\n`); // BOM : les accents s'ouvrent bien dans Excel

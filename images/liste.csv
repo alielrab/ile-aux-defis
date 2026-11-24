@@ -141,6 +141,7 @@
 3;images/ile/urgences.webp;512x512;oui;Bâtiment : Les numéros d’urgence (144, 117, 118)
 3;images/ile/route.webp;512x512;oui;Bâtiment : Le code de la route (piétons et vélos)
 3;images/ile/tri.webp;512x512;oui;Bâtiment : Le centre de tri (la bonne poubelle)
+3;images/ile/secours.webp;512x512;oui;Bâtiment : Les premiers secours (soigner les petits bobos)
 3;images/ile/cuisine.webp;512x512;oui;Bâtiment : Le restaurant (la cuisine de l’île)
 3;images/ile/peinture.webp;512x512;oui;Bâtiment : L'atelier de peinture (colorier et peindre)
 3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
@@ -149,7 +150,7 @@
 3;images/ile/confiance.webp;512x512;oui;Bâtiment : La maison de la confiance (mes droits et ma sécurité)
 3;images/ile/emotions.webp;512x512;oui;Bâtiment : La météo des émotions (reconnaître ses émotions)
 3;images/ile/missions.webp;512x512;oui;Bâtiment : Les missions de la maison (aider à la maison)
-3;images/ile/naturaliste.webp;512x512;oui;Bâtiment : La cabane nature (animaux, plantes et arbres)
+3;images/ile/naturaliste.webp;512x512;oui;Bâtiment : La cabane nature (les fiches des animaux et des plantes, et un quiz)
 3;images/ile/potager.webp;512x512;oui;Bâtiment : Le potager (fruits, légumes et saisons)
 3;images/ile/labyrinthe.webp;512x512;oui;Bâtiment : Le labyrinthe (trouver la sortie)
 3;images/ile/glacier.webp;512x512;oui;Bâtiment : Le glacier de la plage (servir les glaces)
@@ -482,3 +483,22 @@
 8;images/langues/famille.webp;512x320;oui;Thème de langue : La famille
 8;images/langues/nourriture.webp;512x320;oui;Thème de langue : À table
 8;images/langues/ecole.webp;512x320;oui;Thème de langue : À l’école
+8;images/nature/renard.webp;512x320;oui;Animal : Le renard, en entier
+8;images/nature/herisson.webp;512x320;oui;Animal : Le hérisson, en entier
+8;images/nature/ecureuil.webp;512x320;oui;Animal : L’écureuil, en entier
+8;images/nature/cerf.webp;512x320;oui;Animal : Le cerf, en entier
+8;images/nature/chauve-souris.webp;512x320;oui;Animal : La chauve-souris, en entier
+8;images/nature/lievre.webp;512x320;oui;Animal : Le lièvre, en entier
+8;images/nature/loup.webp;512x320;oui;Animal : Le loup, en entier
+8;images/nature/castor.webp;512x320;oui;Animal : Le castor, en entier
+8;images/nature/hibou.webp;512x320;oui;Animal : Le hibou, en entier
+8;images/nature/aigle.webp;512x320;oui;Animal : L’aigle royal, en entier
+8;images/nature/canard.webp;512x320;oui;Animal : Le canard, en entier
+8;images/nature/grenouille.webp;512x320;oui;Animal : La grenouille, en entier
+8;images/nature/lezard.webp;512x320;oui;Animal : Le lézard, en entier
+8;images/nature/couleuvre.webp;512x320;oui;Animal : La couleuvre, en entier
+8;images/nature/abeille.webp;512x320;oui;Animal : L’abeille, en entier
+8;images/nature/coccinelle.webp;512x320;oui;Animal : La coccinelle, en entier
+8;images/nature/papillon.webp;512x320;oui;Animal : Le papillon, en entier
+8;images/nature/escargot.webp;512x320;oui;Animal : L’escargot, en entier
+8;images/nature/truite.webp;512x320;oui;Animal : La truite, en entier

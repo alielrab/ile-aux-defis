@@ -64,7 +64,7 @@ test('archipel : village et savoir ouverts ; les autres îles ont un prix régla
   const svg = dessinerArchipel(p);
   for (const i of ILES) assert.ok(svg.includes(`data-ile="${i.id}"`), i.id);
   assert.match(svg, new RegExp(`⭐ ${PRIX_ILES.coeur}`));
-  assert.equal(svg.match(/class="ile fermee"/g).length, 2);
+  assert.equal(svg.match(/class="ile fermee"/g).length, 3); // créateurs, cœur, nature
   assert.match(svg, /Bientôt…/); // de la place pour d'autres îles
   debloquerIle(p, 'createurs');
   assert.equal(p.etoiles, 50 - PRIX_ILES.createurs);

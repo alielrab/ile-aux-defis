@@ -15,8 +15,8 @@
 | Défi entre sœurs | **Fait** (défi à deux, salle de jeux) : 5 questions chacun, à son niveau |
 | Aide à la maison | **Fait** (missions de la maison, île du cœur). Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
 | Atelier d'écriture | **Commencé** (bibliothèque) : tracer les majuscules au doigt, dans le bon sens. Reste : les minuscules et les mots |
-| Potager | **Commencé** (île de la nature) : quiz sur les fruits, les légumes et les saisons. Reste : semer, arroser, voir pousser |
-| Le glacier de la plage | **Commencé** (île de la nature, sans la monnaie). Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
+| Potager | **Fait** (île de la nature) : mon potager (semer en saison, arroser, récolter) et un quiz |
+| Le glacier de la plage | **Fait** (île de la nature, monnaie à rendre dès 8 ans). Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
 | Jeux de réflexion | Labyrinthe **fait** (île de la nature). Reste le tangram. Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
 ## Les langues (à construire plus tard)

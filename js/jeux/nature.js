@@ -1,6 +1,7 @@
 // L'île de la nature : deux quiz. La cabane nature (le petit naturaliste : animaux, plantes, arbres) et le potager (fruits, légumes, saisons).
 // 7 ans et moins : les questions faciles, 3 choix. Dès 8 ans : toutes les questions, 4 choix.
 import { melanger, etoilesDuJeu, parmiLesNouveaux } from '../partie.js';
+import { questionsDesFiches } from './nature-fiches.js';
 
 // [image, question, bonne réponse, les autres réponses]
 export const NATURALISTE = { faciles: [
@@ -68,7 +69,7 @@ export const POTAGER = { faciles: [
 ] };
 
 // Un jeu de quiz à partir d'une banque { faciles, difficiles }
-const quiz = (nom, banque) => ({
+export const quiz = (nom, banque) => ({
   etoilesParBonneReponse: (age) => etoilesDuJeu(nom, age),
   question({ age }, aleatoire = Math.random, numero = 0, vus = new Set()) {
     const petits = age <= 7;
@@ -77,5 +78,35 @@ const quiz = (nom, banque) => ({
     return { mode: 'choix', texte: `${image}${titre}`, titre, consigne: titre, image, reponse: bonne, choix, solution: `La bonne réponse : ${bonne}.` };
   },
 });
-export const naturaliste = quiz('naturaliste', NATURALISTE);
+// Les premiers secours (île de la sécurité). Les gestes simples, et toujours : prévenir un adulte. À faire relire par un parent ou un soignant.
+export const SECOURS = { faciles: [
+  ['🩹', 'Tu t’es écorché le genou. Que fais-tu d’abord ?', 'Je nettoie avec de l’eau', ['Je mets de la terre dessus', 'Je frotte très fort', 'Je ne fais rien et je cours']],
+  ['👃', 'Ton nez saigne. Comment te mets-tu ?', 'Assis, la tête penchée en avant, en pinçant le nez', ['La tête en arrière', 'Allongé sur le dos', 'La tête en bas']],
+  ['🔥', 'Tu t’es brûlé le doigt. Que fais-tu ?', 'Je le passe longtemps sous l’eau fraîche', ['Je mets du beurre', 'Je frotte fort', 'Je le cache']],
+  ['🐝', 'Une abeille t’a piqué. Que fais-tu ?', 'Je préviens un adulte', ['Je gratte très fort', 'Je ne dis rien', 'Je cours après l’abeille']],
+  ['📞', 'Quelqu’un est gravement blessé. Quel numéro appelle-t-on en Suisse ?', 'Le 144', ['Le 123', 'Le 000', 'Le 999']],
+  ['🤕', 'Un copain est tombé et ne se relève pas. Que fais-tu ?', 'Je vais vite chercher un adulte', ['Je le tire par le bras', 'Je lui donne à boire', 'Je rentre chez moi']],
+  ['💊', 'Tu trouves des médicaments sur la table. Que fais-tu ?', 'Je n’y touche pas et je préviens un adulte', ['J’en goûte un', 'J’en donne au chat', 'Je les cache']],
+  ['🧼', 'Avant de soigner un bobo, que fait-on ?', 'On se lave les mains', ['On se coiffe', 'On met ses chaussures', 'On ferme les yeux']],
+  ['🩹', 'À quoi sert un pansement ?', 'À protéger la plaie des saletés', ['À faire joli', 'À tenir chaud', 'À rien du tout']],
+  ['🧊', 'Tu t’es cogné, et une bosse arrive. Que fais-tu ?', 'Je mets du froid, dans un linge', ['Je mets du chaud', 'Je frotte très fort', 'Je saute sur place']],
+  ['😮', 'Quelqu’un s’étouffe en mangeant et ne peut plus parler. Que fais-tu ?', 'J’appelle tout de suite un adulte', ['Je lui donne à boire', 'Je ris', 'J’attends que ça passe']],
+  ['🧴', 'Tu vois une bouteille de produit pour nettoyer. Que fais-tu ?', 'Je n’y touche pas : c’est dangereux', ['Je la sens de près', 'Je goûte', 'Je la vide dans un verre']],
+], difficiles: [
+  ['📞', 'Au 144, que dis-tu en premier ?', 'Où je suis, et ce qui s’est passé', ['Mon plat préféré', 'Le nom de mon chat', 'Rien : j’attends']],
+  ['📞', 'Au téléphone avec le 144, quand peux-tu raccrocher ?', 'Quand la personne au téléphone me le dit', ['Tout de suite', 'Quand j’en ai envie', 'Après dix secondes']],
+  ['🔥', 'Combien de temps garde-t-on une brûlure sous l’eau fraîche ?', 'Au moins dix minutes', ['Dix secondes', 'Une minute', 'Le temps de compter jusqu’à trois']],
+  ['🤕', 'Quelqu’un est tombé de haut et a très mal au dos. Que fais-tu ?', 'Je ne le déplace pas, et j’appelle un adulte ou le 144', ['Je l’aide à se relever vite', 'Je le porte jusqu’à la maison', 'Je lui masse le dos']],
+  ['☠️', 'Quel numéro appelle-t-on en Suisse si quelqu’un a avalé un produit dangereux ?', 'Le 145', ['Le 118', 'Le 117', 'Le 147']],
+  ['🩸', 'Une plaie saigne beaucoup. Que fait-on ?', 'On appuie dessus avec un linge propre, et on appelle un adulte', ['On regarde et on attend', 'On la passe au sèche-cheveux', 'On met du sable']],
+  ['⚡', 'Quelqu’un touche un fil électrique et reste collé. Que fais-tu ?', 'Je ne le touche pas, et j’appelle vite un adulte', ['Je le tire par la main', 'Je verse de l’eau', 'Je touche le fil aussi']],
+  ['🚲', 'Qu’est-ce qui protège ta tête à vélo ?', 'Le casque', ['La casquette', 'Les lunettes', 'Le bonnet']],
+  ['🌞', 'Il fait très chaud, et tu as mal à la tête. Que fais-tu ?', 'Je me mets à l’ombre et je bois de l’eau', ['Je cours au soleil', 'Je mets un gros pull', 'Je ne bois rien']],
+  ['😴', 'Une personne est par terre et ne répond pas quand on lui parle. Que fais-tu ?', 'J’appelle tout de suite un adulte ou le 144', ['Je la laisse dormir', 'Je lui fais une blague', 'Je pars jouer']],
+  ['🧊', 'Pourquoi ne met-on pas un glaçon directement sur la peau ?', 'Il peut abîmer la peau', ['Il est trop mouillé', 'Il fond trop vite', 'Il chatouille']],
+  ['🧰', 'Que trouve-t-on dans une trousse de secours ?', 'Des pansements et du désinfectant', ['Des bonbons', 'Des crayons de couleur', 'Des pièces de monnaie']],
+] };
+export const secours = quiz('secours', SECOURS);
+// Le quiz de la cabane nature pose aussi des questions tirées des fiches des animaux et des plantes
+export const naturaliste = quiz('naturaliste', { faciles: [...NATURALISTE.faciles, ...questionsDesFiches(false)], difficiles: [...NATURALISTE.difficiles, ...questionsDesFiches(true)] });
 export const potager = quiz('potager', POTAGER);

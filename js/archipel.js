@@ -13,7 +13,7 @@ export const ILES = [
   { id: 'nature', nom: "L'île de la nature", x: 575, y: 975, herbe: '#a8dc8a', vitrine: ['naturaliste', 'glacier'] },
 ];
 // De la place pour les prochaines îles (dessinées dans la brume, « Bientôt »)
-export const EMPLACEMENTS_LIBRES = [[400, 465]];
+export const EMPLACEMENTS_LIBRES = [[400, 465], [225, 1310], [575, 1310]]; // la carte a été agrandie vers le bas pour deux futures îles
 
 export const ile = (id) => ILES.find((i) => i.id === id);
 export const prixIle = (id) => (ile(id).ouverte ? 0 : PRIX_ILES[id]);

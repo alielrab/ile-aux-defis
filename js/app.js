@@ -25,6 +25,8 @@ import * as missions from './jeux/missions.js';
 import * as labyrinthe from './jeux/labyrinthe.js';
 import * as glacier from './jeux/glacier.js';
 import * as ecriture from './jeux/ecriture.js';
+import * as jardinage from './jeux/jardinage.js';
+import * as fiches from './jeux/nature-fiches.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -312,6 +314,8 @@ function entrerLieu(cible) {
   if (id === 'aeroport') return ouvrirPasseport();
   if (id === 'syllabes') return ouvrirBibliotheque();
   if (id === 'missions') return ouvrirMissions();
+  if (id === 'potager') return ouvrirPotager();
+  if (id === 'naturaliste') return ouvrirCabane();
   if (id === 'labyrinthe') return ouvrirLabyrinthe();
   if (id === 'glacier') return ouvrirGlacier();
   if (id === 'urgences') return ouvrirUrgences();
@@ -524,7 +528,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, naturaliste: nature.naturaliste, potager: nature.potager, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, naturaliste: nature.naturaliste, potager: nature.potager, secours: nature.secours, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -561,7 +565,7 @@ function lancerJeu(nom) {
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   if (nom !== 'robot') joueuse.vus[cle] = [...vus]; // (les niveaux du robot sont tirés au hasard : rien à retenir) // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport', naturaliste: 'nature', potager: 'nature' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport', naturaliste: 'nature', potager: 'nature', secours: 'urgences' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   poserDecor($('#salle'), lieu === 'passeport' ? 'aeroport' : lieu);
   const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
@@ -614,7 +618,7 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
-  } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager'].includes(jeu)) {
+  } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager', 'secours'].includes(jeu)) {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'langues') {
@@ -917,6 +921,7 @@ async function reagir(m, juste, suite) {
 function finirPartie() {
   const gain = etoilesGagnees(partie.bonnes, JEUX[jeu].etoilesParBonneReponse(joueuse.age, operation), partie.questions.length);
   joueuse.etoiles += gain;
+  compterPartie(jeu);
   enregistrer();
   const parfait = partie.bonnes === partie.questions.length;
   $('#fin-titre').textContent = parfait ? `Parfait, ${joueuse.prenom} !` : `Bien joué, ${joueuse.prenom} !`;
@@ -1921,6 +1926,8 @@ function ouvrirLibre(titre, decor = null) {
 }
 const libreOuvert = (titre) => !$('[data-ecran="libre"]').hidden && $('#libre-titre').textContent === titre;
 const gagnerEtoiles = (n, profil = joueuse) => { profil.etoiles += n; enregistrer(); etoilesJoueuse(); };
+// Une partie finie de plus dans ce jeu : c'est ce qui fait gagner les médailles de la carte
+function compterPartie(nom, profil = joueuse) { (profil.parties ??= {})[nom] = (profil.parties[nom] ?? 0) + 1; }
 
 // Les missions de la maison : l'enfant annonce, un parent valide avec le code
 function ouvrirMissions(dire = true) {
@@ -1950,6 +1957,7 @@ function validerMission(x) {
   const repondre = (oui) => {
     if (champ.value !== etat.code) return noter(message, 'Code incorrect.');
     const gain = missions.valider(joueuse, x.cle, oui);
+    if (gain) compterPartie('missions');
     enregistrer();
     fenetre.close();
     ouvrirMissions(false);
@@ -1988,6 +1996,7 @@ function jouerLabyrinthe() {
     if (pos[0] !== l.sortie[0] || pos[1] !== l.sortie[1]) return;
     fini = true;
     niveauLaby++;
+    compterPartie('labyrinthe');
     const gain = labyrinthe.etoilesParLabyrinthe(joueuse.age);
     gagnerEtoiles(gain);
     bip(true);
@@ -2044,13 +2053,27 @@ function jouerGlacier() {
   const finir = () => {
     clearInterval(minuteur);
     const gain = servies * glacier.etoilesParGlace(age);
-    if (gain) gagnerEtoiles(gain);
+    if (gain) { compterPartie('glacier'); gagnerEtoiles(gain); }
     const texte = `Tu as servi ${servies} glace${servies > 1 ? 's' : ''} !${gain ? ` +${formatEtoiles(gain)} ⭐` : ''}`;
     v.replaceChildren(el('p', { className: 'carte score-grue', role: 'status', textContent: texte }), gros('🍦 Rejouer', jouerGlacier));
     parler(`C’est fini ! Tu as servi ${servies} glace${servies > 1 ? 's' : ''}.${gain ? ` Tu gagnes ${formatEtoiles(gain)} étoiles.` : ''}`, { ton: 1.1 });
   };
   const perdre = () => { vies--; bip(false); if (vies <= 0) finir(); else nouveau(); };
-  const servir = () => { if (!glacier.juste(cmd, cornet)) return perdre(); servies++; bip(true); nouveau(); };
+  // Dès 8 ans : après chaque glace, on rend la monnaie (2 francs la boule)
+  const monnaie = () => {
+    const prix = cmd.length * 2, donne = [5, 10, 20].filter((b) => b > prix)[Math.floor(Math.random() * (prix < 5 ? 2 : 1))] ?? 10, rendu = donne - prix;
+    const choix = melanger([...new Set([rendu, rendu + 1, Math.max(1, rendu - 1), rendu + 2])]).slice(0, 3);
+    if (!choix.includes(rendu)) choix[0] = rendu;
+    fin = Infinity; // le temps s'arrête pendant le calcul
+    const texte = `La glace coûte ${prix} francs. Le client donne ${donne} francs. Combien lui rends-tu ?`;
+    parfums.replaceChildren(el('p', { className: 'carte question-defi', textContent: `💰 ${texte}` }), el('div', { className: 'reponses-defi' }, ...melanger(choix).map((c) => {
+      const b = el('button', { className: 'gros secondaire', textContent: `${c} franc${c > 1 ? 's' : ''}` });
+      b.addEventListener('click', () => { if (c === rendu) { servies++; bip(true); nouveau(); } else perdre(); });
+      return b;
+    })));
+    parler(texte);
+  };
+  const servir = () => { if (!glacier.juste(cmd, cornet)) return perdre(); if (age >= 8) return monnaie(); servies++; bip(true); nouveau(); };
   const minuteur = setInterval(() => {
     if (!libreOuvert('Le glacier de la plage') || !v.contains(barre)) return clearInterval(minuteur); // on a quitté le jeu
     const reste = fin - performance.now();
@@ -2060,6 +2083,94 @@ function jouerGlacier() {
   v.replaceChildren(score, client, barre, monCornet, parfums,
     el('div', { className: 'actions-atelier' }, gros('↩️ Vider le cornet', () => { cornet = []; dessiner(); }, 'gros secondaire'), gros('🔔 Servir !', servir)));
   nouveau();
+}
+
+// La cabane nature : les fiches des animaux et des plantes, et le quiz
+function ouvrirCabane() {
+  const v = ouvrirLibre('La cabane nature');
+  const carte = (emoji, nom, detail, action) => {
+    const b = el('button', { className: 'carte-image' });
+    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.addEventListener('click', action);
+    return b;
+  };
+  v.replaceChildren(el('div', { className: 'galerie-cartes grandes' },
+    carte('🐾', 'Les animaux', 'Où ils vivent, ce qu’ils mangent', () => afficherFiches('animaux')),
+    carte('🌿', 'Les plantes', 'Celles qu’on mange, celles qu’on ne touche pas', () => afficherFiches('plantes')),
+    carte('❓', 'Le quiz de la nature', 'Teste ce que tu sais', () => lancerJeu('naturaliste'))));
+  parler('La cabane nature ! Choisis : les animaux, les plantes, ou le quiz.', { ton: 1.1 });
+}
+const imageFiche = (dossier, cle, emoji) => { const src = image(`${dossier}/${cle}`); return src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${emoji}</span>`; };
+function afficherFiches(quoi, cle = null) {
+  const v = ouvrirLibre('La cabane nature'), animaux = quoi === 'animaux', liste = animaux ? fiches.ANIMAUX : fiches.PLANTES;
+  if (cle === null) {
+    v.replaceChildren(...(animaux ? [] : [el('p', { className: 'carte presentation regle-d-or', textContent: `⚠️ ${fiches.REGLE_D_OR}` })]),
+      el('div', { className: 'galerie-cartes' }, ...liste.map((f) => {
+        const b = el('button', { className: 'carte-image' });
+        b.innerHTML = `${imageFiche(animaux ? 'nature' : 'plantes', f[0], f[2])}<span>${f[1]}${animaux ? '' : `<br><small>${fiches.STATUTS[f[3]][1]}</small>`}</span>`;
+        b.addEventListener('click', () => afficherFiches(quoi, f[0]));
+        return b;
+      })), gros('← La cabane', ouvrirCabane, 'gros secondaire'));
+    return parler(animaux ? 'Les animaux. Touche un animal pour le découvrir.' : `Les plantes. ${fiches.REGLE_D_OR} Touche une plante pour la découvrir.`);
+  }
+  const f = liste.find((x) => x[0] === cle), texte = animaux ? fiches.ficheAnimal(f) : fiches.fichePlante(f);
+  const lignes = animaux
+    ? [['🏷️ Sa famille', `C’est ${fiches.FAMILLES[f[3]][0]}. ${fiches.FAMILLES[f[3]][1]}`], ['🏡 Où vit cet animal ?', `${fiches.MILIEUX[f[4]]}.`], ['🍽️ Que mange cet animal ?', f[6]], ['💡 Le savais-tu ?', f[7]]]
+    : [[`${fiches.STATUTS[f[3]][1]} Peut-on la manger ?`, `${fiches.STATUTS[f[3]][0]}.`], ...(['comestible', 'cuite'].includes(f[3]) ? [['💚 À quoi sert-elle ?', f[4]], ['🥣 Comment la prépare-t-on ?', f[5]]] : [['🔎 À savoir', f[4]], ['✋ Que fait-on ?', f[5]]]), ...(f[6] ? [['⚠️ Attention', f[6]]] : []), ['👨‍👩‍👧 La règle d’or', fiches.REGLE_D_OR]];
+  const tete = el('div', { className: 'tete-fiche' });
+  tete.innerHTML = imageFiche(animaux ? 'nature' : 'plantes', f[0], f[2]);
+  v.replaceChildren(el('div', { className: `carte fiche-nature${animaux ? '' : ` plante-${f[3]}`}` }, tete, el('h2', { textContent: f[1] }),
+    el('dl', {}, ...lignes.flatMap(([t, d]) => [el('dt', { textContent: t }), el('dd', { textContent: d })]))),
+    el('div', { className: 'actions-atelier' }, gros('🔊 Écouter', () => parler(texte), 'gros secondaire'), gros(animaux ? '← Les animaux' : '← Les plantes', () => afficherFiches(quoi))));
+  parler(texte);
+}
+
+// Mon potager : semer ce qui est de saison, arroser une fois par jour, récolter après 3 arrosages
+function ouvrirPotager() {
+  const v = ouvrirLibre('Le potager');
+  const carte = (emoji, nom, detail, action) => {
+    const b = el('button', { className: 'carte-image' });
+    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.addEventListener('click', action);
+    return b;
+  };
+  v.replaceChildren(el('div', { className: 'galerie-cartes grandes' },
+    carte('🌱', 'Mon potager', 'Sème, arrose et récolte', () => afficherJardinage()), carte('❓', 'Le quiz du potager', 'Fruits, légumes et saisons', () => lancerJeu('potager'))));
+  parler('Le potager ! Choisis : ton potager à toi, ou le quiz.', { ton: 1.1 });
+}
+function afficherJardinage(message = null, graines = null) {
+  const v = ouvrirLibre('Le potager'), jour = missions.aujourdhui(), cs = jardinage.carres(joueuse);
+  const regle = `Sème ce qui est de saison, puis arrose une fois par jour. Après ${jardinage.ARROSAGES} jours d’arrosage, tu récoltes et tu gagnes ${jardinage.ETOILES_RECOLTE} étoiles.`;
+  const info = el('p', { className: 'carte presentation', role: 'status', textContent: message ?? regle });
+  const dire = (t) => { afficherJardinage(t); parler(t); };
+  const plots = el('div', { className: 'galerie-cartes' }, ...cs.map((c, i) => {
+    const b = el('button', { className: `carte-image${jardinage.pret(c) ? ' choisi' : ''}` });
+    const l = c && jardinage.legume(c.legume);
+    b.innerHTML = c ? `<span class="emoji-theme" aria-hidden="true">${jardinage.image(c)}</span><span>${l.nom}<br><small>${jardinage.pret(c) ? '🧺 À récolter !' : c.arrose === jour ? '💧 Arrosé aujourd’hui' : `🚿 À arroser (${c.arrosages} / ${jardinage.ARROSAGES})`}</small></span>`
+      : '<span class="emoji-theme" aria-hidden="true">🟫</span><span>Carré vide<br><small>Touche pour semer</small></span>';
+    b.addEventListener('click', () => {
+      if (!c) return afficherJardinage(`Que veux-tu semer dans le carré ${i + 1} ?`, i);
+      if (jardinage.pret(c)) {
+        const gain = jardinage.recolter(joueuse, i);
+        compterPartie('jardinage');
+        enregistrer();
+        bip(true);
+        return dire(`Bravo, tu as récolté : ${l.nom.toLowerCase()} ! Tu gagnes ${gain} étoiles.`);
+      }
+      if (!jardinage.arroser(joueuse, i, jour)) return dire('Tu as déjà arrosé ce carré aujourd’hui. Reviens demain !');
+      enregistrer();
+      dire(jardinage.pret(cs[i]) ? `${l.nom} : c’est prêt ! Touche encore pour récolter.` : 'Merci pour l’eau ! Ça pousse. Reviens demain pour arroser encore.');
+    });
+    return b;
+  }));
+  const choix = graines === null ? [] : [el('h2', { textContent: '🌰 Les graines' }), el('div', { className: 'phrases' }, ...jardinage.LEGUMES.map((l) => {
+    const ok = jardinage.deSaison(jour).includes(l);
+    const b = gros(`${l.image} ${l.nom}${ok ? '' : ' (pas la saison)'}`, () => { jardinage.semer(joueuse, graines, l.cle, jour); enregistrer(); dire(`${l.nom} : c’est semé ! ${l.note ?? 'Maintenant, arrose.'}`); }, 'petit');
+    b.disabled = !ok;
+    return b;
+  }))];
+  v.replaceChildren(info, plots, ...choix, gros('← Le potager', ouvrirPotager, 'gros secondaire'));
+  if (message === null) parler(`Mon potager. ${regle}`, { ton: 1.1 });
 }
 
 // Le défi à deux (salle de jeux) : chacun répond à 5 questions de son âge, chacun son tour
@@ -2114,7 +2225,7 @@ function jouerDefi(adversaire, cle) {
   };
   const finir = () => {
     const [a, b] = scores, gains = a === b ? [2, 2] : a > b ? [3, 1] : [1, 3];
-    joueurs.forEach((j, i) => { j.etoiles += gains[i]; });
+    joueurs.forEach((j, i) => { j.etoiles += gains[i]; compterPartie('defi', j); });
     enregistrer();
     etoilesJoueuse();
     const texte = a === b ? `Égalité, ${a} partout ! 2 étoiles chacun.` : `${joueurs[a > b ? 0 : 1].prenom} gagne, ${Math.max(a, b)} à ${Math.min(a, b)} ! 3 étoiles, et 1 étoile pour ${joueurs[a > b ? 1 : 0].prenom}.`;
@@ -2155,6 +2266,7 @@ function tracerLettre() {
     dessiner();
     if (t < traits.length) return;
     const gain = ecriture.etoilesParLettre(joueuse.age);
+    compterPartie('ecriture');
     gagnerEtoiles(gain);
     bip(true);
     message.textContent = `Bravo, tu as écrit la lettre ${lettre} ! +${formatEtoiles(gain)} ⭐`;
@@ -2408,6 +2520,7 @@ function jouerGrue() {
   };
   const finir = () => {
     const n = tour.length, r = chantier.finir(joueuse, n);
+    if (n) compterPartie('chantier');
     enregistrer();
     etoilesJoueuse();
     const pieces = r.construites.map((k) => chantier.NOMS[k]).join(', ');

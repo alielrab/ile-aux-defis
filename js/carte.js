@@ -31,7 +31,8 @@ export const LIEUX = [
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
   { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: true, x: 540, y: 440 },
-  { id: 'tri', ile: 'securite', type: 'jeu', nom: 'Le centre\nde tri', detail: 'la bonne poubelle', ouvert: true, x: 400, y: 720 },
+  { id: 'tri', ile: 'securite', type: 'jeu', nom: 'Le centre\nde tri', detail: 'la bonne poubelle', ouvert: true, x: 260, y: 720 },
+  { id: 'secours', ile: 'securite', type: 'jeu', nom: 'Les premiers\nsecours', detail: 'soigner les petits bobos', ouvert: true, x: 540, y: 720 },
   // L'île des créateurs
   { id: 'cuisine', ile: 'createurs', type: 'jeu', nom: 'Le\nrestaurant', detail: 'la cuisine de l’île', ouvert: true, x: 230, y: 400 },
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
@@ -43,7 +44,7 @@ export const LIEUX = [
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
   { id: 'missions', ile: 'coeur', type: 'jeu', nom: 'Les missions\nde la maison', detail: 'aider à la maison', ouvert: true, x: 230, y: 700 },
   // L'île de la nature
-  { id: 'naturaliste', ile: 'nature', type: 'jeu', nom: 'La cabane\nnature', detail: 'animaux, plantes et arbres', ouvert: true, x: 230, y: 400 },
+  { id: 'naturaliste', ile: 'nature', type: 'jeu', nom: 'La cabane\nnature', detail: 'les fiches des animaux et des plantes, et un quiz', ouvert: true, x: 230, y: 400 },
   { id: 'potager', ile: 'nature', type: 'jeu', nom: 'Le potager', detail: 'fruits, légumes et saisons', ouvert: true, x: 570, y: 400 },
   { id: 'labyrinthe', ile: 'nature', type: 'jeu', nom: 'Le labyrinthe', detail: 'trouver la sortie', ouvert: true, x: 230, y: 680 },
   { id: 'glacier', ile: 'nature', type: 'jeu', nom: 'Le glacier\nde la plage', detail: 'servir les glaces', ouvert: true, x: 570, y: 680 },
@@ -175,6 +176,8 @@ const BATIMENTS = {
   robot: [`<rect x="-66" y="-70" width="132" height="70" rx="8" fill="#dfe6ee"/><rect x="-74" y="-80" width="148" height="14" rx="6" fill="#5a6f8a"/>
     <rect x="-14" y="-40" width="28" height="40" fill="#5a6f8a"/><rect x="-54" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/><rect x="26" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/>
     <text x="-17" y="-88" font-size="32">🤖</text>`, 0.85],
+  secours: [`<rect x="-62" y="-70" width="124" height="70" rx="6" fill="#ffffff"/><path d="M-72 -66 L0 -106 L72 -66Z" fill="#e05252"/><rect x="-14" y="-40" width="28" height="40" fill="#bfe6ff"/>
+    <circle cx="0" cy="-74" r="16" fill="#fff"/><path d="M-4 -84 h8 v6 h6 v8 h-6 v6 h-8 v-6 h-6 v-8 h6z" fill="#e05252"/><rect x="-52" y="-52" width="26" height="20" fill="#bfe6ff"/><rect x="26" y="-52" width="26" height="20" fill="#bfe6ff"/>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}
@@ -254,7 +257,7 @@ const EMPLACEMENTS = {
   village: { cote: 122, places: [[0.5, 0.2], [0.294, 0.322], [0.706, 0.322], [0.244, 0.456], [0.75, 0.456], [0.206, 0.6], [0.775, 0.606], [0.494, 0.756]],
     maisons: [[0.494, 0.487], [0.494, 0.625]] },
   savoir: { cote: 122, places: [[0.5, 0.215], [0.32, 0.355], [0.685, 0.355], [0.24, 0.52], [0.75, 0.52], [0.215, 0.657], [0.493, 0.7], [0.78, 0.657]] },
-  createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657], [0.47, 0.8]] }, // le 5e : l'atelier des robots, devant
+  createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657], [0.34, 0.8]] }, // le 5e : l'atelier des robots, devant, sur les rochers
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
   nature: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
@@ -262,11 +265,31 @@ const EMPLACEMENTS = {
 const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
 
-function lieu(l) {
+// Les jeux de chaque bâtiment qui en a plusieurs, ou dont le jeu ne porte pas son nom (pour la pastille « 3 jeux » et les médailles)
+export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], memory: ['memory', 'defi'], potager: ['potager', 'jardinage'],
+  corps: ['corps', 'atlas'], musee: ['dinos'], croyance: ['croyance', 'recit'] };
+const PASTILLES = { syllabes: 3, aeroport: 3, memory: 2, potager: 2, naturaliste: 3 };
+// Une médaille par bâtiment, selon le nombre de parties finies dans ses jeux : bronze dès 1, argent dès 5, or dès 15
+export const SEUILS_MEDAILLES = [[15, '🥇', 'or'], [5, '🥈', 'argent'], [1, '🥉', 'bronze']];
+export function medaille(profil, lieuId) {
+  const n = (JEUX_DU_LIEU[lieuId] ?? [lieuId]).reduce((s, j) => s + (profil?.parties?.[j] ?? 0), 0);
+  return SEUILS_MEDAILLES.find(([seuil]) => n >= seuil) ?? null;
+}
+
+// La pastille et la médaille d'un lieu : dessinées après tous les bâtiments, pour qu'aucun ne les cache
+function marques(l, joueuse) {
+  const cote = l.cote ?? 170, m = l.type === 'jeu' ? medaille(joueuse, l.id) : null, n = PASTILLES[l.id];
+  const pastille = n ? `<g transform="translate(${l.x + cote * 0.36} ${l.y - cote * 0.42})"><rect x="-36" y="-15" width="72" height="28" rx="14" fill="#ff9a3c" stroke="#fff" stroke-width="3"/><text y="5" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">${n} jeux</text></g>` : '';
+  const rond = m ? `<g transform="translate(${l.x - cote * 0.4} ${l.y - cote * 0.42})"><circle r="19" fill="#fff" stroke="#f2c230" stroke-width="3"/><text y="10" font-size="27" text-anchor="middle">${m[1]}</text></g>` : '';
+  return `<g aria-hidden="true" pointer-events="none">${pastille}${rond}</g>`;
+}
+
+function lieu(l, joueuse = null) {
   const [dessin, s] = l.dessin ?? BATIMENTS[l.id];
   const nom = l.nom.replace('\n', ' ');
+  const m = l.type === 'jeu' ? medaille(joueuse, l.id) : null, n = PASTILLES[l.id];
   return `<g class="lieu${l.ouvert ? '' : ' ferme'}" role="button" tabindex="0" data-lieu="${l.id}"
-    aria-label="${echapper(`${nom} : ${l.detail}${l.ouvert ? '' : ', bientôt'}`)}">
+    aria-label="${echapper(`${nom} : ${l.detail}${n ? `, ${n} jeux` : ''}${m ? `, médaille ${m[2] === 'or' ? 'd’or' : m[2] === 'argent' ? 'd’argent' : 'de bronze'}` : ''}${l.ouvert ? '' : ', bientôt'}`)}">
     <title>${echapper(nom)}</title>${batimentImage(l.fichier ?? l.id, l.x, l.y, l.cote ?? 170) ?? `<g transform="translate(${l.x} ${l.y}) scale(${s})">${dessin}</g>`}
     ${etiquette(l.x, l.y + (l.bas ?? 30), l.nom, l.police ?? 28, 230)}${l.ouvert ? '' : bientot(l.x, l.y - 40)}</g>`;
 }
@@ -339,7 +362,7 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
   <circle cx="${fx}" cy="${fy}" r="28" fill="#ecd59a"/><circle cx="${fx}" cy="${fy}" r="11" fill="#7fdcea" stroke="#b9b9c9" stroke-width="5"/>
   ${palmier(92, 420, 0.7)}${palmier(718, 400, 0.7)}${palmier(110, 740, 0.7)}${palmier(690, 745, 0.7)}
   ${fleurs([[330, 380, '#ff7aa8'], [470, 385, '#ffd84a'], [255, 640, '#b06ae0'], [545, 640, '#ff7aa8'], [705, 480, '#b06ae0'], [95, 480, '#ffd84a']])}`}
-  ${(fond ? [...lieux].reverse() : lieux).map(lieu).join('')/* sur une île en image, du bas vers le haut : le nom d'un lieu passe devant le toit du lieu d'en dessous */}
+  ${(fond ? [...lieux].reverse() : lieux).map((l) => lieu(l, joueuse)).join('')}${lieux.map((l) => marques(l, joueuse)).join('')/* sur une île en image, du bas vers le haut : le nom d'un lieu passe devant le toit du lieu d'en dessous */}
   ${ileId === 'village' ? maisons(profils, joueuse, fond ? e.maisons.map(surLeFond) : null) : ''}${ileId === 'coeur' && !famille ? arbre(ax, ay, fond ? 0.8 : 1.2) : ''}
   <g class="lieu port" role="button" tabindex="0" data-lieu="archipel" aria-label="Le bateau : aller vers une autre île">
     <title>Le bateau</title>${batimentImage('bateau', 95, 872, 130) ?? `<g transform="translate(95 850)">${voilier(1.3)}</g>`}${etiquette(95, 890, "L'archipel", 24)}</g>
@@ -372,9 +395,9 @@ export function dessinerArchipel(joueuse, aConfirmer = null) {
   }).join('');
   const futures = EMPLACEMENTS_LIBRES.map(([x, y]) => `<g aria-hidden="true" opacity=".7"><ellipse cx="${x}" cy="${y}" rx="90" ry="50" fill="#fff" opacity=".5" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/>
     ${etiquette(x, y + 8, 'Bientôt…', 22)}</g>`).join('');
-  return `<svg viewBox="0 0 800 1150" xmlns="http://www.w3.org/2000/svg" class="carte-ile archipel" role="group" aria-label="L'archipel">
-  ${image('ile/archipel') ? `<image href="${image('ile/archipel')}" width="800" height="1150" preserveAspectRatio="xMidYMid slice"/>`
-    : MER.replace('height="900"', 'height="1150"') + vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
+  return `<svg viewBox="0 0 800 1480" xmlns="http://www.w3.org/2000/svg" class="carte-ile archipel" role="group" aria-label="L'archipel">
+  ${image('ile/archipel') ? `<image href="${image('ile/archipel')}" width="800" height="1480" preserveAspectRatio="xMidYMid slice"/>`
+    : MER.replace('height="900"', 'height="1480"') + vagues([[60, 470], [690, 470], [330, 140], [120, 860], [620, 860], [740, 120], [30, 160]])}
   ${etiquette(400, 70, "L'archipel", 40)}
   <g stroke="#fff" stroke-width="5" fill="none" stroke-dasharray="4 14" stroke-linecap="round" opacity=".85">${routes}</g>
   ${futures}${iles}

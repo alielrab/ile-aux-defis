@@ -64,7 +64,7 @@ export function modifierProfil(profil, { prenom, age, poids = profil.poids ?? nu
 
 // Écran parent : on repart de zéro (étoiles, achats, maison, îles et dessins à colorier débloqués). La galerie de dessins et les BD sont gardées. On garde le prénom, l'âge, la peau et les yeux.
 export function remettreAZero(profil) {
-  Object.assign(profil, { etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, iles: [], modeles: [], noms: {}, habits: {}, chantier: { record: 0, aConstruire: [] } });
+  Object.assign(profil, { etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, iles: [], modeles: [], noms: {}, habits: {}, parties: {}, chantier: { record: 0, aConstruire: [] } });
   const a = profil.avatar;
   if (!TENUES_DE_DEPART.includes(a.tenue)) a.tenue = AVATAR_PAR_DEFAUT.tenue;
   if (!COIFFURES_DE_DEPART.includes(a.coiffure)) a.coiffure = AVATAR_PAR_DEFAUT.coiffure;
@@ -81,7 +81,7 @@ export function ajouterProfil(etat, { prenom, age, avatar, genre = 'fille' }) {
   prenom = verifierPrenomAge(prenom, age);
   verifierGenre(genre);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, genre, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [], chantier: { record: 0, aConstruire: [] }, confiance: {} };
+  const profil = { id: nouvelId(), prenom, genre, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [], parties: {}, chantier: { record: 0, aConstruire: [] }, confiance: {} };
   etat.profils.push(profil);
   return profil;
 }
@@ -110,6 +110,7 @@ export function charger(stockage = globalThis.localStorage) {
       p.habits ??= {}; // le vêtement de chaque animal
       p.dinos ??= []; // musée : les squelettes reconstitués
       p.passeport ??= []; // passeport du monde : les pays tamponnés
+      p.parties ??= {}; // le nombre de parties finies par jeu, pour les médailles de la carte
       p.confiance ??= {}; // maison de la confiance : les étapes déjà finies (« fait-avis:tri »…), pour ne donner leurs étoiles qu'une fois
       p.chantier ??= { record: 0, aConstruire: [] }; // la grue folle : le record, et les pièces achetées à construire (celles d'avant sont déjà construites)
       p.maison ??= maisonVide();
