@@ -41,6 +41,7 @@ import * as voixParents from './enregistrements.js';
 import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGenre, appliquerVoix, voixFrancaises, parlerLangue } from './voix.js';
 import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
+import * as enLigne from './en-ligne.js';
 
 let etat = charger();
 appliquerVoix(etat?.reglages);
@@ -68,10 +69,32 @@ function enregistrer() {
   const ok = sauver(etat);
   $('#alerte').hidden = ok;
   $('#alerte').textContent = ok ? '' : "Attention : ce navigateur n'enregistre pas les progrès (navigation privée ?).";
+  clearTimeout(aSynchroniser);
+  aSynchroniser = setTimeout(synchroniserEnLigne, 4000); // on regroupe les changements avant de les envoyer
 }
 
+// Le compte parent en ligne : on synchronise au démarrage, quelques secondes après un changement, en quittant l'app et au retour du réseau.
+let aSynchroniser = null, erreurEnLigne = '';
+async function synchroniserEnLigne() {
+  if (!enLigne.disponible() || !enLigne.session() || !etat) return;
+  try {
+    const r = await enLigne.synchroniser(etat);
+    erreurEnLigne = '';
+    if (r && enLigne.appliquer(etat, r)) {
+      sauver(etat);
+      if (!$('[data-ecran="accueil"]').hidden) afficherAccueil();
+    }
+  } catch (e) {
+    erreurEnLigne = e.message;
+  }
+  if (!$('[data-ecran="parents"]').hidden) afficherCompte($('#compte-en-ligne'));
+}
+addEventListener('online', synchroniserEnLigne);
+document.addEventListener('visibilitychange', synchroniserEnLigne);
+setInterval(() => { if (!document.hidden) synchroniserEnLigne(); }, 60_000); // les progrès des frères et sœurs qui jouent sur un autre appareil
+
 function demarrer() {
-  if (!etat) return montrer('code');
+  if (!etat) { afficherCompte($('#compte-code'), true); return montrer('code'); }
   if (etat.profils.length === 0) return ouvrirProfil(); // les autres enfants : « Ajouter un enfant » dans l'espace parents
   afficherAccueil();
 }
@@ -2230,7 +2253,92 @@ function afficherParents(message = null) {
   $('#form-nouveau-code .erreur').textContent = '';
   voixMessage('');
   afficherVoix();
+  afficherCompte($('#compte-en-ligne'));
   montrer('parents');
+}
+
+// La carte « Compte en ligne » (espace parents), et sur un appareil neuf « Vous avez déjà un compte ? » (écran du code)
+const quand = (t) => new Date(t).toLocaleString('fr-CH', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+function afficherCompte(boite, appareilNeuf = false) {
+  boite.hidden = !enLigne.disponible();
+  if (boite.hidden) return;
+  const message = el('p', { className: 'erreur', role: 'status' });
+  const boutons = (actifs) => { for (const b of boite.querySelectorAll('button')) b.disabled = !actifs; };
+  const attendre = async (action) => {
+    boutons(false);
+    noter(message, 'Un instant…', true);
+    try { await action(); } catch (e) { noter(message, e.message); }
+    boutons(true);
+  };
+  const s = enLigne.session();
+  if (s && !appareilNeuf) {
+    let aSupprimer = false;
+    boite.replaceChildren(el('h2', { textContent: '☁️ Compte en ligne' }),
+      el('p', { textContent: `Connecté avec ${enLigne.email() ?? 'votre compte'}. Les profils se retrouvent sur tous les appareils où vous vous connectez.` }),
+      el('p', { className: 'info-profil', textContent: s.derniere ? `Dernière synchronisation : ${quand(s.derniere)}.` : 'Pas encore synchronisé.' }), message,
+      el('div', { className: 'actions' },
+        gros('🔄 Synchroniser maintenant', () => attendre(async () => { await synchroniserEnLigne(); if (erreurEnLigne) throw new Error(erreurEnLigne); afficherCompte(boite); })),
+        gros('Se déconnecter', () => attendre(async () => { await enLigne.deconnecter(); afficherCompte(boite); }), 'gros secondaire')),
+      gros('Supprimer le compte et les données en ligne', (ev) => {
+        if (!aSupprimer) {
+          aSupprimer = true;
+          ev.target.textContent = 'Vraiment ? Toucher encore';
+          return noter(message, 'Le compte et les profils en ligne seront effacés pour toujours. Les profils de cet appareil restent.');
+        }
+        attendre(async () => { await enLigne.supprimerCompte(); afficherCompte(boite); noter(boite.querySelector('.erreur'), 'Compte supprimé ✓', true); });
+      }, 'petit'));
+    if (erreurEnLigne) noter(message, `Synchronisation impossible : ${erreurEnLigne}`);
+    return;
+  }
+  const f = el('form', { className: 'form-compte', noValidate: true });
+  f.innerHTML = `<label>E-mail du parent <input name="email" type="email" autocomplete="username" required></label>
+    <label>Mot de passe <small>(8 caractères au moins)</small> <input name="mdp" type="password" autocomplete="current-password" required></label>
+    <label class="case-reglage"><input type="checkbox" name="accord"> <span>Je suis le parent (ou le responsable légal) et j’accepte la <a href="politique.html" target="_blank">politique de confidentialité</a>.</span></label>`;
+  f.addEventListener('submit', (ev) => ev.preventDefault());
+  if (appareilNeuf) f.accord.closest('label').hidden = true;
+  const connecte = async () => {
+    if (!appareilNeuf) { await synchroniserEnLigne(); if (erreurEnLigne) throw new Error(erreurEnLigne); return afficherCompte(boite); }
+    const r = await enLigne.synchroniser(null); // appareil neuf : on reprend les profils en ligne
+    if (!r) return noter(message, 'Connecté ✓ Aucun profil en ligne pour ce compte : choisissez un code pour commencer.', true);
+    sauver(r);
+    etat = charger();
+    appliquerVoix(etat?.reglages);
+    demarrer();
+  };
+  boite.replaceChildren(el('h2', { textContent: appareilNeuf ? '☁️ Vous avez déjà un compte ?' : '☁️ Compte en ligne' }),
+    el('p', { textContent: appareilNeuf ? 'Connectez-vous pour retrouver les profils de vos enfants.'
+      : 'Gardez les profils en ligne pour les retrouver sur la tablette, le téléphone ou l’ordinateur. Serveurs en Europe. La croyance de la famille et les voix enregistrées restent sur cet appareil.' }),
+    f, message,
+    el('div', { className: 'actions' },
+      gros('Se connecter', () => attendre(async () => { await enLigne.connecter(f.email.value, f.mdp.value); await connecte(); })),
+      ...(appareilNeuf ? [] : [gros('Créer un compte', () => attendre(async () => {
+        if (!f.accord.checked) throw new Error('Cochez la case pour accepter la politique de confidentialité.');
+        if (await enLigne.creerCompte(f.email.value, f.mdp.value)) await connecte();
+        else noter(message, 'Presque fini : ouvrez l’e-mail reçu et cliquez sur le lien pour confirmer le compte.', true);
+      }), 'gros secondaire')])),
+    gros('Mot de passe oublié ?', () => attendre(async () => { await enLigne.oublie(f.email.value); noter(message, 'Un e-mail vous a été envoyé pour choisir un nouveau mot de passe.', true); }), 'petit'));
+}
+
+// Après un lien reçu par e-mail : compte confirmé, ou choisir un nouveau mot de passe
+function lienEnLigne() {
+  if (!enLigne.disponible()) return;
+  const quoi = enLigne.lienRecu();
+  if (quoi === 'confirme') {
+    $('#alerte').hidden = false;
+    $('#alerte').textContent = 'Compte confirmé ✓ Les profils de cet appareil sont maintenant gardés en ligne.';
+    setTimeout(() => ($('#alerte').hidden = true), 6000);
+  }
+  if (quoi !== 'nouveau-mot-de-passe') return;
+  const champ = el('input', { className: 'champ-prenom', type: 'password', autocomplete: 'new-password', placeholder: 'Nouveau mot de passe' });
+  const message = el('p', { className: 'erreur', role: 'status' });
+  const fenetre = el('dialog', { className: 'fenetre-prenom' });
+  fenetre.append(el('h2', { textContent: 'Nouveau mot de passe' }), el('p', { textContent: '8 caractères au moins.' }), champ, message,
+    el('div', { className: 'actions-prenom' }, gros('Enregistrer', async () => {
+      try { await enLigne.changerMotDePasse(champ.value); fenetre.close(); } catch (e) { noter(message, e.message); }
+    }), gros('Annuler', () => fenetre.close(), 'gros secondaire')));
+  fenetre.addEventListener('close', () => fenetre.remove());
+  document.body.append(fenetre);
+  fenetre.showModal();
 }
 
 $('#ajouter-enfant').addEventListener('click', () => ouvrirProfil());
@@ -2364,5 +2472,7 @@ async function basculerMicro(type, id = null) {
 }
 for (const b of document.querySelectorAll('.enregistrer')) b.addEventListener('click', () => basculerMicro(b.dataset.type));
 
+lienEnLigne();
 demarrer();
+synchroniserEnLigne();
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});

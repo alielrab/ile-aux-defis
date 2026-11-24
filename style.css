@@ -516,6 +516,10 @@ select {
 }
 
 .outils-animal { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+/* Le compte en ligne */
+.form-compte { display: grid; gap: 0.5rem; }
+.form-compte input[type="email"], .form-compte input[type="password"] { font: inherit; font-size: 1.1rem; padding: 0.5rem; border: 2px solid #c98b4f; border-radius: 10px; }
+
 /* La fenêtre du prénom d'un animal */
 .fenetre-prenom { width: min(92vw, 24rem); border: 0; border-radius: 20px; padding: 1rem; background: #fffdf5; text-align: center; box-shadow: 0 8px 30px rgb(0 0 0 / 0.3); }
 .fenetre-prenom::backdrop { background: rgb(0 0 0 / 0.45); }
