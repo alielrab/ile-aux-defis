@@ -7,6 +7,7 @@ export const PIECES = {
   salon: { nom: 'Salon', prix: 30 },
   jeux: { nom: 'Salle de jeux', prix: 30 },
   jardin: { nom: 'Jardin', prix: 40 },
+  grenier: { nom: 'Grenier', prix: 40 },
   cuisine: { nom: 'Cuisine', prix: 0 }, // ses objets se gagnent en faisant les recettes du restaurant pour de vrai
 };
 export const MEUBLES = {
@@ -31,6 +32,14 @@ export const MEUBLES = {
   'tapis-salon': { nom: 'Tapis du salon', prix: 10, piece: 'salon' },
   'tableau-noir': { nom: 'Tableau noir', prix: 12, piece: 'jeux' },
   'carte-monde': { nom: 'Carte du monde', prix: 10, piece: 'chambre' },
+  // le grenier
+  lanterne: { nom: 'Lanterne', prix: 8, piece: 'grenier' },
+  'fauteuil-poire': { nom: 'Fauteuil poire', prix: 10, piece: 'grenier' },
+  'etagere-jeux': { nom: 'Étagère de jeux', prix: 12, piece: 'grenier' },
+  malle: { nom: 'Malle aux trésors', prix: 14, piece: 'grenier' },
+  hamac: { nom: 'Hamac', prix: 16, piece: 'grenier' },
+  telescope: { nom: 'Télescope', prix: 18, piece: 'grenier' },
+  tipi: { nom: 'Tipi', prix: 20, piece: 'grenier' },
   coucou: { nom: 'Horloge à coucou', prix: 12, piece: 'salon' },
   piano: { nom: 'Piano', prix: 22, piece: 'salon' },
   // le jardin
@@ -70,6 +79,7 @@ export const JOUETS = {
   'panier-basket': { nom: 'Panier de basket', prix: 12, piece: 'jeux' },
   circuit: { nom: 'Circuit de voitures', prix: 14, piece: 'jeux' },
   'bac-a-sable': { nom: 'Bac à sable', prix: 14, piece: 'jardin' },
+  'cheval-bascule': { nom: 'Cheval à bascule', prix: 16, piece: 'grenier' },
 };
 export const PAPIERS = {
   menthe: { nom: 'Vert menthe', prix: 8 },

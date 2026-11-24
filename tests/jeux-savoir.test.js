@@ -129,7 +129,7 @@ test('grue folle : plus lent et plus tolérant à 6 ans ; étoiles par étage, r
   const ancien = { age: 9, etoiles: 1 }; // un profil d'avant le chantier
   assert.deepEqual(chantier.finir(ancien, 3), { gain: 1.5, record: true, construites: [] });
   assert.deepEqual(chantier.finir(ancien, 2).record, false);
-  assert.deepEqual(Object.keys(chantier.HAUTEURS).sort(), ['jardin', 'jeux', 'salon']); // toutes les pièces à vendre
+  assert.deepEqual(Object.keys(chantier.HAUTEURS).sort(), ['grenier', 'jardin', 'jeux', 'salon']); // toutes les pièces à vendre
 });
 
 test('maison de la confiance, fait ou avis : 6 phrases amusantes puis 2 blessantes ; jamais « faux » ; rien de trop dur à 6 ans', () => {

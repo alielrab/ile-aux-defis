@@ -62,6 +62,13 @@
 2;images/maison/tapis-salon.webp;512x512;oui;Tapis du salon
 2;images/maison/tableau-noir.webp;512x512;oui;Tableau noir
 2;images/maison/carte-monde.webp;512x512;oui;Carte du monde
+2;images/maison/lanterne.webp;512x512;oui;Lanterne
+2;images/maison/fauteuil-poire.webp;512x512;oui;Fauteuil poire
+2;images/maison/etagere-jeux.webp;512x512;oui;Étagère de jeux
+2;images/maison/malle.webp;512x512;oui;Malle aux trésors
+2;images/maison/hamac.webp;512x512;oui;Hamac
+2;images/maison/telescope.webp;512x512;oui;Télescope
+2;images/maison/tipi.webp;512x512;oui;Tipi
 2;images/maison/coucou.webp;512x512;oui;Horloge à coucou
 2;images/maison/piano.webp;512x512;oui;Piano
 2;images/maison/fleurs.webp;512x512;oui;Massif de fleurs
@@ -90,6 +97,7 @@
 2;images/maison/panier-basket.webp;512x512;oui;Panier de basket
 2;images/maison/circuit.webp;512x512;oui;Circuit de voitures
 2;images/maison/bac-a-sable.webp;512x512;oui;Bac à sable
+2;images/maison/cheval-bascule.webp;512x512;oui;Cheval à bascule
 2;images/maison/lit-bleu.webp;512x512;oui;Lit bleu
 2;images/maison/lit-vert.webp;512x512;oui;Lit vert
 2;images/maison/lit-jaune.webp;512x512;oui;Lit jaune
@@ -105,6 +113,7 @@
 2;images/maison/piece-salon.webp;1280x832;oui;Salon vide : sol et fenêtre, mur transparent (le papier peint est derrière)
 2;images/maison/piece-jeux.webp;1280x832;oui;Salle de jeux vide : sol et fenêtre, mur transparent (le papier peint est derrière)
 2;images/maison/piece-jardin.webp;1280x832;non;Jardin vide : sol, ciel et haie
+2;images/maison/piece-grenier.webp;1280x832;oui;Grenier vide : sol et fenêtre, mur transparent (le papier peint est derrière)
 2;images/maison/piece-cuisine.webp;1280x832;oui;Cuisine vide : sol et fenêtre, mur transparent (le papier peint est derrière)
 3;images/ile/archipel.webp;1024x1280;non;La mer vue du ciel, vide (les îles sont posées dessus)
 3;images/ile/fond-village.webp;1024x1024;oui;L'île du village vue du ciel, vide : plage, herbe, chemins
@@ -266,6 +275,13 @@
 5;images/avatar/accessoire-medaille.webp;768x1024;oui;Médaille d’or
 5;images/avatar/accessoire-casque-audio.webp;768x1024;oui;Casque audio
 5;images/avatar/accessoire-collier-fleurs.webp;768x1024;oui;Collier de fleurs
+5;images/avatar/accessoire-collier-coeur.webp;768x1024;oui;Collier cœur
+5;images/avatar/accessoire-foulard.webp;768x1024;oui;Foulard
+5;images/avatar/accessoire-sacoche.webp;768x1024;oui;Sacoche
+5;images/avatar/accessoire-badge-etoile.webp;768x1024;oui;Badge étoile
+5;images/avatar/accessoire-diademe.webp;768x1024;oui;Diadème
+5;images/avatar/accessoire-pince-fleur.webp;768x1024;oui;Fleur dans les cheveux
+5;images/avatar/accessoire-lunettes-coeur.webp;768x1024;oui;Lunettes cœur
 5;images/avatar/chaussures-baskets-rouges.webp;768x1024;oui;Baskets rouges
 5;images/avatar/chaussures-baskets-bleues.webp;768x1024;oui;Baskets bleues
 5;images/avatar/chaussures-sandales.webp;768x1024;oui;Sandales

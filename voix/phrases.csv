@@ -4810,6 +4810,7 @@ objet.piece.chambre;Magasins (noms des objets);Chambre
 objet.piece.salon;Magasins (noms des objets);Salon
 objet.piece.jeux;Magasins (noms des objets);Salle de jeux
 objet.piece.jardin;Magasins (noms des objets);Jardin
+objet.piece.grenier;Magasins (noms des objets);Grenier
 objet.piece.cuisine;Magasins (noms des objets);Cuisine
 objet.meuble.plante;Magasins (noms des objets);Plante
 objet.meuble.tapis;Magasins (noms des objets);Tapis
@@ -4832,6 +4833,13 @@ objet.meuble.plante-salon;Magasins (noms des objets);Grande plante
 objet.meuble.tapis-salon;Magasins (noms des objets);Tapis du salon
 objet.meuble.tableau-noir;Magasins (noms des objets);Tableau noir
 objet.meuble.carte-monde;Magasins (noms des objets);Carte du monde
+objet.meuble.lanterne;Magasins (noms des objets);Lanterne
+objet.meuble.fauteuil-poire;Magasins (noms des objets);Fauteuil poire
+objet.meuble.etagere-jeux;Magasins (noms des objets);Étagère de jeux
+objet.meuble.malle;Magasins (noms des objets);Malle aux trésors
+objet.meuble.hamac;Magasins (noms des objets);Hamac
+objet.meuble.telescope;Magasins (noms des objets);Télescope
+objet.meuble.tipi;Magasins (noms des objets);Tipi
 objet.meuble.coucou;Magasins (noms des objets);Horloge à coucou
 objet.meuble.piano;Magasins (noms des objets);Piano
 objet.meuble.fleurs;Magasins (noms des objets);Massif de fleurs
@@ -4860,6 +4868,7 @@ objet.jouet.trampoline;Magasins (noms des objets);Trampoline
 objet.jouet.panier-basket;Magasins (noms des objets);Panier de basket
 objet.jouet.circuit;Magasins (noms des objets);Circuit de voitures
 objet.jouet.bac-a-sable;Magasins (noms des objets);Bac à sable
+objet.jouet.cheval-bascule;Magasins (noms des objets);Cheval à bascule
 objet.papier.menthe;Magasins (noms des objets);Vert menthe
 objet.papier.rayures;Magasins (noms des objets);Rayures roses
 objet.papier.pois;Magasins (noms des objets);Pois bleus
@@ -4974,6 +4983,13 @@ objet.accessoire.noeud-papillon;Magasins (noms des objets);Nœud papillon
 objet.accessoire.medaille;Magasins (noms des objets);Médaille d’or
 objet.accessoire.casque-audio;Magasins (noms des objets);Casque audio
 objet.accessoire.collier-fleurs;Magasins (noms des objets);Collier de fleurs
+objet.accessoire.collier-coeur;Magasins (noms des objets);Collier cœur
+objet.accessoire.foulard;Magasins (noms des objets);Foulard
+objet.accessoire.sacoche;Magasins (noms des objets);Sacoche
+objet.accessoire.badge-etoile;Magasins (noms des objets);Badge étoile
+objet.accessoire.diademe;Magasins (noms des objets);Diadème
+objet.accessoire.pince-fleur;Magasins (noms des objets);Fleur dans les cheveux
+objet.accessoire.lunettes-coeur;Magasins (noms des objets);Lunettes cœur
 objet.chaussures.baskets-rouges;Magasins (noms des objets);Baskets rouges
 objet.chaussures.baskets-bleues;Magasins (noms des objets);Baskets bleues
 objet.chaussures.sandales;Magasins (noms des objets);Sandales

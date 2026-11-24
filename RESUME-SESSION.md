@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-49`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-50`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
@@ -34,7 +34,7 @@
 ## En attente
 - **Nouveaux articles** (24 nov.) : 6 meubles et jouets (carte du monde, coucou, piano, panier de basket, circuit, bac à sable), 6 tenues, 2 paires de chaussures, 3 chapeaux. Les pièces de la maison sont presque pleines : pour d'autres meubles, il faudra une nouvelle pièce.
   - **Calques d'avatar** : demander à Higgsfield de modifier `images/avatar-base/maitre.png` (768x1024, fond transparent, « change seulement… »), puis `bash images/calque-avatar.sh plein.png images/originaux/avatar/<nom>.png 48 1` (1 pour une tenue, 0 pour des chaussures ou un chapeau), puis `node images/preparer.mjs`.
-  - Pas faits : de nouveaux accessoires (chacun demande aussi un dessin de secours dans `js/avatar.js`).
+  - 25 nov. : 7 bijoux et accessoires (collier cœur, foulard, sacoche, badge étoile, diadème, fleur dans les cheveux, lunettes cœur) et une nouvelle pièce, **le grenier** (40 ⭐, 7 étages au chantier) avec 8 meubles et jouets.
 - **Maison de la confiance** (24 nov.) : les 5 thèmes sont ouverts. Thème 4 « Les inconnus » (avec le mot de passe secret de la famille). Thème 5 « Mon corps m'appartient » : six principes à écouter, sans mise en situation (choix du parent, qui a trouvé la première version trop gênante) ; la règle du maillot de bain n'y est pas.
 - **Rangement des îles et 6 jeux** (24 nov.) :
   - nouvelle **île de la nature** (ouverte, dessinée, sans image de fond) : cabane nature et potager (quiz, `js/jeux/nature.js`), labyrinthe, glacier de la plage ;

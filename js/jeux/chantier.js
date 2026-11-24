@@ -3,8 +3,8 @@
 // Une pièce achetée au magasin de meubles se construit ici : il faut une tour d'une certaine hauteur.
 import { etoilesDuJeu } from '../partie.js';
 
-export const HAUTEURS = { salon: 5, jeux: 6, jardin: 8 }; // étages à atteindre pour construire la pièce
-export const NOMS = { salon: 'le salon', jeux: 'la salle de jeux', jardin: 'le jardin' }; // pour les phrases
+export const HAUTEURS = { salon: 5, jeux: 6, jardin: 8, grenier: 7 }; // étages à atteindre pour construire la pièce
+export const NOMS = { salon: 'le salon', jeux: 'la salle de jeux', jardin: 'le jardin', grenier: 'le grenier' }; // pour les phrases
 export const LARGEUR = 90, AMPLITUDE = 120; // largeur d'un bloc, et jusqu'où la grue le balance de chaque côté du milieu
 
 // 7 ans et moins : plus lent, et le bloc tient même posé de travers. tolerance : écart permis, en largeurs de bloc.

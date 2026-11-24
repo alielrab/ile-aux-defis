@@ -126,6 +126,20 @@ const OBJETS = {
     <rect x="583" y="450" width="16" height="12" rx="2" fill="#bfe6ff"/>
     <rect x="516" y="482" width="92" height="6" rx="2" fill="${N}"/>
     ${[532, 558, 592].map((x) => `<circle cx="${x}" cy="492" r="8" fill="${N}"/><circle cx="${x}" cy="492" r="3" fill="#aaa"/>`).join('')}` },
+  // Le grenier (25 novembre 2026)
+  lanterne: { boite: '470 0 60 112', dessin: `<path d="M500 0 V40" stroke="#555" stroke-width="3"/><rect x="482" y="40" width="36" height="52" rx="8" fill="#ffd84a" stroke="#7a4a28" stroke-width="4"/><rect x="478" y="36" width="44" height="8" rx="3" fill="#7a4a28"/><rect x="478" y="90" width="44" height="8" rx="3" fill="#7a4a28"/>` },
+  'etagere-jeux': { boite: '40 60 170 120', dessin: `<rect x="40" y="60" width="170" height="120" rx="6" fill="#c98b4f"/><rect x="50" y="70" width="150" height="46" fill="#fbeedd"/><rect x="50" y="124" width="150" height="46" fill="#fbeedd"/>
+    ${[[56, '#e05252'], [84, '#4a90d9'], [112, '#7ac943'], [140, '#f2c230'], [168, '#8e6ad8']].map(([x, c]) => `<rect x="${x}" y="84" width="24" height="32" fill="${c}"/><rect x="${x}" y="142" width="24" height="28" fill="${c}" opacity=".8"/>`).join('')}` },
+  hamac: { boite: '540 110 240 100', dessin: `<path d="M548 120 Q660 240 772 120" fill="#f28c8c" stroke="#c0392b" stroke-width="4"/><path d="M548 120 Q660 200 772 120" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="10 8"/><circle cx="548" cy="118" r="6" fill="#7a4a28"/><circle cx="772" cy="118" r="6" fill="#7a4a28"/>` },
+  tipi: { boite: '30 200 220 250', dessin: `${ombre(140, 446, 104)}<path d="M140 206 L40 446 H240Z" fill="#fff4d6" stroke="#c98b4f" stroke-width="5" stroke-linejoin="round"/><path d="M140 300 L108 446 H172Z" fill="#7a4a28"/>
+    <path d="M128 196 L152 226 M152 196 L128 226" stroke="#9a6334" stroke-width="5" stroke-linecap="round"/>${[[90, 380, '#e05252'], [190, 380, '#4a90d9'], [140, 262, '#f2c230']].map(([x, y, c]) => `<path d="M${x - 10} ${y} l10 -14 l10 14z" fill="${c}"/>`).join('')}` },
+  telescope: { boite: '560 220 110 200', dessin: `${ombre(615, 416, 50)}<path d="M615 320 L585 414 M615 320 L645 414 M615 320 V414" stroke="#7a4a28" stroke-width="6" stroke-linecap="round"/>
+    <path d="M572 300 L654 240" stroke="#3b5bb0" stroke-width="20" stroke-linecap="round"/><path d="M646 246 L662 234" stroke="#f2c230" stroke-width="24" stroke-linecap="round"/>` },
+  malle: { boite: '40 440 150 72', dessin: `${ombre(115, 508, 72)}<rect x="46" y="466" width="138" height="42" rx="5" fill="#9a6334"/><path d="M46 468 Q115 428 184 468Z" fill="#7a4a28"/><rect x="106" y="460" width="18" height="16" rx="3" fill="#f2c230"/>
+    <path d="M70 446 V508 M160 446 V508" stroke="#f2c230" stroke-width="5"/>` },
+  'fauteuil-poire': { boite: '230 424 120 86', dessin: `${ombre(290, 506, 56)}<path d="M240 500 Q230 440 290 432 Q350 440 340 500 Q290 514 240 500Z" fill="#5cc08a" stroke="#3f9a6a" stroke-width="3"/><path d="M262 462 Q290 478 318 462" fill="none" stroke="#3f9a6a" stroke-width="3"/>` },
+  'cheval-bascule': { boite: '600 400 150 110', dessin: `${ombre(675, 506, 70)}<path d="M612 500 Q675 520 738 500" fill="none" stroke="#c98b4f" stroke-width="8" stroke-linecap="round"/><path d="M640 496 V456 M706 496 V456" stroke="#9a6334" stroke-width="7"/>
+    <ellipse cx="672" cy="448" rx="40" ry="18" fill="#e8c27a"/><path d="M700 444 L716 408 L736 420 L720 452Z" fill="#e8c27a"/><circle cx="724" cy="420" r="2.5" fill="${N}"/><path d="M704 440 L716 410" stroke="#7a4a28" stroke-width="6" stroke-linecap="round"/><rect x="660" y="430" width="24" height="10" fill="#e05252"/>` },
   // Ajouts du 24 novembre 2026 : sur les places restées libres
   'carte-monde': { boite: '510 70 160 100', dessin: `<rect x="510" y="70" width="160" height="100" rx="4" fill="#9a6334"/><rect x="516" y="76" width="148" height="88" fill="#9fdcf5"/>
     <path d="M532 100 q14 -14 30 -4 q8 10 -4 22 q-14 8 -22 -2z M580 92 q20 -10 40 2 q10 16 -6 30 q-12 6 -22 -6 q-14 -8 -12 -26z M630 126 q12 -4 18 8 q-6 12 -18 6z" fill="#7ac943"/>` },
@@ -286,6 +300,7 @@ const DECOR = {
   chambre: { mur: '#fbeedd', sol: '#d9a86c', lattes: '#c48f55' },
   salon: { mur: '#f6e2c8', sol: '#b07a48', lattes: '#97663a' },
   jeux: { mur: '#e4f3ff', sol: '#9ed69a', lattes: '#86c482' },
+  grenier: { mur: '#f3e3c8', sol: '#c9a06a', lattes: '#a8824e' },
   cuisine: { mur: '#fff4e2', sol: '#e3cfae', lattes: '#cdb48c', fond: `
     <rect x="20" y="70" width="300" height="200" fill="#ffffff" opacity=".5"/>
     ${[0, 1, 2, 3, 4, 5].map((i) => `<line x1="${20 + i * 60}" y1="70" x2="${20 + i * 60}" y2="270" stroke="#e7d6c0" stroke-width="2"/><line x1="20" y1="${70 + i * 40}" x2="320" y2="${70 + i * 40}" stroke="#e7d6c0" stroke-width="2"/>`).join('')}
@@ -293,7 +308,7 @@ const DECOR = {
     ${[30, 128, 226].map((x) => `<rect x="${x}" y="314" width="84" height="80" rx="6" fill="#b6d7ef"/><rect x="${x + 36}" y="326" width="12" height="4" rx="2" fill="#5a7ea0"/>`).join('')}` },
 };
 // La place du tableau (dessin de l'atelier de peinture) sur le mur de chaque pièce : [x, y, largeur]
-const CADRE = { chambre: [690, 62, 92], salon: [206, 60, 112], jeux: [200, 70, 112], cuisine: [698, 66, 88] };
+const CADRE = { chambre: [690, 62, 92], salon: [206, 60, 112], jeux: [200, 70, 112], cuisine: [698, 66, 88], grenier: [452, 150, 76] };
 function tableau(profil, piece) {
   const d = (profil.dessins ?? []).find((x) => x.id === profil.maison.tableaux?.[piece]);
   if (!d || !CADRE[piece]) return '';
@@ -306,7 +321,8 @@ const ORDRE = ['placard', 'etagere-cuisine', 'frigo', 'lave-vaisselle', 'evier',
   'bibliotheque', 'miroir', 'tele', 'lampadaire', 'plante-salon', 'canape', 'fauteuil', 'tapis-salon', 'table-basse',
   'tableau-noir', 'cerf-volant', 'toboggan', 'manege', 'cubes', 'piscine-balles',
   'pommier', 'cabane', 'balancoire', 'fleurs', 'potager', 'piscine', 'trampoline',
-  'carte-monde', 'coucou', 'piano', 'panier-basket', 'circuit', 'bac-a-sable'];
+  'carte-monde', 'coucou', 'piano', 'panier-basket', 'circuit', 'bac-a-sable',
+  'lanterne', 'etagere-jeux', 'hamac', 'tipi', 'telescope', 'malle', 'fauteuil-poire', 'cheval-bascule'];
 const DEVANT = ['ballon', 'train']; // devant l'enfant
 
 // Papier peint : un motif SVG (id unique par dessin, car plusieurs aperçus sont sur la même page).
@@ -506,7 +522,7 @@ export function apercu(a, profil) {
   }
   if (a.type === 'piece') {
     const d = DECOR[a.cle];
-    const objet = OBJETS[{ chambre: 'lit', salon: 'canape', jeux: 'toboggan', cuisine: 'four', jardin: 'pommier' }[a.cle]]; // un objet typique de la pièce
+    const objet = OBJETS[{ chambre: 'lit', salon: 'canape', jeux: 'toboggan', cuisine: 'four', jardin: 'pommier', grenier: 'tipi' }[a.cle]]; // un objet typique de la pièce
     return mini('0 0 800 520', `<rect width="800" height="390" fill="${d.mur}"/><rect y="380" width="800" height="140" fill="${d.sol}"/>
       ${d.dehors ? d.fond : '<rect x="330" y="60" width="150" height="130" rx="6" fill="#bfe6ff" stroke="#fff" stroke-width="10"/>'}${objet.dessin}`);
   }

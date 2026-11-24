@@ -102,6 +102,13 @@ export const ACCESSOIRES = {
   medaille: { nom: 'Médaille d’or', prix: 20 },
   'casque-audio': { nom: 'Casque audio', prix: 14 },
   'collier-fleurs': { nom: 'Collier de fleurs', prix: 10 },
+  'collier-coeur': { nom: 'Collier cœur', prix: 8 },
+  foulard: { nom: 'Foulard', prix: 8 },
+  sacoche: { nom: 'Sacoche', prix: 12 },
+  'badge-etoile': { nom: 'Badge étoile', prix: 6 },
+  diademe: { nom: 'Diadème', prix: 18 },
+  'pince-fleur': { nom: 'Fleur dans les cheveux', prix: 8 },
+  'lunettes-coeur': { nom: 'Lunettes cœur', prix: 12 },
 };
 // Chaussures (une paire à la fois) : les baskets rouges sont celles du départ
 export const CHAUSSURES = {
@@ -371,7 +378,12 @@ function corps(t, p, acc, aux = 'baskets-rouges') {
   const echarpe = acc.includes('echarpe') ? '<path d="M96 196 Q120 212 144 196 L146 208 Q120 224 94 208Z" fill="#e05252" stroke="#a83a3a" stroke-width="2"/><path d="M130 210 L138 248 L126 250 L122 214Z" fill="#c0392b" stroke="#a83a3a" stroke-width="2"/>' : '';
   const sac = acc.includes('sac') ? '<path d="M150 204 Q172 240 180 280" stroke="#8a2a3a" stroke-width="4" fill="none"/><rect x="168" y="276" width="30" height="24" rx="6" fill="#c0392b" stroke="#8a2a3a" stroke-width="2.5"/><rect x="180" y="282" width="6" height="5" rx="1" fill="#f2c230"/>' : '';
   const montre = acc.includes('montre') ? '<rect x="178" y="258" width="17" height="10" rx="3" fill="#2b2b3a"/><circle cx="186.5" cy="263" r="4" fill="#fff"/><path d="M186.5 263 V260.5" stroke="#2b2b3a" stroke-width="1.2"/>' : '';
-  return { arriere: cape, avant: jambes + pieds + habit + (MOTIFS[t.motif]?.() ?? '') + col + collier + echarpe + sac + bras + montre + manches };
+  // les bijoux ajoutés le 25 novembre 2026 (dessins de secours ; en image, chacun a son calque)
+  const plus = (acc.includes('collier-coeur') ? '<path d="M104 200 Q120 218 136 200" fill="none" stroke="#e6b422" stroke-width="2"/><path d="M120 226 l-6 -7 a4 4 0 0 1 6 -4 a4 4 0 0 1 6 4z" fill="#e05252" stroke="#a83a3a" stroke-width="1"/>' : '')
+    + (acc.includes('foulard') ? '<path d="M98 196 Q120 210 142 196 L140 206 Q120 220 100 206Z" fill="#4a90d9" stroke="#2f6fb0" stroke-width="2"/><path d="M114 212 l6 16 l6 -16z" fill="#4a90d9" stroke="#2f6fb0" stroke-width="2"/>' : '')
+    + (acc.includes('sacoche') ? '<path d="M92 204 Q130 250 166 284" stroke="#7a4a28" stroke-width="4" fill="none"/><rect x="150" y="280" width="34" height="24" rx="5" fill="#a8693a" stroke="#7a4a28" stroke-width="2.5"/><rect x="163" y="286" width="8" height="5" rx="1" fill="#f2c230"/>' : '')
+    + (acc.includes('badge-etoile') ? '<path d="M142 218 l3 7 l8 1 l-6 5 l2 8 l-7 -4 l-7 4 l2 -8 l-6 -5 l8 -1z" fill="#ffd84a" stroke="#c99a10" stroke-width="1.5"/>' : '');
+  return { arriere: cape, avant: jambes + pieds + habit + (MOTIFS[t.motif]?.() ?? '') + col + collier + echarpe + sac + plus + bras + montre + manches };
 }
 
 function visage(a, p) {
@@ -396,6 +408,9 @@ function visage(a, p) {
 // Accessoires portés sur la tête (dessinés par-dessus les cheveux)
 function accessoiresTete(acc) {
   let s = '';
+  if (acc.includes('diademe')) s += '<path d="M84 62 Q120 38 156 62" fill="none" stroke="#d8dde6" stroke-width="5" stroke-linecap="round"/><path d="M110 48 L120 26 L130 48Z" fill="#bfe6ff" stroke="#d8dde6" stroke-width="2.5" stroke-linejoin="round"/><circle cx="96" cy="54" r="3" fill="#ff8fb8"/><circle cx="144" cy="54" r="3" fill="#ff8fb8"/>';
+  if (acc.includes('pince-fleur')) s += `<g transform="translate(78 72)">${[0, 72, 144, 216, 288].map((a) => `<circle cx="${(9 * Math.cos((a * Math.PI) / 180)).toFixed(1)}" cy="${(9 * Math.sin((a * Math.PI) / 180)).toFixed(1)}" r="6" fill="#ff8fb8"/>`).join('')}<circle r="5" fill="#ffd84a"/></g>`;
+  if (acc.includes('lunettes-coeur')) s += `<g fill="#ff8fb866" stroke="#e0457b" stroke-width="3" stroke-linejoin="round">${[96, 144].map((x) => `<path d="M${x} 146 l-15 -15 a8 8 0 0 1 15 -8 a8 8 0 0 1 15 8z"/>`).join('')}</g><path d="M111 130 H129" stroke="#e0457b" stroke-width="3"/>`;
   if (acc.includes('boucles-oreilles')) s += '<circle cx="57" cy="149" r="5" fill="#f2c230" stroke="#b8860b" stroke-width="1.5"/><circle cx="183" cy="149" r="5" fill="#f2c230" stroke="#b8860b" stroke-width="1.5"/>';
   if (acc.includes('lunettes')) s += `<g fill="#ffffff22" stroke="#c0392b" stroke-width="3.5"><circle cx="96" cy="131" r="17"/><circle cx="144" cy="131" r="17"/></g><path d="M113 129 Q120 124 127 129 M79 128 L62 124 M161 128 L178 124" fill="none" stroke="#c0392b" stroke-width="3.5" ${L}/>`;
   if (acc.includes('serre-tete')) s += `<path d="M60 104 C64 56 92 44 120 44 C148 44 176 56 180 104" fill="none" stroke="#ff5d8f" stroke-width="8" ${L}/>`;
@@ -418,7 +433,7 @@ export function proportions(age) {
 // Placés dans le même repère que le dessin (pieds à y = 378, milieu à x = 120) pour que les appels existants ne changent pas.
 const calque = (nom) => ((globalThis.IMAGES ?? []).includes(`images/avatar/${nom}.webp`) ? `images/avatar/${nom}.webp` : null);
 const CADRES_IMAGE = { entier: '0 0 240 390', tete: '54.7 4 130.6 136', corps: '-1.5 114 243 270' };
-const SUR_LA_TETE = ['serre-tete', 'noeud', 'barrettes', 'couronne', 'casque-audio']; // posés sur les cheveux ; les lunettes passent au-dessus de tout
+const SUR_LA_TETE = ['serre-tete', 'noeud', 'barrettes', 'couronne', 'casque-audio', 'diademe', 'pince-fleur']; // posés sur les cheveux ; les lunettes passent au-dessus de tout
 let filtres = 0; // un id de filtre unique par avatar : plusieurs avatars sont sur la même page
 function avatarEnImages(a, cadre, age) {
   const acc = a.accessoires ?? [], lunettes = acc.filter((k) => k.startsWith('lunettes'));
