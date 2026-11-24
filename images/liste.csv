@@ -116,7 +116,7 @@
 3;images/ile/chantier.webp;512x512;oui;Bâtiment : Le chantier (la grue folle)
 3;images/ile/calcul.webp;512x512;oui;Bâtiment : L'école (Calcul)
 3;images/ile/heure.webp;512x512;oui;Bâtiment : La tour de l'horloge (lire l'heure)
-3;images/ile/syllabes.webp;512x512;oui;Bâtiment : La bibliothèque (la chasse aux syllabes)
+3;images/ile/syllabes.webp;512x512;oui;Bâtiment : La bibliothèque (les syllabes et la dictée)
 3;images/ile/espace.webp;512x512;oui;Bâtiment : L'observatoire (le système solaire)
 3;images/ile/corps.webp;512x512;oui;Bâtiment : L'hôpital (le corps humain)
 3;images/ile/musee.webp;512x512;oui;Bâtiment : Le musée des dinosaures (reconstituer des squelettes)
@@ -130,6 +130,7 @@
 3;images/ile/peinture.webp;512x512;oui;Bâtiment : L'atelier de peinture (colorier et peindre)
 3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
 3;images/ile/musique.webp;512x512;oui;Bâtiment : La salle de musique (composer des mélodies)
+3;images/ile/robot.webp;512x512;oui;Bâtiment : L'atelier des robots (programmer avec des flèches)
 3;images/ile/confiance.webp;512x512;oui;Bâtiment : La maison de la confiance (mes droits et ma sécurité)
 3;images/ile/emotions.webp;512x512;oui;Bâtiment : La météo des émotions (reconnaître ses émotions)
 3;images/ile/maison.webp;512x512;oui;Bâtiment : la maison d’un enfant

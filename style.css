@@ -518,6 +518,13 @@ select {
 }
 
 .outils-animal { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+/* L'atelier des robots */
+.grille-robot { display: grid; gap: 4px; width: min(100%, 21rem); margin: 0 auto; padding: 6px; border-radius: 14px; background: #5a6f8a; }
+.grille-robot span { aspect-ratio: 1; display: grid; place-items: center; border-radius: 8px; background: #eef3f8; font-size: clamp(1.6rem, 1rem + 4vw, 2.6rem); line-height: 1; }
+.programme-robot { min-height: 2.4rem; margin: 0.4rem auto 0; padding: 0.3rem 0.8rem; width: fit-content; max-width: 100%; border-radius: 12px; background: #fffdf5; font-size: 1.5rem; font-weight: 700; }
+.reponse.robot-touche { min-height: var(--toucher); font-size: 2rem; line-height: 1; }
+.reponse.robot-touche.lancer { background: #c8f0d0; }
+
 /* Le compte en ligne */
 .form-compte { display: grid; gap: 0.5rem; }
 .form-compte input[type="email"], .form-compte input[type="password"] { font: inherit; font-size: 1.1rem; padding: 0.5rem; border: 2px solid #c98b4f; border-radius: 10px; }

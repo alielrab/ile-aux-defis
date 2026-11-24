@@ -18,6 +18,7 @@ import * as heure from './jeux/heure.js';
 import * as corps from './jeux/corps.js';
 import * as syllabes from './jeux/syllabes.js';
 import * as dictee from './jeux/dictee.js';
+import * as robot from './jeux/robot.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -515,7 +516,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, dictee, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, robot, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -530,6 +531,7 @@ const PERSONNAGES = {
   veto: { peau: 'claire', yeux: 'marron', coiffure: 'queue', cheveux: 'chatain', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   tri: { peau: 'brune', yeux: 'noisette', coiffure: 'tresses', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
   langues: { peau: 'claire', yeux: 'bleus', coiffure: 'carre', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
+  robot: { peau: 'doree', yeux: 'marron', coiffure: 'courts', cheveux: 'noir', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
@@ -548,7 +550,7 @@ function lancerJeu(nom) {
     : nom === 'passeport'
     ? { questions: passeport.questions(paysCourant, joueuse.age), index: 0, bonnes: 0, serie: 0 } // les 3 questions du pays
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
-  joueuse.vus[cle] = [...vus]; // une question ne revient pas tant que les autres n'ont pas été posées
+  if (nom !== 'robot') joueuse.vus[cle] = [...vus]; // (les niveaux du robot sont tirés au hasard : rien à retenir) // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
   const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
@@ -590,6 +592,8 @@ function afficherQuestion() {
     afficherSyllabes(q);
   } else if (jeu === 'marche') {
     afficherMarche(q);
+  } else if (jeu === 'robot') {
+    afficherRobot(q);
   } else if (jeu === 'dinos') {
     const parImage = q.texte.startsWith('trait:'); // « Quel dinosaure… ? » : on touche son image (sans montrer la réponse au-dessus)
     $('#aide').innerHTML = parImage ? '' : dinos.dessinerSquelette(dinos.dino(q.dino));
@@ -692,6 +696,53 @@ function afficherSyllabes(q) {
     });
     return b;
   }));
+}
+
+// L'atelier des robots : on prépare les flèches, puis le robot les suit, case après case
+function afficherRobot(q) {
+  let programme = [], erreur = false, enRoute = false;
+  const attendre = (ms) => new Promise((r) => setTimeout(r, ms));
+  const encore = () => !$('[data-ecran="jeu"]').hidden && partie && questionEnCours(partie) === q; // la partie n'a pas été quittée
+  const grille = el('div', { className: 'grille-robot', role: 'img', ariaLabel: 'La grille : le robot, l’étoile et les rochers' });
+  grille.style.gridTemplateColumns = `repeat(${q.taille}, 1fr)`;
+  const liste = el('p', { className: 'programme-robot', role: 'status' });
+  const dessiner = ([rx, ry] = q.depart, cogne = false) => {
+    grille.replaceChildren(...Array.from({ length: q.taille ** 2 }, (_, i) => {
+      const x = i % q.taille, y = Math.floor(i / q.taille);
+      const ici = x === rx && y === ry;
+      return el('span', { textContent: ici ? (cogne ? '💥' : '🤖') : x === q.but[0] && y === q.but[1] ? '⭐' : q.rochers.some((r) => r[0] === x && r[1] === y) ? '🪨' : '' });
+    }));
+    liste.textContent = programme.length ? programme.map((f) => robot.FLECHES[f][2]).join(' ') : 'Touche les flèches…';
+  };
+  const lancer = async () => {
+    if (!programme.length) return parler('Touche d’abord les flèches.');
+    enRoute = true;
+    const r = robot.executer(q, programme);
+    for (const c of r.chemin) { dessiner(c); await attendre(350); if (!encore()) return; }
+    if (r.gagne) return choisir(erreur ? '' : q.reponse);
+    erreur = true;
+    bip(false);
+    if (r.cogne >= 0) dessiner(r.chemin.at(-1), true);
+    $('#retour').textContent = r.cogne >= 0 ? 'Aïe, le robot s’est cogné ! Essaie un autre chemin.' : 'Le robot n’est pas arrivé à l’étoile. Essaie encore !';
+    parler($('#retour').textContent);
+    await attendre(1200);
+    if (!encore()) return;
+    programme = [];
+    enRoute = false;
+    dessiner();
+  };
+  const bouton = (texte, nom, action, classe = '') => {
+    const b = el('button', { className: `reponse robot-touche ${classe}`, textContent: texte, ariaLabel: nom });
+    b.addEventListener('click', () => { if (!enRoute) action(); });
+    return b;
+  };
+  const fleche = (f, nom) => bouton(robot.FLECHES[f][2], nom, () => { if (programme.length < robot.PROGRAMME_MAX) { programme.push(f); dessiner(); } });
+  $('#aide').replaceChildren(grille, liste);
+  $('#reponses').style.gridTemplateColumns = 'repeat(3, minmax(0, 1fr))';
+  $('#reponses').replaceChildren(
+    bouton('⌫', 'Effacer la dernière flèche', () => { programme.pop(); dessiner(); }), fleche('haut', 'En haut'), bouton('▶️', 'Lancer le robot', lancer, 'lancer'),
+    fleche('gauche', 'À gauche'), fleche('bas', 'En bas'), fleche('droite', 'À droite'));
+  dessiner();
 }
 
 // Le restaurant : peser un ingrédient sur la balance avec les boutons, puis « C'est pesé ! »

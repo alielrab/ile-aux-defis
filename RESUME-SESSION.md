@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-42`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-43`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
@@ -32,6 +32,7 @@
   - En cas de vieux cache : désinscrire le service worker, vider les caches, puis recharger.
 
 ## En attente
+- **Atelier des robots** (24 nov.) : île des créateurs (`js/jeux/robot.js`). Visuel attendu : `images/ile/robot.webp`. Un 5e emplacement a été ajouté sur l'île en image (à ajuster si le bâtiment tombe mal). Suite possible : une flèche « répéter ».
 - **Dictée magique** (24 nov.) : dans la bibliothèque, qui propose maintenant deux jeux (`js/jeux/dictee.js`). L'île du savoir est pleine : 9 lieux pour 8 emplacements en image.
 - **Compte en ligne (Supabase)** (24 nov.) : activé (projet à Francfort, `js/config-en-ligne.js`, `serveur/supabase.sql` lancé, Site URL réglée). Chaque enfant est une ligne à part, pour jouer en même temps sur plusieurs appareils. **À vérifier** : le lien de l'e-mail de confirmation a donné une page 404 GitHub (cause inconnue, Supabase était en panne ce soir-là) ; « Se connecter » après ce lien, le mot de passe oublié, la synchro entre deux vrais appareils et la suppression du compte.
 - **Dinosaures en images** (24 nov.) : 16 images Higgsfield (`images/dinos/`), à toucher dans la galerie du musée et dans les questions « Quel dinosaure… ? » du quiz. Les 6 thèmes de l’école des langues sont aussi en images (`images/langues/`).

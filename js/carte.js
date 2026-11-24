@@ -38,6 +38,7 @@ export const LIEUX = [
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
   { id: 'bd', ile: 'createurs', type: 'jeu', nom: "L'atelier BD", detail: 'inventer des bandes dessinées', ouvert: true, x: 230, y: 680 },
   { id: 'musique', ile: 'createurs', type: 'jeu', nom: 'La salle\nde musique', detail: 'composer des mélodies', ouvert: true, x: 570, y: 680 },
+  { id: 'robot', ile: 'createurs', type: 'jeu', nom: "L'atelier\ndes robots", detail: 'programmer avec des flèches', ouvert: true, x: 400, y: 830 },
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)
   { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: true, x: 230, y: 420 },
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
@@ -159,6 +160,9 @@ const BATIMENTS = {
   langues: [`<rect x="-70" y="-64" width="140" height="64" fill="#fbe9d0"/><path d="M-80 -62 L0 -100 L80 -62Z" fill="#d0603a"/>
     <rect x="-14" y="-38" width="28" height="38" fill="#7a5a3a"/><rect x="-58" y="-50" width="30" height="22" fill="#bfe6ff"/><rect x="28" y="-50" width="30" height="22" fill="#bfe6ff"/>
     <text x="-34" y="-104" font-size="26">🇩🇪</text><text x="6" y="-104" font-size="26">🇬🇧</text>`, 0.85],
+  robot: [`<rect x="-66" y="-70" width="132" height="70" rx="8" fill="#dfe6ee"/><rect x="-74" y="-80" width="148" height="14" rx="6" fill="#5a6f8a"/>
+    <rect x="-14" y="-40" width="28" height="40" fill="#5a6f8a"/><rect x="-54" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/><rect x="26" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/>
+    <text x="-17" y="-88" font-size="32">🤖</text>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}
@@ -238,7 +242,7 @@ const EMPLACEMENTS = {
   village: { cote: 122, places: [[0.5, 0.2], [0.294, 0.322], [0.706, 0.322], [0.244, 0.456], [0.75, 0.456], [0.206, 0.6], [0.775, 0.606], [0.494, 0.756]],
     maisons: [[0.494, 0.487], [0.494, 0.625]] },
   savoir: { cote: 122, places: [[0.5, 0.215], [0.32, 0.355], [0.685, 0.355], [0.24, 0.52], [0.75, 0.52], [0.215, 0.657], [0.493, 0.7], [0.78, 0.657]] },
-  createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657]] },
+  createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657], [0.47, 0.8]] }, // le 5e : l'atelier des robots, devant
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
 };

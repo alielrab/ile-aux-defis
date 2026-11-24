@@ -11,7 +11,7 @@
 | Syllabes | Assembler des syllabes pour apprendre à lire |
 | Explorateur de la Suisse | Cantons, villes, montagnes, lacs sur la carte |
 | Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
-| Code avec un robot | Programmer un robot avec des flèches pour atteindre un but |
+| Code avec un robot | **Fait** (atelier des robots, île des créateurs) : programmer un robot avec des flèches pour atteindre l'étoile |
 | Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
 | Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
 | Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
