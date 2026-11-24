@@ -126,6 +126,19 @@ const OBJETS = {
     <rect x="583" y="450" width="16" height="12" rx="2" fill="#bfe6ff"/>
     <rect x="516" y="482" width="92" height="6" rx="2" fill="${N}"/>
     ${[532, 558, 592].map((x) => `<circle cx="${x}" cy="492" r="8" fill="${N}"/><circle cx="${x}" cy="492" r="3" fill="#aaa"/>`).join('')}` },
+  // Ajouts du 24 novembre 2026 : sur les places restées libres
+  'carte-monde': { boite: '510 70 160 100', dessin: `<rect x="510" y="70" width="160" height="100" rx="4" fill="#9a6334"/><rect x="516" y="76" width="148" height="88" fill="#9fdcf5"/>
+    <path d="M532 100 q14 -14 30 -4 q8 10 -4 22 q-14 8 -22 -2z M580 92 q20 -10 40 2 q10 16 -6 30 q-12 6 -22 -6 q-14 -8 -12 -26z M630 126 q12 -4 18 8 q-6 12 -18 6z" fill="#7ac943"/>` },
+  coucou: { boite: '640 50 90 110', dessin: `<path d="M650 96 L685 56 L720 96Z" fill="#9a6334"/><rect x="656" y="94" width="58" height="46" fill="#c98b4f"/><circle cx="685" cy="116" r="15" fill="#fff" stroke="#7a4a28" stroke-width="3"/>
+    <path d="M685 116 V106 M685 116 L693 120" stroke="${N}" stroke-width="2.5" stroke-linecap="round"/><path d="M672 140 V158 M698 140 V152" stroke="#7a4a28" stroke-width="3"/><circle cx="672" cy="160" r="4" fill="#7a4a28"/><circle cx="698" cy="154" r="4" fill="#7a4a28"/>` },
+  piano: { boite: '24 400 170 112', dessin: `${ombre(109, 508, 82)}<rect x="30" y="410" width="158" height="96" rx="6" fill="#7a4a28"/><rect x="26" y="452" width="166" height="20" rx="3" fill="#5a3418"/>
+    <rect x="34" y="456" width="150" height="12" fill="#fff"/>${[44, 56, 80, 92, 104, 128, 140, 164].map((x) => `<rect x="${x}" y="456" width="6" height="7" fill="${N}"/>`).join('')}` },
+  'panier-basket': { boite: '40 60 110 130', dessin: `<rect x="46" y="64" width="98" height="72" rx="6" fill="#fff" stroke="#e05252" stroke-width="5"/><rect x="76" y="92" width="38" height="30" fill="none" stroke="#e05252" stroke-width="4"/>
+    <ellipse cx="95" cy="138" rx="26" ry="7" fill="none" stroke="#f28c28" stroke-width="5"/><path d="M71 140 L80 184 H110 L119 140 M83 142 L88 184 M95 144 V184 M107 142 L102 184" stroke="#fff" stroke-width="2.5" fill="none"/>` },
+  circuit: { boite: '30 446 190 64', dessin: `<ellipse cx="125" cy="478" rx="90" ry="28" fill="none" stroke="#555" stroke-width="16"/><ellipse cx="125" cy="478" rx="90" ry="28" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="8 8"/>
+    <rect x="60" y="452" width="26" height="14" rx="5" fill="#e05252"/><rect x="160" y="490" width="26" height="14" rx="5" fill="#4a90d9"/>` },
+  'bac-a-sable': { boite: '356 448 180 64', dessin: `<rect x="360" y="462" width="172" height="46" rx="8" fill="#c98b4f"/><rect x="370" y="470" width="152" height="32" rx="6" fill="#f2dca0"/>
+    <path d="M400 500 L414 474 L428 500Z" fill="#e8c27a"/><rect x="470" y="478" width="18" height="22" rx="3" fill="#e05252"/><path d="M440 498 l16 -22" stroke="#4a90d9" stroke-width="5" stroke-linecap="round"/>` },
   // Nouveaux meubles de la chambre
   horloge: { boite: '30 60 72 72', dessin: `<circle cx="66" cy="96" r="30" fill="#fff" stroke="#c98b4f" stroke-width="6"/>
     ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => `<circle cx="${(66 + 22 * Math.cos((i * Math.PI) / 6)).toFixed(1)}" cy="${(96 + 22 * Math.sin((i * Math.PI) / 6)).toFixed(1)}" r="2" fill="${N}"/>`).join('')}
@@ -292,7 +305,8 @@ const ORDRE = ['placard', 'etagere-cuisine', 'frigo', 'lave-vaisselle', 'evier',
   'guirlande', 'horloge', 'tapis', 'etagere', 'lit', 'bureau', 'lampe', 'plante', 'ours', 'robot', 'coffre', 'pouf',
   'bibliotheque', 'miroir', 'tele', 'lampadaire', 'plante-salon', 'canape', 'fauteuil', 'tapis-salon', 'table-basse',
   'tableau-noir', 'cerf-volant', 'toboggan', 'manege', 'cubes', 'piscine-balles',
-  'pommier', 'cabane', 'balancoire', 'fleurs', 'potager', 'piscine', 'trampoline'];
+  'pommier', 'cabane', 'balancoire', 'fleurs', 'potager', 'piscine', 'trampoline',
+  'carte-monde', 'coucou', 'piano', 'panier-basket', 'circuit', 'bac-a-sable'];
 const DEVANT = ['ballon', 'train']; // devant l'enfant
 
 // Papier peint : un motif SVG (id unique par dessin, car plusieurs aperçus sont sur la même page).

@@ -4831,6 +4831,9 @@ objet.meuble.miroir;Magasins (noms des objets);Miroir
 objet.meuble.plante-salon;Magasins (noms des objets);Grande plante
 objet.meuble.tapis-salon;Magasins (noms des objets);Tapis du salon
 objet.meuble.tableau-noir;Magasins (noms des objets);Tableau noir
+objet.meuble.carte-monde;Magasins (noms des objets);Carte du monde
+objet.meuble.coucou;Magasins (noms des objets);Horloge à coucou
+objet.meuble.piano;Magasins (noms des objets);Piano
 objet.meuble.fleurs;Magasins (noms des objets);Massif de fleurs
 objet.meuble.potager;Magasins (noms des objets);Potager
 objet.meuble.pommier;Magasins (noms des objets);Pommier
@@ -4854,6 +4857,9 @@ objet.jouet.piscine-balles;Magasins (noms des objets);Piscine à balles
 objet.jouet.piscine;Magasins (noms des objets);Petite piscine
 objet.jouet.balancoire;Magasins (noms des objets);Balançoire
 objet.jouet.trampoline;Magasins (noms des objets);Trampoline
+objet.jouet.panier-basket;Magasins (noms des objets);Panier de basket
+objet.jouet.circuit;Magasins (noms des objets);Circuit de voitures
+objet.jouet.bac-a-sable;Magasins (noms des objets);Bac à sable
 objet.papier.menthe;Magasins (noms des objets);Vert menthe
 objet.papier.rayures;Magasins (noms des objets);Rayures roses
 objet.papier.pois;Magasins (noms des objets);Pois bleus
@@ -4944,6 +4950,12 @@ objet.tenue.chef;Magasins (noms des objets);Tenue de chef
 objet.tenue.artiste;Magasins (noms des objets);Blouse d’artiste
 objet.tenue.basket;Magasins (noms des objets);Tenue de basket
 objet.tenue.parka;Magasins (noms des objets);Parka d’hiver
+objet.tenue.fee;Magasins (noms des objets);Robe de fée
+objet.tenue.foot;Magasins (noms des objets);Tenue de foot bleue
+objet.tenue.cire;Magasins (noms des objets);Ciré jaune
+objet.tenue.detective;Magasins (noms des objets);Tenue de détective
+objet.tenue.robe-papillon;Magasins (noms des objets);Robe papillon
+objet.tenue.pyjama-etoiles;Magasins (noms des objets);Pyjama étoilé
 objet.accessoire.boucles-oreilles;Magasins (noms des objets);Boucles d'oreilles
 objet.accessoire.bracelet;Magasins (noms des objets);Bracelets
 objet.accessoire.serre-tete;Magasins (noms des objets);Serre-tête
@@ -4978,6 +4990,8 @@ objet.chaussures.baskets-roses;Magasins (noms des objets);Baskets roses
 objet.chaussures.chaussons-lapin;Magasins (noms des objets);Chaussons lapin
 objet.chaussures.bottes-neige;Magasins (noms des objets);Bottes de neige
 objet.chaussures.baskets-lumineuses;Magasins (noms des objets);Baskets lumineuses
+objet.chaussures.crampons;Magasins (noms des objets);Chaussures de foot
+objet.chaussures.ballerines-dorees;Magasins (noms des objets);Ballerines dorées
 objet.chapeau.casquette;Magasins (noms des objets);Casquette
 objet.chapeau.bonnet;Magasins (noms des objets);Bonnet à pompon
 objet.chapeau.beret;Magasins (noms des objets);Béret
@@ -4991,6 +5005,9 @@ objet.chapeau.pirate;Magasins (noms des objets);Chapeau de pirate
 objet.chapeau.cowboy;Magasins (noms des objets);Chapeau de cow-boy
 objet.chapeau.toque;Magasins (noms des objets);Toque de chef
 objet.chapeau.anniversaire;Magasins (noms des objets);Chapeau d’anniversaire
+objet.chapeau.casque-velo;Magasins (noms des objets);Casque de vélo
+objet.chapeau.bob;Magasins (noms des objets);Bob
+objet.chapeau.detective;Magasins (noms des objets);Chapeau de détective
 objet.coiffure.courts;Magasins (noms des objets);Courts
 objet.coiffure.carre;Magasins (noms des objets);Carré
 objet.coiffure.longs;Magasins (noms des objets);Longs

@@ -1,5 +1,5 @@
 // Garde l'app en cache pour qu'elle marche hors ligne. Changer VERSION à chaque mise en ligne.
-const VERSION = 'ile-48';
+const VERSION = 'ile-49';
 importScripts('images/liste.js'); // self.IMAGES : les images du nouveau style déjà prêtes
 const FICHIERS = [...self.IMAGES, 'images/liste.js',
   './', 'index.html', 'style.css', 'manifest.json', 'icons/icone-192.png', 'icons/icone-512.png',

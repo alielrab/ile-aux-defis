@@ -75,6 +75,12 @@ export const TENUES = {
   artiste: { nom: 'Blouse d’artiste', forme: 'robe', haut: '#9fd3f5', motif: 'pois', prix: 16 },
   basket: { nom: 'Tenue de basket', forme: 'short', haut: '#f28a26', bas: '#f28a26', motif: 'numero', prix: 15 },
   parka: { nom: 'Parka d’hiver', forme: 'pantalon', haut: '#1f6f63', bas: '#4a4a52', motif: 'boutons', prix: 22 },
+  fee: { nom: 'Robe de fée', forme: 'robe', haut: '#c9a0f0', motif: 'pois', prix: 25 },
+  foot: { nom: 'Tenue de foot bleue', forme: 'short', haut: '#2f6fd0', bas: '#ffffff', prix: 18 },
+  cire: { nom: 'Ciré jaune', forme: 'pantalon', haut: '#f2c230', bas: '#3b5b8c', motif: 'boutons', prix: 18 },
+  detective: { nom: 'Tenue de détective', forme: 'pantalon', haut: '#b08c52', bas: '#5a4632', motif: 'boutons', prix: 20 },
+  'robe-papillon': { nom: 'Robe papillon', forme: 'robe', haut: '#ff9a3c', motif: 'pois', prix: 20 },
+  'pyjama-etoiles': { nom: 'Pyjama étoilé', forme: 'pantalon', haut: '#2f3f8f', bas: '#2f3f8f', motif: 'etoiles', prix: 15 },
 };
 // Bijoux et accessoires : on peut en porter plusieurs à la fois. Tous à gagner à la boutique.
 export const ACCESSOIRES = {
@@ -115,6 +121,8 @@ export const CHAUSSURES = {
   'chaussons-lapin': { nom: 'Chaussons lapin', forme: 'ballerine', couleur: '#fdf3f7', prix: 14 },
   'bottes-neige': { nom: 'Bottes de neige', forme: 'botte', couleur: '#3b5bb0', prix: 16 },
   'baskets-lumineuses': { nom: 'Baskets lumineuses', forme: 'basket', couleur: '#f2f2f2', prix: 20 },
+  crampons: { nom: 'Chaussures de foot', forme: 'basket', couleur: '#2a2a2a', prix: 14 },
+  'ballerines-dorees': { nom: 'Ballerines dorées', forme: 'ballerine', couleur: '#e6b422', prix: 14 },
 };
 // Chapeaux (un à la fois, ou aucun)
 export const CHAPEAUX = {
@@ -132,6 +140,9 @@ export const CHAPEAUX = {
   cowboy: { nom: 'Chapeau de cow-boy', forme: 'chapeau-paille', couleur: '#a8693a', prix: 16 },
   toque: { nom: 'Toque de chef', forme: 'bonnet', couleur: '#ffffff', prix: 12 },
   anniversaire: { nom: 'Chapeau d’anniversaire', forme: 'sorciere', couleur: '#ff8fb8', prix: 10 },
+  'casque-velo': { nom: 'Casque de vélo', forme: 'bonnet', couleur: '#3fae6a', prix: 12 },
+  bob: { nom: 'Bob', forme: 'chapeau-paille', couleur: '#7ad0f0', prix: 10 },
+  detective: { nom: 'Chapeau de détective', forme: 'chapeau-paille', couleur: '#8a6a4a', prix: 14 },
 };
 
 const gratuits = (liste, prix = {}) => Object.keys(liste).filter((k) => !prix[k]);

@@ -61,6 +61,9 @@
 2;images/maison/plante-salon.webp;512x512;oui;Grande plante
 2;images/maison/tapis-salon.webp;512x512;oui;Tapis du salon
 2;images/maison/tableau-noir.webp;512x512;oui;Tableau noir
+2;images/maison/carte-monde.webp;512x512;oui;Carte du monde
+2;images/maison/coucou.webp;512x512;oui;Horloge à coucou
+2;images/maison/piano.webp;512x512;oui;Piano
 2;images/maison/fleurs.webp;512x512;oui;Massif de fleurs
 2;images/maison/potager.webp;512x512;oui;Potager
 2;images/maison/pommier.webp;512x512;oui;Pommier
@@ -84,6 +87,9 @@
 2;images/maison/piscine.webp;512x512;oui;Petite piscine
 2;images/maison/balancoire.webp;512x512;oui;Balançoire
 2;images/maison/trampoline.webp;512x512;oui;Trampoline
+2;images/maison/panier-basket.webp;512x512;oui;Panier de basket
+2;images/maison/circuit.webp;512x512;oui;Circuit de voitures
+2;images/maison/bac-a-sable.webp;512x512;oui;Bac à sable
 2;images/maison/lit-bleu.webp;512x512;oui;Lit bleu
 2;images/maison/lit-vert.webp;512x512;oui;Lit vert
 2;images/maison/lit-jaune.webp;512x512;oui;Lit jaune
@@ -236,6 +242,12 @@
 5;images/avatar/tenue-artiste.webp;768x1024;oui;Blouse d’artiste
 5;images/avatar/tenue-basket.webp;768x1024;oui;Tenue de basket
 5;images/avatar/tenue-parka.webp;768x1024;oui;Parka d’hiver
+5;images/avatar/tenue-fee.webp;768x1024;oui;Robe de fée
+5;images/avatar/tenue-foot.webp;768x1024;oui;Tenue de foot bleue
+5;images/avatar/tenue-cire.webp;768x1024;oui;Ciré jaune
+5;images/avatar/tenue-detective.webp;768x1024;oui;Tenue de détective
+5;images/avatar/tenue-robe-papillon.webp;768x1024;oui;Robe papillon
+5;images/avatar/tenue-pyjama-etoiles.webp;768x1024;oui;Pyjama étoilé
 5;images/avatar/accessoire-boucles-oreilles.webp;768x1024;oui;Boucles d'oreilles
 5;images/avatar/accessoire-bracelet.webp;768x1024;oui;Bracelets
 5;images/avatar/accessoire-serre-tete.webp;768x1024;oui;Serre-tête
@@ -270,6 +282,8 @@
 5;images/avatar/chaussures-chaussons-lapin.webp;768x1024;oui;Chaussons lapin
 5;images/avatar/chaussures-bottes-neige.webp;768x1024;oui;Bottes de neige
 5;images/avatar/chaussures-baskets-lumineuses.webp;768x1024;oui;Baskets lumineuses
+5;images/avatar/chaussures-crampons.webp;768x1024;oui;Chaussures de foot
+5;images/avatar/chaussures-ballerines-dorees.webp;768x1024;oui;Ballerines dorées
 5;images/avatar/chapeau-casquette.webp;768x1024;oui;Casquette
 5;images/avatar/chapeau-bonnet.webp;768x1024;oui;Bonnet à pompon
 5;images/avatar/chapeau-beret.webp;768x1024;oui;Béret
@@ -283,6 +297,9 @@
 5;images/avatar/chapeau-cowboy.webp;768x1024;oui;Chapeau de cow-boy
 5;images/avatar/chapeau-toque.webp;768x1024;oui;Toque de chef
 5;images/avatar/chapeau-anniversaire.webp;768x1024;oui;Chapeau d’anniversaire
+5;images/avatar/chapeau-casque-velo.webp;768x1024;oui;Casque de vélo
+5;images/avatar/chapeau-bob.webp;768x1024;oui;Bob
+5;images/avatar/chapeau-detective.webp;768x1024;oui;Chapeau de détective
 5;images/avatar/base-tres-claire-marron.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux marron
 5;images/avatar/base-tres-claire-noisette.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux noisette
 5;images/avatar/base-tres-claire-bleus.webp;768x1024;oui;Enfant chauve en t-shirt et short beiges, peau tres-claire, yeux bleus

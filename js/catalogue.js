@@ -30,6 +30,9 @@ export const MEUBLES = {
   'plante-salon': { nom: 'Grande plante', prix: 8, piece: 'salon' },
   'tapis-salon': { nom: 'Tapis du salon', prix: 10, piece: 'salon' },
   'tableau-noir': { nom: 'Tableau noir', prix: 12, piece: 'jeux' },
+  'carte-monde': { nom: 'Carte du monde', prix: 10, piece: 'chambre' },
+  coucou: { nom: 'Horloge à coucou', prix: 12, piece: 'salon' },
+  piano: { nom: 'Piano', prix: 22, piece: 'salon' },
   // le jardin
   fleurs: { nom: 'Massif de fleurs', prix: 8, piece: 'jardin' },
   potager: { nom: 'Potager', prix: 10, piece: 'jardin' },
@@ -64,6 +67,9 @@ export const JOUETS = {
   piscine: { nom: 'Petite piscine', prix: 15, piece: 'jardin' },
   balancoire: { nom: 'Balançoire', prix: 18, piece: 'jardin' },
   trampoline: { nom: 'Trampoline', prix: 20, piece: 'jardin' },
+  'panier-basket': { nom: 'Panier de basket', prix: 12, piece: 'jeux' },
+  circuit: { nom: 'Circuit de voitures', prix: 14, piece: 'jeux' },
+  'bac-a-sable': { nom: 'Bac à sable', prix: 14, piece: 'jardin' },
 };
 export const PAPIERS = {
   menthe: { nom: 'Vert menthe', prix: 8 },
