@@ -2211,7 +2211,7 @@ function ouvrirLangues() {
 function ouvrirConfiance() {
   etoilesJoueuse();
   const accueil = 'Ici, on apprend à se sentir bien et en sécurité. Il n’y a pas de mauvaise réponse : on apprend ensemble.';
-  const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance, droits: ouvrirDroits };
+  const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance, droits: ouvrirDroits, inconnus: ouvrirInconnus, corps: ouvrirCorps };
   $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', textContent: accueil }),
     ...confiance.THEMES.map((t) => {
       const b = gros(`${t.image} ${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrir[t.cle], t.ouvert ? 'gros' : 'gros secondaire');
@@ -2348,6 +2348,31 @@ function ouvrirDroits() {
       situations: confiance.pasRespectes(joueuse.age), bonnes: confiance.IDEES_DROITS, aRevoir: confiance.NORMAL, douceur: confiance.DOUCEUR_NORMAL,
       fin: () => finir('idees', `${confiance.DROITS_DES_AUTRES} ${confiance.FIN_DROITS}`) })],
   ], `${confiance.DROITS_DES_AUTRES} ${confiance.FIN_DROITS}`);
+}
+
+function ouvrirInconnus() {
+  const finir = (etape, texte) => finEtapeConfiance('inconnus', etape, texte, ouvrirInconnus);
+  menuTheme('inconnus', '🚶 Les inconnus', confiance.INTRO_INCONNUS, [
+    ['accord', 'C’est d’accord, ou je demande d’abord ?', () => jouerChoix({
+      questions: confiance.accordOuDemande(joueuse.age).map((q) => ({ ...q, choix: [['accord', 'C’est d’accord'], ['demande', 'Je demande d’abord']] })),
+      mot: 'Situation', retour: confiance.retourAccord, question: 'C’est d’accord, ou tu demandes d’abord à tes parents ?', fin: () => finir('accord', 'Bravo ! Tu sais quand demander à tes parents.') })],
+    ['souci', 'Pas de souci, ou je dis non ?', () => jouerChoix({
+      questions: confiance.souciOuNon(joueuse.age).map((q, i) => ({ ...q, choix: [['souci', 'Pas de souci'], ['non', 'Je dis non et je m’éloigne']], avant: i ? '' : `${confiance.SOUCI_INTRO} ` })),
+      mot: 'Situation', retour: confiance.retourSouci, question: 'Pas de souci, ou tu dis non ?', fin: () => finir('souci', 'Bravo ! Tu peux être {poli|polie} et dire non.') })],
+    ['idees', 'Qu’est-ce que je peux faire ?', () => jouerReactions({
+      situations: confiance.situationsInconnus(joueuse.age), bonnes: confiance.IDEES_INCONNUS, aRevoir: confiance.RESTER, douceur: confiance.DOUCEUR_RESTER,
+      fin: () => finir('idees', `${confiance.CRIER} ${confiance.FIN_INCONNUS}`) })],
+  ], confiance.FIN_INCONNUS);
+}
+
+// « Mon corps m'appartient » : six principes à écouter, sans question ni mise en situation (choix du parent)
+function ouvrirCorps() {
+  menuTheme('corps', '🛡️ Mon corps m’appartient', confiance.INTRO_CORPS, [
+    ['principes', 'J’écoute les principes', () => jouerChoix({
+      questions: confiance.principes().map((q) => ({ ...q, choix: [['ok', '🔊 Explique-moi']] })),
+      mot: 'Principe', retour: (q) => q.explication,
+      fin: () => finEtapeConfiance('corps', 'principes', `${confiance.ADULTES_DE_CONFIANCE} ${confiance.FIN_CORPS}`, ouvrirCorps) })],
+  ], `${confiance.ADULTES_DE_CONFIANCE} ${confiance.FIN_CORPS}`);
 }
 
 // Le chantier : « La grue folle ». On empile des blocs ; une tour assez haute construit les pièces achetées.

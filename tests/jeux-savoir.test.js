@@ -156,7 +156,7 @@ test('maison de la confiance, fait ou avis : 6 phrases amusantes puis 2 blessant
   assert.equal(new Set(confiance.SITUATIONS.map((s) => s[0])).size, confiance.SITUATIONS.length);
   assert.equal(confiance.REACTIONS.length, 4);
   assert.match(confiance.FIN, /147/);
-  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis', 'emotions', 'droits']); // un thème à la fois, relu avant d'ouvrir
+  assert.deepEqual(confiance.THEMES.filter((t) => t.ouvert).map((t) => t.cle), ['fait-avis', 'emotions', 'droits', 'inconnus', 'corps']); // un thème à la fois, relu avant d'ouvrir
 });
 
 test('maison de la confiance, mes émotions : le message de chaque émotion, le oui et le non, les quatre gestes ; jamais « faux »', async () => {
@@ -220,4 +220,27 @@ test('mots de voyage : 6 mots par pays, dans l’ordre bonjour… s’il te pla�
   assert.equal(passeport.motsDebloques(profil), 0);
   passeport.tamponner(profil, 'japon', 3);
   assert.equal(passeport.motsDebloques(profil), 6);
+});
+
+test('maison de la confiance, les inconnus : 8 situations par étape, jamais « faux », les plus dures dès 8 ans, le mot de passe de la famille', () => {
+  for (const [liste, tirer, retour, noms] of [[confiance.ACCORD_OU_DEMANDE, confiance.accordOuDemande, confiance.retourAccord, confiance.NOMS_ACCORD], [confiance.SOUCI_OU_NON, confiance.souciOuNon, confiance.retourSouci, confiance.NOMS_SOUCI]]) {
+    for (const s of liste) assert.ok(s[1] in noms && s[2].length > 10, s[0]);
+    for (const age of [6, 9]) for (let g = 1; g < 10; g++) {
+      const qs = tirer(age, graine(g));
+      assert.equal(qs.length, 8);
+      if (age === 6) assert.ok(qs.every((q) => !liste.find((s) => s[0] === q.texte)[3]));
+      for (const q of qs) for (const c of Object.keys(noms)) assert.ok(!/faux/i.test(retour(q, c)), q.texte);
+    }
+  }
+  assert.equal(confiance.situationsInconnus(6, graine(1)).length, 3);
+  assert.equal(confiance.IDEES_INCONNUS.length, 4);
+  assert.match(confiance.INTRO_INCONNUS + confiance.FIN_INCONNUS, /mot de passe secret/);
+  assert.match(confiance.FIN_INCONNUS, /117/);
+  assert.match(confiance.FIN_INCONNUS, /147/);
+  assert.equal(confiance.THEMES.find((x) => x.cle === 'inconnus').ouvert, true);
+  // « Mon corps m'appartient » : des principes seulement, aucune mise en situation (choix du parent)
+  assert.equal(confiance.principes().length, 6);
+  assert.ok(confiance.PRINCIPES.every(([p, e]) => p.endsWith('.') && e.length > 30 && !/imagine|maillot/i.test(p + e)));
+  assert.match(confiance.PRINCIPES.map((p) => p.join(' ')).join(' '), /doute.*parent ou à un adulte de confiance/);
+  assert.match(confiance.FIN_CORPS, /147/);
 });

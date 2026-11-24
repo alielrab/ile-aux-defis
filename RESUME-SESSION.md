@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-46`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-48`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
@@ -32,6 +32,7 @@
   - En cas de vieux cache : désinscrire le service worker, vider les caches, puis recharger.
 
 ## En attente
+- **Maison de la confiance** (24 nov.) : les 5 thèmes sont ouverts. Thème 4 « Les inconnus » (avec le mot de passe secret de la famille). Thème 5 « Mon corps m'appartient » : six principes à écouter, sans mise en situation (choix du parent, qui a trouvé la première version trop gênante) ; la règle du maillot de bain n'y est pas.
 - **Rangement des îles et 6 jeux** (24 nov.) :
   - nouvelle **île de la nature** (ouverte, dessinée, sans image de fond) : cabane nature et potager (quiz, `js/jeux/nature.js`), labyrinthe, glacier de la plage ;
   - **missions de la maison** sur l'île du cœur (validées par un parent avec le code, 3 ⭐, une fois par jour) ;

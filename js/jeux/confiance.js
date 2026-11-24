@@ -1,6 +1,6 @@
 // La maison de la confiance (île du cœur). Thème 1 : « Fait ou avis ? » (texte relu dans relecture/fait-ou-avis.md).
 // Règle du lieu : aucune pénalité. Une réponse à revoir donne une explication douce ; les étoiles récompensent
-// le fait d'aller au bout d'une étape, jamais les bonnes réponses. Thèmes 1, 2 et 3 relus et validés par un parent le 15 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert.
+// le fait d'aller au bout d'une étape, jamais les bonnes réponses. Thèmes 1, 2 et 3 relus et validés par un parent le 15 novembre 2026, thèmes 4 et 5 le 24 novembre 2026 ; chaque nouveau thème est à faire relire avant d'être ouvert.
 import { melanger } from '../partie.js';
 
 // Les thèmes du lieu, dans l'ordre choisi par les parents. ouvert : false = « Bientôt ».
@@ -8,8 +8,8 @@ export const THEMES = [
   { cle: 'fait-avis', nom: 'Fait ou avis ?', image: '🔎', ouvert: true },
   { cle: 'emotions', nom: 'Mes émotions me parlent', image: '💛', ouvert: true },
   { cle: 'droits', nom: 'Mes droits', image: '📜', ouvert: true },
-  { cle: 'inconnus', nom: 'Les inconnus', image: '🚶', ouvert: false },
-  { cle: 'corps', nom: 'Mon corps m’appartient', image: '🛡️', ouvert: false },
+  { cle: 'inconnus', nom: 'Les inconnus', image: '🚶', ouvert: true },
+  { cle: 'corps', nom: 'Mon corps m’appartient', image: '🛡️', ouvert: true },
 ];
 
 export const INTRO = 'Un fait, c’est quelque chose de vrai pour tout le monde : on peut le vérifier. Un avis, c’est ce que quelqu’un pense ou ressent : une autre personne peut penser autrement. « Il pleut » est un fait : on peut regarder par la fenêtre. « La pluie, c’est nul » est un avis.';
@@ -251,3 +251,83 @@ export const pasRespectes = (age, aleatoire = Math.random) => melanger(PAS_RESPE
 
 export const DROITS_DES_AUTRES = 'Tous les enfants ont les mêmes droits que toi. Alors, quand tu respectes les autres, tu respectes leurs droits : tu les laisses jouer, tu les écoutes, tu ne leur fais pas de mal. Avoir des droits, ça ne veut pas dire tout décider. Les adultes qui t’aiment t’écoutent, puis choisissent ce qui est bon pour toi.';
 export const FIN_DROITS = 'Tes droits sont à toi, pour toujours. Personne ne peut te les enlever. Si un jour quelque chose ne te semble pas juste, ou si quelqu’un te fait du mal, parles-en à un adulte de confiance. Tu peux aussi appeler le 147 : c’est gratuit, jour et nuit, et des adultes sont là pour écouter les enfants. Et maintenant, si tu en parlais avec un adulte de ta famille ?';
+
+// ---------- Thème 4 : « Les inconnus » (texte d'origine : relecture/les-inconnus.md, relu par un parent le 24 novembre 2026) ----------
+// Le ton est calme : des règles simples, comme la ceinture dans la voiture. La règle porte sur « partir avec quelqu'un », pas seulement sur les inconnus.
+export const INTRO_INCONNUS = 'La plupart des adultes sont gentils et veulent du bien aux enfants. Mais tu ne peux pas savoir, juste en le regardant, si quelqu’un que tu ne connais pas est gentil. Alors il y a quelques règles simples, comme la ceinture dans la voiture : on les suit toujours, et on est tranquille. La plus importante : tu ne pars jamais avec quelqu’un sans que tes parents le sachent. Même si tu connais cette personne. Et tu peux choisir avec tes parents un mot de passe secret : si tu as un doute avec un adulte, tu lui demandes le mot de passe.';
+
+export const NOMS_ACCORD = { accord: 'c’est d’accord', demande: 'je demande d’abord' };
+// [situation, « accord » ou « demande », explication, grand ?]
+export const ACCORD_OU_DEMANDE = [
+  ['Ta grand-mère vient te chercher à l’école, comme tes parents te l’ont dit ce matin.', 'accord', 'Tes parents le savent : tout va bien.'],
+  ['Un voisin que tu connais te propose de te ramener en voiture. Tes parents ne le savent pas.', 'demande', 'Même avec quelqu’un que tu connais, tes parents doivent savoir où tu es.'],
+  ['La maman d’une copine te propose de venir goûter chez elle, tout de suite.', 'demande', 'C’est gentil ! Mais tes parents doivent d’abord dire oui.'],
+  ['Ton papa t’a dit : « Ce soir, c’est tonton qui vient te chercher. » Et tonton est là.', 'accord', 'C’était prévu avec ton papa.'],
+  ['Une dame que tu ne connais pas te dit : « Ta maman m’a demandé de venir te chercher. »', 'demande', 'Tu ne pars pas. Tu lui demandes le mot de passe secret de ta famille. Si elle ne le connaît pas, tu vas voir la maîtresse ou un adulte que tu connais, et on appelle tes parents.'],
+  ['À la sortie du sport, l’entraîneur te propose de te raccompagner. Ce n’était pas prévu.', 'demande', 'Même un adulte que tu aimes bien : on appelle d’abord tes parents.'],
+  ['Tu vas à l’école à pied avec ta grande sœur, comme chaque matin.', 'accord', 'C’est ce qui est prévu avec tes parents.'],
+  ['Un monsieur te propose de monter dans sa voiture pour te mettre à l’abri de la pluie.', 'demande', 'Tu ne montes jamais dans la voiture de quelqu’un sans que tes parents le sachent. Un peu de pluie, ce n’est pas grave.'],
+  ['Un grand que tu ne connais pas t’invite à venir voir un jeu vidéo chez lui.', 'demande', 'Tu n’entres pas chez quelqu’un sans que tes parents le sachent.', true],
+  ['Ta maîtresse emmène toute la classe à la bibliothèque.', 'accord', 'C’est une sortie de l’école : tes parents sont au courant.'],
+];
+const huit = (liste, age, aleatoire) => melanger(liste.filter((s) => age > 7 || !s[3]), aleatoire).slice(0, 8).map(([texte, reponse, explication]) => ({ texte, reponse, explication }));
+// Étape 1 : 8 situations
+export const accordOuDemande = (age, aleatoire = Math.random) => huit(ACCORD_OU_DEMANDE, age, aleatoire);
+export const retourAccord = (q, choix) => `${choix === q.reponse ? 'Oui !' : `Ici, c’est plutôt : ${NOMS_ACCORD[q.reponse]}.`} ${q.explication}`;
+
+export const SOUCI_INTRO = 'Un adulte qui a besoin d’aide demande à un autre adulte, pas à un enfant. Et un cadeau d’une personne que tu ne connais pas, tu peux toujours le refuser. Tu peux être {poli|polie} et dire non.';
+export const NOMS_SOUCI = { souci: 'pas de souci', non: 'je dis non et je m’éloigne' };
+// [situation, « souci » (pas de souci) ou « non », explication, grand ?]
+export const SOUCI_OU_NON = [
+  ['Dans la rue, une dame te sourit et te dit bonjour.', 'souci', 'Tu peux répondre bonjour et continuer ton chemin. Dire bonjour, ce n’est pas suivre quelqu’un.'],
+  ['Un monsieur que tu ne connais pas te demande de l’aider à chercher son petit chien.', 'non', 'Un adulte demande de l’aide à un autre adulte. Tu dis non et tu t’éloignes.'],
+  ['Au magasin, la vendeuse te demande si tu cherches quelque chose.', 'souci', 'C’est son métier d’aider les clients.'],
+  ['Quelqu’un que tu ne connais pas te propose des bonbons.', 'non', 'Tu peux dire : « Non merci. » Tu n’as rien à expliquer.'],
+  ['Une personne en voiture s’arrête et te demande son chemin.', 'non', 'Tu restes loin de la voiture. Un adulte peut demander son chemin à un autre adulte.'],
+  ['Ta maîtresse te demande de distribuer les cahiers.', 'souci', 'Tu la connais, et c’est à l’école.'],
+  ['Quelqu’un que tu ne connais pas te dit : « Viens, j’ai des chatons à te montrer. »', 'non', 'C’est tentant, mais tu ne suis pas quelqu’un que tu ne connais pas.'],
+  ['Tu es {perdu|perdue} dans un magasin. Tu vas voir la personne à la caisse.', 'souci', 'Bravo ! Si tu es {perdu|perdue}, va voir quelqu’un qui travaille là, ou une maman ou un papa avec des enfants.'],
+  ['Quelqu’un que tu ne connais pas veut te prendre en photo.', 'non', 'Personne ne te prend en photo sans que tes parents soient d’accord.', true],
+  ['Quelqu’un que tu ne connais pas connaît ton prénom et dit qu’il est un ami de tes parents.', 'non', 'Connaître ton prénom ne veut pas dire te connaître. Tu lui demandes le mot de passe secret de ta famille, et tu vérifies toujours avec tes parents.'],
+];
+// Étape 2 : 8 situations
+export const souciOuNon = (age, aleatoire = Math.random) => huit(SOUCI_OU_NON, age, aleatoire);
+export const retourSouci = (q, choix) => `${choix === q.reponse ? 'Oui !' : `Ici, c’est plutôt : ${NOMS_SOUCI[q.reponse]}.`} ${q.explication}`;
+
+// Étape 3 : quatre bonnes idées, toujours les mêmes ; un seul choix est à revoir
+export const IDEES_INCONNUS = [
+  'Je dis « Non ! » très fort.',
+  'Je m’éloigne vite, sans discuter.',
+  'Je vais vers d’autres personnes : un magasin, ou un parent avec des enfants.',
+  'Je raconte tout à un adulte de confiance.',
+];
+export const RESTER = 'Je reste, pour ne pas être {impoli|impolie}.';
+export const DOUCEUR_RESTER = 'Être {poli|polie}, c’est bien. Mais ta sécurité passe avant la politesse. Tu as le droit de dire non à un adulte, et de partir. Regarde ce que tu peux faire à la place.';
+// [situation, grand ?]
+export const SITUATIONS_INCONNUS = [
+  ['Imagine : sur le chemin de l’école, une voiture s’arrête. La personne te dit de monter.'],
+  ['Imagine : au parc, quelqu’un que tu ne connais pas te demande de le suivre pour voir une surprise.'],
+  ['Imagine : quelqu’un que tu ne connais pas te prend par la main pour t’emmener.'],
+  ['Imagine : quelqu’un te suit dans la rue, et ça te met mal à l’aise.', true],
+  ['Imagine : quelqu’un insiste, même après que tu as dit non.', true],
+];
+export const situationsInconnus = (age, aleatoire = Math.random) => melanger(SITUATIONS_INCONNUS.filter((s) => age > 7 || !s[1]), aleatoire).slice(0, 3).map(([texte]) => ({ texte }));
+// Pour tous les âges (choix du parent)
+export const CRIER = 'Si quelqu’un te tient et ne te lâche pas, tu as le droit de crier très fort : « Au secours ! Je ne connais pas cette personne ! » Tu as aussi le droit de te débattre.';
+export const FIN_INCONNUS = 'Ces règles ne sont pas là pour te faire peur. Elles sont là pour que tu sois tranquille, comme la ceinture dans la voiture. Rappelle-toi : tu ne pars avec personne sans que tes parents le sachent. Tu as le droit de dire non, même à un adulte. Et si quelque chose t’a fait bizarre, tu le racontes toujours à un adulte de confiance : ce n’est jamais de ta faute. En cas de danger, tu peux appeler la police au 117. Et pour parler, le 147 : c’est gratuit, jour et nuit. Et maintenant, si tu en parlais avec un adulte de ta famille ? Choisissez ensemble un mot de passe secret : seule une personne qui le connaît peut venir te chercher. Et si tu as un doute avec un adulte, tu lui demandes le mot de passe.';
+
+// ---------- Thème 5 : « Mon corps m'appartient » (texte d'origine : relecture/mon-corps.md, relu par un parent le 24 novembre 2026) ----------
+// Choix du parent : aucune mise en situation, aucune question. Seulement six principes simples, et « si j'ai un doute, j'en parle ».
+export const INTRO_CORPS = 'Ton corps est à toi. Voici quelques idées simples à garder dans ta tête. Et retiens surtout la dernière : si tu as un doute, tu peux toujours en parler à un parent ou à un adulte de confiance.';
+// [le principe, ce que dit la voix]
+export const PRINCIPES = [
+  ['Mon corps est à moi.', 'Ton corps est à toi, et à personne d’autre. Tu en prends soin, et on doit le respecter.'],
+  ['J’ai le droit de dire non.', 'Un câlin ou un bisou, c’est seulement si tu en as envie. Tu peux dire non, et dire bonjour autrement : avec la main, ou avec un sourire.'],
+  ['J’écoute ce que je ressens.', 'Si quelque chose te met mal à l’aise ou te serre le ventre, c’est un signal. Tu as raison de l’écouter.'],
+  ['Une surprise, ça se dit. Un secret qui pèse aussi.', 'Une bonne surprise fait plaisir, et on finit toujours par la dire. Un secret qui te pèse, tu as le droit de le raconter, même si tu as promis.'],
+  ['Si j’ai un doute, j’en parle.', 'Si tu ne sais pas si quelque chose est bien ou mal, tu peux toujours en parler à un parent ou à un adulte de confiance. Aucune question n’est bête.'],
+  ['Ce n’est jamais de ma faute.', 'Si quelque chose ne va pas, ce n’est jamais de ta faute. Et si un adulte ne t’écoute pas, tu en parles à un autre adulte.'],
+];
+export const principes = () => PRINCIPES.map(([texte, explication]) => ({ texte, explication }));
+export const ADULTES_DE_CONFIANCE = 'Regarde ta main. Sur chaque doigt, tu peux poser un adulte de confiance : quelqu’un qui t’écoute, qui te croit et qui t’aide. Par exemple : un parent, un grand-parent, une tante ou un oncle, ta maîtresse ou ton maître, le médecin.';
+export const FIN_CORPS = 'Ton corps est à toi. Et si tu as un doute, tu peux toujours en parler à un parent ou à un adulte de confiance. Tu peux aussi appeler le 147 : c’est gratuit, jour et nuit, et des adultes sont là pour écouter les enfants. Et maintenant, si tu choisissais tes cinq adultes de confiance avec un adulte de ta famille ?';
