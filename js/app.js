@@ -20,6 +20,11 @@ import * as syllabes from './jeux/syllabes.js';
 import * as dictee from './jeux/dictee.js';
 import * as robot from './jeux/robot.js';
 import * as suisse from './jeux/suisse.js';
+import * as nature from './jeux/nature.js';
+import * as missions from './jeux/missions.js';
+import * as labyrinthe from './jeux/labyrinthe.js';
+import * as glacier from './jeux/glacier.js';
+import * as ecriture from './jeux/ecriture.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -305,8 +310,10 @@ function entrerLieu(cible) {
   if (id === 'corps') return ouvrirAtlas();
   if (id === 'musee') return ouvrirMusee();
   if (id === 'aeroport') return ouvrirPasseport();
-  if (id === 'langues') return ouvrirLangues();
   if (id === 'syllabes') return ouvrirBibliotheque();
+  if (id === 'missions') return ouvrirMissions();
+  if (id === 'labyrinthe') return ouvrirLabyrinthe();
+  if (id === 'glacier') return ouvrirGlacier();
   if (id === 'urgences') return ouvrirUrgences();
   if (id === 'musique') return ouvrirMusique();
   if (id === 'chantier') return ouvrirChantier();
@@ -517,7 +524,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, naturaliste: nature.naturaliste, potager: nature.potager, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -532,6 +539,7 @@ const PERSONNAGES = {
   veto: { peau: 'claire', yeux: 'marron', coiffure: 'queue', cheveux: 'chatain', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   tri: { peau: 'brune', yeux: 'noisette', coiffure: 'tresses', cheveux: 'noir', tenue: 'salopette-jaune', accessoires: [] },
   langues: { peau: 'claire', yeux: 'bleus', coiffure: 'carre', cheveux: 'blond', tenue: 'mariniere', accessoires: [] },
+  nature: { peau: 'mate', yeux: 'verts', coiffure: 'queue', cheveux: 'chatain', tenue: 'salopette-jaune', accessoires: [] },
   robot: { peau: 'doree', yeux: 'marron', coiffure: 'courts', cheveux: 'noir', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
 };
@@ -553,7 +561,7 @@ function lancerJeu(nom) {
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   if (nom !== 'robot') joueuse.vus[cle] = [...vus]; // (les niveaux du robot sont tirés au hasard : rien à retenir) // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport', naturaliste: 'nature', potager: 'nature' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   poserDecor($('#salle'), lieu === 'passeport' ? 'aeroport' : lieu);
   const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
@@ -606,7 +614,7 @@ function afficherQuestion() {
   } else if (jeu === 'urgences') {
     $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
-  } else if (jeu === 'route' || jeu === 'tri' || jeu === 'suisse') {
+  } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager'].includes(jeu)) {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'langues') {
@@ -1776,7 +1784,8 @@ function afficherChoixMemory() {
     el('div', { className: 'phrases' },
       gros(acc('🙂 {Seul|Seule}'), () => { joueursMemory = [joueuse]; afficherChoixMemory(); }, `petit${avec ? '' : ' choisi'}`),
       ...[...autres, invite].map((p) => gros(`👫 À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'}`, () => { joueursMemory = [joueuse, p]; afficherChoixMemory(); parler(`À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'} !`); }, `petit${avec && avec.id === p.id ? ' choisi' : ''}`))),
-    el('h2', { textContent: 'Quelles cartes ?' }),
+    gros('🤝 Le défi à deux : des questions, chacun son tour', () => ouvrirDefi(), 'gros secondaire'),
+    el('h2', { textContent: 'Le Memory : quelles cartes ?' }),
     el('div', { className: 'themes-memory' }, ...Object.entries(memory.THEMES).map(([k, t]) => gros(`${t.image} ${t.nom}`, () => commencerMemory(k)))),
     el('p', { className: 'carte presentation', textContent: `${memory.nbPaires(Math.min(...joueursMemory.map((j) => j.age)))} paires à trouver. Chaque paire rapporte des étoiles${avec ? ' à celui ou celle qui la trouve' : ''} !` }));
 }
@@ -1880,7 +1889,7 @@ function afficherPasseport(vue) {
     return parler(passeport.presentation(p, joueuse.age));
   }
   v.replaceChildren(carte, el('div', { className: 'actions-atelier' }, gros(`📘 Mon passeport (${tampons.length} / ${passeport.PAYS.length})`, () => afficherPasseport('livret'), 'gros secondaire'),
-    gros('🏔️ L’explorateur de la Suisse', () => lancerJeu('suisse'))),
+    gros('🏔️ L’explorateur de la Suisse', () => lancerJeu('suisse')), gros('🗣️ L’école des langues', () => ouvrirLangues())),
     el('div', { className: 'phrases' }, ...passeport.PAYS.map((p) => gros(`${p.drapeau} ${p.nom}${tampons.includes(p.cle) ? ' ✓' : ''}`, () => voyager(p.cle), `petit${tampons.includes(p.cle) ? ' choisi' : ''}`))));
 }
 // Les 6 mots de voyage du pays : débloqués par le tampon, chacun avec sa prononciation et un 🔊
@@ -1901,7 +1910,265 @@ function voyager(cle) {
   setTimeout(() => { if (!$('[data-ecran="passeport"]').hidden) afficherPasseport('pays'); }, 1500);
 }
 
-// La bibliothèque : deux jeux de mots
+// ---------- Un écran libre, pour les jeux qui ne sont pas des questions (labyrinthe, glacier, missions, écriture, défi) ----------
+function ouvrirLibre(titre, decor = null) {
+  taire();
+  etoilesJoueuse();
+  $('#libre-titre').textContent = titre;
+  montrer('libre');
+  poserDecor($('#decor'), decor);
+  return $('#libre-vue');
+}
+const libreOuvert = (titre) => !$('[data-ecran="libre"]').hidden && $('#libre-titre').textContent === titre;
+const gagnerEtoiles = (n, profil = joueuse) => { profil.etoiles += n; enregistrer(); etoilesJoueuse(); };
+
+// Les missions de la maison : l'enfant annonce, un parent valide avec le code
+function ouvrirMissions(dire = true) {
+  const v = ouvrirLibre('Les missions de la maison');
+  const regle = `Fais une vraie mission à la maison, puis touche-la. Un parent valide avec son code, et tu gagnes ${missions.ETOILES_MISSION} étoiles. Chaque mission, une fois par jour.`;
+  v.replaceChildren(el('p', { className: 'carte presentation', textContent: regle }), el('div', { className: 'galerie-cartes' }, ...missions.MISSIONS.map((x) => {
+    const e = missions.etat(joueuse, x.cle);
+    const b = el('button', { className: `carte-image${e === 'faite' ? ' choisi' : ''}` });
+    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${x.image}</span><span>${x.nom}<br><small>${e === 'faite' ? `✓ Fait ! +${missions.ETOILES_MISSION} ⭐` : e === 'attente' ? '⏳ Un parent valide' : `+${missions.ETOILES_MISSION} ⭐`}</small></span>`;
+    b.disabled = e === 'faite';
+    b.addEventListener('click', () => {
+      if (e === 'attente') return validerMission(x);
+      missions.annoncer(joueuse, x.cle);
+      enregistrer();
+      ouvrirMissions(false);
+      parler(`Bravo ! Demande à un parent de valider : ${x.nom}.`);
+    });
+    return b;
+  })));
+  if (dire) parler(`Les missions de la maison. ${regle}`, { ton: 1.1 });
+}
+function validerMission(x) {
+  const champ = el('input', { className: 'champ-prenom', type: 'password', inputMode: 'numeric', maxLength: 4, autocomplete: 'off', placeholder: 'Code parent' });
+  champ.setAttribute('aria-label', 'Code parent');
+  const message = el('p', { className: 'erreur', role: 'status' });
+  const fenetre = el('dialog', { className: 'fenetre-prenom' });
+  const repondre = (oui) => {
+    if (champ.value !== etat.code) return noter(message, 'Code incorrect.');
+    const gain = missions.valider(joueuse, x.cle, oui);
+    enregistrer();
+    fenetre.close();
+    ouvrirMissions(false);
+    parler(gain ? `Mission réussie ! Tu gagnes ${gain} étoiles.` : 'Pas encore : tu pourras réessayer.', { ton: 1.1 });
+    if (gain) bip(true);
+  };
+  fenetre.append(el('h2', { textContent: `${x.image} ${x.nom}` }), el('p', { textContent: 'Pour un parent : la mission est-elle faite ?' }), champ, message,
+    el('div', { className: 'actions-prenom' }, gros('✔️ Oui, c’est fait', () => repondre(true)), gros('Pas encore', () => repondre(false), 'gros secondaire'), gros('Annuler', () => fenetre.close(), 'petit')));
+  fenetre.addEventListener('close', () => fenetre.remove());
+  document.body.append(fenetre);
+  fenetre.showModal();
+  champ.focus();
+}
+
+// Le labyrinthe : aller jusqu'au drapeau, avec les flèches ou en touchant une case voisine
+let niveauLaby = 0;
+function ouvrirLabyrinthe() {
+  niveauLaby = 0;
+  jouerLabyrinthe();
+  parler('Le labyrinthe ! Trouve le chemin jusqu’au drapeau. Touche les flèches, ou une case à côté de toi.', { ton: 1.1 });
+}
+function jouerLabyrinthe() {
+  const v = ouvrirLibre('Le labyrinthe');
+  const l = labyrinthe.creer(labyrinthe.taille(joueuse.age, niveauLaby));
+  let pos = l.depart, fini = false;
+  const message = el('p', { className: 'carte score-grue', role: 'status', textContent: `Labyrinthe ${niveauLaby + 1} : va jusqu’au drapeau !` });
+  const grille = el('div', { className: 'grille-laby', role: 'img', ariaLabel: 'Le labyrinthe' });
+  grille.style.gridTemplateColumns = `repeat(${l.taille}, 1fr)`;
+  const suite = el('div', { className: 'actions-atelier' });
+  const aller = (d) => {
+    if (fini) return;
+    const n = labyrinthe.avancer(l, pos, d);
+    if (n[0] === pos[0] && n[1] === pos[1]) return bip(false);
+    pos = n;
+    dessiner();
+    if (pos[0] !== l.sortie[0] || pos[1] !== l.sortie[1]) return;
+    fini = true;
+    niveauLaby++;
+    const gain = labyrinthe.etoilesParLabyrinthe(joueuse.age);
+    gagnerEtoiles(gain);
+    bip(true);
+    message.textContent = `Bravo, tu as trouvé la sortie ! +${formatEtoiles(gain)} ⭐`;
+    suite.replaceChildren(gros('🌽 Un autre labyrinthe', jouerLabyrinthe));
+    parler(`Bravo, tu as trouvé la sortie ! Tu gagnes ${formatEtoiles(gain)} étoiles.`, { ton: 1.15 });
+  };
+  const dessiner = () => grille.replaceChildren(...l.ouvert.map((o, i) => {
+    const x = i % l.taille, y = Math.floor(i / l.taille);
+    const c = el('span', { textContent: x === pos[0] && y === pos[1] ? '🙂' : x === l.sortie[0] && y === l.sortie[1] ? '🚩' : '' });
+    for (const d of Object.keys(labyrinthe.DIRECTIONS)) if (!o.includes(d)) c.classList.add(`mur-${d}`);
+    c.addEventListener('click', () => { const d = Object.entries(labyrinthe.DIRECTIONS).find(([, [dx, dy]]) => pos[0] + dx === x && pos[1] + dy === y)?.[0]; if (d) aller(d); });
+    return c;
+  }));
+  const touche = (d, texte, nom) => { const b = el('button', { className: 'reponse robot-touche', textContent: texte, ariaLabel: nom }); b.addEventListener('click', () => aller(d)); return b; };
+  v.replaceChildren(message, suite, grille, el('div', { className: 'pave-fleches' }, el('span'), touche('haut', '⬆️', 'En haut'), el('span'), touche('gauche', '⬅️', 'À gauche'), touche('bas', '⬇️', 'En bas'), touche('droite', '➡️', 'À droite')));
+  dessiner();
+}
+
+// Le glacier de la plage : servir les commandes avant la fin du temps
+function ouvrirGlacier() {
+  const v = ouvrirLibre('Le glacier de la plage');
+  const regle = 'Regarde la glace que veut le client. Touche les parfums pour empiler les boules dans le même ordre, de bas en haut, puis touche Servir. Attention au temps : tu as 3 cœurs !';
+  v.replaceChildren(el('p', { className: 'carte presentation', textContent: regle }), gros('🍦 Jouer', jouerGlacier));
+  parler(`Le glacier de la plage. ${regle}`, { ton: 1.1 });
+}
+function jouerGlacier() {
+  taire();
+  const v = $('#libre-vue'), age = joueuse.age, parfum = (cle) => glacier.PARFUMS.find((p) => p.cle === cle);
+  let servies = 0, vies = glacier.VIES, cornet = [], cmd = [], visage = '🧒', fin = 0, total = 1;
+  const score = el('p', { className: 'carte score-grue', role: 'status' });
+  const client = el('div', { className: 'client-glacier' }), barre = el('div', { className: 'barre-temps' }, el('i')), monCornet = el('div', { className: 'cornet' }), parfums = el('div', { className: 'parfums' });
+  const pile = (l) => `<span class="pile">${[...l].reverse().map((c) => `<i class="boule" style="background:${parfum(c).couleur}"></i>`).join('')}<i class="cone"></i></span>`;
+  const dessiner = () => {
+    score.textContent = `${'❤️'.repeat(vies)}${'🤍'.repeat(glacier.VIES - vies)}   🍦 ${servies}`;
+    client.innerHTML = `<span class="tete" aria-hidden="true">${visage}</span><span class="bulle-glace" role="img" aria-label="Le client veut, de bas en haut : ${cmd.map((c) => parfum(c).nom).join(', ')}">${pile(cmd)}</span>`;
+    monCornet.innerHTML = pile(cornet);
+    monCornet.setAttribute('aria-label', `Ton cornet : ${cornet.map((c) => parfum(c).nom).join(', ') || 'vide'}`);
+    parfums.replaceChildren(...glacier.PARFUMS.slice(0, glacier.nbParfums(age, glacier.niveau(servies))).map((p) => {
+      const b = el('button', { className: 'parfum', ariaLabel: `Une boule ${p.nom}`, title: p.nom });
+      b.style.background = p.couleur;
+      b.addEventListener('click', () => { if (cornet.length < 4) { cornet.push(p.cle); dessiner(); } });
+      return b;
+    }));
+  };
+  const nouveau = () => {
+    cmd = glacier.commande(age, servies);
+    cornet = [];
+    visage = glacier.CLIENTS[Math.floor(Math.random() * glacier.CLIENTS.length)];
+    total = glacier.temps(age, glacier.niveau(servies)) * 1000;
+    fin = performance.now() + total;
+    dessiner();
+  };
+  const finir = () => {
+    clearInterval(minuteur);
+    const gain = servies * glacier.etoilesParGlace(age);
+    if (gain) gagnerEtoiles(gain);
+    const texte = `Tu as servi ${servies} glace${servies > 1 ? 's' : ''} !${gain ? ` +${formatEtoiles(gain)} ⭐` : ''}`;
+    v.replaceChildren(el('p', { className: 'carte score-grue', role: 'status', textContent: texte }), gros('🍦 Rejouer', jouerGlacier));
+    parler(`C’est fini ! Tu as servi ${servies} glace${servies > 1 ? 's' : ''}.${gain ? ` Tu gagnes ${formatEtoiles(gain)} étoiles.` : ''}`, { ton: 1.1 });
+  };
+  const perdre = () => { vies--; bip(false); if (vies <= 0) finir(); else nouveau(); };
+  const servir = () => { if (!glacier.juste(cmd, cornet)) return perdre(); servies++; bip(true); nouveau(); };
+  const minuteur = setInterval(() => {
+    if (!libreOuvert('Le glacier de la plage') || !v.contains(barre)) return clearInterval(minuteur); // on a quitté le jeu
+    const reste = fin - performance.now();
+    barre.firstChild.style.width = `${Math.max(0, (reste / total) * 100)}%`;
+    if (reste <= 0) perdre();
+  }, 100);
+  v.replaceChildren(score, client, barre, monCornet, parfums,
+    el('div', { className: 'actions-atelier' }, gros('↩️ Vider le cornet', () => { cornet = []; dessiner(); }, 'gros secondaire'), gros('🔔 Servir !', servir)));
+  nouveau();
+}
+
+// Le défi à deux (salle de jeux) : chacun répond à 5 questions de son âge, chacun son tour
+const JEUX_DEFI = {
+  calcul: ['➕ Le calcul', (age) => calcul.question({ operation: 'addition', age })],
+  naturaliste: ['🌿 La nature', (age, vus) => nature.naturaliste.question({ age }, Math.random, 0, vus)],
+  potager: ['🥕 Le potager', (age, vus) => nature.potager.question({ age }, Math.random, 0, vus)],
+  suisse: ['🏔️ La Suisse', (age, vus) => suisse.question({ age }, Math.random, 0, vus)],
+};
+const QUESTIONS_DEFI = 5;
+function ouvrirDefi(adversaire = null) {
+  const v = ouvrirLibre('Le défi à deux');
+  const autres = etat.profils.filter((p) => p.id !== joueuse.id);
+  if (!autres.length) {
+    v.replaceChildren(el('p', { className: 'carte presentation', textContent: 'Pour un défi, il faut deux enfants. Un parent peut ajouter un enfant dans l’espace parents.' }));
+    return parler('Pour un défi, il faut deux enfants.');
+  }
+  adversaire ??= autres[0];
+  v.replaceChildren(
+    el('p', { className: 'carte presentation', textContent: `Chacun répond à ${QUESTIONS_DEFI} questions de son âge, chacun son tour. Le gagnant reçoit 3 étoiles, l’autre 1. À égalité : 2 étoiles chacun.` }),
+    el('h2', { textContent: 'Contre qui ?' }),
+    el('div', { className: 'phrases' }, ...autres.map((p) => gros(p.prenom, () => ouvrirDefi(p), `petit${p === adversaire ? ' choisi' : ''}`))),
+    el('h2', { textContent: 'Quel défi ?' }),
+    el('div', { className: 'actions-atelier' }, ...Object.entries(JEUX_DEFI).map(([cle, [nom]]) => gros(nom, () => jouerDefi(adversaire, cle)))));
+  parler(`Le défi à deux ! ${joueuse.prenom} contre ${adversaire.prenom}. Choisis un défi.`, { ton: 1.1 });
+}
+function jouerDefi(adversaire, cle) {
+  const v = $('#libre-vue'), joueurs = [joueuse, adversaire], scores = [0, 0], vus = [new Set(), new Set()];
+  let tour = 0;
+  const suivant = () => {
+    if (!libreOuvert('Le défi à deux')) return;
+    if (tour >= QUESTIONS_DEFI * 2) return finir();
+    const k = tour % 2, j = joueurs[k], q = JEUX_DEFI[cle][1](j.age, vus[k]);
+    vus[k].add(q.texte);
+    const titre = q.titre ?? `${q.texte} = ?`;
+    const reponses = el('div', { className: 'reponses-defi' }, ...q.choix.map((c) => {
+      const b = el('button', { className: 'gros secondaire', textContent: String(c) });
+      b.addEventListener('click', () => {
+        const juste = String(c) === String(q.reponse);
+        if (juste) scores[k]++;
+        bip(juste);
+        for (const x of reponses.children) { x.disabled = true; if (x.textContent === String(q.reponse)) x.classList.add('choisi'); }
+        tour++;
+        setTimeout(suivant, 1300);
+      });
+      return b;
+    }));
+    v.replaceChildren(el('p', { className: 'carte score-grue', role: 'status', textContent: `${joueurs[0].prenom} ${scores[0]} – ${scores[1]} ${joueurs[1].prenom}` }),
+      el('h2', { textContent: `À toi, ${j.prenom} ! (${Math.floor(tour / 2) + 1} / ${QUESTIONS_DEFI})` }),
+      el('p', { className: 'carte question-defi', textContent: `${q.image ? `${q.image} ` : ''}${titre}` }), reponses);
+    parler(`${j.prenom}. ${q.titre ?? ditCalcul(q.texte)}`);
+  };
+  const finir = () => {
+    const [a, b] = scores, gains = a === b ? [2, 2] : a > b ? [3, 1] : [1, 3];
+    joueurs.forEach((j, i) => { j.etoiles += gains[i]; });
+    enregistrer();
+    etoilesJoueuse();
+    const texte = a === b ? `Égalité, ${a} partout ! 2 étoiles chacun.` : `${joueurs[a > b ? 0 : 1].prenom} gagne, ${Math.max(a, b)} à ${Math.min(a, b)} ! 3 étoiles, et 1 étoile pour ${joueurs[a > b ? 1 : 0].prenom}.`;
+    v.replaceChildren(el('p', { className: 'carte score-grue', role: 'status', textContent: `🏆 ${texte}` }), gros('🤝 Un autre défi', () => ouvrirDefi(adversaire)));
+    bip(true);
+    parler(`Bravo à vous deux ! ${texte}`, { ton: 1.15 });
+  };
+  taire();
+  suivant();
+}
+
+// L'atelier d'écriture : suivre chaque trait de la lettre avec le doigt, à partir du point vert
+let lettreEcriture = 0;
+function ouvrirEcriture() {
+  lettreEcriture = 0;
+  tracerLettre();
+  parler('L’atelier d’écriture ! Pose ton doigt sur le point vert, et suis le trait.', { ton: 1.1 });
+}
+function tracerLettre() {
+  const v = ouvrirLibre('L’atelier d’écriture', 'syllabes');
+  const lettres = ecriture.alphabet(joueuse.age), lettre = lettres[lettreEcriture % lettres.length], traits = ecriture.LETTRES[lettre].map(ecriture.reperes);
+  let t = 0, fait = 0, appuie = false;
+  const message = el('p', { className: 'carte score-grue', role: 'status', textContent: `Écris la lettre ${lettre} : pars du point vert.` });
+  const ardoise = el('div', { className: 'ardoise', role: 'img', ariaLabel: `La lettre ${lettre} à tracer` });
+  const ligne = (p) => p.map((c) => c.map((n) => n.toFixed(1)).join(',')).join(' ');
+  const dessiner = () => {
+    const ici = t < traits.length ? traits[t][Math.min(fait, traits[t].length - 1)] : null;
+    ardoise.innerHTML = `<svg viewBox="-15 -15 130 135" aria-hidden="true">${traits.map((p, i) => `<polyline points="${ligne(p)}" class="guide${i < t ? ' fini' : ''}"/>`).join('')}
+      ${ici ? `${fait > 1 ? `<polyline points="${ligne(traits[t].slice(0, fait))}" class="trace"/>` : ''}<circle cx="${ici[0]}" cy="${ici[1]}" r="7" class="depart"/>` : ''}</svg>`;
+  };
+  const toucher = (ev) => {
+    if (!appuie || t >= traits.length) return;
+    const r = ardoise.firstElementChild.getBoundingClientRect();
+    const n = ecriture.suivre(traits[t], fait, ((ev.clientX - r.left) / r.width) * 130 - 15, ((ev.clientY - r.top) / r.height) * 135 - 15);
+    if (n === fait) return;
+    fait = n;
+    if (fait >= traits[t].length) { t++; fait = 0; appuie = false; }
+    dessiner();
+    if (t < traits.length) return;
+    const gain = ecriture.etoilesParLettre(joueuse.age);
+    gagnerEtoiles(gain);
+    bip(true);
+    message.textContent = `Bravo, tu as écrit la lettre ${lettre} ! +${formatEtoiles(gain)} ⭐`;
+    parler(`Bravo ! Tu as écrit la lettre ${lettre}.`, { ton: 1.15 });
+  };
+  ardoise.addEventListener('pointerdown', (ev) => { appuie = true; ardoise.setPointerCapture(ev.pointerId); toucher(ev); });
+  ardoise.addEventListener('pointermove', toucher);
+  for (const e of ['pointerup', 'pointercancel']) ardoise.addEventListener(e, () => { appuie = false; });
+  v.replaceChildren(message, ardoise, el('div', { className: 'actions-atelier' },
+    gros('↩️ Recommencer', tracerLettre, 'gros secondaire'), gros('➡️ Une autre lettre', () => { lettreEcriture++; tracerLettre(); })));
+  dessiner();
+}
+
+// La bibliothèque : trois jeux de mots
 function ouvrirBibliotheque() {
   etoilesJoueuse();
   const carte = (emoji, nom, detail, nomJeu) => {
@@ -1910,11 +2177,14 @@ function ouvrirBibliotheque() {
     b.addEventListener('click', () => lancerJeu(nomJeu));
     return b;
   };
+  const ecrire = el('button', { className: 'carte-image' });
+  ecrire.innerHTML = '<span class="emoji-theme" aria-hidden="true">🖍️</span><span>L’atelier d’écriture<br><small>Trace les lettres avec ton doigt</small></span>';
+  ecrire.addEventListener('click', ouvrirEcriture);
   $('#bibliotheque-vue').replaceChildren(el('div', { className: 'galerie-cartes grandes' },
     carte('🧩', 'La chasse aux syllabes', 'Forme le mot de l’image', 'syllabes'),
-    carte('✏️', 'La dictée magique', 'Écris le mot que tu entends', 'dictee')));
+    carte('✏️', 'La dictée magique', 'Écris le mot que tu entends', 'dictee'), ecrire));
   montrer('bibliotheque');
-  parler('Bienvenue à la bibliothèque ! Choisis : la chasse aux syllabes, ou la dictée magique.', { ton: 1.1 });
+  parler('Bienvenue à la bibliothèque ! Choisis : la chasse aux syllabes, la dictée magique, ou l’atelier d’écriture.', { ton: 1.1 });
 }
 
 // L'école des langues : on choisit la langue, puis le thème ; les mots ratés reviennent (« à revoir »)

@@ -17,18 +17,17 @@ export const LIEUX = [
   { id: 'marche', ile: 'village', type: 'jeu', nom: 'Le marché', detail: 'payer en francs suisses', ouvert: true, x: 190, y: 480 },
   { id: 'refuge', ile: 'village', type: 'magasin', nom: 'Le refuge', detail: 'animaux à adopter', ouvert: true, x: 610, y: 480 },
   { id: 'veto', ile: 'village', type: 'jeu', nom: 'Le vétérinaire', detail: 'soigner les animaux', ouvert: true, x: 185, y: 740 },
-  { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory, seul ou à deux', ouvert: true, x: 615, y: 740 },
+  { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory et le défi à deux', ouvert: true, x: 615, y: 740 },
   { id: 'chantier', ile: 'village', type: 'jeu', nom: 'Le chantier', detail: 'la grue folle', ouvert: true, x: 400, y: 800 },
   // L'île du savoir
   { id: 'calcul', ile: 'savoir', type: 'jeu', nom: "L'école", detail: 'Calcul', ouvert: true, x: 200, y: 330 },
   { id: 'heure', ile: 'savoir', type: 'jeu', nom: "La tour\nde l'horloge", detail: "lire l'heure", ouvert: true, x: 600, y: 330 },
-  { id: 'syllabes', ile: 'savoir', type: 'jeu', nom: 'La bibliothèque', detail: 'les syllabes et la dictée', ouvert: true, x: 200, y: 590 },
+  { id: 'syllabes', ile: 'savoir', type: 'jeu', nom: 'La bibliothèque', detail: 'syllabes, dictée et écriture', ouvert: true, x: 200, y: 590 },
   { id: 'espace', ile: 'savoir', type: 'jeu', nom: "L'observatoire", detail: 'le système solaire', ouvert: true, x: 600, y: 590 },
   { id: 'corps', ile: 'savoir', type: 'jeu', nom: "L'hôpital", detail: 'le corps humain', ouvert: true, x: 400, y: 780 },
   { id: 'musee', ile: 'savoir', type: 'jeu', nom: 'Le musée\ndes dinosaures', detail: 'reconstituer des squelettes', ouvert: true, x: 400, y: 330 },
   { id: 'fractions', ile: 'savoir', type: 'jeu', nom: 'La pizzeria', detail: 'les fractions', ouvert: true, x: 600, y: 790 },
-  { id: 'langues', ile: 'savoir', type: 'jeu', nom: "L'école\ndes langues", detail: 'allemand et anglais', ouvert: true, x: 200, y: 790 },
-  { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le monde et la Suisse', ouvert: true, x: 400, y: 655 },
+  { id: 'aeroport', ile: 'savoir', type: 'jeu', nom: "L'aéroport", detail: 'le monde, la Suisse et les langues', ouvert: true, x: 200, y: 790 },
   // L'île de la sécurité
   { id: 'urgences', ile: 'securite', type: 'jeu', nom: 'Les numéros\nd’urgence', detail: '144, 117, 118', ouvert: true, x: 260, y: 440 },
   { id: 'route', ile: 'securite', type: 'jeu', nom: 'Le code\nde la route', detail: 'piétons et vélos', ouvert: true, x: 540, y: 440 },
@@ -42,6 +41,12 @@ export const LIEUX = [
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)
   { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: true, x: 230, y: 420 },
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
+  { id: 'missions', ile: 'coeur', type: 'jeu', nom: 'Les missions\nde la maison', detail: 'aider à la maison', ouvert: true, x: 230, y: 700 },
+  // L'île de la nature
+  { id: 'naturaliste', ile: 'nature', type: 'jeu', nom: 'La cabane\nnature', detail: 'animaux, plantes et arbres', ouvert: true, x: 230, y: 400 },
+  { id: 'potager', ile: 'nature', type: 'jeu', nom: 'Le potager', detail: 'fruits, légumes et saisons', ouvert: true, x: 570, y: 400 },
+  { id: 'labyrinthe', ile: 'nature', type: 'jeu', nom: 'Le labyrinthe', detail: 'trouver la sortie', ouvert: true, x: 230, y: 680 },
+  { id: 'glacier', ile: 'nature', type: 'jeu', nom: 'Le glacier\nde la plage', detail: 'servir les glaces', ouvert: true, x: 570, y: 680 },
 ];
 
 // Texte avec contour blanc ; « \n » = deuxième ligne. largeurMax : au-delà, le texte rétrécit.
@@ -157,9 +162,16 @@ const BATIMENTS = {
   tri: [`<rect x="-80" y="-60" width="160" height="60" fill="#e8f0e0"/><path d="M-86 -60 H86 L70 -84 H-70Z" fill="#3f9a5a"/>
     ${[['#3a8f4a', -62], ['#3a6fd0', -22], ['#f2c230', 18], ['#8a5a3a', 52]].map(([c, x]) => `<rect x="${x}" y="-40" width="30" height="40" rx="4" fill="${c}"/><rect x="${x - 2}" y="-46" width="34" height="8" rx="3" fill="${c}"/>`).join('')}
     <text x="-16" y="-92" font-size="30">♻️</text>`, 0.85],
-  langues: [`<rect x="-70" y="-64" width="140" height="64" fill="#fbe9d0"/><path d="M-80 -62 L0 -100 L80 -62Z" fill="#d0603a"/>
-    <rect x="-14" y="-38" width="28" height="38" fill="#7a5a3a"/><rect x="-58" y="-50" width="30" height="22" fill="#bfe6ff"/><rect x="28" y="-50" width="30" height="22" fill="#bfe6ff"/>
-    <text x="-34" y="-104" font-size="26">🇩🇪</text><text x="6" y="-104" font-size="26">🇬🇧</text>`, 0.85],
+  naturaliste: [`<path d="M-66 0 V-56 L0 -100 L66 -56 V0Z" fill="#b98a58"/><path d="M-78 -52 L0 -106 L78 -52" fill="none" stroke="#5a8a3a" stroke-width="14" stroke-linecap="round"/>
+    <rect x="-14" y="-40" width="28" height="40" fill="#7a5a3a"/><circle cx="-40" cy="-34" r="12" fill="#bfe6ff"/><circle cx="40" cy="-34" r="12" fill="#bfe6ff"/><text x="-16" y="-112" font-size="30">🌿</text>`, 0.85],
+  potager: [`<rect x="-80" y="-34" width="160" height="34" rx="6" fill="#8a5a3a"/>${[-60, -30, 0, 30, 60].map((x, i) => `<text x="${x - 12}" y="-30" font-size="26">${['🥕', '🥬', '🍅', '🥬', '🎃'][i]}</text>`).join('')}
+    <path d="M-86 -2 V-46 M86 -2 V-46 M-86 -30 H86" stroke="#c9a36a" stroke-width="6" fill="none"/>`, 0.9],
+  labyrinthe: [`<rect x="-72" y="-72" width="144" height="72" rx="8" fill="#5a9a4a"/><path d="M-52 -72 V-30 H-20 M-20 -72 V-50 M12 0 V-44 H-20 M44 -72 V-24 M12 -44 H44" stroke="#3a6a2a" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <text x="34" y="-76" font-size="28">🚩</text>`, 0.85],
+  glacier: [`<rect x="-60" y="-62" width="120" height="62" rx="6" fill="#fff5e0"/>${auvent(-70, 70, -62, '#f58aa5', '#fff')}
+    <rect x="-44" y="-30" width="88" height="30" fill="#bfe6ff"/><text x="-18" y="-84" font-size="34">🍦</text>`, 0.85],
+  missions: [`<rect x="-60" y="-66" width="120" height="66" fill="#fde9c8"/><path d="M-72 -62 L0 -108 L72 -62Z" fill="#e0703a"/>
+    <rect x="-12" y="-38" width="24" height="38" fill="#7a5a3a"/><rect x="-50" y="-50" width="26" height="22" fill="#bfe6ff"/><rect x="24" y="-50" width="26" height="22" fill="#bfe6ff"/><text x="-16" y="-112" font-size="28">🧹</text>`, 0.85],
   robot: [`<rect x="-66" y="-70" width="132" height="70" rx="8" fill="#dfe6ee"/><rect x="-74" y="-80" width="148" height="14" rx="6" fill="#5a6f8a"/>
     <rect x="-14" y="-40" width="28" height="40" fill="#5a6f8a"/><rect x="-54" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/><rect x="26" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/>
     <text x="-17" y="-88" font-size="32">🤖</text>`, 0.85],
@@ -245,6 +257,7 @@ const EMPLACEMENTS = {
   createurs: { cote: 150, places: [[0.307, 0.357], [0.743, 0.42], [0.25, 0.57], [0.643, 0.657], [0.47, 0.8]] }, // le 5e : l'atelier des robots, devant
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
+  nature: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
 };
 const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
@@ -309,7 +322,7 @@ export function dessinerIle(ileId, profils, joueuse, famille = null) {
     const [x, y] = surLeFond(e.places[i]);
     return { ...l, x, y, cote: e.cote, bas: 12, police: 22 };
   });
-  const [ax, ay] = fond ? surLeFond(e.places[2]) : [400, 720]; // le grand arbre de l'île du cœur, quand il n'y a pas de lieu de culte
+  const [ax, ay] = fond ? surLeFond(e.places[3]) : [400, 720]; // le grand arbre de l'île du cœur, quand il n'y a pas de lieu de culte
   const [fx, fy] = ileId === 'village' ? [400, 470] : [400, 520]; // la fontaine, au milieu des chemins
   const chemins = lieux.map((l) => `<path d="M${fx} ${fy} Q${(fx + l.x) / 2} ${(fy + l.y) / 2 + 20} ${l.x} ${l.y}"/>`).join('');
   return `<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" class="carte-ile" role="group" aria-label="${echapper(info.nom)}">

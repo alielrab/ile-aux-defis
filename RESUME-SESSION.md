@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque fois que la personne dit « Oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-44`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-46`. Il faut la monter à chaque envoi.
 - 131 tests, tous verts (`npm test`).
 - Faits pendant cette session :
   - les visuels des lots 37 à 50 : intérieurs, îles, maison, avatar en 175 calques, 30 articles, 6 couleurs de cheveux, personnages, 40 scènes d'histoires, calendrier de l'Avent ;
@@ -32,6 +32,12 @@
   - En cas de vieux cache : désinscrire le service worker, vider les caches, puis recharger.
 
 ## En attente
+- **Rangement des îles et 6 jeux** (24 nov.) :
+  - nouvelle **île de la nature** (ouverte, dessinée, sans image de fond) : cabane nature et potager (quiz, `js/jeux/nature.js`), labyrinthe, glacier de la plage ;
+  - **missions de la maison** sur l'île du cœur (validées par un parent avec le code, 3 ⭐, une fois par jour) ;
+  - **défi à deux** dans la salle de jeux, **atelier d'écriture** dans la bibliothèque ;
+  - l'**école des langues** est maintenant dans l'aéroport (l'île du savoir a 8 bâtiments pour 8 places).
+  - Pas faits : le tangram, « rendre la monnaie » au glacier, semer et arroser au potager. Images Higgsfield faites : l'île de la nature, ses 4 bâtiments, les missions, l'atelier des robots et le centre de tri.
 - **Explorateur de la Suisse** (24 nov.) : un quiz à l'aéroport (`js/jeux/suisse.js`), sans carte pour l'instant. À faire relire par un parent (cantons, chefs-lieux, lacs, montagnes). Suite possible : une vraie carte des cantons à toucher.
 - **Atelier des robots** (24 nov.) : île des créateurs (`js/jeux/robot.js`). Visuel attendu : `images/ile/robot.webp`. Un 5e emplacement a été ajouté sur l'île en image (à ajuster si le bâtiment tombe mal). Suite possible : une flèche « répéter ».
 - **Dictée magique** (24 nov.) : dans la bibliothèque, qui propose maintenant deux jeux (`js/jeux/dictee.js`). L'île du savoir est pleine : 9 lieux pour 8 emplacements en image.

@@ -10,14 +10,14 @@
 | Langues | Voir « Les langues » plus bas : l'école des langues et les mots de voyage |
 | Syllabes | Assembler des syllabes pour apprendre à lire |
 | Explorateur de la Suisse | **Commencé** (quiz à l'aéroport : cantons, chefs-lieux, langues, lacs, montagnes). Reste : la carte des cantons à toucher |
-| Petit naturaliste | Reconnaître des animaux, des plantes et des arbres |
+| Petit naturaliste | **Fait** (cabane nature, île de la nature) : quiz sur les animaux, les plantes et les arbres |
 | Code avec un robot | **Fait** (atelier des robots, île des créateurs) : programmer un robot avec des flèches pour atteindre l'étoile |
-| Défi entre sœurs | Les deux sœurs jouent au même défi, chacune à son niveau |
-| Aide à la maison | Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
-| Atelier d'écriture | Tracer les lettres au doigt, dans le bon sens, puis des mots |
-| Potager | Semer, arroser, voir pousser ; les saisons des fruits et légumes |
-| Le glacier de la plage | Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
-| Jeux de réflexion | Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
+| Défi entre sœurs | **Fait** (défi à deux, salle de jeux) : 5 questions chacun, à son niveau |
+| Aide à la maison | **Fait** (missions de la maison, île du cœur). Missions réelles (ranger sa chambre, mettre la table) validées par un parent avec le code, qui rapportent des étoiles |
+| Atelier d'écriture | **Commencé** (bibliothèque) : tracer les majuscules au doigt, dans le bon sens. Reste : les minuscules et les mots |
+| Potager | **Commencé** (île de la nature) : quiz sur les fruits, les légumes et les saisons. Reste : semer, arroser, voir pousser |
+| Le glacier de la plage | **Commencé** (île de la nature, sans la monnaie). Jeu d'arcade : servir les commandes des clients le plus vite possible, avec des niveaux qui accélèrent ; pour les 9 ans, rendre la monnaie en francs suisses (voir le marché) |
+| Jeux de réflexion | Labyrinthe **fait** (île de la nature). Reste le tangram. Tangram, labyrinthes (le Memory est fait, dans la salle de jeux) |
 
 ## Les langues (à construire plus tard)
 Un mini-jeu de langues à deux niveaux.

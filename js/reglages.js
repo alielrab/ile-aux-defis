@@ -25,14 +25,14 @@ export const QUESTIONS_PAR_PARTIE = 10;
 // memory = Memory (par paire trouvée ; à 8 ans et plus, il y a 10 paires au lieu de 6),
 // peinture = atelier de peinture (par zone réussie du coloriage magique ; la peinture libre ne rapporte pas d'étoiles).
 export const ETOILES_AUTRES_JEUX = [
-  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, dictee: 1.5, robot: 1.5, suisse: 1.5, espace: 1, cuisine: 1, croyance: 1, marche: 1.5, peinture: 0.5, emotions: 1, dinos: 1.5, passeport: 1.5, urgences: 1.5, route: 1.5, tri: 1.5, chantier: 1, veto: 1.5, fractions: 1.5, memory: 0.75, langues: 1.5 }, // 7 ans et moins
-  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, dictee: 1, robot: 1, suisse: 1, espace: 1, cuisine: 0.5, croyance: 1, marche: 1, peinture: 0.5, emotions: 1, dinos: 1, passeport: 1, urgences: 1, route: 1, tri: 1, chantier: 0.5, veto: 1, fractions: 1, memory: 0.5, langues: 1 }, // 8 ans et plus
+  { jusqua: 7, heure: 1.5, corps: 1, syllabes: 1, dictee: 1.5, robot: 1.5, suisse: 1.5, naturaliste: 1.5, potager: 1.5, labyrinthe: 2, glacier: 0.5, ecriture: 0.5, espace: 1, cuisine: 1, croyance: 1, marche: 1.5, peinture: 0.5, emotions: 1, dinos: 1.5, passeport: 1.5, urgences: 1.5, route: 1.5, tri: 1.5, chantier: 1, veto: 1.5, fractions: 1.5, memory: 0.75, langues: 1.5 }, // 7 ans et moins
+  { jusqua: 99, heure: 1, corps: 1, syllabes: 1, dictee: 1, robot: 1, suisse: 1, naturaliste: 1, potager: 1, labyrinthe: 2, glacier: 0.5, ecriture: 0.5, espace: 1, cuisine: 0.5, croyance: 1, marche: 1, peinture: 0.5, emotions: 1, dinos: 1, passeport: 1, urgences: 1, route: 1, tri: 1, chantier: 0.5, veto: 1, fractions: 1, memory: 0.5, langues: 1 }, // 8 ans et plus
 ];
 
 // Prix (en étoiles) pour débloquer une île de l'archipel. Le village et le savoir sont ouverts dès le départ.
 // Chaque enfant débloque les îles avec ses propres étoiles. Mettre 0 pour ouvrir une île à tout le monde.
 // L'île de la sécurité est ouverte à tous (0) : savoir appeler les secours ne doit pas dépendre des étoiles.
-export const PRIX_ILES = { createurs: 20, coeur: 20, securite: 0 };
+export const PRIX_ILES = { createurs: 20, coeur: 20, securite: 0, nature: 0 };
 
 // Maison de la confiance : étoiles quand on finit une étape d'un thème, la première fois (jamais pour une bonne réponse).
 export const ETOILES_CONFIANCE = 3;
