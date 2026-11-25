@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-56`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-57`. Il faut la monter à chaque envoi.
 - 153 tests, tous verts (`npm test`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
 
@@ -54,10 +54,9 @@
 - Nouvelle carte de l'île des créateurs à 6 places, tour de l'horloge recentrée.
 - **Hôpital en images** : 8 pages du corps (`images/corps/`, 640x1024, jamais rognées), plus 3 vues de dos (cerveau, squelette, muscles) avec un bouton « 🔄 Voir de dos ». Les places des organes sont dans `SUR_IMAGE` (`js/jeux/atlas.js`) ; un troisième élément `'dos'` met l'organe sur la vue de dos. Le cervelet et la moelle sont de dos ; l'intestin a été redessiné dans le ventre.
 - **Labo des expériences** (`js/jeux/experiences.js`) : 12 expériences à faire pour de vrai (matériel, étapes, « devine d'abord », explication, 2 ⭐ la première fois). Sources : Alloprof et Les Savants Fous.
-- **Labo, tuto en images** : une image par étape (`images/experiences/<cle>-<n>.webp`, 400x400, affichée toute seule si elle existe). En bas de chaque fiche, « Tu l'as faite pour de vrai ? » : un parent tape son code, +10 ⭐ une seule fois (`validerVraie`, `profil.vraies`). **Pas de vidéo** : deux essais Higgsfield (56 crédits chacun) ne montraient pas le bon résultat, on a abandonné.
+- **Labo, tuto en images** : une image par étape (`images/experiences/<cle>-<n>.webp`, 400x400, les 47 sont faites ; Higgsfield : `aspect_ratio: 1:1`, main à manche jaune, jamais le résultat sur l'image). En bas de chaque fiche, « Tu l'as faite pour de vrai ? » : un parent tape son code, +10 ⭐ une seule fois (`validerVraie`, `profil.vraies`). **Pas de vidéo** : deux essais Higgsfield (56 crédits chacun) ne montraient pas le bon résultat, on a abandonné.
 
 ## Pas encore fait
-- Images des étapes des 11 autres expériences (seul le lait magique est fait). Higgsfield rend des images carrées même si on demande 1024x640.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble », voix pré-enregistrées (`voix/phrases.csv`). Voir `IDEES.md`.
 
