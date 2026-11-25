@@ -35,7 +35,30 @@ Un mini-jeu de langues à deux niveaux.
 **2. Les mots de voyage** : fait, voir plus bas.
 
 ## Nouvelles îles (à construire plus tard)
+- **L'île des méninges** (nom choisi le 25 novembre 2026) : l'île des jeux pour réfléchir. Son premier lieu est **la tour des énigmes**, décrite juste en dessous. Décidé aussi : on y déménage le labyrinthe (île de la nature), l'atelier des robots (île des créateurs) et le défi à deux (salle de jeux du village).
 - **L'île de la mer** : l'aquarium et les fonds marins (poissons, coraux, baleines, protéger la mer).
+
+## La tour des énigmes (à construire plus tard)
+Un lieu de jeux de logique, adaptés à l'âge. Il vient en plus du memory, du tangram, des labyrinthes et du robot.
+
+**Pour les deux âges, avec une difficulté adaptée**
+- **Sudoku** : avec des images sur une grille de 4x4, puis avec des chiffres sur une grille de 6x6.
+- **Suites logiques** : trouver ce qui vient après.
+- **Trouve l'intrus** : une image ne va pas avec les autres.
+- **Taquin** : faire glisser les cases pour remettre l'image en ordre.
+- **Parking bloqué** : faire glisser les véhicules pour libérer la sortie.
+- **Les potions du laboratoire** : trier des liquides de couleur en les versant d'une fiole à l'autre, jusqu'à avoir une seule couleur par fiole. Peu de fioles et de couleurs à 6 ans, beaucoup plus à 9 ans.
+
+**Plutôt pour 9 ans**
+- **Le code des couleurs** : deviner une suite de couleurs cachée, avec un indice après chaque essai.
+- **Énigmes de déduction** : une grille à cocher et des indices pour trouver qui va avec quoi.
+- **La tour à déplacer** : déplacer une pile de disques d'un piquet à l'autre, un par un, sans jamais poser un grand sur un petit.
+- **Dessins cachés** : colorier les bonnes cases grâce aux nombres au bord de la grille, pour faire apparaître un dessin.
+
+**Pour tous les jeux**
+- Des niveaux à débloquer, un par un.
+- Une **énigme du jour**, qui rapporte des étoiles bonus.
+- Nos propres visuels et nos propres noms : on ne copie ni le nom ni l'apparence des jeux qui existent déjà.
 
 ## Île du cœur : « Grandir ensemble » (à construire plus tard)
 Un lieu sur le vivre-ensemble. Comme la maison de la confiance : pas de pénalité, des explications douces, une invitation à en parler avec un parent.

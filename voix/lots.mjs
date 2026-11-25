@@ -34,7 +34,7 @@ console.log(`${pretes.length} voix prêtes dans voix/audio`);
 if (sortie) {
   const re = new RegExp(filtre), vus = new Set(pretes);
   // csv simple : id;source;texte, le texte entre guillemets s'il contient ; ou "
-  const textes = readFileSync('voix/phrases.csv', 'utf8').replace(/^\uFEFF/, '').trim().split('\n').slice(1).map((l) => {
+  const textes = readFileSync('voix/phrases.csv', 'utf8').replace(/^\uFEFF/, '').trim().split(/\r?\n/).slice(1).map((l) => { // \r : git peut rendre le fichier avec des fins de ligne Windows
     const [, id, source, t] = l.match(/^([^;]*);([^;]*);(.*)$/);
     return [id, source, t.startsWith('"') ? t.slice(1, -1).replaceAll('""', '"') : t];
   }).filter(([id, source, t]) => re.test(`${id};${source}`) && /\p{L}/u.test(t) && !/\d\/\d/.test(t) && !vus.has(cle(t)) && vus.add(cle(t))).map(([, , t]) => t);
