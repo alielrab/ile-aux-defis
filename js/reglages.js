@@ -32,7 +32,7 @@ export const ETOILES_AUTRES_JEUX = [
 // Prix (en étoiles) pour débloquer une île de l'archipel. Le village et le savoir sont ouverts dès le départ.
 // Chaque enfant débloque les îles avec ses propres étoiles. Mettre 0 pour ouvrir une île à tout le monde.
 // L'île de la sécurité est ouverte à tous (0) : savoir appeler les secours ne doit pas dépendre des étoiles.
-export const PRIX_ILES = { createurs: 20, coeur: 20, securite: 0, nature: 20 };
+export const PRIX_ILES = { createurs: 20, coeur: 20, securite: 0, nature: 20, meninges: 0 }; // méninges : gratuite, ses jeux étaient déjà ouverts sur d'autres îles
 
 // Maison de la confiance : étoiles quand on finit une étape d'un thème, la première fois (jamais pour une bonne réponse).
 export const ETOILES_CONFIANCE = 3;

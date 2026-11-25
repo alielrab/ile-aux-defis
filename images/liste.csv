@@ -122,13 +122,14 @@
 3;images/ile/fond-coeur.webp;1024x1024;oui;L'île du cœur vue du ciel, vide : plage, herbe, chemins
 3;images/ile/fond-securite.webp;1024x1024;oui;L'île de la sécurité vue du ciel, vide : plage, herbe, chemins
 3;images/ile/fond-nature.webp;1024x1024;oui;L'île de la nature vue du ciel, vide : plage, herbe, chemins
+3;images/ile/fond-meninges.webp;1024x1024;oui;L'île des méninges vue du ciel, vide : plage, herbe, chemins
 3;images/ile/coiffeur.webp;512x512;oui;Bâtiment : Le coiffeur (coiffures et couleurs)
 3;images/ile/mode.webp;512x512;oui;Bâtiment : La boutique (vêtements et bijoux)
 3;images/ile/meubles.webp;512x512;oui;Bâtiment : Le magasin de meubles (meubles, jouets, murs et pièces)
 3;images/ile/marche.webp;512x512;oui;Bâtiment : Le marché (payer en francs suisses)
 3;images/ile/refuge.webp;512x512;oui;Bâtiment : Le refuge (animaux à adopter)
 3;images/ile/veto.webp;512x512;oui;Bâtiment : Le vétérinaire (soigner les animaux)
-3;images/ile/memory.webp;512x512;oui;Bâtiment : La salle de jeux (le Memory et le défi à deux)
+3;images/ile/memory.webp;512x512;oui;Bâtiment : La salle de jeux (le Memory, seul ou à deux)
 3;images/ile/chantier.webp;512x512;oui;Bâtiment : Le chantier (la grue folle)
 3;images/ile/calcul.webp;512x512;oui;Bâtiment : L'école (Calcul)
 3;images/ile/heure.webp;512x512;oui;Bâtiment : La tour de l'horloge (lire l'heure)
@@ -146,15 +147,17 @@
 3;images/ile/peinture.webp;512x512;oui;Bâtiment : L'atelier de peinture (colorier et peindre)
 3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
 3;images/ile/musique.webp;512x512;oui;Bâtiment : La salle de musique (composer des mélodies)
-3;images/ile/robot.webp;512x512;oui;Bâtiment : L'atelier des robots (programmer avec des flèches)
 3;images/ile/labo.webp;512x512;oui;Bâtiment : Le labo des expériences (de petites expériences à faire pour de vrai)
 3;images/ile/confiance.webp;512x512;oui;Bâtiment : La maison de la confiance (mes droits et ma sécurité)
 3;images/ile/emotions.webp;512x512;oui;Bâtiment : La météo des émotions (reconnaître ses émotions)
 3;images/ile/missions.webp;512x512;oui;Bâtiment : Les missions de la maison (aider à la maison)
 3;images/ile/naturaliste.webp;512x512;oui;Bâtiment : La cabane nature (les fiches des animaux et des plantes, et un quiz)
 3;images/ile/potager.webp;512x512;oui;Bâtiment : Le potager (fruits, légumes et saisons)
-3;images/ile/labyrinthe.webp;512x512;oui;Bâtiment : Le labyrinthe (trouver la sortie)
 3;images/ile/glacier.webp;512x512;oui;Bâtiment : Le glacier de la plage (servir les glaces)
+3;images/ile/enigmes.webp;512x512;oui;Bâtiment : La tour des énigmes (des jeux de logique)
+3;images/ile/defi.webp;512x512;oui;Bâtiment : Le défi à deux (des questions, chacun son tour)
+3;images/ile/robot.webp;512x512;oui;Bâtiment : L'atelier des robots (programmer avec des flèches)
+3;images/ile/labyrinthe.webp;512x512;oui;Bâtiment : Le labyrinthe (trouver la sortie)
 3;images/ile/maison.webp;512x512;oui;Bâtiment : la maison d’un enfant
 3;images/ile/croyance-catholique.webp;512x512;oui;Bâtiment : lieu de culte (catholique)
 3;images/ile/croyance-protestant.webp;512x512;oui;Bâtiment : lieu de culte (protestant)

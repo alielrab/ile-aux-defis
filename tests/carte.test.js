@@ -27,6 +27,7 @@ test('les bonnes îles : village (maisons, magasins), savoir (école…), créat
   for (const id of ['calcul', 'syllabes', 'espace', 'corps', 'heure']) assert.equal(ou(id), 'savoir', id);
   for (const id of ['cuisine', 'peinture', 'bd', 'musique']) assert.equal(ou(id), 'createurs', id);
   for (const id of ['confiance', 'emotions']) assert.equal(ou(id), 'coeur', id);
+  for (const id of ['enigmes', 'defi', 'robot', 'labyrinthe']) assert.equal(ou(id), 'meninges', id);
   assert.deepEqual(lieuxDe('coeur', 'islam').map((l) => l.id).sort(), ['confiance', 'croyance', 'emotions', 'missions']);
   // seule la maison de la joueuse s'ouvre, et seulement sur l'île du village
   const svg = dessinerIle('village', profils, profils[0]);

@@ -176,6 +176,8 @@ for (const a of catalogue.CATALOGUE) ajouter(`objet.${a.id.replace(':', '.')}`, 
 
 { // l'accueil de chaque île (voir entrerLieu dans js/app.js)
   const { ILES } = await js('archipel.js');
+  const { LIEUX } = await js('carte.js');
+  for (const l of LIEUX.filter((x) => !x.ouvert)) ajouter(`lieu.${l.id}.bientot`, "Phrases de l'app", `${l.nom.replace('\n', ' ')} ouvre bientôt !`);
   for (const i of ILES) ajouter(`ile.${i.id}.bienvenue`, "Phrases de l'app", `Bienvenue sur ${i.nom.replace(/^L'île/, "l'île")} !`);
 }
 

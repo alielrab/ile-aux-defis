@@ -11,9 +11,10 @@ export const ILES = [
   { id: 'coeur', nom: "L'île du cœur", x: 575, y: 625, herbe: '#f4bfd0', vitrine: ['confiance', 'emotions'] },
   { id: 'securite', nom: "L'île de la sécurité", x: 225, y: 975, herbe: '#b8e0c8', vitrine: ['urgences', 'route'] },
   { id: 'nature', nom: "L'île de la nature", x: 575, y: 975, herbe: '#a8dc8a', vitrine: ['naturaliste', 'glacier'] },
+  { id: 'meninges', nom: "L'île des méninges", x: 225, y: 1310, herbe: '#cdbcf2', vitrine: ['robot', 'labyrinthe'] }, // les jeux pour réfléchir
 ];
 // De la place pour les prochaines îles (dessinées dans la brume, « Bientôt »)
-export const EMPLACEMENTS_LIBRES = [[400, 465], [225, 1310], [575, 1310]]; // la carte a été agrandie vers le bas pour deux futures îles
+export const EMPLACEMENTS_LIBRES = [[400, 465], [575, 1310]]; // la carte a été agrandie vers le bas pour de futures îles
 
 export const ile = (id) => ILES.find((i) => i.id === id);
 export const prixIle = (id) => (ile(id).ouverte ? 0 : PRIX_ILES[id]);

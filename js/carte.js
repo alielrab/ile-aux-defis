@@ -17,7 +17,7 @@ export const LIEUX = [
   { id: 'marche', ile: 'village', type: 'jeu', nom: 'Le marché', detail: 'payer en francs suisses', ouvert: true, x: 190, y: 480 },
   { id: 'refuge', ile: 'village', type: 'magasin', nom: 'Le refuge', detail: 'animaux à adopter', ouvert: true, x: 610, y: 480 },
   { id: 'veto', ile: 'village', type: 'jeu', nom: 'Le vétérinaire', detail: 'soigner les animaux', ouvert: true, x: 185, y: 740 },
-  { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory et le défi à deux', ouvert: true, x: 615, y: 740 },
+  { id: 'memory', ile: 'village', type: 'jeu', nom: 'La salle\nde jeux', detail: 'le Memory, seul ou à deux', ouvert: true, x: 615, y: 740 },
   { id: 'chantier', ile: 'village', type: 'jeu', nom: 'Le chantier', detail: 'la grue folle', ouvert: true, x: 400, y: 800 },
   // L'île du savoir
   { id: 'calcul', ile: 'savoir', type: 'jeu', nom: "L'école", detail: 'Calcul', ouvert: true, x: 200, y: 330 },
@@ -38,8 +38,7 @@ export const LIEUX = [
   { id: 'peinture', ile: 'createurs', type: 'jeu', nom: "L'atelier\nde peinture", detail: 'colorier et peindre', ouvert: true, x: 570, y: 400 },
   { id: 'bd', ile: 'createurs', type: 'jeu', nom: "L'atelier BD", detail: 'inventer des bandes dessinées', ouvert: true, x: 230, y: 680 },
   { id: 'musique', ile: 'createurs', type: 'jeu', nom: 'La salle\nde musique', detail: 'composer des mélodies', ouvert: true, x: 570, y: 680 },
-  { id: 'robot', ile: 'createurs', type: 'jeu', nom: "L'atelier\ndes robots", detail: 'programmer avec des flèches', ouvert: true, x: 400, y: 830 },
-  { id: 'labo', ile: 'createurs', type: 'jeu', nom: 'Le labo des\nexpériences', detail: 'de petites expériences à faire pour de vrai', ouvert: true, x: 570, y: 830 },
+  { id: 'labo', ile: 'createurs', type: 'jeu', nom: 'Le labo des\nexpériences', detail: 'de petites expériences à faire pour de vrai', ouvert: true, x: 400, y: 830 },
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)
   { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: true, x: 230, y: 420 },
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
@@ -47,8 +46,12 @@ export const LIEUX = [
   // L'île de la nature
   { id: 'naturaliste', ile: 'nature', type: 'jeu', nom: 'La cabane\nnature', detail: 'les fiches des animaux et des plantes, et un quiz', ouvert: true, x: 230, y: 400 },
   { id: 'potager', ile: 'nature', type: 'jeu', nom: 'Le potager', detail: 'fruits, légumes et saisons', ouvert: true, x: 570, y: 400 },
-  { id: 'labyrinthe', ile: 'nature', type: 'jeu', nom: 'Le labyrinthe', detail: 'trouver la sortie', ouvert: true, x: 230, y: 680 },
-  { id: 'glacier', ile: 'nature', type: 'jeu', nom: 'Le glacier\nde la plage', detail: 'servir les glaces', ouvert: true, x: 570, y: 680 },
+  { id: 'glacier', ile: 'nature', type: 'jeu', nom: 'Le glacier\nde la plage', detail: 'servir les glaces', ouvert: true, x: 400, y: 680 },
+  // L'île des méninges : les jeux pour réfléchir (la tour des énigmes : voir IDEES.md)
+  { id: 'enigmes', ile: 'meninges', type: 'jeu', nom: 'La tour\ndes énigmes', detail: 'des jeux de logique', ouvert: false, x: 230, y: 400 },
+  { id: 'defi', ile: 'meninges', type: 'jeu', nom: 'Le défi\nà deux', detail: 'des questions, chacun son tour', ouvert: true, x: 570, y: 400 },
+  { id: 'robot', ile: 'meninges', type: 'jeu', nom: "L'atelier\ndes robots", detail: 'programmer avec des flèches', ouvert: true, x: 230, y: 680 },
+  { id: 'labyrinthe', ile: 'meninges', type: 'jeu', nom: 'Le labyrinthe', detail: 'trouver la sortie', ouvert: true, x: 570, y: 680 },
 ];
 
 // Texte avec contour blanc ; « \n » = deuxième ligne. largeurMax : au-delà, le texte rétrécit.
@@ -174,6 +177,10 @@ const BATIMENTS = {
     <rect x="-44" y="-30" width="88" height="30" fill="#bfe6ff"/><text x="-18" y="-84" font-size="34">🍦</text>`, 0.85],
   missions: [`<rect x="-60" y="-66" width="120" height="66" fill="#fde9c8"/><path d="M-72 -62 L0 -108 L72 -62Z" fill="#e0703a"/>
     <rect x="-12" y="-38" width="24" height="38" fill="#7a5a3a"/><rect x="-50" y="-50" width="26" height="22" fill="#bfe6ff"/><rect x="24" y="-50" width="26" height="22" fill="#bfe6ff"/><text x="-16" y="-112" font-size="28">🧹</text>`, 0.85],
+  enigmes: [`<rect x="-34" y="-128" width="68" height="128" rx="6" fill="#b9a4e8"/><path d="M-44 -128 L0 -176 L44 -128Z" fill="#6a4bb8"/>
+    <rect x="-13" y="-34" width="26" height="34" rx="12" fill="#6a4bb8"/><circle cx="0" cy="-88" r="15" fill="#fff4d6"/><text x="-9" y="-79" font-size="24" font-weight="800" fill="#6a4bb8" font-family="sans-serif">?</text>`, 0.85],
+  defi: [`<rect x="-66" y="-70" width="132" height="70" rx="8" fill="#ffe1b8"/><path d="M-76 -70 L0 -108 L76 -70Z" fill="#ff9a3c"/>
+    <rect x="-14" y="-38" width="28" height="38" fill="#c96a1a"/><text x="-44" y="-76" font-size="30">🤝</text>`, 0.85],
   robot: [`<rect x="-66" y="-70" width="132" height="70" rx="8" fill="#dfe6ee"/><rect x="-74" y="-80" width="148" height="14" rx="6" fill="#5a6f8a"/>
     <rect x="-14" y="-40" width="28" height="40" fill="#5a6f8a"/><rect x="-54" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/><rect x="26" y="-54" width="28" height="22" rx="4" fill="#bfe6ff"/>
     <text x="-17" y="-88" font-size="32">🤖</text>`, 0.85],
@@ -264,14 +271,15 @@ const EMPLACEMENTS = {
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
   nature: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
+  meninges: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
 };
 const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
 
 // Les jeux de chaque bâtiment qui en a plusieurs, ou dont le jeu ne porte pas son nom (pour la pastille « 3 jeux » et les médailles)
-export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], memory: ['memory', 'defi'], potager: ['potager', 'jardinage'],
+export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], potager: ['potager', 'jardinage'],
   corps: ['corps', 'atlas'], musee: ['dinos'], croyance: ['croyance', 'recit'] };
-const PASTILLES = { syllabes: 3, aeroport: 3, memory: 2, potager: 2, naturaliste: 3 };
+const PASTILLES = { syllabes: 3, aeroport: 3, potager: 2, naturaliste: 3 };
 // Une médaille par bâtiment, selon le nombre de parties finies dans ses jeux : bronze dès 1, argent dès 5, or dès 15
 export const SEUILS_MEDAILLES = [[15, '🥇', 'or'], [5, '🥈', 'argent'], [1, '🥉', 'bronze']];
 export function medaille(profil, lieuId) {

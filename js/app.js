@@ -318,6 +318,7 @@ function entrerLieu(cible) {
   if (id === 'potager') return ouvrirPotager();
   if (id === 'naturaliste') return ouvrirCabane();
   if (id === 'labo') return ouvrirLabo();
+  if (id === 'defi') return ouvrirDefi();
   if (id === 'labyrinthe') return ouvrirLabyrinthe();
   if (id === 'glacier') return ouvrirGlacier();
   if (id === 'urgences') return ouvrirUrgences();
@@ -1796,7 +1797,6 @@ function afficherChoixMemory() {
     el('div', { className: 'phrases' },
       gros(acc('🙂 {Seul|Seule}'), () => { joueursMemory = [joueuse]; afficherChoixMemory(); }, `petit${avec ? '' : ' choisi'}`),
       ...[...autres, invite].map((p) => gros(`👫 À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'}`, () => { joueursMemory = [joueuse, p]; afficherChoixMemory(); parler(`À deux avec ${p.id ? p.prenom : 'quelqu’un d’autre'} !`); }, `petit${avec && avec.id === p.id ? ' choisi' : ''}`))),
-    gros('🤝 Le défi à deux : des questions, chacun son tour', () => ouvrirDefi(), 'gros secondaire'),
     el('h2', { textContent: 'Le Memory : quelles cartes ?' }),
     el('div', { className: 'themes-memory' }, ...Object.entries(memory.THEMES).map(([k, t]) => gros(`${t.image} ${t.nom}`, () => commencerMemory(k)))),
     el('p', { className: 'carte presentation', textContent: `${memory.nbPaires(Math.min(...joueursMemory.map((j) => j.age)))} paires à trouver. Chaque paire rapporte des étoiles${avec ? ' à celui ou celle qui la trouve' : ''} !` }));

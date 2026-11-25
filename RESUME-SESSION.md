@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-59`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-60`. Il faut la monter à chaque envoi.
 - 154 tests, tous verts (`npm test`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
 
@@ -34,13 +34,14 @@
 
 ## Les îles et leurs jeux
 - **Île du savoir** (8 places, pleine) : calcul, fractions, syllabes (la bibliothèque : lecture, dictée magique, atelier d'écriture), heure (la tour de l'horloge), musée (dinosaures en images), espace, corps (l'hôpital en images), aéroport (passeport, mots de voyage, école des langues, explorateur de la Suisse).
-- **Village** (8 places, plein) : chantier, coiffeur, marché, memory (salle de jeux, avec le défi à deux), meubles, mode, refuge, vétérinaire.
-- **Île des créateurs** (20 ⭐, 6 places, pleine) : restaurant, atelier de peinture, atelier BD, salle de musique, atelier des robots, **labo des expériences**.
+- **Village** (8 places, plein) : chantier, coiffeur, marché, memory (salle de jeux), meubles, mode, refuge, vétérinaire.
+- **Île des créateurs** (20 ⭐, 6 places, 1 libre) : restaurant, atelier de peinture, atelier BD, salle de musique, **labo des expériences**.
 - **Île de la sécurité** (4 places, pleine) : route, urgences, centre de tri, premiers secours.
 - **Île du cœur** (20 ⭐, 4 places, pleine) : maison de la confiance (5 thèmes), émotions, missions de la maison, lieu de culte.
 - Pour un nouveau jeu : le ranger dans un bâtiment existant (pastille « N jeux »), ou changer la carte d'une île, ou ouvrir une nouvelle île.
-- **Île de la nature** (20 ⭐, 4 places, pleine) : cabane nature (fiches et quiz), mon potager, labyrinthe, glacier de la plage.
-- **Archipel** : 2 places « Bientôt » en bas pour de futures îles.
+- **Île de la nature** (20 ⭐, 4 places, 1 libre) : cabane nature (fiches et quiz), mon potager, glacier de la plage.
+- **Île des méninges** (gratuite, 4 places, pleine) : la tour des énigmes (**pas encore ouverte**, 10 jeux de logique décrits dans `IDEES.md`), le défi à deux, l'atelier des robots, le labyrinthe. Ces trois jeux ont été déménagés le 25 novembre : il reste une place vide sur l'île de la nature et une sur l'île des créateurs.
+- **Archipel** : 1 place « Bientôt » en bas à droite pour une future île.
 - Sur la carte : pastille « N jeux » sur les bâtiments qui en cachent plusieurs, et médailles (bronze 1, argent 5, or 15 parties, `profil.parties`).
 - La liste exacte est dans `js/carte.js` (`LIEUX`, `EMPLACEMENTS`, `JEUX_DU_LIEU`).
 
@@ -57,7 +58,7 @@
 - **Labo, tuto en images** : une image par étape (`images/experiences/<cle>-<n>.webp`, 400x400, les 47 sont faites ; Higgsfield : `aspect_ratio: 1:1`, main à manche jaune, jamais le résultat sur l'image). En bas de chaque fiche, « Tu l'as faite pour de vrai ? » : un parent tape son code, +10 ⭐ une seule fois (`validerVraie`, `profil.vraies`). **Pas de vidéo** : deux essais Higgsfield (56 crédits chacun) ne montraient pas le bon résultat, on a abandonné.
 
 ## La voix enregistrée (fait le 25 novembre)
-- L'app joue une voix enregistrée (`voix/audio/<clé>.mp3`, 4 704 fichiers, 92 Mo) quand **tout** le texte à dire est connu, sinon la voix de la tablette (`parler` dans `js/voix.js`). Le nom du fichier vient du texte (`js/voix-cle.js`) : un texte qui change d'une lettre repasse à la voix de la tablette, il faut refaire sa voix.
+- L'app joue une voix enregistrée (`voix/audio/<clé>.mp3`, 4 706 fichiers, 92 Mo) quand **tout** le texte à dire est connu, sinon la voix de la tablette (`parler` dans `js/voix.js`). Le nom du fichier vient du texte (`js/voix-cle.js`) : un texte qui change d'une lettre repasse à la voix de la tablette, il faut refaire sa voix.
 - Un parent qui a choisi une voix de la tablette dans les réglages garde cette voix-là.
 - Voix choisie par le parent : « française énergique », une voix copiée sur la voix française « Hélène » et dite par ElevenLabs v4 (identifiant dans `voix/lots.mjs`). Elle est sur le **nouveau compte Higgsfield** (3 000 crédits au départ, 1 690 après). Les voix toutes faites d'ElevenLabs ont un accent québécois ; celles d'Inworld sont fades.
 - Pour ajouter des voix : `node voix/lister-phrases.mjs` (la liste), `node voix/lots.mjs <dossier> [filtre] [12]` (les envois, 8 lots chacun), envoyer l'archive dans le bac à sable Higgsfield, `generate_audio_batch` avec `requests: {ref: "sandbox:~/…/envoi-N.json#/requests"}`, puis `python3 aligner.py envoi-N.json` dans le bac à sable (découpe et vérifie avec la reconnaissance vocale), rapatrier `pret/` dans `voix/audio/`, et `node voix/lots.mjs` pour refaire `voix/liste.js`.
@@ -76,6 +77,7 @@
 - Textes à relire : mots des langues et prononciations, Suisse (cantons, lacs, montagnes), premiers secours, fiches des animaux et des plantes, saisons du potager, expériences, tracé des lettres, règles du tri, mots de voyage (arabe du Maroc et d'Égypte, suisse allemand).
 
 ## Higgsfield (visuels)
+- **Nouveau compte depuis le 25 novembre** : les identifiants d'images de référence ci-dessous sont ceux de l'ancien compte. Sur le nouveau, on renvoie une image du projet comme référence (`media_upload` d'un PNG tiré de `images/ile/…webp`, rôle `image_references`) : c'est ce qui a servi pour l'île des méninges (référence : `fond-nature`, même disposition des 4 places) et ses bâtiments (référence : `labo`).
 - Modèle `gpt_image_2_6`, qualité `medium`, fond `transparent`, `use_unlim: false`. Environ 1,25 crédit par image en 1k. Vérifier le solde en début de session.
 - Au plus 8 tâches en même temps. Plus grand côté 1024 en 1k. 1024x512 et 576x1008 sont refusés (trop allongés) ; 640x1024 et 1024x640 passent.
 - Les images de corps d'enfant non habillé sont refusées : partir d'une base habillée. Les muscles passent seulement en silhouette bleue.
