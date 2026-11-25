@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-60`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-61`. Il faut la monter à chaque envoi.
 - 154 tests, tous verts (`npm test`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
 
@@ -40,7 +40,7 @@
 - **Île du cœur** (20 ⭐, 4 places, pleine) : maison de la confiance (5 thèmes), émotions, missions de la maison, lieu de culte.
 - Pour un nouveau jeu : le ranger dans un bâtiment existant (pastille « N jeux »), ou changer la carte d'une île, ou ouvrir une nouvelle île.
 - **Île de la nature** (20 ⭐, 4 places, 1 libre) : cabane nature (fiches et quiz), mon potager, glacier de la plage.
-- **Île des méninges** (gratuite, 4 places, pleine) : la tour des énigmes (**pas encore ouverte**, 10 jeux de logique décrits dans `IDEES.md`), le défi à deux, l'atelier des robots, le labyrinthe. Ces trois jeux ont été déménagés le 25 novembre : il reste une place vide sur l'île de la nature et une sur l'île des créateurs.
+- **Île des méninges** (gratuite, 6 places, 2 libres en bas) : la tour des énigmes (**pas encore ouverte**, 10 jeux de logique décrits dans `IDEES.md`), le défi à deux, l'atelier des robots, le labyrinthe. Ces trois jeux ont été déménagés le 25 novembre : il reste une place vide sur l'île de la nature et une sur l'île des créateurs.
 - **Archipel** : 1 place « Bientôt » en bas à droite pour une future île.
 - Sur la carte : pastille « N jeux » sur les bâtiments qui en cachent plusieurs, et médailles (bronze 1, argent 5, or 15 parties, `profil.parties`).
 - La liste exacte est dans `js/carte.js` (`LIEUX`, `EMPLACEMENTS`, `JEUX_DU_LIEU`).

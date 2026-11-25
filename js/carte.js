@@ -271,7 +271,7 @@ const EMPLACEMENTS = {
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
   nature: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
-  meninges: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },
+  meninges: { cote: 150, places: [[0.31, 0.295], [0.69, 0.295], [0.235, 0.48], [0.765, 0.48], [0.315, 0.665], [0.675, 0.665]] }, // 6 emplacements, les 2 du bas sont libres
 };
 const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
