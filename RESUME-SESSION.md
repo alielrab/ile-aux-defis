@@ -22,7 +22,7 @@
   - `node images/lister-images.mjs` régénère `images/liste.csv`, la liste des images attendues.
 - Règles de contenu :
   - ne jamais représenter Dieu ni les prophètes ;
-  - les scènes d'histoires sont sans personnages ;
+  - chaque histoire a une scène sans personne (`images/recits/<clé>.webp`) ; depuis le 25 novembre, 28 histoires ont aussi une scène avec les personnages (`<clé>-gens.webp`, faite avec Higgsfield à partir de la scène sans personne), montrée **seulement** si la famille a laissé « personnages » coché (décoché par défaut pour l'islam). Les histoires de l'islam et celles où une divinité serait le personnage n'ont pas de scène avec personnages, et Dieu n'est jamais montré ;
   - le contenu reste neutre côté religion ;
   - **maison de la confiance** : tout texte sensible va d'abord dans `relecture/*.md`, et le parent le lit avant qu'il soit ouvert. Pas de mises en situation gênantes : des principes simples, et « parles-en à un adulte de confiance » ;
   - une plante dangereuse n'est jamais montrée avec un fruit appétissant ;

@@ -697,8 +697,11 @@ function personnage([x, y, s, couleur, variante = ''], i) {
 export function illustration(recit, avecPersonnages) {
   const gens = avecPersonnages ? recit.personnages.map(personnage).join('') : '';
   // la scène en image (images/recits, nouveau style) : un paysage sans personne ; les personnages, si la famille les a choisis, restent dessinés par-dessus
+  // si la famille a choisi les personnages et que la scène existe aussi avec eux (…-gens), on montre celle-là, sans rien dessiner par-dessus
+  const prete = (f) => (globalThis.IMAGES ?? []).includes(f), avecGens = `images/recits/${recit.cle}-gens.webp`;
+  if (avecPersonnages && prete(avecGens)) return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" class="illustration-recit" role="img" aria-label="${recit.titre.replace(/"/g, '&quot;')}"><image href="${avecGens}" width="320" height="200" preserveAspectRatio="xMidYMid slice"/></svg>`;
   const img = `images/recits/${recit.cle}.webp`;
-  if ((globalThis.IMAGES ?? []).includes(img)) return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" class="illustration-recit" role="img" aria-label="${recit.titre.replace(/"/g, '&quot;')}"><image href="${img}" width="320" height="200" preserveAspectRatio="xMidYMid slice"/>${gens}</svg>`;
+  if (prete(img)) return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" class="illustration-recit" role="img" aria-label="${recit.titre.replace(/"/g, '&quot;')}"><image href="${img}" width="320" height="200" preserveAspectRatio="xMidYMid slice"/>${gens}</svg>`;
   const fond = recit.decor.find(([e]) => e in FONDS)?.[0] ?? 'jour';
   const decor = recit.decor.map(([e, x, y, s, v]) => ELEMENTS[e](x, y, s, v)).join('');
   return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" class="illustration-recit" role="img" aria-label="${recit.titre.replace(/"/g, '&quot;')}">${ciel(FONDS[fond], `ciel-${recit.cle}`)}${decor}${gens}</svg>`;

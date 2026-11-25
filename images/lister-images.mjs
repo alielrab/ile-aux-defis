@@ -40,7 +40,7 @@ for (const id of [...Object.keys(MAGASINS), ...DECORS]) ajouter(4, `decors/${id}
 for (const id of ['calcul', 'heure', 'corps', 'syllabes', 'espace', 'croyance', 'cuisine', 'marche', 'emotions', 'veto', 'fractions', 'musee', 'passeport', 'urgences', 'route']) ajouter(4, `personnages/${id}`, '512x768', `Personnage du lieu : ${id}`);
 
 // Étape 6 : les scènes des histoires du lieu de croyance, en paysages sans personne (Dieu et les prophètes ne sont jamais représentés)
-for (const l of Object.values(RECITS)) for (const r of l) ajouter(6, `recits/${r.cle}`, '768x480', `Histoire : ${r.titre}, sans personne`, false);
+for (const l of Object.values(RECITS)) for (const r of l) { ajouter(6, `recits/${r.cle}`, '768x480', `Histoire : ${r.titre}, sans personne`, false); if (r.personnages.length) ajouter(6, `recits/${r.cle}-gens`, '768x480', `Histoire : ${r.titre}, avec les personnages (montrée seulement si la famille l'a choisi)`, false); }
 
 // Étape 7 : le calendrier de l'Avent, une illustration par case
 for (let j = 1; j <= 24; j++) ajouter(7, `avent/${j}`, '384x384', `Calendrier de l’Avent, case ${j}`, false);

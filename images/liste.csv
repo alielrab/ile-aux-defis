@@ -403,29 +403,53 @@
 5;images/avatar/coiffure-boucles-longues-derriere.webp;768x1024;oui;Cheveux gris clair (teintés par le code), Longs bouclés, partie derriere
 6;images/recits/creation.webp;768x480;non;Histoire : La création du monde, sans personne
 6;images/recits/arche.webp;768x480;non;Histoire : L'arche de Noé, sans personne
+6;images/recits/arche-gens.webp;768x480;non;Histoire : L'arche de Noé, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/abraham.webp;768x480;non;Histoire : Abraham et les étoiles, sans personne
+6;images/recits/abraham-gens.webp;768x480;non;Histoire : Abraham et les étoiles, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/joseph.webp;768x480;non;Histoire : Joseph et ses frères, sans personne
+6;images/recits/joseph-gens.webp;768x480;non;Histoire : Joseph et ses frères, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/moise.webp;768x480;non;Histoire : Moïse et la mer Rouge, sans personne
+6;images/recits/moise-gens.webp;768x480;non;Histoire : Moïse et la mer Rouge, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/david.webp;768x480;non;Histoire : David et Goliath, sans personne
+6;images/recits/david-gens.webp;768x480;non;Histoire : David et Goliath, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/samuel.webp;768x480;non;Histoire : Samuel entend qu'on l'appelle, sans personne
+6;images/recits/samuel-gens.webp;768x480;non;Histoire : Samuel entend qu'on l'appelle, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/jonas.webp;768x480;non;Histoire : Jonas et le grand poisson, sans personne
+6;images/recits/jonas-gens.webp;768x480;non;Histoire : Jonas et le grand poisson, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/daniel.webp;768x480;non;Histoire : Daniel dans la fosse aux lions, sans personne
+6;images/recits/daniel-gens.webp;768x480;non;Histoire : Daniel dans la fosse aux lions, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/naissance.webp;768x480;non;Histoire : La naissance de Jésus, sans personne
+6;images/recits/naissance-gens.webp;768x480;non;Histoire : La naissance de Jésus, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/enfants.webp;768x480;non;Histoire : Jésus et les enfants, sans personne
+6;images/recits/enfants-gens.webp;768x480;non;Histoire : Jésus et les enfants, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/cana.webp;768x480;non;Histoire : Les noces de Cana, sans personne
+6;images/recits/cana-gens.webp;768x480;non;Histoire : Les noces de Cana, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/tempete.webp;768x480;non;Histoire : La tempête apaisée, sans personne
+6;images/recits/tempete-gens.webp;768x480;non;Histoire : La tempête apaisée, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/pains.webp;768x480;non;Histoire : Cinq pains et deux poissons, sans personne
+6;images/recits/pains-gens.webp;768x480;non;Histoire : Cinq pains et deux poissons, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/semeur.webp;768x480;non;Histoire : Le semeur, sans personne
+6;images/recits/semeur-gens.webp;768x480;non;Histoire : Le semeur, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/samaritain.webp;768x480;non;Histoire : Le bon Samaritain, sans personne
+6;images/recits/samaritain-gens.webp;768x480;non;Histoire : Le bon Samaritain, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/brebis.webp;768x480;non;Histoire : La brebis perdue, sans personne
+6;images/recits/brebis-gens.webp;768x480;non;Histoire : La brebis perdue, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/prodigue.webp;768x480;non;Histoire : Le fils qui revient, sans personne
+6;images/recits/prodigue-gens.webp;768x480;non;Histoire : Le fils qui revient, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/zachee.webp;768x480;non;Histoire : Zachée dans l’arbre, sans personne
+6;images/recits/zachee-gens.webp;768x480;non;Histoire : Zachée dans l’arbre, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/paques.webp;768x480;non;Histoire : Le matin de Pâques, sans personne
+6;images/recits/paques-gens.webp;768x480;non;Histoire : Le matin de Pâques, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/hanoucca.webp;768x480;non;Histoire : Hanoucca et la petite fiole d'huile, sans personne
+6;images/recits/hanoucca-gens.webp;768x480;non;Histoire : Hanoucca et la petite fiole d'huile, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/esther.webp;768x480;non;Histoire : La reine Esther, sans personne
+6;images/recits/esther-gens.webp;768x480;non;Histoire : La reine Esther, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/pessah.webp;768x480;non;Histoire : Pessah : le pain qui n’a pas eu le temps de lever, sans personne
+6;images/recits/pessah-gens.webp;768x480;non;Histoire : Pessah : le pain qui n’a pas eu le temps de lever, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/moise-bebe.webp;768x480;non;Histoire : Moïse dans sa corbeille, sans personne
+6;images/recits/moise-bebe-gens.webp;768x480;non;Histoire : Moïse dans sa corbeille, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/hillel.webp;768x480;non;Histoire : Hillel et la Torah sur un pied, sans personne
+6;images/recits/hillel-gens.webp;768x480;non;Histoire : Hillel et la Torah sur un pied, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/nouh.webp;768x480;non;Histoire : Nouh et l'arche, sans personne
 6;images/recits/ibrahim.webp;768x480;non;Histoire : Ibrahim regarde le ciel, sans personne
 6;images/recits/younous.webp;768x480;non;Histoire : Younous et le grand poisson, sans personne
@@ -434,10 +458,14 @@
 6;images/recits/ganesh.webp;768x480;non;Histoire : Ganesh fait le tour du monde, sans personne
 6;images/recits/rama-sita.webp;768x480;non;Histoire : Rama et Sita, sans personne
 6;images/recits/diwali.webp;768x480;non;Histoire : Diwali : des lumières pour le retour de Rama, sans personne
+6;images/recits/diwali-gens.webp;768x480;non;Histoire : Diwali : des lumières pour le retour de Rama, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/krishna-beurre.webp;768x480;non;Histoire : Krishna, le petit voleur de beurre, sans personne
 6;images/recits/krishna-montagne.webp;768x480;non;Histoire : Krishna et la montagne-parapluie, sans personne
+6;images/recits/krishna-montagne-gens.webp;768x480;non;Histoire : Krishna et la montagne-parapluie, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/siddhartha.webp;768x480;non;Histoire : Le prince Siddhartha sort du palais, sans personne
+6;images/recits/siddhartha-gens.webp;768x480;non;Histoire : Le prince Siddhartha sort du palais, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/eveil.webp;768x480;non;Histoire : L'éveil sous l'arbre, sans personne
+6;images/recits/eveil-gens.webp;768x480;non;Histoire : L'éveil sous l'arbre, avec les personnages (montrée seulement si la famille l'a choisi)
 6;images/recits/singes-pont.webp;768x480;non;Histoire : Le roi des singes fait un pont, sans personne
 6;images/recits/singe-crocodile.webp;768x480;non;Histoire : Le singe et le crocodile, sans personne
 6;images/recits/lievre.webp;768x480;non;Histoire : Le lièvre dans la lune, sans personne

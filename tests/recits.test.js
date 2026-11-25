@@ -95,3 +95,14 @@ test("les histoires en image : un paysage sans personne, les personnages dessin�
     assert.ok(!illustration(RECITS.chretien.find((x) => x.cle === 'creation'), false).includes('<image')); // pas d'image : le dessin
   } finally { delete globalThis.IMAGES; }
 });
+
+test('image d’une histoire : la scène avec personnages seulement si la famille l’a choisi, sinon le paysage sans personne', async () => {
+  const { RECITS, illustration } = await import('../js/recits.js');
+  const moise = Object.values(RECITS).flat().find((r) => r.cle === 'moise'), avant = globalThis.IMAGES;
+  globalThis.IMAGES = ['images/recits/moise.webp', 'images/recits/moise-gens.webp'];
+  try {
+    assert.match(illustration(moise, true), /moise-gens\.webp/);
+    assert.doesNotMatch(illustration(moise, false), /moise-gens|class="personnage"/);
+    for (const r of RECITS.islam) assert.equal(r.personnages.length, 0, r.cle); // jamais de personnage pour ces histoires
+  } finally { globalThis.IMAGES = avant; }
+});
