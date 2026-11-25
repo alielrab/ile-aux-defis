@@ -531,6 +531,18 @@ select {
 .fiche-nature li { margin: 0.15rem 0; }
 .fiche-nature li img { display: block; width: 100%; max-width: 400px; margin: 0.3rem 0 0.6rem; border-radius: 14px; }
 .fiche-nature { width: 100%; text-align: left; }
+/* La tour des énigmes : la suite à compléter, et les fioles de potions */
+.reponse.reponse-objet { display: grid; justify-items: center; align-content: center; gap: 2px; padding: 6px 4px; font-size: clamp(1.1rem, 0.9rem + 1.2vw, 1.45rem); font-weight: 800; line-height: 1.15; }
+.reponse-objet img { width: clamp(64px, 20vw, 110px); aspect-ratio: 1; object-fit: contain; }
+.reponse-objet .emoji-objet { font-size: clamp(2.6rem, 2rem + 5vw, 4rem); line-height: 1.1; }
+.suite-logique { font-size: clamp(1.6rem, 1rem + 4vw, 3rem); font-weight: 800; line-height: 1.4; word-spacing: 0.15em; }
+.niveaux-potions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 26rem; margin: 0 auto; }
+.fioles { display: flex; flex-wrap: wrap; gap: 14px 10px; justify-content: center; align-items: flex-end; width: 100%; padding-top: 14px; }
+.fiole { display: flex; flex-direction: column-reverse; width: clamp(2.6rem, 11vw, 3.6rem); height: calc(var(--hauteur) * clamp(2.2rem, 9vw, 3rem) + 10px); padding: 0 3px 3px; background: rgb(255 255 255 / 0.75);
+  border: 4px solid #5a6f8a; border-top: 0; border-radius: 0 0 1.4rem 1.4rem; cursor: pointer; overflow: hidden; transition: translate 0.15s; }
+.fiole span { flex: 0 0 clamp(2.2rem, 9vw, 3rem); display: grid; place-items: center; color: rgb(255 255 255 / 0.9); font-size: 1.1rem; }
+.fiole span:first-child { border-radius: 0 0 1rem 1rem; }
+.fiole.choisie { translate: 0 -14px; border-color: #1e8e3e; }
 .fiche-nature h2 { margin: 0.2rem 0 0.4rem; text-align: center; color: var(--texte); text-shadow: none; }
 .fiche-nature dt { font-weight: 800; margin-top: 0.5rem; }
 .fiche-nature dd { margin: 0; }

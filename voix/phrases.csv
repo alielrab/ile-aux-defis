@@ -5181,7 +5181,39 @@ labo.bonbons.etape2;Labo des expériences;Étape 2. Verse doucement l’eau tiè
 labo.bonbons.etape3;Labo des expériences;Étape 3. Ne touche plus à rien, et regarde !
 labo.bonbons.envrai;Labo des expériences;En vrai : elles avancent vers le milieu en rayons.
 labo.bonbons.explication;Labo des expériences;La couche de couleur des bonbons est faite de sucre et de colorant. L’eau tiède la fait fondre. Chaque couleur avance vers le milieu sans se mélanger tout de suite avec sa voisine.
-lieu.enigmes.bientot;Phrases de l'app;La tour des énigmes ouvre bientôt !
+enigmes.consigne1;Tour des énigmes;Trouve l’intrus : l’image qui ne va pas avec les autres.
+enigmes.consigne2;Tour des énigmes;Regarde bien la suite. Qu’est-ce qui vient après ?
+enigmes.intrus1;Tour des énigmes;Les trois autres sont des fruits.
+enigmes.intrus2;Tour des énigmes;Les trois autres sont des légumes.
+enigmes.intrus3;Tour des énigmes;Les trois autres sont des animaux.
+enigmes.intrus4;Tour des énigmes;Les trois autres sont des véhicules.
+enigmes.intrus5;Tour des énigmes;Les trois autres sont des vêtements.
+enigmes.intrus6;Tour des énigmes;Les trois autres sont des instruments de musique.
+enigmes.intrus7;Tour des énigmes;Les trois autres sont des jeux de ballon.
+enigmes.intrus8;Tour des énigmes;Les trois autres sont des animaux qui volent.
+enigmes.intrus9;Tour des énigmes;Les trois autres sont des animaux qui vivent dans l’eau.
+enigmes.intrus10;Tour des énigmes;Les trois autres sont des animaux à quatre pattes.
+enigmes.intrus11;Tour des énigmes;Les trois autres sont des véhicules qui roulent.
+enigmes.intrus12;Tour des énigmes;Les trois autres sont des véhicules qui vont dans le ciel.
+enigmes.intrus14;Tour des énigmes;Les trois autres sont des choses qui donnent de la lumière.
+enigmes.intrus15;Tour des énigmes;Les trois autres sont des objets pour écrire ou dessiner.
+enigmes.intrus16;Tour des énigmes;Les trois autres sont des choses très froides.
+enigmes.intrus17;Tour des énigmes;Les trois autres sont des choses qu’on porte aux pieds.
+enigmes.intrus18;Tour des énigmes;Les trois autres sont des animaux qui pondent des œufs.
+enigmes.intrus19;Tour des énigmes;Les trois autres sont des choses rondes.
+enigmes.suite1;Tour des énigmes;Le même motif se répète.
+enigmes.suite2;Tour des énigmes;On ajoute 1, puis 2, puis 3, et ainsi de suite.
+enigmes.suite3;Tour des énigmes;On ajoute 2, puis 1, puis 2, puis 1.
+enigmes.suite4;Tour des énigmes;On ajoute 3 à chaque fois.
+enigmes.suite5;Tour des énigmes;On ajoute 5 à chaque fois.
+enigmes.suite6;Tour des énigmes;On compte de 1 en 1.
+enigmes.suite7;Tour des énigmes;On compte de 10 en 10.
+enigmes.suite8;Tour des énigmes;On compte de 2 en 2.
+enigmes.suite9;Tour des énigmes;On compte à l’envers, de 1 en 1.
+enigmes.suite10;Tour des énigmes;On double à chaque fois.
+enigmes.suite11;Tour des énigmes;On enlève 2 à chaque fois.
+enigmes.suite12;Tour des énigmes;On enlève 5 à chaque fois.
+enigmes.potions.bravo;Tour des énigmes;Bravo, tout est trié !
 ile.village.bienvenue;Phrases de l'app;Bienvenue sur l'île du village !
 ile.savoir.bienvenue;Phrases de l'app;Bienvenue sur l'île du savoir !
 ile.createurs.bienvenue;Phrases de l'app;Bienvenue sur l'île des créateurs !
@@ -5214,11 +5246,13 @@ app.23;Phrases de l'app;Ce n’est pas la bonne pièce. Regarde bien la forme qu
 app.24;Phrases de l'app;Bienvenue dans la salle de jeux ! Choisis : tu joues seul ou à deux ? Puis choisis les cartes.
 app.25;Phrases de l'app;Bienvenue à l’aéroport ! Choisis un pays : l’avion t’y emmène.
 app.26;Phrases de l'app;Le labyrinthe ! Trouve le chemin jusqu’au drapeau. Touche les flèches, ou une case à côté de toi.
-app.27;Phrases de l'app;La cabane nature ! Choisis : les animaux, les plantes, ou le quiz.
-app.28;Phrases de l'app;Le potager ! Choisis : ton potager à toi, ou le quiz.
-app.29;Phrases de l'app;Pour un défi, il faut deux enfants.
-app.30;Phrases de l'app;L’atelier d’écriture ! Pose ton doigt sur le point vert, et suis le trait.
-app.31;Phrases de l'app;Bienvenue à la bibliothèque ! Choisis : la chasse aux syllabes, la dictée magique, ou l’atelier d’écriture.
-app.32;Phrases de l'app;Regarde-toi dans le miroir. Touche tout ce qui est vrai pour toi.
-app.33;Phrases de l'app;La salle de musique. Touche les cases pour poser des notes, puis écoute ta mélodie !
-app.34;Phrases de l'app;Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?
+app.27;Phrases de l'app;La tour des énigmes ! Choisis un jeu.
+app.28;Phrases de l'app;Les potions du laboratoire ! Verse les potions d’une fiole à l’autre, jusqu’à avoir une seule couleur par fiole. Choisis un niveau.
+app.29;Phrases de l'app;La cabane nature ! Choisis : les animaux, les plantes, ou le quiz.
+app.30;Phrases de l'app;Le potager ! Choisis : ton potager à toi, ou le quiz.
+app.31;Phrases de l'app;Pour un défi, il faut deux enfants.
+app.32;Phrases de l'app;L’atelier d’écriture ! Pose ton doigt sur le point vert, et suis le trait.
+app.33;Phrases de l'app;Bienvenue à la bibliothèque ! Choisis : la chasse aux syllabes, la dictée magique, ou l’atelier d’écriture.
+app.34;Phrases de l'app;Regarde-toi dans le miroir. Touche tout ce qui est vrai pour toi.
+app.35;Phrases de l'app;La salle de musique. Touche les cases pour poser des notes, puis écoute ta mélodie !
+app.36;Phrases de l'app;Bonjour ! Je suis la voix de l’Île aux Défis. Combien font trois fois quatre ?

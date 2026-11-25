@@ -28,6 +28,7 @@ import * as ecriture from './jeux/ecriture.js';
 import * as jardinage from './jeux/jardinage.js';
 import * as fiches from './jeux/nature-fiches.js';
 import * as experiences from './jeux/experiences.js';
+import * as enigmes from './jeux/enigmes.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -319,6 +320,7 @@ function entrerLieu(cible) {
   if (id === 'naturaliste') return ouvrirCabane();
   if (id === 'labo') return ouvrirLabo();
   if (id === 'defi') return ouvrirDefi();
+  if (id === 'enigmes') return ouvrirEnigmes();
   if (id === 'labyrinthe') return ouvrirLabyrinthe();
   if (id === 'glacier') return ouvrirGlacier();
   if (id === 'urgences') return ouvrirUrgences();
@@ -531,7 +533,7 @@ function ouvrirOperations() {
 $('#operations-retour').addEventListener('click', () => ouvrirIle());
 
 // Partie de mini-jeu
-const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, naturaliste: nature.naturaliste, potager: nature.potager, secours: nature.secours, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance }; // recit : les questions d'une histoire
+const JEUX = { calcul, heure, corps, syllabes, dictee, robot, suisse, naturaliste: nature.naturaliste, potager: nature.potager, secours: nature.secours, espace, cuisine, marche, emotions, atlas, dinos, passeport, urgences, route, tri, langues, veto, fractions, croyance, recit: croyance, intrus: enigmes.intrus, suites: enigmes.suites }; // recit : les questions d'une histoire
 // Le personnage de chaque lieu, à côté du tableau : la maîtresse, l'horloger, la docteure.
 const PERSONNAGES = {
   calcul: { peau: 'doree', yeux: 'noisette', coiffure: 'chignon', cheveux: 'brun', tenue: 'pull-violet' },
@@ -549,6 +551,7 @@ const PERSONNAGES = {
   nature: { peau: 'mate', yeux: 'verts', coiffure: 'queue', cheveux: 'chatain', tenue: 'salopette-jaune', accessoires: [] },
   robot: { peau: 'doree', yeux: 'marron', coiffure: 'courts', cheveux: 'noir', tenue: 'tshirt-turquoise', accessoires: ['lunettes'] },
   fractions: { peau: 'mate', yeux: 'noirs', coiffure: 'tres-courts', cheveux: 'noir', tenue: 'mariniere', accessoires: [] },
+  enigmes: { peau: 'claire', yeux: 'verts', coiffure: 'longs', cheveux: 'noir', tenue: 'pull-violet', accessoires: ['lunettes'] },
 };
 let recette = 'crepes'; // la recette du restaurant en cours
 const majuscule = (t) => t[0].toUpperCase() + t.slice(1);
@@ -568,7 +571,7 @@ function lancerJeu(nom) {
     : nouvellePartie(JEUX[nom].question, { operation, age: joueuse.age, croyance: etat.croyance.famille, systeme: systemeAtlas, patients: veto.patients(joueuse, animalVeto) }, Math.random, vus);
   if (nom !== 'robot') joueuse.vus[cle] = [...vus]; // (les niveaux du robot sont tirés au hasard : rien à retenir) // une question ne revient pas tant que les autres n'ont pas été posées
   enregistrer();
-  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport', naturaliste: 'nature', potager: 'nature', secours: 'urgences' }[nom] ?? nom;
+  const lieu = { recit: 'croyance', atlas: 'corps', dinos: 'musee', dictee: 'syllabes', suisse: 'passeport', naturaliste: 'nature', potager: 'nature', secours: 'urgences', intrus: 'enigmes', suites: 'enigmes' }[nom] ?? nom;
   $('#salle').dataset.decor = lieu;
   poserDecor($('#salle'), lieu === 'passeport' ? 'aeroport' : lieu);
   const perso = image(`personnages/${lieu}`); // le personnage en image du nouveau style ; sinon son dessin
@@ -624,6 +627,14 @@ function afficherQuestion() {
   } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager', 'secours'].includes(jeu)) {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
+  } else if (jeu === 'intrus' || jeu === 'suites') { // les réponses sont des images ou des nombres : de gros boutons, sans texte à lire
+    $('#aide').innerHTML = q.image ? `<div class="suite-logique" role="img" aria-label="La suite">${q.image}</div>` : '';
+    boutonsReponses(q.choix, String, jeu === 'intrus');
+    if (jeu === 'intrus') for (const b of $('#reponses').children) { // l'image, et son mot dessous pour s'habituer à le lire
+      const [nom, emoji, ailleurs] = enigmes.OBJETS[b.dataset.v], src = image(ailleurs ?? `enigmes/${b.dataset.v}`);
+      b.classList.add('reponse-objet');
+      b.replaceChildren(src ? el('img', { src, alt: '' }) : el('span', { className: 'emoji-objet', textContent: emoji, ariaHidden: 'true' }), el('span', { textContent: nom }));
+    } else if (typeof q.reponse === 'string') for (const b of $('#reponses').children) b.classList.add('reponse-image'); // des formes : en grand
   } else if (jeu === 'langues') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, q.mode === 'lire');
@@ -1002,6 +1013,7 @@ function aDire(q) {
   if (jeu === 'fractions') return fractions.aDire(q);
   if (jeu === 'passeport' && q.type === 'drapeau') return q.consigne; // les drapeaux ne se lisent pas : ce serait donner la réponse
   if (jeu === 'langues') return q.consigne; // les mots étrangers ne se lisent pas avec la voix française
+  if (jeu === 'intrus' || jeu === 'suites') return q.consigne; // les réponses sont des images : rien à lire
   if (q.mode === 'choix') return `${q.consigne} ${ou(q.choix)}`;
   if (q.mode === 'lire') return `${q.consigne} ${ou(q.choix.map(heure.dire))}`;
   if (q.mode === 'ingredient') return q.consigne; // les mots des boutons ne sont pas lus : c'est à l'enfant de les lire
@@ -2151,6 +2163,75 @@ function ouvrirLabo(cle = null) {
     el('div', { className: 'actions-atelier' }, gros('🔊 Écouter', () => parler(experiences.lire(e)), 'gros secondaire'), gros('← Les expériences', () => ouvrirLabo())),
     el('h2', { textContent: `🤔 Devine d’abord : ${question}` }), deviner, reponse, vraie);
   parler(`${experiences.lire(e)} Devine d’abord : ${question}`);
+}
+
+// La tour des énigmes (île des méninges) : les jeux de logique
+function ouvrirEnigmes() {
+  const v = ouvrirLibre('La tour des énigmes');
+  const carte = (emoji, nom, detail, action) => {
+    const b = el('button', { className: 'carte-image' });
+    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.addEventListener('click', action);
+    return b;
+  };
+  v.replaceChildren(el('div', { className: 'galerie-cartes grandes' },
+    carte('🕵️', 'Trouve l’intrus', 'L’image qui ne va pas avec les autres', () => lancerJeu('intrus')),
+    carte('🔢', 'Les suites logiques', 'Qu’est-ce qui vient après ?', () => lancerJeu('suites')),
+    carte('🧪', 'Les potions du laboratoire', 'Une seule couleur par fiole', () => ouvrirPotions())));
+  parler('La tour des énigmes ! Choisis un jeu.', { ton: 1.1 });
+}
+// Les potions du laboratoire : d'abord le choix du niveau (un niveau réussi ouvre le suivant), puis le niveau
+const COULEURS_POTIONS = [['#e8483f', '●'], ['#3d7be0', '▲'], ['#f2c230', '■'], ['#3aa860', '★'], ['#a05ad6', '◆'], ['#f08a2c', '♥'], ['#35b8c8', '✚'], ['#e86fa8', '☾'], ['#8a6a4a', '✿']]; // la couleur et un signe, pour ceux qui confondent les couleurs
+function ouvrirPotions(dire = true) {
+  const v = ouvrirLibre('Les potions du laboratoire'), faits = enigmes.potionsReussies(joueuse), niveaux = enigmes.niveauxPotions(joueuse.age);
+  v.replaceChildren(
+    el('p', { className: 'carte presentation', textContent: 'Verse les potions d’une fiole à l’autre, jusqu’à avoir une seule couleur par fiole. On verse seulement sur la même couleur, ou dans une fiole vide.' }),
+    el('div', { className: 'niveaux-potions' }, ...niveaux.map((_, n) => {
+      const b = el('button', { className: `gros${n < faits ? ' secondaire' : ''}`, textContent: n < faits ? `✓ ${n + 1}` : n === faits ? `${n + 1}` : `🔒 ${n + 1}`, disabled: n > faits });
+      b.setAttribute('aria-label', `Niveau ${n + 1}${n < faits ? ', réussi' : n > faits ? ', fermé' : ''}`);
+      b.addEventListener('click', () => jouerPotions(n));
+      return b;
+    })),
+    el('div', { className: 'actions-atelier' }, gros('← La tour des énigmes', () => ouvrirEnigmes(), 'gros secondaire')));
+  if (dire) parler('Les potions du laboratoire ! Verse les potions d’une fiole à l’autre, jusqu’à avoir une seule couleur par fiole. Choisis un niveau.', { ton: 1.1 });
+}
+function jouerPotions(n) {
+  const v = ouvrirLibre('Les potions du laboratoire'), depart = enigmes.potionsDuNiveau(n, joueuse.age), { hauteur } = depart;
+  let etat = depart.etat, choisie = null, coups = 0, fini = false;
+  const message = el('p', { className: 'carte score-grue', role: 'status', textContent: `Niveau ${n + 1} : touche une fiole, puis celle où tu veux verser.` });
+  const table = el('div', { className: 'fioles' }), suite = el('div', { className: 'actions-atelier' });
+  const toucher = (i) => {
+    if (fini) return;
+    if (choisie === null) { if (etat[i].length) choisie = i; return dessiner(); }
+    const apres = i === choisie ? null : enigmes.verser(etat, choisie, i, hauteur);
+    if (i !== choisie && !apres) bip(false);
+    choisie = null;
+    if (!apres) return dessiner();
+    etat = apres;
+    coups++;
+    dessiner();
+    if (!enigmes.potionsTriees(etat, hauteur)) return;
+    fini = true;
+    const gain = enigmes.terminerPotion(joueuse, n);
+    compterPartie('potions');
+    enregistrer();
+    etoilesJoueuse();
+    bip(true);
+    message.textContent = `Bravo, tout est trié en ${coups} coups !${gain ? ` +${gain} ⭐` : ''}`;
+    suite.replaceChildren(...(n + 1 < enigmes.niveauxPotions(joueuse.age).length ? [gros('🧪 Niveau suivant', () => jouerPotions(n + 1))] : []), gros('← Les niveaux', () => ouvrirPotions(false), 'gros secondaire'));
+    parler(`Bravo, tout est trié !${gain ? ` Tu gagnes ${gain} étoiles.` : ''}`, { ton: 1.15 });
+  };
+  const dessiner = () => table.replaceChildren(...etat.map((f, i) => {
+    const b = el('button', { className: `fiole${i === choisie ? ' choisie' : ''}` });
+    b.style.setProperty('--hauteur', hauteur);
+    b.setAttribute('aria-label', `Fiole ${i + 1} : ${f.length ? `${f.length} couche${f.length > 1 ? 's' : ''}` : 'vide'}${i === choisie ? ', choisie' : ''}`);
+    b.append(...f.map((c) => { const s = el('span', { textContent: COULEURS_POTIONS[c][1] }); s.style.background = COULEURS_POTIONS[c][0]; return s; }));
+    b.addEventListener('click', () => toucher(i));
+    return b;
+  }));
+  suite.replaceChildren(gros('↺ Recommencer', () => jouerPotions(n), 'gros secondaire'), gros('← Les niveaux', () => ouvrirPotions(false), 'gros secondaire'));
+  v.replaceChildren(message, table, suite);
+  dessiner();
 }
 
 // La cabane nature : les fiches des animaux et des plantes, et le quiz

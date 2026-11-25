@@ -76,3 +76,47 @@ test('écriture : 26 lettres ; on suit les repères dans l’ordre, en partant d
   const i = ecriture.reperes(ecriture.LETTRES.I[0]);
   assert.equal(ecriture.suivre(i, 0, 50, 100), 0); // on ne commence pas par la fin
 });
+
+test('tour des énigmes : intrus et suites ont 4 choix différents dont la bonne réponse', async () => {
+  const x = await import('../js/jeux/enigmes.js');
+  for (const age of [6, 9]) for (let g = 1; g < 200; g++) for (const jeu of [x.intrus, x.suites]) {
+    const q = jeu.question({ age }, graine(g));
+    assert.equal(new Set(q.choix).size, 4, q.texte);
+    assert.ok(q.choix.includes(q.reponse) && q.solution && q.consigne, q.texte);
+  }
+  for (const [, ...listes] of [...x.FAMILLES, ...x.POINTS_COMMUNS]) for (const cle of listes.flat()) assert.ok(x.OBJETS[cle]?.[0], `${cle} : pas de mot`); // chaque image de l'intrus a son mot à lire
+  // une suite de nombres suit bien sa règle : l'écart entre deux nombres ne saute jamais sans raison
+  const s = x.suites.question({ age: 6 }, () => 0.99); // 0.99 : une suite de nombres, la dernière règle facile (à l'envers, de 1 en 1)
+  const vues = s.texte.split(' ').map(Number);
+  assert.deepEqual(vues.map((v, i) => (i ? vues[i - 1] - v : 1)), [1, 1, 1, 1, 1]);
+  assert.equal(s.reponse, vues[4] - 1);
+});
+
+test('potions : on verse sur la même couleur ou dans une fiole vide ; chaque niveau est faisable ; un niveau réussi ouvre le suivant', async () => {
+  const x = await import('../js/jeux/enigmes.js');
+  const etat = [[0, 1, 1], [1, 0], [], [0, 0, 0]];
+  assert.deepEqual(x.verser(etat, 0, 2, 3), [[0], [1, 0], [1, 1], [0, 0, 0]]); // les deux couches du dessus partent ensemble
+  assert.equal(x.verser(etat, 0, 1, 3), null); // pas la même couleur
+  assert.equal(x.verser(etat, 1, 3, 3), null); // fiole pleine
+  assert.equal(x.verser(etat, 2, 0, 3), null); // rien à verser
+  assert.deepEqual(x.verser([[1, 0, 0], [0], []], 0, 1, 3), [[1], [0, 0, 0], []]);
+  assert.ok(x.potionsTriees([[0, 0, 0], [], [1, 1, 1]], 3) && !x.potionsTriees([[0, 0], [0], [1, 1, 1]], 3));
+  assert.ok(!x.resoluble([[0, 1], [1, 0]], 2)); // sans fiole vide, on est bloqué
+  for (const age of [6, 9]) {
+    const niveaux = x.niveauxPotions(age);
+    assert.ok(niveaux.length >= 10);
+    niveaux.forEach(([couleurs, hauteur], n) => {
+      const p = x.potionsDuNiveau(n, age);
+      assert.equal(p.etat.length, couleurs + 2);
+      assert.deepEqual(p.etat.flat().sort(), Array.from({ length: couleurs * hauteur }, (_, i) => i % couleurs).sort());
+      assert.ok(!x.potionsTriees(p.etat, hauteur) && x.resoluble(p.etat, hauteur), `niveau ${n + 1}, ${age} ans`);
+      assert.deepEqual(x.potionsDuNiveau(n, age).etat, p.etat); // le même niveau pour tout le monde
+    });
+  }
+  const p = { age: 6, etoiles: 0 };
+  assert.throws(() => x.terminerPotion(p, 1), /pas encore ouvert/);
+  assert.equal(x.terminerPotion(p, 0), x.ETOILES_POTION);
+  assert.equal(x.terminerPotion(p, 0), 0); // rejouer un niveau réussi ne redonne pas d'étoiles
+  assert.equal(x.terminerPotion(p, 1), x.ETOILES_POTION);
+  assert.deepEqual([p.etoiles, x.potionsReussies(p), x.potionsReussies({ ...p, age: 9 })], [2 * x.ETOILES_POTION, 2, 0]); // chaque âge a sa série
+});

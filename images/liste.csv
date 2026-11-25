@@ -498,6 +498,106 @@
 8;images/corps/squelette-dos.webp;640x1024;oui;Page du corps, vue de dos : Le squelette
 8;images/corps/muscles-dos.webp;640x1024;oui;Page du corps, vue de dos : Les muscles
 8;images/corps/cerveau-dos.webp;640x1024;oui;Page du corps, vue de dos : Le cerveau et les nerfs
+8;images/enigmes/pomme.webp;256x256;oui;Trouve l'intrus : la pomme
+8;images/enigmes/banane.webp;256x256;oui;Trouve l'intrus : la banane
+8;images/enigmes/fraise.webp;256x256;oui;Trouve l'intrus : la fraise
+8;images/enigmes/raisin.webp;256x256;oui;Trouve l'intrus : le raisin
+8;images/enigmes/orange.webp;256x256;oui;Trouve l'intrus : l’orange
+8;images/enigmes/poire.webp;256x256;oui;Trouve l'intrus : la poire
+8;images/enigmes/cerises.webp;256x256;oui;Trouve l'intrus : les cerises
+8;images/enigmes/ananas.webp;256x256;oui;Trouve l'intrus : l’ananas
+8;images/enigmes/carotte.webp;256x256;oui;Trouve l'intrus : la carotte
+8;images/enigmes/brocoli.webp;256x256;oui;Trouve l'intrus : le brocoli
+8;images/enigmes/patate.webp;256x256;oui;Trouve l'intrus : la pomme de terre
+8;images/enigmes/oignon.webp;256x256;oui;Trouve l'intrus : l’oignon
+8;images/enigmes/mais.webp;256x256;oui;Trouve l'intrus : le maïs
+8;images/enigmes/concombre.webp;256x256;oui;Trouve l'intrus : le concombre
+8;images/enigmes/aubergine.webp;256x256;oui;Trouve l'intrus : l’aubergine
+8;images/enigmes/salade.webp;256x256;oui;Trouve l'intrus : la salade
+8;images/enigmes/chien.webp;256x256;oui;Trouve l'intrus : le chien
+8;images/enigmes/chat.webp;256x256;oui;Trouve l'intrus : le chat
+8;images/enigmes/lapin.webp;256x256;oui;Trouve l'intrus : le lapin
+8;images/enigmes/vache.webp;256x256;oui;Trouve l'intrus : la vache
+8;images/enigmes/cochon.webp;256x256;oui;Trouve l'intrus : le cochon
+8;images/enigmes/cheval.webp;256x256;oui;Trouve l'intrus : le cheval
+8;images/enigmes/lion.webp;256x256;oui;Trouve l'intrus : le lion
+8;images/enigmes/elephant.webp;256x256;oui;Trouve l'intrus : l’éléphant
+8;images/enigmes/voiture.webp;256x256;oui;Trouve l'intrus : la voiture
+8;images/enigmes/bus.webp;256x256;oui;Trouve l'intrus : le bus
+8;images/enigmes/velo.webp;256x256;oui;Trouve l'intrus : le vélo
+8;images/enigmes/tracteur.webp;256x256;oui;Trouve l'intrus : le tracteur
+8;images/enigmes/avion.webp;256x256;oui;Trouve l'intrus : l’avion
+8;images/enigmes/train.webp;256x256;oui;Trouve l'intrus : le train
+8;images/enigmes/voilier.webp;256x256;oui;Trouve l'intrus : le voilier
+8;images/enigmes/helicoptere.webp;256x256;oui;Trouve l'intrus : l’hélicoptère
+8;images/enigmes/scooter.webp;256x256;oui;Trouve l'intrus : le scooter
+8;images/enigmes/camion.webp;256x256;oui;Trouve l'intrus : le camion
+8;images/enigmes/fusee.webp;256x256;oui;Trouve l'intrus : la fusée
+8;images/enigmes/montgolfiere.webp;256x256;oui;Trouve l'intrus : la montgolfière
+8;images/enigmes/tshirt.webp;256x256;oui;Trouve l'intrus : le t-shirt
+8;images/enigmes/pantalon.webp;256x256;oui;Trouve l'intrus : le pantalon
+8;images/enigmes/robe.webp;256x256;oui;Trouve l'intrus : la robe
+8;images/enigmes/chaussettes.webp;256x256;oui;Trouve l'intrus : les chaussettes
+8;images/enigmes/manteau.webp;256x256;oui;Trouve l'intrus : le manteau
+8;images/enigmes/gants.webp;256x256;oui;Trouve l'intrus : les gants
+8;images/enigmes/echarpe.webp;256x256;oui;Trouve l'intrus : l’écharpe
+8;images/enigmes/short.webp;256x256;oui;Trouve l'intrus : le short
+8;images/enigmes/basket.webp;256x256;oui;Trouve l'intrus : la basket
+8;images/enigmes/chaussure.webp;256x256;oui;Trouve l'intrus : la chaussure de marche
+8;images/enigmes/botte.webp;256x256;oui;Trouve l'intrus : la botte
+8;images/enigmes/tong.webp;256x256;oui;Trouve l'intrus : la tong
+8;images/enigmes/chapeau.webp;256x256;oui;Trouve l'intrus : le chapeau
+8;images/enigmes/guitare.webp;256x256;oui;Trouve l'intrus : la guitare
+8;images/enigmes/piano.webp;256x256;oui;Trouve l'intrus : le piano
+8;images/enigmes/tambour.webp;256x256;oui;Trouve l'intrus : le tambour
+8;images/enigmes/trompette.webp;256x256;oui;Trouve l'intrus : la trompette
+8;images/enigmes/violon.webp;256x256;oui;Trouve l'intrus : le violon
+8;images/enigmes/flute.webp;256x256;oui;Trouve l'intrus : la flûte
+8;images/enigmes/foot.webp;256x256;oui;Trouve l'intrus : le ballon de foot
+8;images/enigmes/basketball.webp;256x256;oui;Trouve l'intrus : le ballon de basket
+8;images/enigmes/volley.webp;256x256;oui;Trouve l'intrus : le ballon de volley
+8;images/enigmes/tennis.webp;256x256;oui;Trouve l'intrus : la balle de tennis
+8;images/enigmes/rugby.webp;256x256;oui;Trouve l'intrus : le ballon de rugby
+8;images/enigmes/colombe.webp;256x256;oui;Trouve l'intrus : la colombe
+8;images/enigmes/manchot.webp;256x256;oui;Trouve l'intrus : le manchot
+8;images/enigmes/tortue.webp;256x256;oui;Trouve l'intrus : la tortue
+8;images/enigmes/poisson.webp;256x256;oui;Trouve l'intrus : le poisson
+8;images/enigmes/pieuvre.webp;256x256;oui;Trouve l'intrus : la pieuvre
+8;images/enigmes/dauphin.webp;256x256;oui;Trouve l'intrus : le dauphin
+8;images/enigmes/requin.webp;256x256;oui;Trouve l'intrus : le requin
+8;images/enigmes/baleine.webp;256x256;oui;Trouve l'intrus : la baleine
+8;images/enigmes/crabe.webp;256x256;oui;Trouve l'intrus : le crabe
+8;images/enigmes/poule.webp;256x256;oui;Trouve l'intrus : la poule
+8;images/enigmes/serpent.webp;256x256;oui;Trouve l'intrus : le serpent
+8;images/enigmes/crocodile.webp;256x256;oui;Trouve l'intrus : le crocodile
+8;images/enigmes/singe.webp;256x256;oui;Trouve l'intrus : le singe
+8;images/enigmes/soleil.webp;256x256;oui;Trouve l'intrus : le soleil
+8;images/enigmes/ampoule.webp;256x256;oui;Trouve l'intrus : l’ampoule
+8;images/enigmes/bougie.webp;256x256;oui;Trouve l'intrus : la bougie
+8;images/enigmes/lampe.webp;256x256;oui;Trouve l'intrus : la lampe de poche
+8;images/enigmes/etoile.webp;256x256;oui;Trouve l'intrus : l’étoile
+8;images/enigmes/boite.webp;256x256;oui;Trouve l'intrus : la boîte
+8;images/enigmes/cuillere.webp;256x256;oui;Trouve l'intrus : la cuillère
+8;images/enigmes/livre.webp;256x256;oui;Trouve l'intrus : le livre
+8;images/enigmes/brique.webp;256x256;oui;Trouve l'intrus : la brique
+8;images/enigmes/echelle.webp;256x256;oui;Trouve l'intrus : l’échelle
+8;images/enigmes/crayon.webp;256x256;oui;Trouve l'intrus : le crayon
+8;images/enigmes/stylo.webp;256x256;oui;Trouve l'intrus : le stylo
+8;images/enigmes/feutre.webp;256x256;oui;Trouve l'intrus : le feutre
+8;images/enigmes/pinceau.webp;256x256;oui;Trouve l'intrus : le pinceau
+8;images/enigmes/ciseaux.webp;256x256;oui;Trouve l'intrus : les ciseaux
+8;images/enigmes/regle.webp;256x256;oui;Trouve l'intrus : la règle
+8;images/enigmes/trombone.webp;256x256;oui;Trouve l'intrus : le trombone
+8;images/enigmes/glacon.webp;256x256;oui;Trouve l'intrus : le glaçon
+8;images/enigmes/bonhomme.webp;256x256;oui;Trouve l'intrus : le bonhomme de neige
+8;images/enigmes/glace.webp;256x256;oui;Trouve l'intrus : la glace
+8;images/enigmes/flocon.webp;256x256;oui;Trouve l'intrus : le flocon
+8;images/enigmes/feu.webp;256x256;oui;Trouve l'intrus : le feu
+8;images/enigmes/chocolat.webp;256x256;oui;Trouve l'intrus : le chocolat chaud
+8;images/enigmes/soupe.webp;256x256;oui;Trouve l'intrus : la soupe
+8;images/enigmes/piece.webp;256x256;oui;Trouve l'intrus : la pièce
+8;images/enigmes/horloge.webp;256x256;oui;Trouve l'intrus : l’horloge
+8;images/enigmes/biscuit.webp;256x256;oui;Trouve l'intrus : le biscuit
 8;images/experiences/poivre-1.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 1 : Verse de l’eau dans l’assiette.
 8;images/experiences/poivre-2.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 2 : Saupoudre du poivre partout sur l’eau.
 8;images/experiences/poivre-3.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 3 : Trempe le bout de ton doigt dans le liquide vaisselle.

@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }, { ANIMAUX }, { SYSTEMES }, { EXPERIENCES }] = await Promise.all(
-  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js'), js('jeux/nature-fiches.js'), js('jeux/atlas.js'), js('jeux/experiences.js')]);
+const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }, { ANIMAUX }, { SYSTEMES }, { EXPERIENCES }, { OBJETS }] = await Promise.all(
+  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js'), js('jeux/nature-fiches.js'), js('jeux/atlas.js'), js('jeux/experiences.js'), js('jeux/enigmes.js')]);
 
 const lignes = [];
 const ajouter = (etape, fichier, taille, sujet, transparent = true) => lignes.push([etape, `images/${fichier}.webp`, taille, transparent ? 'oui' : 'non', sujet]);
@@ -57,6 +57,7 @@ for (const t of THEMES) ajouter(8, `langues/${t.cle}`, '512x320', `Thème de lan
 for (const [k, s] of Object.entries(SYSTEMES)) ajouter(8, `corps/${k}`, '640x1024', `Page du corps : ${s.nom}`);
 for (const k of ['squelette', 'muscles', 'cerveau']) ajouter(8, `corps/${k}-dos`, '640x1024', `Page du corps, vue de dos : ${SYSTEMES[k].nom}`);
 // Les étapes des expériences du labo : une image par étape
+for (const [cle, [nom, , ailleurs]] of Object.entries(OBJETS)) if (!ailleurs) ajouter(8, `enigmes/${cle}`, '256x256', `Trouve l'intrus : ${nom}`);
 for (const e of EXPERIENCES) e.etapes.forEach((t, i) => ajouter(8, `experiences/${e.cle}-${i + 1}`, '640x400', `Expérience « ${e.nom} », étape ${i + 1} : ${t}`, false));
 // Les animaux de la cabane nature
 for (const a of ANIMAUX) ajouter(8, `nature/${a[0]}`, '512x320', `Animal : ${a[1]}, en entier`);

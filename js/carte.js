@@ -48,7 +48,7 @@ export const LIEUX = [
   { id: 'potager', ile: 'nature', type: 'jeu', nom: 'Le potager', detail: 'fruits, légumes et saisons', ouvert: true, x: 570, y: 400 },
   { id: 'glacier', ile: 'nature', type: 'jeu', nom: 'Le glacier\nde la plage', detail: 'servir les glaces', ouvert: true, x: 400, y: 680 },
   // L'île des méninges : les jeux pour réfléchir (la tour des énigmes : voir IDEES.md)
-  { id: 'enigmes', ile: 'meninges', type: 'jeu', nom: 'La tour\ndes énigmes', detail: 'des jeux de logique', ouvert: false, x: 230, y: 400 },
+  { id: 'enigmes', ile: 'meninges', type: 'jeu', nom: 'La tour\ndes énigmes', detail: 'des jeux de logique', ouvert: true, x: 230, y: 400 },
   { id: 'defi', ile: 'meninges', type: 'jeu', nom: 'Le défi\nà deux', detail: 'des questions, chacun son tour', ouvert: true, x: 570, y: 400 },
   { id: 'robot', ile: 'meninges', type: 'jeu', nom: "L'atelier\ndes robots", detail: 'programmer avec des flèches', ouvert: true, x: 230, y: 680 },
   { id: 'labyrinthe', ile: 'meninges', type: 'jeu', nom: 'Le labyrinthe', detail: 'trouver la sortie', ouvert: true, x: 570, y: 680 },
@@ -277,9 +277,9 @@ const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
 
 // Les jeux de chaque bâtiment qui en a plusieurs, ou dont le jeu ne porte pas son nom (pour la pastille « 3 jeux » et les médailles)
-export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], potager: ['potager', 'jardinage'],
+export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], potager: ['potager', 'jardinage'], enigmes: ['intrus', 'suites', 'potions'],
   corps: ['corps', 'atlas'], musee: ['dinos'], croyance: ['croyance', 'recit'] };
-const PASTILLES = { syllabes: 3, aeroport: 3, potager: 2, naturaliste: 3 };
+const PASTILLES = { syllabes: 3, aeroport: 3, potager: 2, naturaliste: 3, enigmes: 3 };
 // Une médaille par bâtiment, selon le nombre de parties finies dans ses jeux : bronze dès 1, argent dès 5, or dès 15
 export const SEUILS_MEDAILLES = [[15, '🥇', 'or'], [5, '🥈', 'argent'], [1, '🥉', 'bronze']];
 export function medaille(profil, lieuId) {

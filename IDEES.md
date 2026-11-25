@@ -41,6 +41,8 @@ Un mini-jeu de langues à deux niveaux.
 ## La tour des énigmes (à construire plus tard)
 Un lieu de jeux de logique, adaptés à l'âge. Il vient en plus du memory, du tangram, des labyrinthes et du robot.
 
+**Fait le 25 novembre 2026** (`js/jeux/enigmes.js`) : trouve l'intrus, les suites logiques, les potions du laboratoire (12 niveaux à débloquer par âge). **Reste** : les 7 autres jeux, des niveaux à débloquer pour l'intrus et les suites (aujourd'hui la difficulté suit seulement l'âge), et l'énigme du jour.
+
 **Pour les deux âges, avec une difficulté adaptée**
 - **Sudoku** : avec des images sur une grille de 4x4, puis avec des chiffres sur une grille de 6x6.
 - **Suites logiques** : trouver ce qui vient après.

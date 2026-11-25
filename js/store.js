@@ -81,7 +81,7 @@ export function ajouterProfil(etat, { prenom, age, avatar, genre = 'fille' }) {
   prenom = verifierPrenomAge(prenom, age);
   verifierGenre(genre);
   if (!avatarValide(avatar)) throw new Error('Termine ton personnage.');
-  const profil = { id: nouvelId(), prenom, genre, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [], parties: {}, experiences: [], vraies: [], chantier: { record: 0, aConstruire: [] }, confiance: {} };
+  const profil = { id: nouvelId(), prenom, genre, age, avatar: { accessoires: [], ...avatar }, etoiles: 0, objets: [], maison: maisonVide(), recettes: {}, vus: {}, iles: [], dessins: [], modeles: [], bds: [], atlas: {}, noms: {}, habits: {}, dinos: [], passeport: [], parties: {}, experiences: [], vraies: [], potions: {}, chantier: { record: 0, aConstruire: [] }, confiance: {} };
   etat.profils.push(profil);
   return profil;
 }
@@ -112,6 +112,7 @@ export function charger(stockage = globalThis.localStorage) {
       p.passeport ??= []; // passeport du monde : les pays tamponnés
       p.experiences ??= []; // labo : les expériences déjà devinées
       p.vraies ??= []; // labo : les expériences faites pour de vrai, validées par un parent
+      p.potions ??= {}; // tour des énigmes : le nombre de niveaux de potions réussis, par série (petits, grands)
       p.parties ??= {}; // le nombre de parties finies par jeu, pour les médailles de la carte
       p.confiance ??= {}; // maison de la confiance : les étapes déjà finies (« fait-avis:tri »…), pour ne donner leurs étoiles qu'une fois
       p.chantier ??= { record: 0, aConstruire: [] }; // la grue folle : le record, et les pièces achetées à construire (celles d'avant sont déjà construites)

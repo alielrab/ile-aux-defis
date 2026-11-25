@@ -174,6 +174,16 @@ for (const a of catalogue.CATALOGUE) ajouter(`objet.${a.id.replace(':', '.')}`, 
   }
 }
 
+{ // la tour des énigmes : les consignes et les explications de l'intrus et des suites, et la fin d'un niveau de potions
+  const x = await js('jeux/enigmes.js'), src = 'Tour des énigmes';
+  for (const [i, q] of [x.intrus.question({ age: 6 }), x.suites.question({ age: 6 })].entries()) ajouter(`enigmes.consigne${i + 1}`, src, q.consigne);
+  [...x.FAMILLES, ...x.POINTS_COMMUNS].forEach(([commun], i) => ajouter(`enigmes.intrus${i + 1}`, src, `Les trois autres sont ${commun}.`));
+  const regles = new Set();
+  for (const age of [6, 9]) for (let i = 0; i < 400; i++) regles.add(x.suites.question({ age }).solution); // toutes les règles finissent par sortir
+  [...regles].sort().forEach((t, i) => ajouter(`enigmes.suite${i + 1}`, src, t));
+  ajouter('enigmes.potions.bravo', src, 'Bravo, tout est trié !');
+  ajouter('enigmes.potions.etoiles', src, `Tu gagnes ${x.ETOILES_POTION} étoiles.`);
+}
 { // l'accueil de chaque île (voir entrerLieu dans js/app.js)
   const { ILES } = await js('archipel.js');
   const { LIEUX } = await js('carte.js');
