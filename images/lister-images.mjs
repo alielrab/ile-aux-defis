@@ -58,6 +58,9 @@ for (const [k, s] of Object.entries(SYSTEMES)) ajouter(8, `corps/${k}`, '640x102
 for (const k of ['squelette', 'muscles', 'cerveau']) ajouter(8, `corps/${k}-dos`, '640x1024', `Page du corps, vue de dos : ${SYSTEMES[k].nom}`);
 // Les étapes des expériences du labo : une image par étape
 for (const [cle, [nom, , ailleurs]] of Object.entries(OBJETS)) if (!ailleurs) ajouter(8, `enigmes/${cle}`, '256x256', `Trouve l'intrus : ${nom}`);
+for (const j of ['intrus', 'suites', 'potions']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);
+for (const f of ['rouge', 'bleu', 'jaune', 'vert', 'violet', 'orange', 'etoile', 'coeur', 'triangle', 'carre']) ajouter(8, `enigmes/forme-${f}`, '128x128', `Suites logiques : la forme « ${f} »`);
+ajouter(8, 'enigmes/fiole', '160x512', 'Potions du laboratoire : la fiole vide, posée par-dessus les couleurs');
 for (const e of EXPERIENCES) e.etapes.forEach((t, i) => ajouter(8, `experiences/${e.cle}-${i + 1}`, '640x400', `Expérience « ${e.nom} », étape ${i + 1} : ${t}`, false));
 // Les animaux de la cabane nature
 for (const a of ANIMAUX) ajouter(8, `nature/${a[0]}`, '512x320', `Animal : ${a[1]}, en entier`);

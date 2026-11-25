@@ -538,11 +538,14 @@ select {
 .suite-logique { font-size: clamp(1.6rem, 1rem + 4vw, 3rem); font-weight: 800; line-height: 1.4; word-spacing: 0.15em; }
 .niveaux-potions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 26rem; margin: 0 auto; }
 .fioles { display: flex; flex-wrap: wrap; gap: 14px 10px; justify-content: center; align-items: flex-end; width: 100%; padding-top: 14px; }
-.fiole { display: flex; flex-direction: column-reverse; width: clamp(2.6rem, 11vw, 3.6rem); height: calc(var(--hauteur) * clamp(2.2rem, 9vw, 3rem) + 10px); padding: 0 3px 3px; background: rgb(255 255 255 / 0.75);
-  border: 4px solid #5a6f8a; border-top: 0; border-radius: 0 0 1.4rem 1.4rem; cursor: pointer; overflow: hidden; transition: translate 0.15s; }
+.suite-logique img, .reponse-image img { height: 1.15em; width: auto; vertical-align: -0.2em; }
+/* la fiole : l'image du verre (160x512, haut 48 et bas 70 gardés, le milieu s'étire) est posée par-dessus les couleurs ; son intérieur blanc laisse voir la couleur (multiply) */
+.fiole { --l: clamp(3rem, 12.5vw, 4.2rem); position: relative; display: flex; flex-direction: column-reverse; width: var(--l); height: calc(var(--hauteur) * clamp(2.2rem, 9vw, 3rem) + var(--l) * 0.35); padding: 0 calc(var(--l) * 0.1375) calc(var(--l) * 0.044); box-sizing: border-box;
+  border: 0; background: none; cursor: pointer; transition: translate 0.15s; }
+.fiole::after { content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; border-style: solid; border-width: calc(var(--l) * 0.3) 0 calc(var(--l) * 0.4375); border-image: url(images/enigmes/fiole.webp) 48 0 70 fill; }
 .fiole span { flex: 0 0 clamp(2.2rem, 9vw, 3rem); display: grid; place-items: center; color: rgb(255 255 255 / 0.9); font-size: 1.1rem; }
-.fiole span:first-child { border-radius: 0 0 1rem 1rem; }
-.fiole.choisie { translate: 0 -14px; border-color: #1e8e3e; }
+.fiole span:first-child { border-radius: 0 0 calc(var(--l) * 0.36) calc(var(--l) * 0.36); }
+.fiole.choisie { translate: 0 -18px; scale: 1.08; } /* pas de filtre ici : il empêcherait de voir les couleurs à travers le verre */
 .fiche-nature h2 { margin: 0.2rem 0 0.4rem; text-align: center; color: var(--texte); text-shadow: none; }
 .fiche-nature dt { font-weight: 800; margin-top: 0.5rem; }
 .fiche-nature dd { margin: 0; }

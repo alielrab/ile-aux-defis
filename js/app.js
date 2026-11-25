@@ -628,13 +628,13 @@ function afficherQuestion() {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'intrus' || jeu === 'suites') { // les réponses sont des images ou des nombres : de gros boutons, sans texte à lire
-    $('#aide').innerHTML = q.image ? `<div class="suite-logique" role="img" aria-label="La suite">${q.image}</div>` : '';
+    $('#aide').innerHTML = q.image ? `<div class="suite-logique" role="img" aria-label="La suite">${enFormes(q.image)}</div>` : '';
     boutonsReponses(q.choix, String, jeu === 'intrus');
     if (jeu === 'intrus') for (const b of $('#reponses').children) { // l'image, et son mot dessous pour s'habituer à le lire
       const [nom, emoji, ailleurs] = enigmes.OBJETS[b.dataset.v], src = image(ailleurs ?? `enigmes/${b.dataset.v}`);
       b.classList.add('reponse-objet');
       b.replaceChildren(src ? el('img', { src, alt: '' }) : el('span', { className: 'emoji-objet', textContent: emoji, ariaHidden: 'true' }), el('span', { textContent: nom }));
-    } else if (typeof q.reponse === 'string') for (const b of $('#reponses').children) b.classList.add('reponse-image'); // des formes : en grand
+    } else if (typeof q.reponse === 'string') for (const b of $('#reponses').children) { b.classList.add('reponse-image'); b.innerHTML = enFormes(b.dataset.v); } // des formes : en grand
   } else if (jeu === 'langues') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, q.mode === 'lire');
@@ -2166,18 +2166,22 @@ function ouvrirLabo(cle = null) {
 }
 
 // La tour des énigmes (île des méninges) : les jeux de logique
+const IMAGES_FORMES = { '🔴': 'rouge', '🔵': 'bleu', '🟡': 'jaune', '🟢': 'vert', '🟣': 'violet', '🟠': 'orange', '⭐': 'etoile', '❤️': 'coeur', '🔺': 'triangle', '🟦': 'carre' };
+function enFormes(texte) { // les formes des suites logiques : l'image à la place de l'emoji, quand elle existe
+  return String(texte).split(' ').map((m) => { const src = IMAGES_FORMES[m] && image(`enigmes/forme-${IMAGES_FORMES[m]}`); return src ? `<img src="${src}" alt="${m}">` : m; }).join(' ');
+}
 function ouvrirEnigmes() {
   const v = ouvrirLibre('La tour des énigmes');
-  const carte = (emoji, nom, detail, action) => {
+  const carte = (emoji, nom, detail, action, src = image(`enigmes/carte-${emoji}`)) => {
     const b = el('button', { className: 'carte-image' });
-    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.innerHTML = `${src ? `<img src="${src}" alt="">` : '<span class="emoji-theme" aria-hidden="true">🧩</span>'}<span>${nom}<br><small>${detail}</small></span>`;
     b.addEventListener('click', action);
     return b;
   };
   v.replaceChildren(el('div', { className: 'galerie-cartes grandes' },
-    carte('🕵️', 'Trouve l’intrus', 'L’image qui ne va pas avec les autres', () => lancerJeu('intrus')),
-    carte('🔢', 'Les suites logiques', 'Qu’est-ce qui vient après ?', () => lancerJeu('suites')),
-    carte('🧪', 'Les potions du laboratoire', 'Une seule couleur par fiole', () => ouvrirPotions())));
+    carte('intrus', 'Trouve l’intrus', 'L’image qui ne va pas avec les autres', () => lancerJeu('intrus')),
+    carte('suites', 'Les suites logiques', 'Qu’est-ce qui vient après ?', () => lancerJeu('suites')),
+    carte('potions', 'Les potions du laboratoire', 'Une seule couleur par fiole', () => ouvrirPotions())));
   parler('La tour des énigmes ! Choisis un jeu.', { ton: 1.1 });
 }
 // Les potions du laboratoire : d'abord le choix du niveau (un niveau réussi ouvre le suivant), puis le niveau

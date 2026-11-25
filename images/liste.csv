@@ -598,6 +598,20 @@
 8;images/enigmes/piece.webp;256x256;oui;Trouve l'intrus : la pièce
 8;images/enigmes/horloge.webp;256x256;oui;Trouve l'intrus : l’horloge
 8;images/enigmes/biscuit.webp;256x256;oui;Trouve l'intrus : le biscuit
+8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »
+8;images/enigmes/carte-suites.webp;400x250;oui;Tour des énigmes : la carte du jeu « suites »
+8;images/enigmes/carte-potions.webp;400x250;oui;Tour des énigmes : la carte du jeu « potions »
+8;images/enigmes/forme-rouge.webp;128x128;oui;Suites logiques : la forme « rouge »
+8;images/enigmes/forme-bleu.webp;128x128;oui;Suites logiques : la forme « bleu »
+8;images/enigmes/forme-jaune.webp;128x128;oui;Suites logiques : la forme « jaune »
+8;images/enigmes/forme-vert.webp;128x128;oui;Suites logiques : la forme « vert »
+8;images/enigmes/forme-violet.webp;128x128;oui;Suites logiques : la forme « violet »
+8;images/enigmes/forme-orange.webp;128x128;oui;Suites logiques : la forme « orange »
+8;images/enigmes/forme-etoile.webp;128x128;oui;Suites logiques : la forme « etoile »
+8;images/enigmes/forme-coeur.webp;128x128;oui;Suites logiques : la forme « coeur »
+8;images/enigmes/forme-triangle.webp;128x128;oui;Suites logiques : la forme « triangle »
+8;images/enigmes/forme-carre.webp;128x128;oui;Suites logiques : la forme « carre »
+8;images/enigmes/fiole.webp;160x512;oui;Potions du laboratoire : la fiole vide, posée par-dessus les couleurs
 8;images/experiences/poivre-1.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 1 : Verse de l’eau dans l’assiette.
 8;images/experiences/poivre-2.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 2 : Saupoudre du poivre partout sur l’eau.
 8;images/experiences/poivre-3.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 3 : Trempe le bout de ton doigt dans le liquide vaisselle.
