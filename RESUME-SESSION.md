@@ -65,6 +65,13 @@
 - Appris : écrire les nombres en lettres (« 7 » était lu « sette ») ; « [long pause] » ne marche qu'une fois sur cinq ; 8 fabrications à la fois au plus ; les mots seuls se découpent mal (lots de 12).
 - **Pas encore de voix** : les syllabes (exprès), environ 180 mots seuls refusés par le contrôle, les phrases avec un prénom ou un calcul, et les jeux qui ne sont pas dans `voix/lister-phrases.mjs` (cabane nature, Suisse, langues, premiers secours, potager, missions, etc.).
 
+## Les rendez-vous, le résumé parents et la suite de la tour (fait le 25 novembre, soir)
+- **Rendez-vous** (`js/suivi.js`, `profil.rdv`) : bouton 🔥 en haut de l'île. Série de jours (+1 ⭐ par jour, 10 ⭐ le 7e jour de suite), coffre de la semaine (5 à 15 ⭐, un par semaine du lundi au dimanche), énigme du jour (+3 ⭐, la même pour tous les enfants du même âge, `enigmeDuJour` dans `js/jeux/enigmes.js`).
+- **Résumé de la semaine** dans l'espace parents, sous chaque enfant : parties, jours joués, jeux les plus joués, « bien réussi » (8 sur 10 ou plus) et « à revoir » (moins de 5 sur 10). Il vient de `profil.journal`, rempli par `compterPartie` ; on garde 4 semaines.
+- **Tour des énigmes, 7 nouveaux jeux** (`js/jeux/logique.js`, écrans dans `js/app.js`, niveaux dans `profil.niveaux`) : sudoku, taquin, parking bloqué pour tous ; tour à déplacer, code des couleurs, dessins cachés, déduction dès 8 ans. 2 ⭐ la première fois qu'un niveau est réussi. Les niveaux du parking ont été cherchés par un programme et sont écrits en dur ; un test les revérifie.
+- Visuels Higgsfield : `images/enigmes/carte-<jeu>.webp`, et pour le parking `auto-rouge`, `auto`, `auto-camion` (vus du dessus, le nez à droite ; l'app tourne et recolore l'image bleue). Le format 1024x512 est refusé : demander du 1:1.
+- **Pas de voix enregistrée** pour ces écrans : ils parlent avec la voix de la tablette.
+
 ## Pas encore fait
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.

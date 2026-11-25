@@ -629,6 +629,14 @@
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »
 8;images/enigmes/carte-suites.webp;400x250;oui;Tour des énigmes : la carte du jeu « suites »
 8;images/enigmes/carte-potions.webp;400x250;oui;Tour des énigmes : la carte du jeu « potions »
+8;images/enigmes/carte-sudoku.webp;400x250;oui;Tour des énigmes : la carte du jeu « sudoku »
+8;images/enigmes/carte-taquin.webp;400x250;oui;Tour des énigmes : la carte du jeu « taquin »
+8;images/enigmes/carte-parking.webp;400x250;oui;Tour des énigmes : la carte du jeu « parking »
+8;images/enigmes/carte-tour.webp;400x250;oui;Tour des énigmes : la carte du jeu « tour »
+8;images/enigmes/carte-code.webp;400x250;oui;Tour des énigmes : la carte du jeu « code »
+8;images/enigmes/carte-dessins.webp;400x250;oui;Tour des énigmes : la carte du jeu « dessins »
+8;images/enigmes/carte-deduction.webp;400x250;oui;Tour des énigmes : la carte du jeu « deduction »
+8;images/enigmes/carte-jour.webp;400x250;oui;Tour des énigmes : la carte du jeu « jour »
 8;images/enigmes/forme-rouge.webp;128x128;oui;Suites logiques : la forme « rouge »
 8;images/enigmes/forme-bleu.webp;128x128;oui;Suites logiques : la forme « bleu »
 8;images/enigmes/forme-jaune.webp;128x128;oui;Suites logiques : la forme « jaune »
@@ -639,6 +647,9 @@
 8;images/enigmes/forme-coeur.webp;128x128;oui;Suites logiques : la forme « coeur »
 8;images/enigmes/forme-triangle.webp;128x128;oui;Suites logiques : la forme « triangle »
 8;images/enigmes/forme-carre.webp;128x128;oui;Suites logiques : la forme « carre »
+8;images/enigmes/auto-rouge.webp;256x128;oui;Parking bloqué : un véhicule vu du dessus, couché, le nez à droite (la voiture bleue et le camion changent de couleur dans le jeu)
+8;images/enigmes/auto.webp;256x128;oui;Parking bloqué : un véhicule vu du dessus, couché, le nez à droite (la voiture bleue et le camion changent de couleur dans le jeu)
+8;images/enigmes/auto-camion.webp;384x128;oui;Parking bloqué : un véhicule vu du dessus, couché, le nez à droite (la voiture bleue et le camion changent de couleur dans le jeu)
 8;images/enigmes/fiole.webp;160x512;oui;Potions du laboratoire : la fiole vide, posée par-dessus les couleurs
 8;images/experiences/poivre-1.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 1 : Verse de l’eau dans l’assiette.
 8;images/experiences/poivre-2.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 2 : Saupoudre du poivre partout sur l’eau.

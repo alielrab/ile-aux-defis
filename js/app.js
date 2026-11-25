@@ -54,6 +54,8 @@ import { parler, taire, bip, fanfare, notes, repeter, attendreSilence, choisirGe
 import { accorder } from './genre.js';
 import { messageReponse } from './messages.js';
 import * as enLigne from './en-ligne.js';
+import * as suivi from './suivi.js';
+import * as logique from './jeux/logique.js';
 
 let etat = charger();
 appliquerVoix(etat?.reglages);
@@ -229,6 +231,11 @@ function ouvrirIle(p = joueuse) {
   joueuse = p;
   choisirGenre(p.genre ?? 'fille');
   ileAConfirmer = null;
+  const visite = suivi.visiter(p); // le premier passage du jour : la série de jours, et des étoiles
+  if (visite.nouveau) { enregistrer(); parler(`Bonjour ${p.prenom} ! ${visite.serie > 1 ? `${visite.serie} jours de suite ! ` : ''}Tu gagnes ${visite.gain} étoile${visite.gain > 1 ? 's' : ''}.`, { ton: 1.1 }); }
+  $('#rdv').textContent = `🔥 ${visite.serie}`;
+  $('#rdv').setAttribute('aria-label', `Mes rendez-vous : ${visite.serie} jour${visite.serie > 1 ? 's' : ''} de suite`);
+  $('#rdv').classList.toggle('a-voir', suivi.coffrePret(p) || !suivi.enigmeFaite(p)); // un point rouge : il reste un cadeau aujourd'hui
   $('#ile-joueuse').innerHTML = `<span class="mini-avatar">${dessinerAvatar(p.avatar, 'tete')}</span><span></span>`;
   $('#ile-joueuse').lastChild.textContent = p.prenom;
   $('#ile-etoiles').textContent = `⭐ ${formatEtoiles(p.etoiles)}`;
@@ -240,6 +247,7 @@ function ouvrirIle(p = joueuse) {
 
 $('#changer').addEventListener('click', afficherAccueil);
 $('#avent').addEventListener('click', ouvrirAvent);
+$('#rdv').addEventListener('click', () => ouvrirRendezVous());
 
 // Le calendrier de l'Avent : 24 cases ; on ouvre celles des jours passés, la case montre son image et son texte
 function ouvrirAvent() {
@@ -630,11 +638,7 @@ function afficherQuestion() {
   } else if (jeu === 'intrus' || jeu === 'suites') { // les réponses sont des images ou des nombres : de gros boutons, sans texte à lire
     $('#aide').innerHTML = q.image ? `<div class="suite-logique" role="img" aria-label="La suite">${enFormes(q.image)}</div>` : '';
     boutonsReponses(q.choix, String, jeu === 'intrus');
-    if (jeu === 'intrus') for (const b of $('#reponses').children) { // l'image, et son mot dessous pour s'habituer à le lire
-      const [nom, emoji, ailleurs] = enigmes.OBJETS[b.dataset.v], src = image(ailleurs ?? `enigmes/${b.dataset.v}`);
-      b.classList.add('reponse-objet');
-      b.replaceChildren(src ? el('img', { src, alt: '' }) : el('span', { className: 'emoji-objet', textContent: emoji, ariaHidden: 'true' }), el('span', { textContent: nom }));
-    } else if (typeof q.reponse === 'string') for (const b of $('#reponses').children) { b.classList.add('reponse-image'); b.innerHTML = enFormes(b.dataset.v); } // des formes : en grand
+    for (const b of $('#reponses').children) habillerEnigme(b, jeu, q);
   } else if (jeu === 'langues') {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, q.mode === 'lire');
@@ -935,7 +939,7 @@ async function reagir(m, juste, suite) {
 function finirPartie() {
   const gain = etoilesGagnees(partie.bonnes, JEUX[jeu].etoilesParBonneReponse(joueuse.age, operation), partie.questions.length);
   joueuse.etoiles += gain;
-  compterPartie(jeu);
+  compterPartie(jeu, joueuse, partie.bonnes, partie.questions.length);
   enregistrer();
   const parfait = partie.bonnes === partie.questions.length;
   $('#fin-titre').textContent = parfait ? `Parfait, ${joueuse.prenom} !` : `Bien joué, ${joueuse.prenom} !`;
@@ -1946,7 +1950,7 @@ function ouvrirLibre(titre, decor = null) {
 const libreOuvert = (titre) => !$('[data-ecran="libre"]').hidden && $('#libre-titre').textContent === titre;
 const gagnerEtoiles = (n, profil = joueuse) => { profil.etoiles += n; enregistrer(); etoilesJoueuse(); };
 // Une partie finie de plus dans ce jeu : c'est ce qui fait gagner les médailles de la carte
-function compterPartie(nom, profil = joueuse) { (profil.parties ??= {})[nom] = (profil.parties[nom] ?? 0) + 1; }
+function compterPartie(nom, profil = joueuse, bonnes = null, questions = null) { (profil.parties ??= {})[nom] = (profil.parties[nom] ?? 0) + 1; suivi.noterPartie(profil, nom, bonnes, questions); } // et le journal de la semaine, pour les parents
 
 // Les missions de la maison : l'enfant annonce, un parent valide avec le code
 function ouvrirMissions(dire = true) {
@@ -2170,6 +2174,54 @@ const IMAGES_FORMES = { '🔴': 'rouge', '🔵': 'bleu', '🟡': 'jaune', '🟢'
 function enFormes(texte) { // les formes des suites logiques : l'image à la place de l'emoji, quand elle existe
   return String(texte).split(' ').map((m) => { const src = IMAGES_FORMES[m] && image(`enigmes/forme-${IMAGES_FORMES[m]}`); return src ? `<img src="${src}" alt="${m}">` : m; }).join(' ');
 }
+function habillerEnigme(b, nom, q) { // le bouton d'une réponse de l'intrus ou d'une suite
+  if (nom === 'intrus') { // l'image, et son mot dessous pour s'habituer à le lire
+    const [mot, emoji, ailleurs] = enigmes.OBJETS[b.dataset.v], src = image(ailleurs ?? `enigmes/${b.dataset.v}`);
+    b.classList.add('reponse-objet');
+    b.replaceChildren(src ? el('img', { src, alt: '' }) : el('span', { className: 'emoji-objet', textContent: emoji, ariaHidden: 'true' }), el('span', { textContent: mot }));
+  } else if (typeof q.reponse === 'string') { b.classList.add('reponse-image'); b.innerHTML = enFormes(b.dataset.v); } // des formes : en grand
+}
+// Mes rendez-vous : la série de jours, le coffre de la semaine, l'énigme du jour
+function ouvrirRendezVous(dire = true) {
+  const v = ouvrirLibre('Mes rendez-vous'), serie = suivi.serieEnCours(joueuse), dansLaSemaine = serie % 7, reste = 7 - dansLaSemaine;
+  const coffre = gros(suivi.coffrePret(joueuse) ? '🎁 Ouvrir le coffre de la semaine' : '🎁 Coffre ouvert : le prochain arrive lundi', () => {
+    const gain = suivi.ouvrirCoffre(joueuse);
+    enregistrer(); etoilesJoueuse(); fanfare();
+    ouvrirRendezVous(false);
+    parler(`Dans le coffre, il y avait ${gain} étoiles !`, { ton: 1.15 });
+  });
+  coffre.disabled = !suivi.coffrePret(joueuse);
+  const enigme = gros(suivi.enigmeFaite(joueuse) ? '🧩 Énigme du jour faite : reviens demain' : `🧩 L’énigme du jour (+${suivi.ETOILES_ENIGME} ⭐)`, () => ouvrirEnigmeDuJour());
+  enigme.disabled = suivi.enigmeFaite(joueuse);
+  v.replaceChildren(
+    el('p', { className: 'carte presentation', textContent: `Tu es ${acc('{venu|venue}')} ${serie} jour${serie > 1 ? 's' : ''} de suite. Encore ${reste} jour${reste > 1 ? 's' : ''} et tu gagnes ${suivi.ETOILES_SEPTIEME} étoiles !` }),
+    el('div', { className: 'serie-jours', role: 'img', ariaLabel: `${dansLaSemaine} jours sur 7` }, ...Array.from({ length: 7 }, (_, i) => el('span', { className: i < dansLaSemaine ? 'fait' : '', textContent: i === 6 ? '⭐' : i < dansLaSemaine ? '🔥' : String(i + 1) }))),
+    el('div', { className: 'actions-atelier' }, coffre, enigme));
+  if (dire) parler(`Tu es ${acc('{venu|venue}')} ${serie} jour${serie > 1 ? 's' : ''} de suite. Encore ${reste} jour${reste > 1 ? 's' : ''} et tu gagnes ${suivi.ETOILES_SEPTIEME} étoiles !`);
+}
+function ouvrirEnigmeDuJour() {
+  const v = ouvrirLibre('L’énigme du jour'), q = enigmes.enigmeDuJour(joueuse.age, suivi.jour());
+  if (suivi.enigmeFaite(joueuse)) return ouvrirRendezVous();
+  const message = el('p', { className: 'carte score-grue', role: 'status', textContent: q.consigne });
+  const suite = el('div', { className: 'actions-atelier' });
+  const reponses = el('div', { className: 'reponses-enigme' }, ...q.choix.map((c) => {
+    const b = el('button', { className: 'reponse', textContent: String(c) });
+    b.dataset.v = c;
+    habillerEnigme(b, q.jeu, q);
+    b.addEventListener('click', () => {
+      const juste = c === q.reponse, gain = suivi.repondreEnigme(joueuse, juste);
+      for (const x of reponses.children) { x.disabled = true; if (x.dataset.v === String(q.reponse)) x.classList.add('juste'); else if (x === b) x.classList.add('faux'); }
+      compterPartie('enigme-du-jour', joueuse, juste ? 1 : 0, 1);
+      enregistrer(); etoilesJoueuse(); bip(juste);
+      message.textContent = juste ? `Bravo ! +${gain} ⭐. ${q.solution}` : `Pas cette fois. ${q.solution} Une nouvelle énigme t’attend demain !`;
+      suite.replaceChildren(gros('← Mes rendez-vous', () => ouvrirRendezVous(false)));
+      parler(message.textContent.replace('+', 'Tu gagnes ').replace(' ⭐', ' étoiles'), { ton: juste ? 1.15 : 1 });
+    });
+    return b;
+  }));
+  v.replaceChildren(message, ...(q.image ? [el('div', { className: 'suite-logique carte', role: 'img', ariaLabel: 'La suite', innerHTML: enFormes(q.image) })] : []), reponses, suite);
+  parler(q.consigne);
+}
 function ouvrirEnigmes() {
   const v = ouvrirLibre('La tour des énigmes');
   const carte = (emoji, nom, detail, action, src = image(`enigmes/carte-${emoji}`)) => {
@@ -2181,7 +2233,9 @@ function ouvrirEnigmes() {
   v.replaceChildren(el('div', { className: 'galerie-cartes grandes' },
     carte('intrus', 'Trouve l’intrus', 'L’image qui ne va pas avec les autres', () => lancerJeu('intrus')),
     carte('suites', 'Les suites logiques', 'Qu’est-ce qui vient après ?', () => lancerJeu('suites')),
-    carte('potions', 'Les potions du laboratoire', 'Une seule couleur par fiole', () => ouvrirPotions())));
+    carte('potions', 'Les potions du laboratoire', 'Une seule couleur par fiole', () => ouvrirPotions()),
+    ...logique.jeuxPourAge(joueuse.age).map((j) => carte(j, logique.JEUX_LOGIQUE[j][0], logique.JEUX_LOGIQUE[j][1], () => ouvrirNiveaux(j))),
+    ...(suivi.enigmeFaite(joueuse) ? [] : [carte('jour', 'L’énigme du jour', `Une seule par jour : +${suivi.ETOILES_ENIGME} ⭐`, () => ouvrirEnigmeDuJour())])));
   parler('La tour des énigmes ! Choisis un jeu.', { ton: 1.1 });
 }
 // Les potions du laboratoire : d'abord le choix du niveau (un niveau réussi ouvre le suivant), puis le niveau
@@ -2237,6 +2291,247 @@ function jouerPotions(n) {
   v.replaceChildren(message, table, suite);
   dessiner();
 }
+
+// La tour des énigmes, suite : les jeux à niveaux (règles et niveaux dans js/jeux/logique.js)
+function ouvrirNiveaux(nom, dire = true) {
+  const [titre, but, , total] = logique.JEUX_LOGIQUE[nom], v = ouvrirLibre(titre), faits = logique.niveauxFaits(joueuse, nom);
+  v.replaceChildren(
+    el('p', { className: 'carte presentation', textContent: `${but}.` }),
+    el('div', { className: 'niveaux-potions' }, ...Array.from({ length: total }, (_, n) => {
+      const b = el('button', { className: `gros${n < faits ? ' secondaire' : ''}`, textContent: n < faits ? `✓ ${n + 1}` : n === faits ? `${n + 1}` : `🔒 ${n + 1}`, disabled: n > faits });
+      b.setAttribute('aria-label', `Niveau ${n + 1}${n < faits ? ', réussi' : n > faits ? ', fermé' : ''}`);
+      b.addEventListener('click', () => JOUER_LOGIQUE[nom](n));
+      return b;
+    })),
+    el('div', { className: 'actions-atelier' }, gros('← La tour des énigmes', () => ouvrirEnigmes(), 'gros secondaire')));
+  if (dire) parler(`${titre} ! ${but}. Choisis un niveau.`, { ton: 1.1 });
+}
+// Le cadre d'un niveau : la consigne en haut, les boutons en bas. gagner(texte) : le niveau est réussi.
+function cadreNiveau(nom, n, consigne) {
+  const v = ouvrirLibre(logique.JEUX_LOGIQUE[nom][0]);
+  const message = el('p', { className: 'carte score-grue', role: 'status', textContent: `Niveau ${n + 1} : ${consigne}` });
+  const suite = el('div', { className: 'actions-atelier' }, gros('↺ Recommencer', () => JOUER_LOGIQUE[nom](n), 'gros secondaire'), gros('← Les niveaux', () => ouvrirNiveaux(nom, false), 'gros secondaire'));
+  const dire = (texte, juste = false) => { message.textContent = texte; bip(juste); };
+  const gagner = (texte) => {
+    const gain = logique.terminerNiveau(joueuse, nom, n);
+    compterPartie(nom);
+    enregistrer();
+    etoilesJoueuse();
+    fanfare();
+    message.textContent = `${texte}${gain ? ` +${gain} ⭐` : ''}`;
+    suite.replaceChildren(...(n + 1 < logique.JEUX_LOGIQUE[nom][3] ? [gros('➜ Niveau suivant', () => JOUER_LOGIQUE[nom](n + 1))] : []), gros('← Les niveaux', () => ouvrirNiveaux(nom, false), 'gros secondaire'));
+    parler(`${texte}${gain ? ` Tu gagnes ${gain} étoiles.` : ''}`, { ton: 1.15 });
+  };
+  return { v, message, suite, dire, gagner };
+}
+const imageOuTexte = (chemin, texte) => { const src = image(chemin); return src ? el('img', { src, alt: texte }) : el('span', { textContent: texte }); };
+
+const FRUITS_SUDOKU = [['pomme', '🍎'], ['banane', '🍌'], ['fraise', '🍓'], ['raisin', '🍇']];
+function jouerSudoku(n) {
+  const s = logique.sudokuDuNiveau(n, joueuse.age), grille = s.depart.map((l) => [...l]);
+  const c = cadreNiveau('sudoku', n, s.images ? 'touche une case vide, puis le fruit qui va dedans.' : 'touche une case vide, puis le chiffre qui va dedans.');
+  const symbole = (v) => (s.images ? imageOuTexte(`enigmes/${FRUITS_SUDOKU[v][0]}`, FRUITS_SUDOKU[v][1]) : el('span', { textContent: String(v + 1) }));
+  const table = el('div', { className: 'sudoku' }), palette = el('div', { className: 'palette-sudoku' });
+  let choisie = null, fini = false;
+  table.style.setProperty('--taille', s.taille);
+  const dessiner = () => table.replaceChildren(...grille.flatMap((l, r) => l.map((v, col) => {
+    const b = el('button', { className: `${s.depart[r][col] !== null ? 'donnee' : ''}${choisie === r * s.taille + col ? ' choisie' : ''}${(col + 1) % s.carre[1] === 0 && col + 1 < s.taille ? ' bord-droit' : ''}${(r + 1) % s.carre[0] === 0 && r + 1 < s.taille ? ' bord-bas' : ''}`, disabled: v !== null || fini });
+    b.setAttribute('aria-label', `Ligne ${r + 1}, colonne ${col + 1}${v === null ? ', vide' : ''}`);
+    if (v !== null) b.append(symbole(v));
+    b.addEventListener('click', () => { choisie = r * s.taille + col; dessiner(); });
+    return b;
+  })));
+  palette.append(...Array.from({ length: s.taille }, (_, v) => {
+    const b = el('button', { className: 'reponse' }, symbole(v));
+    b.addEventListener('click', () => {
+      if (fini) return;
+      if (choisie === null) return c.dire('Touche d’abord une case vide.');
+      const r = Math.floor(choisie / s.taille), col = choisie % s.taille;
+      if (s.solution[r][col] !== v) return c.dire('Pas celui-là : regarde bien la ligne, la colonne et le carré.');
+      grille[r][col] = v;
+      choisie = null;
+      bip(true);
+      fini = grille.every((l) => l.every((x) => x !== null));
+      dessiner();
+      if (fini) c.gagner('Bravo, la grille est finie !');
+    });
+    return b;
+  }));
+  c.v.replaceChildren(c.message, table, palette, c.suite);
+  dessiner();
+}
+
+const IMAGES_TAQUIN = ['renard', 'hibou', 'ecureuil', 'herisson', 'grenouille', 'papillon', 'coccinelle', 'canard', 'cerf', 'loup', 'lievre', 'castor'];
+function jouerTaquin(n) {
+  const t = logique.taquinDuNiveau(n, joueuse.age), src = image(`nature/${IMAGES_TAQUIN[n % IMAGES_TAQUIN.length]}`);
+  const c = cadreNiveau('taquin', n, 'touche une case à côté du trou pour la faire glisser.');
+  const table = el('div', { className: 'taquin' });
+  let cases = t.cases, coups = 0, fini = false;
+  table.style.setProperty('--cote', t.cote);
+  const dessiner = () => table.replaceChildren(...cases.map((v, i) => {
+    const trou = v === cases.length - 1 && !fini, b = el('button', { className: trou ? 'trou' : '', disabled: trou || fini });
+    if (!trou) {
+      if (src) Object.assign(b.style, { backgroundImage: `url(${src})`, backgroundPosition: `${((v % t.cote) / (t.cote - 1)) * 100}% ${(Math.floor(v / t.cote) / (t.cote - 1)) * 100}%` });
+      b.append(el('small', { textContent: String(v + 1) }));
+      b.setAttribute('aria-label', `Case ${v + 1}`);
+    }
+    b.addEventListener('click', () => {
+      const s = logique.glisser(cases, i);
+      if (!s) return bip(false);
+      cases = s;
+      coups++;
+      fini = logique.taquinRange(cases);
+      dessiner();
+      if (fini) c.gagner(`Bravo, l’image est refaite en ${coups} coups !`);
+    });
+    return b;
+  }));
+  c.v.replaceChildren(c.message, table, c.suite);
+  dessiner();
+}
+
+function jouerParking(n) {
+  const c = cadreNiveau('parking', n, 'touche un véhicule, puis une flèche. Fais sortir la voiture rouge par la droite.');
+  const table = el('div', { className: 'parking' }), fleches = el('div', { className: 'actions-atelier' });
+  let vehicules = logique.parkingDuNiveau(n, joueuse.age), choisi = 0, coups = 0, fini = false;
+  const bouger = (pas) => {
+    if (fini) return;
+    const s = logique.deplacer(vehicules, choisi, pas);
+    if (!s) return bip(false);
+    vehicules = s;
+    coups++;
+    fini = logique.parkingLibre(vehicules);
+    dessiner();
+    if (fini) c.gagner(`Bravo, la voiture rouge est sortie en ${coups} coups !`);
+  };
+  const dessiner = () => {
+    table.replaceChildren(el('span', { className: 'sortie', textContent: '➜', ariaHidden: 'true' }), ...vehicules.map(([r, col, l, d], i) => {
+      const src = image(`enigmes/${i === 0 ? 'auto-rouge' : l === 3 ? 'auto-camion' : 'auto'}`);
+      const b = el('button', { className: `vehicule ${d}${i === 0 ? ' rouge' : ''}${i === choisi ? ' choisi' : ''}${src ? ' en-image' : ''}`, disabled: fini });
+      Object.assign(b.style, { gridRow: `${r + 1} / span ${d === 'v' ? l : 1}`, gridColumn: `${col + 1} / span ${d === 'h' ? l : 1}` });
+      b.style.setProperty('--teinte', `${[0, -110, 60, -150, -40, 90, -75, 30][i % 8]}deg`); // l'image est bleue : on la tourne vers d'autres couleurs, jamais vers le rouge
+      b.style.setProperty('--long', l);
+      if (src) b.append(el('img', { src, alt: '' }));
+      b.setAttribute('aria-label', `${i === 0 ? 'La voiture rouge' : l === 3 ? 'Un camion' : 'Une voiture'}${i === choisi ? ', choisie' : ''}`);
+      b.addEventListener('click', () => { choisi = i; dessiner(); });
+      return b;
+    }));
+    const couche = vehicules[choisi][3] === 'h';
+    fleches.replaceChildren(gros(couche ? '◀' : '▲', () => bouger(-1)), gros(couche ? '▶' : '▼', () => bouger(1)));
+    fleches.children[0].setAttribute('aria-label', couche ? 'Vers la gauche' : 'Vers le haut');
+    fleches.children[1].setAttribute('aria-label', couche ? 'Vers la droite' : 'Vers le bas');
+  };
+  c.v.replaceChildren(c.message, table, fleches, c.suite);
+  dessiner();
+}
+
+function jouerTour(n) {
+  const c = cadreNiveau('tour', n, `touche un piquet, puis celui où tu veux poser le disque. On peut le faire en ${logique.coupsMinTour(n)} coups.`);
+  const table = el('div', { className: 'tour-disques' });
+  let piquets = logique.tourDuNiveau(n), choisi = null, coups = 0, fini = false;
+  table.style.setProperty('--disques', logique.TOURS[n]);
+  const dessiner = () => table.replaceChildren(...piquets.map((p, i) => {
+    const b = el('button', { className: `piquet${i === choisi ? ' choisi' : ''}`, disabled: fini }, ...p.map((d) => { const s = el('span'); s.style.setProperty('--d', d); return s; }));
+    b.setAttribute('aria-label', `Piquet ${i + 1} : ${p.length ? `${p.length} disque${p.length > 1 ? 's' : ''}` : 'vide'}${i === choisi ? ', choisi' : ''}`);
+    b.addEventListener('click', () => {
+      if (choisi === null) { if (p.length) choisi = i; return dessiner(); }
+      const s = i === choisi ? null : logique.poser(piquets, choisi, i);
+      if (i !== choisi && !s) c.dire('Un grand disque ne va jamais sur un petit.');
+      choisi = null;
+      if (!s) return dessiner();
+      piquets = s;
+      coups++;
+      fini = logique.tourFinie(piquets);
+      dessiner();
+      if (fini) c.gagner(`Bravo, la tour est déplacée en ${coups} coups !`);
+    });
+    return b;
+  }));
+  c.v.replaceChildren(c.message, table, c.suite);
+  dessiner();
+}
+
+const COULEURS_CODE = [['rouge', '🔴'], ['bleu', '🔵'], ['jaune', '🟡'], ['vert', '🟢'], ['violet', '🟣'], ['orange', '🟠']];
+function jouerCode(n) {
+  const [longueur, couleurs, essais] = logique.CODES[n], secret = logique.nouveauCode(n);
+  const c = cadreNiveau('code', n, `trouve les ${longueur} couleurs cachées, en ${essais} essais. Une couleur peut revenir.`);
+  const bille = (v) => imageOuTexte(`enigmes/forme-${COULEURS_CODE[v][0]}`, COULEURS_CODE[v][1]);
+  const historique = el('ol', { className: 'essais-code' }), ligne = el('div', { className: 'essai-code en-cours' }), palette = el('div', { className: 'palette-sudoku' });
+  let essai = [], faits = 0, fini = false;
+  const dessiner = () => ligne.replaceChildren(...Array.from({ length: longueur }, (_, i) => el('span', {}, ...(essai[i] === undefined ? [] : [bille(essai[i])]))));
+  palette.append(...Array.from({ length: couleurs }, (_, v) => {
+    const b = el('button', { className: 'reponse' }, bille(v));
+    b.setAttribute('aria-label', COULEURS_CODE[v][0]);
+    b.addEventListener('click', () => {
+      if (fini) return;
+      essai.push(v);
+      dessiner();
+      if (essai.length < longueur) return;
+      const [bien, mal] = logique.indicesCode(secret, essai);
+      historique.append(el('li', {}, el('span', { className: 'essai-code' }, ...essai.map((x) => el('span', {}, bille(x)))), el('span', { textContent: `${bien} à la bonne place, ${mal} à déplacer` })));
+      faits++;
+      essai = [];
+      dessiner();
+      if (bien === longueur) { fini = true; return c.gagner(`Bravo, tu as trouvé le code en ${faits} essai${faits > 1 ? 's' : ''} !`); }
+      if (faits >= essais) { fini = true; ligne.replaceChildren(...secret.map((x) => el('span', {}, bille(x)))); return c.dire('Plus d’essais ! Voici le code. Recommence : un nouveau code t’attend.'); }
+      c.dire(`${bien} à la bonne place, ${mal} à déplacer. Encore ${essais - faits} essai${essais - faits > 1 ? 's' : ''}.`, bien > 0);
+    });
+    return b;
+  }), gros('⌫', () => { essai.pop(); dessiner(); }, 'gros secondaire'));
+  palette.lastChild.setAttribute('aria-label', 'Effacer la dernière couleur');
+  c.v.replaceChildren(c.message, historique, ligne, palette, c.suite);
+  dessiner();
+}
+
+function jouerDessins(n) {
+  const d = logique.dessinDuNiveau(n), cases = d.cases.map((l) => l.map(() => false));
+  const c = cadreNiveau('dessins', n, 'touche les cases à colorier. Un nombre dit combien de cases coloriées se suivent.');
+  const table = el('div', { className: 'dessin-cache' });
+  let fini = false;
+  table.style.setProperty('--taille', cases.length);
+  const dessiner = () => table.replaceChildren(el('span'), ...d.colonnes.map((x) => el('span', { className: 'nombres haut', textContent: x.join('\n') })),
+    ...cases.flatMap((l, r) => [el('span', { className: 'nombres', textContent: d.lignes[r].join(' ') }), ...l.map((v, col) => {
+      const b = el('button', { className: v ? 'coloriee' : '', disabled: fini });
+      b.setAttribute('aria-label', `Ligne ${r + 1}, colonne ${col + 1}${v ? ', coloriée' : ''}`);
+      b.addEventListener('click', () => {
+        cases[r][col] = !v;
+        fini = logique.dessinJuste(d, cases);
+        dessiner();
+        if (fini) c.gagner(`Bravo ! Le dessin caché, c’était ${d.nom}.`);
+      });
+      return b;
+    })]));
+  c.v.replaceChildren(c.message, table, c.suite);
+  dessiner();
+}
+
+function jouerDeduction(n) {
+  const d = logique.deductionDuNiveau(n), marques = Array.from({ length: d.taille }, () => Array(d.taille).fill(''));
+  const c = cadreNiveau('deduction', n, 'chaque enfant a un animal différent. Touche une case : une fois pour « non », deux fois pour « oui ».');
+  const table = el('div', { className: 'grille-deduction' });
+  let fini = false;
+  table.style.setProperty('--taille', d.taille);
+  const dessiner = () => table.replaceChildren(el('span'), ...logique.ANIMAUX.slice(0, d.taille).map((a) => el('span', { className: 'tete' }, imageOuTexte(`enigmes/${a}`, a))),
+    ...marques.flatMap((l, e) => [el('span', { className: 'tete', textContent: logique.ENFANTS[e] }), ...l.map((m, a) => {
+      const b = el('button', { className: m === '✓' ? 'oui' : m === '✗' ? 'non' : '', textContent: m, disabled: fini });
+      b.setAttribute('aria-label', `${logique.ENFANTS[e]} et le ${logique.ANIMAUX[a]} : ${m === '✓' ? 'oui' : m === '✗' ? 'non' : 'pas encore choisi'}`);
+      b.addEventListener('click', () => { marques[e][a] = m === '' ? '✗' : m === '✗' ? '✓' : ''; dessiner(); });
+      return b;
+    })]));
+  const verifier = gros('✔ Vérifier', () => {
+    const choix = marques.map((l) => (l.filter((m) => m === '✓').length === 1 ? l.indexOf('✓') : null));
+    if (choix.includes(null)) return c.dire('Il faut un seul « oui » pour chaque enfant.');
+    if (!logique.deductionJuste(d, choix)) return c.dire('Ce n’est pas encore ça. Relis bien les indices.');
+    fini = true;
+    verifier.remove();
+    dessiner();
+    c.gagner('Bravo, tu as tout trouvé !');
+  });
+  c.v.replaceChildren(c.message, el('ul', { className: 'carte indices-deduction' }, ...d.indices.map((t) => el('li', { textContent: t }))), table, el('div', { className: 'actions-atelier' }, verifier), c.suite);
+  dessiner();
+  parler(d.indices.join(' '));
+}
+const JOUER_LOGIQUE = { sudoku: jouerSudoku, taquin: jouerTaquin, parking: jouerParking, tour: jouerTour, code: jouerCode, dessins: jouerDessins, deduction: jouerDeduction };
 
 // La cabane nature : les fiches des animaux et des plantes, et le quiz
 function ouvrirCabane() {
@@ -2852,6 +3147,7 @@ function afficherParents(message = null) {
       <label>Fille ou garçon <select name="genre"><option value="fille">Fille</option><option value="garcon">Garçon</option></select></label>
       <label>Poids en kilos <small>(facultatif, pour l'observatoire)</small> <input name="poids" type="number" inputmode="numeric" min="8" max="150"></label>
       <p class="info-profil"></p>
+      <ul class="resume-semaine"></ul>
       <p class="erreur" role="status"></p>
       <div class="actions"><button class="gros">Enregistrer</button><button type="button" class="gros secondaire zero">Remettre à zéro</button></div>`;
     f.querySelector('h2').textContent = p.prenom;
@@ -2860,6 +3156,13 @@ function afficherParents(message = null) {
     f.genre.value = p.genre ?? 'fille';
     f.age.append(...Array.from({ length: AGE_MAX - AGE_MIN + 1 }, (_, i) => new Option(`${AGE_MIN + i} ans`, AGE_MIN + i, false, AGE_MIN + i === p.age)));
     f.querySelector('.info-profil').textContent = `⭐ ${formatEtoiles(p.etoiles)} étoiles, ${p.objets.length} achat${p.objets.length > 1 ? 's' : ''}`;
+    const r = suivi.resume(p), liste = (l) => l.join(', ');
+    f.querySelector('.resume-semaine').append(...[
+      `Cette semaine : ${r.parties} partie${r.parties > 1 ? 's' : ''} en ${r.jours} jour${r.jours > 1 ? 's' : ''} (${r.partiesAvant} la semaine d’avant). Série en cours : ${r.serie} jour${r.serie > 1 ? 's' : ''} de suite.`,
+      r.plusJoues.length && `Le plus joué : ${liste(r.plusJoues)}.`,
+      r.reussis.length && `Bien réussi : ${liste(r.reussis)}.`,
+      r.aRevoir.length && `À revoir ensemble : ${liste(r.aRevoir)}.`,
+    ].filter(Boolean).map((t) => el('li', { textContent: t })));
     const info = f.querySelector('.erreur');
     if (message?.profil === p) noter(info, message.texte, true);
     f.addEventListener('submit', (ev) => {

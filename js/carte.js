@@ -277,9 +277,9 @@ const FOND = [40, 110, 720]; // l'image de l'île sur la carte : x, y, côté
 const surLeFond = ([nx, ny]) => [FOND[0] + FOND[2] * nx, FOND[1] + FOND[2] * (ny + 0.045)]; // le sol d'un bâtiment, un peu sous le milieu de l'emplacement
 
 // Les jeux de chaque bâtiment qui en a plusieurs, ou dont le jeu ne porte pas son nom (pour la pastille « 3 jeux » et les médailles)
-export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], potager: ['potager', 'jardinage'], enigmes: ['intrus', 'suites', 'potions'],
+export const JEUX_DU_LIEU = { syllabes: ['syllabes', 'dictee', 'ecriture'], aeroport: ['passeport', 'suisse', 'langues'], potager: ['potager', 'jardinage'], enigmes: ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction'],
   corps: ['corps', 'atlas'], musee: ['dinos'], croyance: ['croyance', 'recit'] };
-const PASTILLES = { syllabes: 3, aeroport: 3, potager: 2, naturaliste: 3, enigmes: 3 };
+const PASTILLES = { syllabes: 3, aeroport: 3, potager: 2, naturaliste: 3, enigmes: 10 };
 // Une médaille par bâtiment, selon le nombre de parties finies dans ses jeux : bronze dès 1, argent dès 5, or dès 15
 export const SEUILS_MEDAILLES = [[15, '🥇', 'or'], [5, '🥈', 'argent'], [1, '🥉', 'bronze']];
 export function medaille(profil, lieuId) {

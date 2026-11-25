@@ -112,6 +112,13 @@ export const suites = {
   },
 };
 
+// L'énigme du jour : la même pour tous les enfants du même âge, un intrus ou une suite, tirée d'après la date (« 2026-11-25 »)
+export function enigmeDuJour(age, jour) {
+  const aleatoire = hasardDe(Number(jour.replaceAll('-', '')));
+  const jeu = aleatoire() < 0.5 ? 'intrus' : 'suites';
+  return { jeu, ...(jeu === 'intrus' ? intrus : suites).question({ age }, aleatoire) };
+}
+
 // Les potions du laboratoire : chaque fiole contient des couches de couleur. On verse le dessus d'une fiole dans une autre,
 // seulement sur la même couleur ou dans une fiole vide, jusqu'à avoir une seule couleur par fiole.
 // Un état : une liste de fioles ; une fiole : ses couches, du fond vers le haut (un numéro de couleur).
