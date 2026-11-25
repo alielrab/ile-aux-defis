@@ -53,3 +53,14 @@ test('voix : la plus naturelle en français, seulement les voix installées hors
   assert.equal(choisirVoix([v('Samantha', 'en-US', true)]), null);
   assert.equal(choisirVoix([v('Amélie', 'fr_CA', true), v('Thomas', 'fr_FR', true)]).name, 'Thomas');
 });
+
+test('voix enregistrée : un texte se découpe en morceaux connus, sinon la voix de la tablette', async () => {
+  const { cle, phrases, fichiers } = await import('../js/voix-cle.js');
+  const { VOIX_PRETES } = await import('../voix/liste.js'), { existsSync } = await import('node:fs');
+  assert.deepEqual(phrases('Bravo ! Tu gagnes 2 étoiles. Étape 1. Verse 3.5 litres.'), ['Bravo !', 'Tu gagnes 2 étoiles.', 'Étape 1.', 'Verse 3.5 litres.']);
+  assert.equal(cle(' Bravo  ! '), cle('Bravo !'));
+  const pretes = new Set([cle('Bravo !'), cle('Étape 1. Verse du lait.')]);
+  assert.deepEqual(fichiers('Bravo ! Étape 1. Verse du lait.', pretes), [cle('Bravo !'), cle('Étape 1. Verse du lait.')]); // le plus long morceau connu
+  assert.equal(fichiers('Bravo ! Une phrase inconnue.', pretes), null);
+  for (const c of VOIX_PRETES) assert.ok(existsSync(`voix/audio/${c}.mp3`), `voix/audio/${c}.mp3 manque`);
+});

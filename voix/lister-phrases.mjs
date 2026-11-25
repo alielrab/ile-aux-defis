@@ -159,6 +159,26 @@ peinture.COULEURS.forEach(([k, nom]) => ajouter(`peinture.couleur.${k}`, 'Atelie
 for (const [k, m] of Object.entries(peinture.MODELES)) ajouter(`peinture.dessin.${k}`, 'Atelier de peinture', m.nom);
 for (const a of catalogue.CATALOGUE) ajouter(`objet.${a.id.replace(':', '.')}`, 'Magasins (noms des objets)', a.nom);
 
+{ // le labo des expériences : les morceaux tels que l'app les dit (voir ouvrirLabo dans js/app.js)
+  const x = await js('jeux/experiences.js'), src = 'Labo des expériences';
+  ['Le labo des expériences !', x.REGLE, 'Choisis une expérience.', 'Bien deviné !', 'C’est en essayant qu’on découvre !', `Tu gagnes ${x.ETOILES_EXPERIENCE} étoiles.`,
+    'Maintenant, fais l’expérience pour de vrai, avec un adulte !', 'Bravo, tu as fait l’expérience pour de vrai !', `Tu gagnes ${x.ETOILES_VRAIE} étoiles.`].forEach((t, i) => ajouter(`labo.phrase${i + 1}`, src, t));
+  for (const e of x.EXPERIENCES) {
+    ajouter(`labo.${e.cle}.nom`, src, `${e.nom}.`);
+    ajouter(`labo.${e.cle}.materiel`, src, `Il te faut : ${e.materiel.join(', ')}.`);
+    e.etapes.forEach((t, i) => ajouter(`labo.${e.cle}.etape${i + 1}`, src, `Étape ${i + 1}. ${t}`));
+    if (e.adulte) ajouter(`labo.${e.cle}.adulte`, src, e.adulte);
+    ajouter(`labo.${e.cle}.devine`, src, `Devine d’abord : ${e.devine[0]}`);
+    ajouter(`labo.${e.cle}.envrai`, src, `En vrai : ${e.devine[1].toLowerCase()}.`);
+    ajouter(`labo.${e.cle}.explication`, src, e.explication);
+  }
+}
+
+{ // l'accueil de chaque île (voir entrerLieu dans js/app.js)
+  const { ILES } = await js('archipel.js');
+  for (const i of ILES) ajouter(`ile.${i.id}.bienvenue`, "Phrases de l'app", `Bienvenue sur ${i.nom.replace(/^L'île/, "l'île")} !`);
+}
+
 // Les phrases écrites telles quelles dans l'app : parler('…') sans partie variable
 const app = readFileSync(new URL('js/app.js', racine), 'utf8');
 let n = 0;

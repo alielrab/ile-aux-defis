@@ -5064,6 +5064,129 @@ objet.cheveux.jaune;Magasins (noms des objets);Cheveux jaune
 objet.cheveux.corail;Magasins (noms des objets);Cheveux corail
 objet.cheveux.menthe;Magasins (noms des objets);Cheveux menthe
 objet.cheveux.bleu-nuit;Magasins (noms des objets);Cheveux bleu nuit
+labo.phrase1;Labo des expériences;Le labo des expériences !
+labo.phrase2;Labo des expériences;Fais toujours tes expériences avec un adulte. On ne goûte rien, et on range tout à la fin.
+labo.phrase3;Labo des expériences;Choisis une expérience.
+labo.phrase4;Labo des expériences;Bien deviné !
+labo.phrase5;Labo des expériences;C’est en essayant qu’on découvre !
+labo.phrase6;Labo des expériences;Tu gagnes 2 étoiles.
+labo.phrase7;Labo des expériences;Maintenant, fais l’expérience pour de vrai, avec un adulte !
+labo.phrase8;Labo des expériences;Bravo, tu as fait l’expérience pour de vrai !
+labo.phrase9;Labo des expériences;Tu gagnes 10 étoiles.
+labo.poivre.nom;Labo des expériences;Le poivre qui s’enfuit.
+labo.poivre.materiel;Labo des expériences;Il te faut : Une assiette creuse, De l’eau, Du poivre moulu, Du liquide vaisselle.
+labo.poivre.etape1;Labo des expériences;Étape 1. Verse de l’eau dans l’assiette.
+labo.poivre.etape2;Labo des expériences;Étape 2. Saupoudre du poivre partout sur l’eau.
+labo.poivre.etape3;Labo des expériences;Étape 3. Trempe le bout de ton doigt dans le liquide vaisselle.
+labo.poivre.etape4;Labo des expériences;Étape 4. Touche l’eau au milieu de l’assiette, et regarde !
+labo.poivre.devine;Labo des expériences;Devine d’abord : Que va faire le poivre quand ton doigt touche l’eau ?
+labo.poivre.envrai;Labo des expériences;En vrai : il file vers les bords.
+labo.poivre.explication;Labo des expériences;L’eau a une sorte de peau invisible qui tient le poivre. Le savon casse cette peau au milieu : elle se retire vers les bords et emporte le poivre. Les scientifiques appellent ça la tension de surface.
+labo.lait.nom;Labo des expériences;Le lait magique.
+labo.lait.materiel;Labo des expériences;Il te faut : Une assiette creuse, Du lait entier, Des colorants alimentaires, Du liquide vaisselle, Un coton-tige.
+labo.lait.etape1;Labo des expériences;Étape 1. Verse du lait dans l’assiette.
+labo.lait.etape2;Labo des expériences;Étape 2. Dépose quelques gouttes de colorants, de plusieurs couleurs.
+labo.lait.etape3;Labo des expériences;Étape 3. Trempe le coton-tige dans le liquide vaisselle.
+labo.lait.etape4;Labo des expériences;Étape 4. Touche le lait avec le coton-tige, et regarde !
+labo.lait.devine;Labo des expériences;Devine d’abord : Que vont faire les couleurs ?
+labo.lait.envrai;Labo des expériences;En vrai : elles se mettent à danser.
+labo.lait.explication;Labo des expériences;Le savon court après le gras du lait. En bougeant, il pousse les colorants dans tous les sens : c’est pour ça qu’ils dansent.
+labo.oeuf.nom;Labo des expériences;L’œuf qui flotte.
+labo.oeuf.materiel;Labo des expériences;Il te faut : Deux grands verres d’eau, Du sel, Une cuillère, Deux œufs crus.
+labo.oeuf.etape1;Labo des expériences;Étape 1. Pose doucement un œuf dans le premier verre d’eau. Regarde ce qu’il fait.
+labo.oeuf.etape2;Labo des expériences;Étape 2. Dans le deuxième verre, mets 5 cuillères de sel.
+labo.oeuf.etape3;Labo des expériences;Étape 3. Mélange bien jusqu’à ce que le sel disparaisse.
+labo.oeuf.etape4;Labo des expériences;Étape 4. Pose doucement le deuxième œuf dans l’eau salée, et regarde !
+labo.oeuf.devine;Labo des expériences;Devine d’abord : Que fait l’œuf dans l’eau très salée ?
+labo.oeuf.envrai;Labo des expériences;En vrai : il flotte.
+labo.oeuf.explication;Labo des expériences;L’eau salée est plus lourde que l’eau douce : elle porte mieux l’œuf. C’est pour ça qu’on flotte si bien dans la mer !
+labo.eau-voyage.nom;Labo des expériences;L’eau qui voyage.
+labo.eau-voyage.materiel;Labo des expériences;Il te faut : Deux verres, De l’eau, Du colorant alimentaire, Une feuille d’essuie-tout, Un gros livre.
+labo.eau-voyage.etape1;Labo des expériences;Étape 1. Remplis un verre d’eau et ajoute du colorant.
+labo.eau-voyage.etape2;Labo des expériences;Étape 2. Pose ce verre sur le gros livre, et le verre vide à côté, plus bas.
+labo.eau-voyage.etape3;Labo des expériences;Étape 3. Plie l’essuie-tout en longue bande.
+labo.eau-voyage.etape4;Labo des expériences;Étape 4. Mets un bout dans le verre plein, et l’autre bout dans le verre vide.
+labo.eau-voyage.etape5;Labo des expériences;Étape 5. Attends une heure, et regarde !
+labo.eau-voyage.devine;Labo des expériences;Devine d’abord : Que va faire l’eau colorée ?
+labo.eau-voyage.envrai;Labo des expériences;En vrai : elle passe dans l’autre verre.
+labo.eau-voyage.explication;Labo des expériences;L’eau grimpe dans les petits trous du papier, comme elle monte dans une éponge. Puis elle redescend de l’autre côté. Ça s’appelle la capillarité.
+labo.volcan.nom;Labo des expériences;Le volcan.
+labo.volcan.materiel;Labo des expériences;Il te faut : Une petite bouteille, Un plateau, 3 cuillères de bicarbonate de soude, Du vinaigre blanc, Du liquide vaisselle, Du colorant rouge.
+labo.volcan.etape1;Labo des expériences;Étape 1. Pose la bouteille sur le plateau.
+labo.volcan.etape2;Labo des expériences;Étape 2. Mets le bicarbonate dans la bouteille.
+labo.volcan.etape3;Labo des expériences;Étape 3. Ajoute un peu de liquide vaisselle et du colorant.
+labo.volcan.etape4;Labo des expériences;Étape 4. Verse le vinaigre d’un coup, recule d’un pas, et regarde !
+labo.volcan.devine;Labo des expériences;Devine d’abord : Que va-t-il se passer ?
+labo.volcan.envrai;Labo des expériences;En vrai : une mousse monte et déborde.
+labo.volcan.explication;Labo des expériences;Le vinaigre et le bicarbonate fabriquent ensemble un gaz, le gaz carbonique. Le savon l’emprisonne dans des milliers de bulles : la mousse déborde comme la lave d’un volcan.
+labo.ballon-gonfle.nom;Labo des expériences;Le ballon qui se gonfle tout seul.
+labo.ballon-gonfle.materiel;Labo des expériences;Il te faut : Une petite bouteille, Un ballon de baudruche, Du vinaigre blanc, 2 cuillères de bicarbonate de soude, Un entonnoir.
+labo.ballon-gonfle.etape1;Labo des expériences;Étape 1. Verse du vinaigre dans la bouteille, jusqu’au tiers.
+labo.ballon-gonfle.etape2;Labo des expériences;Étape 2. Avec l’entonnoir, mets le bicarbonate dans le ballon.
+labo.ballon-gonfle.etape3;Labo des expériences;Étape 3. Enfile le ballon sur le goulot, sans faire tomber la poudre.
+labo.ballon-gonfle.etape4;Labo des expériences;Étape 4. Redresse le ballon pour que la poudre tombe dans la bouteille, et regarde !
+labo.ballon-gonfle.devine;Labo des expériences;Devine d’abord : Que va faire le ballon ?
+labo.ballon-gonfle.envrai;Labo des expériences;En vrai : il se gonfle.
+labo.ballon-gonfle.explication;Labo des expériences;Le vinaigre et le bicarbonate fabriquent du gaz carbonique. Le gaz ne peut pas sortir : il prend de la place et gonfle le ballon.
+labo.ballon-magique.nom;Labo des expériences;Le ballon aimant.
+labo.ballon-magique.materiel;Labo des expériences;Il te faut : Un ballon de baudruche gonflé, Un pull en laine, ou tes cheveux bien secs, Des petits bouts de papier.
+labo.ballon-magique.etape1;Labo des expériences;Étape 1. Frotte fort le ballon sur le pull ou sur tes cheveux.
+labo.ballon-magique.etape2;Labo des expériences;Étape 2. Approche le ballon des petits bouts de papier.
+labo.ballon-magique.etape3;Labo des expériences;Étape 3. Essaie aussi près d’un tout petit filet d’eau du robinet, et regarde !
+labo.ballon-magique.devine;Labo des expériences;Devine d’abord : Que font les petits papiers ?
+labo.ballon-magique.envrai;Labo des expériences;En vrai : ils sautent sur le ballon.
+labo.ballon-magique.explication;Labo des expériences;En frottant, le ballon se charge d’électricité statique. Cette électricité attire les choses légères, comme le papier, et même le filet d’eau.
+labo.haricot.nom;Labo des expériences;Le haricot dans le bocal.
+labo.haricot.materiel;Labo des expériences;Il te faut : Un bocal en verre, Du coton, Des haricots secs ou des lentilles, De l’eau.
+labo.haricot.etape1;Labo des expériences;Étape 1. Mets du coton mouillé dans le bocal.
+labo.haricot.etape2;Labo des expériences;Étape 2. Glisse les graines entre le coton et le verre, pour bien les voir.
+labo.haricot.etape3;Labo des expériences;Étape 3. Pose le bocal près d’une fenêtre.
+labo.haricot.etape4;Labo des expériences;Étape 4. Garde le coton mouillé, et regarde chaque jour !
+labo.haricot.devine;Labo des expériences;Devine d’abord : Qu’est-ce qui sort de la graine en premier ?
+labo.haricot.envrai;Labo des expériences;En vrai : une petite racine.
+labo.haricot.explication;Labo des expériences;Dans la graine, il y a tout ce qu’il faut pour commencer une plante. Avec de l’eau et de la chaleur, elle se réveille : d’abord la racine, puis la tige et les feuilles.
+labo.celeri.nom;Labo des expériences;Le céleri qui boit les couleurs.
+labo.celeri.materiel;Labo des expériences;Il te faut : Des branches de céleri avec leurs feuilles, Des verres d’eau, Du colorant alimentaire.
+labo.celeri.etape1;Labo des expériences;Étape 1. Mets beaucoup de colorant dans un verre d’eau.
+labo.celeri.etape2;Labo des expériences;Étape 2. Pose une branche de céleri dans le verre.
+labo.celeri.etape3;Labo des expériences;Étape 3. Attends quelques heures.
+labo.celeri.etape4;Labo des expériences;Étape 4. Regarde les feuilles. Puis demande à un adulte de couper la tige, et regarde dedans !
+labo.celeri.adulte;Labo des expériences;Un adulte coupe la tige.
+labo.celeri.devine;Labo des expériences;Devine d’abord : Que va-t-il arriver aux feuilles ?
+labo.celeri.envrai;Labo des expériences;En vrai : elles prennent la couleur de l’eau.
+labo.celeri.explication;Labo des expériences;La plante boit l’eau par de tout petits tuyaux, jusqu’aux feuilles. Le colorant voyage avec l’eau : on voit le chemin que l’eau prend dans la plante.
+labo.arc-en-ciel.nom;Labo des expériences;L’arc-en-ciel dans l’assiette.
+labo.arc-en-ciel.materiel;Labo des expériences;Il te faut : Une assiette creuse, De l’eau, Un petit miroir, Du soleil ou une lampe de poche, Une feuille blanche.
+labo.arc-en-ciel.etape1;Labo des expériences;Étape 1. Remplis l’assiette d’eau.
+labo.arc-en-ciel.etape2;Labo des expériences;Étape 2. Pose le miroir penché, à moitié dans l’eau.
+labo.arc-en-ciel.etape3;Labo des expériences;Étape 3. Tourne l’assiette pour que le soleil éclaire le miroir.
+labo.arc-en-ciel.etape4;Labo des expériences;Étape 4. Cherche le reflet sur le mur ou sur la feuille blanche, et regarde !
+labo.arc-en-ciel.devine;Labo des expériences;Devine d’abord : Que vois-tu sur la feuille ?
+labo.arc-en-ciel.envrai;Labo des expériences;En vrai : toutes les couleurs de l’arc-en-ciel.
+labo.arc-en-ciel.explication;Labo des expériences;La lumière du soleil a l’air blanche, mais elle est faite de toutes les couleurs mélangées. En passant dans l’eau, les couleurs se séparent, comme dans un arc-en-ciel.
+labo.coquille.nom;Labo des expériences;La coquille qui disparaît.
+labo.coquille.materiel;Labo des expériences;Il te faut : Un œuf dur, Un verre, Du vinaigre blanc, Une petite assiette.
+labo.coquille.etape1;Labo des expériences;Étape 1. Pose l’œuf dur dans le verre.
+labo.coquille.etape2;Labo des expériences;Étape 2. Recouvre-le de vinaigre. Regarde les petites bulles !
+labo.coquille.etape3;Labo des expériences;Étape 3. Couvre le verre avec l’assiette et mets-le au frigo.
+labo.coquille.etape4;Labo des expériences;Étape 4. Le lendemain, sors l’œuf, rince-le, et regarde !
+labo.coquille.adulte;Labo des expériences;Un adulte cuit l’œuf dur avant.
+labo.coquille.devine;Labo des expériences;Devine d’abord : Qu’est devenue la coquille ?
+labo.coquille.envrai;Labo des expériences;En vrai : elle a disparu.
+labo.coquille.explication;Labo des expériences;Le vinaigre est un acide. Il ronge doucement le calcaire de la coquille, qui part en petites bulles. Il reste l’œuf, tout mou, dans sa fine peau.
+labo.bonbons.nom;Labo des expériences;Les bonbons arc-en-ciel.
+labo.bonbons.materiel;Labo des expériences;Il te faut : Une assiette blanche, Des bonbons ronds de toutes les couleurs, De l’eau tiède.
+labo.bonbons.etape1;Labo des expériences;Étape 1. Range les bonbons en rond, tout autour de l’assiette.
+labo.bonbons.etape2;Labo des expériences;Étape 2. Verse doucement l’eau tiède au milieu, jusqu’aux bonbons.
+labo.bonbons.etape3;Labo des expériences;Étape 3. Ne touche plus à rien, et regarde !
+labo.bonbons.envrai;Labo des expériences;En vrai : elles avancent vers le milieu en rayons.
+labo.bonbons.explication;Labo des expériences;La couche de couleur des bonbons est faite de sucre et de colorant. L’eau tiède la fait fondre. Chaque couleur avance vers le milieu sans se mélanger tout de suite avec sa voisine.
+ile.village.bienvenue;Phrases de l'app;Bienvenue sur l'île du village !
+ile.savoir.bienvenue;Phrases de l'app;Bienvenue sur l'île du savoir !
+ile.createurs.bienvenue;Phrases de l'app;Bienvenue sur l'île des créateurs !
+ile.coeur.bienvenue;Phrases de l'app;Bienvenue sur l'île du cœur !
+ile.securite.bienvenue;Phrases de l'app;Bienvenue sur l'île de la sécurité !
+ile.nature.bienvenue;Phrases de l'app;Bienvenue sur l'île de la nature !
 app.1;Phrases de l'app;Voici l'archipel ! Choisis une île.
 app.2;Phrases de l'app;Le calendrier de l’Avent ! Chaque jour de décembre, une nouvelle case s’ouvre.
 app.4;Phrases de l'app;Quel prénom veux-tu lui donner ?

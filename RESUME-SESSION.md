@@ -4,8 +4,8 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-57`. Il faut la monter à chaque envoi.
-- 153 tests, tous verts (`npm test`).
+- Version du cache (`sw.js`) : `ile-58`. Il faut la monter à chaque envoi.
+- 154 tests, tous verts (`npm test`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
 
 ## Façon de travailler (préférences)
@@ -56,9 +56,17 @@
 - **Labo des expériences** (`js/jeux/experiences.js`) : 12 expériences à faire pour de vrai (matériel, étapes, « devine d'abord », explication, 2 ⭐ la première fois). Sources : Alloprof et Les Savants Fous.
 - **Labo, tuto en images** : une image par étape (`images/experiences/<cle>-<n>.webp`, 400x400, les 47 sont faites ; Higgsfield : `aspect_ratio: 1:1`, main à manche jaune, jamais le résultat sur l'image). En bas de chaque fiche, « Tu l'as faite pour de vrai ? » : un parent tape son code, +10 ⭐ une seule fois (`validerVraie`, `profil.vraies`). **Pas de vidéo** : deux essais Higgsfield (56 crédits chacun) ne montraient pas le bon résultat, on a abandonné.
 
+## La voix enregistrée (fait le 25 novembre)
+- L'app joue une voix enregistrée (`voix/audio/<clé>.mp3`, 4 698 fichiers, 92 Mo) quand **tout** le texte à dire est connu, sinon la voix de la tablette (`parler` dans `js/voix.js`). Le nom du fichier vient du texte (`js/voix-cle.js`) : un texte qui change d'une lettre repasse à la voix de la tablette, il faut refaire sa voix.
+- Un parent qui a choisi une voix de la tablette dans les réglages garde cette voix-là.
+- Voix choisie par le parent : « française énergique », une voix copiée sur la voix française « Hélène » et dite par ElevenLabs v4 (identifiant dans `voix/lots.mjs`). Elle est sur le **nouveau compte Higgsfield** (3 000 crédits au départ, 1 690 après). Les voix toutes faites d'ElevenLabs ont un accent québécois ; celles d'Inworld sont fades.
+- Pour ajouter des voix : `node voix/lister-phrases.mjs` (la liste), `node voix/lots.mjs <dossier> [filtre] [12]` (les envois, 8 lots chacun), envoyer l'archive dans le bac à sable Higgsfield, `generate_audio_batch` avec `requests: {ref: "sandbox:~/…/envoi-N.json#/requests"}`, puis `python3 aligner.py envoi-N.json` dans le bac à sable (découpe et vérifie avec la reconnaissance vocale), rapatrier `pret/` dans `voix/audio/`, et `node voix/lots.mjs` pour refaire `voix/liste.js`.
+- Appris : écrire les nombres en lettres (« 7 » était lu « sette ») ; « [long pause] » ne marche qu'une fois sur cinq ; 8 fabrications à la fois au plus ; les mots seuls se découpent mal (lots de 12).
+- **Pas encore de voix** : les syllabes (exprès), environ 180 mots seuls refusés par le contrôle, les 6 phrases « Bienvenue sur l'île… » (dans la liste, pas fabriquées), les phrases avec un prénom ou un calcul, et les jeux qui ne sont pas dans `voix/lister-phrases.mjs` (cabane nature, Suisse, langues, premiers secours, potager, missions, etc.).
+
 ## Pas encore fait
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
-- Île de la mer, île du cœur « Grandir ensemble », voix pré-enregistrées (`voix/phrases.csv`). Voir `IDEES.md`.
+- Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.
 
 ## À vérifier ou à faire relire par un parent
 - Compte en ligne : le lien de l'e-mail de confirmation a donné une page 404 GitHub (cause inconnue) ; mot de passe oublié ; suppression du compte ; synchro entre deux vrais appareils.

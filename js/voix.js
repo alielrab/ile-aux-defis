@@ -1,5 +1,7 @@
 // Voix (synthèse vocale du système) et petits sons. Marche sans internet si une voix française est installée.
 import { accorder } from './genre.js';
+import { fichiers } from './voix-cle.js';
+import { VOIX_PRETES } from '../voix/liste.js';
 
 // Le genre de l'enfant qui joue : toutes les phrases dites s'accordent (« Tu es trop {fort|forte} ! »)
 let genre = 'fille';
@@ -29,9 +31,28 @@ let derniere = { texte: '', ton: 1 };
 // Redire la dernière phrase (bouton 🔊 « réécouter »)
 export const repeter = () => parler(derniere.texte, { ton: derniere.ton });
 
+// La voix enregistrée (voix/audio/) si tout le texte en a une, sinon la voix de la tablette.
+// Un parent qui a choisi une voix de la tablette dans les réglages garde cette voix-là.
+let son = null, tour = 0; // le fichier en cours de lecture, et le numéro de la phrase en cours (une nouvelle phrase coupe l'ancienne)
 export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
   texte = accorder(texte, genre);
   derniere = { texte, ton };
+  taire();
+  const moi = ++tour, liste = preferee || !globalThis.Audio ? null : fichiers(texte, VOIX_PRETES);
+  if (!liste) return synthese(texte, ton, vitesse);
+  return Promise.all(liste.map((c) => fetch(`voix/audio/${c}.mp3`).then((x) => (x.ok ? x.blob() : Promise.reject())).then((b) => URL.createObjectURL(b))))
+    .then(async (urls) => {
+      for (const url of urls) {
+        if (moi === tour) await new Promise((fini, rate) => {
+          son = Object.assign(new Audio(url), { playbackRate: allure, onended: fini, onpause: fini, onerror: rate });
+          son.play().catch(rate);
+        });
+        URL.revokeObjectURL(url);
+      }
+    })
+    .catch(() => (moi === tour ? synthese(texte, ton, vitesse) : null)); // hors ligne sans le fichier, ou lecture refusée : la voix de la tablette
+}
+function synthese(texte, ton, vitesse) {
   return new Promise((fini) => {
     const synth = globalThis.speechSynthesis;
     if (!synth) return setTimeout(fini, 600);
@@ -48,7 +69,7 @@ export function parler(texte, { ton = 1, vitesse = 0.95 } = {}) {
   });
 }
 
-export const taire = () => globalThis.speechSynthesis?.cancel();
+export const taire = () => { tour++; son?.pause(); son = null; globalThis.speechSynthesis?.cancel(); };
 
 // Dire un mot étranger (mots de voyage) avec une voix de sa langue ; sans cette voix sur l'appareil, lire la prononciation « à la française »
 export function parlerLangue(mot, lang, prononciation) {
@@ -66,7 +87,7 @@ export function parlerLangue(mot, lang, prononciation) {
 // Attendre que la voix ait vraiment fini : sur certaines tablettes, la fin de la phrase est annoncée trop tôt.
 export async function attendreSilence(max = 20000) {
   const synth = globalThis.speechSynthesis, debut = Date.now();
-  while (synth?.speaking && Date.now() - debut < max) await new Promise((r) => setTimeout(r, 150));
+  while ((synth?.speaking || (son && !son.paused)) && Date.now() - debut < max) await new Promise((r) => setTimeout(r, 150));
 }
 
 let audio;
