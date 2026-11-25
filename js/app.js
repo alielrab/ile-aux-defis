@@ -405,7 +405,7 @@ function afficherLieu() {
 // Ce qu'on voit dans le rayon (ou la pièce), à voix haute
 const direRayon = () => {
   const noms = [...$('#rayon').querySelectorAll('.nom')].map((n) => n.textContent);
-  return noms.length ? `Il y a : ${noms.join(', ')}.` : $('#lieu-message').textContent;
+  return noms.length ? '' : $('#lieu-message').textContent; // on ne récite plus tout le rayon : toucher un objet dit son nom
 };
 
 function carteArticle(a) {
@@ -480,13 +480,13 @@ function toucherArticle(a) {
   } else if (aConfirmer !== a.id) {
     aConfirmer = a.id;
     message.textContent = `Touche encore pour acheter : ${a.nom}.`;
-    parler(`Tu veux ${a.nom} ? Touche encore pour confirmer.`);
+    parler(a.nom);
   } else {
     acheter(joueuse, a.id);
     aConfirmer = null;
     message.textContent = `Bravo, ${a.nom} est à toi !`;
     bip(true);
-    parler(`Bravo ! ${a.nom}, c'est à toi !`, { ton: 1.15 });
+    parler(`Bravo ! ${a.nom}`, { ton: 1.15 });
   }
   if (a.piece) joueuse.maison.piece = a.piece; // montrer la pièce où l'objet est posé
   enregistrer();
@@ -1581,7 +1581,7 @@ function vueEditerBD(v, vue) {
     parler(`Case ${Number(i) + 1}.`);
   });
   const onglets = el('div', { className: 'onglets', role: 'group', ariaLabel: 'Que veux-tu changer ?' },
-    ...[['decor', '🏞️ Décor'], ['0', '⬅️ À gauche'], ['1', '➡️ À droite'], ['auto', '⭐ Autocollant']].map(([k, nom]) =>
+    ...[['decor', '1 · 🏞️ Décor'], ['0', '2 · ⬅️ À gauche'], ['1', '3 · ➡️ À droite'], ['auto', '4 · ⭐ Autocollant']].map(([k, nom]) =>
       bouton(nom, k === vue.onglet, () => afficherBD({ ...vue, onglet: k }))));
   const panneau = el('div', { className: 'panneau-bd' });
   // un bouton de choix : un dessin (ou rien) et un nom
@@ -1589,7 +1589,7 @@ function vueEditerBD(v, vue) {
   const maj = (dire) => { afficherBD(vue); if (dire) parler(dire); };
   if (vue.onglet === 'decor') {
     panneau.append(el('div', { className: 'grille-bd' }, ...Object.entries(bd.DECORS).map(([k, [nom, dessin]]) =>
-      choisir(c.decor === k, `<svg viewBox="0 0 300 240" aria-hidden="true">${dessin}</svg>`, nom, () => { c.decor = k; maj(nom); }))));
+      choisir(c.decor === k, `<svg viewBox="0 0 300 240" aria-hidden="true">${dessin}</svg>`, nom, () => { c.decor = k; afficherBD({ ...vue, onglet: '0' }); parler(nom); })))); // le décor choisi, on passe au personnage : sinon l'enfant ne voit pas quoi faire ensuite
   } else if (vue.onglet === 'auto') {
     panneau.append(el('div', { className: 'grille-bd petite' }, choisir(!c.autocollant, '', 'Aucun', () => { c.autocollant = null; maj('Aucun autocollant.'); }),
       ...bd.AUTOCOLLANTS.map((a) => choisir(c.autocollant === a, `<span class="autocollant" aria-hidden="true">${a}</span>`, '', () => { c.autocollant = a; maj(); }))));
@@ -1605,7 +1605,11 @@ function vueEditerBD(v, vue) {
       gros('Rien', () => { c.bulles[k] = ''; maj('Pas de bulle.'); }, `petit${c.bulles[k] ? '' : ' choisi'}`),
       ...bd.PHRASES.map((p) => gros(p, () => { c.bulles[k] = p; maj(p); }, `petit${c.bulles[k] === p ? ' choisi' : ''}`))), texte);
   }
+  // la case qu'on est en train de faire, toujours sous les yeux : sur un téléphone, la bande est plus haut, hors de l'écran
+  const apercu = el('div', { className: 'apercu-bd' });
+  apercu.innerHTML = bd.dessinerCase(c, dessinPersoBD, { numero: vue.caseActive });
   const actions = el('div', { className: 'actions-atelier' },
+    ...(vue.caseActive + 1 < b.cases.length ? [gros('➜ Case suivante', () => { afficherBD({ ...vue, caseActive: vue.caseActive + 1, onglet: 'decor' }); parler(`Case ${vue.caseActive + 2}.`); })] : []),
     gros('🔊 Lire ma BD', () => parler(bd.texteALire(b, nomBD)), 'gros secondaire'),
     gros('🖨️ Imprimer', () => imprimerBD(b), 'gros secondaire'),
     gros('✅ Terminé', () => {
@@ -1614,7 +1618,7 @@ function vueEditerBD(v, vue) {
       afficherBD({ mode: 'mes' });
       parler('Bravo ! Ta BD est rangée dans « Mes BD ». Veux-tu l’écouter ?', { ton: 1.15 });
     }));
-  v.append(titre, zoneBande, el('h2', { textContent: `Case ${vue.caseActive + 1}` }), onglets, panneau, actions);
+  v.append(titre, zoneBande, el('h2', { textContent: `Case ${vue.caseActive + 1} sur ${b.cases.length}` }), apercu, onglets, panneau, actions);
 }
 
 function vueMesBD(v, vue) {
@@ -2071,6 +2075,7 @@ function jouerGlacier() {
     visage = glacier.CLIENTS[Math.floor(Math.random() * glacier.CLIENTS.length)];
     total = glacier.temps(age, glacier.niveau(servies)) * 1000;
     fin = performance.now() + total;
+    monCornet.hidden = actions.hidden = false;
     dessiner();
   };
   const finir = () => {
@@ -2088,6 +2093,7 @@ function jouerGlacier() {
     const choix = melanger([...new Set([rendu, rendu + 1, Math.max(1, rendu - 1), rendu + 2])]).slice(0, 3);
     if (!choix.includes(rendu)) choix[0] = rendu;
     fin = Infinity; // le temps s'arrête pendant le calcul
+    monCornet.hidden = actions.hidden = true; // la question de monnaie prend la place du cornet et des boutons : tout tient sur l'écran d'un téléphone
     const texte = `La glace coûte ${prix} francs. Le client donne ${donne} francs. Combien lui rends-tu ?`;
     parfums.replaceChildren(el('p', { className: 'carte question-defi', textContent: `💰 ${texte}` }), el('div', { className: 'reponses-defi' }, ...melanger(choix).map((c) => {
       const b = el('button', { className: 'gros secondaire', textContent: `${c} franc${c > 1 ? 's' : ''}` });
@@ -2103,8 +2109,8 @@ function jouerGlacier() {
     barre.firstChild.style.width = `${Math.max(0, (reste / total) * 100)}%`;
     if (reste <= 0) perdre();
   }, 100);
-  v.replaceChildren(score, client, barre, monCornet, parfums,
-    el('div', { className: 'actions-atelier' }, gros('↩️ Vider le cornet', () => { cornet = []; dessiner(); }, 'gros secondaire'), gros('🔔 Servir !', servir)));
+  const actions = el('div', { className: 'actions-atelier' }, gros('↩️ Vider le cornet', () => { cornet = []; dessiner(); }, 'gros secondaire'), gros('🔔 Servir !', servir));
+  v.replaceChildren(score, client, barre, monCornet, parfums, actions);
   nouveau();
 }
 
@@ -2342,7 +2348,7 @@ function jouerSudoku(n) {
     return b;
   })));
   palette.append(...Array.from({ length: s.taille }, (_, v) => {
-    const b = el('button', { className: 'reponse' }, symbole(v));
+    const b = el('button', { className: 'jeton' }, symbole(v));
     b.addEventListener('click', () => {
       if (fini) return;
       if (choisie === null) return c.dire('Touche d’abord une case vide.');
@@ -2454,13 +2460,13 @@ function jouerTour(n) {
 const COULEURS_CODE = [['rouge', '🔴'], ['bleu', '🔵'], ['jaune', '🟡'], ['vert', '🟢'], ['violet', '🟣'], ['orange', '🟠']];
 function jouerCode(n) {
   const [longueur, couleurs, essais] = logique.CODES[n], secret = logique.nouveauCode(n);
-  const c = cadreNiveau('code', n, `trouve les ${longueur} couleurs cachées, en ${essais} essais. Une couleur peut revenir.`);
+  const c = cadreNiveau('code', n, `trouve les ${longueur} couleurs cachées et leur ordre, en ${essais} essais. Attention : la même couleur peut être cachée plusieurs fois, par exemple rouge, rouge, bleu !`);
   const bille = (v) => imageOuTexte(`enigmes/forme-${COULEURS_CODE[v][0]}`, COULEURS_CODE[v][1]);
   const historique = el('ol', { className: 'essais-code' }), ligne = el('div', { className: 'essai-code en-cours' }), palette = el('div', { className: 'palette-sudoku' });
   let essai = [], faits = 0, fini = false;
   const dessiner = () => ligne.replaceChildren(...Array.from({ length: longueur }, (_, i) => el('span', {}, ...(essai[i] === undefined ? [] : [bille(essai[i])]))));
   palette.append(...Array.from({ length: couleurs }, (_, v) => {
-    const b = el('button', { className: 'reponse' }, bille(v));
+    const b = el('button', { className: 'jeton' }, bille(v));
     b.setAttribute('aria-label', COULEURS_CODE[v][0]);
     b.addEventListener('click', () => {
       if (fini) return;
@@ -2468,13 +2474,13 @@ function jouerCode(n) {
       dessiner();
       if (essai.length < longueur) return;
       const [bien, mal] = logique.indicesCode(secret, essai);
-      historique.append(el('li', {}, el('span', { className: 'essai-code' }, ...essai.map((x) => el('span', {}, bille(x)))), el('span', { textContent: `${bien} à la bonne place, ${mal} à déplacer` })));
+      historique.append(el('li', {}, el('span', { className: 'essai-code' }, ...essai.map((x) => el('span', {}, bille(x)))), el('span', { textContent: `${bien} bien placée${bien > 1 ? 's' : ''}, ${mal} à déplacer` })));
       faits++;
       essai = [];
       dessiner();
       if (bien === longueur) { fini = true; return c.gagner(`Bravo, tu as trouvé le code en ${faits} essai${faits > 1 ? 's' : ''} !`); }
       if (faits >= essais) { fini = true; ligne.replaceChildren(...secret.map((x) => el('span', {}, bille(x)))); return c.dire('Plus d’essais ! Voici le code. Recommence : un nouveau code t’attend.'); }
-      c.dire(`${bien} à la bonne place, ${mal} à déplacer. Encore ${essais - faits} essai${essais - faits > 1 ? 's' : ''}.`, bien > 0);
+      c.dire(`${bien} bien placée${bien > 1 ? 's' : ''}, ${mal} à déplacer. Encore ${essais - faits} essai${essais - faits > 1 ? 's' : ''}.`, bien > 0);
     });
     return b;
   }), gros('⌫', () => { essai.pop(); dessiner(); }, 'gros secondaire'));
@@ -2485,12 +2491,12 @@ function jouerCode(n) {
 
 function jouerDessins(n) {
   const d = logique.dessinDuNiveau(n), cases = d.cases.map((l) => l.map(() => false));
-  const c = cadreNiveau('dessins', n, 'touche les cases à colorier. Un nombre dit combien de cases coloriées se suivent.');
+  const c = cadreNiveau('dessins', n, 'le nombre à gauche dit combien de cases colorier dans la ligne, celui du haut dans la colonne. Quand un nombre devient vert, c’est bon !');
   const table = el('div', { className: 'dessin-cache' });
   let fini = false;
   table.style.setProperty('--taille', cases.length);
-  const dessiner = () => table.replaceChildren(el('span'), ...d.colonnes.map((x) => el('span', { className: 'nombres haut', textContent: x.join('\n') })),
-    ...cases.flatMap((l, r) => [el('span', { className: 'nombres', textContent: d.lignes[r].join(' ') }), ...l.map((v, col) => {
+  const dessiner = () => table.replaceChildren(el('span'), ...d.colonnes.map((x, col) => el('span', { className: `nombres haut${String(logique.nombresDe(cases.map((l) => l[col]))) === String(x) ? ' juste' : ''}`, textContent: x.join('\n') })),
+    ...cases.flatMap((l, r) => [el('span', { className: `nombres${String(logique.nombresDe(l)) === String(d.lignes[r]) ? ' juste' : ''}`, textContent: d.lignes[r].join(' ') }), ...l.map((v, col) => {
       const b = el('button', { className: v ? 'coloriee' : '', disabled: fini });
       b.setAttribute('aria-label', `Ligne ${r + 1}, colonne ${col + 1}${v ? ', coloriée' : ''}`);
       b.addEventListener('click', () => {

@@ -1,6 +1,7 @@
 // Ce que l'app dit pendant les jeux à questions : on tire beaucoup de questions et on note chaque texte dit
 // (la question lue, la correction, le « savais-tu »). Sert à voix/couverture.mjs (mesurer) et à voix/lister-phrases.mjs (lister ce qui manque).
-import { phrases } from '../js/voix-cle.js';
+import { phrases, DEBUTS } from '../js/voix-cle.js';
+export { DEBUTS };
 import { accorder } from '../js/genre.js';
 
 const js = (f) => import(new URL(`../js/${f}`, import.meta.url));
@@ -56,7 +57,6 @@ export function textesDits() {
   return tout;
 }
 // Les morceaux à enregistrer pour un texte : ses phrases ; une liste de réponses donne chaque réponse ; « La bonne réponse est X. » donne le début et X.
-export const DEBUTS = ['La bonne réponse est', 'La bonne réponse :'];
 export function morceaux(texte) {
   return phrases(texte).flatMap((p) => {
     const d = DEBUTS.find((x) => p.startsWith(`${x} `));

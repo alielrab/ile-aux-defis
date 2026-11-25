@@ -58,6 +58,9 @@ for (const [k, s] of Object.entries(SYSTEMES)) ajouter(8, `corps/${k}`, '640x102
 for (const k of ['squelette', 'muscles', 'cerveau']) ajouter(8, `corps/${k}-dos`, '640x1024', `Page du corps, vue de dos : ${SYSTEMES[k].nom}`);
 // Les étapes des expériences du labo : une image par étape
 for (const [cle, [nom, , ailleurs]] of Object.entries(OBJETS)) if (!ailleurs) ajouter(8, `enigmes/${cle}`, '256x256', `Trouve l'intrus : ${nom}`);
+for (const a of ['soleil', 'mercure', 'venus', 'terre', 'lune', 'mars', 'jupiter', 'saturne', 'uranus', 'neptune']) ajouter(8, `espace/${a}`, '256x256', `Observatoire : ${a}, un rond qui remplit l'image (Saturne avec ses anneaux)`);
+ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
+ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);
 for (const f of ['rouge', 'bleu', 'jaune', 'vert', 'violet', 'orange', 'etoile', 'coeur', 'triangle', 'carre']) ajouter(8, `enigmes/forme-${f}`, '128x128', `Suites logiques : la forme « ${f} »`);
 for (const [f, t] of [['auto-rouge', '256x128'], ['auto', '256x128'], ['auto-camion', '384x128']]) ajouter(8, `enigmes/${f}`, t, 'Parking bloqué : un véhicule vu du dessus, couché, le nez à droite (la voiture bleue et le camion changent de couleur dans le jeu)');

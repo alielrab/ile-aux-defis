@@ -138,7 +138,7 @@ const PARKINGS = {
 };
 export const parkingDuNiveau = (n, age) => PARKINGS[serie(age)][n].split(' ').map((t) => [Number(t[0]), Number(t[1]), Number(t[2]), t[3]]);
 
-// ——— Le code des couleurs : une suite de couleurs cachée (une couleur peut revenir). [longueur, nombre de couleurs, essais]
+// ——— Le code des couleurs : une suite de couleurs cachée. Une couleur peut revenir plusieurs fois : c'est voulu (plus de réflexion), et la consigne le dit. [longueur, nombre de couleurs, essais]
 export const CODES = [[3, 3, 8], [3, 4, 8], [3, 5, 8], [4, 4, 8], [4, 5, 9], [4, 6, 10], [5, 5, 10], [5, 6, 12]];
 export const nouveauCode = (n, aleatoire = Math.random) => Array.from({ length: CODES[n][0] }, () => Math.floor(aleatoire() * CODES[n][1]));
 // [bien placées, bonnes couleurs mais mal placées]

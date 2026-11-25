@@ -61,7 +61,10 @@ export const ASTRES = [
 export const poidsSur = (astre, poids) => Math.round(poids * astre.gravite);
 
 // Un astre dessiné (rond avec relief ; anneaux pour Saturne ; bandes pour Jupiter)
+const prete = (nom) => ((globalThis.IMAGES ?? []).includes(`images/espace/${nom}.webp`) ? `images/espace/${nom}.webp` : null);
 export function dessinerAstre(a, x, y, r) {
+  const img = prete(a.cle), k = a.cle === 'saturne' ? 1.9 : a.cle === 'soleil' ? 1.12 : 1; // l'image de Saturne compte ses anneaux, celle du Soleil ses flammes
+  if (img) return `<image href="${img}" x="${x - r * k}" y="${y - r * k}" width="${2 * r * k}" height="${2 * r * k}"/>`;
   const bandes = a.cle === 'jupiter'
     ? [-0.45, -0.15, 0.2, 0.5].map((k) => `<rect x="${x - r}" y="${y + k * r}" width="${2 * r}" height="${r * 0.12}" fill="#b5764a" opacity=".55" clip-path="url(#clip-${a.cle}-${Math.round(x)})"/>`).join('')
       + `<ellipse cx="${x + r * 0.35}" cy="${y + r * 0.3}" rx="${r * 0.18}" ry="${r * 0.1}" fill="#c0503a"/>`
@@ -77,6 +80,10 @@ export function dessinerAstre(a, x, y, r) {
 const DEFS = `<defs><radialGradient id="ombre-astre" cx=".35" cy=".35" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient></defs>`;
 const ETOILES_FOND = Array.from({ length: 40 }, (_, i) => `<circle cx="${(i * 197) % 1000}" cy="${(i * 89) % 200}" r="${i % 3 ? 1.2 : 2}" fill="#fff" opacity=".7"/>`).join('');
 
+// Le ciel derrière les astres : l'image, ou un fond bleu nuit semé de points
+const fond = (l, h) => (prete('fond') ? `<image href="${prete('fond')}" width="${l}" height="${h}" preserveAspectRatio="xMidYMid slice" style="clip-path: inset(0 round 16px)"/>`
+  : `<rect width="${l}" height="${h}" rx="16" fill="#141a3a"/>${ETOILES_FOND}`);
+
 // Le voyage : tous les astres en ligne, la fusée au-dessus de celui qu'on visite (indice i)
 export function dessinerVoyage(i) {
   const pas = 1000 / ASTRES.length;
@@ -84,25 +91,26 @@ export function dessinerVoyage(i) {
     ${dessinerAstre(a, pas * (k + 0.5), 125, a.cle === 'soleil' ? 34 : a.cle === 'lune' ? 12 : 22)}</g>`).join('');
   const fx = pas * (i + 0.5);
   return `<svg viewBox="0 0 1000 200" class="voyage" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Le système solaire">${DEFS}
-    <rect width="1000" height="200" rx="16" fill="#141a3a"/>${ETOILES_FOND}${astres}
-    <g class="fusee" style="transform: translate(${fx}px, 62px)">
+    ${fond(1000, 200)}${astres}
+    <g class="fusee" style="transform: translate(${fx}px, 62px)">${prete('fusee') ? `<image href="${prete('fusee')}" x="-24" y="-36" width="48" height="56"/></g></svg>` : FUSEE}`;
+}
+const FUSEE = `
       <path d="M0 -26 Q12 -12 10 12 L-10 12 Q-12 -12 0 -26Z" fill="#f2f2f2"/><circle cy="-6" r="5" fill="#6ac0d0" stroke="#3a4a6a" stroke-width="1.5"/>
       <path d="M-10 4 L-18 16 L-10 14Z M10 4 L18 16 L10 14Z" fill="#e05252"/><path d="M-6 12 Q0 30 6 12Z" fill="#ffb03a"/></g></svg>`;
-}
 
 // Les tailles comparées (à l'échelle) : le Soleil est si gros qu'on n'en voit qu'un bout
 export function dessinerTailles() {
   const k = 150 / ASTRES.find((a) => a.cle === 'jupiter').diametre; // rayon de Jupiter = 75
   let x = 150;
   const planetes = ASTRES.filter((a) => a.cle !== 'soleil').map((a) => {
-    const r = Math.max(1.5, (a.diametre * k) / 2), place = Math.max(r, 26); // les petites planètes gardent la place de leur nom
+    const r = Math.max(1.5, (a.diametre * k) / 2), place = Math.max(r * (a.cle === 'saturne' ? 1.9 : 1), 26); // Saturne : la place de ses anneaux // les petites planètes gardent la place de leur nom
     x += place + 8;
     const s = `${dessinerAstre(a, x, 150, r)}<text x="${x}" y="${150 + Math.max(r, 20) + 26}" font-size="15" font-weight="700" text-anchor="middle" fill="#fff">${a.nom.replace(/^L[ae] /, '')}</text>`;
-    x += place + (a.cle === 'saturne' ? 40 : 4);
+    x += place + 4;
     return s;
   }).join('');
   return `<svg viewBox="0 0 ${x + 20} 260" class="tailles" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Les planètes à la même échelle : Jupiter est la plus grosse, Mercure la plus petite">${DEFS}
-    <rect width="${x + 20}" height="260" rx="16" fill="#141a3a"/>${ETOILES_FOND}
+    ${fond(x + 20, 260)}
     <circle cx="${150 - 1392700 * k / 2}" cy="150" r="${1392700 * k / 2}" fill="#ffcf3f"/><text x="30" y="40" font-size="16" font-weight="700" fill="#5a3a00">Soleil</text>
     ${planetes}</svg>`;
 }

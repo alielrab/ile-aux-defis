@@ -244,6 +244,16 @@ const app = readFileSync(new URL('js/app.js', racine), 'utf8');
 let n = 0;
 for (const [, , t] of app.matchAll(/parler\((['"`])((?:(?!\1)[^\\]|\\.)*)\1/g)) if (!t.includes('${')) ajouter(`app.${++n}`, "Phrases de l'app", t.replace(/\\'/g, "'"));
 
+{ // parler(`Bravo, le squelette est complet ! ${texte}`) : les phrases entières qui ne changent jamais, autour des parties variables
+  const { phrases } = await js('voix-cle.js');
+  let k = 0;
+  for (const [, t] of app.matchAll(/parler\(`([^`]*)/g)) {
+    for (const p of phrases(t.replace(/\$\{[^}]*\}?/g, ' ◆ ').replace(/\\'/g, "'"))) if (!p.includes('◆') && /[.!?]$/.test(p)) ajouter(`app.trou.${++k}`, "Phrases de l'app", p);
+  }
+  ajouter('magasin.maison', "Phrases de l'app", 'Voici ta maison !');
+  for (const [id, m] of Object.entries(catalogue.MAGASINS)) ajouter(`magasin.${id}`, "Phrases de l'app", `Bienvenue ${m.nom.replace(/^Le /, 'au ').replace(/^La /, 'à la ')} !`);
+}
+
 const csv = ['id;source;texte', ...lignes.map((l) => l.map((x) => (/[;"\n]/.test(x) ? `"${x.replaceAll('"', '""')}"` : x)).join(';'))].join('\n');
 writeFileSync(new URL('voix/phrases.csv', racine), `﻿${csv}\n`); // BOM : les accents s'ouvrent bien dans Excel
 console.log(`${lignes.length} phrases écrites dans voix/phrases.csv`);

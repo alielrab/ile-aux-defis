@@ -67,6 +67,7 @@ test('voix enregistrée : un texte se découpe en morceaux connus, sinon la voix
   assert.deepEqual(fichiers('Quel organe pompe le sang ? Le foie, Un os, long, ou Le cœur ?', quiz), ['Quel organe pompe le sang ?', 'Le foie', 'Un os, long', 'ou', 'Le cœur'].map(cle));
   assert.deepEqual(fichiers('La bonne réponse est Le cœur.', quiz), [cle('La bonne réponse est'), cle('Le cœur')]);
   assert.deepEqual(fichiers('La bonne réponse : Le foie.', quiz), [cle('La bonne réponse :'), cle('Le foie')]);
+  assert.deepEqual(fichiers('Le cœur. Quel organe pompe le sang ?', quiz), [cle('Le cœur'), cle('Quel organe pompe le sang ?')]); // un nom suivi d'un point
   assert.equal(fichiers('Le foie, Le rein, ou Le cœur ?', quiz), null); // une réponse sans voix : tout le texte repasse à la voix de la tablette
   for (const c of VOIX_PRETES) assert.ok(existsSync(`voix/audio/${c}.mp3`), `voix/audio/${c}.mp3 manque`);
 });

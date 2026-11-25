@@ -626,6 +626,18 @@
 8;images/enigmes/piece.webp;256x256;oui;Trouve l'intrus : la pièce
 8;images/enigmes/horloge.webp;256x256;oui;Trouve l'intrus : l’horloge
 8;images/enigmes/biscuit.webp;256x256;oui;Trouve l'intrus : le biscuit
+8;images/espace/soleil.webp;256x256;oui;Observatoire : soleil, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/mercure.webp;256x256;oui;Observatoire : mercure, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/venus.webp;256x256;oui;Observatoire : venus, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/terre.webp;256x256;oui;Observatoire : terre, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/lune.webp;256x256;oui;Observatoire : lune, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/mars.webp;256x256;oui;Observatoire : mars, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/jupiter.webp;256x256;oui;Observatoire : jupiter, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/saturne.webp;256x256;oui;Observatoire : saturne, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/uranus.webp;256x256;oui;Observatoire : uranus, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/neptune.webp;256x256;oui;Observatoire : neptune, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/espace/fusee.webp;160x192;oui;Observatoire : la fusée, le nez en haut
+8;images/espace/fond.webp;1024x440;non;Observatoire : le ciel étoilé, sans planète
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »
 8;images/enigmes/carte-suites.webp;400x250;oui;Tour des énigmes : la carte du jeu « suites »
 8;images/enigmes/carte-potions.webp;400x250;oui;Tour des énigmes : la carte du jeu « potions »

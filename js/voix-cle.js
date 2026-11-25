@@ -26,13 +26,15 @@ export function phrases(texte) {
 // Une phrase sans voix à elle, mais faite de morceaux qui en ont une. Renvoie les fichiers, ou null.
 // « Le cœur, le foie, ou le poumon ? » (les réponses proposées) → chaque réponse, avec « ou » avant la dernière.
 // « La bonne réponse est le cœur. » → « La bonne réponse est », puis « le cœur ».
-const DEBUTS = ['La bonne réponse est', 'La bonne réponse :'];
+// « Le crâne. » (un nom suivi d'un point, au début d'une fiche) → la voix de « Le crâne ».
+export const DEBUTS = ['La bonne réponse est', 'La bonne réponse :', 'Tu es sur :'];
 function composer(phrase, pretes) {
   const a = (t) => pretes.has(cle(t));
   for (const d of DEBUTS) if (phrase.startsWith(`${d} `) && a(d)) {
     const reste = phrase.slice(d.length + 1);
     for (const r of [reste, reste.replace(/\.$/, '')]) if (a(r)) return [cle(d), cle(r)];
   }
+  if (phrase.endsWith('.') && a(phrase.slice(0, -1))) return [cle(phrase.slice(0, -1))];
   if (!/, ou .+ \?$/.test(phrase)) return null;
   const mots = phrase.slice(0, -2).split(', '), liste = [];
   mots.push(mots.pop().replace(/^ou /, ''));
