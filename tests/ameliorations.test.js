@@ -91,4 +91,6 @@ test('labo : des expériences complètes et sans danger ; les étoiles une seule
   assert.equal(x.terminer(p, 'poivre'), 0);
   assert.deepEqual([p.etoiles, p.experiences], [x.ETOILES_EXPERIENCE, ['poivre']]);
   assert.throws(() => x.terminer(p, 'inconnue'));
+  assert.deepEqual([x.validerVraie(p, 'poivre'), x.validerVraie(p, 'poivre'), p.vraies], [x.ETOILES_VRAIE, 0, ['poivre']]);
+  assert.throws(() => x.validerVraie(p, 'inconnue'));
 });

@@ -3,8 +3,10 @@
 // Choisies sans feu, sans produit dangereux et sans eau bouillante. Sources (reformulées) : Alloprof, « 10 activités scientifiques à faire à la maison »,
 // et Les Savants Fous, « 15 expériences scientifiques faciles à faire à la maison ». À faire relire par un parent.
 export const ETOILES_EXPERIENCE = 2; // la première fois qu'on devine puis qu'on lit l'explication
+export const ETOILES_VRAIE = 10; // l'expérience faite pour de vrai, validée par un parent avec son code
 export const REGLE = 'Fais toujours tes expériences avec un adulte. On ne goûte rien, et on range tout à la fin.';
 
+// Les images des étapes : images/experiences/<cle>-<n>.webp.
 // devine : [la question, la bonne réponse, deux autres réponses]. adulte : ce que l'adulte fait lui-même.
 export const EXPERIENCES = [
   { cle: 'poivre', nom: 'Le poivre qui s’enfuit', image: '🌶️', duree: '5 minutes',
@@ -78,6 +80,15 @@ export function terminer(profil, cle) {
   faites.push(cle);
   profil.etoiles += ETOILES_EXPERIENCE;
   return ETOILES_EXPERIENCE;
+}
+// Un parent valide l'expérience faite pour de vrai : des étoiles, une seule fois par expérience. Renvoie les étoiles gagnées.
+export function validerVraie(profil, cle) {
+  if (!experience(cle)) throw new Error('Expérience inconnue.');
+  const vraies = (profil.vraies ??= []);
+  if (vraies.includes(cle)) return 0;
+  vraies.push(cle);
+  profil.etoiles += ETOILES_VRAIE;
+  return ETOILES_VRAIE;
 }
 // La fiche, lue à voix haute (sans la réponse à deviner)
 export const lire = (e) => `${e.nom}. Il te faut : ${e.materiel.join(', ')}. ${e.etapes.map((t, i) => `Étape ${i + 1}. ${t}`).join(' ')}${e.adulte ? ` ${e.adulte}` : ''} ${REGLE}`;

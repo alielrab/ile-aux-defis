@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
-const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }, { ANIMAUX }, { SYSTEMES }] = await Promise.all(
-  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js'), js('jeux/nature-fiches.js'), js('jeux/atlas.js')]);
+const [{ CATALOGUE, MAGASINS, PIECES }, { LIEUX }, { ILES }, { CROYANCES }, { PEAUX, YEUX, COIFFURES }, { RECITS }, { DINOS }, { THEMES }, { ANIMAUX }, { SYSTEMES }, { EXPERIENCES }] = await Promise.all(
+  [js('catalogue.js'), js('carte.js'), js('archipel.js'), js('croyances.js'), js('avatar.js'), js('recits.js'), js('jeux/dinos.js'), js('jeux/langues.js'), js('jeux/nature-fiches.js'), js('jeux/atlas.js'), js('jeux/experiences.js')]);
 
 const lignes = [];
 const ajouter = (etape, fichier, taille, sujet, transparent = true) => lignes.push([etape, `images/${fichier}.webp`, taille, transparent ? 'oui' : 'non', sujet]);
@@ -56,13 +56,15 @@ for (const t of THEMES) ajouter(8, `langues/${t.cle}`, '512x320', `Thème de lan
 // Les pages du corps, à l'hôpital : une image par page, à toucher
 for (const [k, s] of Object.entries(SYSTEMES)) ajouter(8, `corps/${k}`, '640x1024', `Page du corps : ${s.nom}`);
 for (const k of ['squelette', 'muscles', 'cerveau']) ajouter(8, `corps/${k}-dos`, '640x1024', `Page du corps, vue de dos : ${SYSTEMES[k].nom}`);
+// Les étapes des expériences du labo : une image par étape
+for (const e of EXPERIENCES) e.etapes.forEach((t, i) => ajouter(8, `experiences/${e.cle}-${i + 1}`, '640x400', `Expérience « ${e.nom} », étape ${i + 1} : ${t}`, false));
 // Les animaux de la cabane nature
 for (const a of ANIMAUX) ajouter(8, `nature/${a[0]}`, '512x320', `Animal : ${a[1]}, en entier`);
 
 lignes.sort((a, b) => a[0] - b[0]);
 writeFileSync(new URL('images/liste.csv', racine), `﻿etape;fichier;taille;transparent;sujet\n${lignes.map((l) => l.join(';')).join('\n')}\n`); // BOM : les accents s'ouvrent bien dans Excel
 // Poids estimé en WebP (Ko par image, selon la taille), pour garder l'app légère
-const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110, '768x480': 60, '512x320': 25, '640x1024': 70 };
+const KO = { '128x128': 4, '256x256': 12, '384x384': 22, '512x512': 35, '512x768': 45, '768x1024': 45, '1280x256': 60, '1024x1024': 120, '1024x1280': 150, '1280x832': 110, '768x480': 60, '512x320': 25, '640x1024': 70, '640x400': 35 };
 for (const e of [1, 2, 3, 4, 5, 6, 7, 8]) {
   const l = lignes.filter((x) => x[0] === e);
   console.log(`étape ${e} : ${l.length} images, environ ${(l.reduce((s, x) => s + KO[x[2]], 0) / 1024).toFixed(1)} Mo`);

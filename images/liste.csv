@@ -495,6 +495,53 @@
 8;images/corps/squelette-dos.webp;640x1024;oui;Page du corps, vue de dos : Le squelette
 8;images/corps/muscles-dos.webp;640x1024;oui;Page du corps, vue de dos : Les muscles
 8;images/corps/cerveau-dos.webp;640x1024;oui;Page du corps, vue de dos : Le cerveau et les nerfs
+8;images/experiences/poivre-1.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 1 : Verse de l’eau dans l’assiette.
+8;images/experiences/poivre-2.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 2 : Saupoudre du poivre partout sur l’eau.
+8;images/experiences/poivre-3.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 3 : Trempe le bout de ton doigt dans le liquide vaisselle.
+8;images/experiences/poivre-4.webp;640x400;non;Expérience « Le poivre qui s’enfuit », étape 4 : Touche l’eau au milieu de l’assiette, et regarde !
+8;images/experiences/lait-1.webp;640x400;non;Expérience « Le lait magique », étape 1 : Verse du lait dans l’assiette.
+8;images/experiences/lait-2.webp;640x400;non;Expérience « Le lait magique », étape 2 : Dépose quelques gouttes de colorants, de plusieurs couleurs.
+8;images/experiences/lait-3.webp;640x400;non;Expérience « Le lait magique », étape 3 : Trempe le coton-tige dans le liquide vaisselle.
+8;images/experiences/lait-4.webp;640x400;non;Expérience « Le lait magique », étape 4 : Touche le lait avec le coton-tige, et regarde !
+8;images/experiences/oeuf-1.webp;640x400;non;Expérience « L’œuf qui flotte », étape 1 : Pose doucement un œuf dans le premier verre d’eau. Regarde ce qu’il fait.
+8;images/experiences/oeuf-2.webp;640x400;non;Expérience « L’œuf qui flotte », étape 2 : Dans le deuxième verre, mets 5 cuillères de sel.
+8;images/experiences/oeuf-3.webp;640x400;non;Expérience « L’œuf qui flotte », étape 3 : Mélange bien jusqu’à ce que le sel disparaisse.
+8;images/experiences/oeuf-4.webp;640x400;non;Expérience « L’œuf qui flotte », étape 4 : Pose doucement le deuxième œuf dans l’eau salée, et regarde !
+8;images/experiences/eau-voyage-1.webp;640x400;non;Expérience « L’eau qui voyage », étape 1 : Remplis un verre d’eau et ajoute du colorant.
+8;images/experiences/eau-voyage-2.webp;640x400;non;Expérience « L’eau qui voyage », étape 2 : Pose ce verre sur le gros livre, et le verre vide à côté, plus bas.
+8;images/experiences/eau-voyage-3.webp;640x400;non;Expérience « L’eau qui voyage », étape 3 : Plie l’essuie-tout en longue bande.
+8;images/experiences/eau-voyage-4.webp;640x400;non;Expérience « L’eau qui voyage », étape 4 : Mets un bout dans le verre plein, et l’autre bout dans le verre vide.
+8;images/experiences/eau-voyage-5.webp;640x400;non;Expérience « L’eau qui voyage », étape 5 : Attends une heure, et regarde !
+8;images/experiences/volcan-1.webp;640x400;non;Expérience « Le volcan », étape 1 : Pose la bouteille sur le plateau.
+8;images/experiences/volcan-2.webp;640x400;non;Expérience « Le volcan », étape 2 : Mets le bicarbonate dans la bouteille.
+8;images/experiences/volcan-3.webp;640x400;non;Expérience « Le volcan », étape 3 : Ajoute un peu de liquide vaisselle et du colorant.
+8;images/experiences/volcan-4.webp;640x400;non;Expérience « Le volcan », étape 4 : Verse le vinaigre d’un coup, recule d’un pas, et regarde !
+8;images/experiences/ballon-gonfle-1.webp;640x400;non;Expérience « Le ballon qui se gonfle tout seul », étape 1 : Verse du vinaigre dans la bouteille, jusqu’au tiers.
+8;images/experiences/ballon-gonfle-2.webp;640x400;non;Expérience « Le ballon qui se gonfle tout seul », étape 2 : Avec l’entonnoir, mets le bicarbonate dans le ballon.
+8;images/experiences/ballon-gonfle-3.webp;640x400;non;Expérience « Le ballon qui se gonfle tout seul », étape 3 : Enfile le ballon sur le goulot, sans faire tomber la poudre.
+8;images/experiences/ballon-gonfle-4.webp;640x400;non;Expérience « Le ballon qui se gonfle tout seul », étape 4 : Redresse le ballon pour que la poudre tombe dans la bouteille, et regarde !
+8;images/experiences/ballon-magique-1.webp;640x400;non;Expérience « Le ballon aimant », étape 1 : Frotte fort le ballon sur le pull ou sur tes cheveux.
+8;images/experiences/ballon-magique-2.webp;640x400;non;Expérience « Le ballon aimant », étape 2 : Approche le ballon des petits bouts de papier.
+8;images/experiences/ballon-magique-3.webp;640x400;non;Expérience « Le ballon aimant », étape 3 : Essaie aussi près d’un tout petit filet d’eau du robinet, et regarde !
+8;images/experiences/haricot-1.webp;640x400;non;Expérience « Le haricot dans le bocal », étape 1 : Mets du coton mouillé dans le bocal.
+8;images/experiences/haricot-2.webp;640x400;non;Expérience « Le haricot dans le bocal », étape 2 : Glisse les graines entre le coton et le verre, pour bien les voir.
+8;images/experiences/haricot-3.webp;640x400;non;Expérience « Le haricot dans le bocal », étape 3 : Pose le bocal près d’une fenêtre.
+8;images/experiences/haricot-4.webp;640x400;non;Expérience « Le haricot dans le bocal », étape 4 : Garde le coton mouillé, et regarde chaque jour !
+8;images/experiences/celeri-1.webp;640x400;non;Expérience « Le céleri qui boit les couleurs », étape 1 : Mets beaucoup de colorant dans un verre d’eau.
+8;images/experiences/celeri-2.webp;640x400;non;Expérience « Le céleri qui boit les couleurs », étape 2 : Pose une branche de céleri dans le verre.
+8;images/experiences/celeri-3.webp;640x400;non;Expérience « Le céleri qui boit les couleurs », étape 3 : Attends quelques heures.
+8;images/experiences/celeri-4.webp;640x400;non;Expérience « Le céleri qui boit les couleurs », étape 4 : Regarde les feuilles. Puis demande à un adulte de couper la tige, et regarde dedans !
+8;images/experiences/arc-en-ciel-1.webp;640x400;non;Expérience « L’arc-en-ciel dans l’assiette », étape 1 : Remplis l’assiette d’eau.
+8;images/experiences/arc-en-ciel-2.webp;640x400;non;Expérience « L’arc-en-ciel dans l’assiette », étape 2 : Pose le miroir penché, à moitié dans l’eau.
+8;images/experiences/arc-en-ciel-3.webp;640x400;non;Expérience « L’arc-en-ciel dans l’assiette », étape 3 : Tourne l’assiette pour que le soleil éclaire le miroir.
+8;images/experiences/arc-en-ciel-4.webp;640x400;non;Expérience « L’arc-en-ciel dans l’assiette », étape 4 : Cherche le reflet sur le mur ou sur la feuille blanche, et regarde !
+8;images/experiences/coquille-1.webp;640x400;non;Expérience « La coquille qui disparaît », étape 1 : Pose l’œuf dur dans le verre.
+8;images/experiences/coquille-2.webp;640x400;non;Expérience « La coquille qui disparaît », étape 2 : Recouvre-le de vinaigre. Regarde les petites bulles !
+8;images/experiences/coquille-3.webp;640x400;non;Expérience « La coquille qui disparaît », étape 3 : Couvre le verre avec l’assiette et mets-le au frigo.
+8;images/experiences/coquille-4.webp;640x400;non;Expérience « La coquille qui disparaît », étape 4 : Le lendemain, sors l’œuf, rince-le, et regarde !
+8;images/experiences/bonbons-1.webp;640x400;non;Expérience « Les bonbons arc-en-ciel », étape 1 : Range les bonbons en rond, tout autour de l’assiette.
+8;images/experiences/bonbons-2.webp;640x400;non;Expérience « Les bonbons arc-en-ciel », étape 2 : Verse doucement l’eau tiède au milieu, jusqu’aux bonbons.
+8;images/experiences/bonbons-3.webp;640x400;non;Expérience « Les bonbons arc-en-ciel », étape 3 : Ne touche plus à rien, et regarde !
 8;images/nature/renard.webp;512x320;oui;Animal : Le renard, en entier
 8;images/nature/herisson.webp;512x320;oui;Animal : Le hérisson, en entier
 8;images/nature/ecureuil.webp;512x320;oui;Animal : L’écureuil, en entier

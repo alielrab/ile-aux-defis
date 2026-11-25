@@ -529,6 +529,7 @@ select {
 /* Les fiches de la cabane nature et du labo */
 .fiche-nature ul, .fiche-nature ol { margin: 0.2rem 0; padding-left: 1.3rem; }
 .fiche-nature li { margin: 0.15rem 0; }
+.fiche-nature li img { display: block; width: 100%; max-width: 400px; margin: 0.3rem 0 0.6rem; border-radius: 14px; }
 .fiche-nature { width: 100%; text-align: left; }
 .fiche-nature h2 { margin: 0.2rem 0 0.4rem; text-align: center; color: var(--texte); text-shadow: none; }
 .fiche-nature dt { font-weight: 800; margin-top: 0.5rem; }

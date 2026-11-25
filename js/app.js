@@ -2112,7 +2112,7 @@ function ouvrirLabo(cle = null) {
     b.addEventListener('click', () => {
       for (const x of deviner.children) { x.disabled = true; if (x.textContent === bonne) x.classList.add('choisi'); }
       const gain = experiences.terminer(joueuse, e.cle);
-      if (gain) { compterPartie('experiences'); gagnerEtoiles(gain); }
+      if (gain) { compterPartie('experiences'); enregistrer(); etoilesJoueuse(); } // les étoiles sont déjà ajoutées par terminer()
       const debut = c === bonne ? 'Bien deviné !' : `En vrai : ${bonne.toLowerCase()}. C’est en essayant qu’on découvre !`;
       reponse.replaceChildren(el('dl', {}, el('dt', { textContent: '💡 Pourquoi ?' }), el('dd', { textContent: e.explication })),
         el('p', { className: 'savais', textContent: gain ? `+${gain} ⭐ Maintenant, fais l’expérience pour de vrai !` : 'Maintenant, fais l’expérience pour de vrai !' }));
@@ -2121,15 +2121,35 @@ function ouvrirLabo(cle = null) {
     });
     return b;
   }));
+  // L'expérience faite pour de vrai : un parent valide avec son code
+  const vraie = el('div', { className: 'carte fiche-nature' });
+  if ((joueuse.vraies ?? []).includes(e.cle)) vraie.append(el('p', { className: 'erreur ok', textContent: '✅ Expérience faite pour de vrai !' }));
+  else {
+    const code = el('input', { type: 'password', inputMode: 'numeric', maxLength: 4, autocomplete: 'off' }), message = el('p', { className: 'erreur', role: 'status' });
+    const form = el('form', { className: 'valider-recette', noValidate: true },
+      el('p', { textContent: `Vous l’avez faite ensemble ? Un parent tape son code pour valider : +${experiences.ETOILES_VRAIE} ⭐.` }),
+      el('label', { textContent: 'Code parent ' }, code), message, el('button', { className: 'gros', textContent: 'Valider l’expérience' }));
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      if (code.value !== etat.code) return noter(message, "Ce n'est pas le bon code.");
+      const gain = experiences.validerVraie(joueuse, e.cle);
+      enregistrer();
+      etoilesJoueuse();
+      vraie.replaceChildren(el('p', { className: 'erreur ok', textContent: `✅ Expérience faite pour de vrai ! +${gain} ⭐` }));
+      bip(true);
+      parler(`Bravo, tu as fait l’expérience pour de vrai ! Tu gagnes ${gain} étoiles.`, { ton: 1.15 });
+    });
+    vraie.append(el('h2', { textContent: '🧪 Tu l’as faite pour de vrai ?' }), form);
+  }
   const tete = el('div', { className: 'tete-fiche' });
   tete.innerHTML = `<span class="emoji-theme" aria-hidden="true">${e.image}</span>`;
   v.replaceChildren(
     el('div', { className: 'carte fiche-nature' }, tete, el('h2', { textContent: e.nom }),
       el('dl', {}, el('dt', { textContent: `⏱️ ${e.duree}` }), el('dt', { textContent: '🧺 Il te faut' }), el('dd', {}, el('ul', {}, ...e.materiel.map((m) => el('li', { textContent: m })))),
-        el('dt', { textContent: '👣 Les étapes' }), el('dd', {}, el('ol', {}, ...e.etapes.map((t) => el('li', { textContent: t })))),
+        el('dt', { textContent: '👣 Les étapes' }), el('dd', {}, el('ol', {}, ...e.etapes.map((t, i) => { const li = el('li', { textContent: t }), src = image(`experiences/${e.cle}-${i + 1}`); if (src) li.append(el('img', { src, alt: '' })); return li; }))),
         ...(e.adulte ? [el('dt', { textContent: '🧑 Avec un adulte' }), el('dd', { textContent: e.adulte })] : []))),
     el('div', { className: 'actions-atelier' }, gros('🔊 Écouter', () => parler(experiences.lire(e)), 'gros secondaire'), gros('← Les expériences', () => ouvrirLabo())),
-    el('h2', { textContent: `🤔 Devine d’abord : ${question}` }), deviner, reponse);
+    el('h2', { textContent: `🤔 Devine d’abord : ${question}` }), deviner, reponse, vraie);
   parler(`${experiences.lire(e)} Devine d’abord : ${question}`);
 }
 
