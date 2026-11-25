@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { cle } from '../js/voix-cle.js';
 
 const VOIX = { voice_type: 'element', voice_id: '0aa4a36d-2dd6-4dad-a0a5-6a4b5bb1a039' }; // la voix choisie (« française énergique »)
-const [sortie, filtre = '.', parLot = 25] = process.argv.slice(2);
+const [sortie, filtre = '.', parLot = 25, quoi = ''] = process.argv.slice(2); // quoi : « courtes » (1 ou 2 mots, à faire par lots de 12) ou « longues »
 
 // Les nombres en lettres : la voix lit mal les chiffres (« 7 » devenait « sette »)
 const PETITS = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf'];
@@ -24,7 +24,7 @@ export function enLettres(n) {
   return String(n);
 }
 // Le texte donné à la voix : nombres en lettres, signes dits en mots
-export const aDire = (t) => t.replace(/(\d+)er\b/g, (_, n) => (n === '1' ? 'premier' : `${enLettres(+n)}ième`)).replace(/(\d+),(\d+)/g, (_, a, b) => `${enLettres(+a)} virgule ${enLettres(+b)}`)
+export const aDire = (t) => t.replace(/(?<!\d)1 (?=heure|étoile|minute|seconde|fois|pièce|glace|paire|case|erreur)/g, 'une ').replace(/(\d+)er\b/g, (_, n) => (n === '1' ? 'premier' : `${enLettres(+n)}ième`)).replace(/(\d+),(\d+)/g, (_, a, b) => `${enLettres(+a)} virgule ${enLettres(+b)}`)
   .replace(/[−-](?=\d)/g, 'moins ').replace(/\d+/g, (n) => (n.length > 6 ? n : enLettres(+n))).replace(/%/g, ' pour cent').replace(/[«»"]/g, '').replace(/\s+/g, ' ').trim();
 
 const pretes = existsSync('voix/audio') ? readdirSync('voix/audio').filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)).sort() : [];
@@ -37,8 +37,11 @@ if (sortie) {
   const textes = readFileSync('voix/phrases.csv', 'utf8').replace(/^\uFEFF/, '').trim().split(/\r?\n/).slice(1).map((l) => { // \r : git peut rendre le fichier avec des fins de ligne Windows
     const [, id, source, t] = l.match(/^([^;]*);([^;]*);(.*)$/);
     return [id, source, t.startsWith('"') ? t.slice(1, -1).replaceAll('""', '"') : t];
-  }).filter(([id, source, t]) => re.test(`${id};${source}`) && /\p{L}/u.test(t) && !/\d\/\d/.test(t) && !vus.has(cle(t)) && vus.add(cle(t))).map(([, , t]) => t);
+  }).filter(([id, source, t]) => re.test(`${id};${source}`) && /[\p{L}\d]/u.test(t) && !/\d\/\d/.test(t) && (!quoi || (t.split(' ').length < 3) === (quoi === 'courtes')) && !vus.has(cle(t)) && vus.add(cle(t))).map(([, , t]) => t);
 
+  // on mélange (toujours pareil) : des phrases qui se ressemblent dans le même lot (« Léa n'a pas le chat. », « Léa n'a pas le chien. ») se découpent mal
+  let graine = 12345; const hasard = () => ((graine = (graine * 48271) % 2147483647) - 1) / 2147483646;
+  for (let i = textes.length - 1; i > 0; i--) { const j = Math.floor(hasard() * (i + 1)); [textes[i], textes[j]] = [textes[j], textes[i]]; }
   const lots = [[]];
   for (const t of textes) { // au plus 25 phrases et 1500 lettres par lot : la voix reste régulière
     const l = lots.at(-1);

@@ -62,5 +62,11 @@ test('voix enregistrée : un texte se découpe en morceaux connus, sinon la voix
   const pretes = new Set([cle('Bravo !'), cle('Étape 1. Verse du lait.')]);
   assert.deepEqual(fichiers('Bravo ! Étape 1. Verse du lait.', pretes), [cle('Bravo !'), cle('Étape 1. Verse du lait.')]); // le plus long morceau connu
   assert.equal(fichiers('Bravo ! Une phrase inconnue.', pretes), null);
+  // une question lue avec ses réponses, et la correction : faites de morceaux qui ont chacun leur voix
+  const quiz = new Set(['Quel organe pompe le sang ?', 'Le cœur', 'Le foie', 'Un os, long', 'ou', 'La bonne réponse est', 'La bonne réponse :'].map(cle));
+  assert.deepEqual(fichiers('Quel organe pompe le sang ? Le foie, Un os, long, ou Le cœur ?', quiz), ['Quel organe pompe le sang ?', 'Le foie', 'Un os, long', 'ou', 'Le cœur'].map(cle));
+  assert.deepEqual(fichiers('La bonne réponse est Le cœur.', quiz), [cle('La bonne réponse est'), cle('Le cœur')]);
+  assert.deepEqual(fichiers('La bonne réponse : Le foie.', quiz), [cle('La bonne réponse :'), cle('Le foie')]);
+  assert.equal(fichiers('Le foie, Le rein, ou Le cœur ?', quiz), null); // une réponse sans voix : tout le texte repasse à la voix de la tablette
   for (const c of VOIX_PRETES) assert.ok(existsSync(`voix/audio/${c}.mp3`), `voix/audio/${c}.mp3 manque`);
 });

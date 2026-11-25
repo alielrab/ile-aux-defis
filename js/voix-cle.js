@@ -23,13 +23,42 @@ export function phrases(texte) {
   }
   return liste.filter(Boolean);
 }
+// Une phrase sans voix à elle, mais faite de morceaux qui en ont une. Renvoie les fichiers, ou null.
+// « Le cœur, le foie, ou le poumon ? » (les réponses proposées) → chaque réponse, avec « ou » avant la dernière.
+// « La bonne réponse est le cœur. » → « La bonne réponse est », puis « le cœur ».
+const DEBUTS = ['La bonne réponse est', 'La bonne réponse :'];
+function composer(phrase, pretes) {
+  const a = (t) => pretes.has(cle(t));
+  for (const d of DEBUTS) if (phrase.startsWith(`${d} `) && a(d)) {
+    const reste = phrase.slice(d.length + 1);
+    for (const r of [reste, reste.replace(/\.$/, '')]) if (a(r)) return [cle(d), cle(r)];
+  }
+  if (!/, ou .+ \?$/.test(phrase)) return null;
+  const mots = phrase.slice(0, -2).split(', '), liste = [];
+  mots.push(mots.pop().replace(/^ou /, ''));
+  for (let i = 0; i < mots.length;) { // une réponse peut contenir une virgule : on prend le plus long morceau connu
+    let j = mots.length;
+    while (j > i && !a(mots.slice(i, j).join(', '))) j--;
+    if (j === i) return null;
+    if (j === mots.length && i > 0 && a('ou')) liste.push(cle('ou'));
+    liste.push(cle(mots.slice(i, j).join(', ')));
+    i = j;
+  }
+  return liste;
+}
 // Les fichiers à jouer pour dire ce texte : on prend à chaque fois le plus long morceau enregistré. null s'il manque un morceau.
 export function fichiers(texte, pretes) {
   const p = phrases(texte), liste = [];
   for (let i = 0; i < p.length;) {
     let j = p.length;
     while (j > i && !pretes.has(cle(p.slice(i, j).join(' ')))) j--;
-    if (j === i) return null;
+    if (j === i) {
+      const morceaux = composer(p[i], pretes);
+      if (!morceaux) return null;
+      liste.push(...morceaux);
+      i++;
+      continue;
+    }
     liste.push(cle(p.slice(i, j).join(' ')));
     i = j;
   }

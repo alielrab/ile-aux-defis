@@ -191,6 +191,54 @@ for (const a of catalogue.CATALOGUE) ajouter(`objet.${a.id.replace(':', '.')}`, 
   for (const i of ILES) ajouter(`ile.${i.id}.bienvenue`, "Phrases de l'app", `Bienvenue sur ${i.nom.replace(/^L'île/, "l'île")} !`);
 }
 
+{ // les jeux à questions : tout ce que l'app dit et qui n'a pas encore de voix, morceau par morceau (voir voix/simuler.mjs)
+  const { textesDits, morceaux, DEBUTS } = await import('./simuler.mjs');
+  const { fichiers } = await js('voix-cle.js');
+  const { VOIX_PRETES } = await import('./liste.js');
+  ['ou', 'Le savais-tu ?', ...DEBUTS].forEach((t, i) => ajouter(`liaison.${i + 1}`, 'Petits mots de liaison', t));
+  for (const [jeu, textes] of Object.entries(textesDits())) {
+    let k = 0;
+    for (const t of textes) if (!fichiers(t, VOIX_PRETES)) for (const m of morceaux(t)) ajouter(`jeu.${jeu}.${++k}`, `Jeu : ${jeu}`, m);
+  }
+}
+
+{ // des phrases à nombre qu'on peut toutes écrire, et la suite de la tour des énigmes (voir js/app.js)
+  const src = "Phrases de l'app";
+  ajouter('etoiles.1', src, 'Tu gagnes 1 étoile.');
+  for (let n = 2; n <= 30; n++) ajouter(`etoiles.${n}`, src, `Tu gagnes ${n} étoiles.`);
+  const suivi = await js('suivi.js'), x = await js('jeux/logique.js'), tour = 'Tour des énigmes';
+  for (let n = suivi.COFFRE[0]; n <= suivi.COFFRE[1]; n++) ajouter(`coffre.${n}`, src, `Dans le coffre, il y avait ${n} étoiles !`);
+  for (const [k, [titre, but]] of Object.entries(x.JEUX_LOGIQUE)) { ajouter(`logique.${k}.titre`, tour, `${titre} !`); ajouter(`logique.${k}.but`, tour, `${but}.`); }
+  ['Choisis un niveau.', 'Bravo, la grille est finie !', 'Bravo, tu as tout trouvé !', 'Bravo !', 'Pas cette fois.', 'Une nouvelle énigme t’attend demain !'].forEach((t, i) => ajouter(`logique.phrase${i + 1}`, tour, t));
+  x.DESSINS.forEach(([nom], i) => ajouter(`logique.dessin${i + 1}`, tour, `Le dessin caché, c’était ${nom}.`));
+  const indices = new Set();
+  for (let n = 0; n < 12; n++) for (const i of x.deductionDuNiveau(n).indices) indices.add(i);
+  [...indices].sort().forEach((t, i) => ajouter(`logique.indice${i + 1}`, tour, t));
+}
+
+{ // les textes rangés dans les données de ces modules (fiches, missions, maison de la confiance…) : chaque phrase, telle qu'elle est écrite
+  const { phrases } = await js('voix-cle.js');
+  const fiches = await js('jeux/nature-fiches.js');
+  for (const f of ['confiance', 'nature-fiches', 'missions', 'jardinage', 'avent', 'chantier']) {
+    const m = await js(`jeux/${f}.js`), vues = new Set();
+    let k = 0;
+    const voir = (v, prof = 0) => {
+      if (typeof v === 'string') { // un vrai texte : au moins deux mots, pas un dessin ni un nom de fichier
+        if (/\p{L}{2,} \p{L}/u.test(v) && !/[<>=]|^#|\.(webp|js|mp3)/.test(v)) for (const p of phrases(v)) ajouter(`${f}.${++k}`, `Textes : ${f}`, p);
+        return;
+      }
+      if (!v || typeof v !== 'object' || vues.has(v) || prof > 8) return;
+      vues.add(v);
+      for (const x of Array.isArray(v) ? v : Object.values(v)) voir(x, prof + 1);
+    };
+    for (const v of Object.values(m)) if (typeof v !== 'function') voir(v);
+  }
+  for (const age of [6, 9]) { // les fiches de la cabane nature, telles qu'elles sont lues
+    for (const a of fiches.ANIMAUX) phrases(fiches.ficheAnimal(a, age)).forEach((p, i) => ajouter(`fiche.animal.${fiches.ANIMAUX.indexOf(a) + 1}.${age}.${i + 1}`, 'Textes : nature-fiches', p));
+    for (const a of fiches.PLANTES) phrases(fiches.fichePlante(a, age)).forEach((p, i) => ajouter(`fiche.plante.${fiches.PLANTES.indexOf(a) + 1}.${age}.${i + 1}`, 'Textes : nature-fiches', p));
+  }
+}
+
 // Les phrases écrites telles quelles dans l'app : parler('…') sans partie variable
 const app = readFileSync(new URL('js/app.js', racine), 'utf8');
 let n = 0;

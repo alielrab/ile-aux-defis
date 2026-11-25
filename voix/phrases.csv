@@ -5221,6 +5221,1232 @@ ile.coeur.bienvenue;Phrases de l'app;Bienvenue sur l'île du cœur !
 ile.securite.bienvenue;Phrases de l'app;Bienvenue sur l'île de la sécurité !
 ile.nature.bienvenue;Phrases de l'app;Bienvenue sur l'île de la nature !
 ile.meninges.bienvenue;Phrases de l'app;Bienvenue sur l'île des méninges !
+liaison.1;Petits mots de liaison;ou
+liaison.2;Petits mots de liaison;Le savais-tu ?
+liaison.3;Petits mots de liaison;La bonne réponse est
+liaison.4;Petits mots de liaison;La bonne réponse :
+jeu.heure.1;Jeu : heure;Quelle heure est-il ?
+jeu.heure.2;Jeu : heure;La petite aiguille montre les heures.
+jeu.heure.4;Jeu : heure;5 heures et demie
+jeu.heure.5;Jeu : heure;4 heures et demie
+jeu.heure.6;Jeu : heure;6 heures
+jeu.heure.7;Jeu : heure;Fais tourner les aiguilles pour mettre l'horloge sur 1 heure.
+jeu.heure.8;Jeu : heure;Puis touche : c'est l'heure !
+jeu.heure.12;Jeu : heure;9 heures
+jeu.heure.13;Jeu : heure;8 heures et demie
+jeu.heure.14;Jeu : heure;6 heures et demie
+jeu.heure.18;Jeu : heure;3 heures et demie
+jeu.heure.20;Jeu : heure;1 heure et demie
+jeu.heure.24;Jeu : heure;7 heures et demie
+jeu.heure.25;Jeu : heure;8 heures
+jeu.heure.31;Jeu : heure;11 heures et demie
+jeu.heure.32;Jeu : heure;9 heures et demie
+jeu.heure.38;Jeu : heure;7 heures
+jeu.heure.50;Jeu : heure;2 heures et demie
+jeu.heure.60;Jeu : heure;3 heures
+jeu.heure.62;Jeu : heure;5 heures
+jeu.heure.92;Jeu : heure;12 heures et demie
+jeu.heure.116;Jeu : heure;11 heures
+jeu.heure.121;Jeu : heure;10 heures et demie
+jeu.heure.146;Jeu : heure;4 heures
+jeu.heure.175;Jeu : heure;12 heures
+jeu.heure.194;Jeu : heure;10 heures
+jeu.heure.1596;Jeu : heure;7 heures 55
+jeu.heure.1597;Jeu : heure;8 heures 55
+jeu.heure.1598;Jeu : heure;11 heures 35
+jeu.heure.1601;Jeu : heure;10 heures 20
+jeu.heure.1602;Jeu : heure;11 heures 20
+jeu.heure.1603;Jeu : heure;12 heures 20
+jeu.heure.1604;Jeu : heure;12 heures 50
+jeu.heure.1607;Jeu : heure;2 heures moins le quart
+jeu.heure.1609;Jeu : heure;5 heures moins le quart
+jeu.heure.1610;Jeu : heure;4 heures moins le quart
+jeu.heure.1614;Jeu : heure;7 heures et quart
+jeu.heure.1616;Jeu : heure;6 heures et quart
+jeu.heure.1619;Jeu : heure;9 heures 5
+jeu.heure.1620;Jeu : heure;9 heures 10
+jeu.heure.1621;Jeu : heure;7 heures 5
+jeu.heure.1622;Jeu : heure;11 heures 5
+jeu.heure.1633;Jeu : heure;4 heures et quart
+jeu.heure.1638;Jeu : heure;6 heures moins le quart
+jeu.heure.1639;Jeu : heure;9 heures 25
+jeu.heure.1643;Jeu : heure;8 heures 5
+jeu.heure.1644;Jeu : heure;8 heures 35
+jeu.heure.1646;Jeu : heure;8 heures 10
+jeu.heure.1651;Jeu : heure;8 heures et quart
+jeu.heure.1652;Jeu : heure;10 heures et quart
+jeu.heure.1655;Jeu : heure;6 heures 20
+jeu.heure.1656;Jeu : heure;8 heures 20
+jeu.heure.1657;Jeu : heure;7 heures 20
+jeu.heure.1658;Jeu : heure;9 heures 20
+jeu.heure.1669;Jeu : heure;9 heures 35
+jeu.heure.1670;Jeu : heure;8 heures moins le quart
+jeu.heure.1673;Jeu : heure;6 heures 25
+jeu.heure.1674;Jeu : heure;5 heures 40
+jeu.heure.1675;Jeu : heure;8 heures 25
+jeu.heure.1676;Jeu : heure;10 heures 25
+jeu.heure.1685;Jeu : heure;10 heures 40
+jeu.heure.1686;Jeu : heure;10 heures 10
+jeu.heure.1687;Jeu : heure;9 heures 40
+jeu.heure.1694;Jeu : heure;9 heures et quart
+jeu.heure.1697;Jeu : heure;3 heures et quart
+jeu.heure.1698;Jeu : heure;11 heures et quart
+jeu.heure.1699;Jeu : heure;1 heure et quart
+jeu.heure.1703;Jeu : heure;3 heures 40
+jeu.heure.1710;Jeu : heure;3 heures moins le quart
+jeu.heure.1711;Jeu : heure;12 heures moins le quart
+jeu.heure.1727;Jeu : heure;2 heures 40
+jeu.heure.1728;Jeu : heure;2 heures 50
+jeu.heure.1733;Jeu : heure;5 heures 20
+jeu.heure.1734;Jeu : heure;6 heures 50
+jeu.heure.1735;Jeu : heure;4 heures 50
+jeu.heure.1741;Jeu : heure;5 heures et quart
+jeu.heure.1747;Jeu : heure;2 heures 25
+jeu.heure.1753;Jeu : heure;12 heures 35
+jeu.heure.1764;Jeu : heure;1 heure moins le quart
+jeu.heure.1766;Jeu : heure;12 heures et quart
+jeu.heure.1775;Jeu : heure;6 heures 55
+jeu.heure.1776;Jeu : heure;9 heures 55
+jeu.heure.1794;Jeu : heure;4 heures 20
+jeu.heure.1795;Jeu : heure;4 heures 55
+jeu.heure.1796;Jeu : heure;4 heures 25
+jeu.heure.1797;Jeu : heure;Il fallait mettre 8 heures et quart.
+jeu.heure.1800;Jeu : heure;10 heures 35
+jeu.heure.1802;Jeu : heure;10 heures 5
+jeu.heure.1808;Jeu : heure;6 heures 35
+jeu.heure.1814;Jeu : heure;2 heures et quart
+jeu.heure.1832;Jeu : heure;11 heures moins le quart
+jeu.heure.1844;Jeu : heure;7 heures moins le quart
+jeu.heure.1872;Jeu : heure;7 heures 10
+jeu.heure.1873;Jeu : heure;2 heures 35
+jeu.heure.1884;Jeu : heure;6 heures 40
+jeu.heure.1887;Jeu : heure;6 heures 10
+jeu.heure.1892;Jeu : heure;12 heures 40
+jeu.heure.1893;Jeu : heure;1 heure 10
+jeu.heure.1938;Jeu : heure;3 heures 25
+jeu.heure.1946;Jeu : heure;10 heures 50
+jeu.heure.1947;Jeu : heure;10 heures moins le quart
+jeu.heure.1950;Jeu : heure;11 heures 40
+jeu.heure.1975;Jeu : heure;7 heures 35
+jeu.heure.1980;Jeu : heure;2 heures 10
+jeu.heure.1982;Jeu : heure;2 heures 5
+jeu.heure.1983;Jeu : heure;3 heures 10
+jeu.heure.1987;Jeu : heure;11 heures 10
+jeu.heure.1992;Jeu : heure;6 heures 5
+jeu.heure.1995;Jeu : heure;5 heures 55
+jeu.heure.2018;Jeu : heure;9 heures moins le quart
+jeu.heure.2031;Jeu : heure;7 heures 40
+jeu.heure.2037;Jeu : heure;1 heure 40
+jeu.heure.2076;Jeu : heure;5 heures 5
+jeu.heure.2077;Jeu : heure;5 heures 10
+jeu.heure.2089;Jeu : heure;5 heures 25
+jeu.heure.2107;Jeu : heure;9 heures 50
+jeu.heure.2133;Jeu : heure;1 heure 5
+jeu.heure.2142;Jeu : heure;2 heures 55
+jeu.heure.2145;Jeu : heure;2 heures 20
+jeu.heure.2148;Jeu : heure;4 heures 5
+jeu.heure.2150;Jeu : heure;3 heures 55
+jeu.heure.2174;Jeu : heure;4 heures 40
+jeu.heure.2226;Jeu : heure;7 heures 25
+jeu.heure.2228;Jeu : heure;11 heures 25
+jeu.heure.2276;Jeu : heure;3 heures 20
+jeu.heure.2280;Jeu : heure;1 heure 25
+jeu.heure.2283;Jeu : heure;12 heures 55
+jeu.heure.2322;Jeu : heure;1 heure 50
+jeu.heure.2340;Jeu : heure;1 heure 55
+jeu.heure.2355;Jeu : heure;12 heures 10
+jeu.heure.2359;Jeu : heure;3 heures 5
+jeu.heure.2360;Jeu : heure;4 heures 35
+jeu.heure.2424;Jeu : heure;12 heures 25
+jeu.heure.2448;Jeu : heure;4 heures 10
+jeu.heure.2487;Jeu : heure;12 heures 5
+jeu.heure.2512;Jeu : heure;Fais tourner les aiguilles pour mettre l'horloge sur 7 heures 35.
+jeu.heure.2547;Jeu : heure;1 heure 35
+jeu.heure.2571;Jeu : heure;3 heures 35
+jeu.heure.2592;Jeu : heure;Fais tourner les aiguilles pour mettre l'horloge sur 2 heures 40.
+jeu.heure.2740;Jeu : heure;11 heures 55
+jeu.heure.2750;Jeu : heure;Il est 2 heures 50.
+jeu.heure.2829;Jeu : heure;Fais tourner les aiguilles pour mettre l'horloge sur 7 heures 25.
+jeu.heure.2839;Jeu : heure;8 heures 50
+jeu.heure.2841;Jeu : heure;8 heures 40
+jeu.heure.2864;Jeu : heure;1 heure 20
+jeu.heure.2966;Jeu : heure;5 heures 35
+jeu.heure.3112;Jeu : heure;7 heures 50
+jeu.heure.3225;Jeu : heure;10 heures 55
+jeu.heure.3286;Jeu : heure;11 heures 50
+jeu.corps.16;Jeu : corps;Plus de la moitié !
+jeu.corps.17;Jeu : corps;Et ton cerveau, lui, est fait d'eau aux trois quarts environ.
+jeu.corps.39;Jeu : corps;C'est à peu près le poids d'une grande bouteille d'eau, et il est mou comme de la gelée !
+jeu.corps.96;Jeu : corps;L'étrier
+jeu.corps.97;Jeu : corps;la selle et la bride
+jeu.corps.99;Jeu : corps;le péroné et la rotule
+jeu.corps.101;Jeu : corps;la scie et le clou
+jeu.corps.102;Jeu : corps;ou Le marteau
+jeu.corps.103;Jeu : corps;l'enclume et l'étrier
+jeu.dictee.1;Jeu : dictee;Écris le mot : bougie.
+jeu.dictee.2;Jeu : dictee;Écris le mot : fourmi.
+jeu.dictee.3;Jeu : dictee;Écris le mot : lézard.
+jeu.dictee.4;Jeu : dictee;Écris le mot : lunettes.
+jeu.dictee.5;Jeu : dictee;Écris le mot : ciseaux.
+jeu.suisse.1;Jeu : suisse;Quel jour est la fête nationale suisse ?
+jeu.naturaliste.1;Jeu : naturaliste;Que transportent les abeilles de fleur en fleur ?
+jeu.naturaliste.3;Jeu : naturaliste;Le miel
+jeu.naturaliste.4;Jeu : naturaliste;La sève
+jeu.naturaliste.5;Jeu : naturaliste;Le pollen
+jeu.naturaliste.6;Jeu : naturaliste;Les graines
+jeu.potager.1;Jeu : potager;Quelle partie du brocoli mange-t-on ?
+jeu.potager.3;Jeu : potager;Les racines
+jeu.potager.4;Jeu : potager;Les fleurs en bouton
+jeu.potager.6;Jeu : potager;L’écorce
+jeu.atlas.4;Jeu : atlas;c’est un poumon
+jeu.atlas.6;Jeu : atlas;c’est un nerf
+jeu.atlas.8;Jeu : atlas;c’est un muscle
+jeu.atlas.9;Jeu : atlas;ou Non
+jeu.atlas.10;Jeu : atlas;c’est un os
+jeu.atlas.119;Jeu : atlas;ou Oui
+jeu.atlas.604;Jeu : atlas;l’enclume et l’étrier
+jeu.atlas.607;Jeu : atlas;le tibia et la rotule
+jeu.atlas.608;Jeu : atlas;ou La pelle
+jeu.atlas.609;Jeu : atlas;le seau et le râteau
+jeu.atlas.623;Jeu : atlas;La pelle
+jeu.dinos.1;Jeu : dinos;Que mangeait l’Ankylosaure ?
+jeu.dinos.3;Jeu : dinos;Des plantes
+jeu.dinos.4;Jeu : dinos;Surtout des poissons
+jeu.dinos.5;Jeu : dinos;De tout : plantes et petits animaux
+jeu.dinos.8;Jeu : dinos;De la viande
+jeu.dinos.68;Jeu : dinos;Combien mesurait l’Ankylosaure, de la tête à la queue ?
+jeu.dinos.71;Jeu : dinos;Environ 12 mètres
+jeu.dinos.72;Jeu : dinos;Environ 7 mètres
+jeu.dinos.73;Jeu : dinos;Environ 10 mètres
+jeu.dinos.84;Jeu : dinos;Environ 4,5 mètres
+jeu.urgences.1;Jeu : urgences;Deux voitures se sont touchées au carrefour.
+jeu.urgences.2;Jeu : urgences;Personne n’est blessé, mais elles bloquent la route.
+jeu.urgences.3;Jeu : urgences;Qui appelles-tu ?
+jeu.urgences.5;Jeu : urgences;🚑 144 : l’ambulance
+jeu.urgences.6;Jeu : urgences;🚓 117 : la police
+jeu.urgences.7;Jeu : urgences;🚒 118 : les pompiers
+jeu.urgences.8;Jeu : urgences;🙋 Pas une urgence : je demande à un adulte
+jeu.urgences.46;Jeu : urgences;Quand quelqu’un respire mal, il faut vite appeler : les secours arrivent rapidement.
+jeu.urgences.64;Jeu : urgences;Les ambulanciers savent soigner, et ils emmènent à l’hôpital si c’est nécessaire.
+jeu.urgences.95;Jeu : urgences;Reste près d’elle si tu peux, et ouvre la porte quand l’ambulance arrive.
+jeu.urgences.188;Jeu : urgences;Au téléphone, l’ambulancier t’expliquera ce que tu peux faire en attendant.
+jeu.urgences.189;Jeu : urgences;Tu n’es pas seule.
+jeu.urgences.194;Jeu : urgences;Tu n’es pas seul.
+jeu.route.6;Jeu : route;ou Je m’arrête
+jeu.route.7;Jeu : route;je regarde
+jeu.route.8;Jeu : route;j’écoute
+jeu.route.9;Jeu : route;puis je traverse
+jeu.route.10;Jeu : route;Une voiture ralentit devant le passage pour piétons.
+jeu.route.11;Jeu : route;Quand traverses-tu ?
+jeu.fractions.1;Jeu : fractions;Quelle fraction du gâteau est garnie ?
+jeu.fractions.3;Jeu : fractions;trois quarts
+jeu.fractions.4;Jeu : fractions;ou un quart
+jeu.fractions.5;Jeu : fractions;ou quatre sur un
+jeu.fractions.6;Jeu : fractions;un tiers
+jeu.fractions.7;Jeu : fractions;Quelle fraction de la pizza est garnie ?
+jeu.fractions.9;Jeu : fractions;un cinquième
+jeu.fractions.10;Jeu : fractions;ou six sur un
+jeu.fractions.11;Jeu : fractions;ou cinq sixièmes
+jeu.fractions.12;Jeu : fractions;un sixième
+jeu.fractions.15;Jeu : fractions;quatre demis
+jeu.fractions.16;Jeu : fractions;ou deux demis
+jeu.fractions.17;Jeu : fractions;ou deux quarts
+jeu.fractions.21;Jeu : fractions;six huitièmes
+jeu.fractions.22;Jeu : fractions;ou six demis
+jeu.fractions.23;Jeu : fractions;ou deux huitièmes
+jeu.fractions.24;Jeu : fractions;huit sixièmes
+jeu.fractions.27;Jeu : fractions;quatre sur un
+jeu.fractions.28;Jeu : fractions;ou un tiers
+jeu.fractions.41;Jeu : fractions;ou quatre demis
+jeu.fractions.42;Jeu : fractions;deux quarts
+jeu.fractions.45;Jeu : fractions;quatre tiers
+jeu.fractions.46;Jeu : fractions;ou trois sur un
+jeu.fractions.53;Jeu : fractions;ou quatre tiers
+jeu.fractions.54;Jeu : fractions;trois sur un
+jeu.fractions.75;Jeu : fractions;un quart
+jeu.fractions.105;Jeu : fractions;deux sixièmes
+jeu.fractions.106;Jeu : fractions;ou six huitièmes
+jeu.fractions.107;Jeu : fractions;ou huit demis
+jeu.fractions.108;Jeu : fractions;deux huitièmes
+jeu.fractions.142;Jeu : fractions;ou trois quarts
+jeu.fractions.153;Jeu : fractions;cinq huitièmes
+jeu.fractions.154;Jeu : fractions;ou huit cinquièmes
+jeu.fractions.155;Jeu : fractions;ou cinq tiers
+jeu.fractions.156;Jeu : fractions;trois huitièmes
+jeu.fractions.161;Jeu : fractions;ou un sixième
+jeu.fractions.162;Jeu : fractions;six sur un
+jeu.fractions.171;Jeu : fractions;cinq sixièmes
+jeu.fractions.177;Jeu : fractions;six demis
+jeu.fractions.178;Jeu : fractions;ou huit sixièmes
+jeu.fractions.197;Jeu : fractions;ou cinq huitièmes
+jeu.fractions.198;Jeu : fractions;cinq tiers
+jeu.fractions.207;Jeu : fractions;huit demis
+jeu.fractions.208;Jeu : fractions;ou deux sixièmes
+jeu.croyance.320;Jeu : croyance;« Cours !
+jeu.croyance.321;Jeu : croyance;», « Mange !
+jeu.croyance.322;Jeu : croyance;», « Dors !
+jeu.croyance.323;Jeu : croyance;», ou « Lis !
+jeu.croyance.324;Jeu : croyance;» ?
+jeu.croyance.326;Jeu : croyance;« Lis !
+jeu.croyance.327;Jeu : croyance;».
+jeu.croyance.329;Jeu : croyance;C'est pour cela que lire et apprendre sont très importants dans l'islam.
+jeu.croyance.331;Jeu : croyance;« Mange !
+jeu.croyance.332;Jeu : croyance;», « Lis !
+jeu.croyance.333;Jeu : croyance;», « Cours !
+jeu.croyance.334;Jeu : croyance;», ou « Dors !
+jeu.croyance.340;Jeu : croyance;», ou « Cours !
+jeu.croyance.343;Jeu : croyance;« Dors !
+jeu.croyance.382;Jeu : croyance;», ou « Mange !
+jeu.croyance.458;Jeu : croyance;On allume des feux et des lampions.
+jeu.passeport.2;Jeu : passeport;🇨🇭
+jeu.passeport.3;Jeu : passeport;Quel est le plat typique que nous avons découvert en Suisse ?
+jeu.passeport.5;Jeu : passeport;les käsknöpfle
+jeu.passeport.6;Jeu : passeport;des pâtes au fromage
+jeu.passeport.7;Jeu : passeport;la fondue
+jeu.passeport.8;Jeu : passeport;la pizza
+jeu.passeport.9;Jeu : passeport;Quel animal avons-nous découvert en Suisse ?
+jeu.passeport.11;Jeu : passeport;le lion
+jeu.passeport.12;Jeu : passeport;le dromadaire
+jeu.passeport.13;Jeu : passeport;le bouquetin
+jeu.passeport.16;Jeu : passeport;le macaque des neiges
+jeu.passeport.21;Jeu : passeport;le cheval lipizzan
+jeu.passeport.26;Jeu : passeport;le cerf
+jeu.passeport.30;Jeu : passeport;🇫🇷
+jeu.passeport.31;Jeu : passeport;Quel animal avons-nous découvert en France ?
+jeu.passeport.34;Jeu : passeport;le coq
+jeu.passeport.35;Jeu : passeport;le panda
+jeu.passeport.36;Jeu : passeport;Quel est le plat typique que nous avons découvert en France ?
+jeu.passeport.38;Jeu : passeport;le croissant
+jeu.passeport.39;Jeu : passeport;le couscous
+jeu.passeport.40;Jeu : passeport;ou les käsknöpfle
+jeu.passeport.44;Jeu : passeport;le crocodile du Nil
+jeu.passeport.49;Jeu : passeport;l’ara
+jeu.passeport.50;Jeu : passeport;un grand perroquet
+jeu.passeport.57;Jeu : passeport;ou la poutine
+jeu.passeport.58;Jeu : passeport;des frites au fromage
+jeu.passeport.62;Jeu : passeport;le loup
+jeu.passeport.66;Jeu : passeport;les sushis
+jeu.passeport.77;Jeu : passeport;les raviolis
+jeu.passeport.81;Jeu : passeport;🇩🇪
+jeu.passeport.82;Jeu : passeport;Quel animal avons-nous découvert en Allemagne ?
+jeu.passeport.84;Jeu : passeport;l’aigle
+jeu.passeport.86;Jeu : passeport;le coq de Barcelos
+jeu.passeport.87;Jeu : passeport;Quel est le plat typique que nous avons découvert en Allemagne ?
+jeu.passeport.90;Jeu : passeport;le bretzel
+jeu.passeport.100;Jeu : passeport;la morue
+jeu.passeport.110;Jeu : passeport;🇮🇹
+jeu.passeport.111;Jeu : passeport;Quel est le plat typique que nous avons découvert en Italie ?
+jeu.passeport.120;Jeu : passeport;La pizza Margherita a les couleurs du drapeau italien : le vert du basilic, le blanc de la mozzarella et le rouge de la tomate.
+jeu.passeport.124;Jeu : passeport;les tacos
+jeu.passeport.129;Jeu : passeport;la salade grecque
+jeu.passeport.130;Jeu : passeport;ou le foul
+jeu.passeport.131;Jeu : passeport;une purée de fèves
+jeu.passeport.137;Jeu : passeport;Quel animal avons-nous découvert en Italie ?
+jeu.passeport.144;Jeu : passeport;l’ugali
+jeu.passeport.145;Jeu : passeport;une purée de maïs
+jeu.passeport.146;Jeu : passeport;le curry
+jeu.passeport.161;Jeu : passeport;la paella
+jeu.passeport.167;Jeu : passeport;le fish and chips
+jeu.passeport.178;Jeu : passeport;le strudel aux pommes
+jeu.passeport.187;Jeu : passeport;la feijoada
+jeu.passeport.188;Jeu : passeport;un plat de haricots noirs
+jeu.passeport.194;Jeu : passeport;ou la pavlova
+jeu.passeport.195;Jeu : passeport;un gâteau meringué
+jeu.passeport.209;Jeu : passeport;le foul
+jeu.passeport.217;Jeu : passeport;ou la feijoada
+jeu.passeport.226;Jeu : passeport;la pavlova
+jeu.passeport.246;Jeu : passeport;ou l’ugali
+jeu.passeport.254;Jeu : passeport;🇦🇹
+jeu.passeport.255;Jeu : passeport;Quel animal avons-nous découvert en Autriche ?
+jeu.passeport.263;Jeu : passeport;le castor
+jeu.passeport.265;Jeu : passeport;Quel est le plat typique que nous avons découvert en Autriche ?
+jeu.passeport.284;Jeu : passeport;l’aigle royal
+jeu.passeport.302;Jeu : passeport;🇱🇮
+jeu.passeport.303;Jeu : passeport;Quel est le plat typique que nous avons découvert au Liechtenstein ?
+jeu.passeport.316;Jeu : passeport;Quel animal avons-nous découvert au Liechtenstein ?
+jeu.passeport.349;Jeu : passeport;ou l’ara
+jeu.passeport.366;Jeu : passeport;la poutine
+jeu.passeport.372;Jeu : passeport;le tigre
+jeu.passeport.409;Jeu : passeport;🇪🇸
+jeu.passeport.410;Jeu : passeport;Quel est le plat typique que nous avons découvert en Espagne ?
+jeu.passeport.415;Jeu : passeport;Quel animal avons-nous découvert en Espagne ?
+jeu.passeport.419;Jeu : passeport;le taureau
+jeu.passeport.434;Jeu : passeport;le kangourou
+jeu.passeport.459;Jeu : passeport;🇵🇹
+jeu.passeport.460;Jeu : passeport;Quel animal avons-nous découvert au Portugal ?
+jeu.passeport.482;Jeu : passeport;🇬🇧
+jeu.passeport.483;Jeu : passeport;Quel animal avons-nous découvert au Royaume-Uni ?
+jeu.passeport.491;Jeu : passeport;Big Ben, à Londres, c’est le nom de la grosse cloche de la tour, pas de la tour elle-même !
+jeu.passeport.516;Jeu : passeport;la chouette
+jeu.passeport.554;Jeu : passeport;Quel est le plat typique que nous avons découvert au Royaume-Uni ?
+jeu.passeport.602;Jeu : passeport;🇬🇷
+jeu.passeport.603;Jeu : passeport;Quel animal avons-nous découvert en Grèce ?
+jeu.passeport.608;Jeu : passeport;Quel est le plat typique que nous avons découvert en Grèce ?
+jeu.passeport.661;Jeu : passeport;🇲🇦
+jeu.passeport.662;Jeu : passeport;Quel est le plat typique que nous avons découvert au Maroc ?
+jeu.passeport.667;Jeu : passeport;Quel animal avons-nous découvert au Maroc ?
+jeu.passeport.716;Jeu : passeport;🇪🇬
+jeu.passeport.717;Jeu : passeport;Quel animal avons-nous découvert en Égypte ?
+jeu.passeport.722;Jeu : passeport;Quel est le plat typique que nous avons découvert en Égypte ?
+jeu.passeport.755;Jeu : passeport;🇰🇪
+jeu.passeport.756;Jeu : passeport;Quel animal avons-nous découvert au Kenya ?
+jeu.passeport.764;Jeu : passeport;Juste à côté de Nairobi, la capitale, il y a un parc national avec des lions et des girafes !
+jeu.passeport.765;Jeu : passeport;Quel est le plat typique que nous avons découvert au Kenya ?
+jeu.passeport.871;Jeu : passeport;🇮🇳
+jeu.passeport.872;Jeu : passeport;Quel animal avons-nous découvert en Inde ?
+jeu.passeport.882;Jeu : passeport;Quel est le plat typique que nous avons découvert en Inde ?
+jeu.passeport.908;Jeu : passeport;🇨🇳
+jeu.passeport.909;Jeu : passeport;Quel animal avons-nous découvert en Chine ?
+jeu.passeport.920;Jeu : passeport;Quel est le plat typique que nous avons découvert en Chine ?
+jeu.passeport.947;Jeu : passeport;🇯🇵
+jeu.passeport.948;Jeu : passeport;Quel animal avons-nous découvert au Japon ?
+jeu.passeport.956;Jeu : passeport;Au Japon, on enlève ses chaussures avant d’entrer dans une maison.
+jeu.passeport.982;Jeu : passeport;Quel est le plat typique que nous avons découvert au Japon ?
+jeu.passeport.1088;Jeu : passeport;🇦🇺
+jeu.passeport.1089;Jeu : passeport;Quel animal avons-nous découvert en Australie ?
+jeu.passeport.1099;Jeu : passeport;Quel est le plat typique que nous avons découvert en Australie ?
+jeu.passeport.1122;Jeu : passeport;🇧🇷
+jeu.passeport.1123;Jeu : passeport;Quel est le plat typique que nous avons découvert au Brésil ?
+jeu.passeport.1141;Jeu : passeport;Quel animal avons-nous découvert au Brésil ?
+jeu.passeport.1154;Jeu : passeport;🇨🇦
+jeu.passeport.1156;Jeu : passeport;la poutine, des frites au fromage
+jeu.passeport.1158;Jeu : passeport;La feuille du drapeau, c’est une feuille d’érable : avec la sève de cet arbre, on fait le sirop d’érable.
+jeu.passeport.1159;Jeu : passeport;Quel animal avons-nous découvert au Canada ?
+jeu.passeport.1164;Jeu : passeport;Quel est le plat typique que nous avons découvert au Canada ?
+jeu.passeport.1193;Jeu : passeport;🇲🇽
+jeu.passeport.1194;Jeu : passeport;Quel est le plat typique que nous avons découvert au Mexique ?
+jeu.passeport.1199;Jeu : passeport;Quel animal avons-nous découvert au Mexique ?
+jeu.passeport.1234;Jeu : passeport;Quelle langue parle-t-on en Suisse ?
+jeu.passeport.1236;Jeu : passeport;l’hindi
+jeu.passeport.1237;Jeu : passeport;l’anglais et beaucoup d’autres langues
+jeu.passeport.1238;Jeu : passeport;l’allemand
+jeu.passeport.1239;Jeu : passeport;le français
+jeu.passeport.1240;Jeu : passeport;l’italien et le romanche
+jeu.passeport.1241;Jeu : passeport;l’arabe et l’amazigh
+jeu.passeport.1242;Jeu : passeport;l’anglais et le français
+jeu.passeport.1246;Jeu : passeport;le swahili et l’anglais
+jeu.passeport.1250;Jeu : passeport;le grec
+jeu.passeport.1262;Jeu : passeport;le japonais
+jeu.passeport.1263;Jeu : passeport;l’italien
+jeu.passeport.1265;Jeu : passeport;Quelle est la capitale de la Suisse ?
+jeu.passeport.1267;Jeu : passeport;Nairobi
+jeu.passeport.1268;Jeu : passeport;Vaduz
+jeu.passeport.1269;Jeu : passeport;Athènes
+jeu.passeport.1270;Jeu : passeport;Berne
+jeu.passeport.1280;Jeu : passeport;Mexico
+jeu.passeport.1282;Jeu : passeport;Berlin
+jeu.passeport.1285;Jeu : passeport;l’arabe
+jeu.passeport.1331;Jeu : passeport;Lisbonne
+jeu.passeport.1332;Jeu : passeport;Canberra
+jeu.passeport.1333;Jeu : passeport;Madrid
+jeu.passeport.1344;Jeu : passeport;l’espagnol
+jeu.passeport.1345;Jeu : passeport;l’anglais
+jeu.passeport.1347;Jeu : passeport;ou l’allemand
+jeu.passeport.1356;Jeu : passeport;Quelle langue parle-t-on en France ?
+jeu.passeport.1358;Jeu : passeport;le portugais
+jeu.passeport.1368;Jeu : passeport;Quelle est la capitale de la France ?
+jeu.passeport.1372;Jeu : passeport;Pékin
+jeu.passeport.1373;Jeu : passeport;Tokyo
+jeu.passeport.1390;Jeu : passeport;Le Caire
+jeu.passeport.1442;Jeu : passeport;ou l’hindi
+jeu.passeport.1453;Jeu : passeport;le chinois
+jeu.passeport.1459;Jeu : passeport;Quelle est la capitale de l’Allemagne ?
+jeu.passeport.1463;Jeu : passeport;Brasília
+jeu.passeport.1472;Jeu : passeport;Quelle langue parle-t-on en Allemagne ?
+jeu.passeport.1493;Jeu : passeport;Rabat
+jeu.passeport.1512;Jeu : passeport;Ottawa
+jeu.passeport.1538;Jeu : passeport;New Delhi
+jeu.passeport.1561;Jeu : passeport;Vienne
+jeu.passeport.1626;Jeu : passeport;Londres
+jeu.passeport.1643;Jeu : passeport;Quelle est la capitale de l’Italie ?
+jeu.passeport.1655;Jeu : passeport;Quelle langue parle-t-on en Italie ?
+jeu.passeport.1835;Jeu : passeport;Quelle est la capitale de l’Autriche ?
+jeu.passeport.1841;Jeu : passeport;Quelle langue parle-t-on en Autriche ?
+jeu.passeport.1946;Jeu : passeport;Quelle langue parle-t-on au Liechtenstein ?
+jeu.passeport.1973;Jeu : passeport;Quelle est la capitale du Liechtenstein ?
+jeu.passeport.2049;Jeu : passeport;Quelle est la capitale de l’Espagne ?
+jeu.passeport.2067;Jeu : passeport;Quelle langue parle-t-on en Espagne ?
+jeu.passeport.2099;Jeu : passeport;Quelle langue parle-t-on au Portugal ?
+jeu.passeport.2111;Jeu : passeport;Quelle est la capitale du Portugal ?
+jeu.passeport.2120;Jeu : passeport;On dit qu’il existe au Portugal une recette de morue pour chaque jour de l’année !
+jeu.passeport.2169;Jeu : passeport;Quel est le plat typique que nous avons découvert au Portugal ?
+jeu.passeport.2307;Jeu : passeport;Quelle langue parle-t-on au Royaume-Uni ?
+jeu.passeport.2327;Jeu : passeport;Quelle est la capitale du Royaume-Uni ?
+jeu.passeport.2465;Jeu : passeport;Quelle est la capitale de la Grèce ?
+jeu.passeport.2471;Jeu : passeport;Quelle langue parle-t-on en Grèce ?
+jeu.passeport.2600;Jeu : passeport;Quelle langue parle-t-on au Maroc ?
+jeu.passeport.2609;Jeu : passeport;Au Maroc, on accueille souvent les invités avec un thé à la menthe.
+jeu.passeport.2616;Jeu : passeport;Quelle est la capitale du Maroc ?
+jeu.passeport.2764;Jeu : passeport;Quelle langue parle-t-on en Égypte ?
+jeu.passeport.2775;Jeu : passeport;Les pyramides de Gizeh, près du Caire, ont plus de 4 500 ans !
+jeu.passeport.2783;Jeu : passeport;Quelle est la capitale de l’Égypte ?
+jeu.passeport.2903;Jeu : passeport;Quelle langue parle-t-on au Kenya ?
+jeu.passeport.2919;Jeu : passeport;Quelle est la capitale du Kenya ?
+jeu.passeport.3161;Jeu : passeport;Quelle langue parle-t-on en Inde ?
+jeu.passeport.3178;Jeu : passeport;Quelle est la capitale de l’Inde ?
+jeu.passeport.3302;Jeu : passeport;Quelle langue parle-t-on en Chine ?
+jeu.passeport.3311;Jeu : passeport;Quelle est la capitale de la Chine ?
+jeu.passeport.3402;Jeu : passeport;Quelle langue parle-t-on au Japon ?
+jeu.passeport.3422;Jeu : passeport;Quelle est la capitale du Japon ?
+jeu.passeport.3542;Jeu : passeport;Quelle est la capitale de l’Australie ?
+jeu.passeport.3560;Jeu : passeport;Quelle langue parle-t-on en Australie ?
+jeu.passeport.3602;Jeu : passeport;Quelle langue parle-t-on au Brésil ?
+jeu.passeport.3610;Jeu : passeport;Quelle est la capitale du Brésil ?
+jeu.passeport.3718;Jeu : passeport;Quelle langue parle-t-on au Canada ?
+jeu.passeport.3741;Jeu : passeport;Quelle est la capitale du Canada ?
+jeu.passeport.3837;Jeu : passeport;Quelle langue parle-t-on au Mexique ?
+jeu.passeport.3843;Jeu : passeport;Quelle est la capitale du Mexique ?
+jeu.cuisine.1;Jeu : cuisine;C'était écrit : la farine.
+jeu.cuisine.2;Jeu : cuisine;Ajoute les œufs.
+jeu.cuisine.3;Jeu : cuisine;Trouve le mot œufs !
+jeu.cuisine.4;Jeu : cuisine;C'était écrit : l'œuf.
+jeu.cuisine.5;Jeu : cuisine;Ajoute l'orange.
+jeu.cuisine.6;Jeu : cuisine;Trouve le mot orange !
+jeu.cuisine.7;Jeu : cuisine;Ajoute les fraises.
+jeu.cuisine.8;Jeu : cuisine;Trouve le mot fraises !
+jeu.cuisine.9;Jeu : cuisine;C'était écrit : l'huile.
+jeu.cuisine.10;Jeu : cuisine;Ajoute le beurre.
+jeu.cuisine.11;Jeu : cuisine;Trouve le mot beurre !
+etoiles.1;Phrases de l'app;Tu gagnes 1 étoile.
+etoiles.3;Phrases de l'app;Tu gagnes 3 étoiles.
+etoiles.4;Phrases de l'app;Tu gagnes 4 étoiles.
+etoiles.5;Phrases de l'app;Tu gagnes 5 étoiles.
+etoiles.6;Phrases de l'app;Tu gagnes 6 étoiles.
+etoiles.7;Phrases de l'app;Tu gagnes 7 étoiles.
+etoiles.8;Phrases de l'app;Tu gagnes 8 étoiles.
+etoiles.9;Phrases de l'app;Tu gagnes 9 étoiles.
+etoiles.11;Phrases de l'app;Tu gagnes 11 étoiles.
+etoiles.12;Phrases de l'app;Tu gagnes 12 étoiles.
+etoiles.13;Phrases de l'app;Tu gagnes 13 étoiles.
+etoiles.14;Phrases de l'app;Tu gagnes 14 étoiles.
+etoiles.15;Phrases de l'app;Tu gagnes 15 étoiles.
+etoiles.16;Phrases de l'app;Tu gagnes 16 étoiles.
+etoiles.17;Phrases de l'app;Tu gagnes 17 étoiles.
+etoiles.18;Phrases de l'app;Tu gagnes 18 étoiles.
+etoiles.19;Phrases de l'app;Tu gagnes 19 étoiles.
+etoiles.20;Phrases de l'app;Tu gagnes 20 étoiles.
+etoiles.21;Phrases de l'app;Tu gagnes 21 étoiles.
+etoiles.22;Phrases de l'app;Tu gagnes 22 étoiles.
+etoiles.23;Phrases de l'app;Tu gagnes 23 étoiles.
+etoiles.24;Phrases de l'app;Tu gagnes 24 étoiles.
+etoiles.25;Phrases de l'app;Tu gagnes 25 étoiles.
+etoiles.26;Phrases de l'app;Tu gagnes 26 étoiles.
+etoiles.27;Phrases de l'app;Tu gagnes 27 étoiles.
+etoiles.28;Phrases de l'app;Tu gagnes 28 étoiles.
+etoiles.29;Phrases de l'app;Tu gagnes 29 étoiles.
+etoiles.30;Phrases de l'app;Tu gagnes 30 étoiles.
+coffre.5;Phrases de l'app;Dans le coffre, il y avait 5 étoiles !
+coffre.6;Phrases de l'app;Dans le coffre, il y avait 6 étoiles !
+coffre.7;Phrases de l'app;Dans le coffre, il y avait 7 étoiles !
+coffre.8;Phrases de l'app;Dans le coffre, il y avait 8 étoiles !
+coffre.9;Phrases de l'app;Dans le coffre, il y avait 9 étoiles !
+coffre.10;Phrases de l'app;Dans le coffre, il y avait 10 étoiles !
+coffre.11;Phrases de l'app;Dans le coffre, il y avait 11 étoiles !
+coffre.12;Phrases de l'app;Dans le coffre, il y avait 12 étoiles !
+coffre.13;Phrases de l'app;Dans le coffre, il y avait 13 étoiles !
+coffre.14;Phrases de l'app;Dans le coffre, il y avait 14 étoiles !
+coffre.15;Phrases de l'app;Dans le coffre, il y avait 15 étoiles !
+logique.sudoku.titre;Tour des énigmes;Le sudoku !
+logique.sudoku.but;Tour des énigmes;Chaque image une seule fois par ligne, par colonne et par carré.
+logique.taquin.titre;Tour des énigmes;Le taquin !
+logique.taquin.but;Tour des énigmes;Fais glisser les cases pour refaire l’image.
+logique.parking.titre;Tour des énigmes;Le parking bloqué !
+logique.parking.but;Tour des énigmes;Déplace les véhicules pour faire sortir la voiture rouge.
+logique.tour.titre;Tour des énigmes;La tour à déplacer !
+logique.tour.but;Tour des énigmes;Déplace toute la tour, sans jamais poser un grand disque sur un petit.
+logique.code.titre;Tour des énigmes;Le code des couleurs !
+logique.code.but;Tour des énigmes;Devine la suite de couleurs cachée.
+logique.dessins.titre;Tour des énigmes;Les dessins cachés !
+logique.dessins.but;Tour des énigmes;Colorie les bonnes cases grâce aux nombres.
+logique.deduction.titre;Tour des énigmes;Les énigmes de déduction !
+logique.deduction.but;Tour des énigmes;Lis les indices et trouve qui a quel animal.
+logique.phrase1;Tour des énigmes;Choisis un niveau.
+logique.phrase2;Tour des énigmes;Bravo, la grille est finie !
+logique.phrase3;Tour des énigmes;Bravo, tu as tout trouvé !
+logique.phrase5;Tour des énigmes;Pas cette fois.
+logique.phrase6;Tour des énigmes;Une nouvelle énigme t’attend demain !
+logique.dessin1;Tour des énigmes;Le dessin caché, c’était un escalier.
+logique.dessin2;Tour des énigmes;Le dessin caché, c’était une croix.
+logique.dessin3;Tour des énigmes;Le dessin caché, c’était un diamant.
+logique.dessin4;Tour des énigmes;Le dessin caché, c’était un cœur.
+logique.dessin5;Tour des énigmes;Le dessin caché, c’était un sapin.
+logique.dessin6;Tour des énigmes;Le dessin caché, c’était un champignon.
+logique.dessin7;Tour des énigmes;Le dessin caché, c’était une maison.
+logique.dessin8;Tour des énigmes;Le dessin caché, c’était une fusée.
+logique.dessin9;Tour des énigmes;Le dessin caché, c’était un bateau.
+logique.dessin10;Tour des énigmes;Le dessin caché, c’était un papillon.
+logique.dessin11;Tour des énigmes;Le dessin caché, c’était un sourire.
+logique.dessin12;Tour des énigmes;Le dessin caché, c’était un poisson.
+logique.indice1;Tour des énigmes;Inès n’a pas le chat.
+logique.indice2;Tour des énigmes;Inès n’a pas le chien.
+logique.indice3;Tour des énigmes;Inès n’a pas le lapin.
+logique.indice4;Tour des énigmes;Inès n’a pas le poisson.
+logique.indice5;Tour des énigmes;Léa a le chien.
+logique.indice6;Tour des énigmes;Léa n’a pas le chat.
+logique.indice7;Tour des énigmes;Léa n’a pas le chien.
+logique.indice8;Tour des énigmes;Léa n’a pas le lapin.
+logique.indice9;Tour des énigmes;Léa n’a pas le poisson.
+logique.indice10;Tour des énigmes;Noé n’a pas le chat.
+logique.indice11;Tour des énigmes;Noé n’a pas le chien.
+logique.indice12;Tour des énigmes;Noé n’a pas le lapin.
+logique.indice13;Tour des énigmes;Noé n’a pas le poisson.
+logique.indice14;Tour des énigmes;Tom n’a pas le chat.
+logique.indice15;Tour des énigmes;Tom n’a pas le chien.
+logique.indice16;Tour des énigmes;Tom n’a pas le lapin.
+confiance.1;Textes : confiance;Ta grand-mère vient te chercher à l’école, comme tes parents te l’ont dit ce matin.
+confiance.2;Textes : confiance;Tes parents le savent : tout va bien.
+confiance.3;Textes : confiance;Un voisin que tu connais te propose de te ramener en voiture.
+confiance.4;Textes : confiance;Tes parents ne le savent pas.
+confiance.5;Textes : confiance;Même avec quelqu’un que tu connais, tes parents doivent savoir où tu es.
+confiance.6;Textes : confiance;La maman d’une copine te propose de venir goûter chez elle, tout de suite.
+confiance.7;Textes : confiance;C’est gentil !
+confiance.8;Textes : confiance;Mais tes parents doivent d’abord dire oui.
+confiance.9;Textes : confiance;Ton papa t’a dit : « Ce soir, c’est tonton qui vient te chercher.
+confiance.10;Textes : confiance;» Et tonton est là.
+confiance.11;Textes : confiance;C’était prévu avec ton papa.
+confiance.12;Textes : confiance;Une dame que tu ne connais pas te dit : « Ta maman m’a demandé de venir te chercher.
+confiance.13;Textes : confiance;»
+confiance.14;Textes : confiance;Tu ne pars pas.
+confiance.15;Textes : confiance;Tu lui demandes le mot de passe secret de ta famille.
+confiance.16;Textes : confiance;Si elle ne le connaît pas, tu vas voir la maîtresse ou un adulte que tu connais, et on appelle tes parents.
+confiance.17;Textes : confiance;À la sortie du sport, l’entraîneur te propose de te raccompagner.
+confiance.18;Textes : confiance;Ce n’était pas prévu.
+confiance.19;Textes : confiance;Même un adulte que tu aimes bien : on appelle d’abord tes parents.
+confiance.20;Textes : confiance;Tu vas à l’école à pied avec ta grande sœur, comme chaque matin.
+confiance.21;Textes : confiance;C’est ce qui est prévu avec tes parents.
+confiance.22;Textes : confiance;Un monsieur te propose de monter dans sa voiture pour te mettre à l’abri de la pluie.
+confiance.23;Textes : confiance;Tu ne montes jamais dans la voiture de quelqu’un sans que tes parents le sachent.
+confiance.24;Textes : confiance;Un peu de pluie, ce n’est pas grave.
+confiance.25;Textes : confiance;Un grand que tu ne connais pas t’invite à venir voir un jeu vidéo chez lui.
+confiance.26;Textes : confiance;Tu n’entres pas chez quelqu’un sans que tes parents le sachent.
+confiance.27;Textes : confiance;Ta maîtresse emmène toute la classe à la bibliothèque.
+confiance.28;Textes : confiance;C’est une sortie de l’école : tes parents sont au courant.
+confiance.29;Textes : confiance;Regarde ta main.
+confiance.30;Textes : confiance;Sur chaque doigt, tu peux poser un adulte de confiance : quelqu’un qui t’écoute, qui te croit et qui t’aide.
+confiance.31;Textes : confiance;Par exemple : un parent, un grand-parent, une tante ou un oncle, ta maîtresse ou ton maître, le médecin.
+confiance.32;Textes : confiance;Tout ça, ce sont des faits sur toi.
+confiance.33;Textes : confiance;Un avis méchant ne peut pas les effacer.
+confiance.34;Textes : confiance;Je ne dis rien et j’attends que ça passe.
+confiance.35;Textes : confiance;Attention : parfois, quelqu’un dit un avis méchant comme si c’était un fait.
+confiance.36;Textes : confiance;Je lui dis quelque chose de méchant aussi.
+confiance.37;Textes : confiance;« Tu es moche.
+confiance.39;Textes : confiance;Un avis méchant ne dit rien de vrai sur toi.
+confiance.40;Textes : confiance;« Ton dessin est nul.
+confiance.42;Textes : confiance;C’est ce que pense une personne.
+confiance.43;Textes : confiance;Ton dessin peut plaire à beaucoup d’autres.
+confiance.44.garcon;Textes : confiance;« Tu es nul en foot.
+confiance.44.fille;Textes : confiance;« Tu es nulle en foot.
+confiance.46;Textes : confiance;Personne n’est « nul » : on apprend en s’entraînant.
+confiance.47;Textes : confiance;« Personne ne t’aime.
+confiance.49;Textes : confiance;Ce n’est pas un fait, et ce n’est pas vrai : pense aux personnes qui t’aiment.
+confiance.50;Textes : confiance;« Tes habits sont ridicules.
+confiance.52;Textes : confiance;Chacun a ses goûts.
+confiance.53;Textes : confiance;Tu as le droit d’aimer tes habits.
+confiance.54;Textes : confiance;« Tu cours comme une tortue.
+confiance.56;Textes : confiance;C’est une moquerie, pas un fait.
+confiance.57;Textes : confiance;Chacun court à sa vitesse.
+confiance.58;Textes : confiance;« Tu portes des lunettes.
+confiance.60;Textes : confiance;C’est un fait, et il n’y a rien de mal à ça.
+confiance.61;Textes : confiance;Si quelqu’un le dit pour se moquer, c’est la moquerie qui n’est pas gentille.
+confiance.62.garcon;Textes : confiance;« Tu es le plus petit de la classe.
+confiance.62.fille;Textes : confiance;« Tu es la plus petite de la classe.
+confiance.64;Textes : confiance;C’est peut-être un fait.
+confiance.65.garcon;Textes : confiance;Être petit n’est ni bien ni mal : ça ne dit pas qui tu es.
+confiance.65.fille;Textes : confiance;Être petite n’est ni bien ni mal : ça ne dit pas qui tu es.
+confiance.66;Textes : confiance;Si quelqu’un te tient et ne te lâche pas, tu as le droit de crier très fort : « Au secours !
+confiance.67;Textes : confiance;Je ne connais pas cette personne !
+confiance.68;Textes : confiance;» Tu as aussi le droit de te débattre.
+confiance.69;Textes : confiance;On comprend que tu aies envie de répondre.
+confiance.70;Textes : confiance;Mais une méchanceté de plus ne répare rien, et tu te sentirais moins bien après.
+confiance.71;Textes : confiance;Regarde ce que tu peux faire à la place.
+confiance.72;Textes : confiance;On comprend : parfois on n’ose pas.
+confiance.73;Textes : confiance;Mais garder ça pour soi, c’est lourd.
+confiance.75;Textes : confiance;Parfois, on ne sait pas quoi faire, et c’est normal d’hésiter.
+confiance.76;Textes : confiance;Mais un droit qui n’est pas respecté, ce n’est jamais « normal ».
+confiance.78.garcon;Textes : confiance;Être poli, c’est bien.
+confiance.78.fille;Textes : confiance;Être polie, c’est bien.
+confiance.79;Textes : confiance;Mais ta sécurité passe avant la politesse.
+confiance.80;Textes : confiance;Tu as le droit de dire non à un adulte, et de partir.
+confiance.82;Textes : confiance;J’ai le droit d’être en sécurité.
+confiance.83;Textes : confiance;Personne n’a le droit de me faire du mal.
+confiance.84.garcon;Textes : confiance;J’ai le droit d’être soigné quand je suis malade ou blessé.
+confiance.84.fille;Textes : confiance;J’ai le droit d’être soignée quand je suis malade ou blessée.
+confiance.85;Textes : confiance;Aller à l’école
+confiance.86;Textes : confiance;J’ai le droit d’apprendre.
+confiance.87;Textes : confiance;Jouer et me reposer
+confiance.88;Textes : confiance;J’ai le droit de jouer, de rêver et de dormir.
+confiance.89;Textes : confiance;Manger et avoir un toit
+confiance.90;Textes : confiance;J’ai le droit de manger à ma faim et d’avoir une maison.
+confiance.91;Textes : confiance;Avoir un nom et une famille
+confiance.92;Textes : confiance;J’ai le droit d’avoir un prénom, et des personnes qui prennent soin de moi.
+confiance.93;Textes : confiance;Donner mon avis
+confiance.94;Textes : confiance;J’ai le droit de dire ce que je pense, et qu’on m’écoute.
+confiance.95.garcon;Textes : confiance;Être respecté comme je suis
+confiance.95.fille;Textes : confiance;Être respectée comme je suis
+confiance.96;Textes : confiance;J’ai les mêmes droits que tous les enfants, quelles que soient ma couleur de peau, ma langue, ma religion, que je sois une fille ou un garçon, ou que j’aie un handicap.
+confiance.97;Textes : confiance;Avoir mon jardin secret
+confiance.98;Textes : confiance;J’ai le droit d’avoir des choses à moi : mon journal, mes pensées.
+confiance.99;Textes : confiance;Tous les enfants ont les mêmes droits que toi.
+confiance.100;Textes : confiance;Alors, quand tu respectes les autres, tu respectes leurs droits : tu les laisses jouer, tu les écoutes, tu ne leur fais pas de mal.
+confiance.101;Textes : confiance;Avoir des droits, ça ne veut pas dire tout décider.
+confiance.102;Textes : confiance;Les adultes qui t’aiment t’écoutent, puis choisissent ce qui est bon pour toi.
+confiance.103;Textes : confiance;Aller à l’école.
+confiance.104;Textes : confiance;Tous les enfants ont le droit d’apprendre.
+confiance.105;Textes : confiance;Avoir une tablette rien qu’à moi.
+confiance.106;Textes : confiance;C’est agréable, mais on peut grandir sans.
+confiance.107.garcon;Textes : confiance;Être soigné quand je suis malade.
+confiance.107.fille;Textes : confiance;Être soignée quand je suis malade.
+confiance.108;Textes : confiance;Tous les enfants ont le droit d’être soignés.
+confiance.109;Textes : confiance;Manger des bonbons tous les jours.
+confiance.110;Textes : confiance;Tu as le droit de manger à ta faim.
+confiance.111;Textes : confiance;Les bonbons, c’est en plus !
+confiance.112;Textes : confiance;Avoir un endroit où dormir.
+confiance.113;Textes : confiance;Tous les enfants ont le droit d’avoir un toit.
+confiance.114;Textes : confiance;Me coucher à minuit.
+confiance.115;Textes : confiance;Tu as le droit de te reposer.
+confiance.116;Textes : confiance;L’heure du coucher, ce sont tes parents qui la choisissent.
+confiance.117;Textes : confiance;Oui, jouer est un vrai droit !
+confiance.118;Textes : confiance;Avoir le jouet que j’ai vu à la télé.
+confiance.119;Textes : confiance;Tu as le droit de jouer, pas d’avoir tous les jouets.
+confiance.120;Textes : confiance;Dire ce que je pense.
+confiance.121;Textes : confiance;Tu as le droit de donner ton avis, et qu’on t’écoute.
+confiance.122;Textes : confiance;Décider de tout à la maison.
+confiance.123;Textes : confiance;Donner son avis ne veut pas dire décider de tout : les adultes écoutent, puis choisissent ce qui est bon pour toi.
+confiance.124;Textes : confiance;Être en sécurité.
+confiance.125;Textes : confiance;Personne n’a le droit de te faire du mal.
+confiance.126;Textes : confiance;Ne jamais ranger ma chambre.
+confiance.127;Textes : confiance;Bien essayé !
+confiance.128;Textes : confiance;Ranger, ça fait partie de la vie ensemble.
+confiance.129;Textes : confiance;Avoir un prénom.
+confiance.130;Textes : confiance;Dès ta naissance, tu as le droit d’avoir un prénom rien qu’à toi.
+confiance.131;Textes : confiance;Avoir des personnes qui prennent soin de moi.
+confiance.132;Textes : confiance;Tous les enfants ont le droit d’avoir une famille ou des adultes qui veillent sur eux.
+confiance.133;Textes : confiance;Un droit, c’est ce dont tous les enfants ont besoin.
+confiance.134;Textes : confiance;Une envie, c’est ce qui fait plaisir, mais dont on peut se passer.
+confiance.136;Textes : confiance;Si ça se répète ou si ça te fait mal, parles-en à un adulte de confiance.
+confiance.137;Textes : confiance;Tu peux aussi appeler le 147 : c’est gratuit, jour et nuit, et des adultes sont là pour écouter les enfants.
+confiance.138;Textes : confiance;Et maintenant, si tu en parlais avec un adulte de ta famille ?
+confiance.139;Textes : confiance;Ton corps est à toi.
+confiance.140;Textes : confiance;Et si tu as un doute, tu peux toujours en parler à un parent ou à un adulte de confiance.
+confiance.142;Textes : confiance;Et maintenant, si tu choisissais tes cinq adultes de confiance avec un adulte de ta famille ?
+confiance.143;Textes : confiance;Tes droits sont à toi, pour toujours.
+confiance.144;Textes : confiance;Personne ne peut te les enlever.
+confiance.145;Textes : confiance;Si un jour quelque chose ne te semble pas juste, ou si quelqu’un te fait du mal, parles-en à un adulte de confiance.
+confiance.148;Textes : confiance;Tes émotions sont tes alliées.
+confiance.149;Textes : confiance;Quand ça fait « non », écoute-les.
+confiance.150;Textes : confiance;Tu n’as pas besoin d’expliquer pourquoi : ressentir « non », ça suffit.
+confiance.151.garcon;Textes : confiance;Et tu n’es jamais seul : il y a toujours un adulte de confiance à qui parler.
+confiance.151.fille;Textes : confiance;Et tu n’es jamais seule : il y a toujours un adulte de confiance à qui parler.
+confiance.153;Textes : confiance;Ces règles ne sont pas là pour te faire peur.
+confiance.154;Textes : confiance;Elles sont là pour que tu sois tranquille, comme la ceinture dans la voiture.
+confiance.155;Textes : confiance;Rappelle-toi : tu ne pars avec personne sans que tes parents le sachent.
+confiance.156;Textes : confiance;Tu as le droit de dire non, même à un adulte.
+confiance.157;Textes : confiance;Et si quelque chose t’a fait bizarre, tu le racontes toujours à un adulte de confiance : ce n’est jamais de ta faute.
+confiance.158;Textes : confiance;En cas de danger, tu peux appeler la police au 117.
+confiance.159;Textes : confiance;Et pour parler, le 147 : c’est gratuit, jour et nuit.
+confiance.161;Textes : confiance;Choisissez ensemble un mot de passe secret : seule une personne qui le connaît peut venir te chercher.
+confiance.162;Textes : confiance;Et si tu as un doute avec un adulte, tu lui demandes le mot de passe.
+confiance.163;Textes : confiance;Je m’arrête et j’écoute ce que je ressens.
+confiance.164;Textes : confiance;Je dis « non » ou « stop », bien fort.
+confiance.165;Textes : confiance;Je m’éloigne.
+confiance.166;Textes : confiance;J’en parle à un adulte de confiance.
+confiance.167;Textes : confiance;Je dis avec des mots : « Ce n’est pas juste.
+confiance.169;Textes : confiance;Je reste près de l’enfant à qui ça arrive.
+confiance.171;Textes : confiance;Je me rappelle que ce n’est pas ma faute.
+confiance.172;Textes : confiance;Je dis « Non !
+confiance.173;Textes : confiance;» très fort.
+confiance.174;Textes : confiance;Je m’éloigne vite, sans discuter.
+confiance.175;Textes : confiance;Je vais vers d’autres personnes : un magasin, ou un parent avec des enfants.
+confiance.176;Textes : confiance;Je raconte tout à un adulte de confiance.
+confiance.177;Textes : confiance;Un fait, c’est quelque chose de vrai pour tout le monde : on peut le vérifier.
+confiance.178;Textes : confiance;Un avis, c’est ce que quelqu’un pense ou ressent : une autre personne peut penser autrement.
+confiance.179;Textes : confiance;« Il pleut » est un fait : on peut regarder par la fenêtre.
+confiance.180;Textes : confiance;« La pluie, c’est nul » est un avis.
+confiance.182;Textes : confiance;Voici quelques idées simples à garder dans ta tête.
+confiance.183;Textes : confiance;Et retiens surtout la dernière : si tu as un doute, tu peux toujours en parler à un parent ou à un adulte de confiance.
+confiance.184;Textes : confiance;Tous les enfants du monde ont des droits.
+confiance.185;Textes : confiance;Un droit, c’est quelque chose dont tu as besoin pour grandir, et que personne ne peut t’enlever.
+confiance.186;Textes : confiance;Tu n’as pas besoin de les mériter : tu les as parce que tu es un enfant.
+confiance.187;Textes : confiance;Et tous les autres enfants ont exactement les mêmes.
+confiance.188;Textes : confiance;Tes émotions sont comme des petits messagers.
+confiance.189;Textes : confiance;Chacune vient te dire quelque chose d’important.
+confiance.190;Textes : confiance;Aucune émotion n’est interdite : même la colère et la peur ont le droit d’être là.
+confiance.191;Textes : confiance;Ce qui compte, c’est de les écouter, et de savoir quoi faire ensuite.
+confiance.192;Textes : confiance;La plupart des adultes sont gentils et veulent du bien aux enfants.
+confiance.193;Textes : confiance;Mais tu ne peux pas savoir, juste en le regardant, si quelqu’un que tu ne connais pas est gentil.
+confiance.194;Textes : confiance;Alors il y a quelques règles simples, comme la ceinture dans la voiture : on les suit toujours, et on est tranquille.
+confiance.195;Textes : confiance;La plus importante : tu ne pars jamais avec quelqu’un sans que tes parents le sachent.
+confiance.196;Textes : confiance;Même si tu connais cette personne.
+confiance.197;Textes : confiance;Et tu peux choisir avec tes parents un mot de passe secret : si tu as un doute avec un adulte, tu lui demandes le mot de passe.
+confiance.199;Textes : confiance;« Attention, il y a peut-être un danger.
+confiance.201;Textes : confiance;La peur te protège.
+confiance.202;Textes : confiance;Elle te dit de t’arrêter et d’aller vers un adulte de confiance.
+confiance.204;Textes : confiance;« Quelque chose n’est pas juste pour moi.
+confiance.206;Textes : confiance;La colère te dit que quelqu’un a dépassé une limite.
+confiance.207;Textes : confiance;On peut le dire avec des mots, sans taper.
+confiance.209;Textes : confiance;« J’ai besoin de réconfort.
+confiance.211;Textes : confiance;La tristesse te dit que tu as besoin d’un câlin ou de parler à quelqu’un.
+confiance.213;Textes : confiance;« C’est bon pour moi, j’en veux encore.
+confiance.215;Textes : confiance;La joie te montre ce qui te fait du bien, et les personnes avec qui tu te sens bien.
+confiance.217;Textes : confiance;« Ça, je n’en veux pas.
+confiance.219;Textes : confiance;Le dégoût te protège de ce qui pourrait te rendre malade.
+confiance.220;Textes : confiance;La gêne
+confiance.221;Textes : confiance;« Ça me met mal à l’aise, je veux que ça s’arrête.
+confiance.223;Textes : confiance;La gêne est un vrai signal.
+confiance.224;Textes : confiance;Tu n’as pas besoin de savoir pourquoi pour avoir le droit de dire stop.
+confiance.225;Textes : confiance;Je sais faire rire quelqu’un.
+confiance.226;Textes : confiance;J’ai déjà aidé quelqu’un.
+confiance.227;Textes : confiance;J’ai appris quelque chose de nouveau cette année.
+confiance.228.garcon;Textes : confiance;Je suis un bon ami.
+confiance.228.fille;Textes : confiance;Je suis une bonne amie.
+confiance.229;Textes : confiance;Je sais dire pardon.
+confiance.230;Textes : confiance;Je prends soin d’un animal ou d’une plante.
+confiance.231;Textes : confiance;J’essaie encore quand c’est difficile.
+confiance.232;Textes : confiance;Quelqu’un m’aime très fort.
+confiance.233;Textes : confiance;Je sais faire quelque chose que je ne savais pas faire avant.
+confiance.234;Textes : confiance;J’ai de bonnes idées.
+confiance.235;Textes : confiance;Je sais écouter.
+confiance.236;Textes : confiance;Je sais partager.
+confiance.237;Textes : confiance;un fait
+confiance.238;Textes : confiance;un avis
+confiance.239;Textes : confiance;c’est d’accord
+confiance.240;Textes : confiance;je demande d’abord
+confiance.241;Textes : confiance;un droit
+confiance.242;Textes : confiance;une envie
+confiance.243;Textes : confiance;pas de souci
+confiance.244;Textes : confiance;je dis non et je m’éloigne
+confiance.245;Textes : confiance;Je me dis que c’est normal, et je ne fais rien.
+confiance.246;Textes : confiance;Mamie te fait un câlin et tu en as très envie.
+confiance.247;Textes : confiance;Un câlin que tu veux, ça fait du bien.
+confiance.248;Textes : confiance;Ton ami te chatouille et vous riez tous les deux.
+confiance.249;Textes : confiance;Tant que tout le monde s’amuse, c’est un jeu.
+confiance.250;Textes : confiance;Ton ami continue de te chatouiller alors que tu as dit « arrête ».
+confiance.251;Textes : confiance;Quand on dit stop, le jeu s’arrête.
+confiance.252;Textes : confiance;Sinon, ce n’est plus un jeu.
+confiance.253;Textes : confiance;Papa prépare une surprise pour l’anniversaire de maman et te demande de ne rien dire.
+confiance.254;Textes : confiance;C’est une surprise : elle fait plaisir, et elle sera bientôt dite.
+confiance.255;Textes : confiance;Quelqu’un te dit : « Ne le dis à personne, sinon tu auras des ennuis.
+confiance.257;Textes : confiance;Un secret qui fait peur ou qui serre le ventre, on a toujours le droit de le raconter.
+confiance.258;Textes : confiance;Tu joues à ton jeu préféré avec ta cousine.
+confiance.259;Textes : confiance;Jouer avec quelqu’un qu’on aime, ça fait du bien.
+confiance.260;Textes : confiance;Un grand de l’école te demande de lui donner ton goûter, sinon il se fâche.
+confiance.261;Textes : confiance;Ce n’est pas juste.
+confiance.262;Textes : confiance;Tu peux en parler à la maîtresse ou à un parent.
+confiance.263;Textes : confiance;Ta maîtresse te félicite devant toute la classe.
+confiance.264;Textes : confiance;Ça fait chaud au cœur, même si on rougit un peu.
+confiance.265;Textes : confiance;Quelqu’un regarde par-dessus ton épaule ce que tu écris et se moque.
+confiance.266;Textes : confiance;Tu as le droit de dire : « Arrête, je n’aime pas ça.
+confiance.268;Textes : confiance;Tu te blottis dans ton lit avec ton doudou.
+confiance.269;Textes : confiance;C’est un moment tout doux, rien que pour toi.
+confiance.270;Textes : confiance;Ton corps te parle aussi.
+confiance.271;Textes : confiance;Quand quelque chose te fait du bien, c’est tout doux et tout chaud : c’est un oui.
+confiance.272;Textes : confiance;Quand quelque chose ne va pas, ça serre dans le ventre, le cœur bat vite, on a envie de partir : c’est un non.
+confiance.273;Textes : confiance;Ton non a toujours raison de se faire entendre.
+confiance.274;Textes : confiance;Imagine : à la récré, un enfant est toujours mis de côté parce qu’il ne parle pas encore bien français.
+confiance.275;Textes : confiance;Imagine : dans un jeu, on dit à une fille : « Toi, tu ne peux pas jouer, c’est un jeu de garçons.
+confiance.277;Textes : confiance;Imagine : en classe, on rit dès qu’un enfant prend la parole, et il n’ose plus rien dire.
+confiance.278;Textes : confiance;Imagine : un enfant te raconte qu’il a souvent faim à l’école parce qu’il n’a pas de goûter.
+confiance.279;Textes : confiance;Imagine : quelqu’un lit ton journal devant tout le monde pour se moquer.
+confiance.280;Textes : confiance;Un chat a quatre pattes.
+confiance.281;Textes : confiance;On peut compter ses pattes.
+confiance.282;Textes : confiance;Les chats sont plus mignons que les chiens.
+confiance.283;Textes : confiance;Certains préfèrent les chiens !
+confiance.284;Textes : confiance;Le ciel est bleu quand il fait beau.
+confiance.285;Textes : confiance;Tout le monde peut le voir.
+confiance.286;Textes : confiance;Le bleu est la plus belle couleur.
+confiance.287;Textes : confiance;Chacun a sa couleur préférée.
+confiance.288;Textes : confiance;Une semaine a sept jours.
+confiance.289;Textes : confiance;On peut les compter sur le calendrier.
+confiance.290;Textes : confiance;Le lundi est le pire jour de la semaine.
+confiance.291;Textes : confiance;Certains aiment bien le lundi.
+confiance.292;Textes : confiance;Les fraises sont des fruits.
+confiance.293;Textes : confiance;C’est vrai pour tout le monde.
+confiance.294;Textes : confiance;Les fraises sont meilleures que les bananes.
+confiance.295;Textes : confiance;Ça dépend des goûts.
+confiance.296;Textes : confiance;En hiver, il fait plus froid qu’en été.
+confiance.297;Textes : confiance;On peut le mesurer avec un thermomètre.
+confiance.298;Textes : confiance;L’hiver est la meilleure saison.
+confiance.299;Textes : confiance;D’autres préfèrent l’été.
+confiance.300;Textes : confiance;La Suisse a des montagnes.
+confiance.301;Textes : confiance;On peut les voir et les compter.
+confiance.302;Textes : confiance;La montagne, c’est plus beau que la mer.
+confiance.303;Textes : confiance;Chacun a son paysage préféré.
+confiance.304;Textes : confiance;Un vélo a deux roues.
+confiance.305;Textes : confiance;On peut les compter.
+confiance.306;Textes : confiance;Le foot est le sport le plus amusant.
+confiance.307;Textes : confiance;D’autres préfèrent la danse ou la natation.
+confiance.308;Textes : confiance;Les épinards sont verts.
+confiance.309;Textes : confiance;Tout le monde voit la même couleur.
+confiance.310;Textes : confiance;Les épinards, c’est dégoûtant.
+confiance.311;Textes : confiance;Certaines personnes adorent les épinards !
+confiance.312;Textes : confiance;Mon corps est à moi.
+confiance.313;Textes : confiance;Ton corps est à toi, et à personne d’autre.
+confiance.314;Textes : confiance;Tu en prends soin, et on doit le respecter.
+confiance.315;Textes : confiance;J’ai le droit de dire non.
+confiance.316;Textes : confiance;Un câlin ou un bisou, c’est seulement si tu en as envie.
+confiance.317;Textes : confiance;Tu peux dire non, et dire bonjour autrement : avec la main, ou avec un sourire.
+confiance.318;Textes : confiance;J’écoute ce que je ressens.
+confiance.319;Textes : confiance;Si quelque chose te met mal à l’aise ou te serre le ventre, c’est un signal.
+confiance.320;Textes : confiance;Tu as raison de l’écouter.
+confiance.321;Textes : confiance;Une surprise, ça se dit.
+confiance.322;Textes : confiance;Un secret qui pèse aussi.
+confiance.323;Textes : confiance;Une bonne surprise fait plaisir, et on finit toujours par la dire.
+confiance.324;Textes : confiance;Un secret qui te pèse, tu as le droit de le raconter, même si tu as promis.
+confiance.325;Textes : confiance;Si j’ai un doute, j’en parle.
+confiance.326;Textes : confiance;Si tu ne sais pas si quelque chose est bien ou mal, tu peux toujours en parler à un parent ou à un adulte de confiance.
+confiance.327;Textes : confiance;Aucune question n’est bête.
+confiance.328;Textes : confiance;Ce n’est jamais de ma faute.
+confiance.329;Textes : confiance;Si quelque chose ne va pas, ce n’est jamais de ta faute.
+confiance.330;Textes : confiance;Et si un adulte ne t’écoute pas, tu en parles à un autre adulte.
+confiance.331;Textes : confiance;Imagine : un copain te pousse pour que tu sautes de très haut, et tu as peur.
+confiance.332;Textes : confiance;Imagine : une grande te demande de lui prêter ton vélo, et tu n’en as pas envie.
+confiance.333;Textes : confiance;Imagine : on te demande de garder un secret qui te serre le ventre.
+confiance.334;Textes : confiance;Imagine : dans un jeu, tout le monde rit sauf toi, et ça te fait mal.
+confiance.335;Textes : confiance;Je ne le crois pas : c’est son avis, pas un fait.
+confiance.336;Textes : confiance;Je réponds calmement : « C’est ton avis.
+confiance.338;Textes : confiance;Je m’éloigne et je vais jouer avec quelqu’un d’autre.
+confiance.340;Textes : confiance;Tu as de la fièvre, et on t’emmène chez le médecin.
+confiance.341;Textes : confiance;Chaque matin, tu vas à l’école.
+confiance.342;Textes : confiance;Après les devoirs, tu vas jouer dehors.
+confiance.343;Textes : confiance;À la maison, on te demande ce que tu préfères pour les vacances, et on t’écoute.
+confiance.344;Textes : confiance;Le soir, il y a un repas chaud et un lit pour toi.
+confiance.345;Textes : confiance;Quand tu traverses, un adulte te donne la main.
+confiance.346;Textes : confiance;On t’appelle par ton prénom, et quelqu’un vient te chercher à l’école.
+confiance.347;Textes : confiance;Dans ta classe, une élève en fauteuil roulant fait la sortie avec tout le monde.
+confiance.348;Textes : confiance;Personne ne lit ton journal sans te le demander.
+confiance.349.garcon;Textes : confiance;Je reste, pour ne pas être impoli.
+confiance.349.fille;Textes : confiance;Je reste, pour ne pas être impolie.
+confiance.350.garcon;Textes : confiance;Imagine : à la récré, un enfant te dit : « Tu cours trop lentement, tu es nul.
+confiance.350.fille;Textes : confiance;Imagine : à la récré, un enfant te dit : « Tu cours trop lentement, tu es nulle.
+confiance.352;Textes : confiance;Imagine : dans le vestiaire, quelqu’un te dit : « Ton pull est moche.
+confiance.354;Textes : confiance;Imagine : en classe, un enfant regarde ton dessin et dit : « C’est n’importe quoi, ton dessin.
+confiance.356;Textes : confiance;Imagine : à la cantine, une fille te dit : « Tu manges bizarrement.
+confiance.358;Textes : confiance;Imagine : pendant un jeu, on te dit : « On ne veut pas de toi, tu joues mal.
+confiance.360;Textes : confiance;Imagine : à la piscine, quelqu’un te dit : « Tu nages comme un caillou.
+confiance.362;Textes : confiance;Imagine : un enfant regarde tes chaussures et dit : « Elles sont trop moches.
+confiance.364.garcon;Textes : confiance;Imagine : à la récré, on te dit : « Tu es trop petit pour jouer avec nous.
+confiance.364.fille;Textes : confiance;Imagine : à la récré, on te dit : « Tu es trop petite pour jouer avec nous.
+confiance.366;Textes : confiance;Imagine : en classe, tu te trompes en lisant, et un enfant rit : « Tu ne sais même pas lire !
+confiance.368;Textes : confiance;Imagine : à un anniversaire, quelqu’un te dit : « Ton cadeau est nul.
+confiance.370;Textes : confiance;Imagine : au parc, un enfant te dit : « Ton vélo, c’est un vélo de bébé.
+confiance.372;Textes : confiance;Imagine : quelqu’un te dit : « Tu as une drôle de voix.
+confiance.374;Textes : confiance;Imagine : tu as pleuré, et on te dit : « Tu pleures tout le temps, tu es un bébé.
+confiance.376;Textes : confiance;Imagine : tous les jours, le même enfant se moque de ton prénom.
+confiance.377;Textes : confiance;Imagine : chaque matin dans le bus, les mêmes enfants rient quand tu montes.
+confiance.378;Textes : confiance;Imagine : à chaque récré, le même groupe te dit : « Va-t’en, on ne joue pas avec toi.
+confiance.380;Textes : confiance;Imagine : sur le chemin de l’école, une voiture s’arrête.
+confiance.381;Textes : confiance;La personne te dit de monter.
+confiance.382;Textes : confiance;Imagine : au parc, quelqu’un que tu ne connais pas te demande de le suivre pour voir une surprise.
+confiance.383;Textes : confiance;Imagine : quelqu’un que tu ne connais pas te prend par la main pour t’emmener.
+confiance.384;Textes : confiance;Imagine : quelqu’un te suit dans la rue, et ça te met mal à l’aise.
+confiance.385;Textes : confiance;Imagine : quelqu’un insiste, même après que tu as dit non.
+confiance.386;Textes : confiance;Un adulte qui a besoin d’aide demande à un autre adulte, pas à un enfant.
+confiance.387;Textes : confiance;Et un cadeau d’une personne que tu ne connais pas, tu peux toujours le refuser.
+confiance.388.garcon;Textes : confiance;Tu peux être poli et dire non.
+confiance.388.fille;Textes : confiance;Tu peux être polie et dire non.
+confiance.389;Textes : confiance;Dans la rue, une dame te sourit et te dit bonjour.
+confiance.390;Textes : confiance;Tu peux répondre bonjour et continuer ton chemin.
+confiance.391;Textes : confiance;Dire bonjour, ce n’est pas suivre quelqu’un.
+confiance.392;Textes : confiance;Un monsieur que tu ne connais pas te demande de l’aider à chercher son petit chien.
+confiance.393;Textes : confiance;Un adulte demande de l’aide à un autre adulte.
+confiance.394;Textes : confiance;Tu dis non et tu t’éloignes.
+confiance.395;Textes : confiance;Au magasin, la vendeuse te demande si tu cherches quelque chose.
+confiance.396;Textes : confiance;C’est son métier d’aider les clients.
+confiance.397;Textes : confiance;Quelqu’un que tu ne connais pas te propose des bonbons.
+confiance.398;Textes : confiance;Tu peux dire : « Non merci.
+confiance.399;Textes : confiance;» Tu n’as rien à expliquer.
+confiance.400;Textes : confiance;Une personne en voiture s’arrête et te demande son chemin.
+confiance.401;Textes : confiance;Tu restes loin de la voiture.
+confiance.402;Textes : confiance;Un adulte peut demander son chemin à un autre adulte.
+confiance.403;Textes : confiance;Ta maîtresse te demande de distribuer les cahiers.
+confiance.404;Textes : confiance;Tu la connais, et c’est à l’école.
+confiance.405;Textes : confiance;Quelqu’un que tu ne connais pas te dit : « Viens, j’ai des chatons à te montrer.
+confiance.407;Textes : confiance;C’est tentant, mais tu ne suis pas quelqu’un que tu ne connais pas.
+confiance.408.garcon;Textes : confiance;Tu es perdu dans un magasin.
+confiance.408.fille;Textes : confiance;Tu es perdue dans un magasin.
+confiance.409;Textes : confiance;Tu vas voir la personne à la caisse.
+confiance.411.garcon;Textes : confiance;Si tu es perdu, va voir quelqu’un qui travaille là, ou une maman ou un papa avec des enfants.
+confiance.411.fille;Textes : confiance;Si tu es perdue, va voir quelqu’un qui travaille là, ou une maman ou un papa avec des enfants.
+confiance.412;Textes : confiance;Quelqu’un que tu ne connais pas veut te prendre en photo.
+confiance.413;Textes : confiance;Personne ne te prend en photo sans que tes parents soient d’accord.
+confiance.414;Textes : confiance;Quelqu’un que tu ne connais pas connaît ton prénom et dit qu’il est un ami de tes parents.
+confiance.415;Textes : confiance;Connaître ton prénom ne veut pas dire te connaître.
+confiance.416;Textes : confiance;Tu lui demandes le mot de passe secret de ta famille, et tu vérifies toujours avec tes parents.
+confiance.417;Textes : confiance;Fait ou avis ?
+confiance.418;Textes : confiance;Mes émotions me parlent
+confiance.419;Textes : confiance;Mes droits
+confiance.420;Textes : confiance;Les inconnus
+confiance.421;Textes : confiance;Mon corps m’appartient
+nature-fiches.1;Textes : nature-fiches;Le renard
+nature-fiches.2;Textes : nature-fiches;Il mange des souris, des fruits et des insectes.
+nature-fiches.3;Textes : nature-fiches;Le renard entend une souris bouger sous la neige !
+nature-fiches.4;Textes : nature-fiches;Le hérisson
+nature-fiches.5;Textes : nature-fiches;Il mange des insectes, des limaces et des vers.
+nature-fiches.6;Textes : nature-fiches;Le hérisson a environ 6000 piquants.
+nature-fiches.7;Textes : nature-fiches;Il se met en boule quand il a peur.
+nature-fiches.8;Textes : nature-fiches;Il mange des noisettes, des glands et des graines.
+nature-fiches.9;Textes : nature-fiches;L’écureuil cache des noisettes pour l’hiver, et il en oublie : elles deviennent des arbres !
+nature-fiches.10;Textes : nature-fiches;Le cerf
+nature-fiches.11;Textes : nature-fiches;Il mange de l’herbe, des feuilles et des bourgeons.
+nature-fiches.12;Textes : nature-fiches;Les bois du cerf tombent chaque année, puis repoussent.
+nature-fiches.13;Textes : nature-fiches;La chauve-souris
+nature-fiches.14;Textes : nature-fiches;Elle mange des moustiques et des papillons de nuit.
+nature-fiches.15;Textes : nature-fiches;C’est le seul mammifère qui vole.
+nature-fiches.16;Textes : nature-fiches;Elle dort la tête en bas.
+nature-fiches.17;Textes : nature-fiches;Le lièvre
+nature-fiches.18;Textes : nature-fiches;Il mange de l’herbe, des plantes et de l’écorce.
+nature-fiches.19;Textes : nature-fiches;Le lièvre peut courir aussi vite qu’une voiture en ville.
+nature-fiches.20;Textes : nature-fiches;Le loup
+nature-fiches.21;Textes : nature-fiches;Il chasse des cerfs et des chevreuils.
+nature-fiches.22;Textes : nature-fiches;Les loups vivent en famille : on dit une meute.
+nature-fiches.23;Textes : nature-fiches;Le castor
+nature-fiches.24;Textes : nature-fiches;Il mange de l’écorce, des branches et des plantes.
+nature-fiches.25;Textes : nature-fiches;Le castor coupe des arbres avec ses dents pour construire des barrages.
+nature-fiches.26;Textes : nature-fiches;Le hibou
+nature-fiches.27;Textes : nature-fiches;Il chasse des souris et des petits animaux, la nuit.
+nature-fiches.28;Textes : nature-fiches;Le hibou peut tourner la tête presque tout autour de lui.
+nature-fiches.29;Textes : nature-fiches;L’aigle royal
+nature-fiches.30;Textes : nature-fiches;Il chasse des marmottes et des lièvres.
+nature-fiches.31;Textes : nature-fiches;L’aigle voit un lièvre à plus d’un kilomètre.
+nature-fiches.32;Textes : nature-fiches;Le canard
+nature-fiches.33;Textes : nature-fiches;Il mange des plantes d’eau, des graines et des petites bêtes.
+nature-fiches.34;Textes : nature-fiches;Les plumes du canard ne se mouillent pas : l’eau glisse dessus.
+nature-fiches.35;Textes : nature-fiches;La grenouille
+nature-fiches.36;Textes : nature-fiches;Elle attrape des mouches et des insectes avec sa langue.
+nature-fiches.37;Textes : nature-fiches;Le bébé de la grenouille s’appelle le têtard : il vit dans l’eau.
+nature-fiches.38;Textes : nature-fiches;Le lézard
+nature-fiches.39;Textes : nature-fiches;Il mange des insectes et des araignées.
+nature-fiches.40;Textes : nature-fiches;Si on attrape sa queue, elle se détache, puis elle repousse.
+nature-fiches.41;Textes : nature-fiches;La couleuvre
+nature-fiches.42;Textes : nature-fiches;Elle mange des grenouilles et des petits poissons.
+nature-fiches.43;Textes : nature-fiches;La couleuvre n’est pas dangereuse pour nous.
+nature-fiches.44;Textes : nature-fiches;On la laisse tranquille.
+nature-fiches.45;Textes : nature-fiches;Elle récolte le nectar et le pollen des fleurs.
+nature-fiches.46;Textes : nature-fiches;Pour un pot de miel, les abeilles visitent des millions de fleurs.
+nature-fiches.47;Textes : nature-fiches;La coccinelle
+nature-fiches.48;Textes : nature-fiches;Elle mange des pucerons.
+nature-fiches.49;Textes : nature-fiches;Une coccinelle peut manger plus de cent pucerons par jour.
+nature-fiches.51;Textes : nature-fiches;Il boit le nectar des fleurs avec sa trompe.
+nature-fiches.52;Textes : nature-fiches;Avant d’être un papillon, il était une chenille.
+nature-fiches.53;Textes : nature-fiches;Il mange des feuilles et des plantes tendres.
+nature-fiches.54;Textes : nature-fiches;L’escargot a des milliers de dents minuscules sur sa langue.
+nature-fiches.55;Textes : nature-fiches;La truite
+nature-fiches.56;Textes : nature-fiches;Elle mange des insectes et des petites bêtes de la rivière.
+nature-fiches.57;Textes : nature-fiches;La truite aime l’eau très fraîche et très propre.
+nature-fiches.58;Textes : nature-fiches;un mammifère
+nature-fiches.59;Textes : nature-fiches;Un mammifère a des poils, et la maman nourrit ses petits avec son lait.
+nature-fiches.60;Textes : nature-fiches;un oiseau
+nature-fiches.61;Textes : nature-fiches;Un oiseau a des plumes, un bec et deux ailes.
+nature-fiches.62;Textes : nature-fiches;Il pond des œufs.
+nature-fiches.63;Textes : nature-fiches;un reptile
+nature-fiches.64;Textes : nature-fiches;Un reptile a la peau sèche, couverte d’écailles.
+nature-fiches.65;Textes : nature-fiches;Il a besoin du soleil pour se réchauffer.
+nature-fiches.66;Textes : nature-fiches;un amphibien
+nature-fiches.67;Textes : nature-fiches;Un amphibien naît dans l’eau, puis vit aussi sur la terre.
+nature-fiches.68;Textes : nature-fiches;Sa peau reste humide.
+nature-fiches.69;Textes : nature-fiches;un insecte
+nature-fiches.70;Textes : nature-fiches;Un insecte a six pattes, et son corps est en trois parties.
+nature-fiches.71;Textes : nature-fiches;Souvent, il a des ailes.
+nature-fiches.72;Textes : nature-fiches;un poisson
+nature-fiches.73;Textes : nature-fiches;Un poisson vit dans l’eau.
+nature-fiches.74;Textes : nature-fiches;Il respire avec des branchies et nage avec ses nageoires.
+nature-fiches.75;Textes : nature-fiches;un mollusque
+nature-fiches.76;Textes : nature-fiches;Un mollusque a le corps mou.
+nature-fiches.77;Textes : nature-fiches;Souvent, une coquille le protège.
+nature-fiches.78;Textes : nature-fiches;Dans la forêt
+nature-fiches.79;Textes : nature-fiches;Dans les jardins et les haies
+nature-fiches.80;Textes : nature-fiches;Dans la montagne
+nature-fiches.81;Textes : nature-fiches;Dans les mares, les lacs et les rivières
+nature-fiches.82;Textes : nature-fiches;Dans les prairies et les champs
+nature-fiches.83;Textes : nature-fiches;Dans les grottes et les greniers
+nature-fiches.84;Textes : nature-fiches;La menthe
+nature-fiches.85;Textes : nature-fiches;Elle rafraîchit et aide à bien digérer.
+nature-fiches.86;Textes : nature-fiches;En tisane : quelques feuilles dans de l’eau chaude.
+nature-fiches.87;Textes : nature-fiches;Ou dans une salade de fruits.
+nature-fiches.88;Textes : nature-fiches;La camomille
+nature-fiches.89;Textes : nature-fiches;Elle calme et aide à s’endormir.
+nature-fiches.90;Textes : nature-fiches;En tisane : les fleurs séchées dans de l’eau chaude.
+nature-fiches.91;Textes : nature-fiches;Le thym
+nature-fiches.92;Textes : nature-fiches;Il fait du bien quand on a le rhume ou mal à la gorge.
+nature-fiches.93;Textes : nature-fiches;En tisane avec du miel, ou dans les plats.
+nature-fiches.95;Textes : nature-fiches;Il est plein de vitamines.
+nature-fiches.96;Textes : nature-fiches;Les jeunes feuilles en salade, bien lavées.
+nature-fiches.97;Textes : nature-fiches;On ne le cueille pas au bord des routes.
+nature-fiches.98;Textes : nature-fiches;La fraise des bois
+nature-fiches.99;Textes : nature-fiches;Elle est pleine de vitamine C.
+nature-fiches.100;Textes : nature-fiches;On la mange crue, bien lavée.
+nature-fiches.101;Textes : nature-fiches;On lave toujours les baies cueillies près du sol.
+nature-fiches.102;Textes : nature-fiches;La myrtille
+nature-fiches.103;Textes : nature-fiches;Elle est pleine de vitamines.
+nature-fiches.104;Textes : nature-fiches;Crue, en tarte ou en confiture, bien lavée.
+nature-fiches.105;Textes : nature-fiches;D’autres baies foncées sont dangereuses : seul un adulte sait les reconnaître.
+nature-fiches.106;Textes : nature-fiches;Le noisetier
+nature-fiches.107;Textes : nature-fiches;Les noisettes donnent beaucoup d’énergie.
+nature-fiches.108;Textes : nature-fiches;On casse la coquille et on mange la noisette.
+nature-fiches.109;Textes : nature-fiches;Elle est très riche en fer et en vitamines.
+nature-fiches.110;Textes : nature-fiches;En soupe, toujours cuite.
+nature-fiches.111;Textes : nature-fiches;Un adulte la cueille avec des gants.
+nature-fiches.112;Textes : nature-fiches;Crue, elle pique très fort !
+nature-fiches.113;Textes : nature-fiches;Le sureau noir
+nature-fiches.114;Textes : nature-fiches;Ses fleurs et ses baies donnent des sirops.
+nature-fiches.115;Textes : nature-fiches;Les fleurs en sirop.
+nature-fiches.116;Textes : nature-fiches;Les baies seulement cuites, en confiture.
+nature-fiches.117;Textes : nature-fiches;Les baies crues donnent mal au ventre.
+nature-fiches.119;Textes : nature-fiches;Il abrite les oiseaux et sent bon la forêt.
+nature-fiches.120;Textes : nature-fiches;On ne le mange pas : on le regarde et on le sent.
+nature-fiches.122;Textes : nature-fiches;Elle est jolie à regarder au printemps.
+nature-fiches.123;Textes : nature-fiches;On ne la mange pas : on l’admire dans le jardin.
+nature-fiches.124;Textes : nature-fiches;Son bulbe ressemble à un oignon, mais il rend malade.
+nature-fiches.125;Textes : nature-fiches;Le marronnier
+nature-fiches.126;Textes : nature-fiches;Ses marrons sont beaux pour bricoler.
+nature-fiches.127;Textes : nature-fiches;On ne les mange jamais.
+nature-fiches.128;Textes : nature-fiches;Le marron du marronnier n’est pas une châtaigne : il rend malade.
+nature-fiches.129;Textes : nature-fiches;Le muguet
+nature-fiches.130;Textes : nature-fiches;Il sent très bon au mois de mai.
+nature-fiches.131;Textes : nature-fiches;On ne le mange jamais.
+nature-fiches.132;Textes : nature-fiches;On se lave les mains après l’avoir touché.
+nature-fiches.133;Textes : nature-fiches;Toute la plante est toxique, même l’eau du vase.
+nature-fiches.134;Textes : nature-fiches;C’est un arbre toujours vert, souvent dans les haies.
+nature-fiches.135;Textes : nature-fiches;On ne mange jamais ses petites boules rouges.
+nature-fiches.136;Textes : nature-fiches;Ses aiguilles et ses graines sont très toxiques.
+nature-fiches.137;Textes : nature-fiches;La belladone
+nature-fiches.138;Textes : nature-fiches;C’est une plante sauvage des bois.
+nature-fiches.139;Textes : nature-fiches;On ne la touche pas et on ne la mange jamais.
+nature-fiches.140;Textes : nature-fiches;Ses baies noires ressemblent à des cerises, mais elles sont très dangereuses.
+nature-fiches.141;Textes : nature-fiches;Le houx
+nature-fiches.142;Textes : nature-fiches;Il décore la maison en hiver.
+nature-fiches.143;Textes : nature-fiches;On ne mange jamais ses baies rouges.
+nature-fiches.144;Textes : nature-fiches;Ses baies rendent malade.
+nature-fiches.145;Textes : nature-fiches;L’amanite tue-mouches
+nature-fiches.146;Textes : nature-fiches;C’est un champignon, pas une plante.
+nature-fiches.147;Textes : nature-fiches;Il est rouge à points blancs.
+nature-fiches.148;Textes : nature-fiches;On ne le touche pas et on ne le mange jamais.
+nature-fiches.149;Textes : nature-fiches;Beaucoup de champignons sont dangereux : on n’en cueille jamais sans un adulte qui les connaît.
+nature-fiches.150;Textes : nature-fiches;Des insectes et des petites bêtes
+nature-fiches.152;Textes : nature-fiches;D’autres animaux
+nature-fiches.153;Textes : nature-fiches;Un peu de tout
+nature-fiches.154;Textes : nature-fiches;Le nectar des fleurs
+nature-fiches.155;Textes : nature-fiches;On ne cueille et on ne goûte jamais une plante, une baie ou un champignon sans un adulte qui la connaît bien.
+nature-fiches.156;Textes : nature-fiches;Si quelqu’un en a mangé par erreur, on appelle le 145.
+nature-fiches.157;Textes : nature-fiches;Oui, elle est comestible
+nature-fiches.158;Textes : nature-fiches;Oui, mais seulement cuite
+nature-fiches.159;Textes : nature-fiches;Non, elle ne se mange pas
+nature-fiches.160;Textes : nature-fiches;Non, elle est dangereuse
+missions.1;Textes : missions;Ranger ma chambre
+missions.2;Textes : missions;Faire mon lit
+missions.3;Textes : missions;Mettre la table
+missions.4;Textes : missions;Débarrasser la table
+missions.5;Textes : missions;Ranger mes jouets
+missions.6;Textes : missions;Mettre mon linge au panier
+missions.7;Textes : missions;Arroser les plantes
+missions.8;Textes : missions;M’occuper de l’animal de la maison
+missions.9;Textes : missions;Préparer mon cartable
+missions.10;Textes : missions;Me brosser les dents sans qu’on me le dise
+jardinage.1;Textes : jardinage;Le cresson
+jardinage.2;Textes : jardinage;Il pousse toute l’année, dans un pot près de la fenêtre.
+jardinage.3;Textes : jardinage;Les radis
+jardinage.4;Textes : jardinage;La salade
+jardinage.5;Textes : jardinage;Les carottes
+jardinage.6;Textes : jardinage;Les petits pois
+jardinage.7;Textes : jardinage;Les fraisiers
+jardinage.8;Textes : jardinage;Les tomates
+jardinage.9;Textes : jardinage;La courge
+jardinage.10;Textes : jardinage;Les haricots
+jardinage.11;Textes : jardinage;La mâche
+jardinage.12;Textes : jardinage;Les bulbes de tulipes
+avent.2;Textes : avent;Chaque flocon de neige a six branches, et il n’y en a jamais deux pareils.
+avent.3;Textes : avent;Petit défi
+avent.4;Textes : avent;Fais un dessin pour quelqu’un que tu aimes, et offre-le-lui.
+avent.6;Textes : avent;Le hérisson dort tout l’hiver : il hiberne jusqu’au printemps.
+avent.8;Textes : avent;Aide à ranger les chaussures et les bottes de l’entrée.
+avent.10;Textes : avent;Prépare des biscuits avec un adulte, ou fais-en en pâte à modeler.
+avent.12;Textes : avent;Avec un adulte, donne à manger aux oiseaux : quand il fait froid, ils ont faim.
+avent.14;Textes : avent;En Suisse, beaucoup d’enfants apprennent à skier dès 3 ou 4 ans.
+avent.16;Textes : avent;Dis « merci » à trois personnes aujourd’hui.
+avent.18;Textes : avent;Sous ses poils blancs, l’ours polaire a la peau noire : elle garde mieux la chaleur du soleil.
+avent.20;Textes : avent;Range tes jouets sans qu’on te le demande.
+avent.22;Textes : avent;Le sapin garde ses aiguilles vertes même en plein hiver.
+avent.24;Textes : avent;Chante une chanson à ta famille.
+avent.26;Textes : avent;Construis un bonhomme de neige…
+avent.27;Textes : avent;ou dessine-le, si la neige n’est pas là.
+avent.29;Textes : avent;Le 21 décembre est le jour le plus court de l’année : c’est la nuit la plus longue.
+avent.31;Textes : avent;Demande à un adulte de te lire une histoire, ou lis-en une à ton tour.
+avent.33;Textes : avent;Les rennes ont des poils jusque sous les sabots, pour ne pas glisser sur la neige.
+avent.35;Textes : avent;Fais un puzzle ou un jeu de société en famille.
+avent.37;Textes : avent;Les mandarines de l’hiver sont pleines de vitamine C, qui aide le corps à rester en forme.
+avent.39;Textes : avent;Éteins la lumière des pièces vides : on économise l’énergie.
+avent.41;Textes : avent;L’écureuil cache des noisettes pour l’hiver.
+avent.42;Textes : avent;Il en oublie, et elles deviennent des arbres !
+avent.44;Textes : avent;Ce soir, regarde les étoiles avec un adulte : c’est la nuit la plus longue de l’année.
+avent.46;Textes : avent;Décore ta fenêtre avec des flocons en papier découpé.
+avent.48;Textes : avent;Fais un câlin à chaque personne de ta famille.
+avent.49;Textes : avent;Tu as ouvert tout le calendrier.
+avent.50;Textes : avent;Joyeuses fêtes et belles vacances d’hiver !
+chantier.1;Textes : chantier;le salon
+chantier.2;Textes : chantier;la salle de jeux
+chantier.3;Textes : chantier;le jardin
+chantier.4;Textes : chantier;le grenier
+fiche.animal.1.6.1;Textes : nature-fiches;Le renard est un mammifère.
+fiche.animal.1.6.3;Textes : nature-fiches;Où vit cet animal ?
+fiche.animal.1.6.4;Textes : nature-fiches;Dans la forêt.
+fiche.animal.1.6.5;Textes : nature-fiches;Que mange cet animal ?
+fiche.animal.2.6.1;Textes : nature-fiches;Le hérisson est un mammifère.
+fiche.animal.2.6.4;Textes : nature-fiches;Dans les jardins et les haies.
+fiche.animal.3.6.1;Textes : nature-fiches;L’écureuil est un mammifère.
+fiche.animal.4.6.1;Textes : nature-fiches;Le cerf est un mammifère.
+fiche.animal.5.6.1;Textes : nature-fiches;La chauve-souris est un mammifère.
+fiche.animal.5.6.4;Textes : nature-fiches;Dans les grottes et les greniers.
+fiche.animal.6.6.1;Textes : nature-fiches;Le lièvre est un mammifère.
+fiche.animal.6.6.4;Textes : nature-fiches;Dans les prairies et les champs.
+fiche.animal.7.6.1;Textes : nature-fiches;Le loup est un mammifère.
+fiche.animal.7.6.4;Textes : nature-fiches;Dans la montagne.
+fiche.animal.8.6.1;Textes : nature-fiches;Le castor est un mammifère.
+fiche.animal.8.6.4;Textes : nature-fiches;Dans les mares, les lacs et les rivières.
+fiche.animal.9.6.1;Textes : nature-fiches;Le hibou est un oiseau.
+fiche.animal.10.6.1;Textes : nature-fiches;L’aigle royal est un oiseau.
+fiche.animal.11.6.1;Textes : nature-fiches;Le canard est un oiseau.
+fiche.animal.12.6.1;Textes : nature-fiches;La grenouille est un amphibien.
+fiche.animal.13.6.1;Textes : nature-fiches;Le lézard est un reptile.
+fiche.animal.14.6.1;Textes : nature-fiches;La couleuvre est un reptile.
+fiche.animal.15.6.1;Textes : nature-fiches;L’abeille est un insecte.
+fiche.animal.16.6.1;Textes : nature-fiches;La coccinelle est un insecte.
+fiche.animal.17.6.1;Textes : nature-fiches;Le papillon est un insecte.
+fiche.animal.18.6.1;Textes : nature-fiches;L’escargot est un mollusque.
+fiche.animal.19.6.1;Textes : nature-fiches;La truite est un poisson.
+fiche.plante.1.6.1;Textes : nature-fiches;La menthe.
+fiche.plante.1.6.2;Textes : nature-fiches;Peut-on la manger ?
+fiche.plante.1.6.3;Textes : nature-fiches;Oui, elle est comestible.
+fiche.plante.2.6.1;Textes : nature-fiches;La camomille.
+fiche.plante.3.6.1;Textes : nature-fiches;Le thym.
+fiche.plante.4.6.1;Textes : nature-fiches;Le pissenlit.
+fiche.plante.4.6.6;Textes : nature-fiches;Attention : On ne le cueille pas au bord des routes.
+fiche.plante.5.6.1;Textes : nature-fiches;La fraise des bois.
+fiche.plante.5.6.6;Textes : nature-fiches;Attention : On lave toujours les baies cueillies près du sol.
+fiche.plante.6.6.1;Textes : nature-fiches;La myrtille.
+fiche.plante.6.6.6;Textes : nature-fiches;Attention : D’autres baies foncées sont dangereuses : seul un adulte sait les reconnaître.
+fiche.plante.7.6.1;Textes : nature-fiches;Le noisetier.
+fiche.plante.8.6.1;Textes : nature-fiches;L’ortie.
+fiche.plante.8.6.3;Textes : nature-fiches;Oui, mais seulement cuite.
+fiche.plante.8.6.7;Textes : nature-fiches;Attention : Crue, elle pique très fort !
+fiche.plante.9.6.1;Textes : nature-fiches;Le sureau noir.
+fiche.plante.9.6.7;Textes : nature-fiches;Attention : Les baies crues donnent mal au ventre.
+fiche.plante.10.6.1;Textes : nature-fiches;Le sapin.
+fiche.plante.10.6.3;Textes : nature-fiches;Non, elle ne se mange pas.
+fiche.plante.11.6.1;Textes : nature-fiches;La tulipe.
+fiche.plante.11.6.6;Textes : nature-fiches;Attention : Son bulbe ressemble à un oignon, mais il rend malade.
+fiche.plante.12.6.1;Textes : nature-fiches;Le marronnier.
+fiche.plante.12.6.3;Textes : nature-fiches;Non, elle est dangereuse.
+fiche.plante.12.6.6;Textes : nature-fiches;Attention : Le marron du marronnier n’est pas une châtaigne : il rend malade.
+fiche.plante.13.6.1;Textes : nature-fiches;Le muguet.
+fiche.plante.13.6.7;Textes : nature-fiches;Attention : Toute la plante est toxique, même l’eau du vase.
+fiche.plante.14.6.1;Textes : nature-fiches;L’if.
+fiche.plante.14.6.6;Textes : nature-fiches;Attention : Ses aiguilles et ses graines sont très toxiques.
+fiche.plante.15.6.1;Textes : nature-fiches;La belladone.
+fiche.plante.15.6.6;Textes : nature-fiches;Attention : Ses baies noires ressemblent à des cerises, mais elles sont très dangereuses.
+fiche.plante.16.6.1;Textes : nature-fiches;Le houx.
+fiche.plante.16.6.6;Textes : nature-fiches;Attention : Ses baies rendent malade.
+fiche.plante.17.6.1;Textes : nature-fiches;L’amanite tue-mouches.
+fiche.plante.17.6.7;Textes : nature-fiches;Attention : Beaucoup de champignons sont dangereux : on n’en cueille jamais sans un adulte qui les connaît.
 app.1;Phrases de l'app;Voici l'archipel ! Choisis une île.
 app.2;Phrases de l'app;Le calendrier de l’Avent ! Chaque jour de décembre, une nouvelle case s’ouvre.
 app.4;Phrases de l'app;Quel prénom veux-tu lui donner ?

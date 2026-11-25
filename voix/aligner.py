@@ -18,11 +18,19 @@ def lettres(n):  # comme enLettres dans voix/lots.mjs : la reconnaissance écrit
     if n < 1000000:
         m, r = divmod(n, 1000); return (lettres(m) + ' ' if m > 1 else '') + 'mille' + (' ' + lettres(r) if r else '')
     return str(n)
+# La reconnaissance écrit souvent les unités en abrégé (« 3 kg » pour « trois kilos ») : on compare les deux sous la même forme.
+UNITES = {'kg': 'kilo', 'kilos': 'kilo', 'kilogrammes': 'kilo', 'kilogramme': 'kilo', 'g': 'gramme', 'grammes': 'gramme', 'cm': 'centimetre', 'centimètres': 'centimetre', 'centimètre': 'centimetre',
+          'mm': 'millimetre', 'millimètres': 'millimetre', 'millimètre': 'millimetre', 'km': 'kilometre', 'kilomètres': 'kilometre', 'kilomètre': 'kilometre', 'm': 'metre', 'mètres': 'metre', 'mètre': 'metre',
+          'l': 'litre', 'litres': 'litre', 'h': 'heure', 'heures': 'heure', 'min': 'minute', 'minutes': 'minute', '%': 'pourcent', 'km/h': 'kilometreheure', 'fr.': 'franc', 'francs': 'franc', 'chf': 'franc'}
 def norm(w):
-    w = re.sub(r'\d+', lambda m: lettres(int(m.group())) if len(m.group()) < 7 else m.group(), w.lower())
+    w = ' '.join(UNITES.get(x.strip('.,;:!?()'), x) for x in w.lower().split())
+    w = re.sub(r'(\d+)\s*h\s*(\d*)', lambda m: m.group(1) + ' heure ' + m.group(2), w)  # « 8h30 » = « huit heures trente »
+    w = w.replace('et demie', 'trente').replace('et demi', 'trente').replace('et quart', 'quinze')
+    w = re.sub(r'\d+', lambda m: lettres(int(m.group())) if len(m.group()) < 7 else m.group(), w)
     w = unicodedata.normalize('NFD', w.replace('œ', 'oe'))
     return re.sub(r'[^a-z0-9]', '', ''.join(c for c in w if unicodedata.category(c) != 'Mn'))
 
+canon = lambda x: x.replace('etdemie', 'trente').replace('etdemi', 'trente').replace('etquart', 'quinze')  # mot par mot, « et quart » n'est pas remplacé : on le fait sur le texte collé
 envoi = sys.argv[1]; n = re.search(r'(\d+)', os.path.basename(envoi)).group(1)
 donnees = json.load(open(envoi)); os.makedirs('pret', exist_ok=True)
 model = WhisperModel('small', device='cpu', compute_type='int8')
@@ -66,7 +74,7 @@ for req in donnees['requests']:
     coupes.append([d, min(duree, sil[-1][0] + 0.15) if sil and sil[-1][1] >= duree - 0.05 else duree])
     for i, (t, (a, b)) in enumerate(zip(tours, coupes)):
         entendu = [w for w in rec if a <= (w[1] + w[2]) / 2 <= b]
-        score = difflib.SequenceMatcher(None, norm(t), ''.join(w[0] for w in entendu), autojunk=False).ratio()
+        score = difflib.SequenceMatcher(None, canon(norm(t)), canon(''.join(w[0] for w in entendu)), autojunk=False).ratio()
         rythme = (b - a) / max(1, len(t))  # secondes par lettre
         if score < 0.85 or not 0.03 <= rythme <= 0.3: refus.append([idx, i, round(score, 2), t, ' '.join(w[3] for w in entendu)]); continue
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{a:.3f}', '-to', f'{b:.3f}', '-i', audio, '-ac', '1', '-ar', '24000', '-b:a', '40k', f'pret/{cles[i]}.mp3'], check=True)
