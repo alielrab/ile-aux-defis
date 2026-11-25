@@ -39,6 +39,7 @@ export const LIEUX = [
   { id: 'bd', ile: 'createurs', type: 'jeu', nom: "L'atelier BD", detail: 'inventer des bandes dessinées', ouvert: true, x: 230, y: 680 },
   { id: 'musique', ile: 'createurs', type: 'jeu', nom: 'La salle\nde musique', detail: 'composer des mélodies', ouvert: true, x: 570, y: 680 },
   { id: 'robot', ile: 'createurs', type: 'jeu', nom: "L'atelier\ndes robots", detail: 'programmer avec des flèches', ouvert: true, x: 400, y: 830 },
+  { id: 'labo', ile: 'createurs', type: 'jeu', nom: 'Le labo des\nexpériences', detail: 'de petites expériences à faire pour de vrai', ouvert: true, x: 570, y: 830 },
   // L'île du cœur (le lieu de culte s'ajoute quand les parents l'ont choisi : voir lieuCroyance)
   { id: 'confiance', ile: 'coeur', type: 'jeu', nom: 'La maison\nde la confiance', detail: 'mes droits et ma sécurité', ouvert: true, x: 230, y: 420 },
   { id: 'emotions', ile: 'coeur', type: 'jeu', nom: 'La météo\ndes émotions', detail: 'reconnaître ses émotions', ouvert: true, x: 570, y: 420 },
@@ -178,6 +179,8 @@ const BATIMENTS = {
     <text x="-17" y="-88" font-size="32">🤖</text>`, 0.85],
   secours: [`<rect x="-62" y="-70" width="124" height="70" rx="6" fill="#ffffff"/><path d="M-72 -66 L0 -106 L72 -66Z" fill="#e05252"/><rect x="-14" y="-40" width="28" height="40" fill="#bfe6ff"/>
     <circle cx="0" cy="-74" r="16" fill="#fff"/><path d="M-4 -84 h8 v6 h6 v8 h-6 v6 h-8 v-6 h-6 v-8 h6z" fill="#e05252"/><rect x="-52" y="-52" width="26" height="20" fill="#bfe6ff"/><rect x="26" y="-52" width="26" height="20" fill="#bfe6ff"/>`, 0.85],
+  labo: [`<rect x="-64" y="-66" width="128" height="66" rx="6" fill="#eef6ff"/><path d="M-74 -62 L0 -100 L74 -62Z" fill="#7a5ad0"/><rect x="-12" y="-38" width="24" height="38" fill="#7a5a3a"/>
+    <rect x="-52" y="-50" width="28" height="22" fill="#bfe6ff"/><rect x="24" y="-50" width="28" height="22" fill="#bfe6ff"/><text x="-17" y="-104" font-size="30">🧪</text>`, 0.85],
   // Les lieux « Bientôt » de l'archipel
   chantier: [`<rect x="-70" y="-36" width="140" height="36" fill="#e8d4a8"/>
     ${[-60, -36, -12, 12, 36, 60].map((x) => `<rect x="${x - 3}" y="-40" width="6" height="40" fill="#f0a030"/>`).join('')}
@@ -257,7 +260,7 @@ const EMPLACEMENTS = {
   village: { cote: 122, places: [[0.5, 0.2], [0.294, 0.322], [0.706, 0.322], [0.244, 0.456], [0.75, 0.456], [0.206, 0.6], [0.775, 0.606], [0.494, 0.756]],
     maisons: [[0.494, 0.487], [0.494, 0.625]] },
   savoir: { cote: 122, places: [[0.5, 0.215], [0.338, 0.36], [0.685, 0.355], [0.24, 0.52], [0.75, 0.52], [0.215, 0.657], [0.493, 0.7], [0.78, 0.657]] },
-  createurs: { cote: 150, places: [[0.317, 0.298], [0.684, 0.298], [0.23, 0.479], [0.771, 0.479], [0.308, 0.664], [0.674, 0.669]] }, // l'île à 6 emplacements (une place libre)
+  createurs: { cote: 150, places: [[0.317, 0.298], [0.684, 0.298], [0.23, 0.479], [0.771, 0.479], [0.308, 0.664], [0.674, 0.669]] }, // l'île à 6 emplacements, tous pris
   securite: { cote: 150, places: [[0.314, 0.343], [0.686, 0.35], [0.27, 0.6], [0.683, 0.607]] },
   coeur: { cote: 150, places: [[0.27, 0.4], [0.67, 0.43], [0.275, 0.607], [0.693, 0.636]] },
   nature: { cote: 150, places: [[0.27, 0.41], [0.68, 0.43], [0.28, 0.61], [0.69, 0.64]] },

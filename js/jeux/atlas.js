@@ -405,8 +405,28 @@ export function decouvrir(profil, systeme, organe) {
   return vus.length === SYSTEMES[systeme].organes.length;
 }
 
+// Les pages en image (images/corps/<page>.webp, 640 x 1024, posée au milieu du cadre) : où toucher chaque organe, dans le repère 240 x 420 du dessin (x = px × 0,375 ; y = 18 + py × 0,375).
+// Un troisième élément 'dos' : l'organe se voit sur l'image de dos (images/corps/<page>-dos.webp), quand on tourne le personnage.
+// Sans image, la page garde son dessin et ses propres zones.
+export const SUR_IMAGE = {
+  squelette: { crane: [120, 67], colonne: [120, 159, 'dos'], cotes: [101, 157], bras: [62, 183], bassin: [120, 228], jambe: [86, 318] },
+  muscles: { biceps: [69, 164], pectoraux: [101, 147], abdominaux: [120, 192], quadriceps: [94, 254], mollets: [79, 314, 'dos'] },
+  coeur: { coeur: [124, 168], arteres: [124, 228], veines: [103, 142], sang: [56, 194] },
+  respiration: { nez: [120, 102], trachee: [120, 134], poumons: [98, 179], diaphragme: [120, 232] },
+  digestion: { bouche: [120, 128], oesophage: [123, 168], foie: [96, 210], estomac: [136, 208], grele: [117, 241], gros: [89, 239] },
+  cerveau: { cerveau: [119, 67], cervelet: [120, 84, 'dos'], moelle: [120, 173, 'dos'], nerfs: [98, 318] },
+  sens: { yeux: [71, 112], oreilles: [34, 164], nez: [107, 157], langue: [113, 209], peau: [191, 221] },
+  dents: { cheveux: [101, 63], dents: [122, 175], peau: [71, 164], ongles: [180, 192] },
+};
+const imageDe = (systeme, face = 'devant') => { const f = `images/corps/${systeme}${face === 'dos' ? '-dos' : ''}.webp`; return (globalThis.IMAGES ?? []).includes(f) ? f : null; };
+// La face où se voit un organe : 'devant' ou 'dos'
+export const faceDe = (systeme, organe) => SUR_IMAGE[systeme]?.[organe]?.[2] ?? 'devant';
+// Cette page a-t-elle une image de dos, pour tourner le personnage ?
+export const aDeuxFaces = (systeme) => Boolean(imageDe(systeme) && imageDe(systeme, 'dos'));
+
 // Le corps de la page, avec ses organes à toucher. vus : les organes déjà découverts ; actif : l'organe ouvert
-export function dessinerSysteme(systeme, vus = [], actif = null) {
+// face : 'devant' ou 'dos' (seulement pour les pages en image qui ont les deux)
+export function dessinerSysteme(systeme, vus = [], actif = null, face = 'devant') {
   const s = SYSTEMES[systeme];
   const corps = `<g fill="#f6d7c0" stroke="#e0b498" stroke-width="2">
     <rect x="42" y="116" width="28" height="182" rx="14"/><rect x="170" y="116" width="28" height="182" rx="14"/>
@@ -414,10 +434,13 @@ export function dessinerSysteme(systeme, vus = [], actif = null) {
     <rect x="80" y="250" width="36" height="152" rx="16"/><rect x="124" y="250" width="36" height="152" rx="16"/>
     <ellipse cx="96" cy="404" rx="22" ry="10"/><ellipse cx="144" cy="404" rx="22" ry="10"/>
     <path d="M70 116 Q120 100 170 116 L168 252 Q120 272 72 252Z"/><rect x="106" y="88" width="28" height="26"/><circle cx="120" cy="56" r="40"/></g>`;
-  const organes = s.organes.map((o) => {
-    const [x, y] = o.hit;
-    return `<g class="organe${o.id === actif ? ' actif' : ''}" data-organe="${o.id}" role="button" tabindex="0" aria-label="${o.nom}">${o.dessin}
+  const deux = aDeuxFaces(systeme), img = imageDe(systeme, deux ? face : 'devant');
+  const organes = s.organes.filter((o) => !deux || faceDe(systeme, o.id) === face).map((o) => {
+    const [x, y] = (img && SUR_IMAGE[systeme][o.id]) || o.hit;
+    // sur l'image : un rond blanc qui bat, pour montrer où toucher
+    const dessin = img ? `<circle class="repere" cx="${x}" cy="${y}" r="11" fill="#fff" fill-opacity=".55" stroke="#ff9a3c" stroke-width="3"/>` : o.dessin;
+    return `<g class="organe${o.id === actif ? ' actif' : ''}" data-organe="${o.id}" role="button" tabindex="0" aria-label="${o.nom}">${dessin}
       <circle cx="${x}" cy="${y}" r="20" fill="transparent"/>${vus.includes(o.id) ? `<circle cx="${x + 14}" cy="${y - 14}" r="7" fill="#1e8e3e"/><path d="M${x + 10} ${y - 14} l3 3 5 -6" stroke="#fff" stroke-width="2" fill="none"/>` : ''}</g>`;
   }).join('');
-  return `<svg viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg" class="atlas-corps" role="group" aria-label="${s.nom}">${corps}${organes}</svg>`;
+  return `<svg viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg" class="atlas-corps" role="group" aria-label="${s.nom}">${img ? `<image href="${img}" width="240" height="420"/>` : corps}${organes}</svg>`;
 }

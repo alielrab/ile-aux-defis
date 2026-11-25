@@ -53,3 +53,42 @@ test('cabane nature : des fiches complètes, et des questions tirées des fiches
   }
   for (const [age, n] of [[6, 3], [9, 4]]) for (let g = 1; g < 60; g++) assert.equal(new Set(nature.naturaliste.question({ age }, graine(g)).choix).size, n);
 });
+
+test('hôpital : chaque page a son image, et chaque organe sa place à toucher sur l’image', async () => {
+  const a = await import('../js/jeux/atlas.js');
+  for (const [k, s] of Object.entries(a.SYSTEMES)) for (const o of s.organes) {
+    const p = a.SUR_IMAGE[k][o.id];
+    assert.ok(p && p[0] > 10 && p[0] < 230 && p[1] > 20 && p[1] < 400, `${k} : ${o.id}`);
+  }
+  assert.ok(!a.dessinerSysteme('squelette').includes('<image')); // sans image : le dessin
+  globalThis.IMAGES = ['images/corps/squelette.webp'];
+  try {
+    const svg = a.dessinerSysteme('squelette', ['crane'], 'crane');
+    assert.ok(svg.includes('images/corps/squelette.webp') && svg.match(/class="repere"/g).length === 6 && svg.includes('organe actif'));
+    assert.equal(a.aDeuxFaces('squelette'), false); // pas d'image de dos : tout reste de face
+    globalThis.IMAGES.push('images/corps/squelette-dos.webp'); // avec l'image de dos : la colonne se voit de dos
+    assert.equal(a.aDeuxFaces('squelette'), true);
+    assert.equal(a.faceDe('squelette', 'colonne'), 'dos');
+    assert.equal(a.dessinerSysteme('squelette').match(/class="repere"/g).length, 5);
+    const dos = a.dessinerSysteme('squelette', [], null, 'dos');
+    assert.ok(dos.includes('squelette-dos.webp') && dos.match(/class="repere"/g).length === 1 && dos.includes('data-organe="colonne"'));
+  } finally { delete globalThis.IMAGES; }
+});
+
+test('labo : des expériences complètes et sans danger ; les étoiles une seule fois', async () => {
+  const x = await import('../js/jeux/experiences.js');
+  assert.ok(x.EXPERIENCES.length >= 10);
+  assert.equal(new Set(x.EXPERIENCES.map((e) => e.cle)).size, x.EXPERIENCES.length);
+  for (const e of x.EXPERIENCES) {
+    assert.ok(e.nom && e.image && e.duree && e.materiel.length >= 3 && e.etapes.length >= 3 && e.explication.length > 40, e.cle);
+    assert.equal(new Set(e.devine.slice(1)).size, 3, e.cle); // trois réponses différentes à deviner
+    const texte = [...e.materiel, ...e.etapes].join(' ').toLowerCase();
+    assert.ok(!/bougie|allumette|feu |briquet|eau bouillante|javel|alcool|peroxyde/.test(texte), `${e.cle} : rien de dangereux`);
+    assert.match(x.lire(e), /avec un adulte/);
+  }
+  const p = { etoiles: 0 };
+  assert.equal(x.terminer(p, 'poivre'), x.ETOILES_EXPERIENCE);
+  assert.equal(x.terminer(p, 'poivre'), 0);
+  assert.deepEqual([p.etoiles, p.experiences], [x.ETOILES_EXPERIENCE, ['poivre']]);
+  assert.throws(() => x.terminer(p, 'inconnue'));
+});

@@ -518,7 +518,17 @@ select {
 }
 
 .outils-animal { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
-/* Les fiches de la cabane nature */
+/* L'hôpital : les pages du corps en image */
+.atlas-colonne { display: grid; gap: 8px; justify-items: center; align-content: start; }
+.carte-image.carte-corps img { aspect-ratio: 4 / 5; }
+.atlas-corps .repere { animation: battre 1.2s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.atlas-corps .organe.actif .repere { fill: #ffd84a; fill-opacity: 0.9; }
+@keyframes battre { from { transform: scale(0.85); } to { transform: scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .atlas-corps .repere { animation: none; } }
+
+/* Les fiches de la cabane nature et du labo */
+.fiche-nature ul, .fiche-nature ol { margin: 0.2rem 0; padding-left: 1.3rem; }
+.fiche-nature li { margin: 0.15rem 0; }
 .fiche-nature { width: 100%; text-align: left; }
 .fiche-nature h2 { margin: 0.2rem 0 0.4rem; text-align: center; color: var(--texte); text-shadow: none; }
 .fiche-nature dt { font-weight: 800; margin-top: 0.5rem; }

@@ -27,6 +27,7 @@ import * as glacier from './jeux/glacier.js';
 import * as ecriture from './jeux/ecriture.js';
 import * as jardinage from './jeux/jardinage.js';
 import * as fiches from './jeux/nature-fiches.js';
+import * as experiences from './jeux/experiences.js';
 import * as espace from './jeux/espace.js';
 import * as cuisine from './jeux/cuisine.js';
 import * as marche from './jeux/marche.js';
@@ -316,6 +317,7 @@ function entrerLieu(cible) {
   if (id === 'missions') return ouvrirMissions();
   if (id === 'potager') return ouvrirPotager();
   if (id === 'naturaliste') return ouvrirCabane();
+  if (id === 'labo') return ouvrirLabo();
   if (id === 'labyrinthe') return ouvrirLabyrinthe();
   if (id === 'glacier') return ouvrirGlacier();
   if (id === 'urgences') return ouvrirUrgences();
@@ -1617,6 +1619,7 @@ const imprimerBD = (b) => imprimer(`<div class="bande">${b.cases.map((c, i) => b
 
 // L'hôpital : l'atlas du corps (une page par système, des fiches à découvrir, un quiz par page) et le grand quiz du corps
 let systemeAtlas = 'squelette', organeAtlas = null;
+let faceAtlas = 'devant'; // la face du personnage montrée dans une page de l'atlas
 function ouvrirAtlas() {
   etoilesJoueuse();
   afficherAtlas(null);
@@ -1630,18 +1633,22 @@ function afficherAtlas(systeme, dire = false) {
   const v = $('#atlas-vue');
   v.replaceChildren();
   if (!systeme) {
-    v.append(el('div', { className: 'atelier-menu' }, ...Object.entries(atlas.SYSTEMES).map(([k, s]) => {
-      const vus = joueuse.atlas?.[k]?.length ?? 0, fini = vus === s.organes.length;
-      return gros(`${s.image} ${s.nom}${fini ? ' ✓' : vus ? ` (${vus}/${s.organes.length})` : ''}`, () => { systemeAtlas = k; organeAtlas = null; afficherAtlas(k, true); }, `gros${fini ? ' secondaire' : ''}`);
+    v.append(el('div', { className: 'galerie-cartes' }, ...Object.entries(atlas.SYSTEMES).map(([k, s]) => {
+      const vus = joueuse.atlas?.[k]?.length ?? 0, fini = vus === s.organes.length, src = image(`corps/${k}`);
+      const b = el('button', { className: `carte-image carte-corps${fini ? ' choisi' : ''}` });
+      b.innerHTML = `${src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${s.image}</span>`}<span>${s.nom}<br><small>${fini ? '✓ Tout découvert' : `${vus} / ${s.organes.length}`}</small></span>`;
+      b.addEventListener('click', () => { systemeAtlas = k; organeAtlas = null; faceAtlas = 'devant'; afficherAtlas(k, true); });
+      return b;
     })), gros('⭐ Le grand quiz du corps', () => lancerJeu('corps'), 'gros secondaire'));
     return;
   }
   const s = atlas.SYSTEMES[systeme], vus = joueuse.atlas?.[systeme] ?? [];
   const o = s.organes.find((x) => x.id === organeAtlas);
   const corpsSvg = el('div', { className: 'atlas-dessin' });
-  corpsSvg.innerHTML = atlas.dessinerSysteme(systeme, vus, organeAtlas);
+  corpsSvg.innerHTML = atlas.dessinerSysteme(systeme, vus, organeAtlas, faceAtlas);
   const ouvrir = (id) => {
     organeAtlas = id;
+    faceAtlas = atlas.faceDe(systeme, id); // on tourne le personnage pour voir cet organe
     const complet = atlas.decouvrir(joueuse, systeme, id);
     if (complet) joueuse.etoiles += ETOILES_ATLAS;
     enregistrer();
@@ -1662,7 +1669,7 @@ function afficherAtlas(systeme, dire = false) {
     : el('p', { className: 'carte presentation', textContent: s.intro });
   v.append(gros('← L’atlas', () => afficherAtlas(null), 'gros secondaire retour-atelier'), el('h2', { textContent: `${s.image} ${s.nom}` }),
     el('p', { className: 'progres-atlas', textContent: `${vus.length} / ${s.organes.length} découvertes${vus.length === s.organes.length ? ' ✓' : ` · découvre tout pour gagner ${ETOILES_ATLAS} ⭐`}` }),
-    el('div', { className: 'atlas-page' }, corpsSvg, el('div', { className: 'atlas-fiche' }, carte, noms)),
+    el('div', { className: 'atlas-page' }, el('div', { className: 'atlas-colonne' }, corpsSvg, ...(atlas.aDeuxFaces(systeme) ? [gros(faceAtlas === 'dos' ? '🔄 Voir de face' : '🔄 Voir de dos', () => { faceAtlas = faceAtlas === 'dos' ? 'devant' : 'dos'; organeAtlas = null; afficherAtlas(systeme); parler(faceAtlas === 'dos' ? 'Voici le dos.' : 'Voici le devant.'); }, 'gros secondaire')] : [])), el('div', { className: 'atlas-fiche' }, carte, noms)),
     gros('🧠 Je teste mes connaissances', () => lancerJeu('atlas')));
   if (dire) parler(`${s.nom}. ${s.intro}`);
 }
@@ -2083,6 +2090,47 @@ function jouerGlacier() {
   v.replaceChildren(score, client, barre, monCornet, parfums,
     el('div', { className: 'actions-atelier' }, gros('↩️ Vider le cornet', () => { cornet = []; dessiner(); }, 'gros secondaire'), gros('🔔 Servir !', servir)));
   nouveau();
+}
+
+// Le labo des expériences : choisir une expérience, la préparer, deviner, puis lire l'explication
+function ouvrirLabo(cle = null) {
+  const v = ouvrirLibre('Le labo des expériences'), faites = joueuse.experiences ?? [];
+  if (cle === null) {
+    v.replaceChildren(el('p', { className: 'carte presentation regle-d-or', textContent: `🧪 ${experiences.REGLE}` }),
+      el('div', { className: 'galerie-cartes' }, ...experiences.EXPERIENCES.map((e) => {
+        const b = el('button', { className: `carte-image${faites.includes(e.cle) ? ' choisi' : ''}` });
+        b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${e.image}</span><span>${e.nom}<br><small>${faites.includes(e.cle) ? '✓ Faite' : `⏱️ ${e.duree}`}</small></span>`;
+        b.addEventListener('click', () => ouvrirLabo(e.cle));
+        return b;
+      })));
+    return parler(`Le labo des expériences ! ${experiences.REGLE} Choisis une expérience.`, { ton: 1.1 });
+  }
+  const e = experiences.experience(cle), [question, bonne, ...autres] = e.devine;
+  const reponse = el('div', { className: 'carte fiche-nature', role: 'status' });
+  const deviner = el('div', { className: 'reponses-defi' }, ...melanger([bonne, ...autres]).map((c) => {
+    const b = el('button', { className: 'gros secondaire', textContent: c });
+    b.addEventListener('click', () => {
+      for (const x of deviner.children) { x.disabled = true; if (x.textContent === bonne) x.classList.add('choisi'); }
+      const gain = experiences.terminer(joueuse, e.cle);
+      if (gain) { compterPartie('experiences'); gagnerEtoiles(gain); }
+      const debut = c === bonne ? 'Bien deviné !' : `En vrai : ${bonne.toLowerCase()}. C’est en essayant qu’on découvre !`;
+      reponse.replaceChildren(el('dl', {}, el('dt', { textContent: '💡 Pourquoi ?' }), el('dd', { textContent: e.explication })),
+        el('p', { className: 'savais', textContent: gain ? `+${gain} ⭐ Maintenant, fais l’expérience pour de vrai !` : 'Maintenant, fais l’expérience pour de vrai !' }));
+      bip(true);
+      parler(`${debut} ${e.explication}${gain ? ` Tu gagnes ${gain} étoiles.` : ''} Maintenant, fais l’expérience pour de vrai, avec un adulte !`);
+    });
+    return b;
+  }));
+  const tete = el('div', { className: 'tete-fiche' });
+  tete.innerHTML = `<span class="emoji-theme" aria-hidden="true">${e.image}</span>`;
+  v.replaceChildren(
+    el('div', { className: 'carte fiche-nature' }, tete, el('h2', { textContent: e.nom }),
+      el('dl', {}, el('dt', { textContent: `⏱️ ${e.duree}` }), el('dt', { textContent: '🧺 Il te faut' }), el('dd', {}, el('ul', {}, ...e.materiel.map((m) => el('li', { textContent: m })))),
+        el('dt', { textContent: '👣 Les étapes' }), el('dd', {}, el('ol', {}, ...e.etapes.map((t) => el('li', { textContent: t })))),
+        ...(e.adulte ? [el('dt', { textContent: '🧑 Avec un adulte' }), el('dd', { textContent: e.adulte })] : []))),
+    el('div', { className: 'actions-atelier' }, gros('🔊 Écouter', () => parler(experiences.lire(e)), 'gros secondaire'), gros('← Les expériences', () => ouvrirLabo())),
+    el('h2', { textContent: `🤔 Devine d’abord : ${question}` }), deviner, reponse);
+  parler(`${experiences.lire(e)} Devine d’abord : ${question}`);
 }
 
 // La cabane nature : les fiches des animaux et des plantes, et le quiz

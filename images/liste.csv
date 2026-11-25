@@ -147,6 +147,7 @@
 3;images/ile/bd.webp;512x512;oui;Bâtiment : L'atelier BD (inventer des bandes dessinées)
 3;images/ile/musique.webp;512x512;oui;Bâtiment : La salle de musique (composer des mélodies)
 3;images/ile/robot.webp;512x512;oui;Bâtiment : L'atelier des robots (programmer avec des flèches)
+3;images/ile/labo.webp;512x512;oui;Bâtiment : Le labo des expériences (de petites expériences à faire pour de vrai)
 3;images/ile/confiance.webp;512x512;oui;Bâtiment : La maison de la confiance (mes droits et ma sécurité)
 3;images/ile/emotions.webp;512x512;oui;Bâtiment : La météo des émotions (reconnaître ses émotions)
 3;images/ile/missions.webp;512x512;oui;Bâtiment : Les missions de la maison (aider à la maison)
@@ -483,6 +484,17 @@
 8;images/langues/famille.webp;512x320;oui;Thème de langue : La famille
 8;images/langues/nourriture.webp;512x320;oui;Thème de langue : À table
 8;images/langues/ecole.webp;512x320;oui;Thème de langue : À l’école
+8;images/corps/squelette.webp;640x1024;oui;Page du corps : Le squelette
+8;images/corps/muscles.webp;640x1024;oui;Page du corps : Les muscles
+8;images/corps/coeur.webp;640x1024;oui;Page du corps : Le cœur et le sang
+8;images/corps/respiration.webp;640x1024;oui;Page du corps : La respiration
+8;images/corps/digestion.webp;640x1024;oui;Page du corps : La digestion
+8;images/corps/cerveau.webp;640x1024;oui;Page du corps : Le cerveau et les nerfs
+8;images/corps/sens.webp;640x1024;oui;Page du corps : Les 5 sens
+8;images/corps/dents.webp;640x1024;oui;Page du corps : Les dents et la peau
+8;images/corps/squelette-dos.webp;640x1024;oui;Page du corps, vue de dos : Le squelette
+8;images/corps/muscles-dos.webp;640x1024;oui;Page du corps, vue de dos : Les muscles
+8;images/corps/cerveau-dos.webp;640x1024;oui;Page du corps, vue de dos : Le cerveau et les nerfs
 8;images/nature/renard.webp;512x320;oui;Animal : Le renard, en entier
 8;images/nature/herisson.webp;512x320;oui;Animal : Le hérisson, en entier
 8;images/nature/ecureuil.webp;512x320;oui;Animal : L’écureuil, en entier
