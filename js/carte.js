@@ -334,7 +334,7 @@ function maisons(profils, joueuse, centres = null) {
     const tete = dessinerAvatar(p.avatar, 'tete').replace('<svg ', `<svg x="${x - 24}" y="${y - 30}" width="48" height="48" `); // à sa porte
     const aElle = p.id === joueuse.id;
     return `<g class="lieu maison${aElle ? '' : ' autre'}" ${aElle ? `role="button" tabindex="0" data-lieu="maison" aria-label="${echapper(`Ma maison (${p.prenom})`)}"` : 'aria-hidden="true"'}>
-      <g transform="translate(${x} ${y}) scale(${taille}) translate(${-x} ${-y})">${batimentImage('maison', x, y + 8, 124) ?? maison(x, y, toit, mur)}${tete}</g>${etiquette(x, y + 46 * taille, aElle ? 'Ma maison' : p.prenom, 26, Math.min(112, ecart - 12 || 112))}</g>`;
+      <g transform="translate(${x} ${y}) scale(${taille}) translate(${-x} ${-y})">${batimentImage('maison', x, y + 8, 124) ?? maison(x, y, toit, mur)}${tete}</g>${etiquette(x, y + 46 * taille, aElle ? 'Ma maison' : p.prenom, 26, Math.min(112, ecart ? ecart - 12 : 112))}</g>`;
   }).join('');
 }
 

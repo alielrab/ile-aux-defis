@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-74`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-75`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
