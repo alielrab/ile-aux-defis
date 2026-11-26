@@ -631,8 +631,9 @@ function afficherQuestion() {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.type === 'drapeau' ? '🏳️' : passeport.pays(paysCourant).drapeau}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'urgences') {
-    $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>` : '';
+    $('#aide').innerHTML = q.image ? `<div class="ingredient-a-trouver" aria-hidden="true">${enImage('urgences', urgences.IMAGES[q.image], q.image)}</div>` : '';
     boutonsReponses(q.choix, urgences.libelle, true);
+    for (const b of $('#reponses').children) if (image(`urgences/${b.dataset.v}`)) b.innerHTML = `${enImage('urgences', b.dataset.v)} <span>${urgences.sansEmoji(b.textContent)}</span>`;
   } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager', 'secours'].includes(jeu)) {
     $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
     boutonsReponses(q.choix, String, true);
@@ -912,7 +913,7 @@ async function choisir(choix) {
   const ici = jeu === 'corps' && q.mode === 'toucher' ? `Ça, c'est ${corps.PARTIES[choix].nom}. ` : '';
   const correction = juste ? '' : ici + (q.solution ?? `La bonne réponse est ${q.reponse}.`);
   const suite = [q.trouve, correction, q.savaisTu && `Le savais-tu ? ${q.savaisTu}`].filter(Boolean).join(' ');
-  $('#retour').textContent = acc(`${m.texte} ${suite}`.trim());
+  $('#retour').textContent = urgences.sansEmoji(acc(`${m.texte} ${suite}`.trim()));
   $('#retour').classList.toggle('longue', suite.length > 60);
   const passer = () => {
     if (p !== partie || $('[data-ecran="jeu"]').hidden) return; // partie quittée entre-temps
@@ -2566,6 +2567,7 @@ function ouvrirCabane() {
 }
 // L'image d'une carte de menu (images/vignettes), d'après son nom
 const VIGNETTES = { 'Les animaux': 'nature-animaux', 'Les plantes': 'nature-plantes', 'Le quiz de la nature': 'nature-quiz', 'Mon potager': 'potager-jardin', 'Le quiz du potager': 'potager-quiz', 'La chasse aux syllabes': 'biblio-syllabes', 'La dictée magique': 'biblio-dictee' };
+const enImage = (dossier, cle, emoji) => { const src = cle && image(`${dossier}/${cle}`); return src ? `<img class="pictogramme" src="${src}" alt="">` : emoji; }; // une petite image dans un texte, à la place d'un emoji
 const imageFiche = (dossier, cle, emoji) => { const src = image(`${dossier}/${cle}`); return src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${emoji}</span>`; };
 function afficherFiches(quoi, cle = null) {
   const v = ouvrirLibre('La cabane nature'), animaux = quoi === 'animaux', liste = animaux ? fiches.ANIMAUX : fiches.PLANTES;
@@ -2612,8 +2614,8 @@ function afficherJardinage(message = null, graines = null) {
   const plots = el('div', { className: 'galerie-cartes' }, ...cs.map((c, i) => {
     const b = el('button', { className: `carte-image${jardinage.pret(c) ? ' choisi' : ''}` });
     const l = c && jardinage.legume(c.legume);
-    b.innerHTML = c ? `<span class="emoji-theme" aria-hidden="true">${jardinage.image(c)}</span><span>${l.nom}<br><small>${jardinage.pret(c) ? '🧺 À récolter !' : c.arrose === jour ? '💧 Arrosé aujourd’hui' : `🚿 À arroser (${c.arrosages} / ${jardinage.ARROSAGES})`}</small></span>`
-      : '<span class="emoji-theme" aria-hidden="true">🟫</span><span>Carré vide<br><small>Touche pour semer</small></span>';
+    b.innerHTML = c ? `${imageFiche('potager', jardinage.nomImage(c), jardinage.image(c))}<span>${l.nom}<br><small>${jardinage.pret(c) ? 'À récolter !' : c.arrose === jour ? 'Arrosé aujourd’hui' : `À arroser (${c.arrosages} / ${jardinage.ARROSAGES})`}</small></span>`
+      : `${imageFiche('potager', 'terre', '🟫')}<span>Carré vide<br><small>Touche pour semer</small></span>`;
     b.addEventListener('click', () => {
       if (!c) return afficherJardinage(`Que veux-tu semer dans le carré ${i + 1} ?`, i);
       if (jardinage.pret(c)) {
@@ -2629,9 +2631,10 @@ function afficherJardinage(message = null, graines = null) {
     });
     return b;
   }));
-  const choix = graines === null ? [] : [el('h2', { textContent: '🌰 Les graines' }), el('div', { className: 'phrases' }, ...jardinage.LEGUMES.map((l) => {
+  const choix = graines === null ? [] : [el('h2', { textContent: 'Les graines' }), el('div', { className: 'phrases' }, ...jardinage.LEGUMES.map((l) => {
     const ok = jardinage.deSaison(jour).includes(l);
-    const b = gros(`${l.image} ${l.nom}${ok ? '' : ' (pas la saison)'}`, () => { jardinage.semer(joueuse, graines, l.cle, jour); enregistrer(); dire(`${l.nom} : c’est semé ! ${l.note ?? 'Maintenant, arrose.'}`); }, 'petit');
+    const b = gros(`${l.nom}${ok ? '' : ' (pas la saison)'}`, () => { jardinage.semer(joueuse, graines, l.cle, jour); enregistrer(); dire(`${l.nom} : c’est semé ! ${l.note ?? 'Maintenant, arrose.'}`); }, 'petit');
+    b.insertAdjacentHTML('afterbegin', `${enImage('potager', l.cle, l.image)} `);
     b.disabled = !ok;
     return b;
   }))];
@@ -3068,13 +3071,13 @@ function ouvrirUrgences() {
   const v = $('#urgences-vue');
   v.replaceChildren(el('p', { className: 'carte presentation', textContent: urgences.RASSURER }),
     el('div', { className: 'numeros' }, ...urgences.NUMEROS.map((n) => {
-      const c = el('button', { className: 'numero-urgence' }, el('span', { className: 'image-numero', textContent: n.image }), el('strong', { textContent: n.numero }), el('span', { className: 'nom-numero', textContent: n.nom }), el('small', { textContent: n.quand }));
+      const c = el('button', { className: 'numero-urgence' }, el('span', { className: 'image-numero', innerHTML: enImage('urgences', n.numero, n.image) }), el('strong', { textContent: n.numero }), el('span', { className: 'nom-numero', textContent: n.nom }), el('small', { textContent: n.quand }));
       c.style.borderColor = n.couleur;
       c.addEventListener('click', () => parler(`${n.numero}. ${n.nom}. ${n.quand}`));
       return c;
     })),
     el('h2', { textContent: '📞 Au téléphone, je dis :' }),
-    el('ol', { className: 'quoi-dire carte' }, ...urgences.QUOI_DIRE.map(([image, titre, texte]) => el('li', {}, el('span', { textContent: `${image} ` }), el('strong', { textContent: `${titre} ` }), texte))),
+    el('ol', { className: 'quoi-dire carte' }, ...urgences.QUOI_DIRE.map(([image, titre, texte]) => el('li', {}, el('span', { innerHTML: `${enImage('urgences', urgences.IMAGES[image], image)} ` }), el('strong', { textContent: `${titre} ` }), texte))),
     gros('🔊 Écouter', () => parler(`${urgences.RASSURER} Au téléphone, je dis : ${urgences.QUOI_DIRE.map(([, t, x]) => `${t} ${x}`).join(' ')}`), 'gros secondaire'),
     gros('⭐ Qui appeler ?', () => lancerJeu('urgences')));
   montrer('urgences');

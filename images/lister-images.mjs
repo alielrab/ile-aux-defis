@@ -64,6 +64,9 @@ for (const v of ['potager-jardin', 'potager-quiz', 'nature-animaux', 'nature-pla
 for (const d of ['plage', 'foret', 'espace', 'maison', 'ecole', 'ville', 'nuit', 'neige']) ajouter(8, `bd/decor-${d}`, '600x480', `Atelier BD : le décor « ${d} », sans personne, le sol libre en bas`, false);
 for (const c of ['chien', 'chat', 'lapin', 'licorne', 'dragon', 'dinosaure', 'robot', 'extraterrestre']) ajouter(8, `bd/${c}`, '256x256', `Atelier BD : la créature « ${c} », en entier`);
 for (const a of ['etoile', 'coeur', 'arcenciel', 'cadeau', 'ballon', 'glace', 'baudruche', 'idee', 'question', 'exclamation', 'dodo', 'musique']) ajouter(8, `bd/auto-${a}`, '128x128', `Atelier BD : l'autocollant « ${a} »`);
+for (const l of (await js('jeux/jardinage.js')).LEGUMES) ajouter(8, `potager/${l.cle}`, '256x256', `Potager : ${l.nom}`);
+for (const p of ['terre', 'pousse-1', 'pousse-2', 'pousse-3']) ajouter(8, `potager/${p}`, '256x256', `Potager : le carré de terre (${p})`);
+for (const [e, n] of Object.entries((await js('jeux/urgences.js')).IMAGES)) ajouter(8, `urgences/${n}`, '256x256', `Numéros d'urgence : à la place de ${e}, sans personne`);
 ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
 ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);

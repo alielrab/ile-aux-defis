@@ -28,6 +28,7 @@ export const deSaison = (jour) => LEGUMES.filter((l) => l.mois.includes(moisDe(j
 export const carres = (profil) => ((profil.potager ??= { carres: Array(NB_CARRES).fill(null) }).carres);
 export const pret = (c) => Boolean(c) && c.arrosages >= ARROSAGES;
 export const image = (c) => (pret(c) ? legume(c.legume).image : STADES[c.arrosages]);
+export const nomImage = (c) => (pret(c) ? c.legume : `pousse-${c.arrosages + 1}`); // images/potager/<nom>.webp
 
 export function semer(profil, i, cle, jour) {
   const l = legume(cle), c = carres(profil);

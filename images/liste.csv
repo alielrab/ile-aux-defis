@@ -699,6 +699,45 @@
 8;images/bd/auto-exclamation.webp;128x128;oui;Atelier BD : l'autocollant « exclamation »
 8;images/bd/auto-dodo.webp;128x128;oui;Atelier BD : l'autocollant « dodo »
 8;images/bd/auto-musique.webp;128x128;oui;Atelier BD : l'autocollant « musique »
+8;images/potager/cresson.webp;256x256;oui;Potager : Le cresson
+8;images/potager/radis.webp;256x256;oui;Potager : Les radis
+8;images/potager/salade.webp;256x256;oui;Potager : La salade
+8;images/potager/carotte.webp;256x256;oui;Potager : Les carottes
+8;images/potager/pois.webp;256x256;oui;Potager : Les petits pois
+8;images/potager/fraise.webp;256x256;oui;Potager : Les fraisiers
+8;images/potager/tomate.webp;256x256;oui;Potager : Les tomates
+8;images/potager/courge.webp;256x256;oui;Potager : La courge
+8;images/potager/haricot.webp;256x256;oui;Potager : Les haricots
+8;images/potager/mache.webp;256x256;oui;Potager : La mâche
+8;images/potager/ail.webp;256x256;oui;Potager : L’ail
+8;images/potager/tulipe.webp;256x256;oui;Potager : Les bulbes de tulipes
+8;images/potager/terre.webp;256x256;oui;Potager : le carré de terre (terre)
+8;images/potager/pousse-1.webp;256x256;oui;Potager : le carré de terre (pousse-1)
+8;images/potager/pousse-2.webp;256x256;oui;Potager : le carré de terre (pousse-2)
+8;images/potager/pousse-3.webp;256x256;oui;Potager : le carré de terre (pousse-3)
+8;images/urgences/144.webp;256x256;oui;Numéros d'urgence : à la place de 🚑, sans personne
+8;images/urgences/117.webp;256x256;oui;Numéros d'urgence : à la place de 🚓, sans personne
+8;images/urgences/118.webp;256x256;oui;Numéros d'urgence : à la place de 🚒, sans personne
+8;images/urgences/pas.webp;256x256;oui;Numéros d'urgence : à la place de 🙋, sans personne
+8;images/urgences/qui.webp;256x256;oui;Numéros d'urgence : à la place de 👋, sans personne
+8;images/urgences/ou.webp;256x256;oui;Numéros d'urgence : à la place de 📍, sans personne
+8;images/urgences/quoi.webp;256x256;oui;Numéros d'urgence : à la place de ❗, sans personne
+8;images/urgences/apres.webp;256x256;oui;Numéros d'urgence : à la place de 📞, sans personne
+8;images/urgences/grand-papa.webp;256x256;oui;Numéros d'urgence : à la place de 👴, sans personne
+8;images/urgences/canape.webp;256x256;oui;Numéros d'urgence : à la place de 🛋️, sans personne
+8;images/urgences/escalier.webp;256x256;oui;Numéros d'urgence : à la place de 🩹, sans personne
+8;images/urgences/respirer.webp;256x256;oui;Numéros d'urgence : à la place de 😮‍💨, sans personne
+8;images/urgences/fumee.webp;256x256;oui;Numéros d'urgence : à la place de 🏠, sans personne
+8;images/urgences/feu-cuisine.webp;256x256;oui;Numéros d'urgence : à la place de 🔥, sans personne
+8;images/urgences/inondation.webp;256x256;oui;Numéros d'urgence : à la place de 🌊, sans personne
+8;images/urgences/chien.webp;256x256;oui;Numéros d'urgence : à la place de 🐕, sans personne
+8;images/urgences/vitre.webp;256x256;oui;Numéros d'urgence : à la place de 🚗, sans personne
+8;images/urgences/accident.webp;256x256;oui;Numéros d'urgence : à la place de 🚦, sans personne
+8;images/urgences/suivi.webp;256x256;oui;Numéros d'urgence : à la place de 🚶, sans personne
+8;images/urgences/doudou.webp;256x256;oui;Numéros d'urgence : à la place de 🧸, sans personne
+8;images/urgences/genou.webp;256x256;oui;Numéros d'urgence : à la place de 🦵, sans personne
+8;images/urgences/ami.webp;256x256;oui;Numéros d'urgence : à la place de 😢, sans personne
+8;images/urgences/blague.webp;256x256;oui;Numéros d'urgence : à la place de 😜, sans personne
 8;images/espace/fusee.webp;160x192;oui;Observatoire : la fusée, le nez en haut
 8;images/espace/fond.webp;1024x440;non;Observatoire : le ciel étoilé, sans planète
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »

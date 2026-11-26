@@ -12,6 +12,12 @@ export const NUMEROS = [
 export const PAS_URGENT = 'pas';
 export const REPONSES = { 144: '🚑 144 : l’ambulance', 117: '🚓 117 : la police', 118: '🚒 118 : les pompiers', pas: '🙋 Pas une urgence : je demande à un adulte' };
 
+// Les images (images/urgences/<nom>.webp) à la place des emojis. Les emojis restent dans les textes : les voix enregistrées en dépendent.
+export const IMAGES = { '🚑': '144', '🚓': '117', '🚒': '118', '🙋': 'pas', '👋': 'qui', '📍': 'ou', '❗': 'quoi', '📞': 'apres',
+  '👴': 'grand-papa', '🛋️': 'canape', '🩹': 'escalier', '😮‍💨': 'respirer', '🏠': 'fumee', '🔥': 'feu-cuisine', '🌊': 'inondation', '🐕': 'chien',
+  '🚗': 'vitre', '🚦': 'accident', '🚶': 'suivi', '🧸': 'doudou', '🦵': 'genou', '😢': 'ami', '😜': 'blague' };
+export const sansEmoji = (t) => t.replace(/(🚑|🚓|🚒|🙋) /g, ''); // pour l'écran seulement
+
 // Ce qu'on dit au téléphone, dans l'ordre
 export const QUOI_DIRE = [
   ['👋', 'Qui ?', 'Je dis mon prénom et mon nom.'],
