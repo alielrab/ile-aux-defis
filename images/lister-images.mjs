@@ -65,6 +65,7 @@ for (const d of ['plage', 'foret', 'espace', 'maison', 'ecole', 'ville', 'nuit',
 for (const c of ['chien', 'chat', 'lapin', 'licorne', 'dragon', 'dinosaure', 'robot', 'extraterrestre']) ajouter(8, `bd/${c}`, '256x256', `Atelier BD : la créature « ${c} », en entier`);
 for (const a of ['etoile', 'coeur', 'arcenciel', 'cadeau', 'ballon', 'glace', 'baudruche', 'idee', 'question', 'exclamation', 'dodo', 'musique']) ajouter(8, `bd/auto-${a}`, '128x128', `Atelier BD : l'autocollant « ${a} »`);
 for (const l of (await js('jeux/jardinage.js')).LEGUMES) ajouter(8, `potager/${l.cle}`, '256x256', `Potager : ${l.nom}`);
+for (const n of Object.values((await js('jeux/nature.js')).IMAGES)) if (!lignes.some((l) => l[1] === `images/potager/${n}.webp`) && n !== 'pousse-1') ajouter(8, `potager/${n}`, '256x256', 'Quiz du potager');
 for (const p of ['terre', 'pousse-1', 'pousse-2', 'pousse-3']) ajouter(8, `potager/${p}`, '256x256', `Potager : le carré de terre (${p})`);
 for (const [e, n] of Object.entries((await js('jeux/urgences.js')).IMAGES)) ajouter(8, `urgences/${n}`, '256x256', `Numéros d'urgence : à la place de ${e}, sans personne`);
 { const c = await js('jeux/cuisine.js');

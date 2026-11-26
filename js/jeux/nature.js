@@ -39,6 +39,10 @@ export const NATURALISTE = { faciles: [
   ['🦫', 'Quel animal construit des barrages sur les rivières ?', 'Le castor', ['La loutre', 'Le canard', 'Le hérisson']],
 ] };
 
+// Les images (images/potager/<nom>.webp) à la place des emojis des quiz. Les emojis restent dans les questions : les voix enregistrées en dépendent.
+export const IMAGES = { '🥕': 'carotte', '🍓': 'fraise', '🎃': 'courge', '🍅': 'tomate', '🥬': 'salade', '🌱': 'pousse-1', '🍎': 'pomme', '🍒': 'cerises', '🌰': 'graine',
+  '🪱': 'ver', '🥔': 'pomme-de-terre', '🍏': 'pommier', '🐌': 'salade-grignotee', '🐞': 'coccinelle', '🐝': 'abeille', '♻️': 'compost', '🥦': 'brocoli', '🌽': 'mais',
+  '❄️': 'neige', '🍇': 'raisin', '💧': 'arrosoir', '🌻': 'tournesol' };
 export const POTAGER = { faciles: [
   ['🥕', 'Quelle partie de la carotte mange-t-on ?', 'La racine', ['La fleur', 'La feuille', 'La graine']],
   ['🍓', 'En quelle saison cueille-t-on les fraises ?', 'Au printemps et en été', ['En automne', 'En hiver', 'Toute l’année']],

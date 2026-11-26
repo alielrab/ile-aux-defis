@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-70`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-71`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
@@ -96,7 +96,8 @@
 
 ## Pas encore fait
 - **Restaurant en images** (26 novembre) : `images/restaurant/` (15 ingrédients nommés par leur clé, et 5 plats `plat-<recette>`), dans le jeu, sur la balance, sur la carte des recettes et sur le plat réussi.
-- **Emojis encore à remplacer par des images** : les 71 fêtes et symboles du lieu de croyance, la maison de la confiance, les questions du quiz du potager.
+- **Quiz du potager en images** (26 novembre) : 16 images de plus dans `images/potager/` ; la table `IMAGES` de `js/jeux/nature.js` dit quelle image remplace quel emoji (les emojis restent dans les questions, pour les voix).
+- **Emojis encore à remplacer par des images** : les 71 fêtes et symboles du lieu de croyance, la maison de la confiance.
 - Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.

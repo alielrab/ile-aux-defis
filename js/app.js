@@ -635,7 +635,7 @@ function afficherQuestion() {
     boutonsReponses(q.choix, urgences.libelle, true);
     for (const b of $('#reponses').children) if (image(`urgences/${b.dataset.v}`)) b.innerHTML = `${enImage('urgences', b.dataset.v)} <span>${urgences.sansEmoji(b.textContent)}</span>`;
   } else if (['route', 'tri', 'suisse', 'naturaliste', 'potager', 'secours'].includes(jeu)) {
-    $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
+    $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${jeu === 'potager' ? enImage('potager', nature.IMAGES[q.image], q.image) : q.image}</div>`;
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'intrus' || jeu === 'suites') { // les réponses sont des images ou des nombres : de gros boutons, sans texte à lire
     $('#aide').innerHTML = q.image ? `<div class="suite-logique" role="img" aria-label="La suite">${enFormes(q.image)}</div>` : '';
