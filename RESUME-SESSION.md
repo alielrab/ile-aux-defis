@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-73`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-74`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
@@ -99,7 +99,8 @@
 - **Quiz du potager en images** (26 novembre) : 16 images de plus dans `images/potager/` ; la table `IMAGES` de `js/jeux/nature.js` dit quelle image remplace quel emoji (les emojis restent dans les questions, pour les voix).
 - **Fêtes et symboles du lieu de croyance en images** (26 novembre) : 50 images dans `images/croyance/`, seulement des objets, des lieux et des symboles (aucune personne, aucune divinité). La table `IMAGES` de `js/croyances-contenu.js` relie le nom de la fête ou du symbole (sans la date) à son image. À faire relire par un parent pour chaque religion.
 - **Maison de la confiance en images** (26 novembre) : une image par thème dans `images/confiance/<clé du thème>.webp`, sur le bouton du thème et dans son titre. Les textes n'ont pas changé.
-- **Emojis encore en place** : les petits emojis des boutons et des titres (🔊, ⭐, ✓, 📖, 🎉…), les quiz de la nature et des premiers secours, les drapeaux, animaux et plats du passeport.
+- **Tous les emojis restants en images** (26 novembre, soir) : `habillerEmojis` dans `js/app.js` regarde tout ce qui s'affiche et met une image à la place de chaque emoji (l'emoji reste dans la page, caché, classe `.emoji-cache`). L'image vient d'un dossier existant (table `IMAGES_EMOJIS` : énigmes, restaurant, nature, BD…) ou de `images/emoji/<code de l'emoji>.webp` (318 images, 192 px). La liste des sujets est dans `images/emojis.txt` (emoji|o objet, a animal ou personne, f drapeau|sujet) : pour un nouvel emoji, ajouter une ligne, générer l'image, la ranger dans `images/originaux/emoji/<code>.png`. Les textes n'ont pas changé (les voix en dépendent).
+- **Emojis encore en place** : dans les dessins seulement (un emoji dans un dessin SVG ne peut pas devenir une image de cette façon) : les bâtiments de secours de la carte et la BD quand leur image manque. Les flèches ◀ ▶ ↩ restent des signes de texte. À relire : les 20 drapeaux (une image générée peut se tromper).
 - Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.

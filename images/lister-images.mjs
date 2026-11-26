@@ -1,6 +1,6 @@
 // La liste de toutes les images à générer pour le nouveau style (voir images/PLAN.md), tirée du catalogue de l'app.
 // Lancer : node images/lister-images.mjs   →   écrit images/liste.csv (etape;fichier;taille;transparent;sujet)
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 const racine = new URL('../', import.meta.url);
 const js = (f) => import(new URL(`js/${f}`, racine));
@@ -73,6 +73,8 @@ for (const [e, n] of Object.entries((await js('jeux/urgences.js')).IMAGES)) ajou
   for (const [k, r] of Object.entries(c.RECETTES)) ajouter(8, `restaurant/plat-${k}`, '256x256', `Restaurant : le plat réussi (${r.nom})`); }
 for (const n of new Set(Object.values((await js('croyances-contenu.js')).IMAGES))) ajouter(8, `croyance/${n}`, '256x256', 'Lieu de croyance : fête ou symbole, sans personne');
 for (const t of (await js('jeux/confiance.js')).THEMES) ajouter(8, `confiance/${t.cle}`, '256x256', `Maison de la confiance : ${t.nom}`);
+// Les emojis qui restent dans les textes : une image par emoji, au nom de son code (images/emojis.txt : emoji|o objet, a animal ou personne, f drapeau|sujet)
+for (const [e, , sujet] of readFileSync(new URL('images/emojis.txt', racine), 'utf8').trim().split('\n').map((l) => l.split('|'))) ajouter(8, `emoji/${[...e].map((c) => c.codePointAt(0).toString(16)).join('-')}`, '192x192', `À la place de ${e} : ${sujet}`);
 ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
 ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);

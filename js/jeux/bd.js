@@ -83,7 +83,7 @@ export function lignes(texte, largeur = 17) {
 // Une case (viewBox 0 0 300 240). dessinPerso(id, x, y, largeur, hauteur) : le SVG d'un personnage, fourni par l'app.
 // Les images du nouveau style (images/bd) : les décors, les créatures et les autocollants. Sans image, on garde le dessin ou l'emoji.
 const prete = (nom) => ((globalThis.IMAGES ?? []).includes(`images/bd/${nom}.webp`) ? `images/bd/${nom}.webp` : null);
-const NOMS_AUTOCOLLANTS = { '⭐': 'etoile', '❤️': 'coeur', '🌈': 'arcenciel', '🎁': 'cadeau', '⚽': 'ballon', '🍦': 'glace', '🎈': 'baudruche', '💡': 'idee', '❓': 'question', '❗': 'exclamation', '💤': 'dodo', '🎵': 'musique' };
+export const NOMS_AUTOCOLLANTS = { '⭐': 'etoile', '❤️': 'coeur', '🌈': 'arcenciel', '🎁': 'cadeau', '⚽': 'ballon', '🍦': 'glace', '🎈': 'baudruche', '💡': 'idee', '❓': 'question', '❗': 'exclamation', '💤': 'dodo', '🎵': 'musique' };
 export const imageAutocollant = (emoji) => prete(`auto-${NOMS_AUTOCOLLANTS[emoji]}`);
 // Le décor d'une case, à mettre dans un svg de 300 x 240
 export const dessinDecor = (cle) => { const img = prete(`decor-${cle}`); return img ? `<image href="${img}" width="300" height="240" preserveAspectRatio="xMidYMid slice"/>` : (DECORS[cle]?.[1] ?? DECORS.plage[1]); };

@@ -716,6 +716,8 @@ button.tampon { cursor: pointer; font-family: inherit; }
 .numero-urgence strong { font-size: 2.6rem; line-height: 1; }
 .image-numero { font-size: 2.6rem; line-height: 1; }
 .pictogramme { height: 2em; width: auto; vertical-align: middle; }
+.image-emoji { height: 1.25em; width: auto; vertical-align: -0.25em; } /* l'image d'un emoji, à la taille du texte autour */
+.emoji-cache { display: none !important; }
 .ingredient-a-trouver .pictogramme, .plat-reussi .pictogramme { height: 1.1em; }
 .image-numero .pictogramme { height: 1.6em; }
 .nom-numero { font-weight: 800; }

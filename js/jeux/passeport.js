@@ -99,7 +99,7 @@ export function dessinerCarte(tampons = [], avionSur = 'suisse') {
   const [ax, ay] = xy(pays(avionSur).lon, pays(avionSur).lat);
   return `<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" class="carte-monde" role="img" aria-label="La carte du monde">
     <rect width="720" height="300" rx="14" fill="#7fc4e8"/><g fill="#9fd36a" stroke="#6aa040" stroke-width="2" stroke-linejoin="round">${terres}</g>${points}
-    <g class="avion" style="transform: translate(${ax}px, ${ay}px)"><text x="0" y="0" font-size="30" text-anchor="middle" dominant-baseline="central">✈️</text></g></svg>`;
+    <g class="avion" style="transform: translate(${ax}px, ${ay}px)">${(globalThis.IMAGES ?? []).includes('images/enigmes/avion.webp') ? '<image href="images/enigmes/avion.webp" x="-18" y="-18" width="36" height="36"/>' : '<text x="0" y="0" font-size="30" text-anchor="middle" dominant-baseline="central">✈️</text>'}</g></svg>`;
 }
 export const position = (cle) => xy(pays(cle).lon, pays(cle).lat);
 

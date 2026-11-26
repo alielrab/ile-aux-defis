@@ -2569,6 +2569,38 @@ function ouvrirCabane() {
 const VIGNETTES = { 'Les animaux': 'nature-animaux', 'Les plantes': 'nature-plantes', 'Le quiz de la nature': 'nature-quiz', 'Mon potager': 'potager-jardin', 'Le quiz du potager': 'potager-quiz', 'La chasse aux syllabes': 'biblio-syllabes', 'La dictée magique': 'biblio-dictee' };
 const enImage = (dossier, cle, emoji) => { const src = cle && image(`${dossier}/${cle}`); return src ? `<img class="pictogramme" src="${src}" alt="">` : emoji; }; // une petite image dans un texte, à la place d'un emoji
 const imageFiche = (dossier, cle, emoji) => { const src = image(`${dossier}/${cle}`); return src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${emoji}</span>`; };
+// Les emojis qui restent dans les textes : à l'écran, leur image à la place. L'emoji reste dans la page, caché : le code qui relit un texte le retrouve.
+const RE_EMOJI = /\p{Extended_Pictographic}(️|‍\p{Extended_Pictographic})*️?|[\u{1F1E6}-\u{1F1FF}]{2}/gu;
+const sansVariante = (e) => e.replace(/️/g, '');
+const IMAGES_EMOJIS = new Map([ // les images qui existent déjà ; pour les autres emojis : images/emoji/<code>.webp
+  ['⭐', 'interface/etoile'], ['🚑', 'urgences/144'], ['🚓', 'urgences/117'], ['🚒', 'urgences/118'], ['✅', 'emoji/2714'], ['♥', 'bd/auto-coeur'], ['🟫', 'potager/terre'],
+  ['🍅', 'potager/tomate'], ['🎃', 'potager/courge'], ['🌻', 'potager/tournesol'], ['🪱', 'potager/ver'], ['🪐', 'espace/saturne'], ['🔎', 'confiance/fait-avis'], ['💛', 'confiance/emotions'], ['📜', 'confiance/droits'], ['🛡', 'confiance/corps'],
+  ...fiches.ANIMAUX.map(([cle, , e]) => [e, `nature/${cle}`]),
+  ...Object.entries(IMAGES_FORMES).map(([e, n]) => [e, `enigmes/forme-${n}`]),
+  ...Object.entries(bd.NOMS_AUTOCOLLANTS).map(([e, n]) => [e, `bd/auto-${n}`]),
+  ...Object.entries(cuisine.INGREDIENTS).map(([cle, [, e]]) => [e, `restaurant/${cle}`]),
+  ...Object.entries(enigmes.OBJETS).map(([cle, [, e, ailleurs]]) => [e, ailleurs ?? `enigmes/${cle}`]),
+].map(([e, chemin]) => [sansVariante(e), chemin]));
+const imageEmoji = (e) => image(IMAGES_EMOJIS.get(sansVariante(e)) ?? `emoji/${[...sansVariante(e)].map((c) => c.codePointAt(0).toString(16)).join('-')}`);
+function habillerEmojis(racine) {
+  const marche = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT), textes = racine.nodeType === 3 ? [racine] : [];
+  while (marche.nextNode()) textes.push(marche.currentNode);
+  for (const t of textes) {
+    if (!t.parentElement || t.parentElement.closest('svg, script, style, textarea, select, .emoji-cache')) continue; // (pas d'image possible dans un dessin ou une liste déroulante)
+    const morceaux = [];
+    let fin = 0;
+    for (const m of t.data.matchAll(RE_EMOJI)) {
+      const src = imageEmoji(m[0]);
+      if (!src) continue;
+      morceaux.push(t.data.slice(fin, m.index), el('img', { className: 'image-emoji', src, alt: '' }), el('span', { className: 'emoji-cache', textContent: m[0] }));
+      fin = m.index + m[0].length;
+    }
+    if (fin) t.replaceWith(...morceaux, t.data.slice(fin));
+  }
+}
+new MutationObserver((changements) => {
+  for (const c of changements) for (const n of c.type === 'characterData' ? [c.target] : c.addedNodes) if (n.nodeType === 1 || n.nodeType === 3) habillerEmojis(n);
+}).observe(document.body, { childList: true, subtree: true, characterData: true });
 function afficherFiches(quoi, cle = null) {
   const v = ouvrirLibre('La cabane nature'), animaux = quoi === 'animaux', liste = animaux ? fiches.ANIMAUX : fiches.PLANTES;
   if (cle === null) {
@@ -3441,6 +3473,13 @@ async function basculerMicro(type, id = null) {
 }
 for (const b of document.querySelectorAll('.enregistrer')) b.addEventListener('click', () => basculerMicro(b.dataset.type));
 
+// Un bouton de retour (« ← … ») fait toujours taire la voix : l'écran qu'on quitte ne doit pas continuer à parler.
+// En phase de capture : avant l'action du bouton, qui peut dire le nouvel écran.
+document.addEventListener('click', (e) => {
+  const b = e.target.closest?.('button, a');
+  if (b && (b.textContent.trim().startsWith('←') || /retour|quitter/.test(`${b.className} ${b.id}`))) { taire(); voixParents.arreter(); }
+}, true);
+habillerEmojis(document.body);
 lienEnLigne();
 demarrer();
 synchroniserEnLigne();
