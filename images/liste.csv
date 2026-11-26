@@ -824,6 +824,11 @@
 8;images/croyance/main-tendue.webp;256x256;oui;Lieu de croyance : fête ou symbole, sans personne
 8;images/croyance/coeur.webp;256x256;oui;Lieu de croyance : fête ou symbole, sans personne
 8;images/croyance/balance.webp;256x256;oui;Lieu de croyance : fête ou symbole, sans personne
+8;images/confiance/fait-avis.webp;256x256;oui;Maison de la confiance : Fait ou avis ?
+8;images/confiance/emotions.webp;256x256;oui;Maison de la confiance : Mes émotions me parlent
+8;images/confiance/droits.webp;256x256;oui;Maison de la confiance : Mes droits
+8;images/confiance/inconnus.webp;256x256;oui;Maison de la confiance : Les inconnus
+8;images/confiance/corps.webp;256x256;oui;Maison de la confiance : Mon corps m’appartient
 8;images/espace/fusee.webp;160x192;oui;Observatoire : la fusée, le nez en haut
 8;images/espace/fond.webp;1024x440;non;Observatoire : le ciel étoilé, sans planète
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »

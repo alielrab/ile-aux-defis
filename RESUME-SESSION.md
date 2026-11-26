@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-72`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-73`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
@@ -98,7 +98,8 @@
 - **Restaurant en images** (26 novembre) : `images/restaurant/` (15 ingrédients nommés par leur clé, et 5 plats `plat-<recette>`), dans le jeu, sur la balance, sur la carte des recettes et sur le plat réussi.
 - **Quiz du potager en images** (26 novembre) : 16 images de plus dans `images/potager/` ; la table `IMAGES` de `js/jeux/nature.js` dit quelle image remplace quel emoji (les emojis restent dans les questions, pour les voix).
 - **Fêtes et symboles du lieu de croyance en images** (26 novembre) : 50 images dans `images/croyance/`, seulement des objets, des lieux et des symboles (aucune personne, aucune divinité). La table `IMAGES` de `js/croyances-contenu.js` relie le nom de la fête ou du symbole (sans la date) à son image. À faire relire par un parent pour chaque religion.
-- **Emojis encore à remplacer par des images** : la maison de la confiance.
+- **Maison de la confiance en images** (26 novembre) : une image par thème dans `images/confiance/<clé du thème>.webp`, sur le bouton du thème et dans son titre. Les textes n'ont pas changé.
+- **Emojis encore en place** : les petits emojis des boutons et des titres (🔊, ⭐, ✓, 📖, 🎉…), les quiz de la nature et des premiers secours, les drapeaux, animaux et plats du passeport.
 - Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.

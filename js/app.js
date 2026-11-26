@@ -2795,7 +2795,8 @@ function ouvrirConfiance() {
   const ouvrir = { 'fait-avis': ouvrirFaitAvis, emotions: ouvrirEmotionsConfiance, droits: ouvrirDroits, inconnus: ouvrirInconnus, corps: ouvrirCorps };
   $('#confiance-vue').replaceChildren(el('p', { className: 'carte presentation', textContent: accueil }),
     ...confiance.THEMES.map((t) => {
-      const b = gros(`${t.image} ${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrir[t.cle], t.ouvert ? 'gros' : 'gros secondaire');
+      const b = gros(`${t.nom}${t.ouvert ? '' : ' (bientôt)'}`, ouvrir[t.cle], t.ouvert ? 'gros' : 'gros secondaire');
+      b.insertAdjacentHTML('afterbegin', `${enImage('confiance', t.cle, t.image)} `);
       b.disabled = !t.ouvert;
       return b;
     }));
@@ -2804,7 +2805,9 @@ function ouvrirConfiance() {
 }
 // Le menu d'un thème : son explication, ses étapes (avec une coche quand elles sont finies), son message à retenir
 function menuTheme(theme, titre, intro, etapes, fin) {
-  $('#confiance-vue').replaceChildren(el('h2', { textContent: titre }), el('p', { className: 'carte presentation', textContent: intro }),
+  const h = el('h2', { textContent: titre.replace(/^\S+ /, '') }); // le titre arrive avec son emoji devant : on met l'image à la place
+  h.insertAdjacentHTML('afterbegin', `${enImage('confiance', theme, titre.split(' ')[0])} `);
+  $('#confiance-vue').replaceChildren(h, el('p', { className: 'carte presentation', textContent: intro }),
     ...etapes.map(([cle, nom, jouer], i) => gros(`${i + 1}. ${nom}${joueuse.confiance?.[`${theme}:${cle}`] ? ' ✓' : ''}`, jouer)),
     el('p', { className: 'carte presentation', textContent: acc(fin) }), gros('← Les autres thèmes', ouvrirConfiance, 'gros secondaire'));
   parler(intro);

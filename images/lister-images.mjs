@@ -72,6 +72,7 @@ for (const [e, n] of Object.entries((await js('jeux/urgences.js')).IMAGES)) ajou
   for (const [k, [nom]] of Object.entries(c.INGREDIENTS)) ajouter(8, `restaurant/${k}`, '256x256', `Restaurant : ${nom}`);
   for (const [k, r] of Object.entries(c.RECETTES)) ajouter(8, `restaurant/plat-${k}`, '256x256', `Restaurant : le plat réussi (${r.nom})`); }
 for (const n of new Set(Object.values((await js('croyances-contenu.js')).IMAGES))) ajouter(8, `croyance/${n}`, '256x256', 'Lieu de croyance : fête ou symbole, sans personne');
+for (const t of (await js('jeux/confiance.js')).THEMES) ajouter(8, `confiance/${t.cle}`, '256x256', `Maison de la confiance : ${t.nom}`);
 ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
 ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);
