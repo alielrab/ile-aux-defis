@@ -1,15 +1,18 @@
-# Résumé pour la prochaine session (25 novembre 2026)
+# Résumé pour la prochaine session (26 novembre 2026)
 
 À coller au début de la prochaine conversation : « Lis RESUME-SESSION.md et continue. »
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-62`. Il faut la monter à chaque envoi.
-- 156 tests, tous verts (`npm test`).
+- Version du cache (`sw.js`) : `ile-68`. Il faut la monter à chaque envoi.
+- 168 tests, tous verts (`npm test`).
+- Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
 
 ## Façon de travailler (préférences)
 - Tout en français, avec des mots simples.
+- **L'app se joue surtout sur téléphone** (demandé le 26 novembre) : chaque jeu doit tenir sur un seul écran, sans défiler. La carte et les listes (boutiques, fiches, menus) peuvent défiler. Pour mesurer : fenêtre de 360 x 720 dans le navigateur, et `document.documentElement.scrollHeight - innerHeight` doit donner 0. Les réglages « téléphone » sont à la fin de `style.css` (`@media (max-width: 759px)`).
+- **Des images Higgsfield partout, pas de dessins ni d'emojis** (redit le 26 novembre), et des textes bien centrés dans les cartes.
 - À la fin de chaque tâche, demander « Je commite et j'envoie sur main ? ». **Jamais de commit sans un « oui » pour ce travail-là.** Sur « oui » :
   1. commiter sur `jardin-route-voix` (message en français) et envoyer la branche ;
   2. mettre `main` à jour en avance rapide (fast-forward) ;
@@ -78,7 +81,21 @@
 - Visuels Higgsfield : `images/enigmes/carte-<jeu>.webp`, et pour le parking `auto-rouge`, `auto`, `auto-camion` (vus du dessus, le nez à droite ; l'app tourne et recolore l'image bleue). Le format 1024x512 est refusé : demander du 1:1.
 - **Pas de voix enregistrée** pour ces écrans : ils parlent avec la voix de la tablette.
 
+## Retours du test sur téléphone (fait le 26 novembre)
+- **Voix** : « La Terre. » (un nom suivi d'un point) joue la voix de « La Terre » ; « Tu es sur : … » se joue en deux morceaux (`composer` dans `js/voix-cle.js`). `voix/lister-phrases.mjs` ramasse aussi les phrases fixes des textes à trous (un `parler` dont le texte contient une partie variable). 8 422 voix. Il manque encore « Voici ta maison ! » et « Malle aux trésors ».
+- **Police** : plus d'écriture attachée (« cursive » sur Android) ; tout prend la police de l'app.
+- **Boutique** : on ne récite plus le rayon ; toucher un objet dit son nom.
+- **Code des couleurs** : la même couleur peut être cachée plusieurs fois, c'est voulu par le parent, et la consigne le dit avec un exemple. Boutons carrés (`.jeton`) à la place des chevalets, qui se chevauchaient.
+- **Dessins cachés** : consigne plus claire, et le nombre passe au vert quand sa ligne ou sa colonne est bonne.
+- **Atelier BD** : aperçu de la case toujours visible, étapes numérotées, passage automatique au personnage après le décor, bouton « Case suivante ». Décors, créatures et autocollants en images (`images/bd/`, `dessinDecor` et `imageAutocollant` dans `js/jeux/bd.js`).
+- **Observatoire** : astres, fusée et ciel en images (`images/espace/`, aussi pour le memory des planètes). Dans « Les tailles », les petites planètes sont aussi montrées à la loupe.
+- **Glacier** : la question de monnaie remplace le cornet et les boutons (tout tient sur l'écran).
+- **Cartes de menu** : texte centré, plus de mot coupé par un tiret ; images `images/vignettes/` (potager, cabane, bibliothèque, météo, missions, labo). Les vignettes du labo ne montrent **jamais le résultat** de l'expérience (l'enfant doit d'abord deviner).
+- **Météo des émotions** : le choix du jour est gardé (`profil.meteo`, `noterMeteo` dans `js/suivi.js`), un baromètre de la semaine s'affiche, et le résumé des parents a une ligne « Sa météo du cœur ». L'enfant est prévenu que ses parents la voient.
+
 ## Pas encore fait
+- **Emojis encore à remplacer par des images** : les 71 fêtes et symboles du lieu de croyance, les recettes du restaurant, la maison de la confiance, les légumes du potager, les numéros d'urgence.
+- Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.
 
@@ -91,7 +108,8 @@
 
 ## Higgsfield (visuels)
 - **Nouveau compte depuis le 25 novembre** : les identifiants d'images de référence ci-dessous sont ceux de l'ancien compte. Sur le nouveau, on renvoie une image du projet comme référence (`media_upload` d'un PNG tiré de `images/ile/…webp`, rôle `image_references`) : c'est ce qui a servi pour l'île des méninges (référence : `fond-nature`, même disposition des 4 places) et ses bâtiments (référence : `labo`).
-- Modèle `gpt_image_2_6`, qualité `medium`, fond `transparent`, `use_unlim: false`. Environ 1,25 crédit par image en 1k. Vérifier le solde en début de session.
+- Modèle `gpt_image_2_6`, qualité `medium`, fond `transparent`, `use_unlim: false`. Environ 1,25 crédit par image en 1k. Vérifier le solde en début de session (environ 680 crédits le 26 novembre : les voix du 25 au soir en ont coûté 710, bien plus que prévu, compter 4 crédits par lot de 25 phrases).
+- Pour beaucoup d'images : écrire les demandes dans un fichier du bac à sable (`sandbox_exec`), puis `generate_image_batch` avec `requests: {ref: "sandbox:~/…/lot-N.json#/requests"}`. Référence de style pour les objets : `9860fc41-b72b-414c-aec5-34ec7a433aa7` (le renard).
 - Au plus 8 tâches en même temps. Plus grand côté 1024 en 1k. 1024x512 et 576x1008 sont refusés (trop allongés) ; 640x1024 et 1024x640 passent.
 - Les images de corps d'enfant non habillé sont refusées : partir d'une base habillée. Les muscles passent seulement en silhouette bleue.
 - Images de référence (identifiants de médias) : style `1defc350-58f7-49ed-9d8f-18eb9d977c29`, bâtiment `d00af870-f96f-4f55-b4af-f2474cd41483`, meuble `16efbdd8-6b24-4117-8013-5bceb8c0728c`, avatar `55524c93-b0cf-4d69-ac4e-2c8fff1f591f`, pièce `ecedbf18-dc49-4c2f-96aa-9c0571b04844`, île à 6 places `2c3bc223-2b33-486f-aab9-5fb66c3de87d`.
