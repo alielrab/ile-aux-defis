@@ -659,7 +659,7 @@ function afficherQuestion() {
     boutonsReponses(q.choix, String, true);
   } else if (jeu === 'cuisine') {
     if (q.mode === 'ingredient') { // on voit l'ingrédient, on l'entend ; on lit les mots (sans images) pour trouver le bon
-      $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${q.image}</div>`;
+      $('#aide').innerHTML = `<div class="ingredient-a-trouver" aria-hidden="true">${enImage('restaurant', q.id, q.image)}</div>`;
       boutonsReponses(q.choix, majuscule, true);
     } else afficherPesee(q);
   } else {
@@ -782,7 +782,7 @@ function afficherRobot(q) {
 let pesee = 0;
 function afficherPesee(q) {
   pesee = 0;
-  const dessiner = () => ($('#aide').innerHTML = cuisine.dessinerBalance(pesee, q.image));
+  const dessiner = () => ($('#aide').innerHTML = cuisine.dessinerBalance(pesee, q.image, image(`restaurant/${q.id}`)));
   dessiner();
   const boutons = q.boutons.map((g) => {
     const b = document.createElement('button');
@@ -907,7 +907,7 @@ async function choisir(choix) {
     horloge.regler(q.reponse); // montre la bonne heure
     $('#aide svg').classList.add(juste ? 'juste' : 'faux');
   }
-  if (q.mode === 'peser' && !juste) $('#aide').innerHTML = cuisine.dessinerBalance(q.reponse, q.image); // la bonne pesée
+  if (q.mode === 'peser' && !juste) $('#aide').innerHTML = cuisine.dessinerBalance(q.reponse, q.image, image(`restaurant/${q.id}`)); // la bonne pesée
   bip(juste);
   const m = messageReponse(juste, partie.serie);
   const ici = jeu === 'corps' && q.mode === 'toucher' ? `Ça, c'est ${corps.PARTIES[choix].nom}. ` : '';
@@ -954,7 +954,7 @@ function finirPartie() {
     cuisine.debloquer(joueuse, recette);
     enregistrer();
     $('#fin-titre').textContent = `${r.nom} : c'est réussi, ${joueuse.prenom} !`;
-    $('#fin-extra').innerHTML = `<div class="plat-reussi" aria-hidden="true">${r.plat}</div>
+    $('#fin-extra').innerHTML = `<div class="plat-reussi" aria-hidden="true">${enImage('restaurant', `plat-${recette}`, r.plat)}</div>
       <p>Recette débloquée ! Fais-la pour de vrai avec un parent : tu gagneras ${BONUS_RECETTE_REELLE} étoiles et un objet pour ta cuisine.</p>
       <p class="savais">Le savais-tu ? ${r.savaisTu}</p><button class="gros secondaire">📖 Voir la vraie recette</button>`;
     $('#fin-extra button').addEventListener('click', () => ouvrirRestaurant(recette));
@@ -3103,7 +3103,7 @@ function afficherRestaurant(cle) {
     const statut = joueuse.recettes[k];
     const c = document.createElement('div');
     c.className = 'article recette';
-    c.innerHTML = `<div class="apercu-article plat" aria-hidden="true">${r.plat}</div><span class="nom"></span>
+    c.innerHTML = `<div class="apercu-article plat" aria-hidden="true">${imageFiche('restaurant', `plat-${k}`, r.plat)}</div><span class="nom"></span>
       <small>${statut === 'faite' ? '✅ Faite pour de vrai' : statut ? '📖 À faire avec un parent' : 'À cuisiner'}</small>
       <button class="action acheter">Cuisiner</button>${statut ? '<button class="action">📖 La recette</button>' : ''}`;
     c.querySelector('.nom').textContent = r.nom;
@@ -3116,7 +3116,7 @@ function afficherRestaurant(cle) {
   $('#vraie-recette').hidden = !r || !statut;
   if (!r || !statut) return;
   const objet = article(`ustensile:${r.objet}`).nom;
-  $('#vraie-recette').innerHTML = `<h2>${r.plat} ${r.nom} <small>(${r.vraie.pour})</small></h2>
+  $('#vraie-recette').innerHTML = `<h2>${enImage('restaurant', `plat-${cle}`, r.plat)} ${r.nom} <small>(${r.vraie.pour})</small></h2>
     <p class="attention">⚠️ Toujours avec un adulte : le four, la poêle et les couteaux, c'est lui qui s'en occupe.</p>
     <h3>Ingrédients</h3><ul>${r.vraie.ingredients.map((x) => `<li>${x}</li>`).join('')}</ul>
     <h3>Étapes</h3><ol>${r.vraie.etapes.map((x) => `<li>${x}</li>`).join('')}</ol>

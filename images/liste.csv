@@ -738,6 +738,26 @@
 8;images/urgences/genou.webp;256x256;oui;Numéros d'urgence : à la place de 🦵, sans personne
 8;images/urgences/ami.webp;256x256;oui;Numéros d'urgence : à la place de 😢, sans personne
 8;images/urgences/blague.webp;256x256;oui;Numéros d'urgence : à la place de 😜, sans personne
+8;images/restaurant/farine.webp;256x256;oui;Restaurant : la farine
+8;images/restaurant/sucre.webp;256x256;oui;Restaurant : le sucre
+8;images/restaurant/oeufs.webp;256x256;oui;Restaurant : les œufs
+8;images/restaurant/lait.webp;256x256;oui;Restaurant : le lait
+8;images/restaurant/beurre.webp;256x256;oui;Restaurant : le beurre
+8;images/restaurant/chocolat.webp;256x256;oui;Restaurant : les pépites de chocolat
+8;images/restaurant/pommes.webp;256x256;oui;Restaurant : les pommes
+8;images/restaurant/bananes.webp;256x256;oui;Restaurant : les bananes
+8;images/restaurant/orange.webp;256x256;oui;Restaurant : l'orange
+8;images/restaurant/fraises.webp;256x256;oui;Restaurant : les fraises
+8;images/restaurant/citron.webp;256x256;oui;Restaurant : le jus de citron
+8;images/restaurant/yaourt.webp;256x256;oui;Restaurant : le yaourt
+8;images/restaurant/levure.webp;256x256;oui;Restaurant : la levure
+8;images/restaurant/huile.webp;256x256;oui;Restaurant : l'huile
+8;images/restaurant/pain.webp;256x256;oui;Restaurant : le pain
+8;images/restaurant/plat-crepes.webp;256x256;oui;Restaurant : le plat réussi (Crêpes)
+8;images/restaurant/plat-cookies.webp;256x256;oui;Restaurant : le plat réussi (Cookies)
+8;images/restaurant/plat-salade.webp;256x256;oui;Restaurant : le plat réussi (Salade de fruits)
+8;images/restaurant/plat-yaourt.webp;256x256;oui;Restaurant : le plat réussi (Gâteau au yaourt)
+8;images/restaurant/plat-pain-perdu.webp;256x256;oui;Restaurant : le plat réussi (Pain perdu)
 8;images/espace/fusee.webp;160x192;oui;Observatoire : la fusée, le nez en haut
 8;images/espace/fond.webp;1024x440;non;Observatoire : le ciel étoilé, sans planète
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »

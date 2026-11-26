@@ -5496,202 +5496,203 @@ jeu.croyance.22;Jeu : croyance;», ou « Cours !
 jeu.croyance.25;Jeu : croyance;« Dors !
 jeu.croyance.64;Jeu : croyance;», ou « Mange !
 jeu.passeport.2;Jeu : passeport;🇨🇭
-jeu.passeport.3;Jeu : passeport;Quel animal avons-nous découvert en Suisse ?
-jeu.passeport.5;Jeu : passeport;le lion
-jeu.passeport.6;Jeu : passeport;le bouquetin
-jeu.passeport.7;Jeu : passeport;le loup
-jeu.passeport.8;Jeu : passeport;Quel est le plat typique que nous avons découvert en Suisse ?
-jeu.passeport.10;Jeu : passeport;la fondue
-jeu.passeport.11;Jeu : passeport;le strudel aux pommes
-jeu.passeport.12;Jeu : passeport;la pizza
-jeu.passeport.15;Jeu : passeport;la paella
-jeu.passeport.21;Jeu : passeport;le kangourou
-jeu.passeport.25;Jeu : passeport;le foul
-jeu.passeport.26;Jeu : passeport;une purée de fèves
-jeu.passeport.31;Jeu : passeport;l’aigle
-jeu.passeport.32;Jeu : passeport;le macaque des neiges
-jeu.passeport.37;Jeu : passeport;la pavlova
-jeu.passeport.38;Jeu : passeport;un gâteau meringué
-jeu.passeport.41;Jeu : passeport;🇫🇷
-jeu.passeport.42;Jeu : passeport;Quel est le plat typique que nous avons découvert en France ?
-jeu.passeport.44;Jeu : passeport;le croissant
-jeu.passeport.45;Jeu : passeport;la morue
-jeu.passeport.47;Jeu : passeport;Quel animal avons-nous découvert en France ?
-jeu.passeport.49;Jeu : passeport;le coq
-jeu.passeport.56;Jeu : passeport;le tigre
-jeu.passeport.59;Jeu : passeport;le fish and chips
-jeu.passeport.61;Jeu : passeport;ou les käsknöpfle
-jeu.passeport.62;Jeu : passeport;des pâtes au fromage
-jeu.passeport.67;Jeu : passeport;les tacos
-jeu.passeport.77;Jeu : passeport;le cheval lipizzan
-jeu.passeport.82;Jeu : passeport;la salade grecque
-jeu.passeport.85;Jeu : passeport;🇩🇪
-jeu.passeport.86;Jeu : passeport;Quel animal avons-nous découvert en Allemagne ?
-jeu.passeport.90;Jeu : passeport;le panda
-jeu.passeport.93;Jeu : passeport;l’aigle royal
-jeu.passeport.100;Jeu : passeport;le castor
-jeu.passeport.103;Jeu : passeport;le taureau
-jeu.passeport.110;Jeu : passeport;le cerf
-jeu.passeport.111;Jeu : passeport;Quel est le plat typique que nous avons découvert en Allemagne ?
-jeu.passeport.113;Jeu : passeport;les käsknöpfle
-jeu.passeport.116;Jeu : passeport;le bretzel
-jeu.passeport.125;Jeu : passeport;la feijoada
-jeu.passeport.126;Jeu : passeport;un plat de haricots noirs
-jeu.passeport.142;Jeu : passeport;ou la poutine
-jeu.passeport.143;Jeu : passeport;des frites au fromage
-jeu.passeport.145;Jeu : passeport;🇮🇹
-jeu.passeport.146;Jeu : passeport;Quel est le plat typique que nous avons découvert en Italie ?
-jeu.passeport.150;Jeu : passeport;ou la feijoada
-jeu.passeport.155;Jeu : passeport;La pizza Margherita a les couleurs du drapeau italien : le vert du basilic, le blanc de la mozzarella et le rouge de la tomate.
-jeu.passeport.158;Jeu : passeport;les sushis
-jeu.passeport.160;Jeu : passeport;le curry
-jeu.passeport.161;Jeu : passeport;Quel animal avons-nous découvert en Italie ?
-jeu.passeport.181;Jeu : passeport;ou l’ugali
-jeu.passeport.182;Jeu : passeport;une purée de maïs
-jeu.passeport.186;Jeu : passeport;la poutine
-jeu.passeport.197;Jeu : passeport;le couscous
-jeu.passeport.217;Jeu : passeport;les raviolis
-jeu.passeport.221;Jeu : passeport;l’ara
-jeu.passeport.222;Jeu : passeport;un grand perroquet
-jeu.passeport.232;Jeu : passeport;le coq de Barcelos
-jeu.passeport.257;Jeu : passeport;l’ugali
-jeu.passeport.295;Jeu : passeport;🇦🇹
-jeu.passeport.296;Jeu : passeport;Quel animal avons-nous découvert en Autriche ?
-jeu.passeport.306;Jeu : passeport;Quel est le plat typique que nous avons découvert en Autriche ?
-jeu.passeport.325;Jeu : passeport;la chouette
-jeu.passeport.351;Jeu : passeport;🇱🇮
-jeu.passeport.352;Jeu : passeport;Quel est le plat typique que nous avons découvert au Liechtenstein ?
-jeu.passeport.357;Jeu : passeport;ou le foul
-jeu.passeport.366;Jeu : passeport;Quel animal avons-nous découvert au Liechtenstein ?
-jeu.passeport.418;Jeu : passeport;le crocodile du Nil
-jeu.passeport.448;Jeu : passeport;ou la pavlova
-jeu.passeport.451;Jeu : passeport;🇪🇸
-jeu.passeport.452;Jeu : passeport;Quel animal avons-nous découvert en Espagne ?
-jeu.passeport.457;Jeu : passeport;Quel est le plat typique que nous avons découvert en Espagne ?
-jeu.passeport.486;Jeu : passeport;le dromadaire
-jeu.passeport.488;Jeu : passeport;🇵🇹
-jeu.passeport.489;Jeu : passeport;Quel animal avons-nous découvert au Portugal ?
-jeu.passeport.494;Jeu : passeport;Quel est le plat typique que nous avons découvert au Portugal ?
-jeu.passeport.545;Jeu : passeport;🇬🇧
-jeu.passeport.546;Jeu : passeport;Quel animal avons-nous découvert au Royaume-Uni ?
-jeu.passeport.554;Jeu : passeport;Big Ben, à Londres, c’est le nom de la grosse cloche de la tour, pas de la tour elle-même !
-jeu.passeport.559;Jeu : passeport;ou l’ara
-jeu.passeport.592;Jeu : passeport;Quel est le plat typique que nous avons découvert au Royaume-Uni ?
-jeu.passeport.672;Jeu : passeport;🇬🇷
-jeu.passeport.673;Jeu : passeport;Quel est le plat typique que nous avons découvert en Grèce ?
-jeu.passeport.689;Jeu : passeport;Quel animal avons-nous découvert en Grèce ?
-jeu.passeport.695;Jeu : passeport;🇲🇦
-jeu.passeport.696;Jeu : passeport;Quel est le plat typique que nous avons découvert au Maroc ?
+jeu.passeport.3;Jeu : passeport;Quel est le plat typique que nous avons découvert en Suisse ?
+jeu.passeport.5;Jeu : passeport;les sushis
+jeu.passeport.6;Jeu : passeport;la pizza
+jeu.passeport.7;Jeu : passeport;la fondue
+jeu.passeport.8;Jeu : passeport;Quel animal avons-nous découvert en Suisse ?
+jeu.passeport.10;Jeu : passeport;le bouquetin
+jeu.passeport.11;Jeu : passeport;le lion
+jeu.passeport.12;Jeu : passeport;l’aigle
+jeu.passeport.15;Jeu : passeport;le taureau
+jeu.passeport.17;Jeu : passeport;le macaque des neiges
+jeu.passeport.20;Jeu : passeport;la morue
+jeu.passeport.22;Jeu : passeport;ou les käsknöpfle
+jeu.passeport.23;Jeu : passeport;des pâtes au fromage
+jeu.passeport.26;Jeu : passeport;le dromadaire
+jeu.passeport.38;Jeu : passeport;ou la feijoada
+jeu.passeport.39;Jeu : passeport;un plat de haricots noirs
+jeu.passeport.43;Jeu : passeport;le panda
+jeu.passeport.48;Jeu : passeport;le croissant
+jeu.passeport.53;Jeu : passeport;l’ara
+jeu.passeport.54;Jeu : passeport;un grand perroquet
+jeu.passeport.57;Jeu : passeport;🇫🇷
+jeu.passeport.58;Jeu : passeport;Quel animal avons-nous découvert en France ?
+jeu.passeport.60;Jeu : passeport;le coq
+jeu.passeport.61;Jeu : passeport;le loup
+jeu.passeport.66;Jeu : passeport;le cerf
+jeu.passeport.68;Jeu : passeport;Quel est le plat typique que nous avons découvert en France ?
+jeu.passeport.71;Jeu : passeport;la feijoada
+jeu.passeport.81;Jeu : passeport;le fish and chips
+jeu.passeport.88;Jeu : passeport;le kangourou
+jeu.passeport.103;Jeu : passeport;la salade grecque
+jeu.passeport.116;Jeu : passeport;le castor
+jeu.passeport.126;Jeu : passeport;la pavlova
+jeu.passeport.127;Jeu : passeport;un gâteau meringué
+jeu.passeport.134;Jeu : passeport;le crocodile du Nil
+jeu.passeport.136;Jeu : passeport;🇩🇪
+jeu.passeport.137;Jeu : passeport;Quel animal avons-nous découvert en Allemagne ?
+jeu.passeport.147;Jeu : passeport;Quel est le plat typique que nous avons découvert en Allemagne ?
+jeu.passeport.149;Jeu : passeport;le bretzel
+jeu.passeport.156;Jeu : passeport;ou l’ugali
+jeu.passeport.157;Jeu : passeport;une purée de maïs
+jeu.passeport.164;Jeu : passeport;🇮🇹
+jeu.passeport.165;Jeu : passeport;Quel est le plat typique que nous avons découvert en Italie ?
+jeu.passeport.169;Jeu : passeport;ou la pavlova
+jeu.passeport.174;Jeu : passeport;La pizza Margherita a les couleurs du drapeau italien : le vert du basilic, le blanc de la mozzarella et le rouge de la tomate.
+jeu.passeport.179;Jeu : passeport;les raviolis
+jeu.passeport.188;Jeu : passeport;le curry
+jeu.passeport.202;Jeu : passeport;les tacos
+jeu.passeport.207;Jeu : passeport;le couscous
+jeu.passeport.210;Jeu : passeport;les käsknöpfle
+jeu.passeport.228;Jeu : passeport;le strudel aux pommes
+jeu.passeport.238;Jeu : passeport;le foul
+jeu.passeport.239;Jeu : passeport;une purée de fèves
+jeu.passeport.251;Jeu : passeport;Quel animal avons-nous découvert en Italie ?
+jeu.passeport.269;Jeu : passeport;l’ugali
+jeu.passeport.276;Jeu : passeport;ou la poutine
+jeu.passeport.277;Jeu : passeport;des frites au fromage
+jeu.passeport.285;Jeu : passeport;🇦🇹
+jeu.passeport.286;Jeu : passeport;Quel animal avons-nous découvert en Autriche ?
+jeu.passeport.288;Jeu : passeport;le cheval lipizzan
+jeu.passeport.301;Jeu : passeport;Quel est le plat typique que nous avons découvert en Autriche ?
+jeu.passeport.318;Jeu : passeport;🇱🇮
+jeu.passeport.319;Jeu : passeport;Quel est le plat typique que nous avons découvert au Liechtenstein ?
+jeu.passeport.337;Jeu : passeport;Quel animal avons-nous découvert au Liechtenstein ?
+jeu.passeport.341;Jeu : passeport;la chouette
+jeu.passeport.377;Jeu : passeport;la paella
+jeu.passeport.390;Jeu : passeport;la poutine
+jeu.passeport.401;Jeu : passeport;🇪🇸
+jeu.passeport.402;Jeu : passeport;Quel animal avons-nous découvert en Espagne ?
+jeu.passeport.407;Jeu : passeport;Quel est le plat typique que nous avons découvert en Espagne ?
+jeu.passeport.441;Jeu : passeport;le coq de Barcelos
+jeu.passeport.455;Jeu : passeport;🇵🇹
+jeu.passeport.456;Jeu : passeport;Quel est le plat typique que nous avons découvert au Portugal ?
+jeu.passeport.461;Jeu : passeport;Quel animal avons-nous découvert au Portugal ?
+jeu.passeport.504;Jeu : passeport;🇬🇧
+jeu.passeport.505;Jeu : passeport;Quel animal avons-nous découvert au Royaume-Uni ?
+jeu.passeport.513;Jeu : passeport;Big Ben, à Londres, c’est le nom de la grosse cloche de la tour, pas de la tour elle-même !
+jeu.passeport.524;Jeu : passeport;Quel est le plat typique que nous avons découvert au Royaume-Uni ?
+jeu.passeport.547;Jeu : passeport;le tigre
+jeu.passeport.566;Jeu : passeport;l’aigle royal
+jeu.passeport.581;Jeu : passeport;ou l’ara
+jeu.passeport.642;Jeu : passeport;🇬🇷
+jeu.passeport.643;Jeu : passeport;Quel animal avons-nous découvert en Grèce ?
+jeu.passeport.658;Jeu : passeport;Quel est le plat typique que nous avons découvert en Grèce ?
+jeu.passeport.696;Jeu : passeport;🇲🇦
+jeu.passeport.697;Jeu : passeport;Quel est le plat typique que nous avons découvert au Maroc ?
 jeu.passeport.702;Jeu : passeport;Quel animal avons-nous découvert au Maroc ?
-jeu.passeport.739;Jeu : passeport;🇪🇬
-jeu.passeport.740;Jeu : passeport;Quel animal avons-nous découvert en Égypte ?
+jeu.passeport.723;Jeu : passeport;🇪🇬
+jeu.passeport.724;Jeu : passeport;Quel animal avons-nous découvert en Égypte ?
 jeu.passeport.750;Jeu : passeport;Quel est le plat typique que nous avons découvert en Égypte ?
-jeu.passeport.775;Jeu : passeport;🇰🇪
-jeu.passeport.776;Jeu : passeport;Quel animal avons-nous découvert au Kenya ?
-jeu.passeport.784;Jeu : passeport;Juste à côté de Nairobi, la capitale, il y a un parc national avec des lions et des girafes !
-jeu.passeport.831;Jeu : passeport;Quel est le plat typique que nous avons découvert au Kenya ?
-jeu.passeport.891;Jeu : passeport;🇮🇳
-jeu.passeport.892;Jeu : passeport;Quel animal avons-nous découvert en Inde ?
-jeu.passeport.918;Jeu : passeport;🇨🇳
-jeu.passeport.919;Jeu : passeport;Quel animal avons-nous découvert en Chine ?
-jeu.passeport.924;Jeu : passeport;Quel est le plat typique que nous avons découvert en Chine ?
-jeu.passeport.951;Jeu : passeport;🇯🇵
-jeu.passeport.952;Jeu : passeport;Quel animal avons-nous découvert au Japon ?
-jeu.passeport.960;Jeu : passeport;Au Japon, on enlève ses chaussures avant d’entrer dans une maison.
-jeu.passeport.966;Jeu : passeport;Quel est le plat typique que nous avons découvert au Japon ?
-jeu.passeport.1077;Jeu : passeport;🇦🇺
-jeu.passeport.1078;Jeu : passeport;Quel animal avons-nous découvert en Australie ?
-jeu.passeport.1088;Jeu : passeport;Quel est le plat typique que nous avons découvert en Australie ?
-jeu.passeport.1119;Jeu : passeport;🇧🇷
-jeu.passeport.1120;Jeu : passeport;Quel animal avons-nous découvert au Brésil ?
-jeu.passeport.1126;Jeu : passeport;Quel est le plat typique que nous avons découvert au Brésil ?
-jeu.passeport.1145;Jeu : passeport;🇨🇦
-jeu.passeport.1146;Jeu : passeport;Quel animal avons-nous découvert au Canada ?
-jeu.passeport.1152;Jeu : passeport;Quel est le plat typique que nous avons découvert au Canada ?
-jeu.passeport.1159;Jeu : passeport;la poutine, des frites au fromage
-jeu.passeport.1161;Jeu : passeport;La feuille du drapeau, c’est une feuille d’érable : avec la sève de cet arbre, on fait le sirop d’érable.
-jeu.passeport.1216;Jeu : passeport;🇲🇽
-jeu.passeport.1217;Jeu : passeport;Quel est le plat typique que nous avons découvert au Mexique ?
-jeu.passeport.1222;Jeu : passeport;Quel animal avons-nous découvert au Mexique ?
-jeu.passeport.1252;Jeu : passeport;Quelle langue parle-t-on en Suisse ?
-jeu.passeport.1254;Jeu : passeport;le chinois
-jeu.passeport.1255;Jeu : passeport;l’arabe et l’amazigh
-jeu.passeport.1256;Jeu : passeport;le swahili et l’anglais
-jeu.passeport.1257;Jeu : passeport;ou l’allemand
-jeu.passeport.1258;Jeu : passeport;le français
-jeu.passeport.1259;Jeu : passeport;l’italien et le romanche
-jeu.passeport.1267;Jeu : passeport;Quelle est la capitale de la Suisse ?
-jeu.passeport.1270;Jeu : passeport;Madrid
-jeu.passeport.1271;Jeu : passeport;Berne
-jeu.passeport.1272;Jeu : passeport;Nairobi
-jeu.passeport.1281;Jeu : passeport;l’arabe
-jeu.passeport.1282;Jeu : passeport;l’allemand
-jeu.passeport.1285;Jeu : passeport;l’anglais
-jeu.passeport.1286;Jeu : passeport;l’espagnol
-jeu.passeport.1306;Jeu : passeport;ou l’hindi
-jeu.passeport.1307;Jeu : passeport;l’anglais et beaucoup d’autres langues
-jeu.passeport.1314;Jeu : passeport;le portugais
-jeu.passeport.1319;Jeu : passeport;l’hindi
-jeu.passeport.1321;Jeu : passeport;l’italien
-jeu.passeport.1322;Jeu : passeport;l’anglais et le français
-jeu.passeport.1335;Jeu : passeport;Quelle langue parle-t-on en France ?
-jeu.passeport.1361;Jeu : passeport;Quelle est la capitale de la France ?
-jeu.passeport.1364;Jeu : passeport;Pékin
-jeu.passeport.1393;Jeu : passeport;Mexico
-jeu.passeport.1394;Jeu : passeport;Lisbonne
-jeu.passeport.1395;Jeu : passeport;Ottawa
-jeu.passeport.1420;Jeu : passeport;le grec
-jeu.passeport.1428;Jeu : passeport;Quelle est la capitale de l’Allemagne ?
-jeu.passeport.1431;Jeu : passeport;Vaduz
-jeu.passeport.1432;Jeu : passeport;Berlin
-jeu.passeport.1443;Jeu : passeport;Londres
-jeu.passeport.1452;Jeu : passeport;Quelle langue parle-t-on en Allemagne ?
-jeu.passeport.1461;Jeu : passeport;Brasília
-jeu.passeport.1473;Jeu : passeport;Tokyo
-jeu.passeport.1481;Jeu : passeport;Vienne
-jeu.passeport.1485;Jeu : passeport;Canberra
-jeu.passeport.1486;Jeu : passeport;Rabat
-jeu.passeport.1497;Jeu : passeport;Athènes
-jeu.passeport.1552;Jeu : passeport;Quelle langue parle-t-on en Italie ?
-jeu.passeport.1555;Jeu : passeport;le japonais
-jeu.passeport.1628;Jeu : passeport;Quelle est la capitale de l’Italie ?
-jeu.passeport.1727;Jeu : passeport;Quelle langue parle-t-on en Autriche ?
-jeu.passeport.1739;Jeu : passeport;Quelle est la capitale de l’Autriche ?
-jeu.passeport.1775;Jeu : passeport;Le Caire
-jeu.passeport.1829;Jeu : passeport;Quelle langue parle-t-on au Liechtenstein ?
-jeu.passeport.1890;Jeu : passeport;Quelle est la capitale du Liechtenstein ?
-jeu.passeport.1976;Jeu : passeport;Quelle est la capitale de l’Espagne ?
-jeu.passeport.2001;Jeu : passeport;Quelle langue parle-t-on en Espagne ?
-jeu.passeport.2019;Jeu : passeport;New Delhi
-jeu.passeport.2119;Jeu : passeport;Quelle est la capitale du Portugal ?
-jeu.passeport.2128;Jeu : passeport;On dit qu’il existe au Portugal une recette de morue pour chaque jour de l’année !
-jeu.passeport.2154;Jeu : passeport;Quelle langue parle-t-on au Portugal ?
-jeu.passeport.2273;Jeu : passeport;Quelle langue parle-t-on au Royaume-Uni ?
-jeu.passeport.2299;Jeu : passeport;Quelle est la capitale du Royaume-Uni ?
-jeu.passeport.2439;Jeu : passeport;Quelle langue parle-t-on en Grèce ?
-jeu.passeport.2498;Jeu : passeport;Quelle est la capitale de la Grèce ?
-jeu.passeport.2585;Jeu : passeport;Quelle langue parle-t-on au Maroc ?
-jeu.passeport.2595;Jeu : passeport;Au Maroc, on accueille souvent les invités avec un thé à la menthe.
-jeu.passeport.2604;Jeu : passeport;Quelle est la capitale du Maroc ?
-jeu.passeport.2725;Jeu : passeport;Quelle langue parle-t-on en Égypte ?
-jeu.passeport.2734;Jeu : passeport;Les pyramides de Gizeh, près du Caire, ont plus de 4 500 ans !
-jeu.passeport.2789;Jeu : passeport;Quelle est la capitale de l’Égypte ?
-jeu.passeport.2864;Jeu : passeport;Quelle langue parle-t-on au Kenya ?
-jeu.passeport.2881;Jeu : passeport;Quelle est la capitale du Kenya ?
-jeu.passeport.3137;Jeu : passeport;Quelle langue parle-t-on en Inde ?
-jeu.passeport.3144;Jeu : passeport;Quelle est la capitale de l’Inde ?
-jeu.passeport.3221;Jeu : passeport;Quel est le plat typique que nous avons découvert en Inde ?
-jeu.passeport.3259;Jeu : passeport;Quelle langue parle-t-on en Chine ?
-jeu.passeport.3355;Jeu : passeport;Quelle est la capitale du Japon ?
-jeu.passeport.3373;Jeu : passeport;Quelle langue parle-t-on au Japon ?
-jeu.passeport.3513;Jeu : passeport;Quelle est la capitale de l’Australie ?
-jeu.passeport.3525;Jeu : passeport;Quelle langue parle-t-on en Australie ?
-jeu.passeport.3599;Jeu : passeport;Quelle langue parle-t-on au Brésil ?
-jeu.passeport.3673;Jeu : passeport;Quelle est la capitale du Brésil ?
-jeu.passeport.3679;Jeu : passeport;Quelle langue parle-t-on au Canada ?
-jeu.passeport.3691;Jeu : passeport;Quelle est la capitale du Canada ?
-jeu.passeport.3819;Jeu : passeport;Quelle langue parle-t-on au Mexique ?
-jeu.passeport.3885;Jeu : passeport;Quelle est la capitale du Mexique ?
+jeu.passeport.763;Jeu : passeport;🇰🇪
+jeu.passeport.764;Jeu : passeport;Quel animal avons-nous découvert au Kenya ?
+jeu.passeport.773;Jeu : passeport;Juste à côté de Nairobi, la capitale, il y a un parc national avec des lions et des girafes !
+jeu.passeport.774;Jeu : passeport;Quel est le plat typique que nous avons découvert au Kenya ?
+jeu.passeport.902;Jeu : passeport;🇮🇳
+jeu.passeport.903;Jeu : passeport;Quel animal avons-nous découvert en Inde ?
+jeu.passeport.908;Jeu : passeport;Quel est le plat typique que nous avons découvert en Inde ?
+jeu.passeport.946;Jeu : passeport;🇨🇳
+jeu.passeport.947;Jeu : passeport;Quel est le plat typique que nous avons découvert en Chine ?
+jeu.passeport.952;Jeu : passeport;Quel animal avons-nous découvert en Chine ?
+jeu.passeport.974;Jeu : passeport;🇯🇵
+jeu.passeport.975;Jeu : passeport;Quel animal avons-nous découvert au Japon ?
+jeu.passeport.983;Jeu : passeport;Au Japon, on enlève ses chaussures avant d’entrer dans une maison.
+jeu.passeport.1009;Jeu : passeport;Quel est le plat typique que nous avons découvert au Japon ?
+jeu.passeport.1110;Jeu : passeport;🇦🇺
+jeu.passeport.1111;Jeu : passeport;Quel animal avons-nous découvert en Australie ?
+jeu.passeport.1136;Jeu : passeport;Quel est le plat typique que nous avons découvert en Australie ?
+jeu.passeport.1143;Jeu : passeport;🇧🇷
+jeu.passeport.1144;Jeu : passeport;Quel animal avons-nous découvert au Brésil ?
+jeu.passeport.1150;Jeu : passeport;Quel est le plat typique que nous avons découvert au Brésil ?
+jeu.passeport.1171;Jeu : passeport;🇨🇦
+jeu.passeport.1173;Jeu : passeport;la poutine, des frites au fromage
+jeu.passeport.1175;Jeu : passeport;La feuille du drapeau, c’est une feuille d’érable : avec la sève de cet arbre, on fait le sirop d’érable.
+jeu.passeport.1176;Jeu : passeport;Quel animal avons-nous découvert au Canada ?
+jeu.passeport.1181;Jeu : passeport;Quel est le plat typique que nous avons découvert au Canada ?
+jeu.passeport.1229;Jeu : passeport;🇲🇽
+jeu.passeport.1230;Jeu : passeport;Quel est le plat typique que nous avons découvert au Mexique ?
+jeu.passeport.1237;Jeu : passeport;Quel animal avons-nous découvert au Mexique ?
+jeu.passeport.1272;Jeu : passeport;Quelle langue parle-t-on en Suisse ?
+jeu.passeport.1274;Jeu : passeport;l’arabe
+jeu.passeport.1275;Jeu : passeport;le grec
+jeu.passeport.1276;Jeu : passeport;l’allemand
+jeu.passeport.1277;Jeu : passeport;le français
+jeu.passeport.1278;Jeu : passeport;l’italien et le romanche
+jeu.passeport.1279;Jeu : passeport;le swahili et l’anglais
+jeu.passeport.1292;Jeu : passeport;l’arabe et l’amazigh
+jeu.passeport.1303;Jeu : passeport;l’espagnol
+jeu.passeport.1309;Jeu : passeport;Quelle est la capitale de la Suisse ?
+jeu.passeport.1311;Jeu : passeport;Berne
+jeu.passeport.1312;Jeu : passeport;Lisbonne
+jeu.passeport.1313;Jeu : passeport;Londres
+jeu.passeport.1314;Jeu : passeport;Tokyo
+jeu.passeport.1322;Jeu : passeport;l’italien
+jeu.passeport.1329;Jeu : passeport;l’hindi
+jeu.passeport.1330;Jeu : passeport;l’anglais et beaucoup d’autres langues
+jeu.passeport.1331;Jeu : passeport;le portugais
+jeu.passeport.1334;Jeu : passeport;Madrid
+jeu.passeport.1345;Jeu : passeport;l’anglais
+jeu.passeport.1353;Jeu : passeport;le chinois
+jeu.passeport.1364;Jeu : passeport;Rabat
+jeu.passeport.1367;Jeu : passeport;Canberra
+jeu.passeport.1388;Jeu : passeport;Quelle langue parle-t-on en France ?
+jeu.passeport.1393;Jeu : passeport;le japonais
+jeu.passeport.1400;Jeu : passeport;Quelle est la capitale de la France ?
+jeu.passeport.1402;Jeu : passeport;Berlin
+jeu.passeport.1404;Jeu : passeport;New Delhi
+jeu.passeport.1410;Jeu : passeport;Nairobi
+jeu.passeport.1414;Jeu : passeport;Mexico
+jeu.passeport.1441;Jeu : passeport;Pékin
+jeu.passeport.1466;Jeu : passeport;Quelle est la capitale de l’Allemagne ?
+jeu.passeport.1468;Jeu : passeport;Brasília
+jeu.passeport.1469;Jeu : passeport;Vienne
+jeu.passeport.1479;Jeu : passeport;Quelle langue parle-t-on en Allemagne ?
+jeu.passeport.1496;Jeu : passeport;Athènes
+jeu.passeport.1501;Jeu : passeport;Le Caire
+jeu.passeport.1513;Jeu : passeport;Ottawa
+jeu.passeport.1553;Jeu : passeport;l’anglais et le français
+jeu.passeport.1597;Jeu : passeport;ou l’allemand
+jeu.passeport.1623;Jeu : passeport;Vaduz
+jeu.passeport.1656;Jeu : passeport;Quelle langue parle-t-on en Italie ?
+jeu.passeport.1661;Jeu : passeport;ou l’hindi
+jeu.passeport.1703;Jeu : passeport;ou le foul
+jeu.passeport.1705;Jeu : passeport;Quelle est la capitale de l’Italie ?
+jeu.passeport.1842;Jeu : passeport;Quelle est la capitale de l’Autriche ?
+jeu.passeport.1860;Jeu : passeport;Quelle langue parle-t-on en Autriche ?
+jeu.passeport.1926;Jeu : passeport;Quelle est la capitale du Liechtenstein ?
+jeu.passeport.1945;Jeu : passeport;Quelle langue parle-t-on au Liechtenstein ?
+jeu.passeport.2066;Jeu : passeport;Quelle langue parle-t-on en Espagne ?
+jeu.passeport.2096;Jeu : passeport;Quelle est la capitale de l’Espagne ?
+jeu.passeport.2182;Jeu : passeport;Quelle langue parle-t-on au Portugal ?
+jeu.passeport.2188;Jeu : passeport;Quelle est la capitale du Portugal ?
+jeu.passeport.2197;Jeu : passeport;On dit qu’il existe au Portugal une recette de morue pour chaque jour de l’année !
+jeu.passeport.2354;Jeu : passeport;Quelle langue parle-t-on au Royaume-Uni ?
+jeu.passeport.2367;Jeu : passeport;Quelle est la capitale du Royaume-Uni ?
+jeu.passeport.2540;Jeu : passeport;Quelle langue parle-t-on en Grèce ?
+jeu.passeport.2598;Jeu : passeport;Quelle est la capitale de la Grèce ?
+jeu.passeport.2671;Jeu : passeport;Quelle langue parle-t-on au Maroc ?
+jeu.passeport.2680;Jeu : passeport;Au Maroc, on accueille souvent les invités avec un thé à la menthe.
+jeu.passeport.2688;Jeu : passeport;Quelle est la capitale du Maroc ?
+jeu.passeport.2822;Jeu : passeport;Quelle langue parle-t-on en Égypte ?
+jeu.passeport.2833;Jeu : passeport;Les pyramides de Gizeh, près du Caire, ont plus de 4 500 ans !
+jeu.passeport.2852;Jeu : passeport;Quelle est la capitale de l’Égypte ?
+jeu.passeport.2987;Jeu : passeport;Quelle langue parle-t-on au Kenya ?
+jeu.passeport.2997;Jeu : passeport;Quelle est la capitale du Kenya ?
+jeu.passeport.3272;Jeu : passeport;Quelle langue parle-t-on en Inde ?
+jeu.passeport.3279;Jeu : passeport;Quelle est la capitale de l’Inde ?
+jeu.passeport.3405;Jeu : passeport;Quelle langue parle-t-on en Chine ?
+jeu.passeport.3431;Jeu : passeport;Quelle est la capitale de la Chine ?
+jeu.passeport.3541;Jeu : passeport;Quelle langue parle-t-on au Japon ?
+jeu.passeport.3572;Jeu : passeport;Quelle est la capitale du Japon ?
+jeu.passeport.3700;Jeu : passeport;Quelle langue parle-t-on en Australie ?
+jeu.passeport.3713;Jeu : passeport;Quelle est la capitale de l’Australie ?
+jeu.passeport.3852;Jeu : passeport;Quelle est la capitale du Brésil ?
+jeu.passeport.3858;Jeu : passeport;Quelle langue parle-t-on au Brésil ?
+jeu.passeport.3967;Jeu : passeport;Quelle est la capitale du Canada ?
+jeu.passeport.4010;Jeu : passeport;Quelle langue parle-t-on au Canada ?
+jeu.passeport.4078;Jeu : passeport;Quelle langue parle-t-on au Mexique ?
+jeu.passeport.4119;Jeu : passeport;Quelle est la capitale du Mexique ?
 jeu.cuisine.1;Jeu : cuisine;C'était écrit : la farine.
 jeu.cuisine.2;Jeu : cuisine;Ajoute les œufs.
 jeu.cuisine.3;Jeu : cuisine;Trouve le mot œufs !

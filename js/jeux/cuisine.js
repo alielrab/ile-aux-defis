@@ -119,14 +119,14 @@ export function etapes(cle, age, aleatoire = Math.random) {
   r.jeu.forEach(([id, nom, image, grammes], i) => {
     // on voit l'ingrédient et on entend son nom ; il faut lire le bon mot parmi des mots (pas lus à voix haute)
     questions.push({
-      mode: 'ingredient', texte: `${cle}-${id}`, recette: cle, etape: i, reponse: nom, image, choix: motsAuChoix(nom, niv, aleatoire),
+      mode: 'ingredient', texte: `${cle}-${id}`, id, recette: cle, etape: i, reponse: nom, image, choix: motsAuChoix(nom, niv, aleatoire),
       titre: `Étape ${i + 1} : trouve le bon mot !`,
       consigne: `Ajoute ${nom}. Trouve le mot ${nom.replace(/^(la |le |les |l')/, '')} !`,
       solution: `C'était écrit : ${nom}.`,
     });
     if (aPeser(grammes, niv)) {
       questions.push({
-        mode: 'peser', texte: `${cle}-${id}-pesee`, recette: cle, etape: i, reponse: grammes, image, boutons: boutonsBalance(niv),
+        mode: 'peser', texte: `${cle}-${id}-pesee`, id, recette: cle, etape: i, reponse: grammes, image, boutons: boutonsBalance(niv),
         titre: `Pèse ${grammes} g de ${nom.replace(/^(la |le |les |l')/, '')}`,
         consigne: `Pèse ${grammes} grammes de ${nom.replace(/^(la |le |les |l')/, '')}, puis touche : c'est pesé !`,
         solution: `Il fallait ${grammes} grammes.`,
@@ -175,7 +175,7 @@ export function carte(cle, fait) {
 }
 
 // La balance : un cadran (0 à 500 g) et l'affichage en chiffres
-export function dessinerBalance(grammes, image) {
+export function dessinerBalance(grammes, image, src) { // src : l'image de l'ingrédient (sinon l'emoji)
   const angle = (Math.min(grammes, 500) / 500) * 300 - 150;
   const graduations = Array.from({ length: 11 }, (_, i) => {
     const a = ((i * 30 - 150) * Math.PI) / 180, [s, c] = [Math.sin(a), Math.cos(a)];
@@ -184,7 +184,7 @@ export function dessinerBalance(grammes, image) {
   }).join('');
   return `<svg class="balance" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La balance indique ${grammes} grammes">
     <ellipse cx="150" cy="42" rx="110" ry="16" fill="#c9ced6"/><path d="M60 40 Q150 80 240 40" fill="#e8ebef"/>
-    <text x="150" y="50" font-size="${grammes ? 34 : 0}" text-anchor="middle">${grammes ? image : ''}</text>
+    ${!grammes ? '' : src ? `<image href="${src}" x="122" y="0" width="56" height="56"/>` : `<text x="150" y="50" font-size="34" text-anchor="middle">${image}</text>`}
     <rect x="50" y="62" width="200" height="220" rx="40" fill="#f26b6b"/>
     <circle cx="150" cy="150" r="88" fill="#fffdf5" stroke="#c94a4a" stroke-width="6"/>${graduations}
     <line x1="150" y1="150" x2="150" y2="78" stroke="#d93030" stroke-width="5" stroke-linecap="round" transform="rotate(${angle} 150 150)"/>

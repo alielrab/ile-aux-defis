@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-69`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-70`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
@@ -95,7 +95,8 @@
 - **Potager et numéros d'urgence en images** (26 novembre, après-midi) : `images/potager/` (12 légumes, `terre`, `pousse-1` à `pousse-3`) et `images/urgences/` (23 images, sans personne ; la table `IMAGES` de `js/jeux/urgences.js` dit quelle image remplace quel emoji). Les emojis restent dans les textes des urgences, parce que les voix enregistrées en dépendent : on les enlève seulement à l'écran (`sansEmoji`). Petite image dans un texte : `enImage` dans `js/app.js`, classe `.pictogramme`.
 
 ## Pas encore fait
-- **Emojis encore à remplacer par des images** : les 71 fêtes et symboles du lieu de croyance, les recettes du restaurant, la maison de la confiance, les questions du quiz du potager.
+- **Restaurant en images** (26 novembre) : `images/restaurant/` (15 ingrédients nommés par leur clé, et 5 plats `plat-<recette>`), dans le jeu, sur la balance, sur la carte des recettes et sur le plat réussi.
+- **Emojis encore à remplacer par des images** : les 71 fêtes et symboles du lieu de croyance, la maison de la confiance, les questions du quiz du potager.
 - Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.
 - Île de la mer, île du cœur « Grandir ensemble ». Voir `IDEES.md`.

@@ -67,6 +67,9 @@ for (const a of ['etoile', 'coeur', 'arcenciel', 'cadeau', 'ballon', 'glace', 'b
 for (const l of (await js('jeux/jardinage.js')).LEGUMES) ajouter(8, `potager/${l.cle}`, '256x256', `Potager : ${l.nom}`);
 for (const p of ['terre', 'pousse-1', 'pousse-2', 'pousse-3']) ajouter(8, `potager/${p}`, '256x256', `Potager : le carré de terre (${p})`);
 for (const [e, n] of Object.entries((await js('jeux/urgences.js')).IMAGES)) ajouter(8, `urgences/${n}`, '256x256', `Numéros d'urgence : à la place de ${e}, sans personne`);
+{ const c = await js('jeux/cuisine.js');
+  for (const [k, [nom]] of Object.entries(c.INGREDIENTS)) ajouter(8, `restaurant/${k}`, '256x256', `Restaurant : ${nom}`);
+  for (const [k, r] of Object.entries(c.RECETTES)) ajouter(8, `restaurant/plat-${k}`, '256x256', `Restaurant : le plat réussi (${r.nom})`); }
 ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
 ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);
