@@ -4,6 +4,7 @@ import { CONTENUS } from './croyances-contenu.js';
 import { melanger, etoilesDuJeu, parmiLesNouveaux } from './partie.js';
 
 export { CONTENUS };
+export { imageDe } from './croyances-contenu.js';
 export const CROYANCES = {
   catholique: { nom: 'Christianisme catholique', contenu: 'catholique', lieu: "L'église" },
   protestant: { nom: 'Christianisme protestant', contenu: 'protestant', lieu: 'Le temple' },

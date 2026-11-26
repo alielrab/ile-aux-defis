@@ -1144,7 +1144,7 @@ function contenuCroyance(vue, cle, sagesse) {
       const carte = document.createElement('div');
       carte.className = 'carte carte-croyance';
       carte.innerHTML = `<div class="tete-carte"><span class="symbole" aria-hidden="true"></span><h3></h3><button class="rond" aria-label="Écouter">🔊</button></div><p></p>${savais ? '<p class="savais"></p>' : ''}`;
-      carte.querySelector('.symbole').textContent = image;
+      carte.querySelector('.symbole').innerHTML = enImage('croyance', croyance.imageDe(nom), image);
       carte.querySelector('h3').textContent = nom;
       carte.querySelector('p').textContent = texte;
       if (savais) carte.querySelector('.savais').textContent = `Le savais-tu ? ${savais}`;

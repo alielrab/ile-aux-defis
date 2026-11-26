@@ -6,6 +6,17 @@
 // questions : [question, bonne réponse, [3 autres choix], « Le savais-tu ? », grand ?]
 // grand = seulement pour les 8 ans et plus. Les 7 ans et moins ont 3 choix au lieu de 4.
 
+// Les images (images/croyance/<nom>.webp) des fêtes et des symboles, par nom (sans la date). Seulement des objets, des lieux et des symboles.
+export const IMAGES = { "L'Avent": 'avent', 'Noël': 'noel', "L'Épiphanie": 'epiphanie', 'Pâques': 'paques', 'La Pentecôte': 'pentecote', 'La Toussaint': 'toussaint',
+  'La première communion': 'pain-coupe', 'La sainte cène': 'pain-coupe', 'La croix': 'croix', 'Le poisson': 'poisson', 'La colombe': 'colombe', 'La Bible': 'bible',
+  'Le chapelet': 'chapelet', 'La fête de la Réformation': 'reformation', 'Les cantiques': 'cantiques', 'La croix orthodoxe': 'croix-orthodoxe', 'Les icônes': 'icones',
+  'Le ramadan': 'ramadan', "L'Aïd el-Fitr": 'aid-fitr', "L'Aïd el-Kébir": 'aid-kebir', 'La mosquée': 'mosquee', 'Le croissant de lune et l’étoile': 'croissant-etoile',
+  'Le Coran': 'coran', 'La direction de La Mecque': 'qibla', 'Le shabbat': 'shabbat', 'Roch Hachana': 'roch-hachana', 'Hanoucca': 'hanoucca', 'Pourim': 'pourim',
+  'Pessah': 'pessah', "L'étoile de David": 'etoile-david', 'Le chandelier de Hanoucca': 'hanoukkia', 'La Torah': 'torah', 'La mezouza': 'mezouza', 'Vesak': 'vesak',
+  'Le Nouvel An': 'nouvel-an', 'La roue du Dharma': 'roue-dharma', 'La fleur de lotus': 'lotus', 'Le lotus': 'lotus', 'La méditation': 'meditation', 'La cloche': 'cloche',
+  'Diwali': 'diwali', 'Ganesh Chaturthi': 'ganesh', 'Holi': 'holi', 'Om': 'om', 'La diya': 'diya', 'Le temple': 'mandir', 'La fête nationale': 'fete-nationale',
+  'Les droits de l’enfant': 'droits-enfant', 'Le Jour de la Terre': 'jour-terre', 'La main tendue': 'main-tendue', 'Le cœur': 'coeur', 'La balance': 'balance' };
+export const imageDe = (nom) => IMAGES[nom.split(',')[0]];
 const CHRETIEN = {
   fetes: [
     ['🕯️', "L'Avent", "Les quatre semaines avant Noël. Chaque dimanche, on allume une bougie de plus sur la couronne de l'Avent.", "Le calendrier de l'Avent a une petite case à ouvrir chaque jour jusqu'à Noël."],
