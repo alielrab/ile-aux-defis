@@ -534,7 +534,7 @@ select {
 .fiche-nature li img { display: block; width: 100%; max-width: 400px; margin: 0.3rem 0 0.6rem; border-radius: 14px; }
 .fiche-nature { width: 100%; text-align: left; }
 /* La tour des énigmes, suite : sudoku, taquin, parking, tour, code, dessins cachés, déduction */
-.sudoku { --c: min(4.6rem, calc((100vw - 3rem) / var(--taille))); display: grid; grid-template-columns: repeat(var(--taille), var(--c)); gap: 3px; margin: 0 auto; padding: 5px; background: #5a6f8a; border-radius: 12px; }
+.sudoku { --c: min(4.6rem, calc((100vw - 3rem - var(--taille) * 4px) / var(--taille))); /* (4px par case : les écarts, pour qu'une grille de 9 tienne en largeur) */ display: grid; grid-template-columns: repeat(var(--taille), var(--c)); gap: 3px; margin: 0 auto; padding: 5px; background: #5a6f8a; border-radius: 12px; }
 .sudoku button { height: var(--c); padding: 3px; border: 0; border-radius: 6px; background: #fffdf5; font: inherit; font-size: calc(var(--c) * 0.55); font-weight: 800; color: #2b3a55; cursor: pointer; }
 .sudoku button.donnee { background: #e8eefc; }
 .sudoku button.choisie { outline: 4px solid #1e8e3e; outline-offset: -4px; background: #c8f0d0; }
@@ -928,7 +928,8 @@ img.image-temps { width: 4.5rem; height: 4.5rem; object-fit: contain; display: b
   #libre-vue .score-grue, #libre-vue .question-defi { font-size: 0.95rem; padding: 0.45rem 0.7rem; line-height: 1.25; }
   #libre-vue .actions-atelier { gap: 6px; }
   #libre-vue .actions-atelier .gros { min-height: 2.6rem; padding: 0 0.9rem; font-size: 1rem; }
-  .sudoku { --c: min(4.6rem, calc((100vw - 3rem) / var(--taille)), calc(44dvh / var(--taille))); }
+  .sudoku { --c: min(4.6rem, calc((100vw - 3rem - var(--taille) * 4px) / var(--taille)), calc((44dvh - var(--taille) * 4px) / var(--taille))); }
+  .sudoku[style*="--taille: 9"] { --c: min(calc((100vw - 3rem - 36px) / 9), calc((40dvh - 36px) / 9)); } /* la grille de 9 : ses 9 chiffres à choisir prennent deux rangées */
   .taquin { --c: min(7rem, calc((100vw - 3rem) / var(--cote)), calc(46dvh / var(--cote))); }
   .parking { --c: min(3.6rem, calc((100vw - 3.5rem) / 6), calc(40dvh / 6)); }
   .dessin-cache { --c: min(3.4rem, calc((100vw - 3rem) / (var(--taille) + 1.4)), calc(44dvh / (var(--taille) + 1.4))); }

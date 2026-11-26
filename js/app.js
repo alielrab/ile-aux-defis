@@ -2530,7 +2530,7 @@ function jouerDeduction(n) {
   const dessiner = () => table.replaceChildren(el('span'), ...logique.ANIMAUX.slice(0, d.taille).map((a) => el('span', { className: 'tete' }, imageOuTexte(`enigmes/${a}`, a))),
     ...marques.flatMap((l, e) => [el('span', { className: 'tete', textContent: logique.ENFANTS[e] }), ...l.map((m, a) => {
       const b = el('button', { className: m === '✓' ? 'oui' : m === '✗' ? 'non' : '', textContent: m, disabled: fini });
-      b.setAttribute('aria-label', `${logique.ENFANTS[e]} et le ${logique.ANIMAUX[a]} : ${m === '✓' ? 'oui' : m === '✗' ? 'non' : 'pas encore choisi'}`);
+      b.setAttribute('aria-label', `${logique.ENFANTS[e]} et ${logique.ARTICLES[logique.ANIMAUX[a]]} : ${m === '✓' ? 'oui' : m === '✗' ? 'non' : 'pas encore choisi'}`);
       b.addEventListener('click', () => { marques[e][a] = m === '' ? '✗' : m === '✗' ? '✓' : ''; dessiner(); });
       return b;
     })]));

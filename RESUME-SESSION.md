@@ -4,7 +4,7 @@
 
 ## Où on en est
 - Branche de travail : `jardin-route-voix`. Elle est fusionnée dans `main` à chaque « oui, commite et envoie ».
-- Version du cache (`sw.js`) : `ile-75`. Il faut la monter à chaque envoi.
+- Version du cache (`sw.js`) : `ile-76`. Il faut la monter à chaque envoi.
 - 168 tests, tous verts (`npm test`).
 - Tout est en ligne sur `main` (dernier envoi : le 26 novembre, commit `728f21e`).
 - L'app en ligne : https://alielrab.github.io/ile-aux-defis/ (GitHub Pages, branche `main`).
@@ -100,6 +100,7 @@
 - **Fêtes et symboles du lieu de croyance en images** (26 novembre) : 50 images dans `images/croyance/`, seulement des objets, des lieux et des symboles (aucune personne, aucune divinité). La table `IMAGES` de `js/croyances-contenu.js` relie le nom de la fête ou du symbole (sans la date) à son image. À faire relire par un parent pour chaque religion.
 - **Maison de la confiance en images** (26 novembre) : une image par thème dans `images/confiance/<clé du thème>.webp`, sur le bouton du thème et dans son titre. Les textes n'ont pas changé.
 - **Tous les emojis restants en images** (26 novembre, soir) : `habillerEmojis` dans `js/app.js` regarde tout ce qui s'affiche et met une image à la place de chaque emoji (l'emoji reste dans la page, caché, classe `.emoji-cache`). L'image vient d'un dossier existant (table `IMAGES_EMOJIS` : énigmes, restaurant, nature, BD…) ou de `images/emoji/<code de l'emoji>.webp` (318 images, 192 px). La liste des sujets est dans `images/emojis.txt` (emoji|o objet, a animal ou personne, f drapeau|sujet) : pour un nouvel emoji, ajouter une ligne, générer l'image, la ranger dans `images/originaux/emoji/<code>.png`. Les textes n'ont pas changé (les voix en dépendent).
+- **Tour des énigmes : des niveaux en plus** (26 novembre, soir) : ajoutés à la fin de chaque jeu, donc les niveaux déjà réussis restent réussis. Sudoku 18 niveaux (les petits finissent en 6x6, les grands en 9x9), taquin 16 (4x4 pour les petits, 5x5 pour les grands), parking 16 (jusqu'à 12 glissades pour les petits, 24 pour les grands), tour 6 (8 disques), code des couleurs 11 (6 pastilles), dessins cachés 18 (7 cases de côté), déduction 18 (5 enfants et 5 animaux). Tout est dans `js/jeux/logique.js`.
 - **Emojis encore en place** : dans les dessins seulement (un emoji dans un dessin SVG ne peut pas devenir une image de cette façon) : les bâtiments de secours de la carte et la BD quand leur image manque. Les flèches ◀ ▶ ↩ restent des signes de texte. À relire : les 20 drapeaux (une image générée peut se tromper).
 - Vérifier sur un vrai téléphone : les quiz après une réponse (une longue bulle de correction peut faire dépasser l'écran), la monnaie du glacier.
 - Tangram ; minuscules dans l'atelier d'écriture ; flèche « répéter » des robots ; carte des cantons à toucher ; langue de famille.

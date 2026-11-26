@@ -12,7 +12,7 @@ test('niveaux : ils s’ouvrent un par un, 2 étoiles la première fois, chaque 
 });
 
 test('sudoku : une seule solution, le bon nombre de cases vides, des images en 4x4 et des chiffres en 6x6', () => {
-  for (const age of [6, 9]) for (let n = 0; n < 12; n++) {
+  for (const age of [6, 9]) for (let n = 0; n < x.JEUX_LOGIQUE.sudoku[3]; n++) {
     const s = x.sudokuDuNiveau(n, age), vides = s.depart.flat().filter((v) => v === null).length;
     assert.ok(x.sudokuUnique(s.depart), `niveau ${n + 1}, ${age} ans`);
     assert.ok(vides >= 4 && s.depart.every((l, r) => l.every((v, c) => v === null || v === s.solution[r][c])));
@@ -20,7 +20,7 @@ test('sudoku : une seule solution, le bon nombre de cases vides, des images en 4
     assert.equal(s.images, s.taille === 4);
     assert.deepEqual(x.sudokuDuNiveau(n, age).depart, s.depart);
   }
-  assert.equal(x.sudokuDuNiveau(11, 9).taille, 6);
+  assert.deepEqual([x.sudokuDuNiveau(11, 9).taille, x.sudokuDuNiveau(17, 6).taille, x.sudokuDuNiveau(17, 9).taille], [6, 6, 9]); // les derniers niveaux : une grille plus grande
 });
 
 test('taquin : seule une case voisine du trou glisse ; chaque niveau est mélangé et faisable', () => {
@@ -28,7 +28,7 @@ test('taquin : seule une case voisine du trou glisse ; chaque niveau est mélang
   assert.ok(x.taquinRange(range) && x.glisser(range, 0) === null);
   assert.deepEqual(x.glisser(range, 7), [0, 1, 2, 3, 4, 5, 6, 8, 7]);
   assert.equal(x.glisser([0, 1, 2, 8, 3, 4, 5, 6, 7], 2), null); // la case au bout de la ligne du dessus n'est pas voisine
-  for (const age of [6, 9]) for (let n = 0; n < 12; n++) {
+  for (const age of [6, 9]) for (let n = 0; n < x.JEUX_LOGIQUE.taquin[3]; n++) {
     const t = x.taquinDuNiveau(n, age);
     assert.ok(!x.taquinRange(t.cases) && t.cases.length === t.cote ** 2);
     // faisable : dans un taquin, la parité des échanges suit la distance du trou à sa place
@@ -45,9 +45,9 @@ test('parking : un véhicule ne traverse pas les autres ni les murs ; chaque niv
   assert.deepEqual(x.deplacer(p, 1, 1)[1], [2, 2, 3, 'v']);
   assert.equal(x.glissadesMin(p), 2);
   for (const age of [6, 9]) {
-    const coups = Array.from({ length: 12 }, (_, n) => x.glissadesMin(x.parkingDuNiveau(n, age)));
+    const coups = Array.from({ length: x.JEUX_LOGIQUE.parking[3] }, (_, n) => x.glissadesMin(x.parkingDuNiveau(n, age)));
     assert.ok(coups.every((c, i) => c >= 2 && (i === 0 || c >= coups[i - 1])), `${age} ans : ${coups}`);
-    for (let n = 0; n < 12; n++) assert.deepEqual(x.parkingDuNiveau(n, age)[0].slice(0, 1).concat(x.parkingDuNiveau(n, age)[0].slice(2)), [2, 2, 'h']);
+    for (let n = 0; n < x.JEUX_LOGIQUE.parking[3]; n++) assert.deepEqual(x.parkingDuNiveau(n, age)[0].slice(0, 1).concat(x.parkingDuNiveau(n, age)[0].slice(2)), [2, 2, 'h']);
   }
 });
 
@@ -57,6 +57,7 @@ test('code des couleurs : bien placées et mal placées, même avec des couleurs
   assert.deepEqual(x.indicesCode([0, 0, 1], [0, 1, 0]), [1, 2]);
   assert.deepEqual(x.indicesCode([0, 0, 1], [2, 2, 2]), [0, 0]);
   assert.deepEqual(x.indicesCode([1, 1, 2], [1, 3, 1]), [1, 1]);
+  assert.deepEqual([x.CODES.length, x.TOURS.length], [x.JEUX_LOGIQUE.code[3], x.JEUX_LOGIQUE.tour[3]]);
   for (let n = 0; n < x.CODES.length; n++) { const c = x.nouveauCode(n); assert.ok(c.length === x.CODES[n][0] && c.every((v) => v >= 0 && v < x.CODES[n][1])); }
 });
 
@@ -75,18 +76,18 @@ test('dessins cachés : les nombres du bord ; le dessin attendu est accepté, un
   assert.deepEqual(x.nombresDe([false, false]), [0]);
   for (let n = 0; n < x.DESSINS.length; n++) {
     const d = x.dessinDuNiveau(n);
-    assert.ok(d.cases.length === 5 && d.cases.every((l) => l.length === 5), d.nom);
+    assert.ok(d.cases.length === (n < 12 ? 5 : 7) && d.cases.every((l) => l.length === d.cases.length), d.nom);
     assert.ok(x.dessinJuste(d, d.cases) && !x.dessinJuste(d, d.cases.map((l) => l.map(() => false))), d.nom);
   }
   assert.equal(new Set(x.DESSINS.map((d) => d[0])).size, x.JEUX_LOGIQUE.dessins[3]);
 });
 
 test('déduction : les indices donnent une seule réponse, et pas tous la réponse toute faite', () => {
-  for (let n = 0; n < 12; n++) {
+  for (let n = 0; n < x.JEUX_LOGIQUE.deduction[3]; n++) {
     const d = x.deductionDuNiveau(n);
     assert.ok(d.uniques && d.indices.length >= 2, `niveau ${n + 1}`);
     assert.ok(d.indices.filter((i) => !i.includes('n’a pas')).length <= 1, `niveau ${n + 1} : ${d.indices}`);
     assert.ok(x.deductionJuste(d, d.solution) && !x.deductionJuste(d, [...d.solution].reverse()));
-    assert.equal(d.taille, n < 6 ? 3 : 4);
+    assert.equal(d.taille, n < 6 ? 3 : n < 12 ? 4 : 5);
   }
 });
