@@ -81,6 +81,13 @@ export function lignes(texte, largeur = 17) {
 }
 
 // Une case (viewBox 0 0 300 240). dessinPerso(id, x, y, largeur, hauteur) : le SVG d'un personnage, fourni par l'app.
+// Les images du nouveau style (images/bd) : les décors, les créatures et les autocollants. Sans image, on garde le dessin ou l'emoji.
+const prete = (nom) => ((globalThis.IMAGES ?? []).includes(`images/bd/${nom}.webp`) ? `images/bd/${nom}.webp` : null);
+const NOMS_AUTOCOLLANTS = { '⭐': 'etoile', '❤️': 'coeur', '🌈': 'arcenciel', '🎁': 'cadeau', '⚽': 'ballon', '🍦': 'glace', '🎈': 'baudruche', '💡': 'idee', '❓': 'question', '❗': 'exclamation', '💤': 'dodo', '🎵': 'musique' };
+export const imageAutocollant = (emoji) => prete(`auto-${NOMS_AUTOCOLLANTS[emoji]}`);
+// Le décor d'une case, à mettre dans un svg de 300 x 240
+export const dessinDecor = (cle) => { const img = prete(`decor-${cle}`); return img ? `<image href="${img}" width="300" height="240" preserveAspectRatio="xMidYMid slice"/>` : (DECORS[cle]?.[1] ?? DECORS.plage[1]); };
+
 export function dessinerCase(c, dessinPerso, { cliquable = false, numero = 0 } = {}) {
   const PLACES = [[22, 66, 104, 168], [174, 66, 104, 168]];
   const perso = c.perso.map((id, k) => (id ? dessinPerso(id, ...PLACES[k]) : '')).join('');
@@ -92,13 +99,15 @@ export function dessinerCase(c, dessinPerso, { cliquable = false, numero = 0 } =
       <path d="${queue}" fill="#fff" stroke="#2b2b3a" stroke-width="2.5" stroke-linejoin="round"/><rect x="${cx - 24}" y="${4 + h}" width="44" height="6" fill="#fff"/>
       ${l.map((ligne, i) => `<text x="${cx}" y="${28 + i * 17}" font-size="15" font-weight="700" text-anchor="middle" fill="#2b2b3a" font-family="sans-serif">${echapper(ligne)}</text>`).join('')}</g>`;
   }).join('');
-  const auto = c.autocollant ? `<text x="150" y="${c.bulles.some(Boolean) ? 120 : 50}" font-size="40" text-anchor="middle">${echapper(c.autocollant)}</text>` : '';
+  const ya = c.bulles.some(Boolean) ? 120 : 50, imgAuto = c.autocollant && imageAutocollant(c.autocollant);
+  const auto = imgAuto ? `<image href="${imgAuto}" x="126" y="${ya - 38}" width="48" height="48"/>` : c.autocollant ? `<text x="150" y="${ya}" font-size="40" text-anchor="middle">${echapper(c.autocollant)}</text>` : '';
   return `<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" class="case-bd${cliquable ? ' cliquable' : ''}" role="img" aria-label="Case ${numero + 1}">
-    ${DECORS[c.decor]?.[1] ?? DECORS.plage[1]}${perso}${auto}${bulles}<rect width="300" height="240" fill="none" stroke="#2b2b3a" stroke-width="6"/></svg>`;
+    ${dessinDecor(c.decor)}${perso}${auto}${bulles}<rect width="300" height="240" fill="none" stroke="#2b2b3a" stroke-width="6"/></svg>`;
 }
 
 // Une créature : un grand emoji, en bas de sa place
 export function dessinCreature(cle, x, y, l, h) {
-  const [, image] = CREATURES.find(([k]) => k === cle) ?? [];
+  const [, image] = CREATURES.find(([k]) => k === cle) ?? [], img = prete(cle);
+  if (img) return `<image href="${img}" x="${x}" y="${y + h - l - 4}" width="${l}" height="${l}" preserveAspectRatio="xMidYMax meet"/>`;
   return image ? `<text x="${x + l / 2}" y="${y + h - 14}" font-size="${l * 0.95}" text-anchor="middle">${image}</text>` : '';
 }

@@ -53,6 +53,16 @@ export function noterPartie(profil, jeu, bonnes = null, questions = null, d = ne
   for (const k of Object.keys(journal).sort().slice(0, -4)) delete journal[k];
 }
 
+// La météo du cœur : l'émotion que l'enfant choisit, une par jour (le dernier choix du jour compte). On garde 14 jours.
+export function noterMeteo(profil, cle, d = new Date()) {
+  const m = (profil.meteo ??= {});
+  m[jour(d)] = cle;
+  for (const k of Object.keys(m).sort().slice(0, -14)) delete m[k];
+}
+const JOURS = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
+// Les 7 jours de la semaine en cours : [['lun.', 'joie'], ['mar.', null], …]
+export const meteoSemaine = (profil, d = new Date()) => JOURS.map((nom, i) => [nom, profil.meteo?.[jour(decaler(semaine(d), i))] ?? null]);
+
 export const NOMS_JEUX = {
   calcul: 'le calcul', heure: 'lire l’heure', corps: 'le corps humain', syllabes: 'les syllabes', dictee: 'la dictée magique', robot: 'l’atelier des robots', suisse: 'la Suisse',
   naturaliste: 'la cabane nature', potager: 'le quiz du potager', secours: 'les premiers secours', espace: 'l’observatoire', cuisine: 'le restaurant', marche: 'le marché', emotions: 'les émotions',
@@ -72,5 +82,6 @@ export function resume(profil, d = new Date()) {
     jours: s.jours.length, parties: total(s), partiesAvant: total(avant), serie: serieEnCours(profil, d),
     plusJoues: jeux.slice(0, 3).map(([jeu, l]) => `${nom(jeu)} (${l[0]})`),
     reussis: taux.filter(([, t]) => t >= 0.8).map(([n]) => n), aRevoir: taux.filter(([, t]) => t < 0.5).map(([n]) => n),
+    meteo: meteoSemaine(profil, d).filter(([, m]) => m), // la météo du cœur choisie cette semaine : [['lun.', 'joie'], …]
   };
 }

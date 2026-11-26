@@ -59,6 +59,11 @@ for (const k of ['squelette', 'muscles', 'cerveau']) ajouter(8, `corps/${k}-dos`
 // Les étapes des expériences du labo : une image par étape
 for (const [cle, [nom, , ailleurs]] of Object.entries(OBJETS)) if (!ailleurs) ajouter(8, `enigmes/${cle}`, '256x256', `Trouve l'intrus : ${nom}`);
 for (const a of ['soleil', 'mercure', 'venus', 'terre', 'lune', 'mars', 'jupiter', 'saturne', 'uranus', 'neptune']) ajouter(8, `espace/${a}`, '256x256', `Observatoire : ${a}, un rond qui remplit l'image (Saturne avec ses anneaux)`);
+for (const v of ['potager-jardin', 'potager-quiz', 'nature-animaux', 'nature-plantes', 'nature-quiz', 'biblio-syllabes', 'biblio-dictee', 'biblio-ecriture', ...['joie', 'calme', 'tristesse', 'colere', 'peur'].map((x) => `meteo-${x}`),
+  ...['chambre', 'lit', 'table', 'debarrasser', 'jouets', 'linge', 'plantes', 'animal', 'cartable', 'dents'].map((x) => `mission-${x}`), ...EXPERIENCES.map((e) => `labo-${e.cle}`)]) ajouter(8, `vignettes/${v}`, '256x256', `Carte de menu : ${v} (à la place d'un emoji)`);
+for (const d of ['plage', 'foret', 'espace', 'maison', 'ecole', 'ville', 'nuit', 'neige']) ajouter(8, `bd/decor-${d}`, '600x480', `Atelier BD : le décor « ${d} », sans personne, le sol libre en bas`, false);
+for (const c of ['chien', 'chat', 'lapin', 'licorne', 'dragon', 'dinosaure', 'robot', 'extraterrestre']) ajouter(8, `bd/${c}`, '256x256', `Atelier BD : la créature « ${c} », en entier`);
+for (const a of ['etoile', 'coeur', 'arcenciel', 'cadeau', 'ballon', 'glace', 'baudruche', 'idee', 'question', 'exclamation', 'dodo', 'musique']) ajouter(8, `bd/auto-${a}`, '128x128', `Atelier BD : l'autocollant « ${a} »`);
 ajouter(8, 'espace/fusee', '160x192', 'Observatoire : la fusée, le nez en haut');
 ajouter(8, 'espace/fond', '1024x440', 'Observatoire : le ciel étoilé, sans planète', false);
 for (const j of ['intrus', 'suites', 'potions', 'sudoku', 'taquin', 'parking', 'tour', 'code', 'dessins', 'deduction', 'jour']) ajouter(8, `enigmes/carte-${j}`, '400x250', `Tour des énigmes : la carte du jeu « ${j} »`);

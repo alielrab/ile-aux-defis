@@ -636,6 +636,69 @@
 8;images/espace/saturne.webp;256x256;oui;Observatoire : saturne, un rond qui remplit l'image (Saturne avec ses anneaux)
 8;images/espace/uranus.webp;256x256;oui;Observatoire : uranus, un rond qui remplit l'image (Saturne avec ses anneaux)
 8;images/espace/neptune.webp;256x256;oui;Observatoire : neptune, un rond qui remplit l'image (Saturne avec ses anneaux)
+8;images/vignettes/potager-jardin.webp;256x256;oui;Carte de menu : potager-jardin (à la place d'un emoji)
+8;images/vignettes/potager-quiz.webp;256x256;oui;Carte de menu : potager-quiz (à la place d'un emoji)
+8;images/vignettes/nature-animaux.webp;256x256;oui;Carte de menu : nature-animaux (à la place d'un emoji)
+8;images/vignettes/nature-plantes.webp;256x256;oui;Carte de menu : nature-plantes (à la place d'un emoji)
+8;images/vignettes/nature-quiz.webp;256x256;oui;Carte de menu : nature-quiz (à la place d'un emoji)
+8;images/vignettes/biblio-syllabes.webp;256x256;oui;Carte de menu : biblio-syllabes (à la place d'un emoji)
+8;images/vignettes/biblio-dictee.webp;256x256;oui;Carte de menu : biblio-dictee (à la place d'un emoji)
+8;images/vignettes/biblio-ecriture.webp;256x256;oui;Carte de menu : biblio-ecriture (à la place d'un emoji)
+8;images/vignettes/meteo-joie.webp;256x256;oui;Carte de menu : meteo-joie (à la place d'un emoji)
+8;images/vignettes/meteo-calme.webp;256x256;oui;Carte de menu : meteo-calme (à la place d'un emoji)
+8;images/vignettes/meteo-tristesse.webp;256x256;oui;Carte de menu : meteo-tristesse (à la place d'un emoji)
+8;images/vignettes/meteo-colere.webp;256x256;oui;Carte de menu : meteo-colere (à la place d'un emoji)
+8;images/vignettes/meteo-peur.webp;256x256;oui;Carte de menu : meteo-peur (à la place d'un emoji)
+8;images/vignettes/mission-chambre.webp;256x256;oui;Carte de menu : mission-chambre (à la place d'un emoji)
+8;images/vignettes/mission-lit.webp;256x256;oui;Carte de menu : mission-lit (à la place d'un emoji)
+8;images/vignettes/mission-table.webp;256x256;oui;Carte de menu : mission-table (à la place d'un emoji)
+8;images/vignettes/mission-debarrasser.webp;256x256;oui;Carte de menu : mission-debarrasser (à la place d'un emoji)
+8;images/vignettes/mission-jouets.webp;256x256;oui;Carte de menu : mission-jouets (à la place d'un emoji)
+8;images/vignettes/mission-linge.webp;256x256;oui;Carte de menu : mission-linge (à la place d'un emoji)
+8;images/vignettes/mission-plantes.webp;256x256;oui;Carte de menu : mission-plantes (à la place d'un emoji)
+8;images/vignettes/mission-animal.webp;256x256;oui;Carte de menu : mission-animal (à la place d'un emoji)
+8;images/vignettes/mission-cartable.webp;256x256;oui;Carte de menu : mission-cartable (à la place d'un emoji)
+8;images/vignettes/mission-dents.webp;256x256;oui;Carte de menu : mission-dents (à la place d'un emoji)
+8;images/vignettes/labo-poivre.webp;256x256;oui;Carte de menu : labo-poivre (à la place d'un emoji)
+8;images/vignettes/labo-lait.webp;256x256;oui;Carte de menu : labo-lait (à la place d'un emoji)
+8;images/vignettes/labo-oeuf.webp;256x256;oui;Carte de menu : labo-oeuf (à la place d'un emoji)
+8;images/vignettes/labo-eau-voyage.webp;256x256;oui;Carte de menu : labo-eau-voyage (à la place d'un emoji)
+8;images/vignettes/labo-volcan.webp;256x256;oui;Carte de menu : labo-volcan (à la place d'un emoji)
+8;images/vignettes/labo-ballon-gonfle.webp;256x256;oui;Carte de menu : labo-ballon-gonfle (à la place d'un emoji)
+8;images/vignettes/labo-ballon-magique.webp;256x256;oui;Carte de menu : labo-ballon-magique (à la place d'un emoji)
+8;images/vignettes/labo-haricot.webp;256x256;oui;Carte de menu : labo-haricot (à la place d'un emoji)
+8;images/vignettes/labo-celeri.webp;256x256;oui;Carte de menu : labo-celeri (à la place d'un emoji)
+8;images/vignettes/labo-arc-en-ciel.webp;256x256;oui;Carte de menu : labo-arc-en-ciel (à la place d'un emoji)
+8;images/vignettes/labo-coquille.webp;256x256;oui;Carte de menu : labo-coquille (à la place d'un emoji)
+8;images/vignettes/labo-bonbons.webp;256x256;oui;Carte de menu : labo-bonbons (à la place d'un emoji)
+8;images/bd/decor-plage.webp;600x480;non;Atelier BD : le décor « plage », sans personne, le sol libre en bas
+8;images/bd/decor-foret.webp;600x480;non;Atelier BD : le décor « foret », sans personne, le sol libre en bas
+8;images/bd/decor-espace.webp;600x480;non;Atelier BD : le décor « espace », sans personne, le sol libre en bas
+8;images/bd/decor-maison.webp;600x480;non;Atelier BD : le décor « maison », sans personne, le sol libre en bas
+8;images/bd/decor-ecole.webp;600x480;non;Atelier BD : le décor « ecole », sans personne, le sol libre en bas
+8;images/bd/decor-ville.webp;600x480;non;Atelier BD : le décor « ville », sans personne, le sol libre en bas
+8;images/bd/decor-nuit.webp;600x480;non;Atelier BD : le décor « nuit », sans personne, le sol libre en bas
+8;images/bd/decor-neige.webp;600x480;non;Atelier BD : le décor « neige », sans personne, le sol libre en bas
+8;images/bd/chien.webp;256x256;oui;Atelier BD : la créature « chien », en entier
+8;images/bd/chat.webp;256x256;oui;Atelier BD : la créature « chat », en entier
+8;images/bd/lapin.webp;256x256;oui;Atelier BD : la créature « lapin », en entier
+8;images/bd/licorne.webp;256x256;oui;Atelier BD : la créature « licorne », en entier
+8;images/bd/dragon.webp;256x256;oui;Atelier BD : la créature « dragon », en entier
+8;images/bd/dinosaure.webp;256x256;oui;Atelier BD : la créature « dinosaure », en entier
+8;images/bd/robot.webp;256x256;oui;Atelier BD : la créature « robot », en entier
+8;images/bd/extraterrestre.webp;256x256;oui;Atelier BD : la créature « extraterrestre », en entier
+8;images/bd/auto-etoile.webp;128x128;oui;Atelier BD : l'autocollant « etoile »
+8;images/bd/auto-coeur.webp;128x128;oui;Atelier BD : l'autocollant « coeur »
+8;images/bd/auto-arcenciel.webp;128x128;oui;Atelier BD : l'autocollant « arcenciel »
+8;images/bd/auto-cadeau.webp;128x128;oui;Atelier BD : l'autocollant « cadeau »
+8;images/bd/auto-ballon.webp;128x128;oui;Atelier BD : l'autocollant « ballon »
+8;images/bd/auto-glace.webp;128x128;oui;Atelier BD : l'autocollant « glace »
+8;images/bd/auto-baudruche.webp;128x128;oui;Atelier BD : l'autocollant « baudruche »
+8;images/bd/auto-idee.webp;128x128;oui;Atelier BD : l'autocollant « idee »
+8;images/bd/auto-question.webp;128x128;oui;Atelier BD : l'autocollant « question »
+8;images/bd/auto-exclamation.webp;128x128;oui;Atelier BD : l'autocollant « exclamation »
+8;images/bd/auto-dodo.webp;128x128;oui;Atelier BD : l'autocollant « dodo »
+8;images/bd/auto-musique.webp;128x128;oui;Atelier BD : l'autocollant « musique »
 8;images/espace/fusee.webp;160x192;oui;Observatoire : la fusée, le nez en haut
 8;images/espace/fond.webp;1024x440;non;Observatoire : le ciel étoilé, sans planète
 8;images/enigmes/carte-intrus.webp;400x250;oui;Tour des énigmes : la carte du jeu « intrus »

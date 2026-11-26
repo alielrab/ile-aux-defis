@@ -604,6 +604,7 @@ function afficherQuestion() {
   const q = questionEnCours(partie);
   $('#progression').textContent = `Question ${partie.index + 1} / ${partie.questions.length}`;
   $('#question').textContent = jeu === 'calcul' ? `${q.texte} = ?` : acc(q.titre);
+  $('#question').classList.toggle('longue', $('#question').textContent.length > 28); // une longue question s'écrit plus petit : le jeu doit tenir sur un écran de téléphone
   $('#retour').textContent = partie.index === 0 ? `À toi, ${joueuse.prenom} !` : '';
   $('#retour').classList.remove('longue');
   $('#aide').setAttribute('aria-hidden', jeu === 'calcul'); // les images du calcul : décoratives
@@ -1041,7 +1042,7 @@ function ouvrirObservatoire() {
 function afficherObservatoire(vue) {
   for (const b of $('#obs-onglets').children) b.setAttribute('aria-pressed', b.dataset.vue === vue);
   if (vue === 'tailles') {
-    $('#obs-vue').innerHTML = `<p class="info">Les planètes à la même échelle. Le Soleil est si gros qu'on n'en voit qu'un petit bout !</p>
+    $('#obs-vue').innerHTML = `<p class="info">Les planètes à la même échelle. Le Soleil est si gros qu'on n'en voit qu'un petit bout ! Les plus petites sont minuscules : on les voit aussi 🔍 à la loupe, dans un rond au-dessus.</p>
       <div class="defile">${espace.dessinerTailles()}</div>`;
     return parler("Voici les planètes à la même échelle. Jupiter est la plus grosse. Le Soleil est si gros qu'on n'en voit qu'un bout !");
   }
@@ -1484,12 +1485,20 @@ function afficherEmotions(choix = null) {
   arreterRespiration();
   const v = $('#emotions-vue');
   v.replaceChildren(el('h2', { textContent: "☁️ Quel temps fait-il dans ton cœur aujourd'hui ?" }));
-  v.append(el('div', { className: 'meteo' }, ...emotions.METEO.map(([cle, image, nom, reponse]) => {
-    const b = el('button', { className: 'temps' }, el('span', { className: 'image-temps', textContent: image, ariaHidden: 'true' }), el('span', { textContent: nom }));
+  v.append(el('div', { className: 'meteo' }, ...emotions.METEO.map(([cle, emoji, nom, reponse]) => {
+    const src = image(`vignettes/meteo-${cle}`);
+    const b = el('button', { className: 'temps' }, src ? el('img', { src, alt: '', className: 'image-temps' }) : el('span', { className: 'image-temps', textContent: emoji, ariaHidden: 'true' }), el('span', { textContent: nom }));
     b.setAttribute('aria-pressed', cle === choix);
-    b.addEventListener('click', () => { afficherEmotions(cle); parler(`${nom}. ${reponse}`); });
+    b.addEventListener('click', () => { suivi.noterMeteo(joueuse, cle); enregistrer(); afficherEmotions(cle); parler(`${nom}. ${reponse}`); });
     return b;
   })));
+  // le baromètre : la météo choisie chaque jour de la semaine (le dernier choix du jour compte) ; les parents la voient aussi, et on le dit à l'enfant
+  const semaine = suivi.meteoSemaine(joueuse);
+  if (semaine.some(([, m]) => m)) v.append(el('div', { className: 'carte barometre' }, el('strong', { textContent: 'Mon baromètre de la semaine' }),
+    el('div', { className: 'jours-meteo' }, ...semaine.map(([jourSemaine, m]) => {
+      const [, emoji, nom] = emotions.METEO.find(([c]) => c === m) ?? [], src = m && image(`vignettes/meteo-${m}`);
+      return el('span', { title: nom ?? 'pas encore choisi' }, el('small', { textContent: jourSemaine }), m ? (src ? el('img', { src, alt: nom }) : el('span', { textContent: emoji })) : el('span', { textContent: '·', ariaHidden: 'true' }));
+    })), el('small', { textContent: 'Tes parents peuvent voir ton baromètre, pour en parler avec toi.' })));
   if (choix) {
     const [, , , reponse] = emotions.METEO.find(([c]) => c === choix);
     v.append(el('p', { className: 'carte presentation', textContent: acc(reponse) }));
@@ -1589,10 +1598,10 @@ function vueEditerBD(v, vue) {
   const maj = (dire) => { afficherBD(vue); if (dire) parler(dire); };
   if (vue.onglet === 'decor') {
     panneau.append(el('div', { className: 'grille-bd' }, ...Object.entries(bd.DECORS).map(([k, [nom, dessin]]) =>
-      choisir(c.decor === k, `<svg viewBox="0 0 300 240" aria-hidden="true">${dessin}</svg>`, nom, () => { c.decor = k; afficherBD({ ...vue, onglet: '0' }); parler(nom); })))); // le décor choisi, on passe au personnage : sinon l'enfant ne voit pas quoi faire ensuite
+      choisir(c.decor === k, `<svg viewBox="0 0 300 240" aria-hidden="true">${bd.dessinDecor(k)}</svg>`, nom, () => { c.decor = k; afficherBD({ ...vue, onglet: '0' }); parler(nom); })))); // le décor choisi, on passe au personnage : sinon l'enfant ne voit pas quoi faire ensuite
   } else if (vue.onglet === 'auto') {
     panneau.append(el('div', { className: 'grille-bd petite' }, choisir(!c.autocollant, '', 'Aucun', () => { c.autocollant = null; maj('Aucun autocollant.'); }),
-      ...bd.AUTOCOLLANTS.map((a) => choisir(c.autocollant === a, `<span class="autocollant" aria-hidden="true">${a}</span>`, '', () => { c.autocollant = a; maj(); }))));
+      ...bd.AUTOCOLLANTS.map((a) => choisir(c.autocollant === a, bd.imageAutocollant(a) ? `<img class="autocollant" src="${bd.imageAutocollant(a)}" alt="">` : `<span class="autocollant" aria-hidden="true">${a}</span>`, '', () => { c.autocollant = a; maj(); }))));
   } else {
     const k = Number(vue.onglet);
     panneau.append(el('h3', { textContent: 'Qui ?' }), el('div', { className: 'grille-bd' },
@@ -1963,7 +1972,7 @@ function ouvrirMissions(dire = true) {
   v.replaceChildren(el('p', { className: 'carte presentation', textContent: regle }), el('div', { className: 'galerie-cartes' }, ...missions.MISSIONS.map((x) => {
     const e = missions.etat(joueuse, x.cle);
     const b = el('button', { className: `carte-image${e === 'faite' ? ' choisi' : ''}` });
-    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${x.image}</span><span>${x.nom}<br><small>${e === 'faite' ? `✓ Fait ! +${missions.ETOILES_MISSION} ⭐` : e === 'attente' ? '⏳ Un parent valide' : `+${missions.ETOILES_MISSION} ⭐`}</small></span>`;
+    b.innerHTML = `${imageFiche('vignettes', `mission-${x.cle}`, x.image)}<span>${x.nom}<br><small>${e === 'faite' ? `✓ Fait ! +${missions.ETOILES_MISSION} ⭐` : e === 'attente' ? '⏳ Un parent valide' : `+${missions.ETOILES_MISSION} ⭐`}</small></span>`;
     b.disabled = e === 'faite';
     b.addEventListener('click', () => {
       if (e === 'attente') return validerMission(x);
@@ -2121,7 +2130,7 @@ function ouvrirLabo(cle = null) {
     v.replaceChildren(el('p', { className: 'carte presentation regle-d-or', textContent: `🧪 ${experiences.REGLE}` }),
       el('div', { className: 'galerie-cartes' }, ...experiences.EXPERIENCES.map((e) => {
         const b = el('button', { className: `carte-image${faites.includes(e.cle) ? ' choisi' : ''}` });
-        b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${e.image}</span><span>${e.nom}<br><small>${faites.includes(e.cle) ? '✓ Faite' : `⏱️ ${e.duree}`}</small></span>`;
+        b.innerHTML = `${imageFiche('vignettes', `labo-${e.cle}`, e.image)}<span>${e.nom}<br><small>${faites.includes(e.cle) ? '✓ Faite' : `⏱️ ${e.duree}`}</small></span>`;
         b.addEventListener('click', () => ouvrirLabo(e.cle));
         return b;
       })));
@@ -2164,7 +2173,7 @@ function ouvrirLabo(cle = null) {
     vraie.append(el('h2', { textContent: '🧪 Tu l’as faite pour de vrai ?' }), form);
   }
   const tete = el('div', { className: 'tete-fiche' });
-  tete.innerHTML = `<span class="emoji-theme" aria-hidden="true">${e.image}</span>`;
+  tete.innerHTML = imageFiche('vignettes', `labo-${e.cle}`, e.image);
   v.replaceChildren(
     el('div', { className: 'carte fiche-nature' }, tete, el('h2', { textContent: e.nom }),
       el('dl', {}, el('dt', { textContent: `⏱️ ${e.duree}` }), el('dt', { textContent: '🧺 Il te faut' }), el('dd', {}, el('ul', {}, ...e.materiel.map((m) => el('li', { textContent: m })))),
@@ -2533,7 +2542,8 @@ function jouerDeduction(n) {
     dessiner();
     c.gagner('Bravo, tu as tout trouvé !');
   });
-  c.v.replaceChildren(c.message, el('ul', { className: 'carte indices-deduction' }, ...d.indices.map((t) => el('li', { textContent: t }))), table, el('div', { className: 'actions-atelier' }, verifier), c.suite);
+  c.v.replaceChildren(c.message, el('ul', { className: 'carte indices-deduction' }, ...d.indices.map((t) => el('li', { textContent: t }))), table, c.suite);
+  c.suite.prepend(verifier); // sur la même ligne que les autres boutons : tout tient sur un écran de téléphone
   dessiner();
   parler(d.indices.join(' '));
 }
@@ -2544,7 +2554,7 @@ function ouvrirCabane() {
   const v = ouvrirLibre('La cabane nature');
   const carte = (emoji, nom, detail, action) => {
     const b = el('button', { className: 'carte-image' });
-    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.innerHTML = `${imageFiche('vignettes', VIGNETTES[nom], emoji)}<span>${nom}<br><small>${detail}</small></span>`;
     b.addEventListener('click', action);
     return b;
   };
@@ -2554,6 +2564,8 @@ function ouvrirCabane() {
     carte('❓', 'Le quiz de la nature', 'Teste ce que tu sais', () => lancerJeu('naturaliste'))));
   parler('La cabane nature ! Choisis : les animaux, les plantes, ou le quiz.', { ton: 1.1 });
 }
+// L'image d'une carte de menu (images/vignettes), d'après son nom
+const VIGNETTES = { 'Les animaux': 'nature-animaux', 'Les plantes': 'nature-plantes', 'Le quiz de la nature': 'nature-quiz', 'Mon potager': 'potager-jardin', 'Le quiz du potager': 'potager-quiz', 'La chasse aux syllabes': 'biblio-syllabes', 'La dictée magique': 'biblio-dictee' };
 const imageFiche = (dossier, cle, emoji) => { const src = image(`${dossier}/${cle}`); return src ? `<img src="${src}" alt="">` : `<span class="emoji-theme" aria-hidden="true">${emoji}</span>`; };
 function afficherFiches(quoi, cle = null) {
   const v = ouvrirLibre('La cabane nature'), animaux = quoi === 'animaux', liste = animaux ? fiches.ANIMAUX : fiches.PLANTES;
@@ -2584,7 +2596,7 @@ function ouvrirPotager() {
   const v = ouvrirLibre('Le potager');
   const carte = (emoji, nom, detail, action) => {
     const b = el('button', { className: 'carte-image' });
-    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.innerHTML = `${imageFiche('vignettes', VIGNETTES[nom], emoji)}<span>${nom}<br><small>${detail}</small></span>`;
     b.addEventListener('click', action);
     return b;
   };
@@ -2739,12 +2751,12 @@ function ouvrirBibliotheque() {
   etoilesJoueuse();
   const carte = (emoji, nom, detail, nomJeu) => {
     const b = el('button', { className: 'carte-image' });
-    b.innerHTML = `<span class="emoji-theme" aria-hidden="true">${emoji}</span><span>${nom}<br><small>${detail}</small></span>`;
+    b.innerHTML = `${imageFiche('vignettes', VIGNETTES[nom], emoji)}<span>${nom}<br><small>${detail}</small></span>`;
     b.addEventListener('click', () => lancerJeu(nomJeu));
     return b;
   };
   const ecrire = el('button', { className: 'carte-image' });
-  ecrire.innerHTML = '<span class="emoji-theme" aria-hidden="true">🖍️</span><span>L’atelier d’écriture<br><small>Trace les lettres avec ton doigt</small></span>';
+  ecrire.innerHTML = `${imageFiche('vignettes', 'biblio-ecriture', '🖍️')}<span>L’atelier d’écriture<br><small>Trace les lettres avec ton doigt</small></span>`;
   ecrire.addEventListener('click', ouvrirEcriture);
   $('#bibliotheque-vue').replaceChildren(el('div', { className: 'galerie-cartes grandes' },
     carte('🧩', 'La chasse aux syllabes', 'Forme le mot de l’image', 'syllabes'),
@@ -3168,6 +3180,7 @@ function afficherParents(message = null) {
       r.plusJoues.length && `Le plus joué : ${liste(r.plusJoues)}.`,
       r.reussis.length && `Bien réussi : ${liste(r.reussis)}.`,
       r.aRevoir.length && `À revoir ensemble : ${liste(r.aRevoir)}.`,
+      r.meteo.length && `Sa météo du cœur : ${liste(r.meteo.map(([j, m]) => `${j} ${emotions.METEO.find(([c]) => c === m)?.[2].split(' : ')[1] ?? m}`))}.`,
     ].filter(Boolean).map((t) => el('li', { textContent: t })));
     const info = f.querySelector('.erreur');
     if (message?.profil === p) noter(info, message.texte, true);

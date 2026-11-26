@@ -48,4 +48,8 @@ test('résumé pour les parents : jours joués, jeux les plus joués, ce qui est
   for (let i = 1; i <= 6; i++) s.noterPartie(p, 'calcul', 1, 1, le(`2027-01-${String(i * 4).padStart(2, '0')}`));
   assert.ok(Object.keys(p.journal).length <= 4);
   assert.deepEqual(s.resume({}, le('2026-11-26')).plusJoues, []); // un profil sans journal
+  // la météo du cœur : une par jour, le dernier choix compte ; le résumé des parents la reprend
+  s.noterMeteo(p, 'colere', le('2026-11-23')); s.noterMeteo(p, 'joie', le('2026-11-23')); s.noterMeteo(p, 'peur', le('2026-11-25')); s.noterMeteo(p, 'calme', le('2026-11-16'));
+  assert.deepEqual(s.meteoSemaine(p, le('2026-11-26')).map(([, m]) => m), ['joie', null, 'peur', null, null, null, null]);
+  assert.deepEqual(s.resume(p, le('2026-11-26')).meteo, [['lun.', 'joie'], ['mer.', 'peur']]);
 });

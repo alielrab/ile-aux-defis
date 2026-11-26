@@ -105,7 +105,9 @@ export function dessinerTailles() {
   const planetes = ASTRES.filter((a) => a.cle !== 'soleil').map((a) => {
     const r = Math.max(1.5, (a.diametre * k) / 2), place = Math.max(r * (a.cle === 'saturne' ? 1.9 : 1), 26); // Saturne : la place de ses anneaux // les petites planètes gardent la place de leur nom
     x += place + 8;
-    const s = `${dessinerAstre(a, x, 150, r)}<text x="${x}" y="${150 + Math.max(r, 20) + 26}" font-size="15" font-weight="700" text-anchor="middle" fill="#fff">${a.nom.replace(/^L[ae] /, '')}</text>`;
+    // à la même échelle que Jupiter, la Terre, Mars, Mercure et la Lune sont des points : on les montre aussi à la loupe, au-dessus
+    const loupe = r < 10 ? `<line x1="${x}" y1="${150 - r - 3}" x2="${x}" y2="98" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="${x}" cy="72" r="25" fill="rgb(255 255 255 / 0.14)" stroke="#fff" stroke-width="2"/>${dessinerAstre(a, x, 72, 18)}` : '';
+    const s = `${loupe}${dessinerAstre(a, x, 150, r)}<text x="${x}" y="${150 + Math.max(r, 20) + 26}" font-size="15" font-weight="700" text-anchor="middle" fill="#fff">${a.nom.replace(/^L[ae] /, '')}</text>`;
     x += place + 4;
     return s;
   }).join('');
